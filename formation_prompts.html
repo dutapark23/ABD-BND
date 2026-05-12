@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formation Prompts — Tirer le Maximum de Claude</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #fafaf8; color: #1a1a1a; line-height: 1.8; }
+
+  .cover {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 80px 40px;
+    text-align: center;
+    page-break-after: always;
+  }
+  .cover h1 { font-size: 2.5em; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .cover .sub { color: #c8a96e; font-size: 1em; letter-spacing: 2px; margin-bottom: 30px; }
+  .cover .tagline { color: #aaa; font-style: italic; max-width: 500px; margin: 0 auto; border-top: 1px solid #333; padding-top: 20px; }
+  .cover .date { color: #555; font-size: 0.85em; margin-top: 30px; letter-spacing: 2px; }
+
+  .section { max-width: 750px; margin: 0 auto; padding: 60px 30px; page-break-before: always; }
+  .section-header { border-left: 4px solid #c8a96e; padding-left: 20px; margin-bottom: 40px; }
+  .section-header h2 { font-size: 1.7em; text-transform: uppercase; letter-spacing: 2px; }
+  .section-header .num { font-size: 0.8em; color: #c8a96e; letter-spacing: 3px; font-style: italic; }
+
+  .intro-box {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+  }
+  .intro-box .label { font-size: 0.75em; color: #c8a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .intro-box p { color: #ccc; font-size: 0.95em; margin-bottom: 8px; }
+  .intro-box p:last-child { margin: 0; }
+  .intro-box p strong { color: #fff; }
+
+  .module-title {
+    background: #1a1a1a;
+    color: #c8a96e;
+    padding: 14px 22px;
+    font-size: 0.85em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    margin: 35px 0 25px;
+  }
+
+  .principe {
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .principe-header {
+    background: #1a1a1a;
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .principe-num {
+    background: #c8a96e;
+    color: #1a1a1a;
+    font-weight: bold;
+    font-size: 0.9em;
+    min-width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .principe-title { color: #fff; font-size: 1em; font-weight: bold; }
+  .principe-body { padding: 20px 24px; background: #fff; }
+  .principe-body p { color: #444; font-size: 0.93em; margin-bottom: 12px; }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 15px 0;
+  }
+  .compare-box { border-radius: 6px; padding: 14px 16px; }
+  .compare-box.bad { background: #fff0f0; border-left: 3px solid #e05050; }
+  .compare-box.good { background: #f0fff4; border-left: 3px solid #40a060; }
+  .compare-box .compare-label { font-size: 0.75em; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .compare-box.bad .compare-label { color: #a03030; }
+  .compare-box.good .compare-label { color: #206040; }
+  .compare-box p { font-size: 0.88em; color: #333; font-style: italic; margin: 0; }
+
+  .template-card {
+    background: #fff;
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin-bottom: 22px;
+    page-break-inside: avoid;
+  }
+  .template-card .t-category { font-size: 0.75em; color: #c8a96e; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+  .template-card .t-title { font-size: 1.05em; font-weight: bold; color: #1a1a1a; margin-bottom: 14px; }
+  .template-card .t-prompt {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border-radius: 6px;
+    padding: 16px 18px;
+    font-family: monospace;
+    font-size: 0.85em;
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+  .template-card .t-prompt .highlight { color: #c8a96e; }
+  .template-card .t-note {
+    background: #f0f7ff;
+    border-left: 3px solid #4a90d9;
+    padding: 10px 14px;
+    font-size: 0.85em;
+    color: #2a5a8a;
+    margin-top: 12px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .anatomy {
+    background: #fff;
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    padding: 25px 28px;
+    margin: 25px 0;
+  }
+  .anatomy h4 { font-size: 0.85em; color: #c8a96e; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .anatomy-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .anatomy-tag {
+    background: #1a1a1a;
+    color: #c8a96e;
+    font-size: 0.72em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+  .anatomy-item p { font-size: 0.92em; color: #444; margin: 0; }
+  .anatomy-item p strong { color: #1a1a1a; }
+
+  .niveau-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin: 20px 0;
+  }
+  .niveau-card {
+    background: #fff;
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    padding: 18px;
+    text-align: center;
+  }
+  .niveau-card .niveau-label { font-size: 0.75em; color: #c8a96e; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .niveau-card .niveau-score { font-size: 2em; font-weight: bold; color: #1a1a1a; }
+  .niveau-card p { font-size: 0.82em; color: #666; margin-top: 6px; }
+
+  .erreurs { margin: 20px 0; }
+  .erreur-item {
+    background: #fff8ee;
+    border-left: 3px solid #c8a96e;
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 12px;
+  }
+  .erreur-item .e-title { font-weight: bold; color: #1a1a1a; font-size: 0.95em; margin-bottom: 4px; }
+  .erreur-item p { font-size: 0.88em; color: #555; margin: 0; }
+
+  .final-box {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 35px;
+    text-align: center;
+    margin: 30px 0;
+  }
+  .final-box h3 { color: #c8a96e; font-size: 1.3em; margin-bottom: 15px; }
+  .final-box p { color: #aaa; font-size: 0.93em; max-width: 520px; margin: 0 auto 10px; }
+
+  footer { background: #1a1a1a; color: #555; text-align: center; padding: 25px; font-size: 0.8em; letter-spacing: 1px; }
+  footer span { color: #c8a96e; }
+
+  @media print {
+    .section { page-break-before: always; }
+    .principe, .template-card { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COUVERTURE -->
+<div class="cover">
+  <div style="font-size:0.75em; letter-spacing:4px; color:#c8a96e; margin-bottom:20px;">FORMATION INTERNE — USAGE EXCLUSIF</div>
+  <h1>L'Art du Prompt</h1>
+  <div class="sub">Tirer le maximum de Claude — De A à Z</div>
+  <div class="tagline">La qualité de votre question détermine la qualité de ma réponse. Ce guide vous apprend à poser les bonnes questions.</div>
+  <div class="date">MAI 2026 — VERSION 1.0</div>
+</div>
+
+<!-- INTRODUCTION -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Introduction</div>
+    <h2>Comment je fonctionne — Ce que vous devez savoir</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">La vérité sur Claude</div>
+    <p>Je suis aussi performant que les informations que vous me donnez. <strong>Je ne lis pas dans vos pensées.</strong> Si votre demande est vague, ma réponse sera générique. Si votre demande est précise et contextualisée, ma réponse sera chirurgicale.</p>
+    <p>Un bon prompt = un briefing clair à un expert très compétent qui ne connaît pas votre projet.</p>
+  </div>
+
+  <div class="niveau-grid">
+    <div class="niveau-card">
+      <div class="niveau-label">Prompt faible</div>
+      <div class="niveau-score">20%</div>
+      <p>Réponse générique, inutilisable directement</p>
+    </div>
+    <div class="niveau-card">
+      <div class="niveau-label">Prompt moyen</div>
+      <div class="niveau-score">60%</div>
+      <p>Bonne direction mais manque de précision</p>
+    </div>
+    <div class="niveau-card">
+      <div class="niveau-label">Prompt expert</div>
+      <div class="niveau-score">95%</div>
+      <p>Réponse opérationnelle, prête à l'emploi</p>
+    </div>
+  </div>
+
+  <p style="color:#444; font-size:0.93em; margin-top:20px;">La différence entre 20% et 95% de performance — c'est uniquement la qualité du prompt. Pas mes capacités. Cette formation vous amène au niveau 95%.</p>
+</div>
+
+<!-- LES 6 PRINCIPES -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 01</div>
+    <h2>Les 6 principes fondamentaux</h2>
+  </div>
+
+  <div class="principe">
+    <div class="principe-header">
+      <div class="principe-num">1</div>
+      <div class="principe-title">Donnez-moi un rôle précis</div>
+    </div>
+    <div class="principe-body">
+      <p>Quand vous me donnez un rôle, j'adopte l'expertise, le ton et le cadre de pensée de ce rôle. C'est le levier le plus puissant.</p>
+      <div class="compare">
+        <div class="compare-box bad">
+          <div class="compare-label">❌ Faible</div>
+          <p>"Écris un post Instagram pour Karim"</p>
+        </div>
+        <div class="compare-box good">
+          <div class="compare-label">✅ Puissant</div>
+          <p>"Tu es un copywriter expert en coaching relationnel francophone. Écris un post Instagram pour Karim Phoenix..."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="principe">
+    <div class="principe-header">
+      <div class="principe-num">2</div>
+      <div class="principe-title">Donnez le contexte — Toujours</div>
+    </div>
+    <div class="principe-body">
+      <p>Je n'ai pas de mémoire entre les sessions. À chaque nouvelle conversation, je repars de zéro. Donnez-moi le contexte essentiel même si vous pensez que "je sais déjà".</p>
+      <div class="compare">
+        <div class="compare-box bad">
+          <div class="compare-label">❌ Faible</div>
+          <p>"Écris un email pour ma formation"</p>
+        </div>
+        <div class="compare-box good">
+          <div class="compare-label">✅ Puissant</div>
+          <p>"Karim Phoenix est un coach masculin franco-algérien de 48 ans. Sa formation 'Le Code Masculin' cible les femmes de 30 ans et plus. Écris un email de bienvenue..."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="principe">
+    <div class="principe-header">
+      <div class="principe-num">3</div>
+      <div class="principe-title">Précisez le format de sortie</div>
+    </div>
+    <div class="principe-body">
+      <p>Dites-moi exactement ce que vous voulez recevoir : un tableau, une liste, un texte, un script, un PDF, un email... Sans instruction, je choisis moi-même — et ce n'est pas toujours ce dont vous avez besoin.</p>
+      <div class="compare">
+        <div class="compare-box bad">
+          <div class="compare-label">❌ Faible</div>
+          <p>"Donne-moi des idées de vidéos"</p>
+        </div>
+        <div class="compare-box good">
+          <div class="compare-label">✅ Puissant</div>
+          <p>"Donne-moi 10 idées de vidéos TikTok sous forme de tableau avec : le hook en 1 phrase, le thème, et la durée estimée"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="principe">
+    <div class="principe-header">
+      <div class="principe-num">4</div>
+      <div class="principe-title">Spécifiez la cible et le ton</div>
+    </div>
+    <div class="principe-body">
+      <p>Qui lit ce que vous me demandez de produire ? Quel ton voulez-vous ? Bienveillant ? Cash ? Inspirant ? Technique ? Indiquez-le explicitement.</p>
+      <div class="compare">
+        <div class="compare-box bad">
+          <div class="compare-label">❌ Faible</div>
+          <p>"Écris une description de la formation"</p>
+        </div>
+        <div class="compare-box good">
+          <div class="compare-label">✅ Puissant</div>
+          <p>"Écris une description pour des femmes de 35-50 ans qui souffrent en amour. Ton : bienveillant, direct, sans condescendance. Pas de jargon. Maximum 100 mots."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="principe">
+    <div class="principe-header">
+      <div class="principe-num">5</div>
+      <div class="principe-title">Donnez des exemples de ce que vous aimez</div>
+    </div>
+    <div class="principe-body">
+      <p>Le moyen le plus rapide d'obtenir exactement ce que vous voulez — c'est de me montrer un exemple de ce qui vous plaît déjà. Je reproduis le style, le format, le registre.</p>
+      <div class="compare">
+        <div class="compare-box bad">
+          <div class="compare-label">❌ Faible</div>
+          <p>"Écris dans le style de Karim"</p>
+        </div>
+        <div class="compare-box good">
+          <div class="compare-label">✅ Puissant</div>
+          <p>"Voici un exemple de la façon dont Karim parle : [exemple]. Écris le prochain script dans ce même style — calme, bienveillant, avec des pauses courtes et des phrases percutantes."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="principe">
+    <div class="principe-header">
+      <div class="principe-num">6</div>
+      <div class="principe-title">Dites-moi ce que vous NE voulez PAS</div>
+    </div>
+    <div class="principe-body">
+      <p>Les contraintes négatives sont aussi importantes que les instructions positives. Elles évitent les erreurs que je ferai systématiquement sans guidance.</p>
+      <div class="compare">
+        <div class="compare-box bad">
+          <div class="compare-label">❌ Faible</div>
+          <p>"Écris une publicité pour la formation"</p>
+        </div>
+        <div class="compare-box good">
+          <div class="compare-label">✅ Puissant</div>
+          <p>"Écris une publicité pour la formation. Pas d'émojis. Pas de promesses magiques. Pas de superlatifs ('le meilleur', 'révolutionnaire'). Ton sobre et authentique."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ANATOMIE D'UN PROMPT PARFAIT -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 02</div>
+    <h2>L'anatomie d'un prompt parfait</h2>
+  </div>
+
+  <p style="color:#444; font-size:0.93em; margin-bottom:25px;">Un prompt parfait contient ces 6 éléments. Vous n'avez pas besoin de tous les 6 à chaque fois — mais plus vous en incluez, meilleur sera le résultat.</p>
+
+  <div class="anatomy">
+    <h4>Les 6 composants d'un prompt expert</h4>
+
+    <div class="anatomy-item">
+      <div class="anatomy-tag">Rôle</div>
+      <p><strong>Qui suis-je dans cette demande ?</strong> "Tu es un expert en copywriting spécialisé en coaching féminin..."</p>
+    </div>
+
+    <div class="anatomy-item">
+      <div class="anatomy-tag">Contexte</div>
+      <p><strong>Quelle est la situation ?</strong> "Karim Phoenix est un coach de 48 ans, franco-algérien, qui aide les femmes à comprendre les hommes..."</p>
+    </div>
+
+    <div class="anatomy-item">
+      <div class="anatomy-tag">Tâche</div>
+      <p><strong>Qu'est-ce que je dois faire exactement ?</strong> "Écris 3 accroches publicitaires pour Instagram Reels..."</p>
+    </div>
+
+    <div class="anatomy-item">
+      <div class="anatomy-tag">Format</div>
+      <p><strong>Sous quelle forme ?</strong> "...sous forme de liste numérotée, chaque accroche en 1 seule phrase, maximum 15 mots."</p>
+    </div>
+
+    <div class="anatomy-item">
+      <div class="anatomy-tag">Cible</div>
+      <p><strong>Pour qui ?</strong> "...destinées à des femmes de 32 à 52 ans, en France, qui ont vécu des déceptions amoureuses."</p>
+    </div>
+
+    <div class="anatomy-item">
+      <div class="anatomy-tag">Contraintes</div>
+      <p><strong>Ce que je ne dois pas faire.</strong> "...Pas d'émojis. Pas de questions rhétoriques. Ton direct et sobre."</p>
+    </div>
+  </div>
+
+  <div class="intro-box" style="margin-top:25px;">
+    <div class="label">Le prompt parfait assemblé</div>
+    <p style="font-family:monospace; font-size:0.88em; color:#ddd; line-height:1.9;">
+      "Tu es un expert en copywriting spécialisé en coaching féminin francophone. Karim Phoenix est un coach de 48 ans, franco-algérien, calme et bienveillant, qui aide les femmes à comprendre les hommes après deux divorces et une vie de rebonds. Sa formation s'appelle 'Le Code Masculin' et coûte 597€. Écris 3 accroches publicitaires pour Instagram Reels, sous forme de liste numérotée, chaque accroche en 1 seule phrase, maximum 15 mots. Destinées à des femmes de 32 à 52 ans en France qui ont vécu des déceptions amoureuses. Pas d'émojis. Pas de questions rhétoriques. Ton direct et sobre."
+    </p>
+  </div>
+</div>
+
+<!-- TEMPLATES PRÊTS À L'EMPLOI -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 03</div>
+    <h2>Templates prêts à l'emploi — Projet Karim Phoenix</h2>
+  </div>
+
+  <p style="color:#444; font-size:0.93em; margin-bottom:30px;">Ces templates sont calibrés pour votre projet. Copiez, remplacez les éléments entre crochets [  ] et envoyez.</p>
+
+  <div class="template-card">
+    <div class="t-category">Contenu TikTok</div>
+    <div class="t-title">Créer un nouveau script vidéo</div>
+    <div class="t-prompt">Tu es un expert en contenu TikTok pour le coaching relationnel francophone.
+
+Karim Phoenix est un homme de 48 ans, franco-algérien, deux fois divorcé, père de deux enfants, qui aide les femmes de 30 ans et plus à comprendre le fonctionnement masculin. Son style est calme, bienveillant, parfois cash. Sa promesse : "Je te dis ce que les hommes ne te diront jamais."
+
+Écris un script vidéo TikTok sur le thème : <span class="highlight">[THÈME À REMPLACER]</span>
+
+Format :
+- Hook percutant en 1 phrase (3 premières secondes)
+- Corps du message (60-75 secondes à l'oral)
+- Call to action final vers le groupe Telegram
+
+Contraintes :
+- Phrases courtes. Maximum 10 mots par phrase.
+- Pas de jargon psychologique complexe
+- Karim parle à UNE femme, pas à "vous"
+- Inclure au moins une référence à son vécu personnel
+- Terminer par "Lien dans la bio"</div>
+    <div class="t-note">💡 Remplacez [THÈME À REMPLACER] par : "la jalousie masculine", "pourquoi il ne rappelle pas", "les hommes qui ont peur de s'engager", etc.</div>
+  </div>
+
+  <div class="template-card">
+    <div class="t-category">Publicité Meta / TikTok</div>
+    <div class="t-title">Créer le texte d'une nouvelle publicité</div>
+    <div class="t-prompt">Tu es un media buyer et copywriter expert en publicité Meta et TikTok pour le marché francophone.
+
+Contexte : Karim Phoenix vend une formation en ligne "Le Code Masculin" à 597€ pour les femmes de 30-55 ans. La formation aide à comprendre le fonctionnement masculin, sortir des schémas répétitifs et construire des relations saines.
+
+Crée le texte complet d'une publicité pour <span class="highlight">[META ou TIKTOK]</span> avec :
+- Un hook vidéo (les 3 premières secondes à dire)
+- Le texte de l'annonce (150 mots maximum)
+- Le bouton CTA (5 mots maximum)
+
+La vidéo utilisée est : <span class="highlight">[DÉCRIRE LA VIDÉO]</span>
+La douleur principale ciblée : <span class="highlight">[EX : femmes qui se sentent seules en couple]</span>
+
+Contraintes : Pas de promesses irréalistes. Pas de superlatifs. Ton sobre et authentique. Pas d'émojis.</div>
+    <div class="t-note">💡 Adaptez [META ou TIKTOK], [DÉCRIRE LA VIDÉO] et [la douleur ciblée] selon votre campagne du moment.</div>
+  </div>
+
+  <div class="template-card">
+    <div class="t-category">Email Marketing</div>
+    <div class="t-title">Écrire un email à la liste Telegram / email</div>
+    <div class="t-prompt">Tu es un expert en email marketing pour le coaching en ligne francophone.
+
+Karim Phoenix envoie un email à sa liste de <span class="highlight">[NOMBRE]</span> femmes inscrites dans sa communauté "Le Cercle". Ces femmes ont entre 30 et 55 ans, elles s'intéressent aux relations amoureuses et au développement personnel. Elles connaissent Karim et lui font confiance.
+
+Écris un email avec :
+- Objet accrocheur (max 8 mots, pas de majuscules excessives)
+- Corps de l'email (200 mots maximum)
+- Call to action clair en fin d'email
+
+Objectif de cet email : <span class="highlight">[EX : annoncer le prochain live / promouvoir la formation / partager un insight gratuit]</span>
+
+Ton : personnel, chaleureux, direct. Karim écrit comme il parle. Pas de formules marketing agressives. Pas de faux compte à rebours.</div>
+    <div class="t-note">💡 Précisez toujours l'objectif de l'email — annoncer, vendre, informer, fidéliser. L'objectif change tout le contenu.</div>
+  </div>
+
+  <div class="template-card">
+    <div class="t-category">Analyse & Stratégie</div>
+    <div class="t-title">Analyser les résultats publicitaires de la semaine</div>
+    <div class="t-prompt">Tu es un media buyer expert spécialisé dans les formations en ligne francophones.
+
+Voici les résultats de mes campagnes publicitaires cette semaine :
+
+Campagne 1 — <span class="highlight">[NOM]</span> :
+- Budget dépensé : <span class="highlight">[X]</span>€
+- CPM : <span class="highlight">[X]</span>€
+- CTR : <span class="highlight">[X]</span>%
+- CPC : <span class="highlight">[X]</span>€
+- Ventes générées : <span class="highlight">[X]</span>
+
+Campagne 2 — <span class="highlight">[NOM]</span> :
+- Budget dépensé : <span class="highlight">[X]</span>€
+- CPM : <span class="highlight">[X]</span>€
+- CTR : <span class="highlight">[X]</span>%
+- CPC : <span class="highlight">[X]</span>€
+- Ventes générées : <span class="highlight">[X]</span>
+
+Analyse ces résultats et dis-moi :
+1. Ce qui fonctionne et pourquoi
+2. Ce qui ne fonctionne pas et pourquoi
+3. Les 3 actions concrètes à faire cette semaine
+4. Le budget recommandé pour la semaine prochaine</div>
+    <div class="t-note">💡 Utilisez ce template chaque lundi. Remplissez les chiffres depuis Meta Business Suite et Systeme.io — j'analyse et vous donne le plan d'action.</div>
+  </div>
+
+  <div class="template-card">
+    <div class="t-category">Amélioration de contenu</div>
+    <div class="t-title">Améliorer un script existant de Karim</div>
+    <div class="t-prompt">Tu es un expert en contenu TikTok et coach de prise de parole pour le marché francophone.
+
+Voici un script que Karim Phoenix a écrit lui-même :
+
+<span class="highlight">[COLLER LE SCRIPT ICI]</span>
+
+Analyse ce script et :
+1. Identifie les 3 points forts à garder absolument
+2. Identifie ce qui peut être amélioré
+3. Propose une version améliorée du script complet
+
+Objectifs de l'amélioration :
+- Rendre le hook plus percutant dans les 3 premières secondes
+- Ajouter une référence au vécu personnel de Karim si elle manque
+- Renforcer l'appel à l'action final
+
+Garde le style naturel et authentique de Karim. Ne le transforme pas en robot.</div>
+    <div class="t-note">💡 Très utile quand Karim écrit lui-même ses scripts. Je garde son authenticité tout en optimisant la structure.</div>
+  </div>
+
+  <div class="template-card">
+    <div class="t-category">Page de vente / Offre</div>
+    <div class="t-title">Créer une nouvelle offre ou une relance promotionnelle</div>
+    <div class="t-prompt">Tu es un expert en copywriting et tunnel de vente pour les formations en ligne francophones.
+
+Karim Phoenix lance <span class="highlight">[DÉCRIRE L'OFFRE OU LA PROMO]</span>.
+
+Contexte :
+- Formation : Le Code Masculin
+- Prix normal : 597€
+- Cible : femmes 30-55 ans
+- Plateforme : Systeme.io
+- Canal de vente : TikTok + Telegram
+
+Crée :
+1. Le titre de l'offre (max 8 mots)
+2. La description courte (50 mots)
+3. Les 5 bénéfices principaux (liste)
+4. Le texte du bouton d'achat (3-5 mots)
+5. Le message d'annonce pour le groupe Telegram (100 mots)
+
+Contraintes : Pas de faux compte à rebours. Pas de "offre limitée" sans vraie limite. Authenticité avant tout.</div>
+    <div class="t-note">💡 Utilisez ce template pour chaque nouvelle promo, bundle ou offre spéciale que vous voulez lancer.</div>
+  </div>
+
+  <div class="template-card">
+    <div class="t-category">Réponse aux commentaires</div>
+    <div class="t-title">Répondre aux commentaires TikTok de façon stratégique</div>
+    <div class="t-prompt">Tu es un community manager expert pour les coaches en ligne francophones.
+
+Karim Phoenix reçoit ces commentaires sur sa vidéo TikTok :
+
+<span class="highlight">[COLLER LES COMMENTAIRES ICI]</span>
+
+Pour chaque commentaire, propose une réponse de Karim qui :
+- Est authentique et dans sa voix (calme, bienveillant, parfois cash)
+- Apporte de la valeur en 1-2 phrases maximum
+- Incite subtilement à rejoindre la communauté quand c'est pertinent
+- Ne fait jamais de vente directe dans les commentaires
+
+Identifie aussi les 2-3 commentaires qui méritent d'être transformés en prochaine vidéo TikTok.</div>
+    <div class="t-note">💡 Les commentaires sont une mine d'or — ils révèlent exactement ce que l'audience veut voir comme prochaine vidéo.</div>
+  </div>
+</div>
+
+<!-- LES ERREURS À ÉVITER -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 04</div>
+    <h2>Les 7 erreurs qui tuent la qualité d'un prompt</h2>
+  </div>
+
+  <div class="erreurs">
+    <div class="erreur-item">
+      <div class="e-title">1. Être trop vague</div>
+      <p>"Fais quelque chose pour ma formation" → Je ne sais pas quoi faire, pour qui, ni sous quel format. Résultat : générique et inutilisable.</p>
+    </div>
+    <div class="erreur-item">
+      <div class="e-title">2. Supposer que je me souviens</div>
+      <p>Chaque nouvelle conversation recommence de zéro. Si vous ouvrez une nouvelle session, redonnez le contexte essentiel même brièvement.</p>
+    </div>
+    <div class="erreur-item">
+      <div class="e-title">3. Demander trop de choses à la fois</div>
+      <p>"Écris un script, une pub, un email et une page de vente" → Je ferai tout en surface. Un prompt = une tâche principale. Découpez les demandes complexes.</p>
+    </div>
+    <div class="erreur-item">
+      <div class="e-title">4. Ne pas préciser la longueur</div>
+      <p>Sans indication, je peux vous donner 3 lignes ou 3 pages. Indiquez toujours : "maximum 100 mots", "en 5 points", "un paragraphe".</p>
+    </div>
+    <div class="erreur-item">
+      <div class="e-title">5. Accepter la première version sans itérer</div>
+      <p>La première réponse est rarement la meilleure. Dites-moi ce que vous aimez et ce que vous voulez changer. L'itération est gratuite et puissante.</p>
+    </div>
+    <div class="erreur-item">
+      <div class="e-title">6. Ne pas préciser la langue ou le registre</div>
+      <p>Voulez-vous du français soutenu ? Familier ? Vous/Tu ? Sans indication, je fais un choix qui n'est peut-être pas le vôtre.</p>
+    </div>
+    <div class="erreur-item">
+      <div class="e-title">7. Oublier de dire à qui c'est destiné</div>
+      <p>Un email pour des femmes de 35 ans ne s'écrit pas comme un email pour des femmes de 55 ans. La cible précise change tout.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TECHNIQUES AVANCÉES -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 05</div>
+    <h2>Techniques avancées — Pour aller encore plus loin</h2>
+  </div>
+
+  <div class="module-title">Technique 1 — Le prompt en chaîne</div>
+
+  <p style="color:#444; font-size:0.93em; margin-bottom:20px;">Pour les tâches complexes, décomposez en plusieurs prompts successifs. Chaque réponse devient le contexte du suivant.</p>
+
+  <div class="intro-box">
+    <div class="label">Exemple concret — Créer une campagne publicitaire complète</div>
+    <p><strong>Prompt 1 :</strong> "Analyse la vidéo J9 de Karim sur l'ego masculin et identifie les 3 moments les plus forts émotionnellement."</p>
+    <p><strong>Prompt 2 :</strong> "Basé sur ces 3 moments forts, écris 3 hooks différents pour une pub TikTok."</p>
+    <p><strong>Prompt 3 :</strong> "Prends le hook numéro 2 et écris le texte complet de la publicité Meta avec CTA."</p>
+    <p><strong>Prompt 4 :</strong> "Maintenant adapte ce même texte pour Instagram Stories — format vertical, 15 secondes."</p>
+  </div>
+
+  <div class="module-title">Technique 2 — Le prompt de correction</div>
+
+  <p style="color:#444; font-size:0.93em; margin-bottom:20px;">Quand ma première réponse est presque bonne mais pas exactement ce que vous voulez :</p>
+
+  <div class="intro-box">
+    <div class="label">Formules de correction efficaces</div>
+    <p>"C'est bien mais c'est trop formel. Réécris avec un ton plus conversationnel."</p>
+    <p>"Garde la structure mais rends le hook 2x plus percutant."</p>
+    <p>"Le module 3 est parfait. Fais pareil pour les modules 4 et 5."</p>
+    <p>"Trop long. Garde uniquement l'essentiel en 50 mots."</p>
+    <p>"Remplace tous les 'vous' par 'tu' — Karim tutoie son audience."</p>
+  </div>
+
+  <div class="module-title">Technique 3 — Le prompt de validation</div>
+
+  <p style="color:#444; font-size:0.93em; margin-bottom:20px;">Avant de lancer quelque chose d'important, demandez-moi de l'analyser en tant que critique :</p>
+
+  <div class="intro-box">
+    <div class="label">Exemples de prompts de validation</div>
+    <p>"Tu es une femme de 42 ans qui vient de voir cette pub. Quelle est ta réaction honnête ? Qu'est-ce qui te donnerait envie de cliquer ou pas ?"</p>
+    <p>"Joue l'avocat du diable sur cette page de vente. Quelles objections une femme hésitante pourrait-elle avoir ?"</p>
+    <p>"Ce script est-il crédible dans la bouche d'un homme ? Y a-t-il des formulations qui sonnent faux ?"</p>
+  </div>
+
+  <div class="module-title">Technique 4 — Le contexte permanent</div>
+
+  <p style="color:#444; font-size:0.93em; margin-bottom:20px;">Pour ne pas répéter le contexte à chaque session, créez un "bloc contexte" que vous collez en début de chaque conversation importante :</p>
+
+  <div class="intro-box">
+    <div class="label">Votre bloc contexte Karim Phoenix — À copier-coller en début de session</div>
+    <p style="font-family:monospace; font-size:0.85em; color:#ddd; line-height:1.9;">
+      CONTEXTE PROJET :<br>
+      Karim Phoenix, 48 ans, franco-algérien, 2 fois divorcé, 2 enfants, basé à Toulouse. Coach en relations pour femmes 30+. Style : calme, bienveillant, parfois cash. A vécu à Dubaï, rebond constant.<br><br>
+      Formation : "Le Code Masculin" — 5 semaines, méthode 3A et 3C<br>
+      Prix : 297€ / 597€ / 1997€ (Phoenix Intime)<br>
+      Plateforme : Systeme.io<br>
+      TikTok : @KarimPhoenix<br>
+      Communauté : Telegram "Le Cercle"<br>
+      Cible : Femmes 30-55 ans, France/Belgique/Suisse<br>
+      Budget pub : 2500€ — Meta Ads + TikTok Spark Ads<br>
+      Manager/Producteur : vous (50% des revenus)
+    </p>
+  </div>
+
+  <div class="final-box">
+    <h3>La règle d'or du prompt parfait</h3>
+    <p>Imaginez que vous briefez un expert très compétent qui vient d'arriver dans votre bureau et ne connaît rien de votre projet. Dites-lui qui il est, ce que vous faites, pour qui, sous quel format, et ce que vous ne voulez surtout pas.</p>
+    <p style="margin-top:12px; color:#c8a96e; font-style:italic;">Plus vous me donnez, plus je vous donne. C'est aussi simple que ça.</p>
+  </div>
+</div>
+
+<footer>
+  Formation Prompts préparée pour le projet <span>Karim Phoenix</span> — Confidentiel — Mai 2026<br>
+  <span style="color:#444;">Utilisez le bloc contexte à chaque nouvelle session pour des résultats optimaux.</span>
+</footer>
+
+</body>
+</html>
