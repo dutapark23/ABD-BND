@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karim Phoenix — Guide de Lancement</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', serif;
+    background: #fafaf8;
+    color: #1a1a1a;
+    line-height: 1.8;
+  }
+  .cover {
+    background: #1a1a1a;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+    page-break-after: always;
+  }
+  .cover h1 {
+    font-size: 3em;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .cover .subtitle {
+    font-size: 1.2em;
+    color: #c8a96e;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+  }
+  .cover .tagline {
+    font-size: 1.1em;
+    color: #aaa;
+    font-style: italic;
+    max-width: 500px;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+  }
+  .cover .date {
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #666;
+    letter-spacing: 2px;
+  }
+
+  .section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    page-break-before: always;
+  }
+  .section-header {
+    border-left: 4px solid #c8a96e;
+    padding-left: 20px;
+    margin-bottom: 40px;
+  }
+  .section-header h2 {
+    font-size: 1.8em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a1a1a;
+  }
+  .section-header .section-num {
+    font-size: 0.85em;
+    color: #c8a96e;
+    letter-spacing: 3px;
+    font-style: italic;
+  }
+
+  .identity-block {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 30px 35px;
+    margin-bottom: 30px;
+  }
+  .identity-block .label {
+    font-size: 0.8em;
+    color: #c8a96e;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .identity-block .value {
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+  .identity-block .note {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  .promise-box {
+    border: 2px solid #c8a96e;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    margin: 30px 0;
+  }
+  .promise-box .promise-text {
+    font-size: 1.4em;
+    font-style: italic;
+    color: #1a1a1a;
+    line-height: 1.6;
+  }
+
+  .plan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 30px;
+    font-size: 0.95em;
+  }
+  .plan-table th {
+    background: #1a1a1a;
+    color: #c8a96e;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .plan-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  .plan-table tr:nth-child(even) td { background: #f5f5f2; }
+  .plan-table .live-row td {
+    background: #fff8ee !important;
+    font-weight: bold;
+  }
+  .badge {
+    display: inline-block;
+    background: #c8a96e;
+    color: #fff;
+    font-size: 0.7em;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .week-title {
+    background: #1a1a1a;
+    color: #c8a96e;
+    padding: 12px 20px;
+    font-size: 0.85em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 30px 0 0;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .script-card {
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .script-header {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .script-header .script-day {
+    font-size: 0.75em;
+    color: #c8a96e;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .script-header .script-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 4px;
+  }
+  .script-header .script-duration {
+    font-size: 0.8em;
+    color: #aaa;
+    text-align: right;
+  }
+  .script-body {
+    padding: 25px 30px;
+    background: #fff;
+  }
+  .script-body .hook {
+    background: #fff8ee;
+    border-left: 3px solid #c8a96e;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 0.9em;
+    color: #666;
+  }
+  .script-body .hook strong { color: #1a1a1a; }
+  .script-text {
+    font-size: 1em;
+    line-height: 2;
+    color: #2a2a2a;
+    white-space: pre-line;
+  }
+  .humanize-note {
+    background: #f0f7ff;
+    border-left: 3px solid #4a90d9;
+    padding: 12px 16px;
+    margin-top: 18px;
+    font-size: 0.88em;
+    color: #2a5a8a;
+    border-radius: 0 4px 4px 0;
+  }
+  .humanize-note strong {
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+  }
+
+  .live-card {
+    border: 2px dashed #c8a96e;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    background: #fffdf8;
+  }
+  .live-card .live-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+  }
+  .live-card .live-day {
+    font-size: 0.8em;
+    color: #c8a96e;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+  .live-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .live-card ul li {
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 0.95em;
+  }
+  .live-card ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #c8a96e;
+  }
+
+  .rules-box {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin: 20px 0;
+  }
+  .rules-box h4 {
+    color: #c8a96e;
+    font-size: 0.85em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+  .rules-box ol {
+    padding-left: 20px;
+  }
+  .rules-box ol li {
+    padding: 6px 0;
+    font-size: 0.95em;
+    color: #ccc;
+  }
+
+  .funnel {
+    text-align: center;
+    margin: 30px 0;
+  }
+  .funnel-step {
+    background: #f5f5f2;
+    border: 1px solid #e0e0d8;
+    border-radius: 6px;
+    padding: 14px 20px;
+    margin: 4px auto;
+    font-size: 0.95em;
+    max-width: 400px;
+  }
+  .funnel-step.highlight {
+    background: #1a1a1a;
+    color: #c8a96e;
+    font-weight: bold;
+    border-color: #1a1a1a;
+  }
+  .funnel-arrow {
+    color: #c8a96e;
+    font-size: 1.2em;
+    margin: 2px 0;
+  }
+
+  .footer {
+    background: #1a1a1a;
+    color: #555;
+    text-align: center;
+    padding: 30px;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+  }
+  .footer span { color: #c8a96e; }
+
+  @media print {
+    .cover { min-height: 100vh; }
+    .section { page-break-before: always; }
+    .script-card { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COUVERTURE -->
+<div class="cover">
+  <div style="font-size:0.8em; letter-spacing:4px; color:#c8a96e; margin-bottom:20px;">CONFIDENTIEL — USAGE INTERNE</div>
+  <h1>Karim Phoenix</h1>
+  <div class="subtitle">Guide de Lancement — 30 Jours</div>
+  <div class="tagline">"Je suis un homme. Je te dis ce que les hommes ne te diront jamais."</div>
+  <div class="date">MAI 2026 — VERSION 1.0</div>
+</div>
+
+<!-- SECTION 1 : IDENTITÉ & POSITIONNEMENT -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 01</div>
+    <h2>Identité & Positionnement</h2>
+  </div>
+
+  <div class="identity-block">
+    <div class="label">Compte TikTok</div>
+    <div class="value">@KarimPhoenix</div>
+    <div class="note">Nouveau compte — départ de zéro avec une identité claire dès le premier jour</div>
+  </div>
+
+  <div class="identity-block">
+    <div class="label">Bio TikTok (80 caractères)</div>
+    <div class="value">"Je dis ce que les hommes pensent vraiment | Femmes 30+ | Rejoins la communauté ↓"</div>
+    <div class="note">Simple, ciblée, avec un appel à l'action direct</div>
+  </div>
+
+  <div class="identity-block">
+    <div class="label">Communauté privée</div>
+    <div class="value">Groupe Telegram — "Le Cercle | Karim Phoenix"</div>
+    <div class="note">Le lien en bio TikTok renvoie uniquement vers ce groupe — c'est la porte d'entrée vers l'offre</div>
+  </div>
+
+  <div class="promise-box">
+    <div style="font-size:0.75em; color:#c8a96e; letter-spacing:3px; text-transform:uppercase; margin-bottom:12px;">La Promesse Centrale</div>
+    <div class="promise-text">"Je suis un homme. Je te dis ce que les hommes ne te diront jamais."</div>
+  </div>
+
+  <p style="font-size:0.95em; color:#555; font-style:italic;">
+    <strong style="color:#1a1a1a;">Pourquoi ça fonctionne :</strong> La majorité des coaches en relations sont soit des femmes qui parlent aux femmes, soit des hommes qui se posent en séducteurs. Karim est ni l'un ni l'autre — c'est un homme bienveillant, vécu, sans agenda caché. Rare. Et bankable.
+  </p>
+</div>
+
+<!-- SECTION 2 : PLAN 30 JOURS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 02</div>
+    <h2>Plan de Contenu — 30 Jours</h2>
+  </div>
+
+  <div class="week-title">Semaine 1 — L'Identité</div>
+  <table class="plan-table">
+    <tr>
+      <th>Jour</th>
+      <th>Format</th>
+      <th>Titre</th>
+      <th>Objectif</th>
+    </tr>
+    <tr>
+      <td><strong>J1</strong></td>
+      <td>Vidéo</td>
+      <td>Présentation sans masque</td>
+      <td>Poser l'identité, créer l'événement</td>
+    </tr>
+    <tr>
+      <td><strong>J2</strong></td>
+      <td>Vidéo</td>
+      <td>Son histoire en 60 secondes</td>
+      <td>Humaniser, créer la confiance</td>
+    </tr>
+    <tr>
+      <td><strong>J3</strong></td>
+      <td>Vidéo</td>
+      <td>Pourquoi les femmes ne comprennent pas les hommes</td>
+      <td>Valider la douleur, légitimer la présence</td>
+    </tr>
+    <tr class="live-row">
+      <td><strong>J4</strong></td>
+      <td><span class="badge">Live</span></td>
+      <td>Premier Q&A libre</td>
+      <td>Première connexion directe avec l'audience</td>
+    </tr>
+    <tr>
+      <td><strong>J5</strong></td>
+      <td>Vidéo</td>
+      <td>La solitude féminine</td>
+      <td>Toucher émotionnellement — fort</td>
+    </tr>
+  </table>
+
+  <div class="week-title">Semaine 2 — Les Thèmes qui Font Mal</div>
+  <table class="plan-table">
+    <tr>
+      <th>Jour</th>
+      <th>Format</th>
+      <th>Titre</th>
+      <th>Objectif</th>
+    </tr>
+    <tr>
+      <td><strong>J8</strong></td>
+      <td>Vidéo</td>
+      <td>La colère dans le couple</td>
+      <td>Dé-culpabiliser, ouvrir les yeux</td>
+    </tr>
+    <tr>
+      <td><strong>J9</strong></td>
+      <td>Vidéo</td>
+      <td>L'ego masculin expliqué</td>
+      <td>Décrypter le comportement masculin</td>
+    </tr>
+    <tr>
+      <td><strong>J10</strong></td>
+      <td>Vidéo</td>
+      <td>Se protéger des parasites</td>
+      <td>Provoquer la prise de conscience</td>
+    </tr>
+    <tr class="live-row">
+      <td><strong>J11</strong></td>
+      <td><span class="badge">Live</span></td>
+      <td>La colère &amp; l'ego masculin</td>
+      <td>Approfondir, créer l'interaction</td>
+    </tr>
+    <tr>
+      <td><strong>J12</strong></td>
+      <td>Vidéo</td>
+      <td>L'homme qui se mure dans le silence</td>
+      <td>Répondre à une question universelle</td>
+    </tr>
+  </table>
+
+  <div class="week-title">Semaine 3 — La Méthodologie</div>
+  <table class="plan-table">
+    <tr>
+      <th>Jour</th>
+      <th>Format</th>
+      <th>Titre</th>
+      <th>Objectif</th>
+    </tr>
+    <tr>
+      <td><strong>J15</strong></td>
+      <td>Vidéo</td>
+      <td>Les 3A — Accepter, Analyser, Agir</td>
+      <td>Introduire la signature méthode</td>
+    </tr>
+    <tr>
+      <td><strong>J16</strong></td>
+      <td>Vidéo</td>
+      <td>La Confiance — 1er C</td>
+      <td>Travailler l'estime de soi</td>
+    </tr>
+    <tr>
+      <td><strong>J17</strong></td>
+      <td>Vidéo</td>
+      <td>La Communication avec un homme</td>
+      <td>Donner un outil concret et applicable</td>
+    </tr>
+    <tr class="live-row">
+      <td><strong>J18</strong></td>
+      <td><span class="badge">Live</span></td>
+      <td>Les 3C en pratique</td>
+      <td>Situations réelles — exercice en direct</td>
+    </tr>
+    <tr>
+      <td><strong>J19</strong></td>
+      <td>Vidéo</td>
+      <td>La Complicité — 3ème C</td>
+      <td>Le côté lumineux — finir sur du positif</td>
+    </tr>
+  </table>
+
+  <div class="week-title">Semaine 4 — Le Lancement</div>
+  <table class="plan-table">
+    <tr>
+      <th>Jour</th>
+      <th>Format</th>
+      <th>Titre</th>
+      <th>Objectif</th>
+    </tr>
+    <tr>
+      <td><strong>J22</strong></td>
+      <td>Vidéo</td>
+      <td>Retours de la communauté</td>
+      <td>Preuve sociale — créer l'envie</td>
+    </tr>
+    <tr>
+      <td><strong>J23</strong></td>
+      <td>Vidéo</td>
+      <td>Ce que la formation apporte concrètement</td>
+      <td>Présenter l'offre sans vendre encore</td>
+    </tr>
+    <tr class="live-row">
+      <td><strong>J24</strong></td>
+      <td><span class="badge">Live</span></td>
+      <td>Présentation officielle de la formation</td>
+      <td>Lever les objections, créer l'urgence</td>
+    </tr>
+    <tr>
+      <td><strong>J25</strong></td>
+      <td>Vidéo</td>
+      <td>Ouverture des inscriptions</td>
+      <td>Conversion — appel à l'action fort</td>
+    </tr>
+  </table>
+</div>
+
+<!-- SECTION 3 : SCRIPTS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 03</div>
+    <h2>Scripts — Semaine 1</h2>
+  </div>
+  <p style="font-size:0.9em; color:#666; margin-bottom:30px; font-style:italic;">
+    Ces scripts sont des bases — pas des textes figés. Lis-les, approprie-les, parle avec tes mots. Les notes en bleu sont des suggestions pour humaniser davantage.
+  </p>
+
+  <!-- J1 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 1 — Vidéo</div>
+        <div class="script-title">Présentation sans masque</div>
+      </div>
+      <div class="script-duration">⏱ ~60 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook (3 premières secondes) :</strong> Apparaître à visage découvert, silence d'une seconde, puis commencer.</div>
+      <div class="script-text">Je m'appelle Karim.
+
+Pendant longtemps sur TikTok j'étais masqué. Le Phoenix. L'anonyme.
+
+Aujourd'hui je retire le masque. Définitivement.
+
+Parce que ce que j'ai à vous dire mérite un vrai visage.
+
+Je suis un homme. J'ai 48 ans. J'ai été marié deux fois. J'ai deux enfants. J'ai dormi dans ma voiture à Dubaï. Et je suis toujours debout — souriant.
+
+Pas parce que la vie a été simple. Mais parce que j'ai compris quelque chose que personne ne m'a appris — ni sur les hommes, ni sur les femmes, ni sur ce qui se passe vraiment dans une relation.
+
+Et c'est exactement ça que je vais partager ici.
+
+Pour les femmes qui en ont assez de souffrir sans comprendre pourquoi.
+
+Je suis Karim Phoenix. Et je commence maintenant.
+
+Le lien pour rejoindre ma communauté privée est dans ma bio.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        La phrase "j'ai dormi dans ma voiture à Dubaï" est puissante — si Karim peut la dire en souriant légèrement, avec une légèreté assumée plutôt que de la gravité, ça crée une rupture de ton très forte et authentique. Idem pour "toujours debout — souriant" : que ce sourire soit réel à ce moment précis, pas joué.
+      </div>
+    </div>
+  </div>
+
+  <!-- J2 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 2 — Vidéo</div>
+        <div class="script-title">Son histoire en 60 secondes</div>
+      </div>
+      <div class="script-duration">⏱ ~75 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> Commencer avec "Deux divorces." — pause. Laisser le mot résonner.</div>
+      <div class="script-text">Deux divorces. Deux enfants. Un garçon. Une fille.
+
+L'un vit avec moi. L'autre est à Dubaï avec sa mère.
+
+J'aurais pu être amer. J'aurais pu haïr les femmes. Blâmer. Me poser en victime.
+
+Je ne l'ai pas fait. Parce que j'ai choisi de comprendre plutôt que de condamner.
+
+Ce que j'ai appris de ces deux histoires — de ces deux échecs, oui je dis bien échecs — c'est que ni elle ni moi n'étions des monstres. On était juste deux personnes qui ne parlaient pas le même langage émotionnel.
+
+Personne ne nous avait appris.
+
+Aujourd'hui je parle ce langage couramment. Et je suis là pour te l'enseigner.
+
+Pas de jugement. Pas de théorie froide. Juste la vérité d'un homme qui a vécu.
+
+Rejoins la communauté — lien dans la bio.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        "ni elle ni moi n'étions des monstres" — Karim peut ajouter une micro-pause là, comme s'il y repensait vraiment. Ce n'est pas un texte récité, c'est un aveu. Si une émotion monte naturellement à cet endroit — ne pas la cacher. C'est exactement ce que les femmes veulent voir.
+      </div>
+    </div>
+  </div>
+
+  <!-- J3 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 3 — Vidéo</div>
+        <div class="script-title">Pourquoi les femmes ne comprennent pas les hommes</div>
+      </div>
+      <div class="script-duration">⏱ ~75 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> Regard droit caméra. "Je vais te dire quelque chose que personne ne te dira." — pause courte.</div>
+      <div class="script-text">Je vais te dire quelque chose que personne ne te dira.
+
+Ce n'est pas de ta faute si tu ne comprends pas les hommes.
+
+On ne t'a jamais appris.
+
+À l'école on t'a appris les maths. Le français. L'histoire.
+
+Personne ne t'a appris comment fonctionne le cerveau masculin. Personne ne t'a expliqué pourquoi un homme se ferme quand il souffre. Pourquoi il attaque quand il a peur. Pourquoi il part quand il aime.
+
+Ce n'est pas logique pour toi. Parce que toi tu fonctionnes différemment. Et c'est normal.
+
+Le problème c'est que cette incompréhension — elle te coûte. Elle te coûte des larmes. De l'énergie. Des relations qui auraient pu être belles.
+
+Je suis là pour combler ce vide.
+
+Un homme. Qui te parle vrai. Sans agenda caché.
+
+Communauté privée — lien dans la bio. On continue là-bas.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        "Pourquoi il part quand il aime" — cette phrase est contre-intuitive et forte. Karim peut marquer une vraie pause là, laisser les gens la digérer. Pas besoin d'expliquer immédiatement — la tension créée fait partie de l'effet.
+      </div>
+    </div>
+  </div>
+
+  <!-- J5 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 5 — Vidéo</div>
+        <div class="script-title">La solitude féminine</div>
+      </div>
+      <div class="script-duration">⏱ ~70 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> Ton doux, presque murmure. "Tu peux être entourée et te sentir seule."</div>
+      <div class="script-text">Tu peux être entourée et te sentir seule.
+
+Tu peux être en couple et te sentir seule.
+
+Et le pire — tu peux ne pas comprendre pourquoi.
+
+La solitude que vivent beaucoup de femmes n'a rien à voir avec l'absence de gens autour d'elles. Elle a à voir avec l'absence d'une vraie connexion. D'être vraiment vue. Vraiment entendue.
+
+Et souvent — elles cherchent ça chez un homme qui ne sait pas le donner. Pas parce qu'il est mauvais. Mais parce qu'il ne sait pas comment.
+
+Tu n'es pas seule parce que tu es trop. Tu es trop entière, trop intense, trop vivante.
+
+Tu es seule parce que tu n'as pas encore trouvé quelqu'un à ta hauteur. Ou parce que tu n'as pas encore appris à le reconnaître quand il est là.
+
+C'est ça qu'on va travailler ensemble.
+
+Rejoins la communauté — lien dans la bio.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        "D'être vraiment vue. Vraiment entendue." — deux phrases courtes, deux temps d'arrêt. Ne pas les enchaîner. Chacune mérite son espace. C'est le coeur émotionnel de cette vidéo et les femmes qui se reconnaîtront dans ces mots vont commenter massivement.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4 : SCRIPTS SEMAINE 2 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 04</div>
+    <h2>Scripts — Semaine 2</h2>
+  </div>
+
+  <!-- J8 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 8 — Vidéo</div>
+        <div class="script-title">La colère dans le couple</div>
+      </div>
+      <div class="script-duration">⏱ ~75 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> "Quand une femme crie — ce n'est presque jamais de la colère." — pause, laisser la surprise s'installer.</div>
+      <div class="script-text">Quand une femme crie — ce n'est presque jamais de la colère.
+
+C'est de la douleur qui n'a plus trouvé d'autre sortie.
+
+C'est de l'amour qu'on a donné trop longtemps sans retour.
+
+C'est une demande d'attention qu'on a répétée cent fois dans le calme — et que personne n'a entendue.
+
+Le problème c'est que quand ça sort en colère — l'homme en face n'entend plus le message. Il voit l'attaque. Et il se ferme. Ou il contre-attaque.
+
+Et vous vous retrouvez dans une guerre où personne ne comprend ce que l'autre veut vraiment.
+
+La colère dans le couple n'est pas un défaut de caractère. C'est un signal d'alarme.
+
+La question n'est pas comment arrêter de te mettre en colère. La question est — qu'est-ce que cette colère essaie de te dire ?
+
+On en parle lors de mon prochain live. L'heure est dans la bio. Sois là.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        Karim peut glisser ici : "J'ai connu ça. Des deux côtés." — une seule phrase ajoutée après "une guerre où personne ne comprend ce que l'autre veut vraiment." Ça ancre immédiatement le discours dans son vécu personnel et brise le côté "cours magistral".
+      </div>
+    </div>
+  </div>
+
+  <!-- J9 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 9 — Vidéo</div>
+        <div class="script-title">L'ego masculin expliqué</div>
+      </div>
+      <div class="script-duration">⏱ ~80 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> Sourire léger. "Je vais trahir un secret masculin aujourd'hui."</div>
+      <div class="script-text">Je vais trahir un secret masculin aujourd'hui.
+
+L'ego d'un homme — ce n'est pas de l'arrogance. C'est de la peur déguisée.
+
+Quand un homme ne s'excuse pas en premier — ce n'est pas parce qu'il pense avoir raison. C'est parce qu'il a peur que ses excuses soient utilisées contre lui.
+
+Quand un homme minimise tes émotions — ce n'est pas parce qu'il s'en fiche. C'est parce qu'il ne sait pas quoi faire avec et ça le panique.
+
+Quand un homme se tait après une dispute — ce n'est pas de la manipulation. C'est sa façon de survivre émotionnellement.
+
+L'ego masculin est un bouclier. Pas une arme.
+
+Comprendre ça ne veut pas dire tout accepter. Ça veut dire arrêter de te battre contre un mur et commencer à chercher la porte.
+
+C'est exactement ce que je t'apprends ici.
+
+Lien dans la bio pour rejoindre la communauté privée.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        "L'ego masculin est un bouclier. Pas une arme." — c'est la phrase clé. Karim peut la dire plus lentement, presque comme une confidence. Puis faire une micro-pause avant de continuer. Ce genre de rupture de rythme marque les esprits et donne envie de partager la vidéo.
+      </div>
+    </div>
+  </div>
+
+  <!-- J10 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 10 — Vidéo</div>
+        <div class="script-title">Se protéger des parasites émotionnels</div>
+      </div>
+      <div class="script-duration">⏱ ~80 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> Regard direct, ton sérieux. "Il y a des gens dans ta vie qui se nourrissent de toi. Et tu ne t'en rends même pas compte."</div>
+      <div class="script-text">Il y a des gens dans ta vie qui se nourrissent de toi. Et tu ne t'en rends même pas compte.
+
+Voici 3 signes qu'un homme te vide sans que tu le réalises.
+
+Un — il est toujours là quand il a besoin. Jamais quand tu as besoin.
+
+Deux — après chaque conversation avec lui tu te sens fatiguée. Pas soulagée. Fatiguée.
+
+Trois — tu marches sur des œufs autour de lui. Tu surveilles tes mots. Tu gères son humeur avant de gérer la tienne.
+
+Ce type d'homme n'est pas forcément méchant. Mais il est dangereux.
+
+Parce qu'il prend. Sans rendre. Sans même s'en apercevoir parfois.
+
+Et toi tu restes — parce que tu espères. Parce que tu as investi. Parce que tu as peur de te tromper dans ton jugement.
+
+Apprendre à reconnaître et à te protéger des parasites émotionnels — c'est l'une des choses les plus importantes que tu feras pour toi.
+
+On en parle en profondeur dans la communauté. Lien dans la bio.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        Les trois points (Un, Deux, Trois) gagnent à être énoncés avec un débit légèrement plus lent — comme si Karim donnait à chacune le temps de se demander "est-ce que c'est moi ?". Ne pas les enchaîner comme une liste mais comme trois petites révélations distinctes.
+      </div>
+    </div>
+  </div>
+
+  <!-- J12 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 12 — Vidéo</div>
+        <div class="script-title">L'homme qui se mure dans le silence</div>
+      </div>
+      <div class="script-duration">⏱ ~75 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> Scénario immersif — parler au présent, comme si c'était maintenant.</div>
+      <div class="script-text">Il rentre. Il ne parle pas. Il répond par monosyllabes. Il regarde son téléphone.
+
+Et toi tu te demandes — qu'est-ce que j'ai fait ? Est-ce qu'il ne m'aime plus ? Est-ce qu'il y a quelqu'un d'autre ?
+
+Je vais t'expliquer ce qui se passe vraiment.
+
+L'homme qui se mure dans le silence — dans la majorité des cas — ne te punit pas. Il se régule.
+
+Le cerveau masculin sous stress a besoin de se déconnecter pour se recharger. Ce n'est pas du rejet. C'est de la survie émotionnelle.
+
+Le problème c'est que ton cerveau à toi interprète ce silence comme un danger. Et tu vas vers lui pour résoudre — ce qui le pousse encore plus à se fermer.
+
+Ce cercle vous épuise tous les deux.
+
+La solution n'est pas de le forcer à parler. C'est de comprendre ce silence — et de savoir quand et comment y répondre.
+
+Je t'explique tout ça dans ma communauté privée. Lien dans la bio.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        L'ouverture en mode "scénario vécu" est très forte. Karim peut aller encore plus loin en disant : "Je l'ai fait. J'ai été cet homme-là." Une seule phrase. Ça transforme le professeur en témoin. Et le témoin est toujours plus crédible que le professeur.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5 : SCRIPTS SEMAINE 3 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 05</div>
+    <h2>Scripts — Semaine 3</h2>
+  </div>
+
+  <!-- J15 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 15 — Vidéo</div>
+        <div class="script-title">Les 3A — Accepter, Analyser, Agir</div>
+      </div>
+      <div class="script-duration">⏱ ~80 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> "Quand une épreuve arrive — la plupart des gens font une erreur fatale."</div>
+      <div class="script-text">Quand une épreuve arrive — une rupture, une trahison, une déception — la plupart des gens font une erreur fatale.
+
+Ils sautent directement à l'action. Ou ils restent bloqués dans l'acceptation sans jamais avancer.
+
+Voici les 3 étapes que j'appelle les 3A. Dans l'ordre. Sans en sauter une seule.
+
+Accepter. Pas résigner. Accepter la réalité de ce qui s'est passé. Sans la minimiser. Sans l'amplifier. Juste — c'est réel.
+
+Analyser. Qu'est-ce qui s'est vraiment passé ? Quelle est ma part ? Quelle est la sienne ? Qu'est-ce que cette situation m'apprend sur moi ?
+
+Agir. Seulement après les deux premières étapes. Parce qu'une action sans acceptation ni analyse — c'est de la réaction. Et la réaction te coûte toujours plus qu'elle ne te rapporte.
+
+Ces 3A ont changé ma vie. Après deux divorces. Après des faillites. Après des nuits dans une voiture à Dubaï.
+
+Ils peuvent changer la tienne aussi.
+
+Rejoins la communauté. Lien dans la bio.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        "Après deux divorces. Après des faillites. Après des nuits dans une voiture à Dubaï." — ces trois phrases courtes sont le moment le plus puissant du script. Les dire lentement. Avec calme. Pas avec douleur — avec la sérénité de quelqu'un qui a traversé ça et s'en est sorti. C'est cette sérénité-là qui inspire.
+      </div>
+    </div>
+  </div>
+
+  <!-- J16 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 16 — Vidéo</div>
+        <div class="script-title">La Confiance — 1er C</div>
+      </div>
+      <div class="script-duration">⏱ ~75 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> Regard intense, ton de conviction. Première phrase lente.</div>
+      <div class="script-text">Tu n'attires pas ce que tu veux. Tu attires ce que tu crois mériter.
+
+Lis bien cette phrase. Relis-la.
+
+Beaucoup de femmes me disent — je veux un homme stable, respectueux, présent. Et pourtant elles se retrouvent toujours avec des hommes instables, irrespectueux, absents.
+
+Ce n'est pas de la malchance. C'est un miroir.
+
+La confiance en soi — ce n'est pas se regarder dans la glace et se dire que tu es belle. C'est savoir ce que tu vaux. C'est ne pas accepter moins que ce que tu mérites. C'est partir quand quelque chose ne te convient pas — sans avoir besoin de permission.
+
+Quand tu baisses ta barre parce que tu as peur d'être seule — tu envoies un signal. Et les mauvaises personnes savent lire ce signal.
+
+Construire la vraie confiance en soi — c'est le premier pilier de tout ce qu'on construit ensemble.
+
+C'est le premier C.
+
+Lien dans la bio pour la communauté.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        "C'est partir quand quelque chose ne te convient pas — sans avoir besoin de permission." Karim peut ajouter en souriant légèrement : "Ça, c'est la vraie liberté." Une phrase courte qui allège le ton et montre que ce n'est pas un sermon mais une invitation.
+      </div>
+    </div>
+  </div>
+
+  <!-- J17 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 17 — Vidéo</div>
+        <div class="script-title">La Communication avec un homme — 2ème C</div>
+      </div>
+      <div class="script-duration">⏱ ~80 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> "Les hommes n'entendent pas tes mots. Ils entendent ton ton." — pause.</div>
+      <div class="script-text">Les hommes n'entendent pas tes mots. Ils entendent ton ton.
+
+Je m'explique.
+
+Si tu dis — on peut parler ? — avec une voix tendue et un regard fermé. Il entend — prépare-toi à l'attaque.
+
+Même phrase. Ton doux. Regard ouvert. Il entend — elle veut se connecter.
+
+Ce n'est pas juste. Ce n'est pas logique. Mais c'est la réalité du câblage masculin.
+
+Les hommes sont des créatures de signaux non-verbaux bien plus que les femmes ne le pensent.
+
+Deuxième point — un homme ne peut traiter qu'un sujet à la fois lors d'une conversation difficile. Si tu lui parles de cinq choses en même temps — il se déconnecte. Pas par mauvaise volonté. Par saturation.
+
+Communiquer avec un homme c'est un art. Pas de la manipulation — de la stratégie émotionnelle intelligente.
+
+Et ça s'apprend.
+
+C'est le deuxième C. On continue lors du live de demain. Heure dans la bio.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        Karim peut illustrer avec un exemple personnel court ici : "J'ai compris ça trop tard dans mon premier mariage." Une seule phrase. Elle transforme immédiatement la vidéo en confession plutôt qu'en cours — et c'est infiniment plus puissant sur TikTok.
+      </div>
+    </div>
+  </div>
+
+  <!-- J19 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 19 — Vidéo</div>
+        <div class="script-title">La Complicité — 3ème C</div>
+      </div>
+      <div class="script-duration">⏱ ~75 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> Ton chaleureux, sourire naturel. Le plus humain des scripts.</div>
+      <div class="script-text">La complicité — c'est le truc dont tout le monde rêve et que presque personne ne sait construire.
+
+On croit que ça arrive. Comme un cadeau. Comme la chance.
+
+La vérité c'est que la complicité se choisit. Chaque jour. Dans les petites choses.
+
+C'est l'homme qui remarque que tu as changé quelque chose dans ta façon de te coiffer. C'est la femme qui se souvient de ce détail qu'il a mentionné une seule fois il y a trois semaines.
+
+Ce sont des gestes. Pas des grands discours.
+
+Mais la complicité a un ennemi — et cet ennemi s'appelle la routine silencieuse. Ce moment où vous êtes ensemble mais chacun dans sa bulle. Présents mais absents.
+
+La complicité ne meurt pas d'un coup. Elle s'érode en silence.
+
+La bonne nouvelle c'est qu'elle se reconstruit aussi. Et je vais te montrer comment.
+
+C'est le troisième C. Le plus beau des trois.
+
+Lien dans la bio.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        C'est la vidéo la plus lumineuse du programme — Karim peut sourire franchement ici, laisser de la légèreté entrer. "Le plus beau des trois" peut être dit avec une vraie chaleur, pas juste énoncé. C'est le moment de montrer le Karim joyeux — celui que l'audience n'a pas encore vu.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6 : SCRIPTS SEMAINE 4 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 06</div>
+    <h2>Scripts — Semaine 4</h2>
+  </div>
+
+  <!-- J22 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 22 — Vidéo</div>
+        <div class="script-title">Retours de la communauté</div>
+      </div>
+      <div class="script-duration">⏱ ~60 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> Ton sincère, posé. Pas de vente. Juste du partage.</div>
+      <div class="script-text">Je veux vous partager quelque chose.
+
+Depuis le lancement de la communauté privée — les messages qui arrivent me touchent profondément.
+
+Des femmes qui me disent — pour la première fois je comprends pourquoi je me suis comportée comme ça. Pour la première fois je ne me sens plus folle. Pour la première fois j'ai des outils concrets.
+
+Ce n'est pas moi qui fais ça. C'est vous.
+
+Vous qui avez eu le courage de vous interroger. De regarder en face ce qui ne fonctionnait pas. De chercher à comprendre plutôt qu'à subir.
+
+C'est pour ça que je suis là. Pas pour donner des leçons. Pour vous accompagner dans un chemin que vous avez déjà commencé.
+
+Si tu n'es pas encore dans la communauté — c'est le moment. Le lien est dans la bio.
+
+Ce qui arrive la semaine prochaine va changer la donne.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        Si possible — lire un vrai message reçu dans le groupe Telegram (avec accord de la personne). Même une phrase. La preuve réelle vaut 100 fois le discours le mieux préparé.
+      </div>
+    </div>
+  </div>
+
+  <!-- J23 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 23 — Vidéo</div>
+        <div class="script-title">Ce que la formation apporte concrètement</div>
+      </div>
+      <div class="script-duration">⏱ ~85 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> "Je vais être direct avec toi aujourd'hui." — regard droit, ton calme et assumé.</div>
+      <div class="script-text">Je vais être direct avec toi aujourd'hui.
+
+Dans 5 semaines — si tu suis ce programme — voici ce qui change concrètement.
+
+Un — tu comprends comment fonctionne un homme émotionnellement. Plus de questions sans réponse. Plus de nuits à te demander ce qu'il pense vraiment.
+
+Deux — tu sais reconnaître et éliminer les hommes parasites avant qu'ils ne t'atteignent. Tu filtres vite. Tu choisis mieux.
+
+Trois — tu communiques différemment. Sans crier. Sans supplier. Sans te perdre. Avec impact.
+
+Quatre — tu reconstruis une confiance en toi qui ne dépend plus du regard des autres.
+
+Cinq — tu as une méthode — les 3A et les 3C — pour traverser n'importe quelle épreuve relationnelle sans te noyer.
+
+Ce n'est pas une promesse magique. C'est un travail. Avec moi. Semaine après semaine.
+
+Les inscriptions ouvrent dans 48 heures. En exclusivité pour la communauté d'abord.
+
+Lien dans la bio si tu n'es pas encore dedans.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        "Ce n'est pas une promesse magique. C'est un travail." — Karim peut ajouter : "Et je serai là à chaque étape." Cette phrase courte transforme une liste de bénéfices en engagement personnel. C'est la différence entre vendre un produit et proposer une relation.
+      </div>
+    </div>
+  </div>
+
+  <!-- J25 -->
+  <div class="script-card">
+    <div class="script-header">
+      <div>
+        <div class="script-day">Jour 25 — Vidéo</div>
+        <div class="script-title">Ouverture des inscriptions</div>
+      </div>
+      <div class="script-duration">⏱ ~75 secondes</div>
+    </div>
+    <div class="script-body">
+      <div class="hook"><strong>Hook :</strong> Une seconde de silence. Puis : "C'est aujourd'hui."</div>
+      <div class="script-text">C'est aujourd'hui.
+
+La formation ouvre ses portes.
+
+5 semaines. Un programme complet pour enfin comprendre les hommes — et te comprendre toi face à eux.
+
+Les 3C. Les 3A. La solitude. La colère. L'ego masculin. Les parasites. La communication. La confiance. La complicité.
+
+Tout ce dont on a parlé depuis le début — structuré, approfondi, avec des exercices concrets et des sessions live privées avec moi chaque semaine.
+
+Les 10 premières inscrites bénéficient d'un tarif fondateur — parce que vous avez été là depuis le début et que ça mérite d'être reconnu.
+
+Je ne vends pas du rêve. Je vends du concret. Du vécu. De l'honnêteté.
+
+Le lien d'inscription est dans la bio. Il sera actif 72 heures.
+
+À tout de suite.</div>
+      <div class="humanize-note">
+        <strong>💡 Note humanisation</strong>
+        "À tout de suite." — finir sur cette phrase courte avec un sourire calme et confiant. Pas d'excitation forcée, pas de pression. La sérénité de quelqu'un qui sait ce qu'il offre. C'est ça qui rassure et fait passer à l'acte.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7 : GUIDES LIVE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 07</div>
+    <h2>Guides Live — 4 Sessions</h2>
+  </div>
+
+  <div class="live-card">
+    <div class="live-day">Jour 4 — Live 1</div>
+    <div class="live-title">Premier Q&A libre — Prise de contact</div>
+    <ul>
+      <li>Durée : 30 à 45 minutes</li>
+      <li>Ouverture : Se présenter à nouveau brièvement. Remercier ceux qui sont là depuis le début.</li>
+      <li>Corps : Répondre aux questions librement — pas de filtre, pas de langue de bois.</li>
+      <li>Glisser naturellement : son histoire personnelle, ses deux divorces, sa vision des relations.</li>
+      <li>Clôture obligatoire : <em>"Rejoignez la communauté privée — c'est là que la vraie conversation continue. Lien dans la bio."</em></li>
+    </ul>
+  </div>
+
+  <div class="live-card">
+    <div class="live-day">Jour 11 — Live 2</div>
+    <div class="live-title">La colère & l'ego masculin</div>
+    <ul>
+      <li>Durée : 30 à 45 minutes</li>
+      <li>Ouverture : <em>"Ce soir on parle de deux sujets que vous m'avez beaucoup demandés."</em></li>
+      <li>Partie 1 : La colère — d'où elle vient, ce qu'elle dit, comment la transformer.</li>
+      <li>Partie 2 : L'ego masculin — démystifier avec des exemples concrets de la vie réelle.</li>
+      <li>Interaction : Demander aux participantes de partager une situation dans les commentaires — répondre en direct.</li>
+      <li>Clôture : Annoncer le prochain live sur les 3C.</li>
+    </ul>
+  </div>
+
+  <div class="live-card">
+    <div class="live-day">Jour 18 — Live 3</div>
+    <div class="live-title">Les 3C en pratique</div>
+    <ul>
+      <li>Durée : 45 minutes</li>
+      <li>Ouverture : Récapituler les 3C rapidement pour les nouveaux arrivants.</li>
+      <li>Corps : Prendre des situations réelles des participantes et les analyser à travers le prisme des 3C.</li>
+      <li>Exercice en direct : <em>"Dans ta relation actuelle ou passée — lequel des 3C manquait le plus ?"</em></li>
+      <li>Clôture : Annoncer l'arrivée de la formation la semaine suivante — créer l'anticipation.</li>
+    </ul>
+  </div>
+
+  <div class="live-card">
+    <div class="live-day">Jour 24 — Live 4</div>
+    <div class="live-title">Présentation officielle de la formation</div>
+    <ul>
+      <li>Durée : 45 à 60 minutes</li>
+      <li>Ouverture : <em>"Ce soir je vous présente ce sur quoi je travaille depuis le début."</em></li>
+      <li>Corps : Présenter chaque module, ce qu'il apporte, comment il est structuré.</li>
+      <li>Témoignages : Lire des retours reçus dans le groupe Telegram Cercle.</li>
+      <li>Questions/Réponses : Répondre à toutes les questions sur la formation — lever les objections.</li>
+      <li>Clôture : <em>"Les inscriptions ouvrent demain. En exclusivité pour la communauté d'abord. Lien dans la bio."</em></li>
+    </ul>
+  </div>
+
+  <div class="rules-box">
+    <h4>Les 2 règles absolues du live</h4>
+    <ol>
+      <li>Toujours terminer par : <em>"Rejoins notre communauté privée — le lien est dans la bio."</em></li>
+      <li>Ne jamais vendre pendant le live. Le live crée la confiance — le Telegram convertit.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- SECTION 8 : TUNNEL DE VENTE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 08</div>
+    <h2>Tunnel de Conversion</h2>
+  </div>
+
+  <div class="funnel">
+    <div class="funnel-step highlight">Contenu TikTok gratuit (4-5 vidéos/semaine + 2 lives)</div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">Groupe Telegram gratuit — "Le Cercle | Karim Phoenix"</div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">Live de présentation (J24) — warm-up de l'offre</div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step highlight">Formation principale — inscriptions ouvertes 72h</div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">Coaching individuel — upsell pour les clientes avancées</div>
+  </div>
+
+  <p style="font-size:0.9em; color:#666; font-style:italic; text-align:center; margin-top:20px;">
+    Chaque étape nourrit la suivante. On ne brûle pas les étapes.
+  </p>
+</div>
+
+<div class="footer">
+  Document préparé pour <span>Karim Phoenix</span> — Confidentiel — Usage interne uniquement<br>
+  Version 1.0 — Mai 2026
+</div>
+
+</body>
+</html>
