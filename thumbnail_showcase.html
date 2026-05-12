@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Thumbnail Specialist — Showcase</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0f0f0f;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #ff0000;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 50px;
+  }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ff0000;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+  }
+  .card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+    transition: transform 0.2s;
+  }
+  .card:hover { transform: translateY(-4px); }
+
+  /* ── THUMBNAIL FRAME ── */
+  .thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ─────────────────────────────────────────
+     THUMB 1 — Finance / Money
+  ───────────────────────────────────────── */
+  .thumb-finance {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a00 60%, #3d1a00 100%);
+  }
+  .thumb-finance .bg-glow {
+    position: absolute;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, #ff6a00 0%, transparent 70%);
+    top: -60px; right: -40px;
+    opacity: 0.45;
+  }
+  .thumb-finance .money-stack {
+    position: absolute;
+    bottom: 0; right: 30px;
+    font-size: 6rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 20px #ff6a00);
+  }
+  .thumb-finance .badge {
+    position: absolute;
+    top: 18px; left: 18px;
+    background: #ff6a00;
+    color: #000;
+    font-weight: 900;
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .thumb-finance .headline {
+    position: absolute;
+    left: 20px; bottom: 28px;
+    max-width: 55%;
+  }
+  .thumb-finance .headline .main {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    text-shadow: 0 2px 8px #000;
+  }
+  .thumb-finance .headline .accent {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #ff6a00;
+    line-height: 1;
+  }
+  .thumb-finance .arrow {
+    position: absolute;
+    bottom: 50px; right: 130px;
+    font-size: 2.5rem;
+    color: #ff6a00;
+    animation: bounce 1s infinite;
+  }
+
+  /* ─────────────────────────────────────────
+     THUMB 2 — Tech / AI
+  ───────────────────────────────────────── */
+  .thumb-tech {
+    background: #020818;
+  }
+  .thumb-tech .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,255,0.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  .thumb-tech .orb {
+    position: absolute;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, #00c8ff 0%, #0050ff 50%, transparent 80%);
+    border-radius: 50%;
+    right: -30px; top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.3;
+    filter: blur(20px);
+  }
+  .thumb-tech .robot {
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 7rem;
+    filter: drop-shadow(0 0 25px #00c8ff);
+  }
+  .thumb-tech .label {
+    position: absolute;
+    top: 20px; left: 20px;
+    background: linear-gradient(90deg, #00c8ff, #0050ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .thumb-tech .headline {
+    position: absolute;
+    left: 20px;
+    bottom: 25px;
+    max-width: 55%;
+  }
+  .thumb-tech .headline .main {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .thumb-tech .headline .highlight {
+    background: linear-gradient(90deg, #00c8ff, #0050ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.3rem;
+    font-weight: 900;
+  }
+  .thumb-tech .scan-line {
+    position: absolute;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, #00c8ff, transparent);
+    top: 40%;
+    animation: scan 3s infinite linear;
+    opacity: 0.5;
+  }
+
+  /* ─────────────────────────────────────────
+     THUMB 3 — Fitness
+  ───────────────────────────────────────── */
+  .thumb-fitness {
+    background: linear-gradient(160deg, #0d0d0d 0%, #1a0022 100%);
+  }
+  .thumb-fitness .streaks {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      75deg,
+      transparent,
+      transparent 18px,
+      rgba(200, 0, 255, 0.04) 18px,
+      rgba(200, 0, 255, 0.04) 19px
+    );
+  }
+  .thumb-fitness .glow-left {
+    position: absolute;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, #c800ff, transparent 70%);
+    left: -60px; top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.4;
+    filter: blur(15px);
+  }
+  .thumb-fitness .person {
+    position: absolute;
+    left: 15px; bottom: 0;
+    font-size: 8rem;
+    filter: drop-shadow(0 0 30px #c800ff);
+    line-height: 1;
+  }
+  .thumb-fitness .headline {
+    position: absolute;
+    right: 18px; top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+    max-width: 52%;
+  }
+  .thumb-fitness .headline .days {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #c800ff;
+    line-height: 1;
+    text-shadow: 0 0 20px #c800ff;
+  }
+  .thumb-fitness .headline .main {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  .thumb-fitness .headline .sub {
+    font-size: 0.75rem;
+    color: #ccc;
+    margin-top: 4px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .thumb-fitness .before-after {
+    position: absolute;
+    top: 12px; right: 18px;
+    display: flex; gap: 6px;
+  }
+  .thumb-fitness .tag {
+    background: #c800ff;
+    color: #fff;
+    font-size: 0.55rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+
+  /* ─────────────────────────────────────────
+     THUMB 4 — Business / Entrepreneur
+  ───────────────────────────────────────── */
+  .thumb-biz {
+    background: linear-gradient(135deg, #0a1628 0%, #0d2444 100%);
+  }
+  .thumb-biz .lines {
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .thumb-biz .gold-bar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 6px; height: 100%;
+    background: linear-gradient(180deg, #ffd700, #ff8c00);
+  }
+  .thumb-biz .chart {
+    position: absolute;
+    right: 20px; bottom: 15px;
+    font-size: 5.5rem;
+    filter: drop-shadow(0 0 15px #ffd700);
+    opacity: 0.9;
+  }
+  .thumb-biz .headline {
+    position: absolute;
+    left: 30px; top: 50%;
+    transform: translateY(-50%);
+    max-width: 58%;
+  }
+  .thumb-biz .amount {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #ffd700;
+    line-height: 1;
+    text-shadow: 0 0 25px rgba(255,215,0,0.5);
+  }
+  .thumb-biz .main {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .thumb-biz .timeframe {
+    display: inline-block;
+    margin-top: 8px;
+    background: rgba(255,215,0,0.15);
+    border: 1px solid #ffd700;
+    color: #ffd700;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ─────────────────────────────────────────
+     THUMB 5 — Clickbait / Reaction style
+  ───────────────────────────────────────── */
+  .thumb-react {
+    background: linear-gradient(120deg, #1a0000 0%, #3d0000 50%, #1a0000 100%);
+  }
+  .thumb-react .burst {
+    position: absolute;
+    width: 350px; height: 350px;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg 10deg,
+      rgba(255,50,50,0.08) 10deg 20deg,
+      transparent 20deg 30deg,
+      rgba(255,50,50,0.08) 30deg 40deg,
+      transparent 40deg 50deg,
+      rgba(255,50,50,0.08) 50deg 60deg,
+      transparent 60deg 70deg,
+      rgba(255,50,50,0.08) 70deg 80deg,
+      transparent 80deg 90deg,
+      rgba(255,50,50,0.08) 90deg 100deg,
+      transparent 100deg 110deg,
+      rgba(255,50,50,0.08) 110deg 120deg,
+      transparent 120deg 130deg,
+      rgba(255,50,50,0.08) 130deg 140deg,
+      transparent 140deg 150deg,
+      rgba(255,50,50,0.08) 150deg 160deg,
+      transparent 160deg 170deg,
+      rgba(255,50,50,0.08) 170deg 180deg,
+      transparent 180deg 360deg
+    );
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .thumb-react .face {
+    position: absolute;
+    left: 12px; bottom: 0;
+    font-size: 9rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 20px rgba(255,0,0,0.8));
+  }
+  .thumb-react .text-block {
+    position: absolute;
+    right: 15px; top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    max-width: 50%;
+  }
+  .thumb-react .shocked {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.7;
+  }
+  .thumb-react .big-text {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #ff3232;
+    line-height: 1;
+    text-shadow: 0 0 20px #ff3232, 0 0 40px rgba(255,50,50,0.5);
+    text-transform: uppercase;
+  }
+  .thumb-react .question {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ─────────────────────────────────────────
+     THUMB 6 — Tutorial / How-To
+  ───────────────────────────────────────── */
+  .thumb-tutorial {
+    background: linear-gradient(135deg, #001a0a 0%, #002d14 100%);
+  }
+  .thumb-tutorial .dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(0,255,100,0.07) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .thumb-tutorial .screen {
+    position: absolute;
+    right: 15px; top: 50%;
+    transform: translateY(-50%);
+    width: 180px; height: 110px;
+    background: #0d0d0d;
+    border: 2px solid #00ff64;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px rgba(0,255,100,0.3), inset 0 0 30px rgba(0,255,100,0.05);
+    overflow: hidden;
+  }
+  .thumb-tutorial .screen .code-lines {
+    padding: 10px;
+    font-family: monospace;
+    font-size: 0.55rem;
+    color: #00ff64;
+    line-height: 1.8;
+    opacity: 0.9;
+    white-space: nowrap;
+  }
+  .thumb-tutorial .screen .cursor {
+    display: inline-block;
+    width: 6px; height: 10px;
+    background: #00ff64;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+  }
+  .thumb-tutorial .step-badge {
+    position: absolute;
+    top: 15px; left: 15px;
+    display: flex; gap: 6px;
+  }
+  .thumb-tutorial .step {
+    background: #00ff64;
+    color: #000;
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  .thumb-tutorial .headline {
+    position: absolute;
+    left: 18px; bottom: 20px;
+    max-width: 52%;
+  }
+  .thumb-tutorial .headline .main {
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .thumb-tutorial .headline .highlight {
+    color: #00ff64;
+    text-shadow: 0 0 15px #00ff64;
+  }
+  .thumb-tutorial .headline .sub {
+    font-size: 0.7rem;
+    color: #aaa;
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+
+  /* ── CARD INFO ── */
+  .card-info {
+    padding: 16px 18px;
+  }
+  .card-info .niche {
+    font-size: 0.65rem;
+    color: #ff0000;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .card-info .title {
+    font-size: 0.92rem;
+    color: #fff;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .card-info .tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .card-info .tag {
+    background: #2a2a2a;
+    color: #888;
+    font-size: 0.6rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+
+  /* ── CAPABILITIES ── */
+  .capabilities {
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+  }
+  .cap-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cap-icon { font-size: 1.6rem; }
+  .cap-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .cap-desc {
+    font-size: 0.75rem;
+    color: #888;
+    line-height: 1.5;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes scan {
+    0% { top: -5%; }
+    100% { top: 105%; }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<h1>THUMBNAIL SPECIALIST</h1>
+<p class="subtitle">YouTube Thumbnails &amp; Titles — Full-Service Creative</p>
+
+<div style="max-width:1200px;margin:0 auto 30px auto">
+  <div class="section-label">Thumbnail Mockups — 6 Niches</div>
+</div>
+
+<div class="grid">
+
+  <!-- FINANCE -->
+  <div class="card">
+    <div class="thumb thumb-finance">
+      <div class="bg-glow"></div>
+      <div class="badge">Must Watch</div>
+      <div class="headline">
+        <div class="main">Make Money</div>
+        <div class="accent">While You Sleep</div>
+      </div>
+      <div class="money-stack">💰</div>
+      <div class="arrow">↗</div>
+    </div>
+    <div class="card-info">
+      <div class="niche">Finance / Passive Income</div>
+      <div class="title">I Made $4,800 This Month While Working 2 Hours a Day (Here's Exactly How)</div>
+      <div class="tags">
+        <span class="tag">Bold Text</span>
+        <span class="tag">Warm Glow</span>
+        <span class="tag">Contrast Accent</span>
+        <span class="tag">Curiosity Hook</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH / AI -->
+  <div class="card">
+    <div class="thumb thumb-tech">
+      <div class="grid-lines"></div>
+      <div class="orb"></div>
+      <div class="scan-line"></div>
+      <div class="label">Breaking</div>
+      <div class="robot">🤖</div>
+      <div class="headline">
+        <div class="main">This AI Just</div>
+        <div class="highlight">Changed Everything</div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="niche">Tech / AI</div>
+      <div class="title">OpenAI's New Model Does What No AI Has Ever Done Before — And It's Free</div>
+      <div class="tags">
+        <span class="tag">Cyber Grid</span>
+        <span class="tag">Blue Neon</span>
+        <span class="tag">Scan Effect</span>
+        <span class="tag">Urgency</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FITNESS -->
+  <div class="card">
+    <div class="thumb thumb-fitness">
+      <div class="streaks"></div>
+      <div class="glow-left"></div>
+      <div class="person">🏋️</div>
+      <div class="before-after">
+        <span class="tag">BEFORE</span>
+        <span class="tag">AFTER</span>
+      </div>
+      <div class="headline">
+        <div class="days">30</div>
+        <div class="main">Day<br>Shred</div>
+        <div class="sub">Real Results</div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="niche">Fitness / Transformation</div>
+      <div class="title">I Worked Out Every Day for 30 Days — My Body Did NOT Expect This</div>
+      <div class="tags">
+        <span class="tag">Purple Neon</span>
+        <span class="tag">Big Number</span>
+        <span class="tag">Before/After</span>
+        <span class="tag">Transformation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUSINESS -->
+  <div class="card">
+    <div class="thumb thumb-biz">
+      <div class="lines"></div>
+      <div class="gold-bar"></div>
+      <div class="chart">📈</div>
+      <div class="headline">
+        <div class="amount">$10,000</div>
+        <div class="main">First Month<br>Online</div>
+        <span class="timeframe">Step by Step</span>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="niche">Business / Entrepreneurship</div>
+      <div class="title">How I Made $10,000 in My First Month (The Exact Blueprint Nobody Tells You)</div>
+      <div class="tags">
+        <span class="tag">Gold Accent</span>
+        <span class="tag">Dark Navy</span>
+        <span class="tag">Dollar Figure</span>
+        <span class="tag">Authority</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- REACTION / CLICKBAIT -->
+  <div class="card">
+    <div class="thumb thumb-react">
+      <div class="burst"></div>
+      <div class="face">😱</div>
+      <div class="text-block">
+        <div class="shocked">I Can't Believe</div>
+        <div class="big-text">THIS<br>HAPPENED</div>
+        <div class="question">Nobody saw this coming</div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="niche">Reaction / Entertainment</div>
+      <div class="title">They Said It Was Impossible… Then This Happened LIVE on Camera</div>
+      <div class="tags">
+        <span class="tag">Shock Face</span>
+        <span class="tag">Red Burst</span>
+        <span class="tag">Drama Text</span>
+        <span class="tag">Pattern Interrupt</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TUTORIAL -->
+  <div class="card">
+    <div class="thumb thumb-tutorial">
+      <div class="dots"></div>
+      <div class="step-badge">
+        <span class="step">FREE</span>
+        <span class="step">TUTORIAL</span>
+      </div>
+      <div class="screen">
+        <div class="code-lines">
+          &gt; install complete ✓<br>
+          &gt; config loaded ✓<br>
+          &gt; running build...<br>
+          &gt; success <span class="cursor"></span>
+        </div>
+      </div>
+      <div class="headline">
+        <div class="main">Build This <span class="highlight">App</span></div>
+        <div class="main">in <span class="highlight">60 min</span></div>
+        <div class="sub">Beginner Friendly • Step by Step</div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="niche">Tech / Tutorial</div>
+      <div class="title">Build a Full-Stack App in 60 Minutes — Even If You've Never Coded Before</div>
+      <div class="tags">
+        <span class="tag">Green Tech</span>
+        <span class="tag">Code Screen</span>
+        <span class="tag">Time Promise</span>
+        <span class="tag">Beginner Hook</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CAPABILITIES -->
+<div style="max-width:1200px;margin:0 auto 30px auto">
+  <div class="section-label">What I Deliver</div>
+</div>
+
+<div class="capabilities">
+  <div class="cap-item">
+    <div class="cap-icon">🎨</div>
+    <div class="cap-title">Visual Concept</div>
+    <div class="cap-desc">Full layout brief: background, colors, composition, focal point, text placement, props/icons.</div>
+  </div>
+  <div class="cap-item">
+    <div class="cap-icon">✍️</div>
+    <div class="cap-title">Title Copywriting</div>
+    <div class="cap-desc">3–5 title variants per video, CTR-optimized with hooks, power words, and search intent.</div>
+  </div>
+  <div class="cap-item">
+    <div class="cap-icon">🖼️</div>
+    <div class="cap-title">HTML Mockups</div>
+    <div class="cap-desc">Live visual prototypes like these — exact color, layout, and text to hand off to a designer.</div>
+  </div>
+  <div class="cap-item">
+    <div class="cap-icon">🎯</div>
+    <div class="cap-title">Niche Targeting</div>
+    <div class="cap-desc">Finance, fitness, tech, business, entertainment, gaming, cooking — any niche, any audience.</div>
+  </div>
+  <div class="cap-item">
+    <div class="cap-icon">🔁</div>
+    <div class="cap-title">A/B Testing Sets</div>
+    <div class="cap-desc">Multiple thumbnail variants for the same video to test what gets the highest CTR.</div>
+  </div>
+  <div class="cap-item">
+    <div class="cap-icon">📐</div>
+    <div class="cap-title">Brand Consistency</div>
+    <div class="cap-desc">Locked visual style for your channel — same fonts, colors, and layout across all videos.</div>
+  </div>
+</div>
+
+<p style="text-align:center;color:#555;font-size:0.75rem;padding-bottom:40px;">
+  Ready to create thumbnails for your channel — just share your video topic.
+</p>
+
+</body>
+</html>
