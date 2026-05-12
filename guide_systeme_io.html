@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide Systeme.io — Karim Phoenix</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #fafaf8; color: #1a1a1a; line-height: 1.8; }
+
+  .cover {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 80px 40px;
+    text-align: center;
+    page-break-after: always;
+  }
+  .cover h1 { font-size: 2.5em; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .cover .sub { color: #c8a96e; font-size: 1em; letter-spacing: 2px; margin-bottom: 30px; }
+  .cover .tagline { color: #aaa; font-style: italic; font-size: 1em; border-top: 1px solid #333; padding-top: 20px; max-width: 500px; margin: 0 auto; }
+  .cover .date { color: #555; font-size: 0.85em; margin-top: 30px; letter-spacing: 2px; }
+
+  .section { max-width: 750px; margin: 0 auto; padding: 60px 30px; page-break-before: always; }
+  .section-header { border-left: 4px solid #c8a96e; padding-left: 20px; margin-bottom: 40px; }
+  .section-header h2 { font-size: 1.7em; text-transform: uppercase; letter-spacing: 2px; }
+  .section-header .num { font-size: 0.8em; color: #c8a96e; letter-spacing: 3px; font-style: italic; }
+
+  .intro-box {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin-bottom: 35px;
+  }
+  .intro-box .label { font-size: 0.75em; color: #c8a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+  .intro-box p { color: #ccc; font-size: 0.95em; margin: 0; }
+
+  .step {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 35px;
+    align-items: flex-start;
+    page-break-inside: avoid;
+  }
+  .step-num {
+    background: #c8a96e;
+    color: #1a1a1a;
+    font-size: 1.1em;
+    font-weight: bold;
+    min-width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .step-content h3 { font-size: 1.05em; color: #1a1a1a; margin-bottom: 6px; }
+  .step-content p { color: #444; font-size: 0.95em; margin-bottom: 8px; }
+  .step-content .action {
+    background: #fff8ee;
+    border-left: 3px solid #c8a96e;
+    padding: 10px 14px;
+    font-size: 0.9em;
+    color: #333;
+    border-radius: 0 4px 4px 0;
+    margin-top: 8px;
+  }
+  .step-content .action strong { color: #1a1a1a; display: block; margin-bottom: 3px; font-size: 0.8em; letter-spacing: 1px; text-transform: uppercase; }
+  .step-content .warning {
+    background: #fff0f0;
+    border-left: 3px solid #e05050;
+    padding: 10px 14px;
+    font-size: 0.88em;
+    color: #a03030;
+    border-radius: 0 4px 4px 0;
+    margin-top: 8px;
+  }
+  .step-content .tip {
+    background: #f0f7ff;
+    border-left: 3px solid #4a90d9;
+    padding: 10px 14px;
+    font-size: 0.88em;
+    color: #2a5a8a;
+    border-radius: 0 4px 4px 0;
+    margin-top: 8px;
+  }
+
+  .phase-title {
+    background: #1a1a1a;
+    color: #c8a96e;
+    padding: 14px 22px;
+    font-size: 0.85em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    margin: 40px 0 25px;
+  }
+
+  .checklist {
+    background: #fff;
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin: 25px 0;
+  }
+  .checklist h4 { font-size: 0.85em; color: #c8a96e; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; }
+  .checklist ul { list-style: none; }
+  .checklist ul li {
+    padding: 8px 0 8px 30px;
+    border-bottom: 1px solid #f0f0e8;
+    position: relative;
+    font-size: 0.95em;
+    color: #333;
+  }
+  .checklist ul li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    color: #c8a96e;
+    font-size: 1.1em;
+  }
+
+  .pricing-recap {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin: 25px 0;
+  }
+  .pricing-recap h4 { color: #c8a96e; font-size: 0.85em; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; }
+  .pricing-recap .offer { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #2a2a2a; }
+  .pricing-recap .offer:last-child { border-bottom: none; }
+  .pricing-recap .offer .name { color: #ccc; font-size: 0.95em; }
+  .pricing-recap .offer .price { color: #c8a96e; font-weight: bold; }
+
+  .schema {
+    background: #f5f5f2;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 25px 0;
+    text-align: center;
+  }
+  .schema-step {
+    background: #fff;
+    border: 1px solid #e0e0d8;
+    border-radius: 6px;
+    padding: 12px 20px;
+    margin: 5px auto;
+    max-width: 380px;
+    font-size: 0.9em;
+    color: #1a1a1a;
+  }
+  .schema-step.gold { background: #1a1a1a; color: #c8a96e; font-weight: bold; border-color: #1a1a1a; }
+  .schema-arrow { color: #c8a96e; font-size: 1.3em; margin: 3px 0; }
+
+  .url-box {
+    background: #1a1a1a;
+    color: #c8a96e;
+    font-family: monospace;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1em;
+    margin: 10px 0;
+    letter-spacing: 1px;
+  }
+
+  .final-box {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 35px;
+    text-align: center;
+    margin: 30px 0;
+  }
+  .final-box h3 { color: #c8a96e; font-size: 1.3em; margin-bottom: 15px; }
+  .final-box p { color: #aaa; font-size: 0.95em; max-width: 500px; margin: 0 auto; }
+
+  footer {
+    background: #1a1a1a;
+    color: #555;
+    text-align: center;
+    padding: 25px;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+  }
+  footer span { color: #c8a96e; }
+
+  @media print {
+    .section { page-break-before: always; }
+    .step { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COUVERTURE -->
+<div class="cover">
+  <div style="font-size:0.75em; letter-spacing:4px; color:#c8a96e; margin-bottom:20px;">GUIDE TECHNIQUE — USAGE INTERNE</div>
+  <h1>Systeme.io</h1>
+  <div class="sub">Guide de mise en ligne — Étape par étape</div>
+  <div class="tagline">Zéro compétence technique requise. Suivez les étapes dans l'ordre.</div>
+  <div class="date">MAI 2026 — VERSION 1.0</div>
+</div>
+
+<!-- INTRO -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Introduction</div>
+    <h2>Pourquoi Systeme.io ?</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">En résumé</div>
+    <p>Systeme.io est une plateforme française tout-en-un qui permet de créer et vendre une formation en ligne sans aucune compétence technique. Elle remplace 5 outils différents et propose un plan gratuit jusqu'à 2000 contacts.</p>
+  </div>
+
+  <p>Avec Systeme.io vous allez pouvoir :</p>
+  <ul style="list-style:none; margin:15px 0 25px;">
+    <li style="padding:8px 0 8px 25px; position:relative; color:#444; border-bottom:1px solid #eee;">
+      <span style="position:absolute;left:0;color:#c8a96e;">✓</span>
+      Héberger toutes les vidéos de la formation
+    </li>
+    <li style="padding:8px 0 8px 25px; position:relative; color:#444; border-bottom:1px solid #eee;">
+      <span style="position:absolute;left:0;color:#c8a96e;">✓</span>
+      Créer une page de paiement sécurisée
+    </li>
+    <li style="padding:8px 0 8px 25px; position:relative; color:#444; border-bottom:1px solid #eee;">
+      <span style="position:absolute;left:0;color:#c8a96e;">✓</span>
+      Envoyer des emails automatiques aux clientes
+    </li>
+    <li style="padding:8px 0 8px 25px; position:relative; color:#444; border-bottom:1px solid #eee;">
+      <span style="position:absolute;left:0;color:#c8a96e;">✓</span>
+      Gérer les 3 offres (297€ / 597€ / 1997€)
+    </li>
+    <li style="padding:8px 0 8px 25px; position:relative; color:#444;">
+      <span style="position:absolute;left:0;color:#c8a96e;">✓</span>
+      Recevoir les paiements directement sur votre compte bancaire
+    </li>
+  </ul>
+
+  <div class="schema">
+    <div style="font-size:0.8em; color:#888; margin-bottom:15px; letter-spacing:2px; text-transform:uppercase;">Votre tunnel complet sur Systeme.io</div>
+    <div class="schema-step gold">TikTok @KarimPhoenix</div>
+    <div class="schema-arrow">↓</div>
+    <div class="schema-step">Lien en bio → Groupe Telegram "Le Cercle"</div>
+    <div class="schema-arrow">↓</div>
+    <div class="schema-step">Page de vente (hébergée sur Systeme.io)</div>
+    <div class="schema-arrow">↓</div>
+    <div class="schema-step gold">Paiement sécurisé → Accès formation</div>
+    <div class="schema-arrow">↓</div>
+    <div class="schema-step">Email de bienvenue automatique</div>
+  </div>
+</div>
+
+<!-- PHASE 1 : CRÉATION DU COMPTE -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Phase 01</div>
+    <h2>Créer le compte Systeme.io</h2>
+  </div>
+
+  <div class="phase-title">Durée estimée : 10 minutes</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Aller sur Systeme.io</h3>
+      <p>Ouvrez votre navigateur et tapez l'adresse suivante :</p>
+      <div class="url-box">systeme.io</div>
+      <div class="action">
+        <strong>Action</strong>
+        Cliquez sur le bouton <strong>"Commencer gratuitement"</strong> en haut à droite de la page.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Créer votre compte</h3>
+      <p>Remplissez le formulaire d'inscription :</p>
+      <div class="action">
+        <strong>Informations à saisir</strong>
+        Adresse email professionnelle (créez une adresse Gmail dédiée si besoin : karimphoenix.contact@gmail.com)<br>
+        Mot de passe sécurisé (notez-le précieusement)
+      </div>
+      <div class="tip">
+        💡 Créez une adresse Gmail dédiée au projet : <strong>karimphoenix.officiel@gmail.com</strong> — ça professionnalise tout et centralise les communications.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Confirmer l'email</h3>
+      <p>Systeme.io va vous envoyer un email de confirmation.</p>
+      <div class="action">
+        <strong>Action</strong>
+        Ouvrez l'email reçu et cliquez sur le lien de confirmation. Vous êtes maintenant dans votre tableau de bord.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>Configurer le profil</h3>
+      <p>Dans le tableau de bord, cliquez sur votre nom en haut à droite → <strong>Paramètres du compte</strong></p>
+      <div class="action">
+        <strong>À remplir</strong>
+        Nom : Karim Phoenix<br>
+        Fuseau horaire : Europe/Paris<br>
+        Langue : Français
+      </div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h4>✓ Checklist Phase 1</h4>
+    <ul>
+      <li>Compte Systeme.io créé</li>
+      <li>Email de confirmation validé</li>
+      <li>Adresse Gmail dédiée créée</li>
+      <li>Profil configuré en français</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PHASE 2 : CONNEXION STRIPE -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Phase 02</div>
+    <h2>Connecter le paiement (Stripe)</h2>
+  </div>
+
+  <div class="phase-title">Durée estimée : 20 minutes · Nécessite une pièce d'identité</div>
+
+  <div class="intro-box">
+    <div class="label">Pourquoi Stripe ?</div>
+    <p>Stripe est la solution de paiement intégrée à Systeme.io. C'est elle qui va recevoir les paiements de vos clientes et les virer sur votre compte bancaire. Gratuit à créer — Stripe prend 1,4% + 0,25€ par transaction.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Accéder aux paramètres de paiement</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Tableau de bord Systeme.io → menu gauche → <strong>Paiements</strong> → <strong>Intégrations de paiement</strong> → <strong>Stripe</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Créer un compte Stripe</h3>
+      <p>Cliquez sur "Connecter Stripe". Si vous n'avez pas encore de compte Stripe, vous allez en créer un.</p>
+      <div class="action">
+        <strong>Informations requises</strong>
+        Email · Nom complet · Adresse en France · Numéro de téléphone · Pièce d'identité (photo) · IBAN de votre compte bancaire
+      </div>
+      <div class="warning">
+        ⚠️ Important : Stripe demandera une vérification d'identité. Préparez votre carte d'identité ou passeport en photo lisible. Le processus prend 24-48h pour validation complète.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Attendre la validation</h3>
+      <p>Une fois le formulaire Stripe complété, revenez sur Systeme.io. Stripe apparaîtra comme "En attente de validation".</p>
+      <div class="tip">
+        💡 La validation Stripe prend généralement 24 à 48 heures. Profitez de ce temps pour créer la formation (Phase 3).
+      </div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h4>✓ Checklist Phase 2</h4>
+    <ul>
+      <li>Compte Stripe créé</li>
+      <li>Pièce d'identité envoyée</li>
+      <li>IBAN renseigné</li>
+      <li>Stripe connecté à Systeme.io</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PHASE 3 : CRÉER LA FORMATION -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Phase 03</div>
+    <h2>Créer la formation en ligne</h2>
+  </div>
+
+  <div class="phase-title">Durée estimée : 1 à 2 heures</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Accéder à la section Formation</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Tableau de bord → menu gauche → <strong>Produits</strong> → <strong>Formations</strong> → bouton <strong>"Créer"</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Nommer la formation</h3>
+      <div class="action">
+        <strong>À saisir</strong>
+        Nom : <strong>Le Code Masculin</strong><br>
+        Description courte : "Comprendre les hommes pour ne plus souffrir — 5 semaines pour tout changer."
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Créer les 5 modules</h3>
+      <p>Dans la formation, cliquez sur <strong>"Ajouter une section"</strong> pour chaque module. Créez-les dans l'ordre :</p>
+      <div class="action">
+        <strong>Les 5 sections à créer</strong>
+        Section 1 : La Solitude & les Émotions<br>
+        Section 2 : La Colère, l'Ego & les Parasites<br>
+        Section 3 : Les 3A — Ta Méthode Face aux Épreuves<br>
+        Section 4 : Les 3C — Confiance, Communication, Complicité<br>
+        Section 5 : Le Nouveau Départ
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>Ajouter les vidéos dans chaque module</h3>
+      <p>Dans chaque section, cliquez sur <strong>"Ajouter une leçon"</strong> → choisissez <strong>"Vidéo"</strong>.</p>
+      <div class="action">
+        <strong>2 options pour les vidéos</strong>
+        Option A — Uploader directement la vidéo sur Systeme.io (simple)<br>
+        Option B — Coller le lien d'une vidéo YouTube non répertoriée (recommandé si vidéos lourdes)
+      </div>
+      <div class="tip">
+        💡 Recommandation : Karim filme ses vidéos sur son téléphone, les envoie via WhatsApp ou Google Drive. Vous les uploadez ensuite sur Systeme.io ou YouTube (en "non répertorié" pour qu'elles ne soient pas publiques).
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <h3>Ajouter le PDF Bonus</h3>
+      <p>Dans la Section 5 (Nouveau Départ), ajoutez une leçon de type <strong>"Fichier"</strong> pour le guide PDF bonus.</p>
+      <div class="action">
+        <strong>Titre du fichier</strong>
+        "Bonus — Les 10 vérités sur les hommes que personne ne dit"
+      </div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h4>✓ Checklist Phase 3</h4>
+    <ul>
+      <li>Formation "Le Code Masculin" créée</li>
+      <li>5 modules (sections) créés dans l'ordre</li>
+      <li>Vidéos ajoutées dans chaque module</li>
+      <li>PDF Bonus ajouté dans le module 5</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PHASE 4 : CRÉER LES 3 OFFRES -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Phase 04</div>
+    <h2>Créer les 3 offres et les prix</h2>
+  </div>
+
+  <div class="phase-title">Durée estimée : 30 minutes</div>
+
+  <div class="pricing-recap">
+    <h4>Rappel des 3 offres</h4>
+    <div class="offer">
+      <span class="name">Le Code Masculin — Essentiel</span>
+      <span class="price">297€</span>
+    </div>
+    <div class="offer">
+      <span class="name">Le Code Masculin — Accompagnement Groupe</span>
+      <span class="price">597€</span>
+    </div>
+    <div class="offer">
+      <span class="name">Phoenix Intime — Transformation 3 mois</span>
+      <span class="price">1 997€</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Créer l'Offre 1 — 297€</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Produits → Offres → Créer une offre
+      </div>
+      <div class="action">
+        <strong>Paramètres à renseigner</strong>
+        Nom : Le Code Masculin — Essentiel<br>
+        Prix : 297,00€<br>
+        Type : Paiement unique<br>
+        Formation associée : Le Code Masculin (accès modules 1 à 5)
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Créer l'Offre 2 — 597€</h3>
+      <div class="action">
+        <strong>Paramètres à renseigner</strong>
+        Nom : Le Code Masculin — Accompagnement Groupe<br>
+        Prix : 597,00€<br>
+        Type : Paiement unique<br>
+        Formation associée : Le Code Masculin (accès complet)
+      </div>
+      <div class="tip">
+        💡 La différence entre l'offre 1 et 2 (les lives privés) se gère manuellement — Karim ajoute manuellement les clientes de l'offre 2 dans un groupe Telegram VIP séparé.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Créer l'Offre 3 — 1997€ (Phoenix Intime)</h3>
+      <div class="action">
+        <strong>Paramètres à renseigner</strong>
+        Nom : Phoenix Intime — Transformation 3 mois<br>
+        Prix : 1 997,00€<br>
+        Type : Paiement unique (ou 3 x 699€ en échelonné)<br>
+        Formation associée : Le Code Masculin (accès complet)
+      </div>
+      <div class="warning">
+        ⚠️ L'offre Phoenix Intime ne doit PAS être visible publiquement sur la page de vente principale. Elle se propose uniquement en direct à des clientes sélectionnées. Créez un lien de paiement privé que Karim partage en DM ou WhatsApp.
+      </div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h4>✓ Checklist Phase 4</h4>
+    <ul>
+      <li>Offre 1 créée à 297€</li>
+      <li>Offre 2 créée à 597€</li>
+      <li>Offre 3 créée à 1997€ (lien privé)</li>
+      <li>Stripe validé et connecté aux offres</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PHASE 5 : PAGE DE VENTE -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Phase 05</div>
+    <h2>Mettre en ligne la page de vente</h2>
+  </div>
+
+  <div class="phase-title">Durée estimée : 45 minutes</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Créer un tunnel de vente</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Tableau de bord → <strong>Tunnels</strong> → <strong>Créer un tunnel</strong>
+      </div>
+      <div class="action">
+        <strong>Paramètres</strong>
+        Nom du tunnel : Le Code Masculin<br>
+        Type : Tunnel de vente d'une formation
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Créer la page de vente dans le tunnel</h3>
+      <p>Systeme.io propose des modèles de pages. Choisissez un modèle sombre et épuré.</p>
+      <div class="action">
+        <strong>Option simple</strong>
+        Copiez-collez le contenu de la page de vente fournie dans ce guide (fichier page_de_vente.html) directement dans l'éditeur Systeme.io en utilisant les blocs texte et image disponibles.
+      </div>
+      <div class="tip">
+        💡 Ne cherchez pas la perfection au lancement. Une page simple et claire convertit mieux qu'une page complexe mal exécutée. Priorité : lisible, rapide, avec les boutons d'achat bien visibles.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Connecter les boutons d'achat</h3>
+      <p>Pour chaque bouton d'achat sur la page, connectez-le à l'offre correspondante créée en Phase 4.</p>
+      <div class="action">
+        <strong>Les 3 boutons à connecter</strong>
+        "Je commence →" → Offre 1 (297€)<br>
+        "Je m'inscris →" → Offre 2 (597€)<br>
+        "Je postule →" → Formulaire de candidature (email Karim)
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>Créer la page de confirmation</h3>
+      <p>Après le paiement, la cliente doit arriver sur une page de confirmation chaleureuse.</p>
+      <div class="action">
+        <strong>Message de confirmation suggéré</strong>
+        "Bienvenue dans Le Code Masculin. Tu as fait le bon choix. Tu vas recevoir un email dans les prochaines minutes avec ton accès. Karim te retrouve très vite."
+      </div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h4>✓ Checklist Phase 5</h4>
+    <ul>
+      <li>Tunnel créé sur Systeme.io</li>
+      <li>Page de vente en ligne</li>
+      <li>Boutons d'achat connectés aux offres</li>
+      <li>Page de confirmation créée</li>
+      <li>Test d'achat effectué (paiement test)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PHASE 6 : EMAIL AUTOMATIQUE -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Phase 06</div>
+    <h2>L'email de bienvenue automatique</h2>
+  </div>
+
+  <div class="phase-title">Durée estimée : 20 minutes</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Créer la séquence email</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Emails → Campagnes → Créer une campagne → Nommer : "Bienvenue Le Code Masculin"
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Email 1 — Envoi immédiat après achat</h3>
+      <div class="action">
+        <strong>Objet de l'email</strong>
+        "Bienvenue — ton accès est prêt, [Prénom]"
+      </div>
+      <div class="action">
+        <strong>Corps de l'email</strong>
+        "Bonjour [Prénom],<br><br>
+        Je suis Karim. Et je suis sincèrement heureux de t'accueillir dans Le Code Masculin.<br><br>
+        Tu viens de prendre une décision importante pour toi. Et je vais être là à chaque étape.<br><br>
+        Voici ton accès à la formation : [lien automatique Systeme.io]<br><br>
+        Commence par le Module 1 — prends le temps qu'il faut. Ce n'est pas une course.<br><br>
+        À très vite,<br>
+        Karim Phoenix"
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Email 2 — J+2 après achat</h3>
+      <div class="action">
+        <strong>Objet</strong>
+        "As-tu commencé ? Un mot de Karim"
+      </div>
+      <div class="action">
+        <strong>Corps</strong>
+        "Bonjour [Prénom],<br><br>
+        J'espère que tu as eu le temps de commencer le premier module.<br><br>
+        Si tu as la moindre question — ou si quelque chose te touche particulièrement — réponds simplement à cet email. Je lis tout.<br><br>
+        Et rappelle-toi : rejoins le groupe Telegram Le Cercle si ce n'est pas déjà fait. C'est là que la communauté vit.<br><br>
+        Karim"
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>Connecter la séquence aux offres</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Retournez dans chaque Offre → onglet "Automatisations" → sélectionnez la campagne "Bienvenue Le Code Masculin" → déclencher "Après achat"
+      </div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h4>✓ Checklist Phase 6</h4>
+    <ul>
+      <li>Campagne email créée</li>
+      <li>Email J+0 rédigé et programmé</li>
+      <li>Email J+2 rédigé et programmé</li>
+      <li>Séquence connectée aux 3 offres</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PHASE 7 : TEST FINAL -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Phase 07</div>
+    <h2>Test final avant lancement</h2>
+  </div>
+
+  <div class="phase-title">Durée estimée : 30 minutes · À faire AVANT d'annoncer</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Faire un achat test</h3>
+      <p>Systeme.io permet de simuler un achat en mode test sans vrai paiement.</p>
+      <div class="action">
+        <strong>Action</strong>
+        Activez le mode "Test" dans les paramètres Stripe → faites un faux achat de l'Offre 2 (597€) → vérifiez que vous recevez bien l'email de bienvenue et que l'accès à la formation fonctionne.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Vérifier sur téléphone</h3>
+      <div class="action">
+        <strong>Action</strong>
+        Ouvrez la page de vente sur un téléphone. Vérifiez que tout est lisible, que les boutons sont accessibles et que les vidéos se lancent correctement.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Copier le lien de la page de vente</h3>
+      <p>Systeme.io vous donne une URL pour votre page de vente.</p>
+      <div class="action">
+        <strong>Action</strong>
+        Copiez ce lien — c'est lui que vous allez mettre dans la bio TikTok de @KarimPhoenix le jour du lancement.
+      </div>
+      <div class="tip">
+        💡 Le lien ressemblera à : karimphoenix.systeme.io/le-code-masculin — Vous pouvez aussi acheter un nom de domaine (ex: lecodemascutin.fr à ~10€/an) et le connecter à Systeme.io pour plus de professionnalisme.
+      </div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h4>✓ Checklist Phase 7 — Tout est prêt si vous cochez tout</h4>
+    <ul>
+      <li>Achat test effectué avec succès</li>
+      <li>Email de bienvenue reçu automatiquement</li>
+      <li>Accès formation vérifié</li>
+      <li>Page testée sur téléphone</li>
+      <li>Vidéos qui se lancent correctement</li>
+      <li>Lien de la page de vente copié</li>
+      <li>Bio TikTok prête à être mise à jour le jour J</li>
+    </ul>
+  </div>
+
+  <div class="final-box">
+    <h3>Vous êtes prêts à lancer.</h3>
+    <p>Une fois cette checklist complète, le seul travail restant est le contenu — les vidéos de Karim, les lives, et l'animation de la communauté Telegram.</p>
+    <p style="margin-top:12px; color:#c8a96e; font-style:italic;">Le business est en place. Maintenant on vend.</p>
+  </div>
+</div>
+
+<footer>
+  Guide technique préparé pour <span>Karim Phoenix</span> — Confidentiel — Mai 2026<br>
+  <span style="color:#444;">Pour toute question technique : support Systeme.io disponible en français</span>
+</footer>
+
+</body>
+</html>
