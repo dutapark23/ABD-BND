@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formation Média Buying — Karim Phoenix</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #fafaf8; color: #1a1a1a; line-height: 1.8; }
+
+  .cover {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 80px 40px;
+    text-align: center;
+    page-break-after: always;
+  }
+  .cover h1 { font-size: 2.5em; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .cover .sub { color: #c8a96e; font-size: 1em; letter-spacing: 2px; margin-bottom: 30px; }
+  .cover .tagline { color: #aaa; font-style: italic; max-width: 500px; margin: 0 auto; border-top: 1px solid #333; padding-top: 20px; }
+  .cover .date { color: #555; font-size: 0.85em; margin-top: 30px; letter-spacing: 2px; }
+
+  .section { max-width: 750px; margin: 0 auto; padding: 60px 30px; page-break-before: always; }
+  .section-header { border-left: 4px solid #c8a96e; padding-left: 20px; margin-bottom: 40px; }
+  .section-header h2 { font-size: 1.7em; text-transform: uppercase; letter-spacing: 2px; }
+  .section-header .num { font-size: 0.8em; color: #c8a96e; letter-spacing: 3px; font-style: italic; }
+
+  .intro-box {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+  }
+  .intro-box .label { font-size: 0.75em; color: #c8a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .intro-box p { color: #ccc; font-size: 0.95em; margin-bottom: 8px; }
+  .intro-box p:last-child { margin: 0; }
+
+  .step {
+    display: flex;
+    gap: 22px;
+    margin-bottom: 32px;
+    align-items: flex-start;
+    page-break-inside: avoid;
+  }
+  .step-num {
+    background: #c8a96e;
+    color: #1a1a1a;
+    font-size: 1em;
+    font-weight: bold;
+    min-width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .step-content h3 { font-size: 1.05em; color: #1a1a1a; margin-bottom: 6px; }
+  .step-content p { color: #444; font-size: 0.93em; margin-bottom: 8px; }
+  .step-content .action {
+    background: #fff8ee;
+    border-left: 3px solid #c8a96e;
+    padding: 10px 14px;
+    font-size: 0.9em;
+    color: #333;
+    border-radius: 0 4px 4px 0;
+    margin-top: 8px;
+  }
+  .step-content .action strong { color: #1a1a1a; display: block; margin-bottom: 4px; font-size: 0.78em; letter-spacing: 1px; text-transform: uppercase; }
+  .step-content .tip {
+    background: #f0f7ff;
+    border-left: 3px solid #4a90d9;
+    padding: 10px 14px;
+    font-size: 0.88em;
+    color: #2a5a8a;
+    border-radius: 0 4px 4px 0;
+    margin-top: 8px;
+  }
+  .step-content .warning {
+    background: #fff0f0;
+    border-left: 3px solid #e05050;
+    padding: 10px 14px;
+    font-size: 0.88em;
+    color: #a03030;
+    border-radius: 0 4px 4px 0;
+    margin-top: 8px;
+  }
+
+  .module-title {
+    background: #1a1a1a;
+    color: #c8a96e;
+    padding: 14px 22px;
+    font-size: 0.85em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    margin: 35px 0 25px;
+  }
+
+  .glossaire {
+    background: #fff;
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin: 25px 0;
+  }
+  .glossaire h4 { font-size: 0.85em; color: #c8a96e; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px; }
+  .glossaire dl dt { font-weight: bold; color: #1a1a1a; font-size: 0.95em; margin-top: 12px; }
+  .glossaire dl dd { color: #555; font-size: 0.9em; padding-left: 15px; border-left: 2px solid #eee; margin-left: 5px; }
+
+  .campagne-card {
+    background: #fff;
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+  }
+  .campagne-card .camp-num { font-size: 0.75em; color: #c8a96e; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+  .campagne-card .camp-title { font-size: 1.05em; font-weight: bold; color: #1a1a1a; margin-bottom: 12px; }
+  .campagne-card table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+  .campagne-card table td { padding: 7px 10px; border-bottom: 1px solid #f0f0e8; color: #444; }
+  .campagne-card table td:first-child { font-weight: bold; color: #1a1a1a; width: 35%; }
+  .campagne-card .copy-box {
+    background: #f5f5f2;
+    border-radius: 6px;
+    padding: 12px 15px;
+    margin-top: 12px;
+    font-style: italic;
+    color: #333;
+    font-size: 0.9em;
+  }
+  .campagne-card .copy-box strong { font-style: normal; display: block; font-size: 0.78em; color: #c8a96e; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+
+  .kpi-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9em;
+  }
+  .kpi-table th {
+    background: #1a1a1a;
+    color: #c8a96e;
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 0.78em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .kpi-table td { padding: 11px 14px; border-bottom: 1px solid #eee; color: #333; }
+  .kpi-table .green td { background: #f0fff4; }
+  .kpi-table .red td { background: #fff0f0; }
+
+  .checklist {
+    background: #fff;
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    padding: 22px 28px;
+    margin: 25px 0;
+  }
+  .checklist h4 { font-size: 0.82em; color: #c8a96e; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; }
+  .checklist ul { list-style: none; }
+  .checklist ul li { padding: 7px 0 7px 28px; border-bottom: 1px solid #f5f5f2; position: relative; font-size: 0.93em; color: #333; }
+  .checklist ul li::before { content: '☐'; position: absolute; left: 0; color: #c8a96e; font-size: 1.1em; }
+
+  .final-box {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 35px;
+    text-align: center;
+    margin: 30px 0;
+  }
+  .final-box h3 { color: #c8a96e; font-size: 1.3em; margin-bottom: 15px; }
+  .final-box p { color: #aaa; font-size: 0.93em; max-width: 500px; margin: 0 auto 10px; }
+
+  footer { background: #1a1a1a; color: #555; text-align: center; padding: 25px; font-size: 0.8em; letter-spacing: 1px; }
+  footer span { color: #c8a96e; }
+</style>
+</head>
+<body>
+
+<!-- COUVERTURE -->
+<div class="cover">
+  <div style="font-size:0.75em; letter-spacing:4px; color:#c8a96e; margin-bottom:20px;">FORMATION INTERNE — USAGE EXCLUSIF</div>
+  <h1>Média Buying</h1>
+  <div class="sub">Formation complète — Meta Ads & TikTok Ads sur Mobile</div>
+  <div class="tagline">De zéro à votre première campagne active. Étape par étape. Zéro jargon inutile.</div>
+  <div class="date">MAI 2026 — VERSION 1.0</div>
+</div>
+
+<!-- MODULE 0 : LES BASES -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Module 00</div>
+    <h2>Les bases — Ce qu'il faut comprendre avant tout</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">Ce que vous faites concrètement</div>
+    <p>Vous payez une plateforme (Meta ou TikTok) pour montrer le contenu de Karim à des femmes précises qui ne le connaissent pas encore. Quand elles cliquent, elles arrivent sur la page de vente. Si elles achètent, vous gagnez de l'argent.</p>
+    <p>Votre rôle : choisir À QUI montrer, COMBIEN dépenser, et QUAND arrêter ou accélérer.</p>
+  </div>
+
+  <div class="glossaire">
+    <h4>Glossaire essentiel — 10 termes à connaître</h4>
+    <dl>
+      <dt>Campagne</dt>
+      <dd>Le projet publicitaire global. Ex : "Lancement Le Code Masculin"</dd>
+
+      <dt>Ensemble de publicités (Ad Set)</dt>
+      <dd>Le groupe à l'intérieur d'une campagne où vous définissez QUI voit la pub (ciblage) et COMBIEN vous dépensez</dd>
+
+      <dt>Publicité (Ad)</dt>
+      <dd>La vidéo ou image que les gens voient réellement dans leur fil</dd>
+
+      <dt>CPM</dt>
+      <dd>Coût pour 1000 impressions. Ce que vous payez pour que 1000 personnes VOIENT la pub. Objectif : moins de 10€</dd>
+
+      <dt>CPC</dt>
+      <dd>Coût par clic. Ce que vous payez quand quelqu'un CLIQUE sur votre pub. Objectif : moins de 0,50€</dd>
+
+      <dt>CTR</dt>
+      <dd>Taux de clic. % de personnes qui cliquent après avoir vu la pub. Objectif : plus de 1,5%</dd>
+
+      <dt>ROAS</dt>
+      <dd>Retour sur dépense publicitaire. Si vous dépensez 100€ et générez 400€ de ventes = ROAS de 4. Objectif : minimum 3</dd>
+
+      <dt>Pixel</dt>
+      <dd>Un code invisible sur votre page de vente qui dit à Meta quand quelqu'un visite ou achète. Indispensable pour mesurer.</dd>
+
+      <dt>Audience Lookalike</dt>
+      <dd>Meta trouve des millions de personnes similaires à vos clientes existantes. Le ciblage le plus puissant qui existe.</dd>
+
+      <dt>Retargeting</dt>
+      <dd>Montrer une pub aux personnes qui ont déjà visité votre page de vente sans acheter. Conversion très élevée.</dd>
+    </dl>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">La logique du budget</div>
+    <p>Ne pensez pas en "je dépense X€". Pensez en "pour chaque euro dépensé, combien je récupère ?"</p>
+    <p>Si vous dépensez <strong>100€</strong> et vendez <strong>1 formation à 597€</strong> → vous avez gagné 497€ nets. Ce 100€ était un investissement, pas une dépense.</p>
+  </div>
+</div>
+
+<!-- MODULE 1 : META SETUP -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Module 01</div>
+    <h2>Créer votre infrastructure Meta — Sur mobile</h2>
+  </div>
+
+  <div class="module-title">Étape 1 — Créer la page Facebook Karim Phoenix</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Télécharger l'application Facebook</h3>
+      <p>Si vous ne l'avez pas déjà — téléchargez Facebook depuis l'App Store ou Google Play. Connectez-vous avec votre compte personnel.</p>
+      <div class="tip">💡 Votre compte personnel ne sera pas visible publiquement. La page Karim Phoenix sera séparée de votre profil.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Créer la page professionnelle</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Ouvrez Facebook → Menu (☰) → Pages → Créer → Choisir "Personnage public ou créateur de contenu"
+      </div>
+      <div class="action">
+        <strong>Informations à renseigner</strong>
+        Nom de la page : Karim Phoenix<br>
+        Catégorie : Coach de vie / Auteur<br>
+        Bio : "Je dis ce que les hommes pensent vraiment | Pour les femmes qui veulent comprendre | Rejoins la communauté ↓"
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Ajouter une photo de profil</h3>
+      <p>Une photo récente de Karim — visage visible, fond neutre, regard direct. C'est la première impression.</p>
+      <div class="warning">⚠️ Pas de masque, pas de logo. Le vrai visage de Karim uniquement.</div>
+    </div>
+  </div>
+
+  <div class="module-title">Étape 2 — Créer le compte Meta Business Manager</div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>Télécharger Meta Business Suite</h3>
+      <p>Cherchez "Meta Business Suite" dans l'App Store ou Google Play. C'est l'application officielle de Meta pour gérer les publicités depuis le téléphone.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <h3>Connecter la page Karim Phoenix</h3>
+      <div class="action">
+        <strong>Dans Meta Business Suite</strong>
+        Connexion → Votre compte Facebook → Sélectionner la page "Karim Phoenix" → Confirmer
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-content">
+      <h3>Ajouter un mode de paiement</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Menu → Paramètres → Facturation et paiements → Ajouter un mode de paiement → Carte bancaire
+      </div>
+      <div class="warning">⚠️ Meta prélèvera automatiquement votre carte selon le budget que vous définissez. Commencez avec une carte avec une limite journalière pour contrôler les dépenses.</div>
+    </div>
+  </div>
+
+  <div class="module-title">Étape 3 — Installer le Pixel Meta</div>
+
+  <div class="step">
+    <div class="step-num">7</div>
+    <div class="step-content">
+      <h3>Créer le Pixel dans Meta Business Suite</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Menu → Gestionnaire d'événements → Connecter des sources de données → Web → Pixel Meta → Créer un pixel → Nommer : "Karim Phoenix Pixel"
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">8</div>
+    <div class="step-content">
+      <h3>Copier l'ID du Pixel</h3>
+      <p>Une fois créé, Meta vous donne un numéro d'identification — c'est votre ID Pixel. Il ressemble à : <strong>1234567890123456</strong></p>
+      <div class="action">
+        <strong>Action</strong>
+        Copiez cet ID et gardez-le précieusement — vous en aurez besoin à l'étape suivante.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">9</div>
+    <div class="step-content">
+      <h3>Connecter le Pixel à Systeme.io</h3>
+      <div class="action">
+        <strong>Dans Systeme.io (sur ordinateur ou téléphone)</strong>
+        Paramètres → Intégrations → Meta Pixel → Coller votre ID Pixel → Sauvegarder
+      </div>
+      <div class="tip">💡 À partir de maintenant, Meta "voit" tous les visiteurs de votre page de vente. Il peut donc optimiser vos campagnes pour atteindre des personnes similaires à celles qui achètent.</div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h4>✓ Checklist Module 01</h4>
+    <ul>
+      <li>Page Facebook "Karim Phoenix" créée avec photo</li>
+      <li>Meta Business Suite installé sur le téléphone</li>
+      <li>Mode de paiement ajouté</li>
+      <li>Pixel Meta créé</li>
+      <li>ID Pixel copié dans Systeme.io</li>
+    </ul>
+  </div>
+</div>
+
+<!-- MODULE 2 : PREMIÈRE CAMPAGNE META -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Module 02</div>
+    <h2>Créer votre première campagne Meta</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">Ordre de lancement des campagnes</div>
+    <p>On ne lance pas tout en même temps. On commence par <strong>1 campagne</strong>, on la regarde 7 jours, puis on en ajoute une deuxième si les résultats sont bons.</p>
+  </div>
+
+  <div class="module-title">Campagne 1 — Notoriété (Semaine 1-2)</div>
+
+  <div class="campagne-card">
+    <div class="camp-num">Campagne 1</div>
+    <div class="camp-title">Faire connaître Karim Phoenix</div>
+    <table>
+      <tr><td>Objectif</td><td>Notoriété — faire voir la vidéo au maximum de femmes ciblées</td></tr>
+      <tr><td>Budget</td><td>10€/jour pendant 14 jours = 140€</td></tr>
+      <tr><td>Vidéo à utiliser</td><td>La vidéo J1 — Présentation sans masque</td></tr>
+      <tr><td>Placement</td><td>Instagram Reels + Facebook automatique</td></tr>
+      <tr><td>Sexe</td><td>Femmes uniquement</td></tr>
+      <tr><td>Âge</td><td>30 à 55 ans</td></tr>
+      <tr><td>Pays</td><td>France, Belgique, Suisse</td></tr>
+      <tr><td>Intérêts</td><td>Relations amoureuses · Développement personnel · Coaching · Psychologie</td></tr>
+    </table>
+    <div class="copy-box">
+      <strong>Texte de la publicité (à copier-coller)</strong>
+      "Tu mérites de comprendre ce qui se passe vraiment dans la tête des hommes. Pas de théorie. Pas de jugement. Juste la vérité — par un homme qui a vécu. 👇 Rejoins la communauté gratuite."
+    </div>
+  </div>
+
+  <div class="module-title">Comment créer cette campagne sur mobile</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Ouvrir Meta Business Suite</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Ouvrez l'app → Sélectionnez la page "Karim Phoenix" → Bouton bleu "Créer une publicité" en bas de l'écran
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Choisir l'objectif</h3>
+      <div class="action">
+        <strong>Sélectionnez</strong>
+        "Notoriété" ou "Couverture" — pour cette première campagne on veut que le maximum de personnes voient Karim.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Uploader la vidéo</h3>
+      <p>Choisissez la vidéo J1 de Karim depuis votre téléphone ou Google Drive.</p>
+      <div class="tip">💡 Format idéal : vidéo verticale 9:16 (format portrait téléphone). Durée : 30 à 60 secondes maximum pour les Reels.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>Configurer le ciblage</h3>
+      <div class="action">
+        <strong>À renseigner exactement</strong>
+        Sexe : Femmes<br>
+        Âge : 30-55 ans<br>
+        Lieux : France + Belgique + Suisse<br>
+        Intérêts : tapez un par un dans la barre de recherche → Relations amoureuses / Coaching de vie / Développement personnel / Psychologie
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <h3>Définir le budget</h3>
+      <div class="action">
+        <strong>Paramètres</strong>
+        Type : Budget quotidien<br>
+        Montant : 10,00€ par jour<br>
+        Durée : 14 jours (date de début et fin)<br>
+        Total engagé : 140€
+      </div>
+      <div class="warning">⚠️ Ne jamais choisir "Budget à vie" au début — vous perdez le contrôle. Toujours "Budget quotidien" avec une date de fin.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-content">
+      <h3>Publier et confirmer</h3>
+      <p>Vérifiez tout. Appuyez sur "Publier". Meta va examiner votre publicité — cela prend entre 1 et 24 heures.</p>
+      <div class="tip">💡 Vous recevrez une notification quand la pub sera approuvée et en ligne.</div>
+    </div>
+  </div>
+
+  <div class="module-title">Campagne 2 — Trafic vers la page de vente (Semaine 3-4)</div>
+
+  <div class="campagne-card">
+    <div class="camp-num">Campagne 2 — À lancer seulement si Campagne 1 a un CTR supérieur à 1%</div>
+    <div class="camp-title">Envoyer des femmes sur la page de vente</div>
+    <table>
+      <tr><td>Objectif</td><td>Trafic — envoyer des clics vers systeme.io/le-code-masculin</td></tr>
+      <tr><td>Budget</td><td>15€/jour pendant 14 jours = 210€</td></tr>
+      <tr><td>Vidéo</td><td>Vidéo J10 — Les parasites (la plus percutante)</td></tr>
+      <tr><td>CTA</td><td>Bouton "En savoir plus" → URL page de vente Systeme.io</td></tr>
+      <tr><td>Ciblage</td><td>Identique à Campagne 1</td></tr>
+    </table>
+    <div class="copy-box">
+      <strong>Texte de la publicité</strong>
+      "Il y a des hommes dans ta vie qui se nourrissent de toi. Et tu ne t'en rends même pas compte. Voici les 3 signes qui ne trompent pas — et comment t'en protéger définitivement. ↓"
+    </div>
+  </div>
+
+  <div class="module-title">Campagne 3 — Retargeting (Semaine 4+)</div>
+
+  <div class="campagne-card">
+    <div class="camp-num">Campagne 3 — À lancer quand le Pixel a recueilli 100+ visites</div>
+    <div class="camp-title">Relancer les femmes qui ont visité sans acheter</div>
+    <table>
+      <tr><td>Objectif</td><td>Conversions — achat formation</td></tr>
+      <tr><td>Budget</td><td>10€/jour en continu</td></tr>
+      <tr><td>Audience</td><td>Personnes ayant visité la page de vente dans les 30 derniers jours (via Pixel)</td></tr>
+      <tr><td>Vidéo</td><td>Témoignage client ou vidéo J22 — Retours de la communauté</td></tr>
+    </table>
+    <div class="copy-box">
+      <strong>Texte de la publicité</strong>
+      "Tu as visité la page. Tu hésites encore. Je comprends. Voici ce que des femmes comme toi disent après 5 semaines avec Karim. La garantie satisfait ou remboursé est valable 14 jours — tu ne prends aucun risque. ↓"
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 3 : TIKTOK ADS -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Module 03</div>
+    <h2>TikTok Spark Ads — Booster l'organique</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">Pourquoi les Spark Ads sont différents</div>
+    <p>Les Spark Ads ne créent pas une nouvelle publicité. Ils <strong>boostent une vidéo TikTok existante</strong> de @KarimPhoenix. La vidéo garde ses vues, likes et commentaires organiques — ce qui la rend beaucoup plus crédible qu'une pub classique.</p>
+  </div>
+
+  <div class="module-title">Configuration TikTok Ads sur mobile</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Télécharger TikTok Ads Manager</h3>
+      <p>Cherchez "TikTok Ads Manager" dans l'App Store ou Google Play. Connectez-vous avec l'email de Karim Phoenix.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Créer le compte Business TikTok</h3>
+      <div class="action">
+        <strong>À renseigner</strong>
+        Nom du compte : Karim Phoenix<br>
+        Pays de facturation : France<br>
+        Devise : Euro (€)<br>
+        Mode de paiement : Carte bancaire
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Autoriser les Spark Ads depuis le compte TikTok</h3>
+      <p>Pour booster une vidéo existante de @KarimPhoenix, il faut d'abord autoriser l'accès depuis le compte TikTok.</p>
+      <div class="action">
+        <strong>Sur l'application TikTok @KarimPhoenix</strong>
+        Paramètres → Créateur → Autorisation des publicités Spark → Activer → Générer un code d'autorisation → Copier le code
+      </div>
+      <div class="action">
+        <strong>Dans TikTok Ads Manager</strong>
+        Bibliothèque d'actifs → Contenus organiques → Ajouter → Coller le code d'autorisation
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>Créer la campagne Spark Ads</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Créer une campagne → Objectif : Trafic → Nom : "Spark - Ego Masculin"
+      </div>
+      <div class="action">
+        <strong>Ciblage</strong>
+        Sexe : Féminin<br>
+        Âge : 25-54 ans<br>
+        Langue : Français<br>
+        Pays : France, Belgique, Suisse, Canada<br>
+        Intérêts : Romantic Relationships · Self Improvement · Life Coach · Psychology
+      </div>
+      <div class="action">
+        <strong>Budget et durée</strong>
+        Budget quotidien : 20€/jour<br>
+        Durée : 10 jours = 200€ total
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <h3>Sélectionner la vidéo à booster</h3>
+      <div class="action">
+        <strong>Choisissez</strong>
+        Dans "Format de la publicité" → Spark Ads → Sélectionnez la vidéo J9 (L'ego masculin) depuis les contenus autorisés de @KarimPhoenix
+      </div>
+      <div class="tip">💡 Boostez toujours la vidéo qui a déjà le meilleur taux d'engagement organique. Une vidéo à 15K vues naturelles sera bien meilleure qu'une vidéo à 500 vues.</div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h4>✓ Checklist Modules 02 & 03</h4>
+    <ul>
+      <li>Campagne Meta 1 (Notoriété) créée et active</li>
+      <li>Campagne Meta 2 (Trafic) prête — en attente résultats C1</li>
+      <li>Campagne Meta 3 (Retargeting) configurée — en attente 100 visites Pixel</li>
+      <li>Compte TikTok Ads Manager créé</li>
+      <li>Autorisation Spark Ads accordée depuis @KarimPhoenix</li>
+      <li>Première campagne Spark Ads lancée</li>
+    </ul>
+  </div>
+</div>
+
+<!-- MODULE 4 : LIRE LES RÉSULTATS -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Module 04</div>
+    <h2>Lire les résultats et prendre les bonnes décisions</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">La routine hebdomadaire</div>
+    <p>Chaque <strong>lundi matin</strong> — 15 minutes maximum. Vous regardez 4 chiffres. Vous prenez une décision. C'est tout.</p>
+  </div>
+
+  <div class="module-title">Les 4 chiffres à regarder chaque semaine</div>
+
+  <table class="kpi-table">
+    <tr>
+      <th>Indicateur</th>
+      <th>Où le trouver</th>
+      <th>Bon résultat</th>
+      <th>Mauvais résultat</th>
+    </tr>
+    <tr class="green">
+      <td><strong>CPM</strong></td>
+      <td>Colonne "CPM" dans le tableau</td>
+      <td>Moins de 10€</td>
+      <td>Plus de 20€</td>
+    </tr>
+    <tr class="green">
+      <td><strong>CTR</strong></td>
+      <td>Colonne "CTR" dans le tableau</td>
+      <td>Plus de 1,5%</td>
+      <td>Moins de 0,8%</td>
+    </tr>
+    <tr class="green">
+      <td><strong>CPC</strong></td>
+      <td>Colonne "CPC" dans le tableau</td>
+      <td>Moins de 0,50€</td>
+      <td>Plus de 1,50€</td>
+    </tr>
+    <tr class="green">
+      <td><strong>Ventes</strong></td>
+      <td>Tableau de bord Systeme.io</td>
+      <td>1 vente / 100€ dépensés</td>
+      <td>0 vente après 200€</td>
+    </tr>
+  </table>
+
+  <div class="module-title">L'arbre de décision — Que faire selon les résultats</div>
+
+  <div class="campagne-card">
+    <div class="camp-title">✅ Tout est dans le vert — Bons chiffres</div>
+    <table>
+      <tr><td>Action</td><td>Augmentez le budget de 20% par semaine maximum. Ex : 10€/j → 12€/j → 14€/j</td></tr>
+      <tr><td>À ne pas faire</td><td>Ne doublez jamais le budget d'un coup — l'algorithme se réinitialise</td></tr>
+    </table>
+  </div>
+
+  <div class="campagne-card">
+    <div class="camp-title">⚠️ CTR faible mais CPM correct — Les gens voient mais ne cliquent pas</div>
+    <table>
+      <tr><td>Diagnostic</td><td>La vidéo n'accroche pas assez dans les 3 premières secondes</td></tr>
+      <tr><td>Action</td><td>Testez une nouvelle vidéo avec un hook différent. Gardez le même ciblage.</td></tr>
+    </table>
+  </div>
+
+  <div class="campagne-card">
+    <div class="camp-title">⚠️ CPM très élevé — La pub coûte cher à diffuser</div>
+    <table>
+      <tr><td>Diagnostic</td><td>Votre audience est trop petite ou trop concurrentielle</td></tr>
+      <tr><td>Action</td><td>Élargissez l'âge (25-60 ans au lieu de 30-55) ou ajoutez un pays (Canada)</td></tr>
+    </table>
+  </div>
+
+  <div class="campagne-card">
+    <div class="camp-title">🔴 Zéro vente après 150€ dépensés</div>
+    <table>
+      <tr><td>Diagnostic</td><td>Soit la page de vente ne convertit pas, soit l'audience est mauvaise</td></tr>
+      <tr><td>Action 1</td><td>Vérifiez que le lien vers la page de vente fonctionne correctement</td></tr>
+      <tr><td>Action 2</td><td>Regardez combien de personnes arrivent sur la page (dans Systeme.io → Statistiques)</td></tr>
+      <tr><td>Action 3</td><td>Si plus de 200 visites et 0 vente → problème de page de vente. Contactez-moi.</td></tr>
+      <tr><td>Action 4</td><td>Si moins de 50 visites pour 150€ → problème de ciblage. Changez les intérêts.</td></tr>
+    </table>
+  </div>
+
+  <div class="module-title">Comment trouver ces chiffres sur mobile</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Sur Meta Business Suite</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Ouvrez l'app → Publicités → Sélectionnez votre campagne → Résultats → Vous voyez toutes les colonnes de chiffres
+      </div>
+      <div class="tip">💡 Appuyez sur "Colonnes" pour personnaliser l'affichage et n'afficher que CPM, CTR, CPC et Résultats.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Sur TikTok Ads Manager</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Ouvrez l'app → Dashboard → Campagnes → Sélectionnez la campagne → Voir les statistiques
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Sur Systeme.io — Les ventes</h3>
+      <div class="action">
+        <strong>Navigation</strong>
+        Ouvrez Systeme.io → Tableau de bord → Ventes récentes — Vous voyez chaque paiement en temps réel avec le nom de l'offre achetée
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 5 : OPTIMISATION -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Module 05</div>
+    <h2>Optimisation — Les règles simples qui font la différence</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">La règle des 3 semaines</div>
+    <p><strong>Semaine 1 :</strong> Ne touchez à rien. L'algorithme apprend.<br>
+    <strong>Semaine 2 :</strong> Regardez les chiffres. Coupez ce qui ne fonctionne pas.<br>
+    <strong>Semaine 3 :</strong> Augmentez le budget sur ce qui fonctionne.</p>
+  </div>
+
+  <div class="module-title">Les 5 règles d'or du média buyer</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Une seule variable à la fois</h3>
+      <p>Si vous changez la vidéo ET le ciblage en même temps — vous ne saurez jamais ce qui a fait la différence. Changez toujours UNE seule chose à la fois.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Testez toujours 2 vidéos en parallèle</h3>
+      <p>Créez 2 publicités dans le même ensemble d'annonces avec des vidéos différentes. Après 7 jours, coupez la moins performante et gardez la gagnante.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Le hook fait 80% du résultat</h3>
+      <p>Les 3 premières secondes d'une vidéo déterminent si les gens regardent ou scrollent. Si le CTR est faible, c'est presque toujours un problème de hook.</p>
+      <div class="tip">💡 Demandez à Karim de tourner la même vidéo avec 3 débuts différents. Testez les 3. Gardez le meilleur.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>Ne jamais arrêter une pub qui performe</h3>
+      <p>Si une campagne génère des ventes régulières à un bon ROAS — ne la touchez pas. Même si vous la trouvez "vieille". Laissez-la tourner tant qu'elle rapporte.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <h3>Reinvestissez 30% des profits en pub</h3>
+      <p>Quand les premières ventes arrivent — réinvestissez 30% du profit en publicité. C'est comme ça qu'on passe de 5 ventes/mois à 50 ventes/mois progressivement.</p>
+    </div>
+  </div>
+
+  <div class="final-box">
+    <h3>Vous êtes formé. Maintenant vous pratiquez.</h3>
+    <p>La théorie s'apprend en une heure. La compétence s'acquiert en faisant. Lancez la première campagne à 10€/jour. Regardez les chiffres. Posez-moi vos questions.</p>
+    <p style="margin-top:12px; color:#c8a96e; font-style:italic;">Chaque lundi matin — 4 chiffres. Une décision. C'est tout.</p>
+  </div>
+</div>
+
+<footer>
+  Formation Média Buying préparée pour <span>Karim Phoenix</span> — Confidentiel — Mai 2026<br>
+  <span style="color:#444;">Questions sur les résultats ? Partagez vos chiffres — j'analyse et conseille immédiatement.</span>
+</footer>
+
+</body>
+</html>
