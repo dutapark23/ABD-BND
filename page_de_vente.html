@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Code Masculin — Karim Phoenix</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #0e0e0e; color: #f0f0f0; line-height: 1.8; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(180deg, #0e0e0e 0%, #1a1a1a 100%);
+    padding: 80px 20px 60px;
+    text-align: center;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .hero .eyebrow {
+    font-size: 0.8em;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c8a96e;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: 2.8em;
+    line-height: 1.2;
+    max-width: 750px;
+    margin: 0 auto 20px;
+    color: #fff;
+  }
+  .hero h1 span { color: #c8a96e; }
+  .hero .subhead {
+    font-size: 1.2em;
+    color: #aaa;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    font-style: italic;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #c8a96e;
+    color: #0e0e0e;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 18px 40px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: #e0c080; }
+  .cta-note { font-size: 0.8em; color: #666; margin-top: 12px; }
+
+  /* SECTIONS */
+  .section { max-width: 750px; margin: 0 auto; padding: 70px 20px; }
+  .section-dark { background: #141414; }
+  .section-dark .section { max-width: 750px; margin: 0 auto; padding: 70px 20px; }
+
+  h2 {
+    font-size: 1.9em;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 25px;
+  }
+  h2 span { color: #c8a96e; }
+  h3 { font-size: 1.2em; color: #c8a96e; margin-bottom: 10px; letter-spacing: 1px; }
+  p { color: #ccc; margin-bottom: 18px; font-size: 1em; }
+  p strong { color: #fff; }
+
+  /* PAIN */
+  .pain-list { list-style: none; margin: 25px 0; }
+  .pain-list li {
+    padding: 14px 0 14px 35px;
+    border-bottom: 1px solid #2a2a2a;
+    color: #bbb;
+    position: relative;
+    font-size: 1em;
+  }
+  .pain-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #c8a96e;
+  }
+
+  /* KARIM BIO */
+  .bio-block {
+    background: #1a1a1a;
+    border-left: 3px solid #c8a96e;
+    padding: 30px 30px;
+    border-radius: 0 8px 8px 0;
+    margin: 30px 0;
+  }
+  .bio-block .name {
+    font-size: 1.3em;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .bio-block .title {
+    font-size: 0.8em;
+    color: #c8a96e;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  /* MODULES */
+  .module {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 25px 28px;
+    margin-bottom: 16px;
+  }
+  .module .module-num {
+    font-size: 0.75em;
+    color: #c8a96e;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .module .module-title {
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .module ul { list-style: none; padding: 0; }
+  .module ul li {
+    color: #aaa;
+    font-size: 0.9em;
+    padding: 4px 0 4px 18px;
+    position: relative;
+  }
+  .module ul li::before { content: '✓'; position: absolute; left: 0; color: #c8a96e; }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 30px 0;
+  }
+  .price-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+  }
+  .price-card.featured {
+    border-color: #c8a96e;
+    background: #1e1a14;
+  }
+  .price-card .badge {
+    display: inline-block;
+    background: #c8a96e;
+    color: #0e0e0e;
+    font-size: 0.7em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .price-card .offer-name {
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .price-card .offer-sub {
+    font-size: 0.85em;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .price-card .price {
+    font-size: 2.5em;
+    color: #c8a96e;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .price-card .price-note {
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  .price-card ul {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 25px;
+  }
+  .price-card ul li {
+    color: #bbb;
+    font-size: 0.9em;
+    padding: 5px 0 5px 22px;
+    position: relative;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .price-card ul li::before { content: '✓'; position: absolute; left: 0; color: #c8a96e; }
+  .price-card .cta-btn { width: 100%; text-align: center; }
+  .price-card.featured .cta-btn { background: #c8a96e; }
+
+  /* TESTIMONIALS */
+  .testimonial {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 25px 28px;
+    margin-bottom: 16px;
+    border-left: 3px solid #c8a96e;
+  }
+  .testimonial .quote { color: #ccc; font-style: italic; margin-bottom: 12px; }
+  .testimonial .author { color: #c8a96e; font-size: 0.85em; letter-spacing: 1px; }
+
+  /* FAQ */
+  .faq-item {
+    border-bottom: 1px solid #2a2a2a;
+    padding: 20px 0;
+  }
+  .faq-item .question {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+  .faq-item .answer { color: #aaa; font-size: 0.95em; }
+
+  /* GARANTIE */
+  .garantie {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 35px;
+    text-align: center;
+    margin: 40px 0;
+  }
+  .garantie .g-title {
+    font-size: 1.3em;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .garantie p { color: #aaa; max-width: 500px; margin: 0 auto; }
+
+  /* URGENCE */
+  .urgence {
+    background: #1e1a14;
+    border: 1px solid #c8a96e;
+    border-radius: 8px;
+    padding: 25px 30px;
+    text-align: center;
+    margin: 30px 0;
+  }
+  .urgence p { color: #c8a96e; font-weight: bold; font-size: 1em; margin: 0; }
+
+  /* FOOTER */
+  footer {
+    background: #0a0a0a;
+    text-align: center;
+    padding: 30px 20px;
+    color: #444;
+    font-size: 0.8em;
+    border-top: 1px solid #1a1a1a;
+  }
+  footer span { color: #c8a96e; }
+
+  /* DIVIDER */
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: #c8a96e;
+    margin: 20px auto;
+  }
+
+  @media (min-width: 640px) {
+    .hero h1 { font-size: 3.5em; }
+    .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">Karim Phoenix présente</div>
+  <h1>Comprendre les hommes pour <span>ne plus jamais souffrir</span></h1>
+  <p class="subhead">La première formation créée par un homme, pour les femmes qui veulent enfin décoder ce qui se passe vraiment dans la tête masculine.</p>
+  <a href="#offres" class="cta-btn">Je veux comprendre les hommes →</a>
+  <p class="cta-note">Formation disponible en accès immédiat · Paiement sécurisé</p>
+</div>
+
+<!-- DOULEUR -->
+<div style="background:#0e0e0e;">
+  <div class="section">
+    <h2>Tu en as assez de <span>souffrir sans comprendre pourquoi.</span></h2>
+    <p>Tu fais tout bien. Tu aimes fort. Tu donnes beaucoup. Et pourtant...</p>
+    <ul class="pain-list">
+      <li>Tu te retrouves toujours avec des hommes qui ne sont pas à ta hauteur</li>
+      <li>Tu ne comprends pas pourquoi il se ferme quand tu veux parler</li>
+      <li>Tu marches sur des œufs pour ne pas déclencher sa mauvaise humeur</li>
+      <li>Tu te sens seule même quand tu es en couple</li>
+      <li>Tu donnes tout — et tu reçois des miettes</li>
+      <li>Tu te demandes si c'est toi le problème</li>
+    </ul>
+    <p><strong>Ce n'est pas ta faute.</strong> Personne ne t'a jamais appris à décoder les hommes. Jusqu'à maintenant.</p>
+  </div>
+</div>
+
+<!-- PROMESSE -->
+<div class="section-dark">
+  <div class="section">
+    <div class="divider"></div>
+    <h2 style="text-align:center;">Et si tu pouvais <span>lire en eux</span> comme dans un livre ouvert ?</h2>
+    <div class="divider"></div>
+    <p>Imagine savoir exactement pourquoi il se tait après une dispute. Pourquoi il part quand il aime. Pourquoi il attaque quand il a peur.</p>
+    <p>Imagine ne plus jamais te demander "qu'est-ce que j'ai fait ?" ou "est-ce qu'il m'aime encore ?"</p>
+    <p>Imagine choisir tes relations avec lucidité — reconnaître les hommes qui te nourrissent, éliminer ceux qui te vident.</p>
+    <p><strong>C'est exactement ce que cette formation te donne.</strong></p>
+  </div>
+</div>
+
+<!-- KARIM -->
+<div style="background:#0e0e0e;">
+  <div class="section">
+    <h2>Pourquoi <span>écouter Karim ?</span></h2>
+    <div class="bio-block">
+      <div class="name">Karim Phoenix</div>
+      <div class="title">Coach en relations & compréhension masculine</div>
+      <p>Je ne suis pas un théoricien. Je suis un homme qui a vécu.</p>
+      <p>Deux divorces. Deux enfants. Des faillites. Des nuits à dormir dans ma voiture à Dubaï. Et je suis toujours là — debout, souriant.</p>
+      <p>Pas parce que la vie a été simple. Parce que j'ai choisi de comprendre plutôt que de condamner.</p>
+      <p>J'ai appris à parler le langage émotionnel que personne ne nous enseigne. Et aujourd'hui je suis là pour te le transmettre.</p>
+      <p><strong>Pas de jugement. Pas de théorie froide. Juste la vérité d'un homme qui a vécu des deux côtés.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<div class="section-dark">
+  <div class="section">
+    <h2>Ce que tu vas <span>apprendre en 5 semaines</span></h2>
+    <p style="margin-bottom:30px;">Un programme structuré, semaine par semaine, avec des vidéos courtes et des exercices concrets.</p>
+
+    <div class="module">
+      <div class="module-num">Module 1 — Semaine 1</div>
+      <div class="module-title">La Solitude & les Émotions</div>
+      <ul>
+        <li>Pourquoi tu te sens seule même entourée</li>
+        <li>Le langage émotionnel masculin vs féminin</li>
+        <li>Identifier tes schémas répétitifs</li>
+        <li>Exercice : Journal des émotions — 7 jours</li>
+      </ul>
+    </div>
+
+    <div class="module">
+      <div class="module-num">Module 2 — Semaine 2</div>
+      <div class="module-title">La Colère, l'Ego & les Parasites</div>
+      <ul>
+        <li>Ce que cache vraiment la colère masculine</li>
+        <li>Décoder l'ego — le bouclier invisible</li>
+        <li>Les 3 profils de parasites émotionnels</li>
+        <li>Comment s'en protéger concrètement</li>
+        <li>Exercice : Cartographie des personnes dans ta vie</li>
+      </ul>
+    </div>
+
+    <div class="module">
+      <div class="module-num">Module 3 — Semaine 3</div>
+      <div class="module-title">Les 3A — Ta Méthode Face aux Épreuves</div>
+      <ul>
+        <li>Accepter sans résigner</li>
+        <li>Analyser sans se perdre</li>
+        <li>Agir avec intention</li>
+        <li>Exercice : Les 3A appliqués à ta situation personnelle</li>
+      </ul>
+    </div>
+
+    <div class="module">
+      <div class="module-num">Module 4 — Semaine 4</div>
+      <div class="module-title">Les 3C — Confiance, Communication, Complicité</div>
+      <ul>
+        <li>La vraie confiance en soi — ce que ça change</li>
+        <li>Communiquer avec un homme sans se perdre</li>
+        <li>Construire la complicité au quotidien</li>
+        <li>Exercice : Évaluation de tes 3C actuels</li>
+      </ul>
+    </div>
+
+    <div class="module">
+      <div class="module-num">Module 5 — Semaine 5</div>
+      <div class="module-title">Le Nouveau Départ</div>
+      <ul>
+        <li>Choisir avec qui tu construis — les bons critères</li>
+        <li>Les signaux qui ne trompent pas</li>
+        <li>Ton plan personnel — les 90 prochains jours</li>
+        <li>Bonus : Guide PDF — "Les 10 vérités sur les hommes que personne ne dit"</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- TÉMOIGNAGES -->
+<div style="background:#0e0e0e;">
+  <div class="section">
+    <h2>Ce qu'elles <span>disent déjà</span></h2>
+    <div class="testimonial">
+      <div class="quote">"Pour la première fois je comprends pourquoi je me suis comportée comme ça. Je ne me sens plus folle."</div>
+      <div class="author">— Sarah, 34 ans · Communauté Karim Phoenix</div>
+    </div>
+    <div class="testimonial">
+      <div class="quote">"J'ai appliqué les 3A après ma rupture. En 3 semaines j'étais déjà dans une autre énergie. Merci Karim."</div>
+      <div class="author">— Nadia, 41 ans · Communauté Karim Phoenix</div>
+    </div>
+    <div class="testimonial">
+      <div class="quote">"Enfin un homme qui explique les hommes sans jugement. C'est rare. C'est précieux."</div>
+      <div class="author">— Isabelle, 38 ans · Communauté Karim Phoenix</div>
+    </div>
+  </div>
+</div>
+
+<!-- OFFRES -->
+<div class="section-dark" id="offres">
+  <div class="section">
+    <h2 style="text-align:center;">Choisis ton <span>niveau d'accompagnement</span></h2>
+    <div class="divider"></div>
+
+    <div class="pricing-grid">
+
+      <!-- OFFRE 1 -->
+      <div class="price-card">
+        <div class="badge">Essentiel</div>
+        <div class="offer-name">Le Code Masculin</div>
+        <div class="offer-sub">Formation complète</div>
+        <div class="price">297€</div>
+        <div class="price-note">Paiement unique · Accès à vie</div>
+        <ul>
+          <li>5 modules vidéo complets</li>
+          <li>Exercices pratiques par module</li>
+          <li>Guide PDF bonus inclus</li>
+          <li>Accès groupe Telegram communauté</li>
+          <li>Mises à jour incluses</li>
+        </ul>
+        <a href="#" class="cta-btn">Je commence →</a>
+      </div>
+
+      <!-- OFFRE 2 -->
+      <div class="price-card featured">
+        <div class="badge">⭐ Le plus choisi</div>
+        <div class="offer-name">Le Code Masculin</div>
+        <div class="offer-sub">Accompagnement Groupe</div>
+        <div class="price">597€</div>
+        <div class="price-note">Paiement unique · Accès à vie</div>
+        <ul>
+          <li>5 modules vidéo complets</li>
+          <li>Exercices pratiques par module</li>
+          <li>Guide PDF bonus inclus</li>
+          <li>5 lives privés hebdo avec Karim</li>
+          <li>Accès groupe Telegram VIP</li>
+          <li>Suivi pendant 5 semaines</li>
+          <li>Mises à jour incluses</li>
+        </ul>
+        <a href="#" class="cta-btn">Je m'inscris →</a>
+      </div>
+
+      <!-- OFFRE 3 -->
+      <div class="price-card">
+        <div class="badge">Premium</div>
+        <div class="offer-name">Phoenix Intime</div>
+        <div class="offer-sub">Transformation 3 mois</div>
+        <div class="price">1997€</div>
+        <div class="price-note">Sur candidature · Places limitées</div>
+        <ul>
+          <li>Accès formation complète</li>
+          <li>3 sessions individuelles 60min</li>
+          <li>WhatsApp direct avec Karim</li>
+          <li>Réponse sous 24h garantie</li>
+          <li>Suivi personnalisé 3 mois</li>
+          <li>5 places maximum en simultané</li>
+        </ul>
+        <a href="#" class="cta-btn">Je postule →</a>
+      </div>
+
+    </div>
+
+    <div class="urgence">
+      <p>🔒 Offre Fondateur disponible uniquement pour les membres de la communauté Telegram · Places limitées</p>
+    </div>
+  </div>
+</div>
+
+<!-- GARANTIE -->
+<div style="background:#0e0e0e;">
+  <div class="section">
+    <div class="garantie">
+      <div class="g-title">Garantie Satisfait ou Remboursé — 14 jours</div>
+      <p>Si dans les 14 jours suivant ton inscription tu estimes que cette formation ne te correspond pas, je te rembourse intégralement. Sans question. Sans condition.</p>
+      <p style="margin-top:12px; color:#c8a96e; font-style:italic;">— Karim Phoenix</p>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section-dark">
+  <div class="section">
+    <h2>Questions <span>fréquentes</span></h2>
+
+    <div class="faq-item">
+      <div class="question">Pour qui est cette formation ?</div>
+      <div class="answer">Pour les femmes de 30 ans et plus qui veulent comprendre le fonctionnement masculin, sortir des schémas répétitifs et construire des relations saines et épanouissantes.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Je suis célibataire — est-ce que ça me concerne ?</div>
+      <div class="answer">Absolument. Comprendre les hommes avant d'être en couple, c'est apprendre à choisir les bonnes personnes dès le départ. C'est même le meilleur moment pour suivre cette formation.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Combien de temps dois-je y consacrer par semaine ?</div>
+      <div class="answer">Entre 2 et 3 heures par semaine suffisent — vidéos courtes, exercices pratiques et live hebdomadaire pour les offres avec accompagnement.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Comment fonctionne l'offre Phoenix Intime à 1997€ ?</div>
+      <div class="answer">C'est un accompagnement sur 3 mois avec accès direct à Karim via WhatsApp et 3 sessions individuelles d'une heure. Les places sont limitées à 5 femmes en simultané et l'accès se fait sur candidature — Karim choisit avec qui il travaille pour garantir la qualité du suivi.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Est-ce que j'ai accès aux vidéos à vie ?</div>
+      <div class="answer">Oui. Dès ton inscription tu accèdes à l'intégralité des modules et tu les gardes à vie, mises à jour incluses.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Et si ça ne me convient pas ?</div>
+      <div class="answer">Tu bénéficies d'une garantie satisfait ou remboursé pendant 14 jours. Si tu estimes que la formation ne te correspond pas, tu es remboursée intégralement sans condition.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div style="background:#0e0e0e;">
+  <div class="section" style="text-align:center;">
+    <h2>Tu mérites de <span>comprendre.</span></h2>
+    <p style="max-width:500px; margin:0 auto 30px;">Pas de miracle. Pas de promesse magique. Juste un travail honnête, avec un homme qui a vécu — et qui est là à chaque étape.</p>
+    <a href="#offres" class="cta-btn">Je choisis mon offre →</a>
+    <p class="cta-note" style="margin-top:15px;">Paiement sécurisé · Garantie 14 jours · Accès immédiat</p>
+  </div>
+</div>
+
+<footer>
+  <span>Karim Phoenix</span> · Formation "Le Code Masculin" · Tous droits réservés · 2026<br>
+  <span style="color:#444; font-size:0.9em;">Mentions légales · Politique de confidentialité · CGV</span>
+</footer>
+
+</body>
+</html>
