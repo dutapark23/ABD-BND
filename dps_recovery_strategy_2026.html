@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dubai Podcast Studio — Recovery Strategy 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #f8f8f6; color: #1a1a1a; line-height: 1.85; }
+
+  /* COVER */
+  .cover {
+    background: #0d0d0d;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+  }
+  .cover .eyebrow { font-size: 0.78em; letter-spacing: 5px; text-transform: uppercase; color: #c8a050; margin-bottom: 28px; }
+  .cover h1 { font-size: 2.9em; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; line-height: 1.15; }
+  .cover .subtitle { font-size: 1.05em; color: #c8a050; letter-spacing: 2px; margin-bottom: 44px; }
+  .cover .tagline { font-size: 0.98em; color: #888; font-style: italic; max-width: 580px; border-top: 1px solid #2a2a2a; padding-top: 24px; }
+  .cover .meta { margin-top: 40px; font-size: 0.82em; color: #444; letter-spacing: 2px; }
+
+  /* LAYOUT */
+  .section { max-width: 800px; margin: 0 auto; padding: 72px 40px; }
+  .section + .section { border-top: 1px solid #e4e4dc; }
+  .dark { background: #0d0d0d; }
+  .mid { background: #f0f0ea; }
+  .dark .section { max-width: 800px; margin: 0 auto; padding: 72px 40px; }
+  .mid .section { max-width: 800px; margin: 0 auto; padding: 72px 40px; }
+
+  /* TYPOGRAPHY */
+  .sec-header { border-left: 4px solid #c8a050; padding-left: 22px; margin-bottom: 46px; }
+  .sec-header .num { font-size: 0.76em; color: #c8a050; letter-spacing: 4px; text-transform: uppercase; font-style: italic; margin-bottom: 8px; }
+  .sec-header h2 { font-size: 1.75em; text-transform: uppercase; letter-spacing: 2px; line-height: 1.2; }
+  .dark .sec-header h2 { color: #fff; }
+  .mid .sec-header h2 { color: #1a1a1a; }
+
+  h3 { font-size: 0.85em; color: #c8a050; text-transform: uppercase; letter-spacing: 3px; margin: 38px 0 14px; }
+  .dark h3 { color: #c8a050; }
+  p { color: #444; margin-bottom: 17px; font-size: 0.97em; }
+  .dark p { color: #bbb; }
+  .mid p { color: #444; }
+  p strong { color: #1a1a1a; }
+  .dark p strong { color: #fff; }
+  ul, ol { margin: 14px 0 22px 0; }
+  li { color: #444; font-size: 0.94em; padding: 6px 0 6px 24px; position: relative; border-bottom: 1px solid #ededE5; }
+  li:last-child { border-bottom: none; }
+  li::before { content: '→'; position: absolute; left: 0; color: #c8a050; }
+  .dark li { color: #bbb; border-bottom-color: #222; }
+  .mid li { border-bottom-color: #ddd; }
+
+  /* CALLOUT BOXES */
+  .callout {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 28px 0;
+  }
+  .callout .label { font-size: 0.7em; color: #c8a050; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
+  .callout p { color: #ccc; margin: 0; }
+  .callout p strong { color: #fff; }
+
+  .alert {
+    background: #fff8ed;
+    border-left: 4px solid #e8a020;
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.91em;
+    color: #6a4200;
+  }
+  .alert strong { color: #3a2000; }
+
+  .insight {
+    background: #eef6ff;
+    border-left: 4px solid #3a80d4;
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.91em;
+    color: #1a3a60;
+  }
+  .insight strong { color: #0a2040; }
+
+  .danger {
+    background: #fff0f0;
+    border-left: 4px solid #d44040;
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.91em;
+    color: #600000;
+  }
+
+  /* CARDS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 24px 0; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .card {
+    background: #fff;
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    padding: 24px 22px;
+  }
+  .dark .card { background: #1a1a1a; border-color: #2a2a2a; }
+  .card .card-label { font-size: 0.7em; color: #c8a050; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .card h4 { font-size: 1em; color: #1a1a1a; margin-bottom: 10px; font-weight: bold; }
+  .dark .card h4 { color: #fff; }
+  .card p { color: #555; font-size: 0.88em; margin: 0; }
+  .dark .card p { color: #aaa; }
+
+  /* PHASE BLOCKS */
+  .phase { border: 1px solid #e0e0d8; border-radius: 8px; overflow: hidden; margin-bottom: 28px; }
+  .phase-head {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 18px 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .phase-head .ph-name { font-size: 1.05em; font-weight: bold; }
+  .phase-head .ph-period { font-size: 0.78em; color: #c8a050; letter-spacing: 2px; }
+  .phase-head .ph-tag { background: #c8a050; color: #0d0d0d; font-size: 0.72em; font-weight: bold; padding: 4px 14px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; }
+  .phase-body { padding: 26px 28px; background: #fff; }
+  .phase-body h4 { font-size: 0.78em; color: #c8a050; letter-spacing: 3px; text-transform: uppercase; margin: 20px 0 10px; }
+  .phase-body h4:first-child { margin-top: 0; }
+  .phase-body p { color: #444; font-size: 0.92em; }
+  .phase-body ul { margin: 8px 0 16px; }
+  .phase-body li { font-size: 0.9em; padding: 5px 0 5px 20px; border-bottom: 1px solid #f2f2ea; }
+
+  /* OFFER TABLE */
+  .offer-table { width: 100%; border-collapse: collapse; margin: 26px 0; font-size: 0.9em; }
+  .offer-table th { background: #1a1a1a; color: #c8a050; padding: 12px 16px; text-align: left; font-size: 0.78em; letter-spacing: 2px; text-transform: uppercase; }
+  .offer-table td { padding: 12px 16px; border-bottom: 1px solid #e8e8e0; color: #444; vertical-align: top; }
+  .offer-table tr:nth-child(even) td { background: #f7f7f1; }
+  .offer-table tr.highlight td { background: #1a1a1a; color: #ddd; }
+  .offer-table tr.highlight td:first-child { color: #c8a050; font-weight: bold; }
+
+  /* KPI STRIP */
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 28px 0; }
+  .kpi-box { background: #1a1a1a; border-radius: 8px; padding: 20px 16px; text-align: center; }
+  .kpi-box .val { font-size: 1.9em; color: #c8a050; font-weight: bold; line-height: 1; margin-bottom: 8px; }
+  .kpi-box .lbl { font-size: 0.7em; color: #888; letter-spacing: 2px; text-transform: uppercase; line-height: 1.4; }
+
+  /* PRIORITY BADGE */
+  .priority-row { display: flex; align-items: flex-start; gap: 16px; margin: 16px 0; padding: 16px 0; border-bottom: 1px solid #e8e8e0; }
+  .priority-row:last-child { border-bottom: none; }
+  .badge { min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.82em; font-weight: bold; color: #fff; background: #c8a050; flex-shrink: 0; margin-top: 2px; }
+  .badge.b2 { background: #888; }
+  .badge.b3 { background: #555; }
+  .priority-content h4 { font-size: 0.97em; font-weight: bold; color: #1a1a1a; margin-bottom: 5px; }
+  .priority-content p { font-size: 0.88em; color: #555; margin: 0; }
+
+  /* CHANNEL ROWS */
+  .ch-row { display: flex; gap: 14px; margin: 12px 0; align-items: flex-start; }
+  .ch-tag { background: #1a1a1a; color: #c8a050; font-size: 0.7em; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; border-radius: 4px; white-space: nowrap; min-width: 90px; text-align: center; flex-shrink: 0; margin-top: 2px; }
+  .ch-desc { font-size: 0.91em; color: #444; padding-top: 3px; }
+  .ch-desc strong { color: #1a1a1a; }
+
+  /* FOOTER */
+  footer { background: #0d0d0d; color: #444; text-align: center; padding: 44px 40px; font-size: 0.8em; letter-spacing: 1px; }
+  footer strong { color: #c8a050; }
+
+  /* TOC */
+  .toc-list { list-style: none; counter-reset: toc; margin: 0; }
+  .toc-list li { counter-increment: toc; display: flex; align-items: baseline; gap: 14px; padding: 11px 0; border-bottom: 1px dotted #ddd; font-size: 0.94em; }
+  .toc-list li::before { content: "0" counter(toc); font-size: 0.72em; color: #c8a050; letter-spacing: 2px; min-width: 26px; }
+  .toc-list li span { color: #999; font-size: 0.84em; margin-left: auto; font-style: italic; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="eyebrow">Confidential — Leadership Use Only</div>
+  <h1>Dubai Podcast Studio<br>Recovery Strategy</h1>
+  <div class="subtitle">Crisis Response & Revenue Recovery Plan — 2026</div>
+  <div class="tagline">"The market has changed. The strategy must change with it — without abandoning what made you the leader in the first place."</div>
+  <div class="meta">MAY 2026 — VERSION 1.0</div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="section">
+  <div class="sec-header">
+    <div class="num">Index</div>
+    <h2>Contents</h2>
+  </div>
+  <ul class="toc-list">
+    <li>The Honest Diagnosis <span>What is really happening</span></li>
+    <li>What Must Not Change <span>Protecting the brand DNA</span></li>
+    <li>The Three Markets to Win Right Now <span>Where the revenue actually lives</span></li>
+    <li>The Summer Opportunity Nobody Sees <span>The GCC market play</span></li>
+    <li>Revenue Recovery Architecture <span>New offers that the team can actually deliver</span></li>
+    <li>Paid & Organic Channel Strategy <span>Where to spend and where to post</span></li>
+    <li>Re-Activating 3,500+ Past Clients <span>The cheapest pipeline you already own</span></li>
+    <li>On Pricing — The Race You Must Not Enter <span>Competing without commoditising</span></li>
+    <li>90-Day Recovery Roadmap <span>Week-by-week execution</span></li>
+    <li>KPIs & Weekly Scorecard <span>How to know if it's working</span></li>
+  </ul>
+</div>
+
+<!-- SECTION 01 — THE HONEST DIAGNOSIS -->
+<div class="mid">
+  <div class="section">
+    <div class="sec-header">
+      <div class="num">Section 01</div>
+      <h2>The Honest Diagnosis</h2>
+    </div>
+
+    <p>Before any strategy can work, the situation must be named accurately. There are three forces at work simultaneously, and each requires a different response.</p>
+
+    <h3>Force 01 — External Demand Shock</h3>
+    <p>The regional conflict has materially reduced international visitor volume to Dubai. This is not a marketing problem. No amount of clever advertising brings back visitors who have chosen not to travel to the region. <strong>This force cannot be fixed. It must be navigated around.</strong> The strategy must stop relying on visitor-dependent revenue and pivot toward audiences that are already in Dubai — or coming despite the broader climate.</p>
+
+    <h3>Force 02 — Seasonal Compression</h3>
+    <p>Summer in Dubai is historically the weakest period for resident and expat activity. Expats leave for home countries. The heat keeps people indoors. Event calendars empty. This is a known, predictable pattern — and the correct response is not to fight it, but to <strong>substitute the audience that leaves (Western expats) with the audience that arrives (Gulf nationals)</strong>. This is the single most underused strategic insight in Dubai's hospitality and services sector.</p>
+
+    <h3>Force 03 — Competitive Price Erosion</h3>
+    <p>Competitors are cutting prices to survive. This creates pressure to follow. <strong>Do not follow.</strong> Price wars initiated by weaker players are a trap designed to bring the leader down to their level. A studio that cuts prices in a quality-signals market tells every prospective client that their prices were arbitrary to begin with — and that the quality claims may also be. Your Google Reviews leadership position is incompatible with being the cheapest option. They cannot coexist.</p>
+
+    <div class="callout">
+      <div class="label">Core Strategic Principle</div>
+      <p><strong>The goal is not to fight on three fronts simultaneously.</strong> It is to selectively withdraw from the one front you cannot win (visitor market recovery), hold firm on the front that protects margin (pricing), and go on the offensive on the two fronts where you have genuine advantage — the resident/corporate market and the Gulf nationals summer market.</p>
+    </div>
+
+    <h3>A Note on the Team Reality</h3>
+    <p>This strategy is built around the team you actually have — not the team you wish you had. The operators are loyal, consistent, and reliable. They are not creative directors. Every new service proposed in this document is specifically designed to be executable without creative judgment. <strong>Consistency is your competitive advantage. Never sacrifice it chasing complexity.</strong></p>
+  </div>
+</div>
+
+<!-- SECTION 02 — WHAT MUST NOT CHANGE -->
+<div class="section">
+  <div class="sec-header">
+    <div class="num">Section 02</div>
+    <h2>What Must Not Change</h2>
+  </div>
+
+  <p>Before addressing what needs to shift, it is equally important to be explicit about what must be protected. These are not negotiable — touching them would cost more than the revenue they might temporarily generate.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">Protect</div>
+      <h4>The #1 Google Reviews Position</h4>
+      <p>You are number one in the region, not just Dubai. This is your most durable competitive moat. Every decision must be filtered through this question: "Does this risk a negative review?" If yes, don't do it.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Protect</div>
+      <h4>The "Record and Leave" Brand Promise</h4>
+      <p>Clients chose you because you deliver without drama. Reliability over creativity. "You come any day of the week and always get what we promise." This is rare and valuable. Don't abandon it to compete with Poddster's community model.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Protect</div>
+      <h4>The Price Floor</h4>
+      <p>450 AED/hour for video + audio is already competitive for Business Bay with your equipment. Discounting the base rate signals weakness and erodes brand perception. Do not lower it. Create different packages instead.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Protect</div>
+      <h4>Standardised Service Delivery</h4>
+      <p>Customisation creates demanding clients and inconsistent reviews. The decision to stay in the mass-market, standardised model was correct. Any new service must be template-based and repeatable.</p>
+    </div>
+  </div>
+
+  <div class="danger">
+    <strong>The Poddster Trap:</strong> Do not attempt to build a community to compete with Poddster. Your venue is not sized for it, your audience DNA is not built for it, and your team is not resourced for it. Poddster's website is currently unreachable — their model may not be as strong as it appears. Competitors in the community space often sacrifice margin for engagement. You chose margin. That was correct.
+  </div>
+</div>
+
+<!-- SECTION 03 — THE THREE MARKETS TO WIN -->
+<div class="dark">
+  <div class="section">
+    <div class="sec-header">
+      <div class="num">Section 03</div>
+      <h2>The Three Markets to Win Right Now</h2>
+    </div>
+
+    <p>The visitor market is diminished for the foreseeable future. The strategy must pivot to the three segments that are present, active, and spending regardless of the regional climate.</p>
+
+    <h3>Market 01 — Dubai Residents: Coaches, Consultants, Entrepreneurs</h3>
+    <p>Dubai has a large, permanent population of coaches, business consultants, and entrepreneurs who are building personal brands. They are not visiting — they live here. They need content every week. This segment is almost entirely immune to the visitor market decline. <strong>This is the most stable, recurring revenue opportunity available to you right now.</strong></p>
+    <ul>
+      <li>Target via LinkedIn and Instagram with messaging about consistent, professional podcast production</li>
+      <li>Offer a monthly recording membership (detailed in Section 05) to convert one-time clients into predictable monthly revenue</li>
+      <li>Leverage the coaching vertical page you already have — it needs updating and a direct call to book a recurring package</li>
+    </ul>
+
+    <h3>Market 02 — Corporate & B2B</h3>
+    <p>Companies in Business Bay and DIFC do not travel. They are open. They produce content year-round. A corporate client on a monthly programme is worth ten times a one-off creator booking. <strong>This segment requires a different sales approach — direct outreach, not digital ads — but it is the highest-value segment in the building.</strong></p>
+    <ul>
+      <li>Target: Communications Directors, PR Managers, CMOs at mid-to-large companies in Business Bay and DIFC</li>
+      <li>Channel: LinkedIn direct outreach + email</li>
+      <li>Offer: A "Corporate Podcast Programme" package (detailed in Section 05)</li>
+      <li>Proof: The fact that major international figures have recorded at your studios is powerful for corporate buyers who value credibility signals</li>
+    </ul>
+
+    <h3>Market 03 — The French-Speaking Creator Ecosystem</h3>
+    <p>Yomi Denzel and Oussama Amar — two of the most followed French-speaking entrepreneurs in the world — have recorded at your studios. The French-speaking creator economy spans France, Morocco, Tunisia, Algeria, Ivory Coast, Senegal, and beyond. Many of these creators visit Dubai specifically for content and business. <strong>This is a market that can be activated at near-zero cost through the relationships you already have.</strong></p>
+    <ul>
+      <li>One social post from either Yomi Denzel or Oussama Amar mentioning the studio reaches millions of exactly the right audience</li>
+      <li>Create a French-language version of the booking page or at minimum French-language ads targeting this demographic</li>
+      <li>Target French-speaking creator communities on Instagram and YouTube with awareness content featuring these names</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 04 — THE SUMMER GCC PLAY -->
+<div class="section">
+  <div class="sec-header">
+    <div class="num">Section 04</div>
+    <h2>The Summer Opportunity Nobody Is Seeing</h2>
+  </div>
+
+  <div class="callout">
+    <div class="label">The Counterintuitive Insight</div>
+    <p><strong>When Western expats and tourists leave Dubai in summer, Gulf nationals arrive.</strong> Saudis, Kuwaitis, Emiratis, and Bahrainis treat Dubai as their summer destination — air-conditioned, cosmopolitan, and cooler than Riyadh or Kuwait City. They have disposable income. Many are creators and entrepreneurs. And almost none of your competitors are marketing to them in their language.</p>
+  </div>
+
+  <h3>The Snapchat Factor</h3>
+  <p>This is the single most overlooked insight for any Dubai-based business targeting Gulf nationals: <strong>Saudi Arabia has one of the highest per-capita Snapchat usage rates on the planet.</strong> Over 90% of Saudi internet users are on Snapchat. The platform is largely ignored by Western-trained marketers who default to Meta and TikTok. Running Snapchat ads in Arabic targeting Gulf visitors to Dubai during June–September is a genuine first-mover opportunity in your category.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">Summer Play — Channels</div>
+      <h4>Snapchat + Instagram Arabic</h4>
+      <p>Snapchat for Saudi and Gulf audience. Instagram Reels in Arabic with Dubai location targeting. Both platforms allow precise geographic + language targeting. Budget: 3,000–5,000 AED across June–August.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Summer Play — Offer</div>
+      <h4>Gulf Creator Summer Package</h4>
+      <p>"Record your podcast in Dubai this summer." A simple booking incentive (a 20% discount on first session or a free AI reels add-on) specifically for Gulf national ID holders — June through August only. Time-limited, segment-specific. Does not dilute the general rate.</p>
+    </div>
+  </div>
+
+  <h3>Arabic Language Is Non-Negotiable for This Market</h3>
+  <p>The ads, the offer page, and the social content targeting Gulf nationals must be in Arabic. Not translated mechanically — written natively. If no one on the current team writes strong Arabic copy, this is the one external investment worth making. A single well-written Arabic Snapchat ad reaching the right Saudi creator visiting Dubai this July could generate a week of bookings.</p>
+
+  <div class="insight">
+    <strong>Why competitors won't do this:</strong> Most studio operators in Dubai are either expat-run (and don't think in Arabic) or too depleted to invest in a new channel. The summer Snapchat Arabic market is effectively uncontested in your category. This window will close once others see it working.
+  </div>
+</div>
+
+<!-- SECTION 05 — REVENUE RECOVERY ARCHITECTURE -->
+<div class="mid">
+  <div class="section">
+    <div class="sec-header">
+      <div class="num">Section 05</div>
+      <h2>Revenue Recovery Architecture</h2>
+    </div>
+
+    <p>Three principles govern every new offer below. If a proposed service fails any one of them, it does not belong in the lineup.</p>
+    <ul>
+      <li><strong>Deliverable by the current team without creative judgment</strong> — no offer should rely on the operator deciding what looks or sounds good</li>
+      <li><strong>Standardised and repeatable</strong> — the same inputs produce the same output every time, protecting the Google Reviews position</li>
+      <li><strong>Additive to cash flow, not destructive to margin</strong> — new offers must generate revenue above the cost of delivery</li>
+    </ul>
+
+    <h3>New Offer 01 — The Monthly Recording Membership</h3>
+    <p>This is the most important single change you can make. Convert irregular bookings into predictable monthly revenue.</p>
+
+    <table class="offer-table">
+      <thead><tr><th>Tier</th><th>Hours / Month</th><th>Price (AED)</th><th>Target Client</th><th>Execution Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Starter</td><td>4 hours (2×2h sessions)</td><td>1,600 / month</td><td>Solo coach, beginner podcaster</td><td>Same studio, same operator each time</td></tr>
+        <tr class="highlight"><td>Creator</td><td>8 hours (4×2h sessions)</td><td>2,800 / month</td><td>Active creator, consultant</td><td>Priority booking, guaranteed availability</td></tr>
+        <tr><td>Pro</td><td>16 hours (8×2h sessions)</td><td>5,000 / month</td><td>Regular show, small brand</td><td>Dedicated studio if requested</td></tr>
+      </tbody>
+    </table>
+
+    <p>The membership is billed monthly via Stripe or manual invoice. Hours do not carry over month-to-month — this prevents a single power user from blocking future bookings. The operator does not change per session, which increases the quality consistency that protects reviews.</p>
+
+    <div class="alert">
+      <strong>Why this works for the team:</strong> A member client is a known client. The operator knows their setup preferences, their voice, their camera angle. Zero learning curve per session. This actually makes the operator's job easier and the output more consistent.
+    </div>
+
+    <h3>New Offer 02 — AI Reels Add-On (The Right Way to Implement It)</h3>
+    <p>The owner correctly identified this as an opportunity. The obstacle — team creativity and taste — is solved by removing the human creative decision entirely. <strong>The algorithm decides, not the operator.</strong></p>
+    <p>The tool: <strong>Opus Clip</strong> (or Descript). These AI tools automatically identify the most engaging 60–90 second moments from a session recording and generate short-form clips with captions. The operator uploads the file. The AI selects and cuts. The operator exports. No taste required.</p>
+
+    <table class="offer-table">
+      <thead><tr><th>Add-On</th><th>Price (AED)</th><th>Deliverable</th><th>Turnaround</th><th>Team Task</th></tr></thead>
+      <tbody>
+        <tr><td>AI Reels Pack — Standard</td><td>250</td><td>5 AI-selected short clips with auto-captions</td><td>24–48 hours</td><td>Upload file to Opus Clip. Download outputs. Send link.</td></tr>
+        <tr class="highlight"><td>AI Reels Pack — Extended</td><td>450</td><td>10 clips + 1 full-episode vertical cut</td><td>48 hours</td><td>Same workflow. More output files.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="insight">
+      <strong>This is not editing. Do not call it editing.</strong> Call it "AI Reels" or "Social Clips Pack." Clients who understand AI content production will value it correctly. Clients who don't understand it will be pleasantly surprised by the output quality. It is priced to be an impulse add-on at checkout — not a premium service requiring a separate conversation.
+    </div>
+
+    <h3>New Offer 03 — Corporate Podcast Programme</h3>
+    <p>A packaged offering specifically for companies rather than individuals. Simple, standardised, and high-value.</p>
+
+    <table class="offer-table">
+      <thead><tr><th>Component</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Duration</td><td>Monthly retainer, minimum 3-month commitment</td></tr>
+        <tr><td>Hours included</td><td>8 hours/month (4 episodes of 2 hours each)</td></tr>
+        <tr><td>Price</td><td>5,500–7,000 AED/month depending on studio and requirements</td></tr>
+        <tr class="highlight"><td>Differentiator</td><td>Fixed studio, named account contact, priority scheduling, monthly session summary report</td></tr>
+        <tr><td>Add-on available</td><td>AI Reels Pack per session (+250 AED per episode)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>New Offer 04 — Express Raw File Delivery</h3>
+    <p>Currently raw files are delivered in 2–3 days. This creates friction for creators who operate on tight content schedules. A simple tiered delivery model converts this constraint into revenue.</p>
+    <ul>
+      <li><strong>Standard delivery:</strong> 1–2 days — included in all packages (no change)</li>
+      <li><strong>Express delivery (same day, within 4 hours):</strong> +150 AED — operator transfers directly at end of session via high-speed upload link</li>
+    </ul>
+    <p>This requires no creative skill. It requires one operator to stay at the machine for 30 minutes post-session to ensure upload completion. At 150 AED per upsell, and if 20% of sessions opt in, it adds meaningful revenue with zero additional overhead.</p>
+
+    <h3>What NOT to Add</h3>
+    <div class="danger">
+      <strong>Do not add:</strong> Full creative editing packages beyond what you currently offer, podcast strategy consulting, social media management, or any service that requires the team to exercise creative judgment on behalf of the client. Every time you have offered this, demanding clients have followed. The mass-market, consistent-delivery model is the asset. Do not compromise it.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 06 — CHANNEL STRATEGY -->
+<div class="section">
+  <div class="sec-header">
+    <div class="num">Section 06</div>
+    <h2>Paid & Organic Channel Strategy</h2>
+  </div>
+
+  <p>With a reduced team and tighter budget, channel selection must be ruthless. Do not spread across all platforms. Do fewer things significantly better.</p>
+
+  <h3>Channels — Priority Order</h3>
+
+  <div class="ch-row">
+    <div class="ch-tag">Google Ads</div>
+    <div class="ch-desc"><strong>Priority 1 — Immediate, high-intent traffic.</strong> "Podcast studio Dubai," "record podcast Dubai," "video podcast studio business bay" are searched by people ready to book. This is the most direct path from ad spend to booking confirmation. Budget: 3,500–5,000 AED/month. Start here before any other paid channel.</div>
+  </div>
+  <div class="ch-row">
+    <div class="ch-tag">Google Reviews</div>
+    <div class="ch-desc"><strong>Priority 1 — Protect the moat actively.</strong> You are #1 in the region. Every session should end with a verbal request for a Google review. Train every operator to say it naturally at the end of each session. This is your most powerful marketing asset and it costs zero to maintain — only effort.</div>
+  </div>
+  <div class="ch-row">
+    <div class="ch-tag">Snapchat Ads</div>
+    <div class="ch-desc"><strong>Priority 1 (June–September only) — Gulf nationals summer play.</strong> Arabic-language ads targeting Gulf national visitors in Dubai. This is uncontested territory in your category. Budget: 2,000–3,000 AED/month across summer. Measure cost per booking inquiry. If it works in June, scale in July.</div>
+  </div>
+  <div class="ch-row">
+    <div class="ch-tag">Instagram</div>
+    <div class="ch-desc"><strong>Priority 2 — Brand presence and booking conversion.</strong> Studio footage, equipment walkthroughs, "behind the session" content. 3 Reels per week minimum. The visual quality of your studios sells itself — the operator just needs to point the phone at the room. No creative direction required.</div>
+  </div>
+  <div class="ch-row">
+    <div class="ch-tag">LinkedIn</div>
+    <div class="ch-desc"><strong>Priority 2 — B2B and corporate pipeline.</strong> Direct outreach to Communications Directors, CMOs, and PR managers in Business Bay and DIFC. 20 personalised messages per week. Content: "How Dubai's top professionals are using podcasts to build authority." This is the right audience, in the right building, and LinkedIn reaches them directly.</div>
+  </div>
+  <div class="ch-row">
+    <div class="ch-tag">WhatsApp</div>
+    <div class="ch-desc"><strong>Priority 2 — Re-engagement of past clients.</strong> Your most underused channel for the most valuable audience you have — people who have already paid you. A single WhatsApp broadcast to past clients costs nothing. Results can be immediate. This is covered fully in Section 07.</div>
+  </div>
+  <div class="ch-row">
+    <div class="ch-tag">TikTok</div>
+    <div class="ch-desc"><strong>Priority 3 — Discovery and reach.</strong> Valuable but lower priority given team constraints. If content is already being shot for Instagram, repurpose it to TikTok. Do not create TikTok-specific content with the current team size.</div>
+  </div>
+
+  <h3>What to Post — The No-Creativity Rule</h3>
+  <p>Given team limitations, all social content must require zero creative judgment. Every piece of content falls into one of these five categories:</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">Content Type 01</div>
+      <h4>Studio Footage</h4>
+      <p>Point a phone at the studio before/during a session. Cameras. Lights. Microphones. The room sells itself. No script, no concept, no creative direction needed.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Content Type 02</div>
+      <h4>Client Permission Clips</h4>
+      <p>At the start of each session, ask the client if you may share a 10-second clip on Instagram. Most will say yes. One operator records 10 seconds. Upload same day.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Content Type 03</div>
+      <h4>Equipment Features</h4>
+      <p>"This is the same microphone Joe Rogan uses." "These cameras are Netflix-approved." Product facts delivered directly. No styling needed.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Content Type 04</div>
+      <h4>Review Reposts</h4>
+      <p>Screenshot every 5-star Google review and post it to Instagram Stories. Costs 2 minutes. Serves as constant social proof reinforcement.</p>
+    </div>
+  </div>
+
+  <h3>Monthly Ad Budget Recommendation</h3>
+  <table class="offer-table">
+    <thead><tr><th>Channel</th><th>Budget (AED/month)</th><th>Period</th><th>Expected Outcome</th></tr></thead>
+    <tbody>
+      <tr><td>Google Search Ads</td><td>4,000–5,000</td><td>Year-round</td><td>High-intent bookings, fastest ROI</td></tr>
+      <tr><td>Snapchat (Arabic)</td><td>2,500–3,500</td><td>June–September</td><td>Gulf national visitor market</td></tr>
+      <tr><td>Meta (Instagram)</td><td>2,000–3,000</td><td>Year-round</td><td>Brand awareness, creator market</td></tr>
+      <tr class="highlight"><td>LinkedIn (B2B)</td><td>1,500–2,500</td><td>Year-round</td><td>Corporate pipeline, agency relationships</td></tr>
+      <tr><td><strong>Total</strong></td><td><strong>10,000–14,000</strong></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 07 — REACTIVATING PAST CLIENTS -->
+<div class="dark">
+  <div class="section">
+    <div class="sec-header">
+      <div class="num">Section 07</div>
+      <h2>Re-Activating 3,500+ Past Clients</h2>
+    </div>
+
+    <p>You have 3,500 people who have already paid you, already trust you, and already know how to book. This is the most underused asset in the entire business. A single outreach campaign to this list — executed this week — will generate bookings before any ad campaign delivers a single click.</p>
+
+    <h3>The WhatsApp Broadcast — This Week</h3>
+    <p>Every past client who provided a phone number can receive a WhatsApp message today. The message should be short, personal, and not feel like a mass broadcast.</p>
+
+    <div class="callout">
+      <div class="label">Template — WhatsApp Broadcast (English)</div>
+      <p>Hey [first name],<br><br>It's been a while since we saw you at Dubai Podcast Studio. Wanted to reach out personally — we've added a few new things including an AI Reels package and monthly recording memberships that a few of our regulars have been using.<br><br>If you're thinking about recording again, reply here or head to the link and book directly — we'll make sure you get the same studio you know.<br><br>[booking link]</p>
+    </div>
+
+    <div class="callout">
+      <div class="label">Template — WhatsApp Broadcast (Arabic Version)</div>
+      <p>مرحباً [الاسم]،<br><br>وددنا التواصل معك — لقد أضفنا خدمة جديدة لمقاطع Reels بالذكاء الاصطناعي وعضوية التسجيل الشهرية. إذا كنت تفكر في التسجيل مجدداً، احجز مباشرة عبر الرابط:<br><br>[booking link]</p>
+    </div>
+
+    <h3>The Referral Programme — Launch Now</h3>
+    <p>Formalise what is currently informal. Every past client who refers a new paying client earns 200 AED studio credit. This costs you 200 AED only when a paying client arrives — it is zero-risk marketing.</p>
+    <ul>
+      <li>Announce via WhatsApp broadcast to the full past client list</li>
+      <li>Add a referral block to the booking confirmation email</li>
+      <li>Include the offer on the Google Review request — "Review us and share your unique link to earn 200 AED credit"</li>
+      <li>Expected: 3,500 clients × 5% activation = 175 referrals in the first 30 days. Even at 50% conversion that is 87 new bookings from a single message.</li>
+    </ul>
+
+    <h3>The Google Review Push — This Week</h3>
+    <p>You are #1 in the region on Google Reviews. This position must be actively defended and grown during the downturn — it is one of the primary factors driving organic bookings. Take two specific actions this week:</p>
+    <ul>
+      <li><strong>WhatsApp request to all past clients:</strong> "We're working hard to remain the #1 podcast studio in the region — a Google review from you would mean everything to us." Include the direct review link. Target: 100+ new reviews within 30 days.</li>
+      <li><strong>Verbal at every session end:</strong> Every operator ends every session with: "If you enjoyed today, we would really appreciate a Google review — it takes 30 seconds and helps us a lot." Not pushy. Genuine. Train this into the team's standard close.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 08 — PRICING -->
+<div class="section">
+  <div class="sec-header">
+    <div class="num">Section 08</div>
+    <h2>On Pricing — The Race You Must Not Enter</h2>
+  </div>
+
+  <div class="callout">
+    <div class="label">The Pricing Principle</div>
+    <p><strong>You are the leader. Leaders do not price-match struggling competitors.</strong> When weaker players lower prices to survive, they are signalling desperation — not value. If you match them, you tell the market that your higher prices were unjustified. You will never recover that perception.</p>
+  </div>
+
+  <h3>What You Can Do Instead of Lowering Prices</h3>
+
+  <div class="priority-row">
+    <div class="badge">1</div>
+    <div class="priority-content">
+      <h4>Create a True Entry Point</h4>
+      <p>A first-time client "Welcome Session" — 1 hour video + audio for 350 AED (vs 450 standard). Available once per new client only. This feels like a discount without diluting the ongoing rate. New clients experience the studio at lower risk. Conversion to repeat bookings at full rate should be high given the product quality.</p>
+    </div>
+  </div>
+
+  <div class="priority-row">
+    <div class="badge">1</div>
+    <div class="priority-content">
+      <h4>Increase Perceived Value, Not Discounts</h4>
+      <p>Rather than reducing price, increase what 450 AED includes — add the AI Reels Pack Standard (250 AED value) as a free inclusion on all 2-hour+ bookings for a limited 60-day period. The client perceives more value. You pay only the marginal cost of running Opus Clip. The hourly rate is untouched.</p>
+    </div>
+  </div>
+
+  <div class="priority-row">
+    <div class="badge">2</div>
+    <div class="priority-content">
+      <h4>Summer Rate — Gulf Nationals Only</h4>
+      <p>A 15% discount exclusively for Gulf national ID holders (Saudi, Kuwaiti, Emirati, Bahraini, Qatari) on first sessions — June through August. Segment-specific, time-limited. Does not impact the rate for other clients. Shows cultural awareness and activates the summer market directly.</p>
+    </div>
+  </div>
+
+  <div class="priority-row">
+    <div class="badge b2">2</div>
+    <div class="priority-content">
+      <h4>Never Publish "Promotional" Pricing Publicly</h4>
+      <p>Discounts for specific campaigns, segments, or first-time offers should live on dedicated landing pages — not on the main booking page. The main page must always show full pricing. If a prospect finds your offer through a specific campaign, the discounted page applies. Everyone else sees the standard rate.</p>
+    </div>
+  </div>
+
+  <div class="priority-row">
+    <div class="badge b3">3</div>
+    <div class="priority-content">
+      <h4>On the Editing Price (1,000 AED/hour)</h4>
+      <p>This is the most price-sensitive item in your lineup. At 1,000 AED/hour with a 4–6 business day turnaround, clients perceive it as expensive and slow. The AI Reels Add-On (250–450 AED) is strategically positioned to absorb the demand for quick social content at a much lower price point — protecting the premium editing product for clients who genuinely need full-episode production quality.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 09 — 90-DAY ROADMAP -->
+<div class="dark">
+  <div class="section">
+    <div class="sec-header">
+      <div class="num">Section 09</div>
+      <h2>90-Day Recovery Roadmap</h2>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="ph-name">Phase 1 — Stop the Bleeding</span>
+        <span class="ph-period">Days 1–30</span>
+        <span class="ph-tag">Cash Flow First</span>
+      </div>
+      <div class="phase-body">
+        <h4>Week 1 — Immediate Revenue Actions</h4>
+        <ul>
+          <li>Send WhatsApp broadcast to all past clients with re-engagement message and booking link</li>
+          <li>Launch Google Review push — WhatsApp request to past clients + verbal close trained into every session</li>
+          <li>Launch Google Search Ads — 4,000 AED/month — "podcast studio Dubai" keyword set</li>
+          <li>Add AI Reels Add-On to booking page as an optional extra (250 AED / 450 AED)</li>
+          <li>Train all operators on the Opus Clip workflow — upload, auto-generate, export, send. One afternoon training session.</li>
+        </ul>
+        <h4>Week 2 — Offers and Activation</h4>
+        <ul>
+          <li>Launch the Monthly Recording Membership (Starter, Creator, Pro tiers) on the website</li>
+          <li>Email + WhatsApp to past clients announcing the membership — target 5 sign-ups in first 30 days</li>
+          <li>Launch the Referral Programme — 200 AED credit per referred booking — announce to full client base</li>
+          <li>Begin LinkedIn outreach — 20 personalised messages per week to B2B targets in Business Bay / DIFC</li>
+        </ul>
+        <h4>Week 3 — Summer Preparation</h4>
+        <ul>
+          <li>Brief and produce Arabic-language ad creative for Snapchat — Gulf national summer targeting</li>
+          <li>Create a "Gulf Creator Summer" landing page or section on the website in Arabic</li>
+          <li>Design the "Gulf National First Session" offer page (private URL, not on main nav)</li>
+          <li>Begin Instagram posting cadence — 3x/week, studio footage only, no creative direction required</li>
+        </ul>
+        <h4>Week 4 — Corporate Pipeline</h4>
+        <ul>
+          <li>Produce a 1-page Corporate Podcast Programme brief (PDF) for direct B2B outreach</li>
+          <li>Reach out to 3 PR agencies in Dubai with partnership and volume-booking proposal</li>
+          <li>Offer a free "studio experience" session to 2 corporate prospects — once they see the space, conversion is high</li>
+          <li>Review Week 1 Google Ads — pause underperforming keywords, scale clicks-to-booking terms</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="ph-name">Phase 2 — Build the Summer Revenue Bridge</span>
+        <span class="ph-period">Days 31–60</span>
+        <span class="ph-tag">Summer Activation</span>
+      </div>
+      <div class="phase-body">
+        <h4>Snapchat Summer Campaign</h4>
+        <ul>
+          <li>Launch Snapchat Arabic ads targeting Gulf nationals in Dubai — budget 2,500 AED/month from June 1</li>
+          <li>Monitor cost per booking inquiry — if below 150 AED, scale to 5,000 AED/month in July</li>
+          <li>Produce 3 Arabic-language Instagram Reels targeting Gulf creators — studio tour, equipment showcase, booking walkthrough</li>
+        </ul>
+        <h4>Membership & Corporate Scale</h4>
+        <ul>
+          <li>Target: 8 active monthly memberships by end of Day 60</li>
+          <li>Target: 1 confirmed Corporate Podcast Programme client by end of Day 60</li>
+          <li>Follow up with all LinkedIn prospects from Phase 1 — second touchpoint with case study or testimonial</li>
+        </ul>
+        <h4>French-Speaking Market Activation</h4>
+        <ul>
+          <li>Reach out directly to Yomi Denzel and Oussama Amar management — propose a simple affiliate arrangement (10% on referred bookings) or ask for a single social post</li>
+          <li>If approved: prepare a dedicated French-language landing page for their audience</li>
+          <li>Target French-speaking creator communities on Instagram with content featuring these names (with permission)</li>
+        </ul>
+        <h4>Optimisation</h4>
+        <ul>
+          <li>Review full May performance — bookings by source, revenue by package, AI Reels add-on attachment rate</li>
+          <li>Cut any channel delivering below 5x ROAS — reallocate to top performers</li>
+          <li>Collect 5 new written testimonials from membership clients — update website and Google profile</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="ph-name">Phase 3 — Stabilise and Scale</span>
+        <span class="ph-period">Days 61–90</span>
+        <span class="ph-tag">Build Resilience</span>
+      </div>
+      <div class="phase-body">
+        <h4>Recurring Revenue Target</h4>
+        <ul>
+          <li>Target: 12 active monthly memberships — generating 33,000–45,000 AED monthly recurring regardless of visitor levels</li>
+          <li>Target: 2 corporate programme clients — generating 11,000–14,000 AED monthly recurring</li>
+          <li>Combined floor: 44,000–59,000 AED/month before a single walk-in booking</li>
+        </ul>
+        <h4>Summer Peak Capture</h4>
+        <ul>
+          <li>July is the peak Gulf nationals month in Dubai — maximum Snapchat and Instagram Arabic budget</li>
+          <li>Run "Summer Closer" campaign: last 10 spots remaining at Gulf Creator rate — urgency messaging</li>
+          <li>Capture testimonials and studio content from Gulf creator clients — repurpose for next year's summer campaign</li>
+        </ul>
+        <h4>Post-Summer Preparation</h4>
+        <ul>
+          <li>September is the return of Dubai's expat and event season — prepare a "Back to Business" campaign for September 1 launch</li>
+          <li>Review all corporate proposals sent in Phase 1–2 — recontact with updated proposal and Q4 availability</li>
+          <li>Brief Q4 strategy based on real performance data from 90 days</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 10 — KPIs -->
+<div class="section">
+  <div class="sec-header">
+    <div class="num">Section 10</div>
+    <h2>KPIs & Weekly Scorecard</h2>
+  </div>
+
+  <p>With a team of 6 and a recovery mandate, measurement must be simple, weekly, and ruthless. These are the only numbers that matter during the recovery phase.</p>
+
+  <div class="kpi-strip">
+    <div class="kpi-box">
+      <div class="val">65%+</div>
+      <div class="kpi-lbl lbl">Studio utilisation target — Day 90</div>
+    </div>
+    <div class="kpi-box">
+      <div class="val">12</div>
+      <div class="kpi-lbl lbl">Active monthly memberships — Day 90 target</div>
+    </div>
+    <div class="kpi-box">
+      <div class="val">2+</div>
+      <div class="kpi-lbl lbl">Corporate programme clients — Day 60</div>
+    </div>
+    <div class="kpi-box">
+      <div class="val">5×</div>
+      <div class="kpi-lbl lbl">Minimum ROAS on all paid channels</div>
+    </div>
+  </div>
+
+  <h3>The Weekly Review — 30 Minutes, Every Monday</h3>
+  <table class="offer-table">
+    <thead><tr><th>Metric</th><th>How to Measure</th><th>Action Trigger</th></tr></thead>
+    <tbody>
+      <tr><td>Total sessions booked (week)</td><td>Booking system</td><td>If below prior week, activate WhatsApp broadcast</td></tr>
+      <tr><td>Revenue by package type</td><td>Booking system / invoice</td><td>Shift next week's messaging to best-performing offer</td></tr>
+      <tr><td>AI Reels add-on attachment rate</td><td>Count of add-on bookings</td><td>If below 15%, add it as a popup at checkout</td></tr>
+      <tr><td>Google Reviews count + rating</td><td>Google Business Profile</td><td>If any 3-star or below, respond within 24 hours</td></tr>
+      <tr><td>Google Ads cost per booking inquiry</td><td>Google Ads + booking system</td><td>If above 200 AED, pause low-performing keywords</td></tr>
+      <tr class="highlight"><td>Monthly membership sign-ups (cumulative)</td><td>Manual tracking</td><td>Progress toward 12-membership target</td></tr>
+      <tr><td>Referral bookings (weekly)</td><td>Ask at booking: "How did you hear about us?"</td><td>If referrals below 5/week, resend referral programme message</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="label">The One Number That Matters Most Right Now</div>
+    <p>Monthly Recurring Revenue (MRR) from memberships and corporate programmes. Every other metric is a leading indicator. MRR is what tells you whether the business has a stable floor or is still dependent on walk-in traffic. <strong>The target is to build a floor of 44,000 AED/month in predictable recurring revenue within 90 days.</strong> Above that floor, every walk-in booking is upside, not survival.</p>
+  </div>
+</div>
+
+<!-- SUMMARY PAGE -->
+<div class="mid">
+  <div class="section">
+    <div class="sec-header">
+      <div class="num">Summary</div>
+      <h2>The 10 Moves — Priority Order</h2>
+    </div>
+
+    <div class="priority-row">
+      <div class="badge">1</div>
+      <div class="priority-content">
+        <h4>WhatsApp broadcast to 3,500+ past clients — this week</h4>
+        <p>Re-engagement + referral programme + Google Review request. This costs zero and will generate bookings before any paid campaign goes live. Execute before anything else.</p>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="badge">2</div>
+      <div class="priority-content">
+        <h4>Launch Google Search Ads immediately</h4>
+        <p>4,000–5,000 AED/month targeting high-intent search terms. Fastest path from budget to booking.</p>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="badge">3</div>
+      <div class="priority-content">
+        <h4>Add the AI Reels Add-On to every booking this week</h4>
+        <p>250 AED attached to 2h sessions. Train operators on Opus Clip in one afternoon. Immediate revenue uplift on existing bookings.</p>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="badge">4</div>
+      <div class="priority-content">
+        <h4>Launch the Monthly Recording Membership</h4>
+        <p>3 tiers: 1,600 / 2,800 / 5,000 AED/month. Announce to past client list. Target 5 sign-ups in 30 days. This is the foundation of revenue resilience.</p>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="badge">5</div>
+      <div class="priority-content">
+        <h4>Begin Arabic Snapchat Summer Campaign — June 1</h4>
+        <p>Target Gulf national visitors in Dubai. This is uncontested territory. Budget 2,500 AED/month. Scale if it performs. This is the summer revenue bridge.</p>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="badge">6</div>
+      <div class="priority-content">
+        <h4>Launch B2B LinkedIn outreach — 20 messages/week</h4>
+        <p>Target Communications Directors and CMOs in Business Bay/DIFC. Offer a free studio experience session. The first corporate client pays for the cost of three months of outreach.</p>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="badge">7</div>
+      <div class="priority-content">
+        <h4>Reach out to Yomi Denzel and Oussama Amar management</h4>
+        <p>Propose an affiliate arrangement or ask for a single social post. This is the highest-leverage marketing asset you are currently not using.</p>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="badge">8</div>
+      <div class="priority-content">
+        <h4>Protect the Google Reviews #1 position actively</h4>
+        <p>Verbal close at every session. WhatsApp request to all past clients. Respond to every review within 24 hours. This is your primary organic acquisition channel — never neglect it.</p>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="badge b2">9</div>
+      <div class="priority-content">
+        <h4>Do not lower the base hourly rate</h4>
+        <p>Create entry points (Welcome Session at 350 AED, AI Reels as value-add) but never discount the standard rate publicly. You are the leader. Price accordingly.</p>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="badge b2">10</div>
+      <div class="priority-content">
+        <h4>Run a 30-minute Monday review every week</h4>
+        <p>Total sessions, revenue by package, add-on attachment rate, Google Reviews count, ad ROAS, membership count. These 7 numbers tell you everything you need to know about whether the strategy is working.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>Dubai Podcast Studio</strong> · Recovery Strategy 2026 · Confidential — Leadership Use Only<br>
+  <span style="color: #2a2a2a;">Tamani Arts Building, Business Bay, Dubai · info@dubaipodcaststudio.com</span>
+</footer>
+
+</body>
+</html>
