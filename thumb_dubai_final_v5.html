@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Thumbnail — Dubai Property Crash (Title #5)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0f0f0f;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .label {
+    font-size: 0.65rem;
+    color: #ff0000;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    align-self: flex-start;
+    max-width: 760px;
+    width: 100%;
+  }
+
+  /* ══════════════════════════════
+     FINAL THUMBNAIL
+  ══════════════════════════════ */
+  .thumb {
+    width: 100%;
+    max-width: 760px;
+    aspect-ratio: 16/9;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
+  }
+
+  /* Deep dark background — secretive/ominous */
+  .bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, #0d0d1a 0%, #000 70%);
+  }
+
+  /* Subtle vignette */
+  .vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
+  }
+
+  /* Faint circuit/data lines — "hidden info" vibe */
+  .circuit {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,34,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,34,0,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Dubai skyline — blurred/silhouetted at bottom */
+  .skyline-wrap {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 38%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 3px;
+    padding: 0 10px;
+    opacity: 0.18;
+    filter: blur(1px);
+  }
+  .b { display: block; background: #111; }
+
+  /* Red tinted glow low horizon */
+  .horizon-glow {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 45%;
+    background: linear-gradient(180deg, transparent 0%, rgba(180,0,0,0.18) 100%);
+  }
+
+  /* ── TOP SECRET / CLASSIFIED stamp ── */
+  .classified {
+    position: absolute;
+    top: 16px; left: 18px;
+    border: 2px solid rgba(255,34,0,0.7);
+    padding: 4px 12px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,34,0,0.08);
+  }
+  .classified .dot {
+    width: 6px; height: 6px;
+    background: #ff2200;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+  }
+  .classified .text {
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: #ff2200;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ── NOBODY IS TALKING ABOUT — top center ── */
+  .nobody {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 0.62rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  /* ── MAIN HEADLINE — center stage ── */
+  .headline {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-52%);
+    max-width: 58%;
+  }
+
+  .line-the {
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 2px;
+  }
+
+  .line-dubai {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+  .line-dubai .flag { font-size: 1.5rem; }
+  .line-dubai .word {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #ffd200;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(255,210,0,0.4), 2px 2px 0 #000;
+    letter-spacing: 2px;
+  }
+
+  .line-property {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 2px 2px 0 #000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .line-crash {
+    font-size: 3.6rem;
+    font-weight: 900;
+    color: #ff2200;
+    line-height: 1;
+    text-shadow:
+      0 0 25px rgba(255,34,0,0.9),
+      0 0 50px rgba(255,34,0,0.4),
+      3px 3px 0 #000;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+
+  /* ── RIGHT panel — data / evidence ── */
+  .right-panel {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px 16px;
+  }
+
+  /* Faint separator */
+  .right-panel::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 15%; bottom: 15%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(255,34,0,0.3), transparent);
+  }
+
+  .chart-icon {
+    font-size: 4.5rem;
+    filter: drop-shadow(0 0 20px rgba(255,34,0,0.7));
+    animation: sink 3s ease-in-out infinite;
+  }
+
+  /* Redacted stat blocks */
+  .stats { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    background: rgba(255,34,0,0.07);
+    border: 1px solid rgba(255,34,0,0.18);
+    border-radius: 4px;
+  }
+  .stat-row .s-key {
+    font-size: 0.55rem;
+    color: #777;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .stat-row .s-num {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #ff4444;
+  }
+
+  /* Eye / hidden info icon */
+  .eye-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .eye-icon {
+    font-size: 1.8rem;
+    opacity: 0.5;
+    filter: grayscale(50%);
+  }
+  .eye-line {
+    position: absolute;
+    width: 140%;
+    height: 2px;
+    background: #ff2200;
+    transform: rotate(-30deg);
+    opacity: 0.8;
+    box-shadow: 0 0 8px #ff2200;
+  }
+
+  /* ── BOTTOM BANNER ── */
+  .bottom-banner {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 30px;
+    background: rgba(255,34,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .bottom-banner .bang {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .bottom-banner .sep { color: rgba(255,255,255,0.5); font-size: 0.65rem; }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+  @keyframes sink {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(6px) rotate(-3deg); }
+  }
+
+  /* ── TITLE DISPLAY ── */
+  .title-box {
+    width: 100%;
+    max-width: 760px;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-left: 4px solid #ff2200;
+    border-radius: 8px;
+    padding: 20px 22px;
+  }
+  .title-box .t-label {
+    font-size: 0.6rem;
+    color: #555;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .title-box .t-main {
+    font-size: 1.05rem;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .title-box .t-main .red { color: #ff2200; }
+  .title-box .t-main .gold { color: #ffd200; }
+
+  /* ── DESIGN BREAKDOWN ── */
+  .breakdown {
+    width: 100%;
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .bk {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 7px;
+    padding: 12px 14px;
+  }
+  .bk .bk-label {
+    font-size: 0.55rem;
+    color: #555;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .bk .bk-val { font-size: 0.78rem; color: #ccc; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="label">Final Thumbnail — Title #5 · Hidden Info Hook</div>
+
+<div class="thumb" style="max-width:760px;width:100%;">
+  <div class="bg"></div>
+  <div class="circuit"></div>
+  <div class="vignette"></div>
+  <div class="horizon-glow"></div>
+
+  <!-- Skyline silhouette -->
+  <div class="skyline-wrap">
+    <span class="b" style="width:12px;height:30%"></span>
+    <span class="b" style="width:18px;height:50%"></span>
+    <span class="b" style="width:10px;height:35%"></span>
+    <span class="b" style="width:8px;height:55%"></span>
+    <span class="b" style="width:6px;height:90%;clip-path:polygon(30% 0%,70% 0%,100% 100%,0% 100%)"></span>
+    <span class="b" style="width:22px;height:65%"></span>
+    <span class="b" style="width:14px;height:42%"></span>
+    <span class="b" style="width:28px;height:75%"></span>
+    <span class="b" style="width:10px;height:38%"></span>
+    <span class="b" style="width:16px;height:58%"></span>
+    <span class="b" style="width:20px;height:48%"></span>
+    <span class="b" style="width:12px;height:32%"></span>
+  </div>
+
+  <!-- Classified tag -->
+  <div class="classified">
+    <div class="dot"></div>
+    <span class="text">Nobody Is Talking About This</span>
+  </div>
+
+  <!-- Main headline -->
+  <div class="headline">
+    <div class="line-the">The</div>
+    <div class="line-dubai">
+      <span class="flag">🇦🇪</span>
+      <span class="word">DUBAI</span>
+    </div>
+    <div class="line-property">Property</div>
+    <div class="line-crash">CRASH</div>
+  </div>
+
+  <!-- Right data panel -->
+  <div class="right-panel">
+    <div class="eye-wrap">
+      <div class="eye-icon">👁️</div>
+      <div class="eye-line"></div>
+    </div>
+    <div class="chart-icon">📉</div>
+    <div class="stats">
+      <div class="stat-row">
+        <span class="s-key">Listings</span>
+        <span class="s-num">-34%</span>
+      </div>
+      <div class="stat-row">
+        <span class="s-key">Avg. Price</span>
+        <span class="s-num">↘ AED 1.6M</span>
+      </div>
+      <div class="stat-row">
+        <span class="s-key">Sell Orders</span>
+        <span class="s-num">+218%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom banner -->
+  <div class="bottom-banner">
+    <span class="bang">Panic Selling Has Begun</span>
+    <span class="sep">·</span>
+    <span class="bang">Watch Before It's Too Late</span>
+  </div>
+</div>
+
+<!-- TITLE -->
+<div class="title-box">
+  <div class="t-label">Selected Title — #5</div>
+  <div class="t-main">
+    The <span class="gold">Dubai</span> Property <span class="red">Crash</span> Nobody Is Talking About (<span class="red">Panic Selling Has Begun</span>)
+  </div>
+</div>
+
+<!-- DESIGN BREAKDOWN -->
+<div class="breakdown">
+  <div class="bk">
+    <div class="bk-label">Hook Angle</div>
+    <div class="bk-val">Hidden Info / Secret</div>
+  </div>
+  <div class="bk">
+    <div class="bk-label">Primary Emotion</div>
+    <div class="bk-val">Curiosity + Fear</div>
+  </div>
+  <div class="bk">
+    <div class="bk-label">Focal Word</div>
+    <div class="bk-val">"CRASH" — red glow</div>
+  </div>
+  <div class="bk">
+    <div class="bk-label">Colors</div>
+    <div class="bk-val">Black · Red · Dubai Gold</div>
+  </div>
+  <div class="bk">
+    <div class="bk-label">Trust Signal</div>
+    <div class="bk-val">Stats panel + 📉</div>
+  </div>
+  <div class="bk">
+    <div class="bk-label">Pattern Interrupt</div>
+    <div class="bk-val">Crossed-eye · Classified tag</div>
+  </div>
+</div>
+
+</body>
+</html>
