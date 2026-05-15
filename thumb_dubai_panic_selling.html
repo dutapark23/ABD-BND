@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thumbnail — Dubai Panic Selling</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0f0f0f;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  h2 {
+    color: #ff0000;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    align-self: flex-start;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  /* ── THUMBNAIL WRAPPER ── */
+  .thumb-wrap {
+    width: 100%;
+    max-width: 760px;
+  }
+
+  /* ══════════════════════════════
+     MAIN THUMBNAIL
+  ══════════════════════════════ */
+  .thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #08010e;
+  }
+
+  /* Sky gradient — dark red/orange crisis mood */
+  .sky {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      170deg,
+      #200000 0%,
+      #500a00 35%,
+      #7a1e00 55%,
+      #1a0800 100%
+    );
+  }
+
+  /* Horizontal haze lines */
+  .haze {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 28px,
+      rgba(255,60,0,0.04) 28px,
+      rgba(255,60,0,0.04) 29px
+    );
+  }
+
+  /* Dubai skyline silhouette — CSS drawn */
+  .skyline {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 52%;
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    opacity: 0.22;
+  }
+  .skyline span {
+    display: block;
+    background: #000;
+    flex-shrink: 0;
+  }
+
+  /* Burj Khalifa needle top */
+  .burj {
+    position: absolute;
+    bottom: 0;
+    left: 48%;
+    width: 18px;
+    height: 72%;
+    background: linear-gradient(180deg, #000 0%, #111 100%);
+    clip-path: polygon(40% 0%, 60% 0%, 80% 100%, 20% 100%);
+    opacity: 0.28;
+  }
+
+  /* Red radial glow behind skyline */
+  .crisis-glow {
+    position: absolute;
+    width: 500px; height: 300px;
+    background: radial-gradient(ellipse, rgba(255,50,0,0.35) 0%, transparent 70%);
+    bottom: 10%; left: 50%;
+    transform: translateX(-50%);
+    filter: blur(10px);
+  }
+
+  /* ── ALERT STRIPE top bar ── */
+  .alert-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 34px;
+    background: #cc0000;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    gap: 10px;
+  }
+  .alert-bar .dot {
+    width: 8px; height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+  }
+  .alert-bar .live-text {
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .alert-bar .sep { color: rgba(255,255,255,0.4); font-size: 0.6rem; }
+  .alert-bar .ticker {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* ── MAIN TEXT block (left) ── */
+  .text-left {
+    position: absolute;
+    left: 22px;
+    top: 50px;
+    max-width: 56%;
+  }
+
+  .word-panic {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #ff2200;
+    line-height: 1;
+    text-shadow:
+      0 0 30px rgba(255,34,0,0.8),
+      0 0 60px rgba(255,34,0,0.4),
+      2px 2px 0 #000;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+
+  .word-selling {
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 2px 2px 0 #000, 0 0 20px rgba(0,0,0,0.8);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .dubai-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    background: rgba(255,210,0,0.15);
+    border: 1.5px solid #ffd200;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+  .dubai-tag .flag { font-size: 1rem; }
+  .dubai-tag .name {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #ffd200;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* Crash arrow */
+  .crash-arrow {
+    position: absolute;
+    left: 22px;
+    bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .crash-arrow .arrow-down {
+    font-size: 2rem;
+    color: #ff2200;
+    text-shadow: 0 0 15px #ff2200;
+    animation: shake 0.5s infinite;
+  }
+  .crash-arrow .stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .crash-arrow .stat .pct {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #ff2200;
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(255,34,0,0.6);
+  }
+  .crash-arrow .stat .label {
+    font-size: 0.55rem;
+    color: #aaa;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ── RIGHT side — split image area ── */
+  .right-panel {
+    position: absolute;
+    right: 0; top: 34px; bottom: 0;
+    width: 42%;
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a0800 100%);
+    border-left: 2px solid rgba(255,34,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .building-emoji {
+    font-size: 5rem;
+    filter:
+      drop-shadow(0 0 20px rgba(255,50,0,0.7))
+      grayscale(30%);
+    animation: tremble 0.4s infinite;
+  }
+
+  .price-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .price-old {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #888;
+    text-decoration: line-through;
+    text-decoration-color: #ff2200;
+    text-decoration-thickness: 2px;
+  }
+  .price-new {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #ff2200;
+    text-shadow: 0 0 15px rgba(255,34,0,0.5);
+  }
+  .price-label {
+    font-size: 0.55rem;
+    color: #888;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Sell orders ticker */
+  .sell-orders {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 100%;
+  }
+  .sell-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,0,0,0.08);
+    border: 1px solid rgba(255,0,0,0.15);
+    border-radius: 3px;
+    padding: 3px 8px;
+  }
+  .sell-row .s-label { font-size: 0.55rem; color: #888; letter-spacing: 1px; }
+  .sell-row .s-val { font-size: 0.6rem; font-weight: 700; color: #ff4444; }
+
+  /* ── OVERLAY gradient fade left edge of right panel ── */
+  .panel-fade {
+    position: absolute;
+    right: 42%;
+    top: 34px; bottom: 0;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, rgba(30,5,0,0.6));
+    pointer-events: none;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.8); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+  }
+  @keyframes tremble {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+  }
+
+  /* ══════════════════════════════
+     VARIANT B — Calmer / Analysis
+  ══════════════════════════════ */
+  .thumb-b {
+    width: 100%;
+    aspect-ratio: 16/9;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0a0a14 0%, #0d1a2a 60%, #0a0a14 100%);
+  }
+  .tb-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,150,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,150,255,0.04) 1px, transparent 1px);
+    background-size: 35px 35px;
+  }
+  .tb-red-stripe {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: #ff2200;
+  }
+  .tb-graph {
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 6rem;
+    filter: drop-shadow(0 0 20px rgba(255,34,0,0.5));
+  }
+  .tb-text {
+    position: absolute;
+    left: 30px; top: 50%;
+    transform: translateY(-50%);
+    max-width: 58%;
+  }
+  .tb-eyebrow {
+    font-size: 0.6rem;
+    font-weight: 800;
+    color: #ff2200;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .tb-main {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    text-shadow: 0 2px 10px #000;
+  }
+  .tb-highlight { color: #ff2200; }
+  .tb-sub {
+    margin-top: 10px;
+    font-size: 0.75rem;
+    color: #aaa;
+    line-height: 1.5;
+    max-width: 90%;
+  }
+  .tb-badge {
+    position: absolute;
+    bottom: 18px; left: 30px;
+    background: #ff2200;
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 4px 12px;
+    border-radius: 4px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .tb-dubai {
+    position: absolute;
+    top: 16px; right: 18px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .tb-dubai span { font-size: 0.65rem; color: #ffd200; font-weight: 700; letter-spacing: 2px; }
+
+  /* ── TITLES & INFO ── */
+  .info-box {
+    width: 100%;
+    max-width: 760px;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .info-box h3 {
+    font-size: 0.65rem;
+    color: #ff0000;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .title-list { display: flex; flex-direction: column; gap: 10px; }
+  .title-option {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    background: #111;
+    border-radius: 6px;
+    border-left: 3px solid #ff2200;
+  }
+  .title-num {
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: #ff2200;
+    min-width: 20px;
+    padding-top: 1px;
+  }
+  .title-text { font-size: 0.88rem; color: #fff; line-height: 1.45; }
+  .title-angle {
+    margin-top: 4px;
+    font-size: 0.62rem;
+    color: #666;
+    letter-spacing: 1px;
+  }
+
+  .design-notes {
+    width: 100%;
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .note {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .note .n-label {
+    font-size: 0.6rem;
+    color: #555;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .note .n-val {
+    font-size: 0.78rem;
+    color: #ccc;
+    font-weight: 600;
+  }
+
+  .variant-label {
+    font-size: 0.65rem;
+    color: #555;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    align-self: flex-start;
+    max-width: 760px;
+    width: 100%;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h2>Thumbnail — Dubai Real Estate Panic Selling</h2>
+
+<!-- ══ VARIANT A ══ -->
+<p class="variant-label">Variant A — High Drama / Emotion (Max CTR)</p>
+<div class="thumb-wrap">
+  <div class="thumb">
+    <div class="sky"></div>
+    <div class="haze"></div>
+    <div class="crisis-glow"></div>
+    <div class="burj"></div>
+
+    <!-- Alert bar -->
+    <div class="alert-bar">
+      <div class="dot"></div>
+      <span class="live-text">Breaking</span>
+      <span class="sep">|</span>
+      <span class="ticker">Dubai Real Estate Market — June 2025</span>
+    </div>
+
+    <!-- Left text -->
+    <div class="text-left">
+      <div class="word-panic">PANIC</div>
+      <div class="word-selling">SELLING</div>
+      <div class="dubai-tag">
+        <span class="flag">🇦🇪</span>
+        <span class="name">Dubai</span>
+      </div>
+    </div>
+
+    <!-- Crash stat bottom left -->
+    <div class="crash-arrow">
+      <div class="arrow-down">↘</div>
+      <div class="stat">
+        <span class="pct">-34%</span>
+        <span class="label">Listings Dropped</span>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="right-panel">
+      <div class="building-emoji">🏙️</div>
+      <div class="price-box">
+        <div class="price-old">AED 2.4M</div>
+        <div class="price-new">AED 1.6M</div>
+        <div class="price-label">Avg. Off-Plan Unit</div>
+      </div>
+      <div class="sell-orders">
+        <div class="sell-row">
+          <span class="s-label">Marina Vista</span>
+          <span class="s-val">SELL ↓</span>
+        </div>
+        <div class="sell-row">
+          <span class="s-label">Downtown Loft</span>
+          <span class="s-val">SELL ↓</span>
+        </div>
+        <div class="sell-row">
+          <span class="s-label">JVC Studio</span>
+          <span class="s-val">SELL ↓</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel-fade"></div>
+  </div>
+</div>
+
+<!-- ══ VARIANT B ══ -->
+<p class="variant-label">Variant B — Authority / Analysis (Trust + CTR)</p>
+<div class="thumb-wrap">
+  <div class="thumb-b">
+    <div class="tb-grid"></div>
+    <div class="tb-red-stripe"></div>
+    <div class="tb-graph">📉</div>
+    <div class="tb-dubai">
+      <span>🇦🇪 DUBAI</span>
+    </div>
+    <div class="tb-text">
+      <div class="tb-eyebrow">Real Estate Alert</div>
+      <div class="tb-main">Why Investors Are<br><span class="tb-highlight">Panic Selling</span><br>Dubai Properties</div>
+      <div class="tb-sub">And what smart money is doing instead</div>
+    </div>
+    <div class="tb-badge">Watch Before You Buy</div>
+  </div>
+</div>
+
+<!-- TITLES -->
+<div class="info-box">
+  <h3>Title Options — Pick Your Angle</h3>
+  <div class="title-list">
+
+    <div class="title-option">
+      <div class="title-num">A1</div>
+      <div>
+        <div class="title-text">Dubai Real Estate is CRASHING — Investors Are Panic Selling and Here's Why</div>
+        <div class="title-angle">Angle: Fear + urgency · Best for: broad audience, news watchers</div>
+      </div>
+    </div>
+
+    <div class="title-option">
+      <div class="title-num">A2</div>
+      <div>
+        <div class="title-text">I Almost Panic Sold My Dubai Property — Watch This First</div>
+        <div class="title-angle">Angle: Personal story + pattern interrupt · Best for: investors, buyers</div>
+      </div>
+    </div>
+
+    <div class="title-option">
+      <div class="title-num">A3</div>
+      <div>
+        <div class="title-text">Why Smart Investors Are DUMPING Dubai Real Estate Right Now (The Truth)</div>
+        <div class="title-angle">Angle: Authority + curiosity · Best for: finance-savvy audience</div>
+      </div>
+    </div>
+
+    <div class="title-option">
+      <div class="title-num">A4</div>
+      <div>
+        <div class="title-text">Dubai Real Estate Panic Selling Explained — Is Your Investment Safe?</div>
+        <div class="title-angle">Angle: Education + fear · Best for: existing property owners</div>
+      </div>
+    </div>
+
+    <div class="title-option">
+      <div class="title-num">A5</div>
+      <div>
+        <div class="title-text">The Dubai Property Crash Nobody Is Talking About (Panic Selling Has Begun)</div>
+        <div class="title-angle">Angle: Conspiracy/hidden info · Best for: high CTR on cold audience</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DESIGN NOTES -->
+<div class="design-notes">
+  <div class="note">
+    <div class="n-label">Primary Color</div>
+    <div class="n-val">#FF2200 — Crisis Red</div>
+  </div>
+  <div class="note">
+    <div class="n-label">Accent</div>
+    <div class="n-val">#FFD200 — Dubai Gold</div>
+  </div>
+  <div class="note">
+    <div class="n-label">Background</div>
+    <div class="n-val">Dark red/orange sky gradient</div>
+  </div>
+  <div class="note">
+    <div class="n-label">Focal Word</div>
+    <div class="n-val">"PANIC" — oversized, glowing</div>
+  </div>
+  <div class="note">
+    <div class="n-label">Visual Hook</div>
+    <div class="n-val">Dubai skyline silhouette + falling prices</div>
+  </div>
+  <div class="note">
+    <div class="n-label">Emotion Target</div>
+    <div class="n-val">Fear · Urgency · Curiosity</div>
+  </div>
+</div>
+
+</body>
+</html>

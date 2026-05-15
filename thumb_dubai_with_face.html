@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Thumbnail — Dubai Crash (With Face)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0f0f0f;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #fff;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .top-label {
+    font-size: 0.65rem;
+    color: #ff2200;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    align-self: flex-start;
+    max-width: 760px;
+    width: 100%;
+  }
+
+  /* ══════════════════════
+     THUMBNAIL
+  ══════════════════════ */
+  .thumb {
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
+  }
+
+  /* ── BASE background ── */
+  .bg-base {
+    position: absolute; inset: 0;
+    background: linear-gradient(130deg, #0a0000 0%, #1c0400 40%, #0a0000 100%);
+  }
+
+  /* Grid overlay */
+  .bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,34,0,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,34,0,0.05) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  /* ── FACE — left side ── */
+  .face-wrap {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 52%;
+    overflow: hidden;
+  }
+
+  .face-img {
+    position: absolute;
+    /* Push image up and scale so face fills the left panel */
+    width: 100%;
+    height: 140%;
+    top: -10%;
+    left: -5%;
+    object-fit: cover;
+    object-position: center top;
+    /* Color-grade: push it warm/dark to match the crisis palette */
+    filter:
+      contrast(1.1)
+      saturate(0.6)
+      brightness(0.82)
+      sepia(0.2);
+  }
+
+  /* Gradient fade — right edge of face into background */
+  .face-fade {
+    position: absolute;
+    top: 0; bottom: 0;
+    right: 0;
+    width: 55%;
+    background: linear-gradient(90deg, transparent 0%, rgba(10,0,0,0.75) 60%, #0a0000 100%);
+  }
+
+  /* Red tint overlay on face — crisis mood */
+  .face-tint {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, rgba(180,0,0,0.18) 0%, transparent 70%);
+  }
+
+  /* Bottom shadow under face */
+  .face-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 35%;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.8));
+  }
+
+  /* ── RIGHT TEXT PANEL ── */
+  .text-panel {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 52%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px 0 10px;
+  }
+
+  /* "Nobody is talking about this" tag */
+  .secret-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    background: rgba(255,34,0,0.12);
+    border: 1.5px solid rgba(255,34,0,0.5);
+    padding: 4px 10px;
+    border-radius: 3px;
+    width: fit-content;
+  }
+  .secret-tag .dot {
+    width: 5px; height: 5px;
+    background: #ff2200;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+  }
+  .secret-tag .tag-text {
+    font-size: 0.52rem;
+    font-weight: 900;
+    color: #ff5533;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* THE */
+  .word-the {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  /* 🇦🇪 DUBAI */
+  .word-dubai-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  .flag { font-size: 1.4rem; }
+  .word-dubai {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #ffd200;
+    line-height: 1;
+    letter-spacing: 3px;
+    text-shadow: 0 0 25px rgba(255,210,0,0.5), 2px 2px 0 #000;
+  }
+
+  /* PROPERTY */
+  .word-property {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 2px;
+  }
+
+  /* CRASH */
+  .word-crash {
+    font-size: 3.8rem;
+    font-weight: 900;
+    color: #ff2200;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: 0.9;
+    text-shadow:
+      0 0 20px rgba(255,34,0,1),
+      0 0 45px rgba(255,34,0,0.5),
+      3px 3px 0 #000;
+    margin-bottom: 12px;
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .stat-chip {
+    background: rgba(255,34,0,0.1);
+    border: 1px solid rgba(255,34,0,0.3);
+    border-radius: 4px;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .stat-chip .s-num {
+    font-size: 0.8rem;
+    font-weight: 900;
+    color: #ff4444;
+    line-height: 1;
+  }
+  .stat-chip .s-label {
+    font-size: 0.45rem;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── TOP alert bar ── */
+  .alert-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 28px;
+    background: rgba(180,0,0,0.9);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 8px;
+    z-index: 10;
+  }
+  .alert-bar .a-dot {
+    width: 6px; height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    animation: blink 0.8s infinite;
+  }
+  .alert-bar .a-text {
+    font-size: 0.55rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .alert-bar .a-sep { color: rgba(255,255,255,0.4); }
+  .alert-bar .a-ticker {
+    font-size: 0.55rem;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+  .alert-bar .a-right {
+    margin-left: auto;
+    font-size: 0.55rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 2px;
+  }
+
+  /* ── BOTTOM banner ── */
+  .bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 28px;
+    background: linear-gradient(90deg, rgba(255,34,0,0.9), rgba(180,0,0,0.9));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 10;
+  }
+  .bottom-bar .b-text {
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .bottom-bar .b-sep { color: rgba(255,255,255,0.4); font-size: 0.6rem; }
+
+  /* Glow behind CRASH text */
+  .crash-glow {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(255,34,0,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  /* ── INFO SECTION ── */
+  .title-box {
+    width: 100%;
+    max-width: 760px;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-left: 4px solid #ff2200;
+    border-radius: 8px;
+    padding: 18px 22px;
+  }
+  .title-box .t-label {
+    font-size: 0.58rem;
+    color: #555;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+  }
+  .title-box .t-main {
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .title-box .t-main .red { color: #ff2200; }
+  .title-box .t-main .gold { color: #ffd200; }
+
+  .notes {
+    width: 100%;
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    gap: 8px;
+  }
+  .note {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .note .n-l {
+    font-size: 0.52rem;
+    color: #555;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .note .n-v { font-size: 0.75rem; color: #ccc; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="top-label">Final Thumbnail — Dubai Crash · Your Photo</div>
+
+<!-- THUMBNAIL -->
+<div class="thumb">
+  <div class="bg-base"></div>
+  <div class="bg-grid"></div>
+
+  <!-- Face -->
+  <div class="face-wrap">
+    <img class="face-img" src="face_dubai.jpg" alt="face">
+    <div class="face-tint"></div>
+    <div class="face-fade"></div>
+    <div class="face-bottom"></div>
+  </div>
+
+  <!-- Alert bar -->
+  <div class="alert-bar">
+    <div class="a-dot"></div>
+    <span class="a-text">Breaking</span>
+    <span class="a-sep">|</span>
+    <span class="a-ticker">Dubai Real Estate Market — 2025</span>
+    <span class="a-right">🇦🇪</span>
+  </div>
+
+  <!-- Crash glow -->
+  <div class="crash-glow"></div>
+
+  <!-- Right text -->
+  <div class="text-panel">
+    <div class="secret-tag">
+      <div class="dot"></div>
+      <span class="tag-text">Nobody Is Talking About This</span>
+    </div>
+    <div class="word-the">The</div>
+    <div class="word-dubai-row">
+      <span class="flag">🇦🇪</span>
+      <span class="word-dubai">DUBAI</span>
+    </div>
+    <div class="word-property">Property</div>
+    <div class="word-crash">CRASH</div>
+    <div class="stats-row">
+      <div class="stat-chip">
+        <span class="s-num">-34%</span>
+        <span class="s-label">Listings</span>
+      </div>
+      <div class="stat-chip">
+        <span class="s-num">+218%</span>
+        <span class="s-label">Sell Orders</span>
+      </div>
+      <div class="stat-chip">
+        <span class="s-num">📉</span>
+        <span class="s-label">Prices</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="bottom-bar">
+    <span class="b-text">Panic Selling Has Begun</span>
+    <span class="b-sep">·</span>
+    <span class="b-text">Watch Before It's Too Late</span>
+  </div>
+</div>
+
+<!-- TITLE -->
+<div class="title-box">
+  <div class="t-label">Title — #5 (Selected)</div>
+  <div class="t-main">
+    The <span class="gold">Dubai</span> Property <span class="red">Crash</span> Nobody Is Talking About (<span class="red">Panic Selling Has Begun</span>)
+  </div>
+</div>
+
+<!-- DESIGN NOTES -->
+<div class="notes">
+  <div class="note">
+    <div class="n-l">Photo Role</div>
+    <div class="n-v">Hand-over-eye = hidden info</div>
+  </div>
+  <div class="note">
+    <div class="n-l">Color Grade</div>
+    <div class="n-v">Warm dark — crisis mood</div>
+  </div>
+  <div class="note">
+    <div class="n-l">Focal Word</div>
+    <div class="n-v">"CRASH" — red glow</div>
+  </div>
+  <div class="note">
+    <div class="n-l">Accent</div>
+    <div class="n-v">Dubai Gold on name</div>
+  </div>
+  <div class="note">
+    <div class="n-l">Trust Signal</div>
+    <div class="n-v">Stats chips + Breaking bar</div>
+  </div>
+  <div class="note">
+    <div class="n-l">Pattern Interrupt</div>
+    <div class="n-v">Real face + secret tag</div>
+  </div>
+</div>
+
+</body>
+</html>
