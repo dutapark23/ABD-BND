@@ -277,48 +277,62 @@ doc = SimpleDocTemplate(pdf_path, pagesize=A4,
                         topMargin=1.8*cm, bottomMargin=1.8*cm)
 styles = getSampleStyleSheet()
 
+# ── PDF COLOR SCHEME (white background → all text must be dark) ───────────────
+PDF_BLACK  = '#1a1a2e'   # near-black for body text
+PDF_RED    = '#c0392b'   # strong red for headers
+PDF_SUBRED = '#e94560'   # lighter red for sub-headers & emphasis
+PDF_GOLD   = '#d4850a'   # darker gold (readable on white)
+PDF_GREY   = '#555555'   # mid-grey for meta / footer
+PDF_LGREY  = '#95a5a6'   # light grey for dividers
+PDF_TBLHDR = '#1a1a2e'   # table header bg (dark navy, white text)
+PDF_TBLROW = '#f4f6f7'   # table row bg (very light grey, dark text)
+
 def S(name, parent='Normal', **kw):
     return ParagraphStyle(name, parent=styles[parent], **kw)
 
-S_title  = S('T1', fontSize=20, textColor=colors.HexColor(C_ACCENT),
+S_title  = S('T1', fontSize=20, textColor=colors.HexColor(PDF_RED),
              spaceAfter=4, fontName='Helvetica-Bold', alignment=TA_CENTER)
-S_sub    = S('T2', fontSize=10, textColor=colors.HexColor(C_GOLD),
+S_sub    = S('T2', fontSize=10, textColor=colors.HexColor(PDF_GOLD),
              spaceAfter=2, fontName='Helvetica-Bold', alignment=TA_CENTER)
-S_meta   = S('TM', fontSize=8,  textColor=colors.HexColor(C_GREY),
+S_meta   = S('TM', fontSize=8,  textColor=colors.HexColor(PDF_GREY),
              spaceAfter=10, alignment=TA_CENTER)
-S_h2     = S('H2', fontSize=12, textColor=colors.HexColor(C_GOLD),
+S_h2     = S('H2', fontSize=12, textColor=colors.HexColor(PDF_RED),
              spaceBefore=8, spaceAfter=4, fontName='Helvetica-Bold')
-S_h3     = S('H3', fontSize=9,  textColor=colors.HexColor(C_ACCENT),
+S_h3     = S('H3', fontSize=9,  textColor=colors.HexColor(PDF_SUBRED),
              spaceBefore=5, spaceAfter=3, fontName='Helvetica-Bold')
-S_body   = S('BD', fontSize=8.5, textColor=colors.HexColor(C_LIGHT),
-             spaceAfter=4, leading=13)
-S_bullet = S('BU', fontSize=8.5, textColor=colors.HexColor(C_LIGHT),
-             spaceAfter=3, leading=13, leftIndent=10)
-S_kpi_v  = S('KV', fontSize=20, textColor=colors.HexColor(C_ACCENT),
-             alignment=TA_CENTER, fontName='Helvetica-Bold', leading=24)
-S_kpi_l  = S('KL', fontSize=7,  textColor=colors.HexColor(C_GREY),
+S_body   = S('BD', fontSize=9,  textColor=colors.HexColor(PDF_BLACK),
+             spaceAfter=5, leading=14)
+S_bullet = S('BU', fontSize=9,  textColor=colors.HexColor(PDF_BLACK),
+             spaceAfter=4, leading=14, leftIndent=12)
+# KPI cards: dark navy background → white text is fine inside the table cells
+S_kpi_v  = S('KV', fontSize=22, textColor=colors.white,
+             alignment=TA_CENTER, fontName='Helvetica-Bold', leading=26)
+S_kpi_s  = S('KS', fontSize=12, textColor=colors.HexColor('#f5a623'),
+             alignment=TA_CENTER, fontName='Helvetica-Bold', leading=14)
+S_kpi_l  = S('KL', fontSize=7,  textColor=colors.HexColor('#bdc3c7'),
              alignment=TA_CENTER, leading=10)
-S_foot   = S('FT', fontSize=7.5, textColor=colors.HexColor(C_GREY),
+S_foot   = S('FT', fontSize=7.5, textColor=colors.HexColor(PDF_GREY),
              alignment=TA_CENTER)
 
-def divider(thick=0.8, before=6, after=2):
+def divider(thick=1, before=8, after=4):
     return HRFlowable(width=W, thickness=thick,
-                      color=colors.HexColor(C_GREY),
+                      color=colors.HexColor(PDF_LGREY),
                       spaceBefore=before, spaceAfter=after)
 
 def sec_hdr(text):
     return KeepTogether([divider(), Paragraph(text, S_h2)])
 
-def base_ts(hdr_bg=C_ACCENT):
+def base_ts():
+    """Dark header row, light alternating body rows, dark text."""
     return TableStyle([
-        ('BACKGROUND',    (0,0),(-1, 0), colors.HexColor(hdr_bg)),
-        ('BACKGROUND',    (0,1),(-1,-1), colors.HexColor(C_MID)),
+        ('BACKGROUND',    (0,0),(-1, 0), colors.HexColor(PDF_TBLHDR)),
+        ('BACKGROUND',    (0,1),(-1,-1), colors.HexColor(PDF_TBLROW)),
         ('TEXTCOLOR',     (0,0),(-1, 0), colors.white),
-        ('TEXTCOLOR',     (0,1),(-1,-1), colors.HexColor(C_LIGHT)),
+        ('TEXTCOLOR',     (0,1),(-1,-1), colors.HexColor(PDF_BLACK)),
         ('FONTNAME',      (0,0),(-1, 0), 'Helvetica-Bold'),
         ('FONTSIZE',      (0,0),(-1,-1), 8),
-        ('BOX',           (0,0),(-1,-1), 0.8, colors.HexColor(C_GREY)),
-        ('INNERGRID',     (0,0),(-1,-1), 0.4, colors.HexColor(C_GREY)),
+        ('BOX',           (0,0),(-1,-1), 0.8, colors.HexColor(PDF_LGREY)),
+        ('INNERGRID',     (0,0),(-1,-1), 0.4, colors.HexColor(PDF_LGREY)),
         ('VALIGN',        (0,0),(-1,-1), 'MIDDLE'),
         ('TOPPADDING',    (0,0),(-1,-1), 5),
         ('BOTTOMPADDING', (0,0),(-1,-1), 5),
@@ -334,28 +348,32 @@ story.append(Spacer(1, 1.2*cm))
 story.append(Paragraph('DUBAI PODCAST STUDIO  |  YALLAPOD', S_title))
 story.append(Paragraph('Client Database — Marketing Intelligence Report', S_sub))
 story.append(Paragraph('Reporting Period: March 23 – May 14, 2025  |  Generated: May 15, 2025', S_meta))
-story.append(HRFlowable(width=W, thickness=2, color=colors.HexColor(C_ACCENT), spaceAfter=10))
+story.append(HRFlowable(width=W, thickness=2, color=colors.HexColor(PDF_RED), spaceAfter=12))
 
-# KPI cards
+# KPI cards — 3 rows: big number / pct / label
 kpi_data = [
-    [Paragraph(str(total),       S_kpi_v),
-     Paragraph(str(answered),    S_kpi_v),
-     Paragraph(str(in_dubai),    S_kpi_v),
-     Paragraph(str(not_dubai),   S_kpi_v)],
-    [Paragraph('Total Records',         S_kpi_l),
-     Paragraph(f'Answered ({contact_rate}%)', S_kpi_l),
-     Paragraph(f'In Dubai ({dubai_rate}%)',   S_kpi_l),
-     Paragraph(f'Absent ({absent_rate}%)',    S_kpi_l)],
+    [Paragraph(str(total),             S_kpi_v),
+     Paragraph(str(answered),          S_kpi_v),
+     Paragraph(str(in_dubai),          S_kpi_v),
+     Paragraph(str(not_dubai),         S_kpi_v)],
+    [Paragraph('—',                    S_kpi_s),
+     Paragraph(f'{contact_rate}%',     S_kpi_s),
+     Paragraph(f'{dubai_rate}%',       S_kpi_s),
+     Paragraph(f'{absent_rate}%',      S_kpi_s)],
+    [Paragraph('Total Records',        S_kpi_l),
+     Paragraph('Answered',             S_kpi_l),
+     Paragraph('Confirmed In Dubai',   S_kpi_l),
+     Paragraph('Currently Absent',     S_kpi_l)],
 ]
-kpi_t = Table(kpi_data, colWidths=[W/4]*4, rowHeights=[36, 18])
+kpi_t = Table(kpi_data, colWidths=[W/4]*4, rowHeights=[34, 18, 16])
 kpi_t.setStyle(TableStyle([
-    ('BACKGROUND',    (0,0),(-1,-1), colors.HexColor(C_MID)),
-    ('BOX',           (0,0),(-1,-1), 1,   colors.HexColor(C_ACCENT)),
-    ('INNERGRID',     (0,0),(-1,-1), 0.4, colors.HexColor(C_GREY)),
+    ('BACKGROUND',    (0,0),(-1,-1), colors.HexColor(PDF_TBLHDR)),
+    ('BOX',           (0,0),(-1,-1), 1,   colors.HexColor(PDF_RED)),
+    ('INNERGRID',     (0,0),(-1,-1), 0.5, colors.HexColor('#2c3e50')),
     ('ALIGN',         (0,0),(-1,-1), 'CENTER'),
     ('VALIGN',        (0,0),(-1,-1), 'MIDDLE'),
-    ('TOPPADDING',    (0,0),(-1,-1), 5),
-    ('BOTTOMPADDING', (0,0),(-1,-1), 5),
+    ('TOPPADDING',    (0,0),(-1,-1), 3),
+    ('BOTTOMPADDING', (0,0),(-1,-1), 3),
 ]))
 story.append(kpi_t)
 story.append(Spacer(1, 0.4*cm))
@@ -482,10 +500,11 @@ story.append(PageBreak())
 # ── PAGE 4: SECTIONS 5, 6, 7, 8 ───────────────────────────────────────────────
 story.append(sec_hdr('5. COMPETITOR STUDIO MENTIONS'))
 
+S_tbl_body = S('TB', fontSize=8.5, textColor=colors.HexColor(PDF_BLACK), leading=13)
 studio_rows = [[Paragraph('<b>Studio Named by Clients</b>', S_body),
                 Paragraph('<b>Mentions</b>', S_body)]]
 for s, c in studios.items():
-    studio_rows.append([Paragraph(str(s).title(), S_body), Paragraph(str(c), S_body)])
+    studio_rows.append([Paragraph(str(s).title(), S_tbl_body), Paragraph(str(c), S_tbl_body)])
 st_t = Table(studio_rows, colWidths=[W*0.74, W*0.22])
 st_t.setStyle(base_ts())
 story.append(KeepTogether([
@@ -503,29 +522,29 @@ story.append(sec_hdr('6. RISK ASSESSMENT — WAR IMPACT + SUMMER EFFECT'))
 
 risk_data = [
     ['Risk Factor', 'Severity', 'Evidence', 'Recommended Action'],
-    ['Regional conflict\nclient displacement', 'MEDIUM',
-     f'{phone_off} phones off\n({round(phone_off/total*100,1)}% of DB)',
-     'Retain Dubai clients with loyalty offers;\navoid over-investing in permanently departed'],
-    ['Summer seasonal\ndecline', 'HIGH',
-     f'{not_dubai} clients confirmed\noutside Dubai',
-     "Shift budget to retention + 'coming back'\ncampaigns targeting UK & France"],
-    ['Large untouched\ncontact pool', 'MEDIUM',
-     f'{not_called} records\nnot yet called',
-     'Prioritise next outreach wave on\nthis untouched segment immediately'],
-    ['Competitor studio\nawareness', 'LOW–MED',
-     '5 studios named\nby clients',
-     'Benchmark vs. Dimension, Podster,\nMetro, Procast, Upod'],
-    ['Long-term absent\nclients', 'LOW',
-     f'{lng_n} returning\nin 3+ months',
-     'Autumn re-engagement sequence;\nlaunch email nurture in Aug'],
+    ['Regional conflict / client displacement', 'MEDIUM',
+     f'{phone_off} phones off ({round(phone_off/total*100,1)}%)',
+     'Retain Dubai clients with loyalty offers; avoid over-investing in permanently departed'],
+    ['Summer seasonal decline', 'HIGH',
+     f'{not_dubai} clients confirmed outside Dubai',
+     "Shift budget to retention + 'coming back' campaigns targeting UK & France"],
+    ['Large untouched contact pool', 'MEDIUM',
+     f'{not_called} records not yet called',
+     'Prioritise next outreach wave on this untouched segment immediately'],
+    ['Competitor studio awareness', 'LOW–MED',
+     '5 studios named by clients',
+     'Benchmark vs. Dimension, Podster, Metro, Procast, Upod'],
+    ['Long-term absent clients', 'LOW',
+     f'{lng_n} returning in 3+ months',
+     'Autumn re-engagement sequence; launch email nurture in Aug'],
 ]
-risk_t = Table(risk_data, colWidths=[W*0.20, W*0.11, W*0.24, W*0.40])
+risk_t = Table(risk_data, colWidths=[W*0.24, W*0.11, W*0.24, W*0.37])
 ts_r = base_ts()
-ts_r.add('BACKGROUND', (1,2),(1,2), colors.HexColor('#c0392b'))   # HIGH
-ts_r.add('BACKGROUND', (1,1),(1,1), colors.HexColor(C_GOLD))      # MEDIUM
-ts_r.add('BACKGROUND', (1,3),(1,3), colors.HexColor(C_GOLD))      # MEDIUM
-ts_r.add('BACKGROUND', (1,4),(1,4), colors.HexColor('#16a085'))   # LOW-MED
-ts_r.add('BACKGROUND', (1,5),(1,5), colors.HexColor(C_BLUE))      # LOW
+ts_r.add('BACKGROUND', (1,2),(1,2), colors.HexColor('#c0392b'))   # HIGH  — red bg
+ts_r.add('BACKGROUND', (1,1),(1,1), colors.HexColor('#e67e22'))   # MEDIUM — orange
+ts_r.add('BACKGROUND', (1,3),(1,3), colors.HexColor('#e67e22'))   # MEDIUM
+ts_r.add('BACKGROUND', (1,4),(1,4), colors.HexColor('#16a085'))   # LOW-MED — teal
+ts_r.add('BACKGROUND', (1,5),(1,5), colors.HexColor('#2980b9'))   # LOW — blue
 ts_r.add('TEXTCOLOR',  (1,1),(1,-1), colors.white)
 ts_r.add('FONTNAME',   (1,1),(1,-1), 'Helvetica-Bold')
 ts_r.add('ALIGN',      (1,0),(1,-1), 'CENTER')
@@ -579,11 +598,10 @@ budget_data = [
      'One-off asset; high reuse across all channels'],
 ]
 bud_t = Table(budget_data, colWidths=[W*0.43, W*0.08, W*0.44])
-ts_b = base_ts(hdr_bg=C_GOLD)
-ts_b.add('TEXTCOLOR',  (0,0),(-1,0), colors.HexColor(C_DARK))
-ts_b.add('ALIGN',      (1,0),(1,-1), 'CENTER')
-ts_b.add('FONTNAME',   (1,1),(1,-1), 'Helvetica-Bold')
-ts_b.add('TEXTCOLOR',  (1,1),(1,-1), colors.HexColor(C_GOLD))
+ts_b = base_ts()
+ts_b.add('ALIGN',    (1,0),(1,-1), 'CENTER')
+ts_b.add('FONTNAME', (1,1),(1,-1), 'Helvetica-Bold')
+ts_b.add('TEXTCOLOR',(1,1),(1,-1), colors.HexColor(PDF_RED))
 bud_t.setStyle(ts_b)
 story.append(KeepTogether([bud_t]))
 
@@ -607,7 +625,7 @@ story.append(KeepTogether(checklist))
 
 # ── FOOTER ────────────────────────────────────────────────────────────────────
 story.append(Spacer(1, 0.6*cm))
-story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_ACCENT), spaceAfter=4))
+story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(PDF_RED), spaceAfter=4))
 story.append(Paragraph(
     'YallaPod — Dubai Podcast Studio  |  Client Intelligence Report  |  Confidential  |  May 2025',
     S_foot))
