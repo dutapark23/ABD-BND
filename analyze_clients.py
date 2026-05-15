@@ -11,7 +11,7 @@ from reportlab.lib.units import cm
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Image, Table, TableStyle,
-    HRFlowable, KeepTogether
+    HRFlowable, KeepTogether, PageBreak
 )
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 from io import BytesIO
@@ -841,150 +841,44 @@ buf5 = fig_to_img(fig5); plt.close(fig5)
 # BUILD PDF
 # ═══════════════════════════════════════════════════════════════════════════════
 pdf_path = "/home/user/ABD-BND/Dubai_Podcast_Studio_Marketing_Report.pdf"
+
+PW, PH = A4  # 595.27 x 841.89 pts
+LM = RM = 1.8*cm
+TM = BM = 1.8*cm
+W = PW - LM - RM   # usable width ~558 pts
+
 doc = SimpleDocTemplate(pdf_path, pagesize=A4,
-                        leftMargin=1.5*cm, rightMargin=1.5*cm,
-                        topMargin=1.5*cm, bottomMargin=1.5*cm)
+                        leftMargin=LM, rightMargin=RM,
+                        topMargin=TM, bottomMargin=BM)
 
 styles = getSampleStyleSheet()
-W = A4[0] - 3*cm
 
-def style(name, parent="Normal", **kwargs):
-    s = ParagraphStyle(name, parent=styles[parent], **kwargs)
-    return s
+def S(name, parent="Normal", **kw):
+    return ParagraphStyle(name, parent=styles[parent], **kw)
 
-S_title    = style("title2",    fontSize=22, textColor=colors.HexColor(C_ACCENT),
-                   spaceAfter=4, fontName="Helvetica-Bold", alignment=TA_CENTER)
-S_sub      = style("sub",       fontSize=11, textColor=colors.HexColor(C_GOLD),
-                   spaceAfter=2, fontName="Helvetica-Bold", alignment=TA_CENTER)
-S_date     = style("date",      fontSize=9,  textColor=colors.HexColor(C_GREY),
-                   spaceAfter=12, alignment=TA_CENTER)
-S_h2       = style("h2",        fontSize=13, textColor=colors.HexColor(C_GOLD),
-                   spaceBefore=14, spaceAfter=4, fontName="Helvetica-Bold")
-S_h3       = style("h3",        fontSize=10, textColor=colors.HexColor(C_ACCENT),
-                   spaceBefore=8, spaceAfter=3, fontName="Helvetica-Bold")
-S_body     = style("body",      fontSize=9,  textColor=colors.HexColor(C_LIGHT),
-                   spaceAfter=4, leading=14)
-S_bullet   = style("bullet2",   fontSize=9,  textColor=colors.HexColor(C_LIGHT),
-                   spaceAfter=3, leading=14, leftIndent=12, bulletIndent=0)
-S_kpi_val  = style("kpiv",      fontSize=26, textColor=colors.HexColor(C_ACCENT),
-                   alignment=TA_CENTER, fontName="Helvetica-Bold")
-S_kpi_lbl  = style("kpil",      fontSize=8,  textColor=colors.HexColor(C_GREY),
-                   alignment=TA_CENTER)
+S_title  = S("T1", fontSize=20, textColor=colors.HexColor(C_ACCENT),
+              spaceAfter=4, fontName="Helvetica-Bold", alignment=TA_CENTER)
+S_sub    = S("T2", fontSize=10, textColor=colors.HexColor(C_GOLD),
+              spaceAfter=2, fontName="Helvetica-Bold", alignment=TA_CENTER)
+S_meta   = S("TM", fontSize=8, textColor=colors.HexColor(C_GREY),
+              spaceAfter=10, alignment=TA_CENTER)
+S_h2     = S("H2", fontSize=12, textColor=colors.HexColor(C_GOLD),
+              spaceBefore=10, spaceAfter=4, fontName="Helvetica-Bold")
+S_h3     = S("H3", fontSize=9,  textColor=colors.HexColor(C_ACCENT),
+              spaceBefore=6, spaceAfter=3, fontName="Helvetica-Bold")
+S_body   = S("BD", fontSize=8.5, textColor=colors.HexColor(C_LIGHT),
+              spaceAfter=4, leading=13)
+S_bullet = S("BU", fontSize=8.5, textColor=colors.HexColor(C_LIGHT),
+              spaceAfter=3, leading=13, leftIndent=10)
+S_kpi_v  = S("KV", fontSize=18, textColor=colors.HexColor(C_ACCENT),
+              alignment=TA_CENTER, fontName="Helvetica-Bold", leading=22)
+S_kpi_l  = S("KL", fontSize=7,  textColor=colors.HexColor(C_GREY),
+              alignment=TA_CENTER, leading=10)
+S_foot   = S("FT", fontSize=7.5, textColor=colors.HexColor(C_GREY), alignment=TA_CENTER)
 
-story = []
-
-# ── COVER ────────────────────────────────────────────────────────────────────
-story.append(Spacer(1, 1.5*cm))
-story.append(Paragraph("DUBAI PODCAST STUDIO", S_title))
-story.append(Paragraph("Client Database — Marketing Intelligence Report", S_sub))
-story.append(Paragraph("Reporting Period: March 23 – May 14, 2025  |  Generated: May 15, 2025", S_date))
-story.append(HRFlowable(width=W, thickness=2, color=colors.HexColor(C_ACCENT)))
-story.append(Spacer(1, 0.4*cm))
-
-# ── EXEC SUMMARY ─────────────────────────────────────────────────────────────
-story.append(Paragraph("EXECUTIVE SUMMARY", S_h2))
-story.append(Paragraph(
-    f"Between <b>March 23 and May 14, 2025</b>, the studio assistant completed a full outreach "
-    f"campaign across <b>{total} client contact records</b>. The exercise was specifically designed "
-    f"to gauge the impact of <b>regional conflict</b> and the approaching <b>summer season</b> on "
-    f"client presence and booking intent in Dubai. The data reveals a market that remains "
-    f"predominantly active locally, but with a notable segment of clients either currently abroad "
-    f"or uncertain about their return — directly informing how the studio should allocate its "
-    f"marketing budget and messaging for June–August.", S_body))
-story.append(Spacer(1, 0.3*cm))
-
-# ── KPI ROW ──────────────────────────────────────────────────────────────────
-contact_rate = round(answered/total*100,1)
-dubai_rate   = round(in_dubai/answered*100,1) if answered else 0
-absent_rate  = round(not_dubai/answered*100,1) if answered else 0
-
-kpi_data = [
-    [Paragraph(str(total), S_kpi_val),
-     Paragraph(f"{answered} ({contact_rate}%)", S_kpi_val),
-     Paragraph(str(in_dubai), S_kpi_val),
-     Paragraph(str(not_dubai), S_kpi_val)],
-    [Paragraph("Total Records", S_kpi_lbl),
-     Paragraph("Reached (Contact Rate)", S_kpi_lbl),
-     Paragraph("Confirmed In Dubai", S_kpi_lbl),
-     Paragraph("Currently Absent", S_kpi_lbl)],
-]
-kpi_table = Table(kpi_data, colWidths=[W/4]*4)
-kpi_table.setStyle(TableStyle([
-    ("BACKGROUND", (0,0), (-1,-1), colors.HexColor(C_MID)),
-    ("BOX",        (0,0), (-1,-1), 1, colors.HexColor(C_ACCENT)),
-    ("INNERGRID",  (0,0), (-1,-1), 0.5, colors.HexColor(C_GREY)),
-    ("ALIGN",      (0,0), (-1,-1), "CENTER"),
-    ("VALIGN",     (0,0), (-1,-1), "MIDDLE"),
-    ("TOPPADDING", (0,0), (-1,-1), 8),
-    ("BOTTOMPADDING",(0,0),(-1,-1),8),
-]))
-story.append(kpi_table)
-story.append(Spacer(1, 0.5*cm))
-
-# ── SECTION 1: CALL PERFORMANCE ──────────────────────────────────────────────
-story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_GREY)))
-story.append(Paragraph("1. OUTREACH PERFORMANCE", S_h2))
-
-row1 = [[Image(buf1, width=W*0.47, height=W*0.35),
-         Image(buf2, width=W*0.47, height=W*0.35)]]
-t1 = Table(row1, colWidths=[W*0.5, W*0.5])
-t1.setStyle(TableStyle([("ALIGN",(0,0),(-1,-1),"CENTER"),("VALIGN",(0,0),(-1,-1),"MIDDLE")]))
-story.append(t1)
-story.append(Spacer(1, 0.2*cm))
-
-story.append(Paragraph("Key Findings:", S_h3))
-story.append(Paragraph(
-    f"• <b>Contact rate of {contact_rate}%</b> ({answered}/{total}) — a strong baseline for a "
-    f"cold-recall campaign.", S_bullet))
-story.append(Paragraph(
-    f"• <b>{phone_off} numbers ({round(phone_off/total*100,1)}%) were switched off</b> — "
-    f"likely clients who have temporarily or permanently left the region.", S_bullet))
-story.append(Paragraph(
-    f"• <b>{no_ans} no-answers ({round(no_ans/total*100,1)}%)</b> represent a recoverable segment "
-    f"via WhatsApp/SMS follow-up.", S_bullet))
-story.append(Paragraph(
-    f"• Of those reached, <b>{dubai_rate}% confirmed they are in Dubai</b>, while "
-    f"<b>{absent_rate}% are currently outside</b> the country.", S_bullet))
-
-# ── SECTION 2: GEOGRAPHIC DISPERSION ─────────────────────────────────────────
-story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_GREY)))
-story.append(Paragraph("2. GEOGRAPHIC DISPERSION OF ABSENT CLIENTS", S_h2))
-story.append(Image(buf3, width=W*0.85, height=W*0.38))
-story.append(Spacer(1, 0.2*cm))
-story.append(Paragraph("Key Findings:", S_h3))
-story.append(Paragraph(
-    "• The <b>UK dominates</b> as the top destination for absent clients — suggesting a strong "
-    "British expat segment that travels home during the summer.", S_bullet))
-story.append(Paragraph(
-    "• <b>France and Germany</b> follow, confirming a significant Western European clientele.", S_bullet))
-story.append(Paragraph(
-    "• <b>Bahrain and Abu Dhabi</b> appearances suggest some regional displacement — these clients "
-    "may return quickly and should be priority-targeted.", S_bullet))
-story.append(Paragraph(
-    "• <b>Russia, Spain, Egypt, Panama, Bali, Singapore, Morocco</b> all represented — "
-    "the studio has a genuinely international client base.", S_bullet))
-
-# ── SECTION 3: DAILY ACTIVITY ─────────────────────────────────────────────────
-story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_GREY)))
-story.append(Paragraph("3. OUTREACH VOLUME OVER TIME", S_h2))
-story.append(Image(buf4, width=W, height=W*0.33))
-story.append(Spacer(1,0.2*cm))
-story.append(Paragraph("Key Findings:", S_h3))
-story.append(Paragraph(
-    "• The campaign peaked in <b>late March / early April</b> with the heaviest single-day volumes, "
-    "suggesting proactive follow-up immediately after the regional conflict escalation.", S_bullet))
-story.append(Paragraph(
-    "• A notable <b>April 14 surge</b> (highest single-day record) likely reflects a systematic "
-    "sweep of the full database.", S_bullet))
-story.append(Paragraph(
-    "• Activity levels in <b>May 2025 dropped</b> — indicating either saturation of the reachable "
-    "pool or a shift to other tasks. Fresh outreach waves are recommended.", S_bullet))
-
-# ── SECTION 4: RETURN TIMELINE ───────────────────────────────────────────────
-story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_GREY)))
-story.append(Paragraph("4. ABSENT CLIENT RETURN TIMELINE SEGMENTATION", S_h2))
-story.append(Image(buf5, width=W*0.75, height=W*0.33))
-story.append(Spacer(1,0.2*cm))
+contact_rate = round(answered/total*100, 1)
+dubai_rate   = round(in_dubai/answered*100, 1) if answered else 0
+absent_rate  = round(not_dubai/answered*100, 1) if answered else 0
 
 short_n = ret_seg.get("Short-term (<1 mo)", 0)
 mid_n   = ret_seg.get("Mid-term (1–3 mo)", 0)
@@ -992,191 +886,300 @@ long_n  = ret_seg.get("Long-term (3+ mo)", 0)
 no_date = ret_seg.get("No Definite Date", 0)
 lost    = ret_seg.get("Lost Client", 0)
 
-story.append(Paragraph("Key Findings:", S_h3))
-story.append(Paragraph(
-    f"• <b>{short_n} clients short-term (<1 month)</b> — immediate re-engagement priority. "
-    f"These clients are returning imminently and should receive booking incentive offers NOW.", S_bullet))
-story.append(Paragraph(
-    f"• <b>{mid_n} clients mid-term (1–3 months)</b> — target with June/July 'book before you arrive' "
-    f"campaigns.", S_bullet))
-story.append(Paragraph(
-    f"• <b>{long_n} clients long-term (3+ months)</b> — low summer priority; nurture with newsletter "
-    f"content and autumn re-engagement.", S_bullet))
-story.append(Paragraph(
-    f"• <b>{no_date} clients gave no definite return date</b> — monitor and ping in 30–45 days.", S_bullet))
-story.append(Paragraph(
-    f"• <b>{lost} clients indicated they are no longer based in Dubai</b> — consider archiving "
-    f"or targeting with remote/virtual studio services.", S_bullet))
+# ── shared table style helper ─────────────────────────────────────────────────
+def base_ts(header_bg=C_ACCENT):
+    return TableStyle([
+        ("BACKGROUND",   (0,0),(-1, 0), colors.HexColor(header_bg)),
+        ("BACKGROUND",   (0,1),(-1,-1), colors.HexColor(C_MID)),
+        ("TEXTCOLOR",    (0,0),(-1, 0), colors.white),
+        ("TEXTCOLOR",    (0,1),(-1,-1), colors.HexColor(C_LIGHT)),
+        ("FONTNAME",     (0,0),(-1, 0), "Helvetica-Bold"),
+        ("FONTSIZE",     (0,0),(-1,-1), 8),
+        ("BOX",          (0,0),(-1,-1), 0.8, colors.HexColor(C_GREY)),
+        ("INNERGRID",    (0,0),(-1,-1), 0.4, colors.HexColor(C_GREY)),
+        ("VALIGN",       (0,0),(-1,-1), "MIDDLE"),
+        ("TOPPADDING",   (0,0),(-1,-1), 5),
+        ("BOTTOMPADDING",(0,0),(-1,-1), 5),
+        ("LEFTPADDING",  (0,0),(-1,-1), 5),
+        ("RIGHTPADDING", (0,0),(-1,-1), 5),
+        ("WORDWRAP",     (0,0),(-1,-1), 1),
+    ])
 
-# ── SECTION 5: STUDIO PREFERENCES ───────────────────────────────────────────
-story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_GREY)))
-story.append(Paragraph("5. STUDIO BRAND MENTIONS", S_h2))
-studio_rows = [[Paragraph("<b>Studio</b>", S_body),
-                Paragraph("<b>Mentions</b>", S_body)]]
+def divider():
+    return HRFlowable(width=W, thickness=0.8, color=colors.HexColor(C_GREY),
+                      spaceAfter=2, spaceBefore=6)
+
+def section_header(text):
+    return KeepTogether([
+        divider(),
+        Paragraph(text, S_h2),
+    ])
+
+story = []
+
+# ════════════════════════════════════════════════════════════════════════════
+# PAGE 1 — COVER + KPIs + EXEC SUMMARY
+# ════════════════════════════════════════════════════════════════════════════
+story.append(Spacer(1, 1.2*cm))
+story.append(Paragraph("DUBAI PODCAST STUDIO", S_title))
+story.append(Paragraph("Client Database — Marketing Intelligence Report", S_sub))
+story.append(Paragraph("Reporting Period: March 23 – May 14, 2025  |  Generated: May 15, 2025", S_meta))
+story.append(HRFlowable(width=W, thickness=2, color=colors.HexColor(C_ACCENT), spaceAfter=8))
+
+# KPI cards — 4 columns, fixed row heights
+kpi_data = [
+    [Paragraph(str(total),             S_kpi_v),
+     Paragraph(f"{answered}",          S_kpi_v),
+     Paragraph(f"{in_dubai}",          S_kpi_v),
+     Paragraph(f"{not_dubai}",         S_kpi_v)],
+    [Paragraph(f"Total Records",       S_kpi_l),
+     Paragraph(f"Reached ({contact_rate}%)", S_kpi_l),
+     Paragraph("Confirmed In Dubai",   S_kpi_l),
+     Paragraph("Currently Absent",     S_kpi_l)],
+]
+kpi_col = W / 4
+kpi_t = Table(kpi_data, colWidths=[kpi_col]*4, rowHeights=[32, 18])
+kpi_t.setStyle(TableStyle([
+    ("BACKGROUND",   (0,0),(-1,-1), colors.HexColor(C_MID)),
+    ("BOX",          (0,0),(-1,-1), 1,   colors.HexColor(C_ACCENT)),
+    ("INNERGRID",    (0,0),(-1,-1), 0.4, colors.HexColor(C_GREY)),
+    ("ALIGN",        (0,0),(-1,-1), "CENTER"),
+    ("VALIGN",       (0,0),(-1,-1), "MIDDLE"),
+    ("TOPPADDING",   (0,0),(-1,-1), 4),
+    ("BOTTOMPADDING",(0,0),(-1,-1), 4),
+]))
+story.append(kpi_t)
+story.append(Spacer(1, 0.4*cm))
+
+story.append(Paragraph("EXECUTIVE SUMMARY", S_h2))
+story.append(Paragraph(
+    f"Between <b>March 23 and May 14, 2025</b>, the studio assistant completed a full outreach "
+    f"campaign across <b>{total} client contact records</b>. The exercise gauged the impact of "
+    f"<b>regional conflict</b> and the approaching <b>summer season</b> on client presence and "
+    f"booking intent in Dubai. The data reveals a market that remains predominantly active locally, "
+    f"but with a notable segment currently abroad or uncertain about their return — directly "
+    f"informing how the studio should allocate its marketing budget for June–August.", S_body))
+
+story.append(PageBreak())
+
+# ════════════════════════════════════════════════════════════════════════════
+# PAGE 2 — SECTIONS 1 & 2
+# ════════════════════════════════════════════════════════════════════════════
+story.append(section_header("1. OUTREACH PERFORMANCE"))
+
+# Two donuts side by side — fixed pixel sizes
+IMG_W2 = W * 0.46
+IMG_H2 = IMG_W2 * 0.78
+charts_row = Table(
+    [[Image(buf1, width=IMG_W2, height=IMG_H2),
+      Image(buf2, width=IMG_W2, height=IMG_H2)]],
+    colWidths=[W*0.5, W*0.5],
+    rowHeights=[IMG_H2 + 6],
+)
+charts_row.setStyle(TableStyle([
+    ("ALIGN",  (0,0),(-1,-1), "CENTER"),
+    ("VALIGN", (0,0),(-1,-1), "MIDDLE"),
+    ("LEFTPADDING",  (0,0),(-1,-1), 2),
+    ("RIGHTPADDING", (0,0),(-1,-1), 2),
+]))
+story.append(KeepTogether([
+    charts_row,
+    Spacer(1, 0.15*cm),
+    Paragraph("Key Findings:", S_h3),
+    Paragraph(f"• <b>Contact rate of {contact_rate}%</b> ({answered}/{total}) — strong for a cold-recall campaign.", S_bullet),
+    Paragraph(f"• <b>{phone_off} numbers ({round(phone_off/total*100,1)}%) were switched off</b> — likely clients who have temporarily or permanently left the region.", S_bullet),
+    Paragraph(f"• <b>{no_ans} no-answers ({round(no_ans/total*100,1)}%)</b> — recoverable via WhatsApp/SMS follow-up.", S_bullet),
+    Paragraph(f"• Of those reached, <b>{dubai_rate}% confirmed in Dubai</b>; <b>{absent_rate}% currently outside</b> the country.", S_bullet),
+]))
+
+story.append(Spacer(1, 0.3*cm))
+story.append(section_header("2. GEOGRAPHIC DISPERSION OF ABSENT CLIENTS"))
+
+IMG_W3 = W * 0.88
+IMG_H3 = IMG_W3 * 0.46
+story.append(KeepTogether([
+    Spacer(1, 0.1*cm),
+    Image(buf3, width=IMG_W3, height=IMG_H3),
+    Spacer(1, 0.15*cm),
+    Paragraph("Key Findings:", S_h3),
+    Paragraph("• The <b>UK dominates</b> — strong British expat segment travelling home for summer.", S_bullet),
+    Paragraph("• <b>France and Germany</b> follow, confirming a significant Western European clientele.", S_bullet),
+    Paragraph("• <b>Bahrain and Abu Dhabi</b> are regional relocations — these clients can return quickly; priority-target them.", S_bullet),
+    Paragraph("• <b>Russia, Spain, Egypt, Panama, Bali, Singapore, Morocco</b> all present — genuinely international client base.", S_bullet),
+]))
+
+story.append(PageBreak())
+
+# ════════════════════════════════════════════════════════════════════════════
+# PAGE 3 — SECTIONS 3 & 4
+# ════════════════════════════════════════════════════════════════════════════
+story.append(section_header("3. OUTREACH VOLUME OVER TIME"))
+
+IMG_W4 = W
+IMG_H4 = IMG_W4 * 0.32
+story.append(KeepTogether([
+    Spacer(1, 0.1*cm),
+    Image(buf4, width=IMG_W4, height=IMG_H4),
+    Spacer(1, 0.15*cm),
+    Paragraph("Key Findings:", S_h3),
+    Paragraph("• Campaign peaked in <b>late March / early April</b> — proactive response immediately after the regional conflict escalation.", S_bullet),
+    Paragraph("• <b>April 14 is the single highest volume day</b> — reflects a systematic full-database sweep.", S_bullet),
+    Paragraph("• <b>May activity dropped</b> — reachable pool saturated. A fresh outreach wave is now recommended.", S_bullet),
+]))
+
+story.append(Spacer(1, 0.4*cm))
+story.append(section_header("4. ABSENT CLIENT RETURN TIMELINE"))
+
+IMG_W5 = W * 0.72
+IMG_H5 = IMG_W5 * 0.48
+story.append(KeepTogether([
+    Spacer(1, 0.1*cm),
+    Image(buf5, width=IMG_W5, height=IMG_H5),
+    Spacer(1, 0.15*cm),
+    Paragraph("Key Findings:", S_h3),
+    Paragraph(f"• <b>{short_n} short-term returnees (&lt;1 month)</b> — contact them NOW with a booking incentive.", S_bullet),
+    Paragraph(f"• <b>{mid_n} mid-term (1–3 months)</b> — target with a June/July 'book before you arrive' campaign.", S_bullet),
+    Paragraph(f"• <b>{long_n} long-term (3+ months)</b> — low summer priority; nurture via email for autumn re-engagement.", S_bullet),
+    Paragraph(f"• <b>{no_date} gave no definite date</b> — re-ping in 30–45 days.", S_bullet),
+    Paragraph(f"• <b>{lost} indicated they are no longer Dubai-based</b> — consider archiving or targeting with remote/virtual services.", S_bullet),
+]))
+
+story.append(PageBreak())
+
+# ════════════════════════════════════════════════════════════════════════════
+# PAGE 4 — SECTIONS 5, 6, 7, 8
+# ════════════════════════════════════════════════════════════════════════════
+story.append(section_header("5. COMPETITOR STUDIO MENTIONS"))
+
+studio_rows = [[Paragraph("<b>Studio Named by Clients</b>", S_body),
+                Paragraph("<b>Times Mentioned</b>", S_body)]]
 for s, c in studios.items():
     studio_rows.append([Paragraph(str(s), S_body), Paragraph(str(c), S_body)])
-st_table = Table(studio_rows, colWidths=[W*0.7, W*0.25])
-st_table.setStyle(TableStyle([
-    ("BACKGROUND", (0,0), (-1,0), colors.HexColor(C_ACCENT)),
-    ("BACKGROUND", (0,1), (-1,-1), colors.HexColor(C_MID)),
-    ("TEXTCOLOR",  (0,0), (-1,0), colors.white),
-    ("TEXTCOLOR",  (0,1), (-1,-1), colors.HexColor(C_LIGHT)),
-    ("BOX",        (0,0), (-1,-1), 1, colors.HexColor(C_GREY)),
-    ("INNERGRID",  (0,0), (-1,-1), 0.5, colors.HexColor(C_GREY)),
-    ("ALIGN",      (1,0), (1,-1), "CENTER"),
-    ("TOPPADDING", (0,0), (-1,-1), 6),
-    ("BOTTOMPADDING",(0,0),(-1,-1),6),
+st_t = Table(studio_rows, colWidths=[W*0.72, W*0.23])
+ts_st = base_ts()
+st_t.setStyle(ts_st)
+story.append(KeepTogether([
+    st_t,
+    Spacer(1, 0.15*cm),
+    Paragraph(
+        "Studios mentioned: <b>Dimension, Metro Podcast Studio, Podster, Procast Studio, Upod</b>. "
+        "These are competitors the clients are aware of or have used — key intelligence for pricing "
+        "and differentiation strategy.", S_body),
 ]))
-story.append(st_table)
-story.append(Spacer(1,0.2*cm))
-story.append(Paragraph(
-    "Studios explicitly named by clients include <b>Dimension, Metro Podcast Studio, "
-    "Podster, Procast Studio, and Upod</b>. These are competitive studios the clients "
-    "are aware of or have used — key intelligence for positioning and differentiation.", S_body))
 
-# ── SECTION 6: RISK ASSESSMENT ───────────────────────────────────────────────
-story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_GREY)))
-story.append(Paragraph("6. RISK ASSESSMENT — WAR IMPACT + SUMMER EFFECT", S_h2))
+story.append(Spacer(1, 0.3*cm))
+story.append(section_header("6. RISK ASSESSMENT — WAR IMPACT + SUMMER EFFECT"))
 
 risk_data = [
-    ["Risk Factor","Severity","Evidence","Recommended Action"],
-    ["Regional conflict\nclient exodus","MEDIUM",
-     f"{phone_off} phones off\n({round(phone_off/total*100,1)}% of database)",
-     "Retain Dubai-based clients with loyalty\noffers; don't over-invest in departed"],
-    ["Summer seasonal\ndecline","HIGH",
-     f"{not_dubai} clients confirmed\noutside Dubai",
-     "Shift budget to retention + 'coming back'\ncampaigns targeting UK/EU"],
-    ["Unreachable pool","MEDIUM",
-     f"{no_ans+phone_off} ({round((no_ans+phone_off)/total*100,1)}%)\nnot reached",
-     "WhatsApp/email retargeting with a\npersonalised message"],
-    ["Competitor studio\nawareness","LOW-MEDIUM",
-     "5 competitor studios\nnamed by clients",
-     "Benchmark pricing & services vs.\nDimension, Podster, Metro"],
-    ["Long-term absent\nclients","LOW",
-     f"{long_n} returning\nin 3+ months",
-     "Autumn re-engagement campaign\nlaunched in Aug/Sep"],
+    ["Risk Factor", "Severity", "Evidence", "Recommended Action"],
+    ["Regional conflict client exodus", "MEDIUM",
+     f"{phone_off} phones off ({round(phone_off/total*100,1)}%)",
+     "Retain Dubai clients with loyalty offers; don't over-invest in departed"],
+    ["Summer seasonal decline", "HIGH",
+     f"{not_dubai} clients confirmed outside Dubai",
+     "Shift budget to retention + 'coming back' campaigns targeting UK/EU"],
+    ["Unreachable pool", "MEDIUM",
+     f"{no_ans+phone_off} ({round((no_ans+phone_off)/total*100,1)}%) not reached",
+     "WhatsApp/email retargeting with personalised message"],
+    ["Competitor studio awareness", "LOW-MED",
+     "5 competitor studios named",
+     "Benchmark vs. Dimension, Podster, Metro Podcast Studio"],
+    ["Long-term absent clients", "LOW",
+     f"{long_n} returning in 3+ months",
+     "Autumn re-engagement campaign — launch in Aug/Sep"],
 ]
-risk_table = Table(risk_data, colWidths=[W*0.2, W*0.12, W*0.26, W*0.36])
-risk_table.setStyle(TableStyle([
-    ("BACKGROUND", (0,0), (-1,0), colors.HexColor(C_ACCENT)),
-    ("BACKGROUND", (0,1), (-1,-1), colors.HexColor(C_MID)),
-    ("TEXTCOLOR",  (0,0), (-1,0), colors.white),
-    ("TEXTCOLOR",  (0,1), (-1,-1), colors.HexColor(C_LIGHT)),
-    ("FONTNAME",   (0,0), (-1,0), "Helvetica-Bold"),
-    ("FONTSIZE",   (0,0), (-1,-1), 8),
-    ("BOX",        (0,0), (-1,-1), 1, colors.HexColor(C_GREY)),
-    ("INNERGRID",  (0,0), (-1,-1), 0.5, colors.HexColor(C_GREY)),
-    ("VALIGN",     (0,0), (-1,-1), "MIDDLE"),
-    ("TOPPADDING", (0,0), (-1,-1), 5),
-    ("BOTTOMPADDING",(0,0),(-1,-1),5),
-    # severity colours
-    ("BACKGROUND", (1,2), (1,2), colors.HexColor("#c0392b")),  # HIGH
-    ("BACKGROUND", (1,1), (1,1), colors.HexColor(C_GOLD)),     # MEDIUM
-    ("BACKGROUND", (1,3), (1,3), colors.HexColor(C_GOLD)),
-    ("BACKGROUND", (1,4), (1,4), colors.HexColor("#16a085")),  # LOW-MEDIUM
-    ("BACKGROUND", (1,5), (1,5), colors.HexColor(C_BLUE)),     # LOW
-    ("TEXTCOLOR",  (1,1), (1,-1), colors.white),
-    ("FONTNAME",   (1,1), (1,-1), "Helvetica-Bold"),
-    ("ALIGN",      (1,0), (1,-1), "CENTER"),
-]))
-story.append(risk_table)
+risk_t = Table(risk_data, colWidths=[W*0.21, W*0.11, W*0.26, W*0.37])
+ts_risk = base_ts()
+ts_risk.add("BACKGROUND", (1,2),(1,2), colors.HexColor("#c0392b"))
+ts_risk.add("BACKGROUND", (1,1),(1,1), colors.HexColor(C_GOLD))
+ts_risk.add("BACKGROUND", (1,3),(1,3), colors.HexColor(C_GOLD))
+ts_risk.add("BACKGROUND", (1,4),(1,4), colors.HexColor("#16a085"))
+ts_risk.add("BACKGROUND", (1,5),(1,5), colors.HexColor(C_BLUE))
+ts_risk.add("TEXTCOLOR",  (1,1),(1,-1), colors.white)
+ts_risk.add("FONTNAME",   (1,1),(1,-1), "Helvetica-Bold")
+ts_risk.add("ALIGN",      (1,0),(1,-1), "CENTER")
+risk_t.setStyle(ts_risk)
+story.append(KeepTogether([risk_t]))
 
-# ── SECTION 7: MARKETING RECOMMENDATIONS ─────────────────────────────────────
-story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_GREY)))
-story.append(Paragraph("7. MARKETING STRATEGY & BUDGET RECOMMENDATIONS", S_h2))
+story.append(PageBreak())
 
-story.append(Paragraph("JUNE 2025 — PRIORITY ACTIONS", S_h3))
+# ── Section 7 ─────────────────────────────────────────────────────────────
+story.append(section_header("7. MARKETING STRATEGY & BUDGET — JUNE 2025"))
+
+story.append(Paragraph("PRIORITY ACTIONS", S_h3))
 rec_data = [
-    ["#","Action","Target Segment","Budget Priority","Channel"],
-    ["1","'Welcome Back' campaign with\nbooking discount for returning clients",
-     f"Short-term returnees\n({short_n} clients)","★★★★★","WhatsApp / Direct call"],
-    ["2","Dubai-based client retention:\nMonthly subscription / loyalty pack",
-     f"In-Dubai confirmed\n({in_dubai} clients)","★★★★☆","Email + Instagram"],
-    ["3","WhatsApp blast to no-answer list\nwith offer + studio tour video",
-     f"Unreached ({no_ans+phone_off} contacts)","★★★☆☆","WhatsApp"],
-    ["4","UK/Europe geo-targeted social ads\n'Coming back to Dubai? Book your pod'",
-     "UK, France, Germany\nexpat communities","★★★☆☆","Meta Ads"],
-    ["5","Competitor differentiation content\n(vs. Dimension, Podster, Metro)",
-     "All active + returning clients","★★★☆☆","Instagram / YouTube"],
-    ["6","Autumn nurture sequence (email)",
-     f"Long-term absent ({long_n})\n+ no-date ({no_date})","★★☆☆☆","Email"],
+    ["#", "Campaign / Action", "Target Segment", "Priority", "Channel"],
+    ["1", "'Welcome Back' offer — booking discount for returning clients",
+     f"Short-term returnees ({short_n})", "★★★★★", "WhatsApp / Call"],
+    ["2", "In-Dubai retention: monthly pack / loyalty offer",
+     f"Confirmed in Dubai ({in_dubai})", "★★★★☆", "Email + Instagram"],
+    ["3", "WhatsApp blast to unreached list with studio tour video",
+     f"Unreached ({no_ans+phone_off})", "★★★☆☆", "WhatsApp"],
+    ["4", "Geo-targeted ads: 'Coming back to Dubai? Book your pod'",
+     "UK, France, Germany expats", "★★★☆☆", "Meta Ads"],
+    ["5", "Competitor differentiation content",
+     "All active + returning clients", "★★★☆☆", "Instagram / YouTube"],
+    ["6", "Autumn nurture email sequence",
+     f"Long-term absent + no-date ({long_n+no_date})", "★★☆☆☆", "Email"],
 ]
-rec_table = Table(rec_data, colWidths=[W*0.04, W*0.30, W*0.22, W*0.14, W*0.24])
-rec_table.setStyle(TableStyle([
-    ("BACKGROUND", (0,0), (-1,0), colors.HexColor(C_ACCENT)),
-    ("BACKGROUND", (0,1), (-1,-1), colors.HexColor(C_MID)),
-    ("TEXTCOLOR",  (0,0), (-1,0), colors.white),
-    ("TEXTCOLOR",  (0,1), (-1,-1), colors.HexColor(C_LIGHT)),
-    ("FONTNAME",   (0,0), (-1,0), "Helvetica-Bold"),
-    ("FONTSIZE",   (0,0), (-1,-1), 8),
-    ("BOX",        (0,0), (-1,-1), 1, colors.HexColor(C_GREY)),
-    ("INNERGRID",  (0,0), (-1,-1), 0.5, colors.HexColor(C_GREY)),
-    ("VALIGN",     (0,0), (-1,-1), "MIDDLE"),
-    ("TOPPADDING", (0,0), (-1,-1), 5),
-    ("BOTTOMPADDING",(0,0),(-1,-1),5),
-    ("ALIGN",      (0,0),(0,-1),"CENTER"),
-    ("ALIGN",      (3,0),(3,-1),"CENTER"),
-]))
-story.append(rec_table)
-story.append(Spacer(1, 0.3*cm))
+cws = [W*0.04, W*0.30, W*0.22, W*0.12, W*0.25]
+rec_t = Table(rec_data, colWidths=cws)
+ts_rec = base_ts()
+ts_rec.add("ALIGN", (0,0),(0,-1), "CENTER")
+ts_rec.add("ALIGN", (3,0),(3,-1), "CENTER")
+rec_t.setStyle(ts_rec)
+story.append(KeepTogether([rec_t]))
 
-story.append(Paragraph("BUDGET ALLOCATION GUIDANCE (% of Monthly Marketing Budget)", S_h3))
+story.append(Spacer(1, 0.35*cm))
+story.append(Paragraph("MONTHLY BUDGET ALLOCATION", S_h3))
 budget_data = [
-    ["Channel / Campaign","Allocation","Rationale"],
-    ["Direct WhatsApp / SMS outreach\n(returning clients + unreached list)","30%",
-     "Highest conversion — personal touch;\nlow cost, high impact"],
-    ["Meta Ads (UK, France, Germany geo-targeting)","25%",
-     "Capture expats before they return;\nbuild anticipation"],
-    ["Instagram organic + Reels\n(competitor differentiation)","15%",
-     "Brand awareness; differentiate\nvs. named competitors"],
-    ["Email nurture sequences\n(mid/long-term absent)","10%",
-     "Low cost; keeps studio top of mind\nfor autumn return"],
-    ["Loyalty / retention offers\nfor in-Dubai clients","15%",
-     "Prevent churn of confirmed\nactive clients"],
-    ["Content production\n(studio tour, testimonials)","5%",
-     "Once-off asset; high reuse value\nacross all channels"],
+    ["Channel / Campaign", "%", "Rationale"],
+    ["Direct WhatsApp & SMS outreach (returning + unreached)", "30%",
+     "Highest conversion; personal touch; low cost"],
+    ["Meta Ads — UK, France, Germany geo-targeting", "25%",
+     "Capture expats before they return; build anticipation"],
+    ["Loyalty / retention offers for in-Dubai clients", "15%",
+     "Prevent churn of confirmed active clients"],
+    ["Instagram organic + Reels (competitor differentiation)", "15%",
+     "Brand awareness vs. named competitors"],
+    ["Email nurture sequences (mid/long-term absent)", "10%",
+     "Low cost; keeps studio top of mind for autumn"],
+    ["Content production (studio tour, testimonials)", "5%",
+     "Once-off asset; high reuse value across all channels"],
 ]
-bud_table = Table(budget_data, colWidths=[W*0.38, W*0.12, W*0.44])
-bud_table.setStyle(TableStyle([
-    ("BACKGROUND", (0,0), (-1,0), colors.HexColor(C_GOLD)),
-    ("BACKGROUND", (0,1), (-1,-1), colors.HexColor(C_MID)),
-    ("TEXTCOLOR",  (0,0), (-1,0), colors.HexColor(C_DARK)),
-    ("TEXTCOLOR",  (0,1), (-1,-1), colors.HexColor(C_LIGHT)),
-    ("FONTNAME",   (0,0), (-1,0), "Helvetica-Bold"),
-    ("FONTSIZE",   (0,0), (-1,-1), 8),
-    ("BOX",        (0,0), (-1,-1), 1, colors.HexColor(C_GREY)),
-    ("INNERGRID",  (0,0), (-1,-1), 0.5, colors.HexColor(C_GREY)),
-    ("ALIGN",      (1,0),(1,-1),"CENTER"),
-    ("FONTNAME",   (1,1),(1,-1),"Helvetica-Bold"),
-    ("TEXTCOLOR",  (1,1),(1,-1),colors.HexColor(C_GOLD)),
-    ("VALIGN",     (0,0), (-1,-1), "MIDDLE"),
-    ("TOPPADDING", (0,0), (-1,-1), 5),
-    ("BOTTOMPADDING",(0,0),(-1,-1),5),
-]))
-story.append(bud_table)
+bud_t = Table(budget_data, colWidths=[W*0.43, W*0.09, W*0.43])
+ts_bud = base_ts(header_bg=C_GOLD)
+ts_bud.add("TEXTCOLOR",  (0,0),(-1,0), colors.HexColor(C_DARK))
+ts_bud.add("ALIGN",      (1,0),(1,-1), "CENTER")
+ts_bud.add("FONTNAME",   (1,1),(1,-1), "Helvetica-Bold")
+ts_bud.add("TEXTCOLOR",  (1,1),(1,-1), colors.HexColor(C_GOLD))
+bud_t.setStyle(ts_bud)
+story.append(KeepTogether([bud_t]))
 
-# ── SECTION 8: ACTION CHECKLIST ──────────────────────────────────────────────
-story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_GREY)))
-story.append(Paragraph("8. IMMEDIATE ACTION CHECKLIST (NEXT 2 WEEKS)", S_h2))
+story.append(Spacer(1, 0.3*cm))
+story.append(section_header("8. IMMEDIATE ACTION CHECKLIST (NEXT 2 WEEKS)"))
+
 actions = [
-    ("TODAY", "Export all 'Short-term returnee' contacts and assign to sales for personal follow-up call"),
-    ("TODAY", "Draft WhatsApp template for unreached clients (no-answer + phone-off list)"),
-    ("THIS WEEK", f"Create a 'Coming back to Dubai?' offer — minimum 10% booking discount or free add-on"),
-    ("THIS WEEK", "Set up Meta Ads campaign targeting UK, France, Germany with UAE podcast/content creator interest"),
-    ("THIS WEEK", "Audit pricing and services vs. Dimension, Podster, Metro Podcast Studio, Procast, Upod"),
-    ("NEXT WEEK", "Send loyalty offer to all confirmed in-Dubai clients (email + WhatsApp)"),
-    ("NEXT WEEK", "Build email automation for mid/long-term absent clients (6-week nurture sequence)"),
-    ("END OF JUNE", "Re-run outreach call campaign on all unreached records — situation may have changed"),
+    ("TODAY",        "Export short-term returnee contacts and assign for personal follow-up call"),
+    ("TODAY",        "Draft WhatsApp template for unreached clients (no-answer + phone-off list)"),
+    ("THIS WEEK",    "Create 'Coming back to Dubai?' offer — 10% booking discount or free add-on"),
+    ("THIS WEEK",    "Launch Meta Ads targeting UK, France, Germany — UAE podcast/content creator interest"),
+    ("THIS WEEK",    "Audit pricing & services vs. Dimension, Podster, Metro, Procast, Upod"),
+    ("NEXT WEEK",    "Send loyalty offer to all confirmed in-Dubai clients (email + WhatsApp)"),
+    ("NEXT WEEK",    "Build email automation for mid/long-term absent clients (6-week nurture)"),
+    ("END OF JUNE",  "Re-run full outreach call campaign — client situations will have shifted"),
 ]
+checklist = []
 for timing, task in actions:
-    story.append(Paragraph(f"<b>[{timing}]</b> {task}", S_bullet))
+    checklist.append(Paragraph(f"<b>[{timing}]</b>  {task}", S_bullet))
+story.append(KeepTogether(checklist))
 
-# ── FOOTER ───────────────────────────────────────────────────────────────────
-story.append(Spacer(1, 0.5*cm))
-story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_ACCENT)))
+# ── FOOTER ────────────────────────────────────────────────────────────────────
+story.append(Spacer(1, 0.6*cm))
+story.append(HRFlowable(width=W, thickness=1, color=colors.HexColor(C_ACCENT), spaceAfter=4))
 story.append(Paragraph(
-    "Dubai Podcast Studio | Client Intelligence Report | Confidential | May 2025",
-    style("footer", fontSize=8, textColor=colors.HexColor(C_GREY), alignment=TA_CENTER)))
+    "Dubai Podcast Studio  |  Client Intelligence Report  |  Confidential  |  May 2025",
+    S_foot))
 
 # ── BUILD ─────────────────────────────────────────────────────────────────────
 doc.build(story)
