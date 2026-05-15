@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    font-family: 'Arial Black', 'Impact', Arial, sans-serif;
+  }
+
+  .thumb {
+    position: relative;
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    background: #1565C0;
+    display: flex;
+  }
+
+  /* ── LEFT — Person ── */
+  .person-side {
+    position: relative;
+    width: 400px;
+    flex-shrink: 0;
+    background: #f0f0f0;
+    overflow: hidden;
+    z-index: 2;
+  }
+  .person-img {
+    position: absolute;
+    width: 120%;
+    height: 115%;
+    top: -5%;
+    left: -8%;
+    object-fit: cover;
+    object-position: center 15%;
+    /* Natural, clean — no dark grading */
+    filter: contrast(1.05) saturate(1.1) brightness(1.05);
+  }
+  /* Soft fade on the right edge into blue */
+  .person-fade {
+    position: absolute;
+    top: 0; bottom: 0; right: 0;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, #1565C0);
+  }
+
+  /* ── RIGHT — Blue Board ── */
+  .board-side {
+    flex: 1;
+    position: relative;
+    background: #1565C0;
+    display: flex;
+    flex-direction: column;
+    padding: 0 30px 22px 20px;
+  }
+
+  /* Blueprint grid on blue */
+  .board-side::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* ── YELLOW TOP BANNER ── */
+  .yellow-banner {
+    position: relative;
+    background: #FFE600;
+    margin: 22px 0 24px 0;
+    padding: 12px 20px;
+    border: 4px solid #000;
+    border-radius: 4px;
+    text-align: center;
+    z-index: 2;
+  }
+  .yellow-banner .title {
+    font-size: 52px;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  /* ── BOXES GRID ── */
+  .boxes-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 14px;
+    flex: 1;
+    z-index: 2;
+  }
+
+  .box {
+    background: #000;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 8px;
+    position: relative;
+  }
+
+  .box-num {
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .box-text {
+    font-size: 26px;
+    font-weight: 900;
+    color: #FFE600;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.1;
+    letter-spacing: 0px;
+  }
+
+  .box-text.white { color: #fff; }
+
+  /* Dashed connector line between rows */
+  .connector {
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* ── BOTTOM strip ── */
+  .bottom-strip {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 36px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  .bottom-strip span {
+    font-size: 15px;
+    font-weight: 900;
+    color: #FFE600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  /* Dashed path SVG overlay */
+  .dash-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    overflow: visible;
+  }
+</style>
+</head>
+<body>
+<div class="thumb">
+
+  <!-- LEFT: Person -->
+  <div class="person-side">
+    <img class="person-img" src="face_dubai.jpg" alt="">
+    <div class="person-fade"></div>
+  </div>
+
+  <!-- RIGHT: Blue Board -->
+  <div class="board-side">
+
+    <!-- Yellow Title Banner -->
+    <div class="yellow-banner">
+      <div class="title">DUBAI PROPERTY CRASH</div>
+    </div>
+
+    <!-- 6 Boxes -->
+    <div class="boxes-grid" id="grid">
+
+      <div class="box">
+        <div class="box-num">1</div>
+        <div class="box-text">MARCHÉ<br>EN CHUTE</div>
+      </div>
+
+      <div class="box">
+        <div class="box-num">2</div>
+        <div class="box-text">VENTE<br>PANIQUE</div>
+      </div>
+
+      <div class="box">
+        <div class="box-num">3</div>
+        <div class="box-text white">PRIX<br>-34%</div>
+      </div>
+
+      <div class="box">
+        <div class="box-num">4</div>
+        <div class="box-text">QUI<br>VEND ?</div>
+      </div>
+
+      <div class="box">
+        <div class="box-num">5</div>
+        <div class="box-text white">SMART<br>MONEY</div>
+      </div>
+
+      <div class="box">
+        <div class="box-num">6</div>
+        <div class="box-text">QUE<br>FAIRE ?</div>
+      </div>
+
+    </div>
+
+    <!-- Bottom black strip -->
+    <div class="bottom-strip">
+      <span>Panic Selling Has Begun — Nobody Is Talking About This</span>
+    </div>
+
+    <!-- Dashed path SVG between box rows -->
+    <svg class="dash-svg" viewBox="0 0 880 460" preserveAspectRatio="none">
+      <path
+        d="M 140 230 Q 440 260 740 230"
+        stroke="white"
+        stroke-width="3"
+        stroke-dasharray="10,8"
+        fill="none"
+        opacity="0.6"
+      />
+    </svg>
+
+  </div>
+</div>
+</body>
+</html>
