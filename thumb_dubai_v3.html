@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    font-family: 'Arial Black', 'Impact', Arial, sans-serif;
+  }
+
+  .thumb {
+    position: relative;
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    display: flex;
+  }
+
+  /* ════════════════════════════
+     LEFT — PERSON PANEL
+  ════════════════════════════ */
+  .person-side {
+    position: relative;
+    width: 430px;
+    flex-shrink: 0;
+    overflow: hidden;
+    /* Warm studio background — NOT white */
+    background: radial-gradient(ellipse at 40% 35%, #d4a96a 0%, #b8813a 40%, #7a4e1e 75%, #3d2008 100%);
+    z-index: 2;
+  }
+
+  /* The actual photo */
+  .person-img {
+    position: absolute;
+    width: 116%;
+    height: 122%;
+    top: -8%;
+    left: -6%;
+    object-fit: cover;
+    object-position: center 18%;
+    /* Strong pop: contrast, saturation, warmth */
+    filter: contrast(1.18) saturate(1.25) brightness(1.08) warm(1);
+    mix-blend-mode: normal;
+  }
+
+  /* ── LIGHT LAYER 1: Key light — warm, from upper-left ── */
+  .light-key {
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(255, 220, 140, 0.55) 0%, rgba(255, 180, 80, 0.2) 40%, transparent 70%);
+    top: -120px;
+    left: -60px;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  /* ── LIGHT LAYER 2: Fill light — soft, from right ── */
+  .light-fill {
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(200, 220, 255, 0.18) 0%, transparent 70%);
+    top: 50px;
+    right: -60px;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  /* ── LIGHT LAYER 3: Rim light — warm edge glow on left side ── */
+  .light-rim {
+    position: absolute;
+    width: 120px;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 160, 40, 0.35) 0%, transparent 100%);
+    top: 0; left: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  /* ── Vignette — darkens corners, adds depth ── */
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 38% 42%, transparent 30%, rgba(0,0,0,0.45) 100%);
+    pointer-events: none;
+  }
+
+  /* ── Background warm glow behind head ── */
+  .bg-glow {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(220, 150, 60, 0.5) 0%, transparent 65%);
+    top: -40px;
+    left: 10px;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  /* ── Colour grade overlay — warm film look ── */
+  .color-grade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(255, 200, 80, 0.08) 0%,
+      transparent 50%,
+      rgba(30, 10, 0, 0.2) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ── Right edge fade into blue board ── */
+  .person-fade {
+    position: absolute;
+    top: 0; bottom: 0; right: 0;
+    width: 100px;
+    background: linear-gradient(90deg, transparent 0%, #1565C0 100%);
+    pointer-events: none;
+  }
+
+  /* ════════════════════════════
+     RIGHT — BLUE BOARD
+  ════════════════════════════ */
+  .board-side {
+    flex: 1;
+    position: relative;
+    background: #1565C0;
+    display: flex;
+    flex-direction: column;
+    padding: 0 28px 30px 16px;
+  }
+
+  .board-side::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* ── YELLOW BANNER ── */
+  .yellow-banner {
+    position: relative;
+    background: #FFE600;
+    margin: 20px 0 20px 0;
+    padding: 11px 20px;
+    border: 4px solid #000;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 2;
+  }
+  .yellow-banner .title {
+    font-size: 54px;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  /* ── 6 BOXES ── */
+  .boxes-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 13px;
+    flex: 1;
+    z-index: 2;
+  }
+
+  .box {
+    background: #000;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 8px;
+  }
+  .box-num {
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .box-text {
+    font-size: 27px;
+    font-weight: 900;
+    color: #FFE600;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.1;
+  }
+  .box-text.white { color: #fff; }
+
+  /* ── BOTTOM BLACK STRIP ── */
+  .bottom-strip {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 38px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  .bottom-strip span {
+    font-size: 15px;
+    font-weight: 900;
+    color: #FFE600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  /* Dashed connector */
+  .dash-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    overflow: visible;
+  }
+</style>
+</head>
+<body>
+<div class="thumb">
+
+  <!-- LEFT: Person with light work -->
+  <div class="person-side">
+    <img class="person-img" src="face_dubai.jpg" alt="">
+    <div class="bg-glow"></div>
+    <div class="light-key"></div>
+    <div class="light-fill"></div>
+    <div class="light-rim"></div>
+    <div class="color-grade"></div>
+    <div class="vignette"></div>
+    <div class="person-fade"></div>
+  </div>
+
+  <!-- RIGHT: Blue Board -->
+  <div class="board-side">
+
+    <div class="yellow-banner">
+      <div class="title">DUBAI PROPERTY CRASH</div>
+    </div>
+
+    <div class="boxes-grid">
+      <div class="box">
+        <div class="box-num">1</div>
+        <div class="box-text">MARCHÉ<br>EN CHUTE</div>
+      </div>
+      <div class="box">
+        <div class="box-num">2</div>
+        <div class="box-text">VENTE<br>PANIQUE</div>
+      </div>
+      <div class="box">
+        <div class="box-num">3</div>
+        <div class="box-text white">PRIX<br>-34%</div>
+      </div>
+      <div class="box">
+        <div class="box-num">4</div>
+        <div class="box-text">QUI<br>VEND ?</div>
+      </div>
+      <div class="box">
+        <div class="box-num">5</div>
+        <div class="box-text white">SMART<br>MONEY</div>
+      </div>
+      <div class="box">
+        <div class="box-num">6</div>
+        <div class="box-text">QUE<br>FAIRE ?</div>
+      </div>
+    </div>
+
+    <div class="bottom-strip">
+      <span>Panic Selling Has Begun — Nobody Is Talking About This</span>
+    </div>
+
+    <svg class="dash-svg" viewBox="0 0 850 450" preserveAspectRatio="none">
+      <path
+        d="M 130 228 Q 420 255 720 228"
+        stroke="white"
+        stroke-width="3.5"
+        stroke-dasharray="12,8"
+        fill="none"
+        opacity="0.55"
+      />
+    </svg>
+
+  </div>
+</div>
+</body>
+</html>
