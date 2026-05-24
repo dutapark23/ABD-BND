@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dubai Podcast Studio — The Studio Network: Full Build Guide</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #f8f8f6; color: #1a1a1a; line-height: 1.85; }
+
+  /* COVER */
+  .cover {
+    background: #0d0d0d;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+  }
+  .cover .eyebrow { font-size: 0.75em; letter-spacing: 6px; text-transform: uppercase; color: #c8a050; margin-bottom: 28px; }
+  .cover h1 { font-size: 2.8em; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 14px; line-height: 1.15; }
+  .cover h1 span { color: #c8a050; }
+  .cover .subtitle { font-size: 1em; color: #c8a050; letter-spacing: 2px; margin-bottom: 44px; }
+  .cover .tagline { font-size: 0.95em; color: #666; font-style: italic; max-width: 560px; border-top: 1px solid #222; padding-top: 24px; line-height: 1.7; }
+  .cover .meta { margin-top: 40px; font-size: 0.76em; color: #333; letter-spacing: 3px; text-transform: uppercase; }
+
+  /* LAYOUT */
+  .wrap { max-width: 820px; margin: 0 auto; padding: 72px 44px; }
+  .dark { background: #0d0d0d; }
+  .mid { background: #f0f0e8; }
+  .wrap + .wrap { border-top: 1px solid #e4e4dc; }
+  .dark .wrap + .dark .wrap { border-top-color: #1a1a1a; }
+
+  /* SECTION HEADERS */
+  .sec-head { border-left: 4px solid #c8a050; padding-left: 22px; margin-bottom: 46px; }
+  .sec-head .num { font-size: 0.74em; color: #c8a050; letter-spacing: 5px; text-transform: uppercase; font-style: italic; margin-bottom: 8px; }
+  .sec-head h2 { font-size: 1.7em; text-transform: uppercase; letter-spacing: 2px; line-height: 1.2; }
+  .dark .sec-head h2 { color: #fff; }
+
+  /* STEP BLOCKS */
+  .step {
+    border: 1px solid #e0e0d8;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    page-break-inside: avoid;
+  }
+  .step-head {
+    background: #1a1a1a;
+    padding: 16px 26px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .step-num {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #c8a050;
+    color: #0d0d0d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.88em;
+    flex-shrink: 0;
+  }
+  .step-head h3 { font-size: 1em; color: #fff; font-weight: bold; text-transform: none; letter-spacing: 0; margin: 0; }
+  .step-head .step-tag { margin-left: auto; font-size: 0.68em; color: #c8a050; letter-spacing: 2px; text-transform: uppercase; white-space: nowrap; }
+  .step-body { padding: 26px 28px; background: #fff; }
+  .step-body p { color: #444; font-size: 0.93em; margin-bottom: 14px; }
+  .step-body p:last-child { margin-bottom: 0; }
+  .step-body p strong { color: #1a1a1a; }
+  .step-body ul, .step-body ol { margin: 10px 0 18px 0; }
+  .step-body li { color: #444; font-size: 0.91em; padding: 5px 0 5px 22px; position: relative; border-bottom: 1px solid #f5f5ef; }
+  .step-body li:last-child { border-bottom: none; }
+  .step-body li::before { content: '→'; position: absolute; left: 0; color: #c8a050; }
+  .step-body ol { counter-reset: ol-counter; }
+  .step-body ol li::before { content: counter(ol-counter) "."; counter-increment: ol-counter; color: #c8a050; font-size: 0.85em; font-weight: bold; }
+
+  /* FIELD TABLES */
+  .field-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.86em; }
+  .field-table th { background: #1a1a1a; color: #c8a050; padding: 10px 14px; text-align: left; font-size: 0.76em; letter-spacing: 2px; text-transform: uppercase; }
+  .field-table td { padding: 10px 14px; border-bottom: 1px solid #eeeeE6; color: #444; vertical-align: top; }
+  .field-table tr:nth-child(even) td { background: #f9f9f4; }
+  .field-table code { background: #f0f0e8; padding: 2px 7px; border-radius: 3px; font-family: monospace; font-size: 0.9em; color: #1a1a1a; }
+  .field-table .req { color: #c8a050; font-weight: bold; }
+
+  /* CODE / TEMPLATE BLOCKS */
+  .code-block {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 18px 0;
+    font-family: monospace;
+    font-size: 0.84em;
+    color: #ccc;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .code-block .key { color: #c8a050; }
+  .code-block .val { color: #88c8a0; }
+  .code-block .comment { color: #555; font-style: italic; }
+
+  /* EMAIL TEMPLATE */
+  .email-template {
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 18px 0;
+  }
+  .email-template .email-head {
+    background: #f0f0e8;
+    padding: 12px 18px;
+    font-size: 0.78em;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e0e0d8;
+  }
+  .email-template .email-body {
+    padding: 22px 24px;
+    background: #fff;
+  }
+  .email-template .email-body p { color: #333; font-size: 0.9em; margin-bottom: 12px; }
+  .email-template .email-body p:last-child { margin-bottom: 0; }
+  .email-template .email-btn {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff !important;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 10px 0;
+    letter-spacing: 1px;
+  }
+  .email-template .var { color: #c8a050; font-weight: bold; }
+
+  /* CALLOUT BOXES */
+  .callout { background: #1a1a1a; border-radius: 8px; padding: 24px 28px; margin: 22px 0; }
+  .callout .label { font-size: 0.7em; color: #c8a050; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
+  .callout p { color: #ccc; margin: 0; font-size: 0.91em; }
+  .callout p strong { color: #fff; }
+
+  .tip { background: #eef5ff; border-left: 4px solid #3a80d4; padding: 14px 18px; margin: 16px 0; border-radius: 0 6px 6px 0; font-size: 0.89em; color: #1a3a60; }
+  .tip strong { color: #0a2040; }
+
+  .warn { background: #fff8ed; border-left: 4px solid #e8a020; padding: 14px 18px; margin: 16px 0; border-radius: 0 6px 6px 0; font-size: 0.89em; color: #6a4200; }
+  .warn strong { color: #3a2000; }
+
+  .gold { border: 1px solid #c8a050; border-radius: 8px; padding: 22px 26px; margin: 22px 0; }
+  .gold .label { font-size: 0.7em; color: #c8a050; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
+  .gold p { color: #444; margin: 0; font-size: 0.91em; }
+
+  /* FLOW DIAGRAM */
+  .flow { background: #0d0d0d; border-radius: 10px; padding: 36px; margin: 28px 0; }
+  .flow .flow-title { font-size: 0.7em; color: #c8a050; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 28px; text-align: center; }
+  .flow-row { display: flex; align-items: center; gap: 12px; margin: 10px 0; }
+  .flow-box { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 6px; padding: 10px 16px; font-size: 0.82em; color: #ddd; flex: 1; text-align: center; line-height: 1.4; }
+  .flow-box.trigger { border-color: #c8a050; color: #c8a050; }
+  .flow-box.action { border-color: #3a80d4; color: #88b8e8; }
+  .flow-box.result { border-color: #50a050; color: #88d888; }
+  .flow-arrow { color: #444; font-size: 1.2em; flex-shrink: 0; }
+  .flow-label { font-size: 0.7em; color: #555; letter-spacing: 2px; text-transform: uppercase; margin: 16px 0 8px; }
+
+  /* CHECKLIST */
+  .checklist { margin: 18px 0; }
+  .check-item { display: flex; align-items: flex-start; gap: 14px; padding: 11px 0; border-bottom: 1px solid #eeeee6; }
+  .check-item:last-child { border-bottom: none; }
+  .check-box { width: 20px; height: 20px; border: 2px solid #c8a050; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+  .check-text { font-size: 0.91em; color: #444; line-height: 1.5; }
+  .check-text strong { color: #1a1a1a; }
+
+  /* TOOL CARDS */
+  .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 22px 0; }
+  .tool-card { background: #fff; border: 1px solid #e0e0d8; border-radius: 8px; padding: 20px; }
+  .tool-card .tool-name { font-size: 0.72em; color: #c8a050; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+  .tool-card h4 { font-size: 1em; color: #1a1a1a; margin-bottom: 8px; }
+  .tool-card p { color: #555; font-size: 0.86em; margin: 0; line-height: 1.5; }
+  .tool-card .tool-url { font-size: 0.78em; color: #3a80d4; margin-top: 8px; font-family: monospace; }
+
+  /* SECTION DIVIDER PAGES */
+  .chapter-break {
+    background: #1a1500;
+    padding: 60px 44px;
+    text-align: center;
+    page-break-before: always;
+  }
+  .chapter-break .ch-num { font-size: 0.72em; color: #c8a050; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 16px; }
+  .chapter-break h2 { font-size: 2em; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; }
+  .chapter-break p { color: #666; font-size: 0.9em; font-style: italic; max-width: 500px; margin: 0 auto; }
+
+  /* SUMMARY TABLE */
+  .sum-table { width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 0.87em; }
+  .sum-table th { background: #0d0d0d; color: #c8a050; padding: 12px 16px; text-align: left; font-size: 0.76em; letter-spacing: 2px; text-transform: uppercase; }
+  .sum-table td { padding: 12px 16px; border-bottom: 1px solid #e8e8e0; color: #444; }
+  .sum-table tr:nth-child(even) td { background: #f7f7f0; }
+  .sum-table .total td { background: #1a1a1a; color: #c8a050; font-weight: bold; }
+
+  h3 { font-size: 0.82em; color: #c8a050; text-transform: uppercase; letter-spacing: 3px; margin: 32px 0 14px; }
+  .dark h3 { color: #c8a050; }
+  p { color: #444; margin-bottom: 16px; font-size: 0.96em; }
+  .dark p { color: #bbb; }
+  p strong { color: #1a1a1a; }
+  .dark p strong { color: #fff; }
+
+  footer { background: #0d0d0d; color: #333; text-align: center; padding: 44px 40px; font-size: 0.78em; letter-spacing: 1px; }
+  footer strong { color: #c8a050; }
+
+  @media print {
+    .chapter-break { page-break-before: always; }
+    .step { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="eyebrow">Internal Operations Guide — Confidential</div>
+  <h1>The <span>Studio Network</span><br>Full Build Guide</h1>
+  <div class="subtitle">Step-by-Step Technical Setup — No Developer Required</div>
+  <div class="tagline">Everything you need to build, launch, and run the matchmaking system from scratch — using four free tools, in under two days, with zero ongoing staff time.</div>
+  <div class="meta">Dubai Podcast Studio · May 2026 · Version 1.0</div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="wrap">
+  <div class="sec-head">
+    <div class="num">Before You Start</div>
+    <h2>What You Are Building & How It All Connects</h2>
+  </div>
+
+  <p>The Studio Network is a <strong>private, invitation-only matchmaking directory</strong> for DPS clients. A member browses other creators, requests an introduction, and — if the other party accepts — both receive a direct booking link to DPS. The session gets booked, both get 50 AED credit, and the connection is recorded in their profiles.</p>
+  <p>You will use <strong>four tools</strong>. Each has one job:</p>
+
+  <div class="tool-grid">
+    <div class="tool-card">
+      <div class="tool-name">Tool 01 — Database</div>
+      <h4>Airtable</h4>
+      <p>Stores every member profile, every connection request, and every completed session. The directory members browse is an Airtable view embedded into your Wix site.</p>
+      <div class="tool-url">airtable.com → free account</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Tool 02 — Forms</div>
+      <h4>Tally</h4>
+      <p>Two forms: one for members to create their profile after their session, one for requesting an introduction. Free, no branding, embeds cleanly in Wix.</p>
+      <div class="tool-url">tally.so → free account</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Tool 03 — Automation</div>
+      <h4>Make (formerly Integromat)</h4>
+      <p>The engine that connects everything. When a booking happens in Wix, Make fires a chain of actions: adds to Airtable, sends emails, generates codes. All automatic.</p>
+      <div class="tool-url">make.com → free account</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Tool 04 — Member Portal</div>
+      <h4>Wix Members (already on your site)</h4>
+      <p>The password-protected page where members log in to browse the directory. Already built into your existing Wix subscription — no extra cost, no new platform.</p>
+      <div class="tool-url">Your existing Wix dashboard</div>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="flow-title">The Complete Flow — End to End</div>
+    <div class="flow-label">Trigger</div>
+    <div class="flow-row">
+      <div class="flow-box trigger">Client books & pays on Wix</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box action">Make adds them to Airtable</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box action">Email sent 24h later with profile form link</div>
+    </div>
+    <div class="flow-label">Member Joins</div>
+    <div class="flow-row">
+      <div class="flow-box trigger">Client fills Tally intake form</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box action">Make activates their Airtable profile</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box result">Profile appears in directory</div>
+    </div>
+    <div class="flow-label">Connection Made</div>
+    <div class="flow-row">
+      <div class="flow-box trigger">Member A clicks "Invite to record"</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box action">Make emails Member B to accept/decline</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box action">On accept: both get DPS booking link + 50 AED code</div>
+    </div>
+    <div class="flow-label">Session Confirmed</div>
+    <div class="flow-row">
+      <div class="flow-box trigger">Booking made using network code</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box action">Make updates both profiles</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box result">Connection counter incremented. Loop repeats.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="label">Time to Build</div>
+    <p>Allow <strong>6–8 hours total</strong> across two sittings. Day 1: Airtable + Tally (3 hours). Day 2: Make automations + Wix page (3–4 hours). One person can do all of this. No coding. No developer.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 1 — AIRTABLE -->
+<!-- ============================================================ -->
+<div class="chapter-break">
+  <div class="ch-num">Chapter 01</div>
+  <h2>Building the Database</h2>
+  <p>Set up Airtable as the brain of the system — every member, every connection, every session tracked automatically.</p>
+</div>
+
+<div class="wrap">
+  <div class="sec-head">
+    <div class="num">Chapter 01</div>
+    <h2>Airtable — The Database</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <h3>Create Your Airtable Account & Base</h3>
+      <span class="step-tag">10 minutes</span>
+    </div>
+    <div class="step-body">
+      <ol>
+        <li>Go to <strong>airtable.com</strong> and click <strong>Sign up for free</strong></li>
+        <li>Use your work email (info@dubaipodcaststudio.com or a team address)</li>
+        <li>Once inside, click the <strong>+ Add a base</strong> button</li>
+        <li>Choose <strong>Start from scratch</strong></li>
+        <li>Name the base: <strong>Studio Network</strong></li>
+        <li>You will land on a blank table called "Table 1" — rename it by double-clicking the tab: call it <strong>Members</strong></li>
+      </ol>
+      <div class="tip"><strong>Tip:</strong> Airtable automatically creates 3 sample fields (Name, Notes, Attachments). You will delete Notes and Attachments and build the full field list in the next step.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">2</div>
+      <h3>Build the Members Table — All Fields</h3>
+      <span class="step-tag">30 minutes</span>
+    </div>
+    <div class="step-body">
+      <p>Click the <strong>+</strong> button at the end of the column headers to add each new field. Set the field type exactly as shown below.</p>
+      <table class="field-table">
+        <thead><tr><th>Field Name</th><th>Field Type</th><th>Settings / Options</th></tr></thead>
+        <tbody>
+          <tr><td><code>Name</code> <span class="req">★</span></td><td>Single line text</td><td>Already exists — keep it</td></tr>
+          <tr><td><code>Email</code> <span class="req">★</span></td><td>Email</td><td>—</td></tr>
+          <tr><td><code>Phone</code></td><td>Phone number</td><td>—</td></tr>
+          <tr><td><code>Podcast Name</code></td><td>Single line text</td><td>—</td></tr>
+          <tr><td><code>Industry</code></td><td>Single select</td><td>Options: Business · Finance · Real Estate · Health &amp; Wellness · Tech · Media · Culture · Sports · Coaching · Other</td></tr>
+          <tr><td><code>Languages</code></td><td>Multiple select</td><td>Options: English · Arabic · French · Hindi · Urdu · Russian · Other</td></tr>
+          <tr><td><code>Available as Guest</code></td><td>Checkbox</td><td>—</td></tr>
+          <tr><td><code>Guest Topics</code></td><td>Long text</td><td>—</td></tr>
+          <tr><td><code>Profile Link</code></td><td>URL</td><td>Podcast, Instagram, LinkedIn or YouTube</td></tr>
+          <tr><td><code>Instagram</code></td><td>Single line text</td><td>—</td></tr>
+          <tr><td><code>Bio</code></td><td>Long text</td><td>—</td></tr>
+          <tr><td><code>Photo</code></td><td>Attachment</td><td>—</td></tr>
+          <tr><td><code>Session Date</code></td><td>Date</td><td>Date format: DD/MM/YYYY</td></tr>
+          <tr><td><code>Studio Used</code></td><td>Single select</td><td>Options: DPS1 · DPS2 · DPS3 · YALLAPOD1 · YALLAPOD2 · YALLAPOD3 · YALLAPOD4</td></tr>
+          <tr><td><code>Profile Status</code></td><td>Single select</td><td>Options: Pending · Active · Inactive. Set default to: Pending</td></tr>
+          <tr><td><code>Connections Made</code></td><td>Number</td><td>Default value: 0</td></tr>
+          <tr><td><code>Sessions via Network</code></td><td>Number</td><td>Default value: 0</td></tr>
+          <tr><td><code>Member Since</code></td><td>Date</td><td>—</td></tr>
+          <tr><td><code>Airtable Record ID</code></td><td>Formula</td><td>Formula: <code>RECORD_ID()</code> — this auto-generates a unique ID for each row, used by Make for lookups</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><strong>The <span class="req">★</span> fields are the only required ones.</strong> All others are filled in gradually as members complete their profiles. Do not make fields required in Airtable itself — Make will handle validation.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">3</div>
+      <h3>Create the Connections Table</h3>
+      <span class="step-tag">15 minutes</span>
+    </div>
+    <div class="step-body">
+      <p>Click the <strong>+</strong> tab next to "Members" at the bottom of the screen to add a second table. Name it <strong>Connections</strong>. Build these fields:</p>
+      <table class="field-table">
+        <thead><tr><th>Field Name</th><th>Field Type</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>Connection ID</code></td><td>Autonumber</td><td>Auto-increments with each new connection. Used to generate unique discount codes.</td></tr>
+          <tr><td><code>Requester Name</code></td><td>Single line text</td><td>—</td></tr>
+          <tr><td><code>Requester Email</code></td><td>Email</td><td>—</td></tr>
+          <tr><td><code>Recipient Name</code></td><td>Single line text</td><td>—</td></tr>
+          <tr><td><code>Recipient Email</code></td><td>Email</td><td>—</td></tr>
+          <tr><td><code>Episode Idea</code></td><td>Long text</td><td>What the requester wants to discuss</td></tr>
+          <tr><td><code>Status</code></td><td>Single select</td><td>Options: Pending · Accepted · Declined · Session Booked · Completed. Default: Pending</td></tr>
+          <tr><td><code>Request Date</code></td><td>Date</td><td>—</td></tr>
+          <tr><td><code>Discount Code</code></td><td>Single line text</td><td>Auto-filled by Make — e.g. NETWORK-042</td></tr>
+          <tr><td><code>Code Redeemed</code></td><td>Checkbox</td><td>Checked by Make when the code is used</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">4</div>
+      <h3>Create the Directory View (What Members See)</h3>
+      <span class="step-tag">15 minutes</span>
+    </div>
+    <div class="step-body">
+      <p>In the <strong>Members</strong> table, you will create a Gallery view — this is the visual directory that gets embedded in your Wix page.</p>
+      <ol>
+        <li>Click <strong>+ Add view</strong> in the left sidebar of Airtable</li>
+        <li>Select <strong>Gallery</strong></li>
+        <li>Name the view: <strong>Active Directory</strong></li>
+        <li>Click <strong>Filter</strong> → Add filter → <strong>Profile Status</strong> → <strong>is</strong> → <strong>Active</strong></li>
+        <li>Add a second filter → <strong>Available as Guest</strong> → <strong>is checked</strong></li>
+        <li>Set the card cover image to the <code>Photo</code> field</li>
+        <li>Under <strong>Fields</strong>, show only: Name, Podcast Name, Industry, Languages, Bio, Profile Link. Hide all other fields.</li>
+        <li>Click <strong>Share view</strong> → enable <strong>Allow anyone with this link to see this view</strong> → copy the embed link</li>
+      </ol>
+      <div class="warn"><strong>Important:</strong> The Airtable embed shows the directory but does NOT expose private information (email, phone) — only the fields you chose to display. Members' contact details stay internal.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 2 — TALLY FORMS -->
+<!-- ============================================================ -->
+<div class="chapter-break">
+  <div class="ch-num">Chapter 02</div>
+  <h2>Building the Forms</h2>
+  <p>Two Tally forms handle all member input — the profile intake and the introduction request.</p>
+</div>
+
+<div class="wrap">
+  <div class="sec-head">
+    <div class="num">Chapter 02</div>
+    <h2>Tally — The Two Forms</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">5</div>
+      <h3>Create Your Tally Account</h3>
+      <span class="step-tag">5 minutes</span>
+    </div>
+    <div class="step-body">
+      <ol>
+        <li>Go to <strong>tally.so</strong> and click <strong>Sign up free</strong></li>
+        <li>Use the same work email as Airtable</li>
+        <li>Click <strong>+ New form</strong> to begin</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">6</div>
+      <h3>Build Form 1 — Member Profile Intake</h3>
+      <span class="step-tag">30 minutes</span>
+    </div>
+    <div class="step-body">
+      <p>This form is sent to every client 24 hours after their session. It creates their Studio Network profile. Name the form: <strong>Studio Network — Join the Directory</strong></p>
+
+      <table class="field-table">
+        <thead><tr><th>#</th><th>Question / Field</th><th>Type</th><th>Required</th></tr></thead>
+        <tbody>
+          <tr><td>—</td><td><em>Welcome block: "You recorded at Dubai Podcast Studio — which means you are now eligible to join The Studio Network. Fill in your profile below to be discovered by other DPS creators looking for guests."</em></td><td>Text block</td><td>—</td></tr>
+          <tr><td>1</td><td>Your full name</td><td>Short text</td><td>Yes</td></tr>
+          <tr><td>2</td><td>Your email address</td><td>Email</td><td>Yes</td></tr>
+          <tr><td>3</td><td>Your podcast or show name (leave blank if you don't have one yet)</td><td>Short text</td><td>No</td></tr>
+          <tr><td>4</td><td>Your industry or niche</td><td>Dropdown</td><td>Yes</td></tr>
+          <tr><td>5</td><td>Languages you speak</td><td>Multiple choice (checkboxes)</td><td>Yes</td></tr>
+          <tr><td>6</td><td>Are you available to be a guest on other people's podcasts?</td><td>Yes / No toggle</td><td>Yes</td></tr>
+          <tr><td>7</td><td>If yes — what topics can you speak about? (shown only if Q6 = Yes)</td><td>Long text</td><td>Conditional</td></tr>
+          <tr><td>8</td><td>Link to your podcast, Instagram, YouTube or LinkedIn</td><td>Short text</td><td>No</td></tr>
+          <tr><td>9</td><td>Your Instagram handle (optional)</td><td>Short text</td><td>No</td></tr>
+          <tr><td>10</td><td>A short bio — max 150 characters. This is what other members will see first.</td><td>Long text (set max characters to 150)</td><td>Yes</td></tr>
+          <tr><td>11</td><td>Upload a profile photo</td><td>File upload</td><td>No</td></tr>
+          <tr><td>12</td><td>I agree to be listed in the private Studio Network directory, visible only to verified DPS clients.</td><td>Checkbox consent</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+      <p>After building all fields, go to <strong>Settings → Integrations → Webhooks</strong> and copy the webhook URL — you will need this in Make (Chapter 4, Step 12).</p>
+      <div class="tip"><strong>Conditional logic for Question 7:</strong> In Tally, click on Question 7 → click the logic icon → set condition: "Show this question if Question 6 = Yes." This way the topics field only appears for people who want to be guests.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">7</div>
+      <h3>Build Form 2 — Introduction Request</h3>
+      <span class="step-tag">20 minutes</span>
+    </div>
+    <div class="step-body">
+      <p>This form appears when a member clicks <strong>"Invite to record together at DPS"</strong> next to someone's profile in the directory. Name it: <strong>Studio Network — Introduction Request</strong></p>
+
+      <table class="field-table">
+        <thead><tr><th>#</th><th>Question / Field</th><th>Type</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>—</td><td><em>Header: "You are about to invite [Recipient Name] to record a podcast episode together at Dubai Podcast Studio."</em></td><td>Text block</td><td>Recipient name pre-filled via URL parameter — see Step 16</td></tr>
+          <tr><td>1</td><td>Your name</td><td>Short text, required</td><td>Pre-filled from Wix member session if possible</td></tr>
+          <tr><td>2</td><td>Your email</td><td>Email, required</td><td>—</td></tr>
+          <tr><td>3</td><td>Your podcast or show name</td><td>Short text</td><td>—</td></tr>
+          <tr><td>4</td><td>Who are you inviting? (recipient name)</td><td>Hidden field</td><td>Pre-filled via URL parameter <code>?recipient_name=</code></td></tr>
+          <tr><td>5</td><td>Recipient email</td><td>Hidden field</td><td>Pre-filled via URL parameter <code>?recipient_email=</code></td></tr>
+          <tr><td>6</td><td>Why do you want to record with this person? What episode do you have in mind? (This message is sent to them.)</td><td>Long text, required</td><td>This becomes the body of the notification email to the recipient</td></tr>
+        </tbody>
+      </table>
+
+      <p>Go to <strong>Settings → Integrations → Webhooks</strong> and copy this form's webhook URL separately. Label it "Introduction Request Webhook" in your notes.</p>
+
+      <div class="tip"><strong>Hidden fields with URL parameters:</strong> In Tally, click <strong>+ Add block → Hidden fields</strong>. Name each one to match the URL parameter key (e.g. <code>recipient_name</code>, <code>recipient_email</code>). When you link to this form with those parameters in the URL, Tally captures them silently — the member never sees them.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">8</div>
+      <h3>Build Form 3 — Accept / Decline Response</h3>
+      <span class="step-tag">10 minutes</span>
+    </div>
+    <div class="step-body">
+      <p>This is the simplest form. The recipient receives an email, clicks a link, and lands on this page. Name it: <strong>Studio Network — Accept Invitation</strong></p>
+      <ol>
+        <li>Add a text block: <em>"[Requester Name] wants to record a podcast episode with you at Dubai Podcast Studio. Here is what they said: [Episode Idea]. Do you accept?"</em></li>
+        <li>Add a hidden field: <code>connection_id</code> (pre-filled via URL)</li>
+        <li>Add a hidden field: <code>response</code> (pre-filled as either "accepted" or "declined" via two separate links in the email)</li>
+        <li>Add a hidden field: <code>recipient_email</code></li>
+        <li>Add a text block for accepted response: <em>"Thank you — you will receive a booking link within minutes."</em></li>
+      </ol>
+      <div class="tip"><strong>Two links, one form:</strong> You will create two different URLs for the same form — one with <code>?response=accepted</code> and one with <code>?response=declined</code>. Each button in the notification email points to one of these URLs. When submitted, Make reads the hidden <code>response</code> field and fires the correct action.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 3 — WIX SETUP -->
+<!-- ============================================================ -->
+<div class="chapter-break">
+  <div class="ch-num">Chapter 03</div>
+  <h2>Setting Up the Wix Member Portal</h2>
+  <p>Create the private, members-only page where DPS clients log in to browse the directory and send introduction requests.</p>
+</div>
+
+<div class="wrap">
+  <div class="sec-head">
+    <div class="num">Chapter 03</div>
+    <h2>Wix — The Member Portal</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">9</div>
+      <h3>Enable Wix Members on Your Site</h3>
+      <span class="step-tag">10 minutes</span>
+    </div>
+    <div class="step-body">
+      <ol>
+        <li>Log into your <strong>Wix dashboard</strong></li>
+        <li>In the left sidebar click <strong>Members &amp; Contacts → Members</strong></li>
+        <li>Click <strong>Enable Members Area</strong> — Wix will add a login/signup flow to your site automatically</li>
+        <li>Go to your site editor and locate the Members Area pages — Wix creates a <strong>/members</strong> section automatically</li>
+        <li>In the editor, add a new <strong>blank page</strong> and name it: <strong>The Studio Network</strong></li>
+        <li>Set the URL slug to: <strong>/studio-network</strong></li>
+        <li>Go to page settings → <strong>Permissions</strong> → set to <strong>Members only</strong></li>
+      </ol>
+      <div class="callout">
+        <div class="label">What "Members Only" Means</div>
+        <p>Only people with a Wix Members account on your site can access this page. You will control who gets an account — only verified DPS clients receive the invitation (sent automatically by Make). Anyone who tries to access the URL without being logged in sees a login wall.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">10</div>
+      <h3>Build the Studio Network Page in Wix</h3>
+      <span class="step-tag">40 minutes</span>
+    </div>
+    <div class="step-body">
+      <p>Inside the Wix editor on your new <strong>/studio-network</strong> page, add these elements in order:</p>
+      <ol>
+        <li><strong>Header text:</strong> "The Studio Network — Members Only" in your brand font</li>
+        <li><strong>Intro paragraph:</strong> "Browse DPS creators available as podcast guests. Find your next episode. Click 'Invite to Record' to send an introduction request — if they accept, you will both receive a DPS booking link and 50 AED studio credit."</li>
+        <li><strong>Add an HTML iframe element</strong> (in Wix editor: Add → Embed → HTML iFrame)</li>
+        <li>Paste the Airtable Active Directory embed link from Step 4 into the iframe source</li>
+        <li>Set iframe height to at least 800px so the gallery displays fully</li>
+        <li><strong>Add a second section below the directory:</strong> "Want to invite someone you found? Click below to send an introduction request."</li>
+        <li><strong>Add a button:</strong> "Send Introduction Request" — link this button to your Tally Form 2 URL</li>
+        <li><strong>Add a FAQ section:</strong>
+          <ul>
+            <li><em>Q: Who can see my profile?</em> A: Only verified DPS clients who have completed at least one session.</li>
+            <li><em>Q: How does the 50 AED credit work?</em> A: When an introduction leads to a booked session, both parties receive a 50 AED discount code automatically by email.</li>
+            <li><em>Q: Can I remove myself from the directory?</em> A: Yes — email info@dubaipodcaststudio.com at any time.</li>
+          </ul>
+        </li>
+      </ol>
+      <div class="warn"><strong>Airtable embed and Wix:</strong> Some Wix templates block external iframes by default. If the embed does not appear, go to your Wix dashboard → Settings → Advanced → and ensure "Allow external scripts and embeds" is enabled. If the issue persists, use the Wix HTML Embed widget instead of the standard iFrame widget.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">11</div>
+      <h3>Set Up the Introduction Request Button with Pre-Filled Parameters</h3>
+      <span class="step-tag">20 minutes</span>
+    </div>
+    <div class="step-body">
+      <p>The "Invite to Record" button next to each profile must pass the recipient's name and email to the Tally form automatically. Since the Airtable gallery is embedded as an iframe, the simplest approach is a single shared button that opens a Tally form the user fills manually.</p>
+      <p>For a more advanced setup where each profile has its own pre-filled link: add a <code>Tally Link</code> field in Airtable (Formula type) with this formula:</p>
+      <div class="code-block"><span class="comment">-- Airtable Formula field: Tally Link --</span>
+<span class="key">"https://tally.so/r/YOUR_FORM_ID?recipient_name="</span> <span class="val">&amp; ENCODE_URL_COMPONENT({Name}) &amp;</span>
+<span class="key">"&amp;recipient_email="</span> <span class="val">&amp; ENCODE_URL_COMPONENT({Email})</span></div>
+      <p>This generates a unique Tally link for each member. Show this field in the Airtable gallery view as a <strong>button</strong> labeled "Invite to Record Together at DPS →". Replace <code>YOUR_FORM_ID</code> with the actual ID from your Tally Form 2 URL.</p>
+      <div class="tip"><strong>To find your Tally form ID:</strong> Open Form 2 in Tally. The URL will look like <code>tally.so/r/abcXYZ</code> — the ID is the part after <code>/r/</code>.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 4 — MAKE AUTOMATIONS -->
+<!-- ============================================================ -->
+<div class="chapter-break">
+  <div class="ch-num">Chapter 04</div>
+  <h2>Building the Automations</h2>
+  <p>Five Make scenarios that run every process automatically — from new booking to completed session — without any human intervention.</p>
+</div>
+
+<div class="wrap">
+  <div class="sec-head">
+    <div class="num">Chapter 04</div>
+    <h2>Make — The Five Automation Scenarios</h2>
+  </div>
+
+  <p>Go to <strong>make.com</strong>, create a free account, and click <strong>+ Create a new scenario</strong> for each of the five flows below. Each scenario has one trigger and one or more actions.</p>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">12</div>
+      <h3>Scenario 1 — New Booking → Airtable + Delayed Invite Email</h3>
+      <span class="step-tag">45 minutes</span>
+    </div>
+    <div class="step-body">
+      <p><strong>What it does:</strong> When a client completes a booking on Wix, Make adds them to Airtable and schedules the Studio Network invitation email for 24 hours later.</p>
+
+      <p><strong>Trigger setup in Wix first:</strong></p>
+      <ol>
+        <li>In your Wix dashboard, go to <strong>Automations → + New Automation</strong></li>
+        <li>Trigger: <strong>Booking Confirmed</strong></li>
+        <li>Action: <strong>Send a webhook</strong></li>
+        <li>In Make, create a new scenario → choose <strong>Webhooks → Custom Webhook</strong> as the trigger module</li>
+        <li>Make generates a webhook URL — copy it</li>
+        <li>Paste the Make webhook URL into the Wix automation webhook field</li>
+        <li>Save the Wix automation → it will now send booking data to Make on every confirmation</li>
+      </ol>
+
+      <p><strong>Make scenario — modules in order:</strong></p>
+      <ol>
+        <li><strong>Trigger:</strong> Webhooks → Custom Webhook (receives Wix booking data)</li>
+        <li><strong>Action:</strong> Airtable → Create a Record → Table: Members
+          <ul>
+            <li>Map <code>Name</code> → Wix booking field: customer name</li>
+            <li>Map <code>Email</code> → Wix booking field: customer email</li>
+            <li>Map <code>Phone</code> → Wix booking field: customer phone</li>
+            <li>Map <code>Session Date</code> → Wix booking field: booking date</li>
+            <li>Map <code>Studio Used</code> → Wix booking field: service/resource name</li>
+            <li>Set <code>Profile Status</code> → Pending (hardcoded)</li>
+            <li>Set <code>Member Since</code> → current date</li>
+          </ul>
+        </li>
+        <li><strong>Action:</strong> Tools → Sleep → Duration: 86400 seconds (= 24 hours)</li>
+        <li><strong>Action:</strong> Gmail (or any email module) → Send an Email</li>
+      </ol>
+
+      <div class="email-template">
+        <div class="email-head">Invite Email — Sent 24 Hours After Session</div>
+        <div class="email-body">
+          <p><strong>Subject:</strong> You're invited to The Studio Network — Dubai Podcast Studio</p>
+          <p>Hi <span class="var">{{Name}}</span>,</p>
+          <p>Thank you for recording with us yesterday. We hope the session went well.</p>
+          <p>Because you are now a verified Dubai Podcast Studio client, you are invited to join <strong>The Studio Network</strong> — our private directory of DPS creators.</p>
+          <p>Inside you can:</p>
+          <p>→ Be discovered as a podcast guest by other DPS creators<br>→ Find the perfect guest for your next episode<br>→ Book a co-recording session and earn 50 AED studio credit</p>
+          <a href="YOUR_TALLY_FORM_1_URL" class="email-btn">Create Your Profile →</a>
+          <p>It takes 3 minutes. Access is exclusive to verified DPS clients only.</p>
+          <p>See you back in the studio,<br><strong>Dubai Podcast Studio Team</strong></p>
+        </div>
+      </div>
+
+      <div class="tip"><strong>On the Sleep module:</strong> Make's free tier allows scenarios to run for up to 40 minutes. For a 24-hour delay you need a paid plan (from ~$9/month) or an alternative: use Google Sheets as a scheduler — Make writes a row at booking time with a "send at" timestamp, and a separate daily scenario checks the sheet and sends emails when the time arrives. This works on the free tier and is explained in the appendix.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">13</div>
+      <h3>Scenario 2 — Profile Form Submitted → Activate Airtable Profile</h3>
+      <span class="step-tag">25 minutes</span>
+    </div>
+    <div class="step-body">
+      <p><strong>What it does:</strong> When a client submits the Tally intake form, Make finds their Airtable record and activates their profile so it appears in the directory.</p>
+      <ol>
+        <li><strong>Trigger:</strong> Webhooks → Custom Webhook → paste the Tally Form 1 webhook URL from Step 6</li>
+        <li><strong>Action:</strong> Airtable → Search Records → Table: Members → Filter: Email = <code>{{form.email}}</code></li>
+        <li><strong>Action:</strong> Airtable → Update a Record → use the Record ID from the search result
+          <ul>
+            <li>Map all form fields to their Airtable equivalents</li>
+            <li>Set <code>Profile Status</code> → Active</li>
+          </ul>
+        </li>
+        <li><strong>Action:</strong> Gmail → Send Email → welcome confirmation to the member</li>
+      </ol>
+
+      <div class="email-template">
+        <div class="email-head">Welcome Email — Sent Immediately After Profile Submission</div>
+        <div class="email-body">
+          <p><strong>Subject:</strong> Your Studio Network profile is live ✓</p>
+          <p>Hi <span class="var">{{Name}}</span>,</p>
+          <p>Your profile is now live in The Studio Network. Other DPS creators can now find you and invite you to record together.</p>
+          <p>You can browse the directory and send your own introduction requests here:</p>
+          <a href="https://www.dubaipodcaststudio.com/studio-network" class="email-btn">Browse The Directory →</a>
+          <p>When an introduction leads to a booked session, you will automatically receive 50 AED studio credit.</p>
+          <p>Dubai Podcast Studio Team</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">14</div>
+      <h3>Scenario 3 — Introduction Request → Notify Recipient</h3>
+      <span class="step-tag">30 minutes</span>
+    </div>
+    <div class="step-body">
+      <p><strong>What it does:</strong> When a member submits the Introduction Request form, Make creates a connection record in Airtable and sends a notification email to the recipient with Accept and Decline links.</p>
+      <ol>
+        <li><strong>Trigger:</strong> Webhooks → Custom Webhook → paste the Tally Form 2 webhook URL from Step 7</li>
+        <li><strong>Action:</strong> Airtable → Create a Record → Table: Connections
+          <ul>
+            <li>Map <code>Requester Name</code>, <code>Requester Email</code>, <code>Recipient Name</code>, <code>Recipient Email</code>, <code>Episode Idea</code> from form fields</li>
+            <li>Set <code>Status</code> → Pending</li>
+            <li>Set <code>Request Date</code> → current date</li>
+          </ul>
+        </li>
+        <li><strong>Action:</strong> Gmail → Send Email to <code>{{recipient_email}}</code></li>
+      </ol>
+
+      <div class="email-template">
+        <div class="email-head">Recipient Notification — Sent Immediately on Request</div>
+        <div class="email-body">
+          <p><strong>Subject:</strong> Someone from The Studio Network wants to record with you</p>
+          <p>Hi <span class="var">{{recipient_name}}</span>,</p>
+          <p><strong><span class="var">{{requester_name}}</span></strong> found your profile in The Studio Network at Dubai Podcast Studio and wants to record a podcast episode with you.</p>
+          <p><strong>Here is what they have in mind:</strong></p>
+          <p style="background:#f5f5ef; padding:14px 18px; border-radius:6px; font-style:italic; color:#333;"><span class="var">{{episode_idea}}</span></p>
+          <p>If you accept, you will both receive a direct booking link to DPS and a 50 AED studio credit.</p>
+          <a href="YOUR_TALLY_FORM_3_URL?connection_id={{connection_id}}&amp;response=accepted&amp;recipient_email={{recipient_email}}" class="email-btn">Accept &amp; Get Booking Link →</a>
+          <p style="margin-top:10px; font-size:0.85em; color:#888;">Not interested? <a href="YOUR_TALLY_FORM_3_URL?connection_id={{connection_id}}&amp;response=declined" style="color:#888;">Decline here</a>.</p>
+          <p>This invitation expires in 7 days.</p>
+          <p>Dubai Podcast Studio Team</p>
+        </div>
+      </div>
+      <div class="tip"><strong>Replace {{connection_id}} in the email links:</strong> In Make, the Airtable Create Record action returns the new record's ID. Map this value into the URL you build for the Accept and Decline links. Make has a "Text Aggregator" or you can build the URL directly in the email body using Make's variable mapping.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">15</div>
+      <h3>Scenario 4 — Introduction Accepted → Send Booking Link + Credit Codes</h3>
+      <span class="step-tag">30 minutes</span>
+    </div>
+    <div class="step-body">
+      <p><strong>What it does:</strong> When the recipient clicks Accept, Make updates the connection status, generates a unique discount code, and sends both parties the DPS booking link with their credit.</p>
+      <ol>
+        <li><strong>Trigger:</strong> Webhooks → Custom Webhook → paste the Tally Form 3 webhook URL</li>
+        <li><strong>Router module:</strong> Split based on the <code>response</code> field
+          <ul>
+            <li>Route A: <code>response = accepted</code> → proceed</li>
+            <li>Route B: <code>response = declined</code> → update status to Declined, send a polite decline notification to requester, end scenario</li>
+          </ul>
+        </li>
+        <li><strong>Action (Route A):</strong> Airtable → Update Connection Record → Status: Accepted</li>
+        <li><strong>Action:</strong> Tools → Set Variable → generate discount code: <code>NETWORK-{{connection_id}}</code></li>
+        <li><strong>Action:</strong> Airtable → Update Connection Record → Discount Code: <code>NETWORK-{{connection_id}}</code></li>
+        <li><strong>Action:</strong> Wix → Create Coupon (via Wix API or manually) for 50 AED — code: <code>NETWORK-{{connection_id}}</code></li>
+        <li><strong>Action:</strong> Gmail → Send Email to BOTH requester and recipient</li>
+      </ol>
+
+      <div class="email-template">
+        <div class="email-head">Introduction Confirmed — Sent to Both Parties</div>
+        <div class="email-body">
+          <p><strong>Subject:</strong> Your introduction is confirmed — here is your booking link</p>
+          <p>Hi <span class="var">{{name}}</span>,</p>
+          <p>Your connection through The Studio Network has been confirmed. <strong><span class="var">{{other_party_name}}</span></strong> has accepted.</p>
+          <p>Book your session together at the link below. Your <strong>50 AED studio credit</strong> is already built in — use code <strong><span class="var">NETWORK-{{connection_id}}</span></strong> at checkout.</p>
+          <a href="https://www.dubaipodcaststudio.com/book-now" class="email-btn">Book Your Session Together at DPS →</a>
+          <p>Discount code: <strong><span class="var">NETWORK-{{connection_id}}</span></strong> (50 AED off, valid 30 days)</p>
+          <p>Both parties must book the same session slot. If you need help coordinating, reply to this email.</p>
+          <p>We look forward to seeing you both in the studio.</p>
+          <p>Dubai Podcast Studio Team</p>
+        </div>
+      </div>
+
+      <div class="warn"><strong>Creating Wix coupons via automation:</strong> Wix supports coupon creation through its API. This requires generating an API key from your Wix dashboard (Settings → API Keys → Generate Key). In Make, use the HTTP module to call the Wix Coupons API. If this feels too technical initially, create a batch of 50 generic codes manually in Wix (e.g. NETWORK-001 through NETWORK-050) and have Make select and assign the next unused code from an Airtable "Codes" table. Simpler and works on the free tier.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">16</div>
+      <h3>Scenario 5 — Discount Code Redeemed → Complete the Connection</h3>
+      <span class="step-tag">20 minutes</span>
+    </div>
+    <div class="step-body">
+      <p><strong>What it does:</strong> When a NETWORK- code is used in a Wix booking, Make marks the connection as completed and increments both members' session counters.</p>
+      <ol>
+        <li><strong>Trigger:</strong> Webhooks → Custom Webhook from Wix (set up a second Wix Automation: trigger = "Booking Confirmed where coupon code starts with NETWORK-")</li>
+        <li><strong>Action:</strong> Airtable → Search Records → Table: Connections → Filter: Discount Code = <code>{{coupon_code_used}}</code></li>
+        <li><strong>Action:</strong> Airtable → Update Connection Record → Status: Completed, Code Redeemed: checked</li>
+        <li><strong>Action:</strong> Airtable → Search Records → Table: Members → Filter: Email = requester email → Update: Sessions via Network + 1</li>
+        <li><strong>Action:</strong> Airtable → Search Records → Table: Members → Filter: Email = recipient email → Update: Sessions via Network + 1</li>
+        <li><strong>Action:</strong> Gmail → Send Email to both: "Your Studio Network session is confirmed — see you in the studio."</li>
+      </ol>
+      <div class="tip"><strong>Incrementing a number in Airtable via Make:</strong> Make's Airtable module does not auto-increment. Use this workaround: (1) Search for the member record, (2) read the current value of Sessions via Network, (3) in the Update Record step, set the field to <code>{{current_value + 1}}</code> using Make's math function.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 5 — TESTING -->
+<!-- ============================================================ -->
+<div class="chapter-break">
+  <div class="ch-num">Chapter 05</div>
+  <h2>Testing the Full System</h2>
+  <p>Run the complete flow end-to-end before going live. Every step must be verified.</p>
+</div>
+
+<div class="wrap">
+  <div class="sec-head">
+    <div class="num">Chapter 05</div>
+    <h2>End-to-End Testing Checklist</h2>
+  </div>
+
+  <p>Use two test email addresses (e.g. a personal Gmail and a colleague's email) to simulate Member A and Member B. Complete every check before sending the system live to clients.</p>
+
+  <h3>Phase 1 — New Booking Flow</h3>
+  <div class="checklist">
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Make a test booking in Wix</strong> using Test Email A. Confirm the booking completes normally.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check Airtable</strong> → a new row should appear in the Members table within 60 seconds. Status should be: Pending.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check the invitation email</strong> arrives at Test Email A after the delay. Verify all variables (name, form link) display correctly.</div></div>
+  </div>
+
+  <h3>Phase 2 — Profile Creation Flow</h3>
+  <div class="checklist">
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Click the form link</strong> in the invitation email. Fill in all fields for Member A including a photo. Submit.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check Airtable</strong> → the Member A row should now show all form data. Status should change to: Active.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check the welcome email</strong> arrives at Test Email A. Verify the directory link works.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Log into the Wix member portal</strong> and navigate to /studio-network. Verify the Airtable directory iframe loads and Member A's profile is visible.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Repeat the above for Member B</strong> (Test Email B) — make a second test booking, activate their profile.</div></div>
+  </div>
+
+  <h3>Phase 3 — Introduction Request Flow</h3>
+  <div class="checklist">
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>As Member A</strong>, click "Invite to Record Together" next to Member B's profile in the directory. Fill and submit the Introduction Request form.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check Airtable Connections table</strong> → a new connection row should appear. Status: Pending.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check Test Email B</strong> receives the notification email with the episode idea message and two buttons: Accept and Decline.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Click Accept.</strong> Verify the Tally Form 3 confirmation page loads correctly.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check Airtable Connections</strong> → Status should update to Accepted. Discount Code field should contain NETWORK-[number].</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check both Test Email A and Test Email B</strong> receive the introduction confirmed email with the booking link and discount code.</div></div>
+  </div>
+
+  <h3>Phase 4 — Booking Completion Flow</h3>
+  <div class="checklist">
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Make a test booking in Wix</strong> using the discount code from the introduction email. Verify the code applies at checkout.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check Airtable Connections</strong> → Status: Completed. Code Redeemed: checked.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check Airtable Members</strong> → Sessions via Network counter incremented by 1 for both Member A and Member B.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Check both test emails</strong> receive the session confirmation email.</div></div>
+  </div>
+
+  <div class="gold">
+    <div class="label">All Clear?</div>
+    <p>If every checkbox above is ticked, the system is working end-to-end. You are ready to launch. If any step fails, go back to the relevant Make scenario and check that all field mappings are correct. The most common issues are: (1) a Tally webhook URL not saved correctly in Make, and (2) an Airtable field name mismatch between what Make sends and what Airtable expects.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 6 — LAUNCH -->
+<!-- ============================================================ -->
+<div class="chapter-break">
+  <div class="ch-num">Chapter 06</div>
+  <h2>Launching to 3,500 Past Clients</h2>
+  <p>The seed message that activates the network from day one.</p>
+</div>
+
+<div class="wrap">
+  <div class="sec-head">
+    <div class="num">Chapter 06</div>
+    <h2>The Seed Launch</h2>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">17</div>
+      <h3>The WhatsApp Broadcast — Send This Week</h3>
+      <span class="step-tag">2 hours to prepare · 1 send</span>
+    </div>
+    <div class="step-body">
+      <p>Export your full past client list from Wix (Contacts → Export). Send the following message via WhatsApp broadcast to every client who has a phone number on record. WhatsApp Business allows broadcasts to up to 256 contacts per list — split into batches if needed.</p>
+
+      <div class="email-template">
+        <div class="email-head">WhatsApp Broadcast Message (English)</div>
+        <div class="email-body">
+          <p>Hi [First Name],</p>
+          <p>Because you recorded at Dubai Podcast Studio, you are now invited to join <strong>The Studio Network</strong> — our private directory for DPS creators.</p>
+          <p>Inside you can find podcast guests from our community of 3,500+ professionals from 75 countries — and be discovered yourself.</p>
+          <p>Join in 3 minutes: [TALLY FORM 1 LINK]</p>
+          <p>Access is exclusive to verified DPS clients. No cost.</p>
+          <p>— Dubai Podcast Studio Team</p>
+        </div>
+      </div>
+
+      <div class="email-template">
+        <div class="email-head">WhatsApp Broadcast Message (Arabic)</div>
+        <div class="email-body">
+          <p>مرحباً [الاسم]،</p>
+          <p>بما أنك سجّلت في Dubai Podcast Studio، يسعدنا دعوتك للانضمام إلى <strong>Studio Network</strong> — دليلنا الخاص بمبدعي DPS.</p>
+          <p>ستتمكن من العثور على ضيوف لبودكاستك من مجتمعنا الذي يضم أكثر من 3500 محترف من 75 دولة — وأن تُكتشف أنت أيضاً.</p>
+          <p>انضم في 3 دقائق: [رابط النموذج]</p>
+          <p>— فريق Dubai Podcast Studio</p>
+        </div>
+      </div>
+
+      <div class="tip"><strong>Expected response rate:</strong> A warm list of people who already know and trust DPS should see a 15–25% completion rate. On 3,500 past clients that is 525–875 initial members. Even at the low end, a 500-person network from day one is meaningful — and it grows automatically with every new booking from that point forward.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">18</div>
+      <h3>Ongoing — What Happens Without Any Action from the Team</h3>
+      <span class="step-tag">Zero ongoing effort</span>
+    </div>
+    <div class="step-body">
+      <p>Once the system is live and the seed broadcast is sent, the following happens automatically every week without any staff involvement:</p>
+      <ul>
+        <li>Every new Wix booking triggers Scenario 1 → client added to Airtable → invitation email scheduled</li>
+        <li>Every profile form submission triggers Scenario 2 → profile activated → appears in directory</li>
+        <li>Every introduction request triggers Scenarios 3 and 4 → recipient notified → booking link and credit sent automatically</li>
+        <li>Every network booking triggers Scenario 5 → profiles updated → connection marked complete</li>
+      </ul>
+      <div class="callout">
+        <div class="label">Weekly Admin — 20 Minutes Maximum</div>
+        <p>Once per week, open Airtable and check the Members table for any Pending profiles that are more than 7 days old (clients who received the invitation but never completed the form). Send a single WhatsApp follow-up to those clients. That is the full extent of manual work required to run the network.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY & COSTS -->
+<div class="mid">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">Summary</div>
+      <h2>Total Cost, Time & Tools</h2>
+    </div>
+
+    <table class="sum-table">
+      <thead><tr><th>Tool</th><th>Free Tier Limit</th><th>Cost to Scale</th><th>When You Hit the Limit</th></tr></thead>
+      <tbody>
+        <tr><td>Airtable</td><td>1,000 records / base</td><td>~360 AED/month (unlimited records)</td><td>After ~700 active members</td></tr>
+        <tr><td>Tally</td><td>Unlimited responses forever</td><td>Free (basic use)</td><td>Never, for this use case</td></tr>
+        <tr><td>Make</td><td>1,000 operations/month</td><td>~170 AED/month (10,000 ops)</td><td>After ~200 introductions/month</td></tr>
+        <tr><td>Wix Members</td><td>Included in your plan</td><td>0 AED</td><td>Never</td></tr>
+        <tr><td>Gmail (sending)</td><td>Included in Google account</td><td>0 AED</td><td>Never, for this volume</td></tr>
+        <tr class="total"><td>Total to launch</td><td colspan="2">0 AED</td><td>~530 AED/month at full scale</td></tr>
+      </tbody>
+    </table>
+
+    <table class="sum-table" style="margin-top:28px;">
+      <thead><tr><th>Phase</th><th>Task</th><th>Time Required</th></tr></thead>
+      <tbody>
+        <tr><td>Day 1 — Morning</td><td>Airtable setup (Steps 1–4)</td><td>2.5 hours</td></tr>
+        <tr><td>Day 1 — Afternoon</td><td>Tally forms (Steps 5–8)</td><td>1.5 hours</td></tr>
+        <tr><td>Day 2 — Morning</td><td>Wix member portal (Steps 9–11)</td><td>1.5 hours</td></tr>
+        <tr><td>Day 2 — Afternoon</td><td>Make automation scenarios (Steps 12–16)</td><td>3 hours</td></tr>
+        <tr><td>Day 3</td><td>Full end-to-end testing (Step 17 checklist)</td><td>2 hours</td></tr>
+        <tr><td>Day 4</td><td>Seed broadcast to past clients (Step 18)</td><td>2 hours</td></tr>
+        <tr class="total"><td>Total build time</td><td>—</td><td>~12 hours across 4 days</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="label">If You Get Stuck</div>
+      <p>The three most common points of friction are: (1) <strong>Make webhook mapping</strong> — if data from Wix or Tally is not reaching Airtable, click "Run once" in Make and check what the webhook receives. The field names must match exactly. (2) <strong>Airtable iframe in Wix</strong> — if the embed is blank, check that the Airtable share view is set to "Anyone with the link" and that Wix allows external embeds. (3) <strong>Hidden fields in Tally</strong> — test your URL parameters by pasting the full link into a browser and submitting the form. Check that hidden values appear in Tally's submission log.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>Dubai Podcast Studio</strong> · The Studio Network — Full Build Guide · Internal Operations · Confidential<br>
+  <span>Tamani Arts Building, Business Bay, Dubai · info@dubaipodcaststudio.com</span>
+</footer>
+
+</body>
+</html>
