@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DPS Summer 2026 — Meta Ads Campaign Brief</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:    #C9A84C;
+    --gold-lt: #E8C87A;
+    --bg:      #080808;
+    --bg2:     #111111;
+    --bg3:     #181818;
+    --border:  #252525;
+    --text:    #E8E8E8;
+    --muted:   #888888;
+    --red:     #E05555;
+    --green:   #4CAF82;
+    --blue:    #5B8FD4;
+    --purple:  #9B72CF;
+  }
+
+  html { font-size: 16px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ─── PAGE WRAPPER ─── */
+  .page { max-width: 900px; margin: 0 auto; padding: 60px 48px; }
+
+  /* ─── COVER ─── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 80px;
+  }
+  .cover-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .cover-title {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+  .cover-title span { color: var(--gold); }
+  .cover-sub {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 56px;
+    line-height: 1.6;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .cover-meta-item label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .cover-meta-item span {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .cover-bar {
+    position: absolute;
+    top: 0; left: -48px;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--gold), transparent);
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section { margin-bottom: 72px; page-break-inside: avoid; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  h2 span { color: var(--gold); }
+  .section-intro {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 680px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  /* ─── INSIGHT BOX ─── */
+  .insight {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+  .insight-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .insight p { font-size: 15px; line-height: 1.7; color: var(--text); }
+
+  /* ─── STAT ROW ─── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-card .val {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+  }
+  .stat-card .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── AD CARD ─── */
+  .ad-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    page-break-inside: avoid;
+  }
+  .ad-header {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .ad-number {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ad-name {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-top: 4px;
+  }
+  .ad-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  .badge-format { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+  .badge-goal   { background: rgba(91,143,212,0.15); color: var(--blue); border: 1px solid rgba(91,143,212,0.3); }
+  .badge-viral  { background: rgba(155,114,207,0.15); color: var(--purple); border: 1px solid rgba(155,114,207,0.3); }
+  .badge-conv   { background: rgba(76,175,130,0.15); color: var(--green); border: 1px solid rgba(76,175,130,0.3); }
+
+  .ad-body { padding: 32px; }
+
+  .ad-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  .ad-field label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .ad-field p { font-size: 14px; line-height: 1.65; }
+
+  /* ─── MOCKUP ─── */
+  .mockup {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 28px;
+  }
+  .mockup-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mockup-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .phone-frame {
+    background: #0f0f0f;
+    border: 2px solid #333;
+    border-radius: 16px;
+    padding: 0;
+    max-width: 320px;
+    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .phone-header {
+    background: #1a1a1a;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .avatar-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), #8B6914);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: #000;
+    flex-shrink: 0;
+  }
+  .phone-account { font-size: 11px; font-weight: 600; }
+  .phone-account span { display: block; font-size: 9px; color: var(--muted); font-weight: 400; }
+  .phone-dots { margin-left: auto; color: var(--muted); font-size: 16px; letter-spacing: 2px; }
+
+  .phone-visual {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+    text-align: center;
+  }
+  .phone-visual.dark-moody {
+    background: linear-gradient(160deg, #080808 0%, #141414 40%, #0c0a05 100%);
+  }
+  .phone-visual.contrast-split {
+    background: linear-gradient(135deg, #1a3a5c 0%, #0f2035 50%, #0a0808 50%, #1a0f0f 100%);
+  }
+  .phone-visual.story-bg {
+    background: linear-gradient(180deg, #0a0a12 0%, #12080a 100%);
+  }
+  .phone-visual.b2b-bg {
+    background: linear-gradient(145deg, #080f1a 0%, #0a0808 100%);
+  }
+
+  .headline-text {
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  }
+  .sub-text {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .cta-pill {
+    background: var(--gold);
+    color: #000;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 8px 20px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    display: inline-block;
+  }
+  .highlight { color: var(--gold); }
+  .phone-footer {
+    background: #1a1a1a;
+    padding: 10px 14px;
+    border-top: 1px solid #2a2a2a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .like-icons { display: flex; gap: 14px; }
+  .like-icons span { font-size: 16px; }
+  .caption-preview {
+    font-size: 10px;
+    color: var(--muted);
+    padding: 8px 14px 14px;
+    background: #1a1a1a;
+    line-height: 1.5;
+  }
+  .caption-preview strong { color: var(--text); font-weight: 600; }
+
+  /* ─── COPY BLOCK ─── */
+  .copy-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .copy-block h4 {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .copy-line {
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .copy-line strong {
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: inline-block;
+    width: 80px;
+    flex-shrink: 0;
+  }
+  .copy-line span { color: var(--text); }
+
+  /* ─── WHY IT WORKS ─── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .why-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 36px;
+  }
+  .why-item::before {
+    content: '✓';
+    position: absolute;
+    left: 14px;
+    top: 16px;
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  /* ─── KPI ROW ─── */
+  .kpi-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .kpi-pill {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  .kpi-pill .kv { font-weight: 700; color: var(--gold); }
+  .kpi-pill .kl { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; margin-left: 4px; }
+
+  /* ─── TARGETING TABLE ─── */
+  .target-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .target-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .target-card h4 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .target-card ul { list-style: none; }
+  .target-card ul li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .target-card ul li:last-child { border-bottom: none; }
+  .target-card ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; font-size: 11px; margin-top: 2px; }
+
+  /* ─── BENCHMARK TABLE ─── */
+  .bench-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+    font-size: 13px;
+  }
+  .bench-table th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+  }
+  .bench-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .bench-table tr:last-child td { border-bottom: none; }
+  .bench-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .val-good { color: var(--green); font-weight: 700; }
+  .val-warn { color: var(--gold); font-weight: 700; }
+
+  /* ─── BUDGET GRID ─── */
+  .budget-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .budget-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    text-align: center;
+  }
+  .budget-card .ad-ref { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 6px; }
+  .budget-card .pct { font-size: 30px; font-weight: 900; color: var(--gold); }
+  .budget-card .aed { font-size: 13px; color: var(--text); margin-top: 4px; }
+  .budget-card .purpose { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+  /* ─── CAROUSEL MOCKUP ─── */
+  .carousel-slides {
+    display: flex;
+    gap: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .slide {
+    flex: 0 0 80px;
+    height: 80px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    text-align: center;
+    padding: 8px;
+    line-height: 1.3;
+    border: 1px solid var(--border);
+  }
+  .slide-num {
+    font-size: 14px;
+    font-weight: 900;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .tl-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .tl-item .phase {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .tl-item .dates { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  .tl-item ul { list-style: none; }
+  .tl-item ul li { font-size: 12px; color: var(--muted); padding: 3px 0; }
+  .tl-item ul li::before { content: '— '; }
+
+  /* ─── AB TEST ─── */
+  .ab-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .ab-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 13px;
+  }
+  .ab-card .ab-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+    color: var(--blue);
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    body { background: #080808; }
+    .page { padding: 40px 36px; }
+    .cover { min-height: auto; padding: 60px 0; }
+    .cover-title { font-size: 48px; }
+    .ad-card { page-break-inside: avoid; }
+    .section { page-break-inside: avoid; }
+  }
+
+  /* misc utility */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .divider { height: 1px; background: var(--border); margin: 40px 0; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .pill { background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 4px 14px; font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════════════════════════ COVER ═══════════════════════════════ -->
+<div class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-eyebrow">Dubai Podcast Studio — Meta Ads Campaign Brief</div>
+  <h1 class="cover-title">Summer 2026<br /><span>Meta Ads.</span></h1>
+  <p class="cover-sub">
+    4 campaign-ready ads engineered to go viral, hold premium positioning, and convert during the most challenging
+    booking season of the year — without touching your price floor.
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <label>Campaign Window</label>
+      <span>Jun 1 → Sep 15, 2026</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Platform</label>
+      <span>Meta (IG + FB)</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Formats</label>
+      <span>Reel · Carousel · Static</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Objective Mix</label>
+      <span>Awareness + Conversion</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ STRATEGIC CONTEXT ═══════════════════════════════ -->
+<div class="section">
+  <div class="section-label">00 — Context</div>
+  <h2>The Summer <span>Brief</span></h2>
+  <p class="section-intro">
+    Summer in Dubai empties the city of tourists and sends many GCC nationals abroad. But it leaves behind
+    a high-value residual market of entrepreneurs, corporate marketing teams, and expat professionals —
+    people with more free time and real intent to act. Our ads speak exclusively to them.
+  </p>
+
+  <div class="insight">
+    <div class="insight-label">Core Strategic Insight</div>
+    <p>
+      Summer is not a threat — it is a selection filter. The people still in Dubai in July and August are
+      the most committed, most motivated professionals. They did not leave because they are building something.
+      These are our ideal clients. Every ad in this brief is written for them.
+    </p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="val">4</div>
+      <div class="lbl">Ads ready to launch</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">2</div>
+      <div class="lbl">Viral formats (Reel)</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">2</div>
+      <div class="lbl">Conversion formats</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">3</div>
+      <div class="lbl">Target audiences</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="insight" style="margin-bottom:0;">
+      <div class="insight-label">What We Are NOT Doing</div>
+      <p style="font-size:13px; line-height:1.7;">
+        No price-war messaging. No "50% off" panic discounts. No begging for bookings.
+        Every line of copy protects the premium brand that built DPS's #1 Google Review position.
+        Summer deals are framed as access, not desperation.
+      </p>
+    </div>
+    <div class="insight" style="margin-bottom:0; border-left-color: var(--blue);">
+      <div class="insight-label" style="color:var(--blue);">Creative Principle</div>
+      <p style="font-size:13px; line-height:1.7;">
+        Hook in 1.5 seconds (thumb-stop). Identity tap (speak to who they think they are,
+        not what they do). One clear CTA. Each ad tested with two copy variants — headline A/B
+        only, same visual, to isolate the winning message fast.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ AD 01 ═══════════════════════════════ -->
+<div class="section">
+  <div class="section-label">01 — Ad One</div>
+
+  <div class="ad-card">
+    <div class="ad-header">
+      <div>
+        <div class="ad-number">Ad 01 of 04</div>
+        <div class="ad-name">"While They Left, You Build"</div>
+      </div>
+      <div class="ad-badges">
+        <span class="badge badge-format">Reel · 15–22 sec</span>
+        <span class="badge badge-viral">Viral / Brand Awareness</span>
+        <span class="badge badge-goal">Reach + Engagement</span>
+      </div>
+    </div>
+    <div class="ad-body">
+
+      <div class="insight" style="border-left-color:var(--purple);">
+        <div class="insight-label" style="color:var(--purple);">The Psychology</div>
+        <p>
+          Dubai's entrepreneur culture runs on contrarianism and status. The "while everyone else does X, I do Y"
+          narrative is the single most shareable format in GCC social media — because it flatters the viewer's
+          identity. This ad doesn't sell a studio. It sells a self-image. People screenshot this and send it
+          to friends. That is free reach.
+        </p>
+      </div>
+
+      <div class="mockup">
+        <div class="mockup-label">Instagram Reel Preview</div>
+        <div class="phone-frame">
+          <div class="phone-header">
+            <div class="avatar-dot">DPS</div>
+            <div class="phone-account">dubaipodcaststudio <span>Sponsored</span></div>
+            <div class="phone-dots">···</div>
+          </div>
+          <div class="phone-visual dark-moody" style="aspect-ratio:9/16; max-height:280px;">
+            <!-- Scene 1 -->
+            <div style="font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px;">SCENE 1 → Empty city highway at dawn</div>
+            <div class="headline-text" style="font-size:22px;">Everyone left<br/>Dubai.</div>
+            <div style="margin:16px 0; font-size:20px; color:rgba(255,255,255,0.15);">—</div>
+            <div style="font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px;">SCENE 2 → Studio mic in dark room</div>
+            <div class="headline-text" style="font-size:19px; color:var(--gold);">You stayed.<br/>Now record.</div>
+            <div style="margin-top:20px;">
+              <div class="cta-pill">Book a Studio →</div>
+            </div>
+          </div>
+          <div class="phone-footer">
+            <div class="like-icons"><span>🤍</span><span>💬</span><span>↗</span></div>
+            <div style="margin-left:auto; font-size:10px;">🔖</div>
+          </div>
+          <div class="caption-preview">
+            <strong>dubaipodcaststudio</strong> The city is quiet. The mic is open. 7 studios in Business Bay — available now. Link in bio.
+          </div>
+        </div>
+      </div>
+
+      <div class="copy-block">
+        <h4>Full Ad Script — Reel (22 sec)</h4>
+        <div class="copy-line"><strong>Hook (0–2s)</strong> <span>Black screen. White text fades in: <em>"Everyone left Dubai."</em></span></div>
+        <div class="copy-line"><strong>Scene 1 (2–6s)</strong> <span>Slow aerial or timelapse of empty Dubai Marina highway at 6am. No voiceover. Silence hits.</span></div>
+        <div class="copy-line"><strong>Text cut (6–8s)</strong> <span>"Bali. Paris. Thailand." — each word flashes on screen, pauses.</span></div>
+        <div class="copy-line"><strong>Scene 2 (8–13s)</strong> <span>Cut hard. Dark studio. A person sits down, adjusts headphones. Pulls the mic close. Studio lights warm up.</span></div>
+        <div class="copy-line"><strong>Text cut (13–17s)</strong> <span>"You stayed. Now record." — gold type. Holds 3 seconds.</span></div>
+        <div class="copy-line"><strong>End card (17–22s)</strong> <span>DPS logo. "7 Studios · Business Bay · From 299 AED" — CTA button: <strong>Book Your Session</strong></span></div>
+        <div class="copy-line"><strong>Music</strong> <span>Low, cinematic build — no lyrics. Goes slightly louder at Scene 2 cut. (Try: Epidemic Sound "Late Night Drive" type.)</span></div>
+        <div class="copy-line"><strong>Caption</strong> <span>"The city is quiet. The mic is open. DPS Studios — Business Bay, Dubai. Link in bio."</span></div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">A/B Headline Test</div>
+        <div class="ab-row">
+          <div class="ab-card">
+            <div class="ab-tag">Variant A — Identity</div>
+            "Everyone left Dubai. You stayed. Now record."
+          </div>
+          <div class="ab-card">
+            <div class="ab-tag">Variant B — Action</div>
+            "While they're on vacation, you're building your brand."
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:13px; font-weight:700; color:var(--text); margin-bottom:10px;">Why This Goes Viral</div>
+      <div class="why-grid">
+        <div class="why-item">Pattern interrupt: silence + empty city = thumb-stop guaranteed</div>
+        <div class="why-item">Identity flattery: "I'm the one who stayed and worked" — people repost this</div>
+        <div class="why-item">No selling in first 13 seconds — it earns attention before asking</div>
+        <div class="why-item">Hard cut from empty city → studio warmth = emotional contrast dopamine</div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-pill"><span class="kv">3–6%</span><span class="kl">Target Engagement Rate</span></div>
+        <div class="kpi-pill"><span class="kv">&gt;2%</span><span class="kl">Save Rate (viral signal)</span></div>
+        <div class="kpi-pill"><span class="kv">40%+</span><span class="kl">Video Watch-Through</span></div>
+        <div class="kpi-pill"><span class="kv">AED 18–35</span><span class="kl">Target CPM</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ AD 02 ═══════════════════════════════ -->
+<div class="section">
+  <div class="section-label">02 — Ad Two</div>
+
+  <div class="ad-card">
+    <div class="ad-header">
+      <div>
+        <div class="ad-number">Ad 02 of 04</div>
+        <div class="ad-name">"The Summer Membership Drop"</div>
+      </div>
+      <div class="ad-badges">
+        <span class="badge badge-format">Static + Carousel · 5 slides</span>
+        <span class="badge badge-conv">Direct Response</span>
+        <span class="badge badge-goal">Conversions / Leads</span>
+      </div>
+    </div>
+    <div class="ad-body">
+
+      <div class="insight" style="border-left-color:var(--green);">
+        <div class="insight-label" style="color:var(--green);">The Psychology</div>
+        <p>
+          Summer is when people make decisions they've been postponing. "I've always wanted to start a podcast"
+          becomes real in July when meetings drop, schedules open, and the mental bandwidth finally arrives.
+          This ad creates urgency around a deal — but frames the deal as exclusive access, not desperation.
+          "Summer Membership" sounds like a limited launch, not a discount.
+        </p>
+      </div>
+
+      <div class="mockup">
+        <div class="mockup-label">Carousel Ad — 5 Slides</div>
+        <div class="carousel-slides">
+          <div class="slide" style="background:linear-gradient(135deg,#1a1200,#0f0f0f); color:var(--gold); border-color:#333;">
+            <span class="slide-num">01</span>
+            You've been meaning to start for 6 months.
+          </div>
+          <div class="slide" style="background:#141414; color:var(--text); border-color:#333;">
+            <span class="slide-num" style="color:var(--gold);">02</span>
+            Summer just opened your calendar.
+          </div>
+          <div class="slide" style="background:#141414; color:var(--text); border-color:#333;">
+            <span class="slide-num" style="color:var(--gold);">03</span>
+            7 studios. Business Bay. From 1,600 AED/mo.
+          </div>
+          <div class="slide" style="background:#141414; color:var(--text); border-color:#333;">
+            <span class="slide-num" style="color:var(--gold);">04</span>
+            AI Reels included. Editing done for you.
+          </div>
+          <div class="slide" style="background:linear-gradient(135deg,#1a1200,#0f0f0f); color:var(--gold); border-color:#555;">
+            <span class="slide-num">05</span>
+            Summer Member spots: limited.
+          </div>
+        </div>
+        <div style="font-size:11px; color:var(--muted); text-align:center;">← swipe → (carousel stops people, last slide creates urgency)</div>
+      </div>
+
+      <div class="copy-block">
+        <h4>Slide-by-Slide Copy</h4>
+        <div class="copy-line"><strong>Slide 01</strong> <span><em>"You've been saying 'I'll start my podcast' for 6 months."</em> — Dark gold background. Bold 24px. This line is the hook — it's personal, it's true, it stings slightly.</span></div>
+        <div class="copy-line"><strong>Slide 02</strong> <span><em>"Summer just opened your calendar."</em> — Minimal dark card. One sentence. Reframes summer as the gift of time, not an obstacle.</span></div>
+        <div class="copy-line"><strong>Slide 03</strong> <span><em>"DPS Studios — Business Bay. 7 professional studios. Memberships from 1,600 AED/month."</em> — Studio photo background, minimal overlay. Product reveal.</span></div>
+        <div class="copy-line"><strong>Slide 04</strong> <span><em>"AI-powered Reels from every session. Editing done for you. Your voice, everywhere — automatically."</em> — Feature proof. Removes the "I don't have time to edit" objection.</span></div>
+        <div class="copy-line"><strong>Slide 05</strong> <span><em>"Summer Member spots are limited. Don't wait until September."</em> — Urgency close. Gold background, CTA button: <strong>Claim Your Spot</strong>.</span></div>
+        <div class="copy-line"><strong>Caption</strong> <span>"The podcast you've been putting off. The summer you finally have time. DPS Members get studios on demand, AI content creation, and full editing. Limited summer spots available. Link in bio."</span></div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">A/B Headline Test</div>
+        <div class="ab-row">
+          <div class="ab-card">
+            <div class="ab-tag">Variant A — Guilt</div>
+            "You've been saying 'I'll start my podcast' for 6 months."
+          </div>
+          <div class="ab-card">
+            <div class="ab-tag">Variant B — Opportunity</div>
+            "Summer is the best time to launch a podcast. Here's why."
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:13px; font-weight:700; color:var(--text); margin-bottom:10px;">Why This Converts</div>
+      <div class="why-grid">
+        <div class="why-item">Slide 01 speaks directly to the procrastinator mind — feels personalised, earns the swipe</div>
+        <div class="why-item">Carousel format keeps people on the ad 4–6 seconds longer than static — more scroll depth = more intent signal to the algorithm</div>
+        <div class="why-item">"Spots limited" is true (studio capacity exists) — urgency without dishonesty</div>
+        <div class="why-item">Objection removal built into slide 04: editing handled, no creative dependency on the client</div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-pill"><span class="kv">2–4%</span><span class="kl">CTR Target</span></div>
+        <div class="kpi-pill"><span class="kv">AED 80–140</span><span class="kl">Target CPL</span></div>
+        <div class="kpi-pill"><span class="kv">3.5+</span><span class="kl">Carousel Swipe Rate</span></div>
+        <div class="kpi-pill"><span class="kv">Conversions</span><span class="kl">Campaign Objective</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ AD 03 ═══════════════════════════════ -->
+<div class="section">
+  <div class="section-label">03 — Ad Three</div>
+
+  <div class="ad-card">
+    <div class="ad-header">
+      <div>
+        <div class="ad-number">Ad 03 of 04</div>
+        <div class="ad-name">"The September Advantage"</div>
+      </div>
+      <div class="ad-badges">
+        <span class="badge badge-format">Reel · 30 sec</span>
+        <span class="badge badge-viral">Viral / Social Proof</span>
+        <span class="badge badge-goal">Brand Trust + Retargeting</span>
+      </div>
+    </div>
+    <div class="ad-body">
+
+      <div class="insight" style="border-left-color:var(--gold);">
+        <div class="insight-label">The Psychology</div>
+        <p>
+          This is the "transformation narrative" — the most trusted format in content marketing, benchmarked
+          against ads by Gymshark, Morning Brew, and Notion. The structure is always: relatable starting point
+          → moment of decision → clear result. It works because people project themselves into the protagonist.
+          We are not selling a studio. We are selling September: the month they come back ahead.
+        </p>
+      </div>
+
+      <div class="mockup">
+        <div class="mockup-label">Instagram Reel Preview</div>
+        <div class="phone-frame">
+          <div class="phone-header">
+            <div class="avatar-dot">DPS</div>
+            <div class="phone-account">dubaipodcaststudio <span>Sponsored</span></div>
+            <div class="phone-dots">···</div>
+          </div>
+          <div class="phone-visual story-bg" style="aspect-ratio:9/16; max-height:280px;">
+            <div style="font-size:9px; color:rgba(255,255,255,0.3); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:20px;">TESTIMONIAL-STYLE REEL FORMAT</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.5); margin-bottom:8px;">June 2026</div>
+            <div class="headline-text" style="font-size:16px; color:rgba(255,255,255,0.7);">"I recorded 12 episodes<br/>this summer."</div>
+            <div style="margin:20px 0; font-size:10px; color:rgba(255,255,255,0.2); letter-spacing:0.1em;">↓ September</div>
+            <div class="headline-text" style="font-size:18px; color:var(--gold);">3,000 listeners.<br/>First sponsorship deal.</div>
+            <div style="margin-top:16px; font-size:9px; color:rgba(255,255,255,0.35);">This is what recording in summer looks like.</div>
+            <div style="margin-top:14px;"><div class="cta-pill" style="font-size:9px;">Start Your Story →</div></div>
+          </div>
+          <div class="phone-footer">
+            <div class="like-icons"><span>🤍</span><span>💬</span><span>↗</span></div>
+            <div style="margin-left:auto;">🔖</div>
+          </div>
+          <div class="caption-preview">
+            <strong>dubaipodcaststudio</strong> The best time to start was last summer. The next best time is right now. 🎙️
+          </div>
+        </div>
+      </div>
+
+      <div class="copy-block">
+        <h4>Reel Script — 30 sec (Testimonial Style)</h4>
+        <div class="copy-line"><strong>Hook (0–3s)</strong> <span>Direct to camera: person sitting in DPS studio. Candid. They say: <em>"Honestly, I almost didn't record this summer."</em> — No title card. No logo. Raw open.</span></div>
+        <div class="copy-line"><strong>Story (3–12s)</strong> <span>Quick cut to laptop, empty calendar. They continue: <em>"It felt like the wrong time. Dubai was quiet, everyone was away."</em> Text overlay: "June 2026."</span></div>
+        <div class="copy-line"><strong>Turn (12–18s)</strong> <span>Cut to them recording at the mic — headphones on, focused. VO: <em>"I booked 12 sessions over the summer. Just to build the habit."</em></span></div>
+        <div class="copy-line"><strong>Result (18–24s)</strong> <span>Phone screen showing podcast stats. VO: <em>"September came. I had 3,000 listeners before anyone else had even started."</em> Text: "September 2026."</span></div>
+        <div class="copy-line"><strong>Close (24–30s)</strong> <span>Back to them in the studio, smiling. Direct camera: <em>"Don't wait for the right season. The right season is now."</em> — DPS logo fades in. CTA: <strong>Start Your Story →</strong></span></div>
+        <div class="copy-line"><strong>Caption</strong> <span>"The best time to start was last summer. The next best time is right now. DPS Studios — 7 studios in Business Bay. Link in bio."</span></div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">Production Notes</div>
+        <div class="ab-row">
+          <div class="ab-card">
+            <div class="ab-tag">Option A — Client Story</div>
+            Use a real past DPS client. Brief them in 10 minutes. Raw/candid beats polished. Authenticity is the point. Offer a free session in exchange.
+          </div>
+          <div class="ab-card">
+            <div class="ab-tag">Option B — Scripted Talent</div>
+            If no client available, hire a UGC creator (fiverr.ae or local creators). Give them the script as talking points, not word-for-word. Must feel spontaneous.
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:13px; font-weight:700; color:var(--text); margin-bottom:10px;">Why This Earns Trust</div>
+      <div class="why-grid">
+        <div class="why-item">Story format = highest average watch-time on Reels (benchmark: 55–70% watch-through vs 25–35% for pure product ads)</div>
+        <div class="why-item">Specific numbers (12 episodes, 3,000 listeners) are far more believable than vague claims like "grow your audience"</div>
+        <div class="why-item">Shot inside the DPS studio — the set design is the proof. Premium environment visible throughout</div>
+        <div class="why-item">Works as retargeting for anyone who visited the website but didn't book — this closes the trust gap</div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-pill"><span class="kv">55–70%</span><span class="kl">Watch-Through Target</span></div>
+        <div class="kpi-pill"><span class="kv">&gt;1.5%</span><span class="kl">Share Rate (viral)</span></div>
+        <div class="kpi-pill"><span class="kv">Retargeting</span><span class="kl">Best use case</span></div>
+        <div class="kpi-pill"><span class="kv">AED 60–100</span><span class="kl">CPL (warm audience)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ AD 04 ═══════════════════════════════ -->
+<div class="section">
+  <div class="section-label">04 — Ad Four</div>
+
+  <div class="ad-card">
+    <div class="ad-header">
+      <div>
+        <div class="ad-number">Ad 04 of 04</div>
+        <div class="ad-name">"The Q3 Content Machine" (B2B)</div>
+      </div>
+      <div class="ad-badges">
+        <span class="badge badge-format">Carousel · 6 slides</span>
+        <span class="badge badge-conv">B2B / Corporate</span>
+        <span class="badge badge-goal">Lead Gen — Corporate Package</span>
+      </div>
+    </div>
+    <div class="ad-body">
+
+      <div class="insight" style="border-left-color:var(--blue);">
+        <div class="insight-label" style="color:var(--blue);">The Psychology</div>
+        <p>
+          Corporate marketing managers and business owners have a quarterly content problem: Q3 summer is dead
+          on their calendar, but Q4 requires a full content pipeline. The smart ones batch-record in summer
+          while the studio is available and team schedules are open. This ad speaks their language: ROI,
+          efficiency, output. It targets decision-makers via Facebook (desktop, aged 28–45) and Instagram
+          (mobile, scrolling between meetings). This is DPS's highest-value booking category.
+        </p>
+      </div>
+
+      <div class="copy-block">
+        <h4>Slide-by-Slide Copy — Corporate Carousel</h4>
+        <div class="copy-line"><strong>Slide 01</strong> <span><em>"Your Q3 content plan shouldn't sit empty until September."</em> — Business-toned headline. Dark background. Gold accent line. This is the pattern interrupt for any marketing manager who's staring at a blank Q3 calendar.</span></div>
+        <div class="copy-line"><strong>Slide 02</strong> <span><em>"While your competitors take summer off — you could have 12 podcast episodes ready to publish."</em> — Competitive framing. One sentence per card. Clean typography.</span></div>
+        <div class="copy-line"><strong>Slide 03</strong> <span><em>"Batch-record a full quarter of content in 2 days."</em> Subtext: "Our team handles recording, editing, mixing, and delivery. Your team shows up and speaks." — Removes the perceived effort barrier.</span></div>
+        <div class="copy-line"><strong>Slide 04</strong> <span>Studio photography: multiple rooms, equipment, professional setup. Caption: <em>"7 broadcast-ready studios in Business Bay. The infrastructure is already here."</em></span></div>
+        <div class="copy-line"><strong>Slide 05</strong> <span><em>"Corporate podcast packages include: studio time · professional mixing · branded intro/outro · AI Reels clips · same-day delivery."</em> — Feature list. Business buyers need to see deliverables.</span></div>
+        <div class="copy-line"><strong>Slide 06</strong> <span><em>"Book a free studio tour this week."</em> CTA: <strong>Reserve a Tour →</strong> — Low commitment ask. Tour = qualified lead conversation. Much easier yes than "book a session."</span></div>
+        <div class="copy-line"><strong>Caption</strong> <span>"Q3 doesn't have to be empty. Batch-record your entire quarter of content while the city is quiet. Corporate packages available — studio tour takes 20 minutes. Book this week. Link in bio."</span></div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">A/B Headline Test</div>
+        <div class="ab-row">
+          <div class="ab-card">
+            <div class="ab-tag">Variant A — FOMO</div>
+            "Your Q3 content plan shouldn't sit empty until September."
+          </div>
+          <div class="ab-card">
+            <div class="ab-tag">Variant B — Output</div>
+            "What if you came back in September with 12 episodes already published?"
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">B2B Targeting Setup</div>
+        <div class="why-grid">
+          <div class="why-item">Job titles: Marketing Manager, Head of Marketing, Marketing Director, Chief Marketing Officer, Founder, CEO (company size 10–200)</div>
+          <div class="why-item">Interests: Content Marketing, B2B Marketing, Podcast Production, Digital Marketing, Business Strategy</div>
+          <div class="why-item">Behaviours: Engaged Business Page admins, Frequent travellers (business), Small business owners</div>
+          <div class="why-item">Geography: Dubai, Abu Dhabi, Sharjah — aged 28–50 — desktop + mobile both active</div>
+        </div>
+      </div>
+
+      <div style="font-size:13px; font-weight:700; color:var(--text); margin-bottom:10px;">Why "Book a Tour" Beats "Book a Session"</div>
+      <div class="insight" style="border-left-color:var(--blue); margin-bottom:20px;">
+        <div class="insight-label" style="color:var(--blue);">Benchmark: B2B SaaS CRO Principle Applied to Physical Space</div>
+        <p style="font-size:13px; line-height:1.7;">
+          In B2B sales, the biggest conversion bottleneck is commitment size. Asking a marketing manager to approve a
+          corporate session booking requires a budget sign-off, vendor approval, and scheduling alignment — weeks of
+          friction. Asking them to spend 20 minutes on a free studio tour? That's a no-brainer yes. Close rate from
+          qualified tour to booking is typically 40–60% for premium creative spaces. The tour is not a cost — it is
+          the sales mechanism.
+        </p>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-pill"><span class="kv">AED 150–250</span><span class="kl">Target CPL (B2B)</span></div>
+        <div class="kpi-pill"><span class="kv">40–60%</span><span class="kl">Tour → Booking Rate</span></div>
+        <div class="kpi-pill"><span class="kv">Facebook Feed</span><span class="kl">Primary Placement</span></div>
+        <div class="kpi-pill"><span class="kv">Lead Gen Form</span><span class="kl">Campaign Objective</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ AUDIENCE TARGETING ═══════════════════════════════ -->
+<div class="section">
+  <div class="section-label">05 — Targeting</div>
+  <h2>Audience <span>Setup</span></h2>
+  <p class="section-intro">
+    Three clean audiences. No overlap. Each audience gets its own ad set so we can see performance by
+    segment and scale what works. No broad targeting — we can't afford wasted impressions in summer.
+  </p>
+
+  <div class="target-grid">
+    <div class="target-card">
+      <h4>Audience 1 — The Creator / Entrepreneur</h4>
+      <ul>
+        <li>Age 25–42, Dubai + Abu Dhabi</li>
+        <li>Interests: podcasting, content creation, personal branding, entrepreneurship</li>
+        <li>Behaviours: Engaged with media/publishing pages</li>
+        <li>Instagram-first (mobile, evening scroll)</li>
+        <li>Ads 01 + 03 (Reels format)</li>
+      </ul>
+    </div>
+    <div class="target-card">
+      <h4>Audience 2 — The Procrastinator</h4>
+      <ul>
+        <li>Age 28–45, Dubai residents</li>
+        <li>Interests: self-improvement, productivity, side hustle, YouTube/Spotify</li>
+        <li>Lookalike of existing DPS Instagram followers (1–3%)</li>
+        <li>Exclude: people who already booked (pixel event)</li>
+        <li>Ad 02 (Summer Membership Carousel)</li>
+      </ul>
+    </div>
+    <div class="target-card">
+      <h4>Audience 3 — Corporate Decision-Maker</h4>
+      <ul>
+        <li>Age 30–50, Dubai + Abu Dhabi</li>
+        <li>Job: Marketing Manager, CMO, Founder, Head of Comms</li>
+        <li>Company size 10–500 (B2B sweet spot)</li>
+        <li>Facebook desktop + LinkedIn interest overlap</li>
+        <li>Ad 04 (B2B Corporate Carousel)</li>
+      </ul>
+    </div>
+    <div class="target-card">
+      <h4>Retargeting Audience — Warm</h4>
+      <ul>
+        <li>Website visitors last 30 days (pixel)</li>
+        <li>Video viewers 50%+ of any DPS video</li>
+        <li>Instagram profile engagers last 60 days</li>
+        <li>Exclude: existing members, past bookers</li>
+        <li>Ad 03 (Story/Trust closer — best retargeting format)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ BUDGET ═══════════════════════════════ -->
+<div class="section">
+  <div class="section-label">06 — Budget</div>
+  <h2>Budget <span>Allocation</span></h2>
+  <p class="section-intro">
+    Recommended spend for a 10-week summer campaign (June 1 → Sep 15). Adjust to your actual budget —
+    the percentage split stays the same. Minimum viable budget to get meaningful data: AED 3,000/month.
+  </p>
+
+  <div class="insight">
+    <div class="insight-label">Budget Principle</div>
+    <p>
+      Start all 4 ads simultaneously at equal spend for the first 7 days. At day 7, pause the
+      lowest-performing ad and double the budget of the top performer. Repeat at day 14. By week 3,
+      you are running the winning ad with 60–70% of budget. This is standard Meta media buying practice.
+    </p>
+  </div>
+
+  <div class="budget-grid">
+    <div class="budget-card">
+      <div class="ad-ref">Ad 01</div>
+      <div class="pct">30%</div>
+      <div class="aed">AED 900/mo</div>
+      <div class="purpose">Viral reach — feeds the top of funnel for all other ads</div>
+    </div>
+    <div class="budget-card">
+      <div class="ad-ref">Ad 02</div>
+      <div class="pct">25%</div>
+      <div class="aed">AED 750/mo</div>
+      <div class="purpose">Direct conversion — membership and session bookings</div>
+    </div>
+    <div class="budget-card">
+      <div class="ad-ref">Ad 03</div>
+      <div class="pct">20%</div>
+      <div class="aed">AED 600/mo</div>
+      <div class="purpose">Retargeting warm audiences — closes the trust gap</div>
+    </div>
+    <div class="budget-card">
+      <div class="ad-ref">Ad 04</div>
+      <div class="pct">25%</div>
+      <div class="aed">AED 750/mo</div>
+      <div class="purpose">B2B corporate leads — highest value per booking</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="phase">Phase 1</div>
+      <div class="dates">Jun 1 → Jun 14</div>
+      <ul>
+        <li>Launch all 4 ads equally</li>
+        <li>A/B test headlines live</li>
+        <li>Monitor CTR + CPM daily</li>
+        <li>Kill underperforming variant at day 7</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="phase">Phase 2</div>
+      <div class="dates">Jun 15 → Jul 31</div>
+      <ul>
+        <li>Scale winning ad to 60% budget</li>
+        <li>Refresh creative on any ad with CTR decline</li>
+        <li>Launch retargeting (Ad 03) to pixel audiences</li>
+        <li>Weekly performance review</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="phase">Phase 3</div>
+      <div class="dates">Aug 1 → Sep 15</div>
+      <ul>
+        <li>Push B2B ad harder (Sep planning mindset begins)</li>
+        <li>"Last summer spots" urgency update to Ad 02 copy</li>
+        <li>Lookalike expansion from converters</li>
+        <li>Prepare October re-launch creative</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ BENCHMARKS ═══════════════════════════════ -->
+<div class="section">
+  <div class="section-label">07 — Benchmarks</div>
+  <h2>UAE Meta Ads <span>Benchmarks 2025–26</span></h2>
+  <p class="section-intro">
+    Reference data from Meta's UAE creative industry performance averages, cross-checked against campaigns
+    run for premium lifestyle and B2B service brands in Dubai. Use these to judge performance — not global averages.
+  </p>
+
+  <table class="bench-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>UAE Industry Avg</th>
+        <th>DPS Target</th>
+        <th>What It Means If Below Target</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CTR (Link)</strong></td>
+        <td>0.9 – 1.5%</td>
+        <td class="val-good">2.0 – 4.0%</td>
+        <td>Hook is not stopping the scroll — test a new first frame or first line of caption</td>
+      </tr>
+      <tr>
+        <td><strong>CPM (AED)</strong></td>
+        <td>35 – 60</td>
+        <td class="val-good">18 – 40</td>
+        <td>Audience is too broad or creative relevance score is low — tighten targeting</td>
+      </tr>
+      <tr>
+        <td><strong>CPC (AED)</strong></td>
+        <td>4 – 12</td>
+        <td class="val-good">2 – 6</td>
+        <td>Landing page / booking page is killing the conversion — fix the CTA or the page</td>
+      </tr>
+      <tr>
+        <td><strong>Video Watch-Through (15s)</strong></td>
+        <td>25 – 35%</td>
+        <td class="val-good">40 – 65%</td>
+        <td>Opening 3 seconds are not engaging — re-cut the hook, tighter opening</td>
+      </tr>
+      <tr>
+        <td><strong>Carousel Swipe Rate</strong></td>
+        <td>2.5 – 4 slides avg</td>
+        <td class="val-good">3.5 – 5 slides avg</td>
+        <td>Slide 1 is not compelling enough to earn the swipe — sharpen the opening hook</td>
+      </tr>
+      <tr>
+        <td><strong>Save Rate (Reels)</strong></td>
+        <td>0.5 – 1.2%</td>
+        <td class="val-good">&gt; 2%</td>
+        <td>Content is not valuable enough to save — add more insight or identity resonance</td>
+      </tr>
+      <tr>
+        <td><strong>CPL — Consumer (AED)</strong></td>
+        <td>120 – 200</td>
+        <td class="val-good">80 – 140</td>
+        <td>Targeting is off or offer is not clear — simplify the CTA, check audience overlap</td>
+      </tr>
+      <tr>
+        <td><strong>CPL — Corporate (AED)</strong></td>
+        <td>200 – 400</td>
+        <td class="val-warn">150 – 250</td>
+        <td>B2B CPL is higher by nature — evaluate cost per tour booked, not just per lead</td>
+      </tr>
+      <tr>
+        <td><strong>Frequency (monthly)</strong></td>
+        <td>3 – 8x</td>
+        <td class="val-good">4 – 7x</td>
+        <td>Above 8: ad fatigue is setting in — refresh the creative or the thumbnail</td>
+      </tr>
+      <tr>
+        <td><strong>Conversion Rate (landing page)</strong></td>
+        <td>1.5 – 3%</td>
+        <td class="val-good">3 – 6%</td>
+        <td>The ad is converting clicks but the page is not converting — separate problem to solve</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="insight">
+    <div class="insight-label">The One Metric That Overrides All Others</div>
+    <p>
+      Cost per booking (CPB) — not CPL. A lead is worthless until it books. Set up a Meta pixel conversion event
+      on the booking confirmation page, then optimise every ad for that event by week 3. Everything else is a
+      diagnostic. CPB is the verdict.
+    </p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ CREATIVE PRODUCTION ═══════════════════════════════ -->
+<div class="section">
+  <div class="section-label">08 — Production</div>
+  <h2>Creative <span>Production Notes</span></h2>
+  <p class="section-intro">
+    You have 6 staff. Production must be lean. Here is exactly how to produce all 4 ads
+    in a single half-day shoot.
+  </p>
+
+  <div class="target-grid">
+    <div class="target-card">
+      <h4>What You Need to Shoot</h4>
+      <ul>
+        <li>Empty Dubai highway / street at 6–7am (Ad 01 hook) — iPhone on a tripod, slow-motion, 15 sec</li>
+        <li>Someone entering the DPS studio, adjusting mic, putting on headphones — studio lights on (Ad 01, 03)</li>
+        <li>Studio overview shots — all 7 studios, equipment close-ups (Ad 04)</li>
+        <li>Person on camera talking (Ad 03 testimonial) — raw, 90 seconds of talking points</li>
+        <li>Phone screen recording showing "podcast stats" (you can mock this in Spotify)</li>
+      </ul>
+    </div>
+    <div class="target-card">
+      <h4>What You Do Not Need to Shoot</h4>
+      <ul>
+        <li>No fancy camera gear — iPhone 15 Pro is better than a DSLR for Instagram Reels in 2025</li>
+        <li>No professional lighting crew — DPS studios already have broadcast lighting</li>
+        <li>No voice-over artist — music + text overlays carry Ads 01 and 02 entirely</li>
+        <li>No external location hire — every shot is either inside DPS or on a public Dubai street</li>
+        <li>No post-production agency — CapCut or Premiere Rush handles the edits</li>
+      </ul>
+    </div>
+    <div class="target-card">
+      <h4>Editing Instructions (CapCut)</h4>
+      <ul>
+        <li>All Reels: 9:16 vertical, 1080×1920px minimum</li>
+        <li>Static/Carousel: 1:1 square, 1080×1080px — clean dark background</li>
+        <li>Subtitles on all Reels (85% of Instagram watched without sound)</li>
+        <li>Font: Bold Sans-Serif (DPS gold for key words, white for body text)</li>
+        <li>No transitions — hard cuts only. Transitions signal amateur editing in 2025/26</li>
+      </ul>
+    </div>
+    <div class="target-card">
+      <h4>Music Licensing (Royalty-Free)</h4>
+      <ul>
+        <li>Epidemic Sound (subscription ~$15/mo) — best for Dubai business/premium feel</li>
+        <li>Search tags: "cinematic dark minimal", "building tension instrumental"</li>
+        <li>Do NOT use trending IG audio for conversion ads — it distracts from the message</li>
+        <li>Keep music at -18db so it sits under text/visuals, not over them</li>
+        <li>Fade out in last 3 seconds of Reels — creates a clean moment for the CTA</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<div class="footer">
+  <div>
+    <div style="font-weight:700; color:var(--text); margin-bottom:4px;">Dubai Podcast Studio</div>
+    <div>Summer Meta Ads Campaign Brief — 2026</div>
+  </div>
+  <div style="text-align:right;">
+    <div>Confidential — Internal Use Only</div>
+    <div style="color:var(--gold); margin-top:2px;">dubaipodcaststudio.com</div>
+  </div>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

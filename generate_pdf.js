@@ -5,6 +5,7 @@ const docs = [
   { html: 'dps_recovery_strategy_2026.html',      pdf: 'dps_recovery_strategy_2026.pdf' },
   { html: 'dps_competitive_moat.html',             pdf: 'dps_competitive_moat.pdf' },
   { html: 'dps_studio_network_build_guide.html',   pdf: 'dps_studio_network_build_guide.pdf' },
+  { html: 'dps_summer_meta_ads_2026.html',         pdf: 'dps_summer_meta_ads_2026.pdf' },
 ];
 
 (async () => {
