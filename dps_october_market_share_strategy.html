@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DPS — October Market Share Strategy 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:    #C9A84C;
+    --gold-lt: #E8C87A;
+    --bg:      #080808;
+    --bg2:     #111111;
+    --bg3:     #181818;
+    --border:  #252525;
+    --text:    #E8E8E8;
+    --muted:   #888888;
+    --red:     #E05555;
+    --green:   #4CAF82;
+    --blue:    #5B8FD4;
+    --purple:  #9B72CF;
+    --orange:  #E07B40;
+  }
+
+  html { font-size: 16px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 60px 48px; }
+
+  /* ─── COVER ─── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 80px;
+  }
+  .cover-bar {
+    position: absolute;
+    top: 0; left: -48px;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--gold), transparent);
+  }
+  .cover-eyebrow {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 28px;
+  }
+  .cover-title {
+    font-size: 62px; font-weight: 900;
+    line-height: 1.05; letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+  .cover-title span { color: var(--gold); }
+  .cover-sub {
+    font-size: 19px; font-weight: 300;
+    color: var(--muted); max-width: 540px;
+    margin-bottom: 56px; line-height: 1.65;
+  }
+  .cover-meta { display: flex; gap: 48px; flex-wrap: wrap; }
+  .cover-meta-item label {
+    display: block; font-size: 10px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  .cover-meta-item span { font-size: 15px; font-weight: 600; }
+
+  /* ─── SECTION ─── */
+  .section { margin-bottom: 72px; }
+  .section-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 {
+    font-size: 36px; font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  h2 span { color: var(--gold); }
+  .section-intro {
+    font-size: 16px; color: var(--muted);
+    max-width: 680px; margin-bottom: 40px; line-height: 1.7;
+  }
+
+  /* ─── INSIGHT ─── */
+  .insight {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+  .insight-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .insight p { font-size: 15px; line-height: 1.7; }
+
+  /* ─── STAT ROW ─── */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-bottom: 40px;
+  }
+  .stat-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px; text-align: center;
+  }
+  .stat-card .val {
+    font-size: 30px; font-weight: 800;
+    color: var(--gold); letter-spacing: -0.02em;
+  }
+  .stat-card .lbl {
+    font-size: 11px; color: var(--muted);
+    margin-top: 4px; line-height: 1.4;
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  /* ─── PILLAR CARD ─── */
+  .pillar {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 44px;
+    page-break-inside: avoid;
+  }
+  .pillar-header {
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  }
+  .pillar-num {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 6px;
+  }
+  .pillar-title { font-size: 24px; font-weight: 800; letter-spacing: -0.01em; }
+  .pillar-sub { font-size: 14px; color: var(--muted); margin-top: 6px; }
+  .pillar-tag {
+    font-size: 11px; font-weight: 700;
+    padding: 6px 16px; border-radius: 20px;
+    white-space: nowrap; align-self: flex-start;
+  }
+  .tag-gold   { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+  .tag-green  { background: rgba(76,175,130,0.15); color: var(--green); border: 1px solid rgba(76,175,130,0.3); }
+  .tag-blue   { background: rgba(91,143,212,0.15); color: var(--blue); border: 1px solid rgba(91,143,212,0.3); }
+  .tag-purple { background: rgba(155,114,207,0.15); color: var(--purple); border: 1px solid rgba(155,114,207,0.3); }
+  .tag-orange { background: rgba(224,123,64,0.15); color: var(--orange); border: 1px solid rgba(224,123,64,0.3); }
+
+  .pillar-body { padding: 32px; }
+
+  /* ─── TACTIC GRID ─── */
+  .tactic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .tactic {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px;
+  }
+  .tactic h4 {
+    font-size: 13px; font-weight: 700;
+    margin-bottom: 8px; color: var(--text);
+  }
+  .tactic p { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+  /* ─── ACTION LIST ─── */
+  .action-list { list-style: none; margin-bottom: 24px; }
+  .action-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px; line-height: 1.6;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .action-list li:last-child { border-bottom: none; }
+  .action-list li .step {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--gold); white-space: nowrap;
+    padding-top: 2px; min-width: 48px;
+  }
+
+  /* ─── KPI ROW ─── */
+  .kpi-row {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin-top: 20px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .kpi-pill {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 16px; font-size: 12px;
+  }
+  .kpi-pill .kv { font-weight: 700; color: var(--gold); }
+  .kpi-pill .kl { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; margin-left: 4px; }
+
+  /* ─── TIMELINE ─── */
+  .timeline-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; margin-bottom: 40px;
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .tl-col {
+    padding: 24px 20px;
+    border-right: 1px solid var(--border);
+  }
+  .tl-col:last-child { border-right: none; }
+  .tl-month {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .tl-col ul { list-style: none; }
+  .tl-col ul li {
+    font-size: 12px; color: var(--muted);
+    padding: 4px 0; border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .tl-col ul li:last-child { border-bottom: none; }
+  .tl-col ul li::before { content: '— '; color: var(--border); }
+  .tl-col.active { background: rgba(201,168,76,0.04); }
+  .tl-col.active .tl-month { color: var(--gold-lt); }
+
+  /* ─── TWO COL ─── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+
+  /* ─── TABLE ─── */
+  .strat-table {
+    width: 100%; border-collapse: collapse;
+    margin-bottom: 32px; font-size: 13px;
+  }
+  .strat-table th {
+    text-align: left; padding: 10px 16px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+  }
+  .strat-table td {
+    padding: 12px 16px; border-bottom: 1px solid var(--border);
+    vertical-align: top; line-height: 1.6;
+  }
+  .strat-table tr:last-child td { border-bottom: none; }
+  .strat-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .do { color: var(--green); font-weight: 700; }
+  .dont { color: var(--red); font-weight: 700; }
+
+  /* ─── REVENUE MODEL ─── */
+  .rev-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-bottom: 32px;
+  }
+  .rev-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 22px;
+  }
+  .rev-card .tier {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .rev-card .price {
+    font-size: 26px; font-weight: 900;
+    color: var(--gold); letter-spacing: -0.02em;
+  }
+  .rev-card .per { font-size: 12px; color: var(--muted); }
+  .rev-card .desc { font-size: 13px; color: var(--text); margin-top: 12px; line-height: 1.6; }
+  .rev-card .target { font-size: 11px; color: var(--muted); margin-top: 8px; }
+
+  /* ─── PARTNERSHIP CARD ─── */
+  .partner-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .partner-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 18px;
+  }
+  .partner-card .pname {
+    font-size: 13px; font-weight: 700;
+    margin-bottom: 6px; color: var(--text);
+  }
+  .partner-card .ptype {
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--gold); margin-bottom: 10px;
+  }
+  .partner-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* ─── RULE ─── */
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+
+  /* ─── WARNING BOX ─── */
+  .warning {
+    background: rgba(224,85,85,0.08);
+    border: 1px solid rgba(224,85,85,0.25);
+    border-left: 3px solid var(--red);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    font-size: 14px; line-height: 1.7;
+  }
+  .warning-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 8px;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    margin-top: 80px; padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center;
+    justify-content: space-between;
+    font-size: 12px; color: var(--muted);
+  }
+
+  @media print {
+    body { background: #080808; }
+    .page { padding: 40px 36px; }
+    .cover { min-height: auto; padding: 60px 0; }
+    .cover-title { font-size: 46px; }
+    .pillar { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════ COVER ═══════ -->
+<div class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-eyebrow">Dubai Podcast Studio — Strategic Growth Plan</div>
+  <h1 class="cover-title">The October<br /><span>Offensive.</span></h1>
+  <p class="cover-sub">
+    How DPS captures market share when Dubai wakes up — without touching price,
+    without discounting, and without a single competitor seeing it coming.
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <label>Window</label>
+      <span>Sep 15 → Dec 31, 2026</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Objective</label>
+      <span>Market Share, Zero Margin Compression</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Pillars</label>
+      <span>5 Strategic + 1 Defensive</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Primary Market</label>
+      <span>Dubai — Expat + Corporate</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════ MARKET CONTEXT ═══════ -->
+<div class="section">
+  <div class="section-label">00 — Market Reading</div>
+  <h2>Why October is <span>The Biggest Opportunity of the Year</span></h2>
+  <p class="section-intro">
+    October is not just the end of summer. It is the single most commercially charged month on the Dubai calendar.
+    Understanding exactly what happens in this market is the foundation of everything that follows.
+  </p>
+
+  <div class="insight">
+    <div class="insight-label">The Dubai October Effect</div>
+    <p>
+      When expats return to Dubai in September and October, they do not return to the same pace.
+      They return with a backlog of decisions, a fresh appetite for progress, and a psychological
+      "new year" energy that mirrors January in most Western markets. The summer break functions as
+      a reset — and the first studio they record in, the first membership they sign, the first service
+      they commit to in October, tends to be the one they keep for the year. <strong>Whoever captures
+      that October moment owns the client for twelve months.</strong>
+    </p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="val">Oct</div>
+      <div class="lbl">GITEX Global — 100,000+ business visitors flood Dubai</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">+40%</div>
+      <div class="lbl">Typical Q4 booking uplift vs Q3 for premium creative studios</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">3 mo</div>
+      <div class="lbl">Window before Ramadan prep slows Q1 — must convert fast</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">#1</div>
+      <div class="lbl">DPS Google Reviews position — strongest trust signal in the market</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="insight" style="margin-bottom:0;">
+      <div class="insight-label">What the Market Looks Like in October</div>
+      <p style="font-size:13px; line-height:1.7;">
+        LinkedIn activity in Dubai spikes sharply in October. Business events fill every weekend.
+        Companies unlock Q4 budgets. New hires join after summer. Every ambitious professional in
+        the city is in motion — looking for ways to stand out, build their brand, and make Q4 count.
+        Podcast studios are no longer a luxury consideration — they are a professional infrastructure choice.
+      </p>
+    </div>
+    <div class="insight" style="margin-bottom:0; border-left-color:var(--red);">
+      <div class="insight-label" style="color:var(--red);">What Competitors Will Do</div>
+      <p style="font-size:13px; line-height:1.7;">
+        Poddster and other low-cost competitors will run October discount promotions — "back to Dubai" deals,
+        slashed session rates, free first sessions. This is the price-war continuation. It is also a trap.
+        Every discount they offer trains their market to expect lower prices and attracts price-sensitive
+        clients with zero loyalty. We do the opposite.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════ STRATEGIC ARCHITECTURE ═══════ -->
+<div class="section">
+  <div class="section-label">01 — Architecture</div>
+  <h2>The 5-Pillar <span>October Offensive</span></h2>
+  <p class="section-intro">
+    Market share is taken — not given. These five pillars work together as a system.
+    Each one captures a different segment without touching the price floor.
+  </p>
+
+  <div style="background:var(--bg2); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:32px;">
+    <div style="display:grid; grid-template-columns:repeat(5,1fr);">
+      <div style="padding:20px 16px; border-right:1px solid var(--border); text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Pillar 01</div>
+        <div style="font-size:13px; font-weight:700; line-height:1.4;">The September<br/>Head Start</div>
+      </div>
+      <div style="padding:20px 16px; border-right:1px solid var(--border); text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Pillar 02</div>
+        <div style="font-size:13px; font-weight:700; line-height:1.4;">GITEX<br/>Domination</div>
+      </div>
+      <div style="padding:20px 16px; border-right:1px solid var(--border); text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Pillar 03</div>
+        <div style="font-size:13px; font-weight:700; line-height:1.4;">The Corporate<br/>Q4 Sprint</div>
+      </div>
+      <div style="padding:20px 16px; border-right:1px solid var(--border); text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Pillar 04</div>
+        <div style="font-size:13px; font-weight:700; line-height:1.4;">Studio Network<br/>Goes Live</div>
+      </div>
+      <div style="padding:20px 16px; text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Pillar 05</div>
+        <div style="font-size:13px; font-weight:700; line-height:1.4;">The Authority<br/>Land Grab</div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--border);">
+      <div style="padding:12px 16px; border-right:1px solid var(--border); font-size:11px; color:var(--muted); text-align:center;">Book the calendar before rivals wake up</div>
+      <div style="padding:12px 16px; border-right:1px solid var(--border); font-size:11px; color:var(--muted); text-align:center;">Own the B2B speaker market</div>
+      <div style="padding:12px 16px; border-right:1px solid var(--border); font-size:11px; color:var(--muted); text-align:center;">Batch content packages for Q4</div>
+      <div style="padding:12px 16px; border-right:1px solid var(--border); font-size:11px; color:var(--muted); text-align:center;">Network effects kick in at scale</div>
+      <div style="padding:12px 16px; font-size:11px; color:var(--muted); text-align:center;">#1 brand = default choice</div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">The Core Principle — How You Take Market Share Without Price Cuts</div>
+    <p>
+      There are only four ways to grow revenue without touching price: <strong>(1) acquire new segments</strong>
+      that competitors are not serving; <strong>(2) increase booking frequency</strong> from existing clients;
+      <strong>(3) expand wallet share</strong> through add-ons; <strong>(4) build structural switching costs</strong>
+      so clients do not leave. Every tactic in this document maps to one of these four mechanisms.
+      None of them require a discount.
+    </p>
+  </div>
+</div>
+
+
+<!-- ═══════ PILLAR 01 ═══════ -->
+<div class="section">
+  <div class="section-label">02 — Pillar 01</div>
+
+  <div class="pillar">
+    <div class="pillar-header">
+      <div>
+        <div class="pillar-num">Pillar 01 of 05</div>
+        <div class="pillar-title">The September Head Start</div>
+        <div class="pillar-sub">Win October by acting in September — before any competitor has moved</div>
+      </div>
+      <span class="pillar-tag tag-gold">Reactivation</span>
+    </div>
+    <div class="pillar-body">
+
+      <div class="insight" style="border-left-color:var(--orange);">
+        <div class="insight-label" style="color:var(--orange);">The Insight</div>
+        <p>
+          The market does not restart on October 1st. It restarts in the minds of clients during the last two
+          weeks of September, when they are still in Europe or Bali but already thinking about what comes next.
+          The studio that reaches them during that mental transition — while they are in planning mode —
+          gets in the calendar first. Getting in the calendar first is everything. October is fully booked
+          before it even starts.
+        </p>
+      </div>
+
+      <div class="tactic-grid">
+        <div class="tactic">
+          <h4>WhatsApp Broadcast — Sep 15</h4>
+          <p>Personal broadcast to every past DPS client. Not a mass SMS — a message that reads
+          like it was written for them. Reference their last session. Ask one question: "Are you
+          back in Dubai for October?" That single question has a 60–70% reply rate. Every reply is
+          a live conversation and a booking opportunity.</p>
+        </div>
+        <div class="tactic">
+          <h4>Email Reactivation — Sep 18</h4>
+          <p>Subject line: <em>"Your October slot — is it still available?"</em> — Imply scarcity.
+          Use past session data: "Last time you were here was [month]. A lot has changed.
+          Come back and we'll show you." Single CTA: book a session. No offers, no discounts —
+          the phrasing creates FOMO around availability, not price.</p>
+        </div>
+        <div class="tactic">
+          <h4>Instagram Content — Sep 20</h4>
+          <p>"October is coming" content series. 5 posts across the last week of September —
+          behind-the-scenes studio prep, team returning, gear checks, empty mic waiting.
+          The narrative: DPS is ready. Are you? This builds anticipation and positions the studio
+          as the place October happens.</p>
+        </div>
+        <div class="tactic">
+          <h4>Early Bird Access — Sep 25</h4>
+          <p>Offer existing members first access to October's premium time slots (Tue–Thu
+          evenings, Sat mornings — the most demanded slots). Not a discount: framed as
+          member privilege. Creates urgency and deepens membership loyalty simultaneously.</p>
+        </div>
+      </div>
+
+      <ul class="action-list">
+        <li><span class="step">Sep 12</span> Pull full past-client list from booking system. Segment: last booked &lt;6 months, 6–12 months, 12+ months. Different message per segment.</li>
+        <li><span class="step">Sep 15</span> WhatsApp broadcast live. Monitor replies in real time — first 48 hours are the hottest. Assign one person to respond and convert.</li>
+        <li><span class="step">Sep 18</span> Email sequence launches. 3-email flow: reactivation → social proof → final call. Spread over 10 days.</li>
+        <li><span class="step">Sep 20</span> Instagram "October is coming" series begins. 5 posts, daily. Ends on Oct 1.</li>
+        <li><span class="step">Sep 25</span> Member early-access window opens. First-come, first-served on premium slots. Creates real scarcity.</li>
+      </ul>
+
+      <div class="kpi-row">
+        <div class="kpi-pill"><span class="kv">25–35%</span><span class="kl">Past Client Reactivation Rate</span></div>
+        <div class="kpi-pill"><span class="kv">60–70%</span><span class="kl">WhatsApp Reply Rate (warm list)</span></div>
+        <div class="kpi-pill"><span class="kv">Oct 1</span><span class="kl">First 2 weeks fully booked by this date</span></div>
+        <div class="kpi-pill"><span class="kv">Zero AED</span><span class="kl">Cost to execute — pure CRM</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════ PILLAR 02 ═══════ -->
+<div class="section">
+  <div class="section-label">03 — Pillar 02</div>
+
+  <div class="pillar">
+    <div class="pillar-header">
+      <div>
+        <div class="pillar-num">Pillar 02 of 05</div>
+        <div class="pillar-title">GITEX Domination</div>
+        <div class="pillar-sub">Own the B2B speaker and founder podcast market during Dubai's largest event of the year</div>
+      </div>
+      <span class="pillar-tag tag-blue">B2B Acquisition</span>
+    </div>
+    <div class="pillar-body">
+
+      <div class="insight" style="border-left-color:var(--blue);">
+        <div class="insight-label" style="color:var(--blue);">The Opportunity</div>
+        <p>
+          GITEX Global brings 100,000+ tech founders, investors, CMOs, and executives to Dubai every October.
+          These are people with global audiences, active podcasts or the ambition to start one, and budgets
+          to spend. Most of them do not know DPS exists. Every single one of them is a potential client —
+          and many will need a studio during GITEX week itself to record interviews, panels, and founder stories.
+          No competitor is actively targeting this segment. It is an unclaimed territory.
+        </p>
+      </div>
+
+      <div class="tactic-grid">
+        <div class="tactic">
+          <h4>"Recorded at GITEX" Package</h4>
+          <p>Create a named GITEX package: full-day studio hire, two operators, same-day edited reel,
+          branded thumbnail. Price it as a premium bundle — not a session discount. Target GITEX
+          exhibitors and speakers who need content output from the event. They come to Dubai with
+          a content agenda; DPS gives them the infrastructure to execute it.</p>
+        </div>
+        <div class="tactic">
+          <h4>LinkedIn Outreach — Pre-GITEX</h4>
+          <p>3 weeks before GITEX, run targeted LinkedIn DM outreach to confirmed speakers and
+          exhibitors. Message: "You're speaking at GITEX — have you planned how you'll turn that
+          into long-form content? We have 7 studios 10 minutes from DWTC." Short. Specific.
+          Zero selling. 100% utility. Target 200 contacts, expect 15–20 replies.</p>
+        </div>
+        <div class="tactic">
+          <h4>GITEX Week Walk-In Offer</h4>
+          <p>"Same-day recording available during GITEX week" — promoted on LinkedIn and Instagram
+          starting 5 days before the event. GITEX visitors' schedules are chaotic; they cannot
+          plan 2 weeks ahead. Being the studio that can accommodate last-minute bookings during
+          the event is a competitive differentiator that does not require a price cut.</p>
+        </div>
+        <div class="tactic">
+          <h4>Post-GITEX Founder Content Sprint</h4>
+          <p>The week after GITEX, many founders are still in Dubai for side meetings and follow-ups.
+          This is the highest-intent window. Offer a "GITEX debrief" recording session:
+          "What you learned at GITEX, in 30 minutes, on record." Founders love this format —
+          it turns their conference investment into publishable content.</p>
+        </div>
+      </div>
+
+      <div class="insight" style="border-left-color:var(--blue);">
+        <div class="insight-label" style="color:var(--blue);">Why This Takes Market Share Without Discounting</div>
+        <p>
+          GITEX clients are not price-sensitive — they are availability-sensitive and quality-sensitive.
+          They will pay the full rate (and more) for a studio that is available on short notice,
+          professionally run, and located near DWTC. You are not competing on price with Poddster here.
+          You are competing with the decision to record at all — and your job is to make that decision
+          as easy as possible. Premium package, premium price, premium experience.
+        </p>
+      </div>
+
+      <ul class="action-list">
+        <li><span class="step">Sep 1</span> Design "Recorded at GITEX" package. Set price. Build a simple landing page or Wix page dedicated to GITEX bookings.</li>
+        <li><span class="step">Sep 10</span> Begin LinkedIn outreach to confirmed GITEX speakers (list available on gitex.com). Personalised messages, not templates.</li>
+        <li><span class="step">Oct 1</span> Instagram and LinkedIn organic posts: "GITEX recording slots — limited availability." 3 posts per week throughout October.</li>
+        <li><span class="step">Oct 13</span> GITEX week — push "same-day available" social content daily. One team member monitors LinkedIn DMs in real time.</li>
+        <li><span class="step">Oct 20</span> Post-GITEX sprint offer goes live. "Debrief episode" framing. 2-week window.</li>
+      </ul>
+
+      <div class="kpi-row">
+        <div class="kpi-pill"><span class="kv">15–25</span><span class="kl">GITEX bookings target</span></div>
+        <div class="kpi-pill"><span class="kv">10–15%</span><span class="kl">LinkedIn outreach conversion</span></div>
+        <div class="kpi-pill"><span class="kv">New segment</span><span class="kl">Zero overlap with existing client base</span></div>
+        <div class="kpi-pill"><span class="kv">Full rate</span><span class="kl">No discount required — availability is the value</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════ PILLAR 03 ═══════ -->
+<div class="section">
+  <div class="section-label">04 — Pillar 03</div>
+
+  <div class="pillar">
+    <div class="pillar-header">
+      <div>
+        <div class="pillar-num">Pillar 03 of 05</div>
+        <div class="pillar-title">The Corporate Q4 Content Sprint</div>
+        <div class="pillar-sub">Sell a business outcome — not a studio session</div>
+      </div>
+      <span class="pillar-tag tag-green">Corporate Revenue</span>
+    </div>
+    <div class="pillar-body">
+
+      <div class="insight" style="border-left-color:var(--green);">
+        <div class="insight-label" style="color:var(--green);">The Insight</div>
+        <p>
+          Corporate marketing teams in Dubai face a structural problem every October: Q4 requires a full
+          content calendar, but the summer gap has left them with nothing in the pipeline. The solution
+          is obvious to them — batch-produce content — but the execution feels daunting. DPS solves this
+          by selling the outcome (12 published episodes, 36 social clips, a branded podcast channel),
+          not the input (studio hours). When you sell outcomes, price is justified on ROI, not on
+          comparison with a cheaper studio. This is how you protect margin in B2B.
+        </p>
+      </div>
+
+      <div class="tactic-grid">
+        <div class="tactic">
+          <h4>The "Q4 Content Sprint" Package</h4>
+          <p>Two full-day recording sessions = 10–12 episodes. DPS handles recording, professional
+          mixing, branded intro/outro, AI Reels clips (3 per episode), and delivery within 72 hours.
+          Sold as a fixed package: the client shows up, speaks, leaves. Everything else is handled.
+          Price the package on deliverable value — not hourly rate.</p>
+        </div>
+        <div class="tactic">
+          <h4>Target: Marketing Managers, Not Founders</h4>
+          <p>The buyer for this package is the Head of Marketing or CMO, not the CEO. They have
+          budget authority, a Q4 content gap, and a direct accountability to output. Reach them
+          on LinkedIn, via business networks (Dubai Chamber, IBC), and through direct email outreach.
+          Offer a 20-minute "content strategy call" as the entry point — not a studio tour.</p>
+        </div>
+        <div class="tactic">
+          <h4>Anchor Pricing: The "Series" Frame</h4>
+          <p>Never quote by the hour to corporate clients. Quote by the series: "Your 12-episode
+          Q4 podcast series: AED X all-inclusive." When the price is attached to the output,
+          the client evaluates it against the cost of not having 12 episodes — not against a
+          competitor's hourly rate. This framing shift is the single most effective margin
+          protection tactic in premium B2B services.</p>
+        </div>
+        <div class="tactic">
+          <h4>Case Study Social Proof — October Launch</h4>
+          <p>Use 1–2 summer corporate clients as documented case studies. Format: short LinkedIn
+          article from the client contact + a DPS Instagram post. "How [Company X] produced
+          their entire Q3 content calendar in two days at DPS." Real numbers, real outcome.
+          This is the most effective B2B sales tool that costs zero.</p>
+        </div>
+      </div>
+
+      <div class="rev-grid">
+        <div class="rev-card">
+          <div class="tier">Starter Sprint</div>
+          <div class="price">AED 4,500</div>
+          <div class="per">per series package</div>
+          <div class="desc">1 full day recording · 6 episodes · mixing · 3 reels per episode · 5-day delivery</div>
+          <div class="target">Target: SME, scale-up founders</div>
+        </div>
+        <div class="rev-card">
+          <div class="tier">Full Q4 Sprint</div>
+          <div class="price">AED 9,200</div>
+          <div class="per">per series package</div>
+          <div class="desc">2 full days · 12 episodes · mixing · branded intro/outro · reels · 72hr delivery</div>
+          <div class="target">Target: Mid-market marketing teams</div>
+        </div>
+        <div class="rev-card">
+          <div class="tier">Enterprise Content</div>
+          <div class="price">AED 18,000+</div>
+          <div class="per">bespoke</div>
+          <div class="desc">Multi-series, multi-host, dedicated producer, distribution strategy, monthly retainer</div>
+          <div class="target">Target: Banks, FMCG, Consulting firms</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-pill"><span class="kv">5–8</span><span class="kl">Corporate Sprint deals (Oct–Dec)</span></div>
+        <div class="kpi-pill"><span class="kv">AED 50K+</span><span class="kl">Incremental revenue target</span></div>
+        <div class="kpi-pill"><span class="kv">No discounts</span><span class="kl">Outcome pricing protects margin fully</span></div>
+        <div class="kpi-pill"><span class="kv">Retainer</span><span class="kl">Goal: 2+ clients on monthly retainer by Dec</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════ PILLAR 04 ═══════ -->
+<div class="section">
+  <div class="section-label">05 — Pillar 04</div>
+
+  <div class="pillar">
+    <div class="pillar-header">
+      <div>
+        <div class="pillar-num">Pillar 04 of 05</div>
+        <div class="pillar-title">Studio Network Goes Live</div>
+        <div class="pillar-sub">October is when network effects begin — the more members, the more value for every member</div>
+      </div>
+      <span class="pillar-tag tag-purple">Network Effect</span>
+    </div>
+    <div class="pillar-body">
+
+      <div class="insight" style="border-left-color:var(--purple);">
+        <div class="insight-label" style="color:var(--purple);">The Compounding Logic</div>
+        <p>
+          The Studio Network (built on Airtable + Tally + Make) becomes dramatically more valuable when
+          the city is full of active professionals. Summer was the quiet build phase. October is the
+          activation phase. With 50+ returning professionals all looking to grow their audience,
+          the number of potential connections grows exponentially. A network of 20 members has
+          190 possible connections. A network of 50 has 1,225. Each new member makes the product
+          more valuable for everyone — and that growing value is a switching cost that no competitor can replicate.
+        </p>
+      </div>
+
+      <div class="tactic-grid">
+        <div class="tactic">
+          <h4>Seed Launch — 20 Charter Members</h4>
+          <p>Target the 20 most active, well-connected past clients for the first cohort. Personal
+          invitation only — not a mass offer. "We're launching the DPS Studio Network. We chose
+          you as a Charter Member." Charter status = exclusive, permanent, never available again.
+          This makes joining feel like selection, not purchase. Aim to close all 20 before Oct 15.</p>
+        </div>
+        <div class="tactic">
+          <h4>First Introductions — The Proof Moment</h4>
+          <p>Manually facilitate the first 5 introductions the week the network launches.
+          Do not wait for the automation to generate them organically — engineer the first
+          connections between the most compatible members, send the introduction personally.
+          The first successful collaboration or co-recording generates the word-of-mouth that
+          sells every subsequent membership.</p>
+        </div>
+        <div class="tactic">
+          <h4>Membership Renewal Lock-In</h4>
+          <p>Charter members who sign for 6 months lock in their rate permanently, even when
+          membership price increases. This protects margin (no discounting) while creating
+          a compelling reason to commit now. The price is going up — the question is
+          only whether you lock in today's rate.</p>
+        </div>
+        <div class="tactic">
+          <h4>The "Recorded Together" Badge</h4>
+          <p>Every co-recording between two network members generates a co-branded social asset:
+          "Recorded Together at DPS Studios." Both members post it. Their combined audiences see
+          DPS in the tag. Each post is organic advertising reaching an audience who knows
+          and trusts both creators — far more valuable than any paid ad.</p>
+        </div>
+      </div>
+
+      <ul class="action-list">
+        <li><span class="step">Oct 1</span> Network officially launches. All Airtable/Tally/Make automations live and tested.</li>
+        <li><span class="step">Oct 1–7</span> Personal invitations go out to 20 Charter Members. WhatsApp only — no email, no mass broadcast. Individual messages.</li>
+        <li><span class="step">Oct 8</span> First manual introductions facilitated. Target: 5 high-quality pairings in week one.</li>
+        <li><span class="step">Oct 15</span> First "Recorded Together" co-recording happens. Document it. Post it. Tag both parties.</li>
+        <li><span class="step">Nov 1</span> Open network to wider applications (waitlist mentality — not open-door).</li>
+      </ul>
+
+      <div class="kpi-row">
+        <div class="kpi-pill"><span class="kv">20</span><span class="kl">Charter Members by Oct 15</span></div>
+        <div class="kpi-pill"><span class="kv">50+</span><span class="kl">Total members by Dec 31</span></div>
+        <div class="kpi-pill"><span class="kv">Each member</span><span class="kl">Books avg 2+ extra sessions/mo via introductions</span></div>
+        <div class="kpi-pill"><span class="kv">Zero CAC</span><span class="kl">All new members come via network referral</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════ PILLAR 05 ═══════ -->
+<div class="section">
+  <div class="section-label">06 — Pillar 05</div>
+
+  <div class="pillar">
+    <div class="pillar-header">
+      <div>
+        <div class="pillar-num">Pillar 05 of 05</div>
+        <div class="pillar-title">The Authority Land Grab</div>
+        <div class="pillar-sub">Become the default answer to "where do you record in Dubai?" — without spending on ads</div>
+      </div>
+      <span class="pillar-tag tag-orange">Brand Dominance</span>
+    </div>
+    <div class="pillar-body">
+
+      <div class="insight" style="border-left-color:var(--orange);">
+        <div class="insight-label" style="color:var(--orange);">The Insight</div>
+        <p>
+          Market share is not only won through direct client acquisition. It is also won by
+          making your brand the default reference point in the category — so that when
+          anyone in Dubai's business community thinks "podcast studio", they think DPS.
+          This is brand-level market share: the kind that makes your competitors invisible
+          regardless of what they spend. October is the perfect window to execute this,
+          because the entire business community is back, active, and paying attention.
+        </p>
+      </div>
+
+      <div class="tactic-grid">
+        <div class="tactic">
+          <h4>The Dubai Podcast Index — Q3 Report</h4>
+          <p>Publish the first DPS Dubai Podcast Index: anonymised data on podcast growth,
+          most popular formats, most-booked topics, and audience trends in the UAE.
+          This is the data you already own from your own sessions. Press release to
+          Gulf News, Arabian Business, and Khaleej Times. One round of LinkedIn posts.
+          Cost: zero. Outcome: DPS becomes the authority source on podcasting in Dubai.</p>
+        </div>
+        <div class="tactic">
+          <h4>Partnership Announcements — October</h4>
+          <p>Formalise and announce two to three channel partnerships: a Business Bay
+          co-working space (Nest, Astrolabs, or similar), a business events organiser,
+          and one media/press partner. Each partnership puts DPS in front of their
+          entire member base at zero cost. The announcement itself is content —
+          post it, tag them, generate shared reach.</p>
+        </div>
+        <div class="tactic">
+          <h4>LinkedIn Thought Leadership — Weekly</h4>
+          <p>The DPS founder or a designated voice publishes one LinkedIn article per week
+          from October through December. Topics: "What I've learned from 500 podcast
+          sessions in Dubai," "Why your company needs a podcast in Q4 2026," "The 3 biggest
+          mistakes first-time podcasters make." Positioned as industry insight, not advertising.
+          SEO benefit compounds over time. Poddster has 78 blog articles — this is where we close
+          the gap, starting now.</p>
+        </div>
+        <div class="tactic">
+          <h4>"Recorded at DPS" Creator Seal</h4>
+          <p>Every client who records at DPS receives a digital badge: "Recorded at DPS Studios, Dubai."
+          Encourage — and eventually require in the membership agreement — that they display it
+          on their podcast artwork and show notes. Every DPS client becomes a distribution node.
+          Over 50 active clients, this badge appears on 50 different channels. Cost: zero.
+          Brand exposure: compounding monthly.</p>
+        </div>
+      </div>
+
+      <div class="partner-row">
+        <div class="partner-card">
+          <div class="ptype">Co-working</div>
+          <div class="pname">Astrolabs / The Bureau / Nest</div>
+          <p>Cross-referral: their members get a DPS intro session. DPS members get access to their events. Both audiences grow.</p>
+        </div>
+        <div class="partner-card">
+          <div class="ptype">Events & PR</div>
+          <div class="pname">Gulf News / Arabian Business</div>
+          <p>Provide quarterly data (Dubai Podcast Index) as exclusive story. In return: editorial mention and DPS positioning as the source.</p>
+        </div>
+        <div class="partner-card">
+          <div class="ptype">Media Distribution</div>
+          <div class="pname">Anghami</div>
+          <p>DPS as the recommended production partner for Arab creators submitting to Anghami's creator programme. Referral arrangement, no exclusivity needed.</p>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-pill"><span class="kv">3</span><span class="kl">Formal partnerships by Nov 1</span></div>
+        <div class="kpi-pill"><span class="kv">1</span><span class="kl">Media pickup for Dubai Podcast Index</span></div>
+        <div class="kpi-pill"><span class="kv">12</span><span class="kl">LinkedIn articles published Oct–Dec</span></div>
+        <div class="kpi-pill"><span class="kv">50+</span><span class="kl">"Recorded at DPS" badges in market by Dec</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════ WHAT NOT TO DO ═══════ -->
+<div class="section">
+  <div class="section-label">07 — Defensive Layer</div>
+  <h2>What <span>Not to Do</span></h2>
+  <p class="section-intro">
+    Market share strategy is as much about what you refuse to do as what you execute.
+    These are the traps that will cost you margin, brand, and positioning.
+  </p>
+
+  <div class="warning">
+    <div class="warning-label">Do Not Do This</div>
+    Do not run an "October welcome back" discount promotion. Not 10%, not 15%, not a free first session.
+    The moment you discount in October, you establish a new anchor price in the market's memory.
+    Every client who books in November will expect the same rate. Every future October will require
+    another discount to match expectations. You will have permanently compressed your own margin
+    in exchange for a short-term bookings spike that would have happened anyway.
+  </div>
+
+  <table class="strat-table">
+    <thead>
+      <tr>
+        <th>Situation</th>
+        <th>Wrong Response</th>
+        <th>Right Response</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Competitor runs "50% off October" promotion</td>
+        <td class="dont">Match the discount to stay competitive</td>
+        <td class="do">Do nothing. Post a client testimonial the same day. Let quality speak while they race to zero.</td>
+      </tr>
+      <tr>
+        <td>Prospective client says "Poddster is cheaper"</td>
+        <td class="dont">Negotiate or offer a discount to match</td>
+        <td class="do">Agree with them: "Yes, they are. Here is why our clients still choose us." — then share your #1 Google Reviews position and a specific testimonial.</td>
+      </tr>
+      <tr>
+        <td>October fills up faster than expected</td>
+        <td class="dont">Hire back temporary staff and extend to two shifts immediately</td>
+        <td class="do">Create a waitlist. Scarcity is a premium signal. Evaluate adding the second shift only if demand sustains for 3+ consecutive weeks.</td>
+      </tr>
+      <tr>
+        <td>Corporate client pushes back on package price</td>
+        <td class="dont">Discount the package to close the deal</td>
+        <td class="do">Remove a deliverable instead. Reduce scope, not margin. "We can do 8 episodes instead of 12 at that budget." Same rate, smaller package.</td>
+      </tr>
+      <tr>
+        <td>Slow week in November or December</td>
+        <td class="dont">Run a flash sale to fill the calendar</td>
+        <td class="do">Activate the WhatsApp list and offer bonus add-ons (AI Reels, express delivery) at full price. Fill with value, not discounts.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════ ACTIVATION TIMELINE ═══════ -->
+<div class="section">
+  <div class="section-label">08 — Timeline</div>
+  <h2>Sep → Dec <span>Activation Calendar</span></h2>
+
+  <div class="timeline-row">
+    <div class="tl-col">
+      <div class="tl-month">September</div>
+      <ul>
+        <li>Pull past-client database</li>
+        <li>WhatsApp broadcast (Sep 15)</li>
+        <li>Email reactivation sequence</li>
+        <li>Instagram "Oct is coming" series</li>
+        <li>GITEX outreach begins (LinkedIn)</li>
+        <li>Studio Network final testing</li>
+        <li>Partner outreach initiated</li>
+      </ul>
+    </div>
+    <div class="tl-col active">
+      <div class="tl-month">October ← Peak</div>
+      <ul>
+        <li>Studio Network officially live</li>
+        <li>20 Charter Members onboarded</li>
+        <li>GITEX recording packages active</li>
+        <li>First manual network introductions</li>
+        <li>Dubai Podcast Index published</li>
+        <li>Corporate Q4 Sprint outreach</li>
+        <li>Partnership announcements</li>
+        <li>First "Recorded Together" co-post</li>
+      </ul>
+    </div>
+    <div class="tl-col">
+      <div class="tl-month">November</div>
+      <ul>
+        <li>Network opens to wider applications</li>
+        <li>First corporate Sprint deals close</li>
+        <li>LinkedIn articles: 4 published</li>
+        <li>First case study live</li>
+        <li>Retargeting Meta ads (Ad 03)</li>
+        <li>Creator Seal programme launches</li>
+        <li>Network: 35+ members target</li>
+      </ul>
+    </div>
+    <div class="tl-col">
+      <div class="tl-month">December</div>
+      <ul>
+        <li>Year-end "last episodes of 2026" push</li>
+        <li>2+ corporate clients on retainer</li>
+        <li>50+ network members target</li>
+        <li>Dubai Podcast Index Q4 report</li>
+        <li>Annual DPS Awards — announce</li>
+        <li>January pipeline already seeded</li>
+        <li>Full margin review before year end</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">The Compounding Effect — Why This Gets Stronger Every Month</div>
+    <p>
+      Every action in September makes October easier. Every October booking generates a testimonial that
+      makes November easier. Every November case study generates corporate leads that make December easier.
+      Every Studio Network connection generates a social post that builds December organic reach. This is not
+      a campaign — it is a flywheel. By December 2026, DPS should be the unquestioned market leader in
+      Business Bay with a brand, network, and content moat that no competitor can replicate on any budget.
+    </p>
+  </div>
+</div>
+
+
+<!-- ═══════ REVENUE MODEL ═══════ -->
+<div class="section">
+  <div class="section-label">09 — Revenue</div>
+  <h2>Q4 Revenue <span>Architecture</span></h2>
+  <p class="section-intro">
+    Five revenue streams, all at full margin. No discounts needed when the product is correctly positioned.
+  </p>
+
+  <table class="strat-table">
+    <thead>
+      <tr>
+        <th>Revenue Stream</th>
+        <th>Driver</th>
+        <th>Oct–Dec Target</th>
+        <th>Margin Profile</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Studio Memberships</strong></td>
+        <td>Reactivation + Network Charter Members</td>
+        <td>30+ active members</td>
+        <td class="do">Very high — recurring, predictable, low variable cost</td>
+      </tr>
+      <tr>
+        <td><strong>Individual Sessions</strong></td>
+        <td>GITEX visitors, organic search, Meta ads</td>
+        <td>Fully booked Oct–Nov</td>
+        <td class="do">High — full-rate only, no concessions</td>
+      </tr>
+      <tr>
+        <td><strong>Corporate Q4 Sprint</strong></td>
+        <td>B2B outreach, LinkedIn, partner referrals</td>
+        <td>5–8 package deals</td>
+        <td class="do">Very high — outcome pricing, no hourly comparison</td>
+      </tr>
+      <tr>
+        <td><strong>AI Reels Add-On</strong></td>
+        <td>Upsell at booking confirmation</td>
+        <td>40% attach rate</td>
+        <td class="do">Extremely high — near-zero marginal cost per reel</td>
+      </tr>
+      <tr>
+        <td><strong>Corporate Retainer</strong></td>
+        <td>Sprint clients who want ongoing production</td>
+        <td>2+ clients by Dec 31</td>
+        <td class="do">Highest — monthly guaranteed revenue, zero CAC</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════ FOOTER ═══════ -->
+<div class="footer">
+  <div>
+    <div style="font-weight:700; color:var(--text); margin-bottom:4px;">Dubai Podcast Studio</div>
+    <div>October Market Share Strategy — Q4 2026</div>
+  </div>
+  <div style="text-align:right;">
+    <div>Confidential — Internal Use Only</div>
+    <div style="color:var(--gold); margin-top:2px;">dubaipodcaststudio.com</div>
+  </div>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>
