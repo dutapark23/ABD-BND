@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DPS — The 24-Hour Content Production Pipeline</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:   #C9A84C;
+    --bg:     #080808;
+    --bg2:    #111111;
+    --bg3:    #181818;
+    --border: #252525;
+    --text:   #E8E8E8;
+    --muted:  #888888;
+    --red:    #E05555;
+    --green:  #4CAF82;
+    --blue:   #5B8FD4;
+    --teal:   #3DBFB8;
+    --purple: #9B72CF;
+    --orange: #E07B40;
+  }
+
+  html { font-size: 16px; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 60px 48px; }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; position: relative;
+    padding: 80px 0; border-bottom: 1px solid var(--border); margin-bottom: 80px;
+  }
+  .cover-bar {
+    position: absolute; top: 0; left: -48px;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--green), var(--gold), transparent);
+  }
+  .cover-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); margin-bottom: 28px; }
+  .cover-title { font-size: 58px; font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px; }
+  .cover-title span { color: var(--gold); }
+  .cover-sub { font-size: 18px; font-weight: 300; color: var(--muted); max-width: 560px; margin-bottom: 56px; line-height: 1.7; }
+  .cover-meta { display: flex; gap: 40px; flex-wrap: wrap; }
+  .cover-meta-item label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .cover-meta-item span { font-size: 15px; font-weight: 600; }
+
+  /* SECTION */
+  .section { margin-bottom: 68px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px; }
+  h2 span { color: var(--gold); }
+  .section-intro { font-size: 15px; color: var(--muted); max-width: 680px; margin-bottom: 36px; line-height: 1.75; }
+
+  /* INSIGHT */
+  .insight { background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 8px; padding: 22px 26px; margin-bottom: 24px; }
+  .insight-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .insight p { font-size: 14px; line-height: 1.75; }
+
+  /* THE PRINCIPLE BOX */
+  .principle {
+    background: linear-gradient(135deg, rgba(76,175,130,0.07), rgba(201,168,76,0.04));
+    border: 1px solid rgba(76,175,130,0.25); border-radius: 12px;
+    padding: 36px 40px; margin-bottom: 40px;
+  }
+  .principle-label { font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+  .principle-text { font-size: 21px; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
+  .principle-text span { color: var(--gold); }
+
+  /* PIPELINE FLOW */
+  .pipeline { margin-bottom: 48px; }
+  .pipeline-step {
+    display: grid; grid-template-columns: 56px 1fr;
+    gap: 0; margin-bottom: 0;
+    position: relative;
+  }
+  .pipeline-step::before {
+    content: ''; position: absolute;
+    left: 27px; top: 56px; bottom: -1px;
+    width: 2px; background: var(--border);
+    z-index: 0;
+  }
+  .pipeline-step:last-child::before { display: none; }
+
+  .step-node {
+    display: flex; flex-direction: column;
+    align-items: center; padding-top: 14px;
+    z-index: 1;
+  }
+  .node-circle {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800;
+    flex-shrink: 0; margin-bottom: 0;
+    position: relative; z-index: 2;
+  }
+
+  .step-content {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 22px 24px;
+    margin-left: 16px; margin-bottom: 16px;
+    flex: 1;
+  }
+  .step-top {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 12px;
+    margin-bottom: 12px; flex-wrap: wrap;
+  }
+  .step-title { font-size: 16px; font-weight: 800; }
+  .step-when { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .step-badges { display: flex; gap: 8px; flex-wrap: wrap; flex-shrink: 0; }
+  .badge {
+    font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .b-time { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.2); }
+  .b-auto { background: rgba(76,175,130,0.1); color: var(--green); border: 1px solid rgba(76,175,130,0.2); }
+  .b-manual { background: rgba(91,143,212,0.1); color: var(--blue); border: 1px solid rgba(91,143,212,0.2); }
+  .b-free { background: rgba(76,175,130,0.1); color: var(--green); border: 1px solid rgba(76,175,130,0.2); }
+  .b-paid { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.2); }
+
+  .step-body { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 14px; }
+  .step-body strong { color: var(--text); font-weight: 600; }
+
+  .tool-inline {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 6px; padding: 4px 10px;
+    font-size: 11px; font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--teal); margin: 2px;
+    white-space: nowrap;
+  }
+
+  .outputs {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
+  }
+  .output-chip {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 12px;
+    font-size: 11px; color: var(--text);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .output-chip .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* TOOL DETAIL */
+  .tool-detail {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px; margin-top: 12px;
+  }
+  .tool-detail .td-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .tool-detail .td-what { font-size: 12px; color: var(--muted); line-height: 1.65; }
+  .tool-detail .td-price { font-size: 12px; font-weight: 700; color: var(--gold); margin-top: 6px; }
+
+  /* DELIVERABLE PACKAGE */
+  .package-box {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; margin-bottom: 32px;
+  }
+  .package-header {
+    padding: 20px 24px; border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), transparent);
+  }
+  .package-header h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+  .package-header p { font-size: 13px; color: var(--muted); }
+  .deliverable-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .deliverable {
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .deliverable:nth-child(even) { border-right: none; }
+  .deliverable:nth-last-child(-n+2) { border-bottom: none; }
+  .del-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .del-name { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+  .del-spec { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  /* SOP TABLE */
+  .sop-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 13px; }
+  .sop-table th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: var(--bg3); border-bottom: 1px solid var(--border); }
+  .sop-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+  .sop-table tr:last-child td { border-bottom: none; }
+  .sop-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .t-auto { color: var(--green); font-weight: 700; font-size: 11px; }
+  .t-manual { color: var(--blue); font-weight: 700; font-size: 11px; }
+
+  /* COST SUMMARY */
+  .cost-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 28px; }
+  .cost-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 18px; text-align: center; }
+  .cost-card .c-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 6px; }
+  .cost-card .c-val { font-size: 28px; font-weight: 900; color: var(--gold); letter-spacing: -0.02em; }
+  .cost-card .c-sub { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+  /* PRICING */
+  .pricing-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .pricing-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 22px; }
+  .pricing-card h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 8px; }
+  .pricing-card .p-price { font-size: 28px; font-weight: 900; color: var(--gold); margin-bottom: 4px; }
+  .pricing-card .p-per { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .pricing-card ul { list-style: none; }
+  .pricing-card ul li { font-size: 12px; padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; gap: 6px; }
+  .pricing-card ul li:last-child { border-bottom: none; }
+  .pricing-card ul li::before { content: '✓'; color: var(--green); font-size: 10px; margin-top: 2px; flex-shrink: 0; }
+
+  /* MAKE AUTOMATION */
+  .make-flow { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-bottom: 24px; }
+  .make-step { display: flex; align-items: flex-start; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .make-step:last-child { border-bottom: none; }
+  .make-num { width: 24px; height: 24px; border-radius: 50%; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+  .make-content .make-title { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+  .make-content .make-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* FOOTER */
+  .footer { margin-top: 60px; padding-top: 28px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted); }
+
+  @media print {
+    body { background: #080808; }
+    .page { padding: 40px 36px; }
+    .cover { min-height: auto; padding: 60px 0; }
+    .cover-title { font-size: 44px; }
+    .pipeline-step { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-eyebrow">Dubai Podcast Studio — Production System</div>
+  <h1 class="cover-title">The 24-Hour<br /><span>Content Pipeline.</span></h1>
+  <p class="cover-sub">
+    A session-end-to-client-inbox production system that runs on 35 minutes of human
+    effort per episode and delivers 8 content formats automatically.
+    Built for a 6-person team. Scales without hiring.
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><label>Human effort</label><span>35 min per episode</span></div>
+    <div class="cover-meta-item"><label>Deliverables</label><span>8 formats per session</span></div>
+    <div class="cover-meta-item"><label>Delivery time</label><span>24 hours</span></div>
+    <div class="cover-meta-item"><label>Software cost</label><span>AED 590/month total</span></div>
+  </div>
+</div>
+
+
+<!-- THE PRINCIPLE -->
+<div class="section">
+  <div class="section-label">00 — The Principle</div>
+  <h2>This Is Not About <span>Tools</span></h2>
+
+  <div class="principle">
+    <div class="principle-label">The McDonald's Model Applied to Content Production</div>
+    <div class="principle-text">
+      McDonald's does not have better ingredients than a restaurant.<br/>
+      It has a <span>system</span> that produces the same result every time,<br/>
+      staffed by whoever is available, without creative judgment.<br/><br/>
+      That is what this pipeline builds for DPS.
+      Every session, same output. Same quality. Same 24-hour delivery.
+      <span>The engineer follows the SOP. The tools do the work.</span>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">The Current State — What "No Pipeline" Actually Means</div>
+    <p>
+      Right now, after a session ends, what happens is informal — someone edits the audio when they
+      have time, the client follows up to ask where their files are, the Reels may or may not get done,
+      there are no show notes unless the client writes them. The output depends on who is in the studio
+      that day and how much time they have. <strong>That is not a product. That is a recording space.</strong>
+      The pipeline converts DPS from a recording space into a content production company.
+      Same studios. Same team. Completely different value proposition.
+    </p>
+  </div>
+</div>
+
+
+<!-- THE PIPELINE -->
+<div class="section">
+  <div class="section-label">01 — The System</div>
+  <h2>Step by Step — <span>Session End to Client Inbox</span></h2>
+
+  <div class="pipeline">
+
+    <!-- STEP 0: DURING SESSION -->
+    <div class="pipeline-step">
+      <div class="step-node">
+        <div class="node-circle" style="background:rgba(201,168,76,0.15); border:2px solid var(--gold); color:var(--gold);">0</div>
+      </div>
+      <div class="step-content">
+        <div class="step-top">
+          <div>
+            <div class="step-title">During the Session — Set Up for Pipeline Success</div>
+            <div class="step-when">This happens before the session even ends. 5 minutes of setup.</div>
+          </div>
+          <div class="step-badges">
+            <span class="badge b-time">0 min effort</span>
+            <span class="badge b-manual">Pre-session</span>
+          </div>
+        </div>
+        <div class="step-body">
+          The pipeline only works if files are captured correctly from the start.
+          Two rules that must be followed in every session:
+          <br/><br/>
+          <strong>Rule 1 — Consistent file naming:</strong> every session exported as
+          <span style="font-family:'JetBrains Mono',monospace; color:var(--teal); font-size:12px;">ClientName_EpNumber_YYYYMMDD</span>
+          (e.g. <span style="font-family:'JetBrains Mono',monospace; color:var(--teal); font-size:12px;">AlZaabi_Ep12_20261005</span>).
+          This makes automation possible — the Make scenario triggers on this naming pattern.
+          <br/><br/>
+          <strong>Rule 2 — Record everything simultaneously:</strong> DAW captures audio, cameras capture video.
+          Both recordings start at the same time using a clap or timecode.
+          This one action eliminates sync work in post-production.
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 1: EXPORT -->
+    <div class="pipeline-step">
+      <div class="step-node">
+        <div class="node-circle" style="background:rgba(91,143,212,0.15); border:2px solid var(--blue); color:var(--blue);">1</div>
+      </div>
+      <div class="step-content">
+        <div class="step-top">
+          <div>
+            <div class="step-title">Export Raw Files — Session Ends</div>
+            <div class="step-when">Immediately after client leaves · 8 minutes</div>
+          </div>
+          <div class="step-badges">
+            <span class="badge b-time">8 min</span>
+            <span class="badge b-manual">Engineer</span>
+          </div>
+        </div>
+        <div class="step-body">
+          The engineer exports three things immediately while the session is still loaded:
+          <br/><br/>
+          <strong>1 — Final mix from the DAW</strong> (WAV 48kHz 24-bit) — the fully produced audio episode.
+          This is the only creative editing step in the entire pipeline. The session mix template
+          (EQ, compression, levels) is pre-built — the engineer only adjusts for this specific recording.
+          Estimated time: 6 minutes.<br/><br/>
+          <strong>2 — Video files from the ATEM/cameras</strong> — copy SD card files to the session folder.
+          Plug in, copy, done. The camera recorded automatically throughout. 2 minutes.<br/><br/>
+          <strong>3 — Upload both to the shared Google Drive session folder.</strong>
+          This single upload triggers the Make automation that runs the rest of the pipeline.
+        </div>
+        <div class="outputs">
+          <div class="output-chip"><div class="dot" style="background:var(--blue);"></div> final_mix.wav</div>
+          <div class="output-chip"><div class="dot" style="background:var(--blue);"></div> camera1_wide.mp4</div>
+          <div class="output-chip"><div class="dot" style="background:var(--blue);"></div> camera2_closeup.mp4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: AUDIO AI -->
+    <div class="pipeline-step">
+      <div class="step-node">
+        <div class="node-circle" style="background:rgba(76,175,130,0.15); border:2px solid var(--green); color:var(--green);">2</div>
+      </div>
+      <div class="step-content">
+        <div class="step-top">
+          <div>
+            <div class="step-title">AI Audio Enhancement — Fully Automatic</div>
+            <div class="step-when">Runs in background · 0 minutes human effort</div>
+          </div>
+          <div class="step-badges">
+            <span class="badge b-auto">Automatic</span>
+            <span class="badge b-time">0 min</span>
+          </div>
+        </div>
+        <div class="step-body">
+          The WAV file is automatically processed through <span class="tool-inline">Auphonic</span> via API trigger from Make.
+          Auphonic applies broadcast-standard audio processing in one step: noise reduction,
+          level normalisation to -16 LUFS (podcast standard), removal of room echo, and
+          loudness maximisation for streaming platforms.
+          <br/><br/>
+          This runs fully automatically in the background while the engineer has already moved
+          on to the next session. Processing time for a 60-minute episode: approximately 8 minutes.
+          Auphonic deposits the processed file back into the Google Drive folder when done.
+        </div>
+        <div class="tool-detail">
+          <div class="td-name">Auphonic</div>
+          <div class="td-what">Automatic audio levelling, noise reduction, speech enhancement, loudness normalisation. API integration means it runs without any human action. Used by BBC, Deutsche Welle, and thousands of professional podcast producers globally.</div>
+          <div class="td-price">AED 90/month (unlimited hours) · auphonic.com</div>
+        </div>
+        <div class="outputs" style="margin-top:12px;">
+          <div class="output-chip"><div class="dot" style="background:var(--green);"></div> final_mix_mastered.mp3</div>
+          <div class="output-chip"><div class="dot" style="background:var(--green);"></div> -16 LUFS broadcast standard</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: TRANSCRIPT + CONTENT -->
+    <div class="pipeline-step">
+      <div class="step-node">
+        <div class="node-circle" style="background:rgba(155,114,207,0.15); border:2px solid var(--purple); color:var(--purple);">3</div>
+      </div>
+      <div class="step-content">
+        <div class="step-top">
+          <div>
+            <div class="step-title">Transcript + All Text Content — Mostly Automatic</div>
+            <div class="step-when">5 minutes human setup, then runs automatically</div>
+          </div>
+          <div class="step-badges">
+            <span class="badge b-auto">95% Auto</span>
+            <span class="badge b-time">5 min</span>
+          </div>
+        </div>
+        <div class="step-body">
+          Upload the mastered audio file to <span class="tool-inline">Castmagic</span>.
+          Select the client's language (English, Arabic, or bilingual).
+          Click generate. Castmagic processes everything in approximately 10 minutes and outputs
+          all of the following simultaneously — with zero additional work:
+        </div>
+        <div class="tool-detail">
+          <div class="td-name">Castmagic</div>
+          <div class="td-what">
+            From a single audio upload, Castmagic generates: verbatim transcript with speaker labels,
+            edited show notes (structured, professional), blog post (1,200–1,800 words),
+            email newsletter draft, 10 social media posts (LinkedIn, Instagram, Twitter/X formats),
+            5 pull quotes, chapter markers with timestamps, and a 200-word episode summary.
+            All outputs are editable and exportable as text files.
+            Arabic language support is available — critical for bilingual DPS clients.
+          </div>
+          <div class="td-price">AED 150/month (Creator plan — 20 hours audio) · castmagic.io</div>
+        </div>
+        <div class="outputs" style="margin-top:12px;">
+          <div class="output-chip"><div class="dot" style="background:var(--purple);"></div> Full transcript</div>
+          <div class="output-chip"><div class="dot" style="background:var(--purple);"></div> Show notes</div>
+          <div class="output-chip"><div class="dot" style="background:var(--purple);"></div> Blog post</div>
+          <div class="output-chip"><div class="dot" style="background:var(--purple);"></div> 10 social posts</div>
+          <div class="output-chip"><div class="dot" style="background:var(--purple);"></div> Chapter markers</div>
+          <div class="output-chip"><div class="dot" style="background:var(--purple);"></div> Email newsletter</div>
+          <div class="output-chip"><div class="dot" style="background:var(--purple);"></div> Episode summary</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: VIDEO EDIT -->
+    <div class="pipeline-step">
+      <div class="step-node">
+        <div class="node-circle" style="background:rgba(91,143,212,0.15); border:2px solid var(--blue); color:var(--blue);">4</div>
+      </div>
+      <div class="step-content">
+        <div class="step-top">
+          <div>
+            <div class="step-title">Video Assembly — DaVinci Template</div>
+            <div class="step-when">12 minutes human effort · no creative decisions</div>
+          </div>
+          <div class="step-badges">
+            <span class="badge b-time">12 min</span>
+            <span class="badge b-manual">Engineer follows SOP</span>
+          </div>
+        </div>
+        <div class="step-body">
+          Open <span class="tool-inline">DaVinci Resolve</span> → Open "DPS Master Template" project.
+          Import camera files. DaVinci's multi-cam sync tool automatically aligns all camera
+          angles to the audio waveform — one click, done in 30 seconds.
+          Apply the DPS colour grade preset (pre-built, saved in the template — never touch colour settings manually).
+          Add lower thirds from the pre-built title template: client name, guest name, episode number.
+          Pre-rendered DPS intro (5 sec) and DPS outro (10 sec) are already in the timeline — drag session footage between them.
+          Export: <span style="font-family:'JetBrains Mono',monospace; color:var(--teal); font-size:12px;">H.264, 4K, YouTube preset</span>.
+          <br/><br/>
+          <strong>The engineer makes zero creative decisions in this step.</strong>
+          The template handles colour, graphics, and structure. The engineer only imports files, syncs, and exports.
+        </div>
+        <div class="tool-detail">
+          <div class="td-name">DaVinci Resolve (free) + DPS Master Template</div>
+          <div class="td-what">The DPS Master Template is a one-time setup investment: colour grade preset tuned to DPS studio lighting, lower-thirds graphics in DPS brand font and gold colour, pre-rendered DPS intro/outro, and export preset configured for YouTube, Instagram, and LinkedIn. Once built, every future episode uses the same template. Build time: 4 hours once.</div>
+          <div class="td-price">AED 0 — DaVinci Resolve is completely free for everything this pipeline requires</div>
+        </div>
+        <div class="outputs" style="margin-top:12px;">
+          <div class="output-chip"><div class="dot" style="background:var(--blue);"></div> Full episode video 4K 16:9</div>
+          <div class="output-chip"><div class="dot" style="background:var(--blue);"></div> DPS branded intro/outro</div>
+          <div class="output-chip"><div class="dot" style="background:var(--blue);"></div> Lower thirds: names + episode number</div>
+          <div class="output-chip"><div class="dot" style="background:var(--blue);"></div> DPS colour grade applied</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: REELS -->
+    <div class="pipeline-step">
+      <div class="step-node">
+        <div class="node-circle" style="background:rgba(224,123,64,0.15); border:2px solid var(--orange); color:var(--orange);">5</div>
+      </div>
+      <div class="step-content">
+        <div class="step-top">
+          <div>
+            <div class="step-title">AI Reels Generation — Fully Automatic</div>
+            <div class="step-when">5 minutes upload, then runs automatically · 0 wait effort</div>
+          </div>
+          <div class="step-badges">
+            <span class="badge b-auto">Automatic</span>
+            <span class="badge b-time">5 min upload</span>
+          </div>
+        </div>
+        <div class="step-body">
+          Upload the full video to <span class="tool-inline">Opus Clip</span> (already in use at DPS).
+          Opus Clip's AI identifies the highest-engagement moments — the "hook moments" in the conversation —
+          and generates 5–8 vertical 9:16 clips automatically. Each clip has auto-generated captions
+          synced to speech, branded with the DPS template set up in the account, and trimmed to
+          45–90 seconds (optimal for Instagram Reels, TikTok, LinkedIn, YouTube Shorts).
+          <br/><br/>
+          Processing time: approximately 25 minutes for a 60-minute episode, fully unattended.
+          The engineer uploads, walks away, downloads when notified.
+        </div>
+        <div class="outputs" style="margin-top:12px;">
+          <div class="output-chip"><div class="dot" style="background:var(--orange);"></div> 5 vertical Reels 9:16</div>
+          <div class="output-chip"><div class="dot" style="background:var(--orange);"></div> Auto-captions on each</div>
+          <div class="output-chip"><div class="dot" style="background:var(--orange);"></div> DPS branded frame</div>
+          <div class="output-chip"><div class="dot" style="background:var(--orange);"></div> 45–90 sec each</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6: THUMBNAIL -->
+    <div class="pipeline-step">
+      <div class="step-node">
+        <div class="node-circle" style="background:rgba(201,168,76,0.15); border:2px solid var(--gold); color:var(--gold);">6</div>
+      </div>
+      <div class="step-content">
+        <div class="step-top">
+          <div>
+            <div class="step-title">Thumbnail — Canva Template</div>
+            <div class="step-when">5 minutes · one decision only</div>
+          </div>
+          <div class="step-badges">
+            <span class="badge b-time">5 min</span>
+            <span class="badge b-manual">Engineer follows template</span>
+          </div>
+        </div>
+        <div class="step-body">
+          Open the DPS Podcast Thumbnail template in <span class="tool-inline">Canva Pro</span>.
+          The template has the DPS visual structure pre-built: background, colour palette, font system,
+          logo placement, and layout. The engineer makes exactly two changes:
+          <br/><br/>
+          <strong>1 —</strong> Swap the guest photo (take a screenshot from the video at a good frame).
+          <strong>2 —</strong> Update the episode title text.
+          <br/><br/>
+          Export three sizes automatically: YouTube (1280×720), square for Instagram (1080×1080),
+          and portrait for Stories (1080×1920). Total time: 5 minutes. Zero design skill required.
+        </div>
+        <div class="tool-detail">
+          <div class="td-name">Canva Pro — DPS Thumbnail Template System</div>
+          <div class="td-what">Build 3 master thumbnail templates once (one per DPS visual style). Each template has branded colours, fonts, logo, and layout locked. Engineer only swaps photo and title. Magic Resize feature exports all 3 sizes simultaneously from one click. Templates are reused indefinitely.</div>
+          <div class="td-price">AED 180/month or AED 1,400/year · canva.com</div>
+        </div>
+        <div class="outputs" style="margin-top:12px;">
+          <div class="output-chip"><div class="dot" style="background:var(--gold);"></div> YouTube thumbnail 1280×720</div>
+          <div class="output-chip"><div class="dot" style="background:var(--gold);"></div> Instagram square 1080×1080</div>
+          <div class="output-chip"><div class="dot" style="background:var(--gold);"></div> Stories portrait 1080×1920</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 7: DELIVERY -->
+    <div class="pipeline-step">
+      <div class="step-node">
+        <div class="node-circle" style="background:rgba(76,175,130,0.2); border:2px solid var(--green); color:var(--green);">7</div>
+      </div>
+      <div class="step-content">
+        <div class="step-top">
+          <div>
+            <div class="step-title">Client Delivery — Automatic Notification</div>
+            <div class="step-when">0 minutes human effort · triggered by Make</div>
+          </div>
+          <div class="step-badges">
+            <span class="badge b-auto">Fully Automatic</span>
+            <span class="badge b-time">0 min</span>
+          </div>
+        </div>
+        <div class="step-body">
+          When all files are deposited into the client's Google Drive folder, a Make scenario
+          detects the completion (monitors for the final Reels file which is always the last to arrive),
+          and automatically sends the client a branded email:
+          <br/><br/>
+          <em>"Your episode is ready. Here's everything we produced from your session:"</em>
+          followed by a structured list with clickable links to each deliverable in their folder.
+          The email goes out automatically — no human sends it, no human checks it.
+          The client receives it within 24 hours of their session ending.
+        </div>
+        <div class="tool-detail">
+          <div class="td-name">Make (already in use at DPS) — Delivery Automation Scenario</div>
+          <div class="td-what">New Make scenario: Watch Google Drive folder for new file named "*_reels_done*" → Send formatted email from DPS email to client → Log delivery in Airtable (session record updated: "Delivered"). One scenario, runs every time, zero maintenance after setup. Build time: 45 minutes once.</div>
+          <div class="td-price">AED 0 — uses existing Make subscription</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- WHAT THE CLIENT RECEIVES -->
+<div class="section">
+  <div class="section-label">02 — The Deliverable</div>
+  <h2>What the Client <span>Receives in 24 Hours</span></h2>
+  <p class="section-intro">
+    From one 60-minute recording session. This is the complete package that lands in their inbox.
+    No chasing. No follow-up calls. No "where are my files?"
+  </p>
+
+  <div class="package-box">
+    <div class="package-header">
+      <h3>The DPS Content Package — Per Session</h3>
+      <p>Delivered to client Google Drive folder + email notification within 24 hours of session</p>
+    </div>
+    <div class="deliverable-grid">
+      <div class="deliverable">
+        <div class="del-icon">🎙️</div>
+        <div>
+          <div class="del-name">Mastered Audio Episode</div>
+          <div class="del-spec">MP3 + WAV · -16 LUFS broadcast standard · noise-reduced · ready for Apple Podcasts, Spotify, RSS upload</div>
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="del-icon">🎬</div>
+        <div>
+          <div class="del-name">Full Video Episode</div>
+          <div class="del-spec">4K H.264 16:9 · DPS colour grade · branded lower thirds · intro/outro · ready for YouTube direct upload</div>
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="del-icon">📱</div>
+        <div>
+          <div class="del-name">5 Vertical Reels</div>
+          <div class="del-spec">9:16 · 45–90 sec each · auto-captions · branded frame · ready for Instagram, TikTok, LinkedIn, YouTube Shorts</div>
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="del-icon">📝</div>
+        <div>
+          <div class="del-name">Full Transcript</div>
+          <div class="del-spec">Verbatim · speaker-labelled · timestamped · available in English and/or Arabic · .docx + .txt</div>
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="del-icon">📋</div>
+        <div>
+          <div class="del-name">Show Notes + Blog Post</div>
+          <div class="del-spec">Structured show notes ready to paste into podcast host · 1,200-word SEO blog post · chapter markers with timestamps</div>
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="del-icon">📧</div>
+        <div>
+          <div class="del-name">10 Social Media Posts</div>
+          <div class="del-spec">Formatted for LinkedIn, Instagram, and X · 5 pull quotes · email newsletter draft · ready to copy-paste and publish</div>
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="del-icon">🖼️</div>
+        <div>
+          <div class="del-name">Episode Thumbnail (3 sizes)</div>
+          <div class="del-spec">YouTube 1280×720 · Instagram 1080×1080 · Stories 1080×1920 · DPS branded · client-ready</div>
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="del-icon">📊</div>
+        <div>
+          <div class="del-name">Episode Summary</div>
+          <div class="del-spec">200-word episode description · ready for podcast host, YouTube description, and website · SEO-optimised</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- TIME BREAKDOWN -->
+<div class="section">
+  <div class="section-label">03 — The SOP</div>
+  <h2>Exactly <span>35 Minutes</span> of Human Work</h2>
+  <p class="section-intro">
+    This is the Standard Operating Procedure. Any member of the DPS team can execute this
+    after 30 minutes of training. No creative decisions, no judgment calls — just follow the steps.
+  </p>
+
+  <table class="sop-table">
+    <thead>
+      <tr>
+        <th>Step</th>
+        <th>Action</th>
+        <th>Who</th>
+        <th>Time</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td>Export final mix from DAW using session template. Name file correctly.</td>
+        <td>Engineer</td>
+        <td>6 min</td>
+        <td><span class="t-manual">Manual</span></td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td>Copy camera files from SD card to session folder. Upload both to Google Drive.</td>
+        <td>Engineer</td>
+        <td>2 min</td>
+        <td><span class="t-manual">Manual</span></td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td>Auphonic processes audio. Castmagic generates all text content.</td>
+        <td>Nobody</td>
+        <td>~15 min</td>
+        <td><span class="t-auto">Automatic</span></td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td>Upload audio to Castmagic. Select language. Click generate. Walk away.</td>
+        <td>Engineer</td>
+        <td>3 min</td>
+        <td><span class="t-manual">Manual (upload only)</span></td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td>
+        <td>Open DaVinci → DPS Master Template → import files → sync (1 click) → export.</td>
+        <td>Engineer</td>
+        <td>12 min</td>
+        <td><span class="t-manual">Manual (template-driven)</span></td>
+      </tr>
+      <tr>
+        <td><strong>6</strong></td>
+        <td>Upload full video to Opus Clip. Set clip count to 5. Start. Walk away.</td>
+        <td>Engineer</td>
+        <td>5 min</td>
+        <td><span class="t-manual">Manual (upload only)</span></td>
+      </tr>
+      <tr>
+        <td><strong>7</strong></td>
+        <td>Open Canva DPS template. Swap guest photo + episode title. Export 3 sizes.</td>
+        <td>Engineer</td>
+        <td>5 min</td>
+        <td><span class="t-manual">Manual (template-driven)</span></td>
+      </tr>
+      <tr>
+        <td><strong>8</strong></td>
+        <td>Drop all completed files into client's Google Drive folder. Done.</td>
+        <td>Engineer</td>
+        <td>2 min</td>
+        <td><span class="t-manual">Manual (file move)</span></td>
+      </tr>
+      <tr>
+        <td><strong>9</strong></td>
+        <td>Make detects completed folder → sends delivery email to client automatically.</td>
+        <td>Nobody</td>
+        <td>0 min</td>
+        <td><span class="t-auto">Automatic</span></td>
+      </tr>
+      <tr style="background:rgba(201,168,76,0.05);">
+        <td colspan="3"><strong>Total human effort per episode</strong></td>
+        <td><strong>35 min</strong></td>
+        <td><strong>8 formats delivered</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="insight" style="border-left-color:var(--green);">
+    <div class="insight-label" style="color:var(--green);">The Critical One-Time Investment</div>
+    <p>
+      This pipeline requires a one-time setup investment of approximately <strong>2 working days</strong>:
+      build the DaVinci Master Template (4 hours), set up Canva thumbnail templates (2 hours),
+      configure Make delivery scenario (1 hour), set up Auphonic API connection (1 hour),
+      and configure Castmagic account with DPS brand voice guidelines (1 hour).
+      After that, it runs indefinitely with zero maintenance. Every session from that point forward
+      takes 35 minutes and delivers 8 formats.
+    </p>
+  </div>
+</div>
+
+
+<!-- MAKE AUTOMATION DETAIL -->
+<div class="section">
+  <div class="section-label">04 — The Automation Layer</div>
+  <h2>What <span>Make</span> Does in This Pipeline</h2>
+  <p class="section-intro">
+    DPS already uses Make for the Studio Network. This pipeline adds one new Make scenario
+    that connects the production tools and handles client notification automatically.
+  </p>
+
+  <div class="make-flow">
+    <div class="make-step">
+      <div class="make-num">1</div>
+      <div class="make-content">
+        <div class="make-title">Trigger: New file uploaded to Google Drive session folder</div>
+        <div class="make-desc">Make watches the DPS Production Google Drive folder. When a new subfolder appears matching the naming pattern ClientName_EpNumber_Date, the scenario activates. This is the signal that a new session has started the pipeline.</div>
+      </div>
+    </div>
+    <div class="make-step">
+      <div class="make-num">2</div>
+      <div class="make-content">
+        <div class="make-title">Action: Trigger Auphonic API — send audio file for processing</div>
+        <div class="make-desc">Make passes the WAV file URL to Auphonic's API with the DPS preset (noise reduction + normalisation to -16 LUFS). Auphonic processes and deposits the result back into the folder. Zero human action required.</div>
+      </div>
+    </div>
+    <div class="make-step">
+      <div class="make-num">3</div>
+      <div class="make-content">
+        <div class="make-title">Action: Create client delivery folder with correct permissions</div>
+        <div class="make-desc">Make creates a dedicated client-accessible Google Drive subfolder, sets view permissions for the client's email address (pulled from Airtable — client records already there from the Studio Network), and prepares the delivery structure.</div>
+      </div>
+    </div>
+    <div class="make-step">
+      <div class="make-num">4</div>
+      <div class="make-content">
+        <div class="make-title">Watch: Monitor for Opus Clip completion signal</div>
+        <div class="make-desc">Make watches for the Reels files to appear in the folder (named *_reel_1.mp4 through *_reel_5.mp4). This is the last file to arrive, confirming the full package is complete. When all 5 Reels are present, Make triggers the delivery step.</div>
+      </div>
+    </div>
+    <div class="make-step">
+      <div class="make-num">5</div>
+      <div class="make-content">
+        <div class="make-title">Action: Send branded delivery email to client</div>
+        <div class="make-desc">Make sends a pre-built HTML email from the DPS email address to the client. The email lists all 8 deliverables with direct Google Drive links. Subject line: "Your [show name] Episode [number] is ready 🎙️ — everything's inside." Sent automatically, no human triggers it.</div>
+      </div>
+    </div>
+    <div class="make-step">
+      <div class="make-num">6</div>
+      <div class="make-content">
+        <div class="make-title">Action: Update Airtable session record — status: Delivered</div>
+        <div class="make-desc">The client's session record in Airtable (already exists from the Studio Network setup) is updated with delivery timestamp, package contents, and status "Delivered." This creates a searchable history of every episode delivered — useful for client reviews, upsells, and the Dubai Podcast Index data.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- COST AND PRICING -->
+<div class="section">
+  <div class="section-label">05 — Economics</div>
+  <h2>Cost, Pricing, <span>and What It Changes</span></h2>
+
+  <div class="cost-row">
+    <div class="cost-card">
+      <div class="c-label">Monthly software cost</div>
+      <div class="c-val">AED 590</div>
+      <div class="c-sub">Auphonic AED 90 + Castmagic AED 150 + Canva Pro AED 180 + Opus Clip AED 170 (existing)</div>
+    </div>
+    <div class="cost-card">
+      <div class="c-label">Cost per episode</div>
+      <div class="c-val">AED 20</div>
+      <div class="c-sub">At 30 sessions/month. Drops to AED 12 at 50 sessions/month. Marginal cost approaches zero at scale.</div>
+    </div>
+    <div class="cost-card">
+      <div class="c-label">One-time setup</div>
+      <div class="c-val">2 days</div>
+      <div class="c-sub">Build templates, configure APIs, test full run-through. Done once. Runs indefinitely.</div>
+    </div>
+  </div>
+
+  <div class="pricing-compare">
+    <div class="pricing-card">
+      <h4>Audio Session — unchanged</h4>
+      <div class="p-price">Base rate</div>
+      <div class="p-per">no change</div>
+      <ul>
+        <li>Mastered audio file</li>
+        <li>Transcript</li>
+        <li>Show notes</li>
+        <li>5 social posts</li>
+        <li>Episode summary</li>
+      </ul>
+    </div>
+    <div class="pricing-card" style="border-color:rgba(201,168,76,0.3); background:rgba(201,168,76,0.04);">
+      <h4>Content Engine — video sessions</h4>
+      <div class="p-price">+AED 500</div>
+      <div class="p-per">add-on to base session rate</div>
+      <ul>
+        <li>Everything in Audio +</li>
+        <li>4K video episode (YouTube-ready)</li>
+        <li>5 vertical Reels (branded)</li>
+        <li>3 thumbnail sizes</li>
+        <li>Blog post (1,200 words)</li>
+        <li>Email newsletter draft</li>
+        <li>24-hour delivery guarantee</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">What This Changes for the Business</div>
+    <p>
+      Currently DPS sells time — a room for an hour. After this pipeline, DPS sells output — 8 content
+      formats, delivered in 24 hours, ready to publish across every platform the client uses.
+      <strong>The same 60-minute session now produces a week's worth of content for the client.</strong>
+      That is a fundamentally different value proposition. It is also one that no competitor can
+      replicate without building the same system — and most will not bother, because it requires
+      the tool integrations, the templates, and the Make automation working in sequence.
+      Once it is built, it is an operational moat, not just a service feature.
+    </p>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>
+    <div style="font-weight:700; color:var(--text); margin-bottom:4px;">Dubai Podcast Studio</div>
+    <div>The 24-Hour Content Production Pipeline — June 2026</div>
+  </div>
+  <div style="text-align:right;">
+    <div>Confidential — Internal Use Only</div>
+    <div style="color:var(--gold); margin-top:2px;">dubaipodcaststudio.com</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

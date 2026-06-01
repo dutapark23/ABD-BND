@@ -10,6 +10,7 @@ const docs = [
   { html: 'dps_future_trends_rd_report_2026.html',  pdf: 'dps_future_trends_rd_report_2026.pdf' },
   { html: 'dps_spatial_audio_implementation.html', pdf: 'dps_spatial_audio_implementation.pdf' },
   { html: 'dps_video_studio_upgrade.html',         pdf: 'dps_video_studio_upgrade.pdf' },
+  { html: 'dps_production_pipeline.html',          pdf: 'dps_production_pipeline.pdf' },
 ];
 
 (async () => {
