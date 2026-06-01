@@ -6,7 +6,8 @@ const docs = [
   { html: 'dps_competitive_moat.html',             pdf: 'dps_competitive_moat.pdf' },
   { html: 'dps_studio_network_build_guide.html',   pdf: 'dps_studio_network_build_guide.pdf' },
   { html: 'dps_summer_meta_ads_2026.html',           pdf: 'dps_summer_meta_ads_2026.pdf' },
-  { html: 'dps_october_market_share_strategy.html', pdf: 'dps_october_market_share_strategy.pdf' },
+  { html: 'dps_october_market_share_strategy.html',  pdf: 'dps_october_market_share_strategy.pdf' },
+  { html: 'dps_future_trends_rd_report_2026.html',  pdf: 'dps_future_trends_rd_report_2026.pdf' },
 ];
 
 (async () => {
