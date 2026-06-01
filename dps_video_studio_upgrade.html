@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DPS — Video Studio Upgrade: Exact Spec & Cost</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:   #C9A84C;
+    --bg:     #080808;
+    --bg2:    #111111;
+    --bg3:    #181818;
+    --border: #252525;
+    --text:   #E8E8E8;
+    --muted:  #888888;
+    --red:    #E05555;
+    --green:  #4CAF82;
+    --blue:   #5B8FD4;
+    --teal:   #3DBFB8;
+    --purple: #9B72CF;
+    --orange: #E07B40;
+  }
+
+  html { font-size: 16px; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 60px 48px; }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh; display: flex;
+    flex-direction: column; justify-content: center;
+    position: relative; padding: 80px 0;
+    border-bottom: 1px solid var(--border); margin-bottom: 80px;
+  }
+  .cover-bar {
+    position: absolute; top: 0; left: -48px;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--blue), var(--gold), transparent);
+  }
+  .cover-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blue); margin-bottom: 28px; }
+  .cover-title { font-size: 58px; font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px; }
+  .cover-title span { color: var(--gold); }
+  .cover-sub { font-size: 18px; font-weight: 300; color: var(--muted); max-width: 560px; margin-bottom: 56px; line-height: 1.7; }
+  .cover-meta { display: flex; gap: 40px; flex-wrap: wrap; }
+  .cover-meta-item label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .cover-meta-item span { font-size: 15px; font-weight: 600; }
+
+  /* SECTION */
+  .section { margin-bottom: 64px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px; }
+  h2 span { color: var(--gold); }
+  .section-intro { font-size: 15px; color: var(--muted); max-width: 680px; margin-bottom: 36px; line-height: 1.75; }
+
+  /* INSIGHT */
+  .insight { background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 8px; padding: 22px 26px; margin-bottom: 24px; }
+  .insight-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .insight p { font-size: 14px; line-height: 1.75; }
+
+  /* PHASE SELECTOR */
+  .phase-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 40px; }
+  .phase-col { padding: 22px 20px; border-right: 1px solid var(--border); }
+  .phase-col:last-child { border-right: none; }
+  .phase-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 6px; }
+  .phase-title { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+  .phase-rooms { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .phase-cost { font-size: 20px; font-weight: 900; color: var(--gold); }
+  .phase-per { font-size: 11px; color: var(--muted); }
+  .phase-1 .phase-label { color: var(--green); }
+  .phase-2 .phase-label { color: var(--gold); }
+  .phase-3 .phase-label { color: var(--blue); }
+  .phase-1 { background: rgba(76,175,130,0.03); }
+
+  /* DIAGRAM */
+  .room-diagram {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 28px; margin-bottom: 28px;
+  }
+  .diagram-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 20px; }
+  .diagram-top {
+    display: flex; justify-content: center;
+    gap: 12px; margin-bottom: 20px; align-items: flex-end;
+  }
+  .diagram-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .diagram-bottom { display: flex; justify-content: center; gap: 12px; align-items: flex-start; margin-top: 20px; }
+
+  .d-box {
+    border-radius: 8px; padding: 10px 14px;
+    font-size: 11px; font-weight: 700; text-align: center;
+    line-height: 1.4; min-width: 80px;
+  }
+  .d-camera { background: rgba(91,143,212,0.15); border: 1px solid rgba(91,143,212,0.3); color: var(--blue); }
+  .d-light-key { background: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.4); color: var(--gold-lt, #e8c87a); }
+  .d-light-fill { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: var(--muted); }
+  .d-light-back { background: rgba(155,114,207,0.12); border: 1px solid rgba(155,114,207,0.25); color: var(--purple); }
+  .d-subject { background: rgba(76,175,130,0.12); border: 2px solid rgba(76,175,130,0.3); color: var(--green); font-size: 13px; padding: 14px 20px; }
+  .d-bg { background: rgba(224,123,64,0.1); border: 1px solid rgba(224,123,64,0.2); color: var(--orange); }
+  .d-note { font-size: 10px; color: var(--muted); font-style: italic; margin-top: 4px; }
+  .arrow { font-size: 16px; color: var(--border); align-self: center; }
+  .d-center-col { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .angle-note { font-size: 10px; color: var(--muted); text-align: center; margin-top: 4px; }
+
+  /* EQUIPMENT CARD */
+  .equip-section { margin-bottom: 36px; }
+  .equip-section h3 { font-size: 16px; font-weight: 800; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .equip-section h3 span { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+  .equip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .equip-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+  .equip-tier { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 6px; }
+  .t-budget { color: var(--green); }
+  .t-recommended { color: var(--gold); }
+  .t-premium { color: var(--blue); }
+  .equip-name { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+  .equip-model { font-size: 12px; color: var(--teal); font-family: 'JetBrains Mono', monospace; margin-bottom: 10px; }
+  .equip-desc { font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
+  .equip-price { font-size: 18px; font-weight: 900; color: var(--gold); }
+  .equip-where { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .equip-why { font-size: 11px; color: var(--text); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); line-height: 1.5; }
+  .rec-badge { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 4px; margin-left: 8px; }
+
+  /* COST TABLE */
+  .cost-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 13px; }
+  .cost-table th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: var(--bg3); border-bottom: 1px solid var(--border); }
+  .cost-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+  .cost-table .total-row td { font-weight: 800; font-size: 14px; color: var(--gold); border-bottom: none; background: rgba(201,168,76,0.05); }
+  .cost-table tr:nth-child(even):not(.total-row) td { background: rgba(255,255,255,0.02); }
+  .item-name { font-weight: 600; }
+  .item-model { font-size: 11px; color: var(--teal); font-family: 'JetBrains Mono', monospace; display: block; margin-top: 2px; }
+
+  /* WORKFLOW */
+  .workflow { display: flex; align-items: center; gap: 0; margin-bottom: 28px; overflow-x: auto; flex-wrap: nowrap; }
+  .wf-step { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; text-align: center; flex-shrink: 0; min-width: 110px; }
+  .wf-step .wf-icon { font-size: 20px; margin-bottom: 6px; }
+  .wf-step .wf-label { font-size: 11px; font-weight: 700; line-height: 1.4; }
+  .wf-step .wf-sub { font-size: 10px; color: var(--muted); margin-top: 3px; }
+  .wf-arrow { color: var(--border); font-size: 18px; padding: 0 8px; flex-shrink: 0; }
+
+  /* SETTINGS */
+  .settings-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 24px; }
+  .setting-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .setting-card h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 8px; }
+  .setting-val { font-size: 15px; font-weight: 800; color: var(--gold); font-family: 'JetBrains Mono', monospace; }
+  .setting-why { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+  /* BEFORE/AFTER */
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .ba-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .ba-card h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
+  .ba-card ul { list-style: none; }
+  .ba-card ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; line-height: 1.5; }
+  .ba-card ul li:last-child { border-bottom: none; }
+  .x::before { content: '✗'; color: var(--red); }
+  .c::before { content: '✓'; color: var(--green); }
+
+  /* PRICING */
+  .pricing-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 28px; }
+  .pricing-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .pricing-card .p-tier { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 6px; }
+  .pricing-card .p-name { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
+  .pricing-card .p-price { font-size: 24px; font-weight: 900; color: var(--gold); margin: 10px 0 4px; }
+  .pricing-card .p-per { font-size: 11px; color: var(--muted); }
+  .pricing-card .p-includes { font-size: 12px; color: var(--muted); margin-top: 10px; line-height: 1.65; }
+
+  /* SOFTWARE */
+  .software-list { list-style: none; }
+  .software-list li { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-bottom: 10px; display: flex; gap: 14px; align-items: flex-start; }
+  .sw-name { font-size: 14px; font-weight: 700; }
+  .sw-role { font-size: 11px; color: var(--teal); font-family: 'JetBrains Mono', monospace; margin-bottom: 4px; }
+  .sw-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .sw-price { font-size: 13px; font-weight: 700; color: var(--gold); white-space: nowrap; }
+  .free { color: var(--green) !important; }
+
+  /* FOOTER */
+  .footer { margin-top: 60px; padding-top: 28px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted); }
+
+  @media print {
+    body { background: #080808; }
+    .page { padding: 40px 36px; }
+    .cover { min-height: auto; padding: 60px 0; }
+    .cover-title { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-eyebrow">Dubai Podcast Studio — Equipment Specification</div>
+  <h1 class="cover-title">Video-First<br /><span>Studio Upgrade.</span></h1>
+  <p class="cover-sub">
+    Exact cameras, exact lighting, exact settings, exact costs in AED.
+    Where to buy in Dubai. How to set up each room. What to charge clients.
+    Everything needed to go from audio studio to broadcast-ready video studio.
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><label>Phase 1 — 3 Rooms</label><span>AED 14,850</span></div>
+    <div class="cover-meta-item"><label>Full 7 Rooms</label><span>AED 34,650</span></div>
+    <div class="cover-meta-item"><label>Time to set up</label><span>1 day per room</span></div>
+    <div class="cover-meta-item"><label>ROI break-even</label><span>~12 video sessions per room</span></div>
+  </div>
+</div>
+
+
+<!-- STRATEGY: PHASE NOT ALL AT ONCE -->
+<div class="section">
+  <div class="section-label">00 — The Approach</div>
+  <h2>Don't Upgrade <span>All 7 at Once</span></h2>
+  <p class="section-intro">
+    Phase the investment. Start with 3 flagship video studios, market them aggressively,
+    measure demand, then expand. This protects cash flow and lets you refine the setup
+    before committing to all 7 rooms.
+  </p>
+
+  <div class="phase-row">
+    <div class="phase-col phase-1">
+      <div class="phase-label">Phase 1 — Now</div>
+      <div class="phase-title">Flagship Launch</div>
+      <div class="phase-rooms">3 studios upgraded</div>
+      <div class="phase-cost">AED 14,850</div>
+      <div class="phase-per">total · ~AED 4,950/studio</div>
+    </div>
+    <div class="phase-col phase-2">
+      <div class="phase-label">Phase 2 — Month 3</div>
+      <div class="phase-title">Scale if Demand Confirms</div>
+      <div class="phase-rooms">+2 studios (total 5)</div>
+      <div class="phase-cost">AED 9,900</div>
+      <div class="phase-per">additional investment</div>
+    </div>
+    <div class="phase-col phase-3">
+      <div class="phase-label">Phase 3 — Month 6</div>
+      <div class="phase-title">Full Conversion</div>
+      <div class="phase-rooms">Final 2 studios</div>
+      <div class="phase-cost">AED 9,900</div>
+      <div class="phase-per">final investment · all 7 done</div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">Why 3 First</div>
+    <p>
+      Video podcast bookings will initially come from your most engaged, most visible existing clients —
+      those who already have audiences and understand the value. 3 studios is more than enough capacity
+      to handle that initial demand while you build the marketing machine. Once those 3 rooms are
+      generating observable video premium revenue, the case for rooms 4–7 is self-funding and obvious.
+    </p>
+  </div>
+</div>
+
+
+<!-- ROOM DIAGRAM -->
+<div class="section">
+  <div class="section-label">01 — The Setup</div>
+  <h2>Exact <span>Room Layout</span> per Studio</h2>
+  <p class="section-intro">
+    This is the standard DPS video configuration. Every video-capable studio should follow this layout exactly,
+    so all DPS video content has a consistent look — a recognisable visual brand.
+  </p>
+
+  <div class="room-diagram">
+    <div class="diagram-label">Studio Video Layout — Top-Down View (3m × 4m room minimum)</div>
+
+    <!-- Back wall -->
+    <div style="text-align:center; margin-bottom:12px;">
+      <div style="display:inline-flex; gap:16px; align-items:center; background:rgba(224,123,64,0.07); border:1px solid rgba(224,123,64,0.2); border-radius:8px; padding:10px 20px;">
+        <div class="d-box d-bg" style="font-size:10px; padding:8px 12px;">Background<br/>Treatment</div>
+        <div class="d-box d-light-back" style="font-size:10px; padding:8px 12px;">Back-<br/>light</div>
+        <div class="d-box d-bg" style="font-size:10px; padding:8px 12px;">DPS<br/>Branding</div>
+      </div>
+      <div class="d-note">← Back wall — acoustic panels + DPS logo + subtle LED accent lighting →</div>
+    </div>
+
+    <!-- Middle: subjects + side lights -->
+    <div style="display:flex; align-items:center; justify-content:space-between; margin:16px 0;">
+      <div style="text-align:center;">
+        <div class="d-box d-light-fill" style="padding:12px 14px; font-size:11px;">Fill<br/>Light<br/>Soft</div>
+        <div class="d-note" style="max-width:80px;">45° left<br/>1.2m high</div>
+      </div>
+
+      <div style="display:flex; gap:24px; align-items:center;">
+        <div style="text-align:center;">
+          <div class="d-box d-subject" style="padding:16px 22px;">HOST</div>
+          <div class="d-note">Mic at desk<br/>Camera 2 on arm</div>
+        </div>
+        <div style="text-align:center; font-size:11px; color:var(--muted);">←  1.5m  →</div>
+        <div style="text-align:center;">
+          <div class="d-box d-subject" style="padding:16px 22px;">GUEST</div>
+          <div class="d-note">Mic at desk<br/>Camera 3 on arm (optional)</div>
+        </div>
+      </div>
+
+      <div style="text-align:center;">
+        <div class="d-box d-light-key" style="padding:12px 14px; font-size:11px;">Key<br/>Light<br/>Main</div>
+        <div class="d-note" style="max-width:80px;">45° right<br/>1.4m high</div>
+      </div>
+    </div>
+
+    <!-- Camera 1 wide -->
+    <div style="text-align:center; margin-top:12px;">
+      <div style="display:inline-flex; gap:24px; align-items:center; background:rgba(91,143,212,0.07); border:1px solid rgba(91,143,212,0.2); border-radius:8px; padding:10px 24px;">
+        <div class="d-box d-camera" style="font-size:10px; padding:8px 14px;">Camera 1<br/>Wide Shot</div>
+        <div style="font-size:12px; color:var(--muted);">2.0 – 2.5m from subjects · eye-level tripod · 24–35mm focal length</div>
+      </div>
+      <div class="d-note">Front of room — viewer's perspective · captures both host and guest in one frame</div>
+    </div>
+
+    <!-- Legend -->
+    <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:20px; padding-top:16px; border-top:1px solid var(--border);">
+      <div style="font-size:11px; display:flex; align-items:center; gap:6px;"><span style="display:inline-block; width:12px; height:12px; border-radius:2px; background:rgba(91,143,212,0.3);"></span> Camera positions</div>
+      <div style="font-size:11px; display:flex; align-items:center; gap:6px;"><span style="display:inline-block; width:12px; height:12px; border-radius:2px; background:rgba(201,168,76,0.3);"></span> Lighting positions</div>
+      <div style="font-size:11px; display:flex; align-items:center; gap:6px;"><span style="display:inline-block; width:12px; height:12px; border-radius:2px; background:rgba(76,175,130,0.2);"></span> Talent positions</div>
+      <div style="font-size:11px; display:flex; align-items:center; gap:6px;"><span style="display:inline-block; width:12px; height:12px; border-radius:2px; background:rgba(224,123,64,0.2);"></span> Background / set design</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CAMERAS -->
+<div class="section">
+  <div class="section-label">02 — Cameras</div>
+  <h2>Camera <span>Specification</span></h2>
+  <p class="section-intro">
+    You need 1 wide camera per studio as minimum viable setup. Add a second close-up camera per seat
+    if budget allows — it enables proper multi-camera editing and a more professional final cut.
+  </p>
+
+  <div class="equip-section">
+    <h3 style="color:var(--text);">Primary Camera — Wide Shot <span style="background:rgba(201,168,76,0.12); color:var(--gold); border:1px solid rgba(201,168,76,0.25);">1 per studio minimum</span></h3>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-tier t-budget">Budget Path</div>
+        <div class="equip-name">Sony ZV-E10 II <span class="rec-badge">Most Popular</span></div>
+        <div class="equip-model">ILCZV-E10M / Kit with 16-50mm lens</div>
+        <div class="equip-desc">APS-C sensor. 4K 30fps video. Clean HDMI output (critical — not all cameras have this). Excellent autofocus locks onto faces automatically — no camera operator needed during a session. Lightweight, mounts on desk arm.</div>
+        <div class="equip-price">AED 1,399</div>
+        <div class="equip-where">Sharaf DG · Jumbo Electronics · Amazon.ae</div>
+        <div class="equip-why">Best value for podcast video. The autofocus means your engineer doesn't have to touch it during a 60-minute session.</div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-tier t-recommended">Recommended</div>
+        <div class="equip-name">Sony FX30 <span class="rec-badge">DPS Standard</span></div>
+        <div class="equip-model">ILME-FX30 + 15mm PZ lens</div>
+        <div class="equip-desc">Super 35 cinema sensor — same sensor as professional cinema cameras. 4K 120fps. Built-in ND filter (critical in studio with mixed lighting). Full-size HDMI. Designed specifically for video production. Looks unmistakably professional.</div>
+        <div class="equip-price">AED 3,199</div>
+        <div class="equip-where">Sharaf DG · Virgin Megastore Dubai Mall · Sony Centre</div>
+        <div class="equip-why">Cinema-quality image that justifies a premium price tier. When clients see their footage, they won't want to record anywhere else.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="equip-section">
+    <h3 style="color:var(--text);">Close-Up Camera — Per Seat <span style="background:rgba(91,143,212,0.12); color:var(--blue); border:1px solid rgba(91,143,212,0.25);">optional, 1 per person</span></h3>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-tier t-budget">Budget</div>
+        <div class="equip-name">Sony ZV-1 II</div>
+        <div class="equip-model">ZV-1M2 compact camera</div>
+        <div class="equip-desc">Compact, mounts on a flexible arm clipped to the desk. Clean HDMI out. Ultra-wide 18mm lens — ideal for tight desk-mounted shot. Used by hundreds of professional podcast studios globally as the "per-seat" close-up camera.</div>
+        <div class="equip-price">AED 1,799</div>
+        <div class="equip-where">Sharaf DG · Amazon.ae</div>
+        <div class="equip-why">Positioned 40–50cm from the subject's face. Captures the expression details that make video podcasts compelling.</div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-tier t-recommended">Recommended</div>
+        <div class="equip-name">Sony a7C II</div>
+        <div class="equip-model">ILCE-7CM2 full-frame + 24mm</div>
+        <div class="equip-desc">Full-frame sensor — produces the cinematic shallow depth of field (blurred background) that signals premium production. 4K 60fps. Best-in-class skin tones. Used by Joe Rogan's production team and major network podcast shows for close-up talent shots.</div>
+        <div class="equip-price">AED 4,499</div>
+        <div class="equip-where">Sony Centre Dubai · Sharaf DG</div>
+        <div class="equip-why">Full-frame background blur is immediately recognisable as professional quality. This is what makes the difference between "looks like a podcast" and "looks like Netflix."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">The Most Important Camera Setting — Always HDMI Clean Output</div>
+    <p>
+      Every camera you purchase must have <strong>clean HDMI output</strong> — meaning the HDMI port sends
+      pure video signal with no on-screen menus, battery indicators, or overlays.
+      Not all cameras have this. The Sony models specified above all do.
+      Before purchasing any other camera brand, specifically verify "clean HDMI output" in the spec sheet.
+      Without it, you cannot record the video feed to an external recorder or capture card.
+    </p>
+  </div>
+</div>
+
+
+<!-- LIGHTING -->
+<div class="section">
+  <div class="section-label">03 — Lighting</div>
+  <h2>Lighting <span>Specification</span></h2>
+  <p class="section-intro">
+    Lighting is more important than the camera. An average camera with excellent lighting looks
+    more professional than an excellent camera with average lighting. This is where most
+    studios underinvest.
+  </p>
+
+  <div class="equip-section">
+    <h3 style="color:var(--text);">Key Light — Main Illumination <span style="background:rgba(201,168,76,0.12); color:var(--gold); border:1px solid rgba(201,168,76,0.25);">1 per studio, required</span></h3>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-tier t-budget">Budget</div>
+        <div class="equip-name">Godox SL60W + Softbox</div>
+        <div class="equip-model">SL60W + 60×90cm softbox kit</div>
+        <div class="equip-desc">60W LED panel with large softbox diffuser. Bi-colour 2800–6500K. Remote controllable. Produces soft, flattering light on faces — not harsh shadows. Industry-standard for YouTube and podcast studios. Very reliable, widely used in Dubai studios.</div>
+        <div class="equip-price">AED 450</div>
+        <div class="equip-where">Sharaf DG · Studio One FZ LLC · Amazon.ae</div>
+        <div class="equip-why">Best value key light available. Professional studios globally use this exact model. No reason to spend more unless upgrading to RGB.</div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-tier t-recommended">Recommended</div>
+        <div class="equip-name">Aputure Amaran 200d S + Softbox <span class="rec-badge">Best Result</span></div>
+        <div class="equip-model">Amaran 200d S + 90×90cm Lantern</div>
+        <div class="equip-desc">200W daylight LED — significantly brighter, more light control, higher quality diffusion. Produces the clinical, broadcast-quality look seen on major podcast shows. App-controlled, DMX compatible. Aputure is the industry standard for professional video lighting globally.</div>
+        <div class="equip-price">AED 1,250</div>
+        <div class="equip-where">Aputure UAE dealer · B&H (ships to UAE) · Amazon.ae</div>
+        <div class="equip-why">This light is the one that makes a client say "wow, this looks like proper TV." Justifies the price premium for video sessions.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="equip-section">
+    <h3 style="color:var(--text);">Fill Light + Backlight <span style="background:rgba(91,143,212,0.12); color:var(--blue); border:1px solid rgba(91,143,212,0.25);">2 more lights per studio</span></h3>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-tier t-recommended">Fill Light</div>
+        <div class="equip-name">Godox SL60W (second unit)</div>
+        <div class="equip-model">Same model, opposite side, 50% power</div>
+        <div class="equip-desc">The fill light is the same model as the key — placed on the opposite side at half power. This fills shadows on the face without eliminating them. Rule: fill light always 50% brightness of key light. Use same softbox for even diffusion. Total for key + fill: AED 900.</div>
+        <div class="equip-price">AED 450 (second unit)</div>
+        <div class="equip-where">Same sources as key light</div>
+        <div class="equip-why">Without a fill light, one side of every face is in shadow. This is the most common mistake in podcast video setups — fixed with one extra light.</div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-tier t-recommended">Backlight / Hair Light</div>
+        <div class="equip-name">Neewer RGB LED Panel</div>
+        <div class="equip-model">Neewer 660 PRO RGB — compact panel</div>
+        <div class="equip-desc">Small, bright LED panel positioned behind and above the subject. Creates a subtle rim of light that separates the subject from the background — the professional "glow" visible in all high-end studio productions. Also functions as background accent lighting. RGB: match DPS brand colours.</div>
+        <div class="equip-price">AED 220</div>
+        <div class="equip-where">Amazon.ae · Sharaf DG</div>
+        <div class="equip-why">Without a backlight, subjects "merge" into the background visually. This AED 220 light is the difference between flat and three-dimensional.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-grid">
+    <div class="setting-card">
+      <h4>Colour Temperature</h4>
+      <div class="setting-val">5600K</div>
+      <div class="setting-why">All lights at 5600K (daylight). Never mix warm and cool in the same shot. Set camera white balance to match: 5600K manual.</div>
+    </div>
+    <div class="setting-card">
+      <h4>Key Light Power</h4>
+      <div class="setting-val">100%</div>
+      <div class="setting-why">Key light at full power. Fill light at 50%. Backlight at 30–40%. This ratio creates natural, three-dimensional shadow structure.</div>
+    </div>
+    <div class="setting-card">
+      <h4>Key Light Angle</h4>
+      <div class="setting-val">45° / 45°</div>
+      <div class="setting-why">Rembrandt positioning: 45° to the side, 45° above eye level. Universally flattering, standard in professional portrait and interview production.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CAPTURE & CONNECTIONS -->
+<div class="section">
+  <div class="section-label">04 — Capture & Connection</div>
+  <h2>Getting Video <span>Into Your Computer</span></h2>
+  <p class="section-intro">
+    The camera records to its SD card simultaneously while feeding live video via HDMI to a capture card
+    connected to the studio Mac or PC. The capture card converts HDMI to USB-C input.
+  </p>
+
+  <div class="equip-grid" style="margin-bottom:24px;">
+    <div class="equip-card">
+      <div class="equip-tier t-recommended">Capture Card <span class="rec-badge">Required</span></div>
+      <div class="equip-name">Elgato Cam Link 4K</div>
+      <div class="equip-model">10GAM9901</div>
+      <div class="equip-desc">Plug-and-play HDMI → USB-C. Camera appears as a webcam source in OBS, Zoom, Ecamm, Riverside. 4K 30fps or 1080p 60fps passthrough. Works immediately on Mac and PC — no driver installation, no configuration. One per camera feed.</div>
+      <div class="equip-price">AED 549</div>
+      <div class="equip-where">Sharaf DG · Amazon.ae · Virgin Megastore</div>
+      <div class="equip-why">The simplest, most reliable solution. Used by tens of thousands of professional studios globally. If it fails, replacement arrives next day from Amazon.ae.</div>
+    </div>
+    <div class="equip-card">
+      <div class="equip-tier t-recommended">Multi-Camera Switcher</div>
+      <div class="equip-name">Blackmagic ATEM Mini Pro</div>
+      <div class="equip-model">ATEM Mini Pro ISO</div>
+      <div class="equip-desc">Handles 4 HDMI camera inputs simultaneously. Hardware multi-cam switching — the engineer can cut between cameras live during a session. Records all 4 cameras to USB simultaneously. Makes post-production significantly faster — no syncing needed. A serious upgrade for 2+ camera setups.</div>
+      <div class="equip-price">AED 1,299</div>
+      <div class="equip-where">Sharaf DG · Geekay Games · Amazon.ae</div>
+      <div class="equip-why">For a 2+ camera studio, this removes the single most time-consuming part of post-production: multi-cam sync and assembly. Pays for itself within 5 sessions of engineer time saved.</div>
+    </div>
+  </div>
+
+  <div class="workflow">
+    <div class="wf-step">
+      <div class="wf-icon">🎥</div>
+      <div class="wf-label">Camera 1<br/>Wide Shot</div>
+      <div class="wf-sub">SD card + HDMI out</div>
+    </div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step">
+      <div class="wf-icon">📹</div>
+      <div class="wf-label">Camera 2<br/>Close-Up</div>
+      <div class="wf-sub">SD card + HDMI out</div>
+    </div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step" style="background:rgba(201,168,76,0.07); border-color:rgba(201,168,76,0.2);">
+      <div class="wf-icon">⚡</div>
+      <div class="wf-label">ATEM Mini<br/>Pro ISO</div>
+      <div class="wf-sub">Hardware switcher</div>
+    </div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step">
+      <div class="wf-icon">💻</div>
+      <div class="wf-label">Studio Mac<br/>USB-C</div>
+      <div class="wf-sub">OBS / Ecamm</div>
+    </div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step">
+      <div class="wf-icon">🎙️</div>
+      <div class="wf-label">DAW Audio<br/>Interface</div>
+      <div class="wf-sub">Sync via timecode</div>
+    </div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step" style="background:rgba(76,175,130,0.07); border-color:rgba(76,175,130,0.2);">
+      <div class="wf-icon">✅</div>
+      <div class="wf-label">DaVinci<br/>Resolve</div>
+      <div class="wf-sub">Edit + grade + export</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SOFTWARE -->
+<div class="section">
+  <div class="section-label">05 — Software</div>
+  <h2>Post-Production <span>Software Stack</span></h2>
+
+  <ul class="software-list">
+    <li>
+      <div style="flex:1;">
+        <div class="sw-name">DaVinci Resolve</div>
+        <div class="sw-role">Edit · Colour Grade · Audio Sync · Export</div>
+        <div class="sw-desc">The industry-standard professional video editing suite. Used by Netflix, HBO, and Hollywood productions. Multi-cam editing with automatic sync from audio waveform — aligns all cameras in one click. Colour grading built in. Free version handles everything a podcast studio needs. Resolve Studio (paid) adds noise reduction and some AI tools.</div>
+      </div>
+      <div class="sw-price free">AED 0 (free)</div>
+    </li>
+    <li>
+      <div style="flex:1;">
+        <div class="sw-name">OBS Studio</div>
+        <div class="sw-role">Live Recording · Multi-Camera · Live Streaming</div>
+        <div class="sw-desc">Free, open-source recording and streaming software. Captures all camera feeds simultaneously. Can live-stream to YouTube, LinkedIn, and Instagram simultaneously while recording local files. If DPS wants to offer live podcast recording as a service, OBS is the engine. Used by every major live podcast and streaming studio globally.</div>
+      </div>
+      <div class="sw-price free">AED 0 (free)</div>
+    </li>
+    <li>
+      <div style="flex:1;">
+        <div class="sw-name">Ecamm Live</div>
+        <div class="sw-role">Professional Live Recording · Mac Only · Multi-Guest</div>
+        <div class="sw-desc">The most polished, professionally oriented live recording tool for Mac. Handles remote guests via Zoom/Riverside with automatic scene switching. Lower-thirds graphics, PiP layouts, and real-time transitions — all without editing. Used by premium podcast studios when the client wants a same-day broadcast or live episode. Subscription: AED 55/month or AED 550/year.</div>
+      </div>
+      <div class="sw-price">AED 550/year</div>
+    </li>
+    <li>
+      <div style="flex:1;">
+        <div class="sw-name">Opus Clip (already in use)</div>
+        <div class="sw-role">AI Reels — Auto-clip generation from full episode</div>
+        <div class="sw-desc">Already part of the DPS stack. Once video recording is in place, Opus Clip value multiplies — it now has video to work with, not just audio. Generates 5–10 vertical Reels from every episode automatically. The "DPS Content Engine" runs on this.</div>
+      </div>
+      <div class="sw-price">Already subscribed</div>
+    </li>
+  </ul>
+</div>
+
+
+<!-- FULL COST PER STUDIO -->
+<div class="section">
+  <div class="section-label">06 — Exact Costs</div>
+  <h2>Cost Per Studio — <span>Three Budget Levels</span></h2>
+
+  <table class="cost-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Budget Setup</th>
+        <th>Recommended Setup</th>
+        <th>Premium Setup</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="item-name">Primary Camera (wide shot)</span><span class="item-model">+ lens + tripod</span></td>
+        <td>AED 1,399<br/><span style="font-size:11px; color:var(--muted);">Sony ZV-E10 II</span></td>
+        <td>AED 3,199<br/><span style="font-size:11px; color:var(--muted);">Sony FX30</span></td>
+        <td>AED 6,499<br/><span style="font-size:11px; color:var(--muted);">BMPCC 6K G2</span></td>
+      </tr>
+      <tr>
+        <td><span class="item-name">Close-Up Camera</span><span class="item-model">per talent seat, desk arm mount</span></td>
+        <td>—<br/><span style="font-size:11px; color:var(--muted);">1 camera only</span></td>
+        <td>AED 1,799<br/><span style="font-size:11px; color:var(--muted);">Sony ZV-1 II</span></td>
+        <td>AED 4,499<br/><span style="font-size:11px; color:var(--muted);">Sony a7C II</span></td>
+      </tr>
+      <tr>
+        <td><span class="item-name">Key Light + Softbox</span><span class="item-model">main illumination, 45° position</span></td>
+        <td>AED 450<br/><span style="font-size:11px; color:var(--muted);">Godox SL60W</span></td>
+        <td>AED 1,250<br/><span style="font-size:11px; color:var(--muted);">Aputure Amaran 200d S</span></td>
+        <td>AED 2,100<br/><span style="font-size:11px; color:var(--muted);">Aputure 300c</span></td>
+      </tr>
+      <tr>
+        <td><span class="item-name">Fill Light + Softbox</span><span class="item-model">opposite side, 50% power</span></td>
+        <td>AED 450<br/><span style="font-size:11px; color:var(--muted);">Godox SL60W</span></td>
+        <td>AED 450<br/><span style="font-size:11px; color:var(--muted);">Godox SL60W</span></td>
+        <td>AED 450<br/><span style="font-size:11px; color:var(--muted);">Godox SL60W</span></td>
+      </tr>
+      <tr>
+        <td><span class="item-name">Backlight / Hair Light</span><span class="item-model">behind subject, rim separation</span></td>
+        <td>AED 220<br/><span style="font-size:11px; color:var(--muted);">Neewer RGB Panel</span></td>
+        <td>AED 220<br/><span style="font-size:11px; color:var(--muted);">Neewer RGB Panel</span></td>
+        <td>AED 550<br/><span style="font-size:11px; color:var(--muted);">Godox RGB SL60</span></td>
+      </tr>
+      <tr>
+        <td><span class="item-name">Capture Card / Switcher</span><span class="item-model">HDMI → Mac/PC</span></td>
+        <td>AED 549<br/><span style="font-size:11px; color:var(--muted);">Elgato Cam Link 4K</span></td>
+        <td>AED 1,299<br/><span style="font-size:11px; color:var(--muted);">ATEM Mini Pro ISO</span></td>
+        <td>AED 1,299<br/><span style="font-size:11px; color:var(--muted);">ATEM Mini Pro ISO</span></td>
+      </tr>
+      <tr>
+        <td><span class="item-name">Cables, Mounts, Arms</span><span class="item-model">HDMI cables, desk arms, light stands</span></td>
+        <td>AED 280</td>
+        <td>AED 380</td>
+        <td>AED 500</td>
+      </tr>
+      <tr class="total-row">
+        <td>TOTAL PER STUDIO</td>
+        <td>AED 3,348</td>
+        <td>AED 8,597</td>
+        <td>AED 15,897</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="insight" style="border-left-color:var(--green);">
+    <div class="insight-label" style="color:var(--green);">The Recommendation for DPS Phase 1</div>
+    <p>
+      Use the <strong>Recommended Setup (AED 8,597/studio)</strong> for your 3 flagship video rooms.
+      The budget setup looks visibly cheaper on screen — clients will notice. The premium setup
+      is unnecessary for podcasting. At AED 8,597, each studio generates ROI from approximately
+      <strong>12 video sessions charged at AED 700 premium</strong> over the base audio rate.
+      At realistic demand, break-even arrives within 6–8 weeks of launch.
+    </p>
+  </div>
+</div>
+
+
+<!-- CAMERA SETTINGS -->
+<div class="section">
+  <div class="section-label">07 — Camera Settings</div>
+  <h2>Exact <span>Camera Settings</span> — Sony FX30</h2>
+  <p class="section-intro">
+    Save these as a custom preset on the camera. Every session starts with these settings locked.
+    No engineer should be adjusting settings mid-session.
+  </p>
+
+  <div class="settings-grid">
+    <div class="setting-card">
+      <h4>Resolution</h4>
+      <div class="setting-val">4K / 25fps</div>
+      <div class="setting-why">4K for future-proofing. 25fps for UAE market (PAL standard). Never use 60fps for podcast — too smooth, removes cinematic feel.</div>
+    </div>
+    <div class="setting-card">
+      <h4>Shutter Speed</h4>
+      <div class="setting-val">1/50s</div>
+      <div class="setting-why">Always 2× the frame rate. At 25fps: 1/50s shutter. This is the 180-degree rule — produces natural motion blur on any movement.</div>
+    </div>
+    <div class="setting-card">
+      <h4>ISO</h4>
+      <div class="setting-val">800–1600</div>
+      <div class="setting-why">Studio lighting means low ISO is achievable. Keep below 3200 to avoid noise. With Aputure Amaran at full power: ISO 800 is achievable.</div>
+    </div>
+    <div class="setting-card">
+      <h4>White Balance</h4>
+      <div class="setting-val">5600K Manual</div>
+      <div class="setting-why">Never use Auto White Balance — it drifts during a session. Set manually to match your lights: 5600K if using daylight LEDs.</div>
+    </div>
+    <div class="setting-card">
+      <h4>Picture Profile</h4>
+      <div class="setting-val">S-Cinetone</div>
+      <div class="setting-why">Sony's built-in cinematic colour profile. Warm, flattering skin tones, natural contrast. No colour grading knowledge needed — looks professional straight out of camera.</div>
+    </div>
+    <div class="setting-card">
+      <h4>Autofocus</h4>
+      <div class="setting-val">Real-Time Eye AF</div>
+      <div class="setting-why">Sony's eye-tracking AF locks onto the host's eye and never loses focus. The engineer never needs to touch the focus during a 90-minute session. Set to Human → Eye AF.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- NEW PRICING -->
+<div class="section">
+  <div class="section-label">08 — New Pricing</div>
+  <h2>What to <span>Charge</span> for Video Sessions</h2>
+
+  <div class="pricing-row">
+    <div class="pricing-card">
+      <div class="p-tier">Existing Service</div>
+      <div class="p-name">Audio-Only Session</div>
+      <div class="p-price">Base rate</div>
+      <div class="p-per">unchanged</div>
+      <div class="p-includes">No change to existing pricing. Audio clients continue as normal. Video is an upgrade, not a replacement.</div>
+    </div>
+    <div class="pricing-card" style="border-color:rgba(201,168,76,0.3); background:rgba(201,168,76,0.04);">
+      <div class="p-tier" style="color:var(--gold);">New — Video Premium</div>
+      <div class="p-name">Video Podcast Session</div>
+      <div class="p-price">+AED 500–700</div>
+      <div class="p-per">on top of base audio rate</div>
+      <div class="p-includes">Session in video-equipped studio. Full video + audio recording. 2 camera angles. Basic colour correction. Delivered as sync'd audio+video file within 24 hours.</div>
+    </div>
+    <div class="pricing-card">
+      <div class="p-tier">New — Full Package</div>
+      <div class="p-name">Video + Content Engine</div>
+      <div class="p-price">+AED 950–1,200</div>
+      <div class="p-per">on top of base audio rate</div>
+      <div class="p-includes">Everything in Video Premium + AI Reels (5 vertical clips) + transcript + show notes + thumbnail design. Complete deliverable package — ready to publish everywhere.</div>
+    </div>
+  </div>
+
+  <div class="ba-grid">
+    <div class="ba-card">
+      <h4 style="color:var(--red);">What a session delivered to look like before</h4>
+      <ul>
+        <li class="x">Audio file only (.wav or .mp3)</li>
+        <li class="x">Client edits themselves or pays external editor</li>
+        <li class="x">No video — can't publish to YouTube</li>
+        <li class="x">No social content — must create separately</li>
+        <li class="x">No transcript — must use external tool</li>
+      </ul>
+    </div>
+    <div class="ba-card">
+      <h4 style="color:var(--green);">What a session delivers after this upgrade</h4>
+      <ul>
+        <li class="c">Broadcast-quality audio file (as before)</li>
+        <li class="c">4K multi-camera video — ready for YouTube</li>
+        <li class="c">5 vertical Reels — ready for IG/TikTok/LinkedIn</li>
+        <li class="c">Full transcript + show notes — ready to publish</li>
+        <li class="c">Branded thumbnail — professional, consistent</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>
+    <div style="font-weight:700; color:var(--text); margin-bottom:4px;">Dubai Podcast Studio</div>
+    <div>Video Studio Upgrade — Equipment Specification & Implementation</div>
+  </div>
+  <div style="text-align:right;">
+    <div>Confidential — Internal Use Only</div>
+    <div style="color:var(--gold); margin-top:2px;">dubaipodcaststudio.com</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
