@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DPS — Spatial Audio: Implementation Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:   #C9A84C;
+    --bg:     #080808;
+    --bg2:    #111111;
+    --bg3:    #181818;
+    --border: #252525;
+    --text:   #E8E8E8;
+    --muted:  #888888;
+    --red:    #E05555;
+    --green:  #4CAF82;
+    --blue:   #5B8FD4;
+    --teal:   #3DBFB8;
+    --purple: #9B72CF;
+  }
+
+  html { font-size: 16px; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 60px 48px; }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh; display: flex;
+    flex-direction: column; justify-content: center;
+    position: relative; padding: 80px 0;
+    border-bottom: 1px solid var(--border); margin-bottom: 80px;
+  }
+  .cover-bar {
+    position: absolute; top: 0; left: -48px;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--teal), var(--gold), transparent);
+  }
+  .cover-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal); margin-bottom: 28px; }
+  .cover-title { font-size: 58px; font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px; }
+  .cover-title span { color: var(--gold); }
+  .cover-sub { font-size: 18px; font-weight: 300; color: var(--muted); max-width: 540px; margin-bottom: 56px; line-height: 1.7; }
+  .cover-meta { display: flex; gap: 48px; flex-wrap: wrap; }
+  .cover-meta-item label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .cover-meta-item span { font-size: 15px; font-weight: 600; }
+
+  /* SECTION */
+  .section { margin-bottom: 64px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px; }
+  h2 span { color: var(--gold); }
+  .section-intro { font-size: 15px; color: var(--muted); max-width: 680px; margin-bottom: 36px; line-height: 1.75; }
+
+  /* ALERT */
+  .alert {
+    background: linear-gradient(135deg, rgba(61,191,184,0.08), rgba(201,168,76,0.04));
+    border: 1px solid rgba(61,191,184,0.3); border-radius: 10px;
+    padding: 28px 32px; margin-bottom: 36px;
+  }
+  .alert-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .alert p { font-size: 15px; line-height: 1.75; }
+  .alert p strong { color: var(--text); }
+
+  .warning { background: rgba(224,85,85,0.07); border: 1px solid rgba(224,85,85,0.2); border-radius: 10px; padding: 24px 28px; margin-bottom: 28px; }
+  .warning-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+  .warning p { font-size: 14px; line-height: 1.7; }
+
+  /* COMPARISON */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 36px; }
+  .compare-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+  .compare-card h4 { font-size: 13px; font-weight: 800; margin-bottom: 6px; }
+  .compare-card .sub { font-size: 11px; color: var(--muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.12em; }
+  .compare-card ul { list-style: none; }
+  .compare-card ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); line-height: 1.55; display: flex; gap: 8px; align-items: flex-start; }
+  .compare-card ul li:last-child { border-bottom: none; }
+  .bad::before { content: '✗'; color: var(--red); flex-shrink: 0; font-weight: 700; }
+  .good::before { content: '✓'; color: var(--green); flex-shrink: 0; font-weight: 700; }
+  .card-verdict { margin-top: 16px; font-size: 12px; font-weight: 700; padding: 8px 14px; border-radius: 6px; display: inline-block; }
+  .verdict-skip { background: rgba(224,85,85,0.1); color: var(--red); border: 1px solid rgba(224,85,85,0.2); }
+  .verdict-do { background: rgba(76,175,130,0.1); color: var(--green); border: 1px solid rgba(76,175,130,0.2); }
+
+  /* INSIGHT */
+  .insight { background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 8px; padding: 22px 26px; margin-bottom: 24px; }
+  .insight-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .insight p { font-size: 14px; line-height: 1.75; }
+
+  /* DAY STEPS */
+  .day-block { margin-bottom: 32px; }
+  .day-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 16px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-badge {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 16px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .day-title { font-size: 17px; font-weight: 800; }
+  .day-time { font-size: 12px; color: var(--muted); margin-left: auto; white-space: nowrap; }
+
+  .step-list { list-style: none; }
+  .step-list li {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 18px 20px;
+    margin-bottom: 10px; font-size: 14px; line-height: 1.65;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .step-n {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--bg3); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--gold);
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-content { flex: 1; }
+  .step-content strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .step-content p { color: var(--muted); font-size: 13px; }
+  .step-content .cmd {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 4px; padding: 8px 12px; margin-top: 8px;
+    color: var(--teal); display: block; line-height: 1.6;
+  }
+  .step-tag {
+    font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    flex-shrink: 0; height: fit-content;
+  }
+  .t-free { background: rgba(76,175,130,0.1); color: var(--green); border: 1px solid rgba(76,175,130,0.2); }
+  .t-paid { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.2); }
+  .t-action { background: rgba(91,143,212,0.1); color: var(--blue); border: 1px solid rgba(91,143,212,0.2); }
+
+  /* TOOL CARDS */
+  .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+  .tool-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; }
+  .tool-name { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
+  .tool-type { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--teal); margin-bottom: 10px; }
+  .tool-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+  .tool-price { font-size: 12px; font-weight: 700; color: var(--gold); }
+  .tool-why { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* POSITIONING */
+  .pos-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 28px; margin-bottom: 24px; }
+  .pos-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .pos-text { font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.01em; }
+  .pos-text span { color: var(--gold); }
+
+  /* TIMELINE */
+  .tl { list-style: none; position: relative; padding-left: 28px; }
+  .tl::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .tl li { position: relative; margin-bottom: 20px; }
+  .tl li::before { content: ''; position: absolute; left: -24px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--gold); }
+  .tl li .tl-head { font-size: 13px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+  .tl li .tl-time { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); }
+  .tl li .tl-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .tl li.done::before { background: var(--green); border-color: var(--green); }
+  .tl li.hot::before { background: var(--gold); border-color: var(--gold); }
+
+  /* COST TABLE */
+  .cost-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 13px; }
+  .cost-table th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: var(--bg3); border-bottom: 1px solid var(--border); }
+  .cost-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+  .cost-table tr:last-child td { border-bottom: none; font-weight: 700; color: var(--gold); }
+  .cost-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .free-tag { color: var(--green); font-weight: 700; }
+
+  /* FOOTER */
+  .footer { margin-top: 60px; padding-top: 28px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted); }
+
+  @media print {
+    body { background: #080808; }
+    .page { padding: 40px 36px; }
+    .cover { min-height: auto; padding: 60px 0; }
+    .cover-title { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-eyebrow">Dubai Podcast Studio — Technical Implementation</div>
+  <h1 class="cover-title">Spatial Audio.<br /><span>From Tomorrow.</span></h1>
+  <p class="cover-sub">
+    A step-by-step technical implementation guide — what to download today,
+    what to install this week, and how to be producing and marketing spatial audio
+    content within 7 days. Total budget: under AED 1,200.
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><label>Start Date</label><span>Tomorrow morning</span></div>
+    <div class="cover-meta-item"><label>First deliverable</label><span>Day 3 — first spatial test episode</span></div>
+    <div class="cover-meta-item"><label>Commercial launch</label><span>Day 14</span></div>
+    <div class="cover-meta-item"><label>Budget</label><span>AED 0 – 1,200</span></div>
+  </div>
+</div>
+
+
+<!-- CRITICAL DISTINCTION -->
+<div class="section">
+  <div class="section-label">00 — Read This First</div>
+  <h2>The <span>Critical Distinction</span> You Need to Understand</h2>
+
+  <div class="alert">
+    <div class="alert-label">The Most Important Technical Clarification in This Document</div>
+    <p>
+      When people say "Dolby Atmos room certification," they mean a full cinema/music production facility —
+      a 7.1.4 speaker array, treated room, Dolby site visit, months of work, and significant investment.
+      <strong>That is NOT what DPS needs.</strong><br /><br />
+      For podcasts, the correct format is <strong>binaural spatial audio</strong> — a software-only process
+      that creates full 3D immersive audio delivered as a standard stereo file. It works on every pair of
+      headphones, on every platform, with no special equipment needed by the listener.
+      This is what Apple AirPods, Spotify, and YouTube support. And it can be set up tomorrow.
+    </p>
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-card">
+      <h4 style="color:var(--red);">Full Dolby Atmos Room Certification</h4>
+      <div class="sub">What you do NOT need</div>
+      <ul>
+        <li class="bad">7.1.4 speaker array — ceiling speakers, overhead, surrounds</li>
+        <li class="bad">Dolby site inspection and room validation</li>
+        <li class="bad">Dedicated mixing room reconstruction</li>
+        <li class="bad">Timeline: 6–12 months minimum</li>
+        <li class="bad">Cost: AED 80,000 – 300,000+</li>
+        <li class="bad">Designed for film, music labels, TV broadcast</li>
+        <li class="bad">Podcast listeners can't tell the difference</li>
+      </ul>
+      <div class="card-verdict verdict-skip">Not relevant for podcasts</div>
+    </div>
+    <div class="compare-card">
+      <h4 style="color:var(--green);">Binaural Spatial Audio Production</h4>
+      <div class="sub">What DPS actually needs</div>
+      <ul>
+        <li class="good">Software plugins installed on existing workstations</li>
+        <li class="good">Works with your existing DAW (Logic, Pro Tools, Reaper)</li>
+        <li class="good">No hardware changes to any studio room</li>
+        <li class="good">Timeline: setup in 1 day, first episode in 3 days</li>
+        <li class="good">Cost: AED 0 (free tools) to AED 1,100 (premium)</li>
+        <li class="good">Delivers through Apple Podcasts, Spotify, YouTube</li>
+        <li class="good">Listeners hear 3D immersive audio on any earphones</li>
+      </ul>
+      <div class="card-verdict verdict-do">This is the path — start tomorrow</div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">What Binaural Spatial Audio Sounds Like</div>
+    <p>
+      Instead of everything coming from "inside your head" as mono/stereo audio does on headphones —
+      binaural processing places sounds in specific positions in 3D space around the listener.
+      The host voice comes from slightly in front. The guest's voice comes from 30 degrees to the right.
+      Room ambience wraps around from behind. On AirPods with head-tracking enabled, the sound
+      stays anchored to the virtual room even when the listener turns their head.
+      It is a fundamentally different, more immersive experience — and once someone hears it,
+      they notice the difference immediately.
+    </p>
+  </div>
+</div>
+
+
+<!-- DAY 1 -->
+<div class="section">
+  <div class="section-label">01 — Day 1 (Tomorrow Morning)</div>
+  <h2>Morning: <span>Install Everything</span></h2>
+  <p class="section-intro">
+    Everything in Day 1 is free. You will have a working spatial audio chain
+    set up by lunchtime.
+  </p>
+
+  <div class="day-block">
+    <div class="day-header">
+      <div class="day-badge" style="border-color:var(--teal); color:var(--teal);">Step 1</div>
+      <div class="day-title">Identify your DAW and operating system</div>
+      <div class="day-time">9:00 AM · 15 minutes</div>
+    </div>
+    <ul class="step-list">
+      <li>
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <strong>Check what DAW each studio uses</strong>
+          <p>The tools you download depend on this. The three most common setups in Dubai podcast studios:
+          Logic Pro (Mac), Pro Tools (Mac or PC), or Reaper (Mac or PC).</p>
+        </div>
+        <span class="step-tag t-action">Check now</span>
+      </li>
+      <li>
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <strong>If Logic Pro on Mac — you already have spatial audio built in</strong>
+          <p>Logic Pro 10.7.3+ includes native Dolby Atmos and binaural rendering at no extra cost.
+          Open Logic → Preferences → Audio → Spatial Audio. It is already there.</p>
+          <span class="cmd">Logic Pro → File → Project Settings → Audio → Spatial Audio → Enable</span>
+        </div>
+        <span class="step-tag t-free">Already paid</span>
+      </li>
+      <li>
+        <div class="step-n">3</div>
+        <div class="step-content">
+          <strong>If Pro Tools or Reaper — download SPARTA (free)</strong>
+          <p>SPARTA (Spatial Audio Real-Time Applications) is a free, open-source binaural toolkit
+          used by BBC R&D, Fraunhofer, and professional studios globally. It works as a VST/AU plugin
+          in any DAW. Download at: leomccormack.github.io/sparta-site</p>
+          <span class="cmd">Download: SPARTA Suite → install BinauraliserNFr + AmbiRoomSim plugins</span>
+        </div>
+        <span class="step-tag t-free">Free</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">
+      <div class="day-badge" style="border-color:var(--teal); color:var(--teal);">Step 2</div>
+      <div class="day-title">Download dearVR PRO free trial</div>
+      <div class="day-time">10:00 AM · 20 minutes</div>
+    </div>
+    <ul class="step-list">
+      <li>
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <strong>Go to dear-reality.com → dearVR PRO → Start Free Trial</strong>
+          <p>14-day full trial, no credit card needed. This is the industry-standard binaural plugin —
+          used by Abbey Road Studios, Dolby, BBC. Works in Logic, Pro Tools, Reaper, Ableton, Nuendo.</p>
+        </div>
+        <span class="step-tag t-free">14-day free trial</span>
+      </li>
+      <li>
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <strong>Install and activate in your DAW</strong>
+          <p>It appears as a plugin insert on any audio track. Place it on the host microphone channel.
+          You will immediately see a 3D sphere showing the position of that audio source.
+          Drag the source to any position in 3D space — left, right, above, behind.</p>
+        </div>
+        <span class="step-tag t-action">Install</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">
+      <div class="day-badge" style="border-color:var(--teal); color:var(--teal);">Step 3</div>
+      <div class="day-title">Set up your binaural monitoring chain</div>
+      <div class="day-time">11:00 AM · 30 minutes</div>
+    </div>
+    <ul class="step-list">
+      <li>
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <strong>Get a pair of closed-back headphones for monitoring</strong>
+          <p>Spatial audio must be monitored on headphones, not speakers. Sony MDR-7506 or
+          Audio-Technica ATH-M50x are the studio standard. You likely already have these.
+          AirPods Pro or AirPods Max also work for testing the consumer experience.</p>
+        </div>
+        <span class="step-tag t-free">Already have these</span>
+      </li>
+      <li>
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <strong>Enable binaural output in your DAW master bus</strong>
+          <p>In Logic: Output → Dolby Atmos → Binaural Render Mode → On. This renders your spatial
+          mix into a standard stereo signal that carries the 3D spatial information for headphones.
+          In any DAW with dearVR: add dearVR Monitor on the master bus in "headphone monitoring" mode.</p>
+        </div>
+        <span class="step-tag t-action">Configure</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- DAY 2-3 -->
+<div class="section">
+  <div class="section-label">02 — Days 2–3</div>
+  <h2>The <span>Standard Spatial Mix Template</span></h2>
+  <p class="section-intro">
+    This is the exact spatial audio positioning template to use for every DPS podcast recording.
+    Once it is set up as a session template, applying it to any new recording takes 5 minutes.
+  </p>
+
+  <div class="insight" style="border-left-color:var(--teal);">
+    <div class="insight-label" style="color:var(--teal);">The DPS Spatial Audio Positioning Standard</div>
+    <p>
+      These positions are based on how humans naturally perceive conversation.
+      The listener feels like they are in the room with the hosts — a physically present experience
+      that is completely absent from standard stereo podcast audio.
+    </p>
+  </div>
+
+  <div style="background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:28px; margin-bottom:28px;">
+    <div style="font-size:10px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:20px;">Spatial Positioning Map — Listener's Perspective (Top View)</div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <div>
+        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:16px; margin-bottom:12px;">
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--gold); margin-bottom:6px;">Host Voice (Primary)</div>
+          <div style="font-size:13px; line-height:1.65;">Position: <strong>Centre, 1.5m forward, head height</strong><br/>
+          This anchors the listener to the conversation. The main voice should always feel "in front" — commanding and clear.</div>
+        </div>
+        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:16px; margin-bottom:12px;">
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--blue); margin-bottom:6px;">Guest Voice</div>
+          <div style="font-size:13px; line-height:1.65;">Position: <strong>30° right, 1.2m, head height</strong><br/>
+          Natural seating position — feels like the guest is across the table. For video pods, match the physical camera angle.</div>
+        </div>
+        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:16px; margin-bottom:12px;">
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--teal); margin-bottom:6px;">Second Guest (if any)</div>
+          <div style="font-size:13px; line-height:1.65;">Position: <strong>30° left, 1.2m, head height</strong><br/>
+          Mirrored from Guest 1. Listener feels seated between two people at a table.</div>
+        </div>
+      </div>
+      <div>
+        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:16px; margin-bottom:12px;">
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--purple); margin-bottom:6px;">Room Ambience / Reverb</div>
+          <div style="font-size:13px; line-height:1.65;">Position: <strong>360° sphere, distance 3m, -18dB</strong><br/>
+          The DPS studio acoustic signature. Very low level but completely wraps the listener. This is what makes the room feel real — not just voices in a void.</div>
+        </div>
+        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:16px; margin-bottom:12px;">
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--gold); margin-bottom:6px;">Intro/Outro Music</div>
+          <div style="font-size:13px; line-height:1.65;">Position: <strong>Wide stereo, slightly behind, -6dB</strong><br/>
+          Music should feel like it comes from behind and around the listener — immersive bed under the vocal performance, not competing with it.</div>
+        </div>
+        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:16px;">
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--muted); margin-bottom:6px;">Ad Reads (if any)</div>
+          <div style="font-size:13px; line-height:1.65;">Position: <strong>Centre, forward, slightly closer than host</strong><br/>
+          Ad reads should feel like the host is leaning toward the listener — closer, more intimate. This subtle shift unconsciously signals "important message."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">
+      <div class="day-badge" style="border-color:var(--gold); color:var(--gold);">Day 2</div>
+      <div class="day-title">Build and save the DPS Spatial Template</div>
+      <div class="day-time">Half day · 4 hours</div>
+    </div>
+    <ul class="step-list">
+      <li>
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <strong>Open a new session in your DAW. Create tracks:</strong>
+          <span class="cmd">Track 1: Host Mic → dearVR PRO (position: centre 0°, 1.5m)<br/>Track 2: Guest Mic → dearVR PRO (position: right 30°, 1.2m)<br/>Track 3: Room Bus → AmbiRoomSim (SPARTA) → full sphere, distance 3m, -18dB<br/>Track 4: Music → dearVR PRO (position: rear wide, -6dB)<br/>Master: Binaural Render → export as stereo AAC/WAV</span>
+        </div>
+        <span class="step-tag t-action">Build</span>
+      </li>
+      <li>
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <strong>Record a 5-minute test conversation. Export. Listen on AirPods.</strong>
+          <p>This is the moment it clicks. The voices will feel physically present in the room with you.
+          Have two or three team members listen and give feedback. This is also your internal demo asset.</p>
+        </div>
+        <span class="step-tag t-action">Test</span>
+      </li>
+      <li>
+        <div class="step-n">3</div>
+        <div class="step-content">
+          <strong>Save as "DPS Spatial Template" — use this for every new booking</strong>
+          <p>In Logic: File → Save as Template. In Pro Tools: File → Save as Template.
+          From now on, every session opens with spatial positioning pre-configured.
+          The engineer just loads the template and adjusts levels.</p>
+        </div>
+        <span class="step-tag t-free">Permanent asset</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">
+      <div class="day-badge" style="border-color:var(--gold); color:var(--gold);">Day 3</div>
+      <div class="day-title">Produce first commercial-quality spatial episode</div>
+      <div class="day-time">Full session</div>
+    </div>
+    <ul class="step-list">
+      <li>
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <strong>Invite a willing existing client to record a spatial audio episode for free</strong>
+          <p>This is your proof-of-concept and your first marketing asset. Brief them: "We are piloting
+          a new immersive audio format — first in Dubai. We'd like to produce your next episode in
+          spatial audio at no charge. In return, we'd love a short testimonial when you hear it."</p>
+        </div>
+        <span class="step-tag t-action">Outreach</span>
+      </li>
+      <li>
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <strong>Produce, mix, and export two versions: standard stereo + spatial binaural</strong>
+          <p>Always deliver both. Standard stereo for maximum platform compatibility.
+          Spatial binaural for AirPods, Spotify, Apple Podcasts, YouTube. The client publishes both —
+          it signals to their audience that they are the early adopter in their niche.</p>
+        </div>
+        <span class="step-tag t-action">Deliver</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- TOOLS AND COSTS -->
+<div class="section">
+  <div class="section-label">03 — Tools & Investment</div>
+  <h2>Exact Tools, <span>Exact Costs</span></h2>
+
+  <div class="tool-grid">
+    <div class="tool-card">
+      <div class="tool-name">Logic Pro (built-in Dolby Atmos)</div>
+      <div class="tool-type">DAW Spatial Engine — Mac only</div>
+      <div class="tool-desc">If you already use Logic Pro, full Dolby Atmos binaural support is built in since v10.7.3. Zero additional cost. Simply enable in Project Settings → Spatial Audio. Best-in-class binaural renderer, trusted by professional studios globally.</div>
+      <div class="tool-price">AED 0 (already included in Logic Pro)</div>
+      <div class="tool-why">Start here if on Mac</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">dearVR PRO — Dear Reality</div>
+      <div class="tool-type">Binaural Spatial Plugin</div>
+      <div class="tool-desc">Industry standard for binaural audio production. Used by Abbey Road, Dolby, Netflix. Places any sound source anywhere in 3D space. Works in Logic, Pro Tools, Reaper, Ableton, Nuendo. Simple XY pad + elevation control. 14-day free trial, then purchase.</div>
+      <div class="tool-price">€299 one-time (~AED 1,100)</div>
+      <div class="tool-why">Best investment if not using Logic</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">SPARTA Suite — Leomccormack</div>
+      <div class="tool-type">Open-Source Spatial Toolkit</div>
+      <div class="tool-desc">Free academic/professional toolkit developed with BBC R&D and Fraunhofer Institute. BinauraliserNFr plugin handles binaural rendering. AmbiRoomSim creates spatial room ambience. More technical than dearVR but full featured and trusted in broadcast production.</div>
+      <div class="tool-price">AED 0 — completely free</div>
+      <div class="tool-why">Best free path if not on Logic</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Reaper (if you need a new DAW)</div>
+      <div class="tool-type">DAW — Mac + Windows</div>
+      <div class="tool-desc">The most cost-effective professional DAW. Supports all VST/AU spatial plugins. Highly configurable. Used by professional podcast studios and broadcast facilities globally. 60-day free trial, then AED 220 for a discounted licence (commercial use under $20K revenue: $225).</div>
+      <div class="tool-price">AED 220 one-time (~$60)</div>
+      <div class="tool-why">If no DAW currently or on Windows</div>
+    </div>
+  </div>
+
+  <table class="cost-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Scenario A — Mac + Logic</th>
+        <th>Scenario B — Pro Tools / Reaper</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>DAW spatial audio engine</td>
+        <td class="free-tag">AED 0 (built-in)</td>
+        <td class="free-tag">AED 0 (SPARTA free) or AED 1,100 (dearVR)</td>
+        <td>dearVR is faster to learn; SPARTA is more powerful</td>
+      </tr>
+      <tr>
+        <td>Room simulation / ambience</td>
+        <td class="free-tag">AED 0 (Logic Space Designer)</td>
+        <td class="free-tag">AED 0 (SPARTA AmbiRoomSim)</td>
+        <td>Both free options are professional quality</td>
+      </tr>
+      <tr>
+        <td>Binaural monitoring plugin</td>
+        <td class="free-tag">AED 0 (Logic built-in)</td>
+        <td class="free-tag">AED 0 (dearVR Monitor free version)</td>
+        <td>Required to hear spatial mix on headphones correctly</td>
+      </tr>
+      <tr>
+        <td>Headphones for monitoring</td>
+        <td class="free-tag">AED 0 (use existing studio cans)</td>
+        <td class="free-tag">AED 0</td>
+        <td>Sony MDR-7506 or ATH-M50x — you likely have these</td>
+      </tr>
+      <tr>
+        <td>Engineer training (online)</td>
+        <td class="free-tag">AED 0 (Dolby Academy free)</td>
+        <td class="free-tag">AED 0 (YouTube + Dolby Academy)</td>
+        <td>Dolby Academy at learn.dolby.com — free professional courses</td>
+      </tr>
+      <tr>
+        <td><strong>Total minimum investment</strong></td>
+        <td><strong>AED 0</strong></td>
+        <td><strong>AED 0 – AED 1,100</strong></td>
+        <td>Operational within 1 day</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- MARKETING POSITIONING -->
+<div class="section">
+  <div class="section-label">04 — Marketing the Capability</div>
+  <h2>How to <span>Position and Sell</span> Spatial Audio</h2>
+  <p class="section-intro">
+    The production capability is only worth something if it is marketed correctly.
+    Most potential clients have never heard binaural spatial audio — they need to experience it
+    before they can value it. The sales process is therefore: demo first, sell second.
+  </p>
+
+  <div class="pos-box">
+    <div class="pos-label">DPS Positioning Line — Spatial Audio</div>
+    <div class="pos-text">
+      "The first podcast studio in the Arab World to offer<br />
+      <span>immersive spatial audio production.</span><br />
+      Your listeners don't just hear your podcast.<br />
+      They feel like they're in the room."
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px;">
+    <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:20px;">
+      <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--muted); margin-bottom:12px;">The Demo Script</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--muted);">
+        When a prospective client visits: hand them AirPods, play 60 seconds of a standard podcast.
+        Then play 60 seconds of the same content in spatial audio.
+        Do not say anything. Let them react.
+        Every single person who hears it for the first time immediately says some version of
+        <em>"what is that?"</em> or <em>"how did you do that?"</em>
+        That reaction is the sale. Then you explain and price.
+      </p>
+    </div>
+    <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:20px;">
+      <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--muted); margin-bottom:12px;">Pricing the Add-On</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--muted);">
+        Spatial audio mixing adds approximately 45–60 minutes of engineering time per episode.
+        Price accordingly: <strong style="color:var(--gold);">AED 350–500 per episode as a premium add-on</strong>
+        to the base session rate. For corporate packages, include it in the top-tier Sprint package
+        at no visible surcharge — it is part of what justifies the premium package price.
+      </p>
+    </div>
+  </div>
+
+  <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:24px; margin-bottom:28px;">
+    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--muted); margin-bottom:16px;">Instagram / LinkedIn Post — Launch Week</div>
+    <div style="background:var(--bg3); border:1px solid var(--border); border-radius:6px; padding:20px; font-size:14px; line-height:1.8; font-style:italic; color:var(--text);">
+      "Put your AirPods in. 🎧<br/><br/>
+      We just became the first podcast studio in the Arab World to offer immersive spatial audio production.<br/><br/>
+      Instead of everything coming from inside your head — your listeners hear voices positioned in real 3D space.
+      The host in front. The guest to the right. The room wrapping around them.<br/><br/>
+      It sounds like being there. Not like listening.<br/><br/>
+      First spatial audio episode drops this week. Link in bio to hear the difference.
+      [Link to before/after comparison clip]<br/><br/>
+      #DubaiPodcastStudio #SpatialAudio #ImmersiveAudio #PodcastProduction"
+    </div>
+  </div>
+</div>
+
+
+<!-- FORMAL CERTIFICATION PATH -->
+<div class="section">
+  <div class="section-label">05 — Optional Next Level</div>
+  <h2>The Formal <span>Certification Path</span> — if You Want the Badge</h2>
+  <p class="section-intro">
+    Once the service is running and generating revenue, there is an optional path to formal engineer
+    certification. This is not required to offer or market the service — but it adds a credibility
+    layer that matters for enterprise clients.
+  </p>
+
+  <ul class="tl">
+    <li class="hot">
+      <div class="tl-head"><span class="tl-time">Tomorrow</span> Start here</div>
+      <div class="tl-body">Download tools, set up workflow, record first test. This document covers this completely. No certification needed to operate.</div>
+    </li>
+    <li>
+      <div class="tl-head"><span class="tl-time">Week 1–2</span>Dolby Academy — free online courses</div>
+      <div class="tl-body">learn.dolby.com offers free professional training on Dolby Atmos production. Complete "Dolby Atmos Music: Introduction" and "Dolby Atmos for Headphones." Estimated time: 6–8 hours. Free certificate of completion. This is sufficient for DPS engineers to confidently produce and describe the service.</div>
+    </li>
+    <li>
+      <div class="tl-head"><span class="tl-time">Month 1–2</span>Avid Pro Tools | Dolby Atmos Certification</div>
+      <div class="tl-body">A formal professional certification for mixing engineers. Available via ProMedia Training in partnership with Avid and Dolby. Online or in-person. Cost: approximately $1,500–2,000 per engineer. Not mandatory — but "Dolby Atmos Certified Engineer" on your team page is a strong enterprise sales signal. Next scheduled dates: check protoolstraining.com.</div>
+    </li>
+    <li>
+      <div class="tl-head"><span class="tl-time">Month 6+</span>Apple Spatial Audio Format (ASAF) — watch this space</div>
+      <div class="tl-body">Apple unveiled ASAF (Apple Spatial Audio Format) at WWDC 2025. This expands on Dolby Atmos with Apple-native head-tracking and AirPods Max optimisation. As submission guidelines are formalised for Apple Podcasts, DPS should be first in MENA to submit content in this format. Monitor: developer.apple.com/audio for updates.</div>
+    </li>
+    <li>
+      <div class="tl-head"><span class="tl-time">Month 9–12</span>Dolby Atmos Studio Certification — only if warranted</div>
+      <div class="tl-body">The full room certification (7.1.4 speaker array, Dolby site visit) becomes relevant only if DPS secures enterprise music/film post-production contracts. For podcasting alone, it is not necessary and not the right return on investment. Revisit this decision at the 12-month mark based on client demand.</div>
+    </li>
+  </ul>
+</div>
+
+
+<!-- 7-DAY SUMMARY -->
+<div class="section">
+  <div class="section-label">06 — The Week-One Checklist</div>
+  <h2>Day by Day — <span>Week One</span></h2>
+
+  <div style="background:var(--bg2); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:32px;">
+    <div style="display:grid; grid-template-columns:repeat(7,1fr);">
+      <div style="padding:16px 12px; border-right:1px solid var(--border); text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;">Mon</div>
+        <div style="font-size:11px; line-height:1.5; color:var(--muted);">Download tools. Install dearVR trial. Enable spatial in Logic. Headphone test chain.</div>
+      </div>
+      <div style="padding:16px 12px; border-right:1px solid var(--border); text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;">Tue</div>
+        <div style="font-size:11px; line-height:1.5; color:var(--muted);">Build session template. Apply positioning map. Internal test recording with team.</div>
+      </div>
+      <div style="padding:16px 12px; border-right:1px solid var(--border); text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;">Wed</div>
+        <div style="font-size:11px; line-height:1.5; color:var(--muted);">First client spatial session (free beta). Record, mix, deliver. Get testimonial.</div>
+      </div>
+      <div style="padding:16px 12px; border-right:1px solid var(--border); text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;">Thu</div>
+        <div style="font-size:11px; line-height:1.5; color:var(--muted);">Refine mix based on feedback. Create before/after audio comparison clip for marketing.</div>
+      </div>
+      <div style="padding:16px 12px; border-right:1px solid var(--border); text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;">Fri</div>
+        <div style="font-size:11px; line-height:1.5; color:var(--muted);">Begin Dolby Academy free courses online. Engineers complete intro module (2 hrs).</div>
+      </div>
+      <div style="padding:16px 12px; border-right:1px solid var(--border); text-align:center; background:rgba(201,168,76,0.04);">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Sat</div>
+        <div style="font-size:11px; line-height:1.5; color:var(--muted);">Post Instagram/LinkedIn launch content. "First in Arab World" announcement. Before/after clip.</div>
+      </div>
+      <div style="padding:16px 12px; text-align:center; background:rgba(201,168,76,0.04);">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Sun</div>
+        <div style="font-size:11px; line-height:1.5; color:var(--muted);">Update website. Add "Spatial Audio" as a service. Add AED 350–500 add-on to booking page.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight" style="border-left-color:var(--green);">
+    <div class="insight-label" style="color:var(--green);">End of Week One — What You Have</div>
+    <p>
+      A working spatial audio production capability. A published "first in Arab World" announcement.
+      A before/after marketing demo clip. One real client episode delivered. An add-on service priced and
+      listed. The groundwork laid for engineer certification. And a genuine, defensible technical
+      differentiator that no other podcast studio in Dubai, Abu Dhabi, or the wider MENA region offers.
+      Total out-of-pocket cost to reach this point: AED 0 to AED 1,100 depending on existing software.
+    </p>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>
+    <div style="font-weight:700; color:var(--text); margin-bottom:4px;">Dubai Podcast Studio</div>
+    <div>Spatial Audio Implementation Guide — June 2026</div>
+  </div>
+  <div style="text-align:right;">
+    <div>Confidential — Internal Use Only</div>
+    <div style="color:var(--gold); margin-top:2px;">dubaipodcaststudio.com</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
