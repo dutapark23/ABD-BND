@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DPS — The $20K Contingency: Remote Production Bureau, Saudi Arabia</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:   #C9A84C;
+    --bg:     #080808;
+    --bg2:    #111111;
+    --bg3:    #181818;
+    --border: #252525;
+    --text:   #E8E8E8;
+    --muted:  #888888;
+    --red:    #E05555;
+    --green:  #4CAF82;
+    --blue:   #5B8FD4;
+    --teal:   #3DBFB8;
+    --purple: #9B72CF;
+    --orange: #E07B40;
+  }
+
+  html { font-size: 16px; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 60px 48px; }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; position: relative;
+    padding: 80px 0; border-bottom: 1px solid var(--border); margin-bottom: 80px;
+  }
+  .cover-bar {
+    position: absolute; top: 0; left: -48px;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--red), var(--gold), var(--green));
+  }
+  .cover-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); margin-bottom: 28px; }
+  .cover-title { font-size: 58px; font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px; }
+  .cover-title span { color: var(--gold); }
+  .cover-title .green { color: var(--green); }
+  .cover-sub { font-size: 18px; font-weight: 300; color: var(--muted); max-width: 600px; margin-bottom: 56px; line-height: 1.7; }
+  .cover-meta { display: flex; gap: 40px; flex-wrap: wrap; }
+  .cover-meta-item label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .cover-meta-item span { font-size: 15px; font-weight: 600; }
+
+  /* SECTION */
+  .section { margin-bottom: 72px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px; }
+  h2 span { color: var(--gold); }
+  h2 .green { color: var(--green); }
+  h2 .red { color: var(--red); }
+  .section-intro { font-size: 15px; color: var(--muted); max-width: 700px; margin-bottom: 36px; line-height: 1.75; }
+
+  /* INSIGHT */
+  .insight { background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 8px; padding: 22px 26px; margin-bottom: 20px; }
+  .insight.red { border-left-color: var(--red); }
+  .insight.green { border-left-color: var(--green); }
+  .insight.blue { border-left-color: var(--blue); }
+  .insight.purple { border-left-color: var(--purple); }
+  .insight-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .insight.red .insight-label { color: var(--red); }
+  .insight.green .insight-label { color: var(--green); }
+  .insight.blue .insight-label { color: var(--blue); }
+  .insight.purple .insight-label { color: var(--purple); }
+  .insight p { font-size: 14px; line-height: 1.75; }
+  .insight strong { color: var(--text); }
+
+  /* PRINCIPLE BOX */
+  .principle {
+    background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(76,175,130,0.04));
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 12px;
+    padding: 36px 40px; margin-bottom: 40px;
+  }
+  .principle.red-bg {
+    background: linear-gradient(135deg, rgba(224,85,85,0.08), rgba(201,168,76,0.03));
+    border-color: rgba(224,85,85,0.25);
+  }
+  .principle-label { font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .principle.red-bg .principle-label { color: var(--red); }
+  .principle-text { font-size: 21px; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
+  .principle-text span { color: var(--gold); }
+  .principle-text .red { color: var(--red); }
+  .principle-text .green { color: var(--green); }
+
+  /* VERDICT BOX */
+  .verdict {
+    background: linear-gradient(135deg, rgba(76,175,130,0.1), rgba(91,143,212,0.04));
+    border: 1px solid rgba(76,175,130,0.3); border-radius: 12px;
+    padding: 32px 36px; margin: 40px 0;
+  }
+  .verdict-label { font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+  .verdict-main { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.3; color: var(--text); }
+  .verdict-main span { color: var(--green); }
+  .verdict-sub { font-size: 14px; color: var(--muted); margin-top: 12px; line-height: 1.7; }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+  .card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 10px; padding: 24px;
+  }
+  .card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .card-value { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; color: var(--gold); }
+  .card-desc { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+  /* ASSET TABLE */
+  .asset-row { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .asset-row:last-child { border-bottom: none; }
+  .asset-icon { width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .asset-icon.green { background: rgba(76,175,130,0.12); }
+  .asset-icon.gold { background: rgba(201,168,76,0.12); }
+  .asset-icon.blue { background: rgba(91,143,212,0.12); }
+  .asset-icon.purple { background: rgba(155,114,207,0.12); }
+  .asset-icon.teal { background: rgba(61,191,184,0.12); }
+  .asset-icon.red { background: rgba(224,85,85,0.12); }
+  .asset-content { flex: 1; }
+  .asset-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .asset-portable { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-left: 12px; }
+  .asset-portable.yes { color: var(--green); }
+  .asset-portable.no { color: var(--red); }
+  .asset-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+  /* COUNTRY COMPARISON */
+  .country-row { display: grid; grid-template-columns: 160px 1fr 1fr 1fr; gap: 1px; background: var(--border); }
+  .country-cell { background: var(--bg2); padding: 14px 18px; font-size: 13px; }
+  .country-cell.header { background: var(--bg3); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .country-cell.label { font-weight: 600; font-size: 12px; color: var(--muted); }
+  .country-cell.winner { background: rgba(76,175,130,0.06); }
+  .country-table { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 40px; }
+  .pos { color: var(--green); font-weight: 600; }
+  .neg { color: var(--red); }
+  .neu { color: var(--muted); }
+
+  /* REVENUE TABLE */
+  .rev-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+  .rev-table thead th { padding: 14px 18px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); background: var(--bg3); border-bottom: 1px solid var(--border); }
+  .rev-table tbody td { padding: 14px 18px; font-size: 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .rev-table tbody tr:last-child td { border-bottom: none; }
+  .rev-table tbody tr { background: var(--bg2); }
+  .rev-table tbody tr:nth-child(even) { background: var(--bg3); }
+  .rev-table .total-row td { background: rgba(76,175,130,0.08) !important; font-weight: 700; color: var(--green); border-top: 1px solid rgba(76,175,130,0.3); }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .tag.fast { background: rgba(224,224,85,0.12); color: #e0e055; }
+  .tag.medium { background: rgba(224,168,85,0.12); color: var(--orange); }
+  .tag.slow { background: rgba(224,85,85,0.1); color: var(--red); }
+
+  /* TIMELINE */
+  .timeline { position: relative; margin-bottom: 40px; }
+  .timeline::before { content: ''; position: absolute; left: 22px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--red), var(--gold), var(--green)); }
+  .tl-item { display: flex; gap: 24px; margin-bottom: 32px; position: relative; }
+  .tl-dot { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; z-index: 1; }
+  .tl-dot.w1 { background: rgba(224,85,85,0.15); border: 2px solid var(--red); color: var(--red); }
+  .tl-dot.w2 { background: rgba(201,168,76,0.15); border: 2px solid var(--gold); color: var(--gold); }
+  .tl-dot.w3 { background: rgba(224,168,85,0.15); border: 2px solid var(--orange); color: var(--orange); }
+  .tl-dot.m2 { background: rgba(91,143,212,0.15); border: 2px solid var(--blue); color: var(--blue); }
+  .tl-dot.m3 { background: rgba(76,175,130,0.15); border: 2px solid var(--green); color: var(--green); }
+  .tl-content { flex: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; }
+  .tl-week { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .tl-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+  .tl-items { list-style: none; }
+  .tl-items li { font-size: 13px; color: var(--muted); padding: 4px 0; padding-left: 16px; position: relative; line-height: 1.55; }
+  .tl-items li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 11px; top: 5px; }
+  .tl-items li strong { color: var(--text); }
+  .tl-target { display: inline-block; margin-top: 12px; background: rgba(76,175,130,0.1); border: 1px solid rgba(76,175,130,0.25); border-radius: 6px; padding: 6px 14px; font-size: 13px; font-weight: 700; color: var(--green); }
+
+  /* OFFER CARD */
+  .offer-card {
+    background: linear-gradient(135deg, var(--bg3), var(--bg2));
+    border: 1px solid var(--border); border-radius: 14px;
+    padding: 36px 40px; margin-bottom: 24px; position: relative; overflow: hidden;
+  }
+  .offer-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+  }
+  .offer-name { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .offer-price { font-size: 40px; font-weight: 900; letter-spacing: -0.03em; color: var(--gold); margin-bottom: 4px; }
+  .offer-price sub { font-size: 16px; font-weight: 400; color: var(--muted); vertical-align: bottom; line-height: 2.5; }
+  .offer-tagline { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+  .offer-items { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+  .offer-items li { font-size: 13px; color: var(--muted); padding-left: 20px; position: relative; line-height: 1.5; }
+  .offer-items li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .offer-items li strong { color: var(--text); }
+
+  /* RISK MATRIX */
+  .risk-row { display: grid; grid-template-columns: 180px 100px 100px 1fr; gap: 1px; background: var(--border); }
+  .risk-cell { background: var(--bg2); padding: 13px 16px; font-size: 13px; }
+  .risk-cell.header { background: var(--bg3); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .risk-table { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 40px; }
+  .high { color: var(--red); font-weight: 700; }
+  .med { color: var(--orange); font-weight: 700; }
+  .low { color: var(--green); font-weight: 700; }
+
+  /* QUOTE */
+  .quote { background: var(--bg3); border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
+  .quote-text { font-size: 18px; font-weight: 600; line-height: 1.6; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .quote-text em { font-style: italic; color: var(--muted); font-weight: 400; }
+  .quote-attr { font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
+
+  /* BULLET LIST */
+  .bullet-list { list-style: none; margin-bottom: 32px; }
+  .bullet-list li { padding: 10px 0; padding-left: 22px; position: relative; font-size: 14px; line-height: 1.65; border-bottom: 1px solid var(--border); }
+  .bullet-list li:last-child { border-bottom: none; }
+  .bullet-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+  .bullet-list li strong { color: var(--text); }
+  .bullet-list li .muted { color: var(--muted); font-size: 13px; }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 48px; margin-top: 80px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; }
+  .footer-brand { font-size: 22px; font-weight: 900; letter-spacing: -0.02em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-meta { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.8; }
+
+  @media print {
+    .cover { min-height: auto; padding: 60px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-bar"></div>
+    <div class="cover-eyebrow">Contingency &amp; Expansion Strategy — Confidential</div>
+    <h1 class="cover-title">
+      The <span>$20K</span><br>
+      Contingency<br>
+      <span class="green">Plan</span>
+    </h1>
+    <p class="cover-sub">
+      If Dubai conflict intensifies in Sept–Oct 2026 — which business to launch,
+      in which country, using exactly what you already have. No capital. No studio.
+      60–90 days to $20K/month.
+    </p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <label>Target Revenue</label>
+        <span>$20,000 / month</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Target Market</label>
+        <span>Saudi Arabia — Riyadh</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Time to First Revenue</label>
+        <span>30 days</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Capital Required</label>
+        <span>AED 0</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Strategy Type</label>
+        <span>Build Now / Trigger Later</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: THE HONEST TRUTH -->
+  <div class="section">
+    <div class="section-label">01 — The Honest Assessment</div>
+    <h2>Before strategy: <span>the hard truth</span></h2>
+    <p class="section-intro">
+      Most business owners ask the wrong question in a geopolitical crisis. They ask "how do I protect my studio?" The studio is not the asset. It is a liability. The asset walks out the door with you.
+    </p>
+
+    <div class="principle red-bg">
+      <div class="principle-label">The Critical Distinction</div>
+      <div class="principle-text">
+        Your <span>physical studios</span> in Business Bay cannot follow you.<br>
+        Your <span class="green">operational model, pipeline, brand and relationships</span> can.
+        <span class="red">Stop protecting the building. Start protecting the system.</span>
+      </div>
+    </div>
+
+    <div class="insight red">
+      <div class="insight-label">Geopolitical Reality Check</div>
+      <p>Dubai has maintained stability through every regional conflict since 1971 — but proximity risk is real. Gulf tensions (Iran, Red Sea, regional spillover) create two threats: <strong>client cancellations due to flight disruption</strong> and <strong>expat exodus</strong>. Both destroy a studio booking model overnight. This plan assumes a scenario where Dubai is not destroyed, but is temporarily paralysed for 60–90 days. That is the realistic threat.</p>
+    </div>
+
+    <div class="insight green">
+      <div class="insight-label">The Opportunity Inside the Crisis</div>
+      <p>Every time Dubai shakes, <strong>Saudi Arabia absorbs its corporate activity.</strong> Vision 2030 companies, government-backed media, and Gulf corporates all pivot to Riyadh. The content creation demand does not disappear — it migrates. <strong>Your job is to be already positioned in Riyadh before the migration happens.</strong></p>
+    </div>
+  </div>
+
+  <!-- SECTION 2: YOUR REAL ASSETS -->
+  <div class="section">
+    <div class="section-label">02 — Asset Audit</div>
+    <h2>What you <span>actually own</span> vs. what you think you own</h2>
+    <p class="section-intro">
+      The first step of the contingency plan is knowing which assets are portable. Physical assets are liabilities in a conflict scenario. Digital and operational assets are the real capital.
+    </p>
+
+    <div class="asset-row">
+      <div class="asset-icon green">📋</div>
+      <div class="asset-content">
+        <div class="asset-name">The 24-Hour Production Pipeline (McDonald's Model) <span class="asset-portable yes">PORTABLE</span></div>
+        <div class="asset-desc">Your SOP, DaVinci Resolve master template, automation flows in Make, Castmagic account, Auphonic API — all cloud-based. The entire system runs on a laptop with a Google Drive folder as the intake point. Zero physical dependency. This is your most valuable asset and most competitors in Saudi have nothing close to it.</div>
+      </div>
+    </div>
+
+    <div class="asset-row">
+      <div class="asset-icon gold">🏷️</div>
+      <div class="asset-content">
+        <div class="asset-name">The DPS Brand &amp; MENA Market Positioning <span class="asset-portable yes">PORTABLE</span></div>
+        <div class="asset-desc">A proven professional podcast studio brand in the Arab world is valuable anywhere in the GCC. Saudi clients recognise Dubai as a quality benchmark. "Dubai Podcast Studio bringing its production model to Saudi" is a marketing statement that opens doors without a cold pitch.</div>
+      </div>
+    </div>
+
+    <div class="asset-row">
+      <div class="asset-icon blue">👥</div>
+      <div class="asset-content">
+        <div class="asset-name">Team of 6 + Operational Expertise <span class="asset-portable yes">PORTABLE</span></div>
+        <div class="asset-desc">Your team already knows the pipeline. Remote production requires the same skills. Two team members working remotely from anywhere can process 30+ episodes per month. No relocation required — they operate from Dubai, Riyadh, Cairo, or anywhere with a laptop.</div>
+      </div>
+    </div>
+
+    <div class="asset-row">
+      <div class="asset-icon teal">🕸️</div>
+      <div class="asset-content">
+        <div class="asset-name">Studio Network Model <span class="asset-portable yes">PORTABLE</span></div>
+        <div class="asset-desc">The matchmaking and partner network you've built is a framework, not a location. It can be deployed in Riyadh with local studio partners in under 2 weeks — without building or renting a single room.</div>
+      </div>
+    </div>
+
+    <div class="asset-row">
+      <div class="asset-icon purple">📊</div>
+      <div class="asset-content">
+        <div class="asset-name">20 Years of Marketing Expertise <span class="asset-portable yes">PORTABLE</span></div>
+        <div class="asset-desc">Your ability to position, sell, and close enterprise clients is entirely portable. Saudi CMOs and marketing directors respond to the same frameworks as Dubai ones. Arabic language proficiency and Gulf business culture knowledge are assets most Western competitors cannot replicate.</div>
+      </div>
+    </div>
+
+    <div class="asset-row">
+      <div class="asset-icon red">🏢</div>
+      <div class="asset-content">
+        <div class="asset-name">7 Physical Studios in Business Bay <span class="asset-portable no">NOT PORTABLE</span></div>
+        <div class="asset-desc">Real estate, equipment, leases — they stay. They are also an ongoing cost liability in a conflict scenario. In the contingency model, Dubai operations run at minimum staff (or sublet to other creators) while the business pivots to remote revenue generation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: THE COUNTRY DECISION -->
+  <div class="section">
+    <div class="section-label">03 — The Country Decision</div>
+    <h2>The answer is <span>Saudi Arabia</span>.<br>Here is why there is no debate.</h2>
+    <p class="section-intro">
+      Four countries are plausible alternatives: Saudi Arabia, Egypt, United Kingdom, and Jordan. Here is the comparative analysis based on your specific profile.
+    </p>
+
+    <div class="country-table">
+      <div class="country-row">
+        <div class="country-cell header">Factor</div>
+        <div class="country-cell header winner">🇸🇦 Saudi Arabia</div>
+        <div class="country-cell header">🇪🇬 Egypt</div>
+        <div class="country-cell header">🇬🇧 UK / Europe</div>
+      </div>
+      <div class="country-row">
+        <div class="country-cell label">Time to $20K</div>
+        <div class="country-cell winner"><span class="pos">60–90 days</span></div>
+        <div class="country-cell"><span class="neu">90–150 days</span></div>
+        <div class="country-cell"><span class="neg">6–12 months</span></div>
+      </div>
+      <div class="country-row">
+        <div class="country-cell label">Corporate Budget</div>
+        <div class="country-cell winner"><span class="pos">Massive (Vision 2030)</span></div>
+        <div class="country-cell"><span class="neu">Moderate</span></div>
+        <div class="country-cell"><span class="neu">Moderate-High</span></div>
+      </div>
+      <div class="country-row">
+        <div class="country-cell label">Podcast Market Maturity</div>
+        <div class="country-cell winner"><span class="pos">3–4 yrs behind Dubai = first-mover gap</span></div>
+        <div class="country-cell"><span class="neu">Behind Saudi</span></div>
+        <div class="country-cell"><span class="neg">Mature = saturated</span></div>
+      </div>
+      <div class="country-row">
+        <div class="country-cell label">Your Network Advantage</div>
+        <div class="country-cell winner"><span class="pos">GCC relationships transfer</span></div>
+        <div class="country-cell"><span class="neu">Some overlap</span></div>
+        <div class="country-cell"><span class="neg">Zero existing network</span></div>
+      </div>
+      <div class="country-row">
+        <div class="country-cell label">Language</div>
+        <div class="country-cell winner"><span class="pos">Arabic — direct fit</span></div>
+        <div class="country-cell"><span class="pos">Arabic — direct fit</span></div>
+        <div class="country-cell"><span class="neg">English only, different culture</span></div>
+      </div>
+      <div class="country-row">
+        <div class="country-cell label">Dominant Competitor</div>
+        <div class="country-cell winner"><span class="pos">None at DPS level</span></div>
+        <div class="country-cell"><span class="neu">Several local studios</span></div>
+        <div class="country-cell"><span class="neg">Hundreds of established agencies</span></div>
+      </div>
+      <div class="country-row">
+        <div class="country-cell label">Geopolitical Stability</div>
+        <div class="country-cell winner"><span class="pos">Very stable (MBS control)</span></div>
+        <div class="country-cell"><span class="neu">Moderate</span></div>
+        <div class="country-cell"><span class="pos">Very stable</span></div>
+      </div>
+      <div class="country-row">
+        <div class="country-cell label">Capital Required to Enter</div>
+        <div class="country-cell winner"><span class="pos">AED 0 (remote model)</span></div>
+        <div class="country-cell"><span class="pos">AED 0 (remote model)</span></div>
+        <div class="country-cell"><span class="neg">High (legal, setup, visa)</span></div>
+      </div>
+      <div class="country-row">
+        <div class="country-cell label">Proximity to Dubai</div>
+        <div class="country-cell winner"><span class="pos">45-min flight</span></div>
+        <div class="country-cell"><span class="neu">3.5-hr flight</span></div>
+        <div class="country-cell"><span class="neg">7-hr flight</span></div>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <div class="verdict-label">Verdict</div>
+      <div class="verdict-main">Saudi Arabia. <span>No other country comes close.</span></div>
+      <div class="verdict-sub">Riyadh is 45 minutes away, speaks your language, has the biggest corporate content budget in the Arab world, zero dominant competitor at your level, and absorbs Dubai business activity when the Gulf trembles. Egypt gets you volume but not $20K. UK gets you stability but not speed. Saudi gets you both.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: THE BUSINESS -->
+  <div class="section">
+    <div class="section-label">04 — The Business Model</div>
+    <h2>Not a studio. A <span>Remote Content Production Bureau.</span></h2>
+    <p class="section-intro">
+      The mistake most studio owners make in a contingency is trying to replicate the physical model elsewhere. Wrong. The physical model takes months and capital. The answer is to sell the system, not the room.
+    </p>
+
+    <div class="insight blue">
+      <div class="insight-label">The Core Insight</div>
+      <p>Saudi corporates — government entities, PIF-backed companies, family businesses, Saudi Vision 2030 programme offices — <strong>have massive content budgets and no production capability.</strong> They are not looking for a studio. They are looking for someone to take the entire content production headache off their plate and hand them finished episodes. That is exactly what your pipeline does. <strong>You are not selling them a location. You are selling them a result.</strong></p>
+    </div>
+
+    <p class="section-intro" style="margin-top: 0;">
+      The business is simple: clients book a recording session (either at a local Saudi studio partner, remotely via Riverside.fm or Squadcast, or in Dubai when safe), send you the raw files, and you deliver the complete content package within 24 hours. The DPS pipeline runs invisibly in the background. The client sees only the result.
+    </p>
+
+    <div class="offer-card">
+      <div class="offer-name">DPS Corporate Content Bureau — Saudi Package</div>
+      <div class="offer-price">SAR 8,500 <sub>/ month</sub></div>
+      <div class="offer-tagline">≈ $2,260/month · 4 episodes per month · 24-hour turnaround · full production included</div>
+      <ul class="offer-items">
+        <li><strong>Mastered audio (podcast-ready MP3)</strong></li>
+        <li><strong>4K branded video episode</strong></li>
+        <li><strong>5 branded vertical Reels</strong></li>
+        <li><strong>Full transcript</strong></li>
+        <li><strong>Show notes + blog post</strong></li>
+        <li><strong>10 social media captions</strong></li>
+        <li><strong>3 YouTube thumbnails</strong></li>
+        <li><strong>Newsletter + episode summary</strong></li>
+        <li><strong>Arabic + English deliverables</strong></li>
+        <li><strong>Airtable dashboard — client portal</strong></li>
+      </ul>
+    </div>
+
+    <div class="insight">
+      <div class="insight-label">Why SAR 8,500 Is Not Expensive for a Saudi Corporate</div>
+      <p>A mid-size Saudi corporate's monthly social media agency retainer starts at SAR 15,000–25,000 for strategy alone — with no production. You are offering complete production + distribution-ready content for SAR 8,500. To a Saudi PR or marketing director, that is not a content expense. <strong>It is a budget reallocation away from the social media agency towards a production service that actually delivers tangible assets.</strong> This is a very easy sell.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 5: PATH TO $20K -->
+  <div class="section">
+    <div class="section-label">05 — Revenue Path</div>
+    <h2>The exact <span>path to $20,000</span> per month</h2>
+    <p class="section-intro">
+      $20K/month = SAR 75,000/month. Here are three revenue streams that combine to reach that number, ordered by speed of closure.
+    </p>
+
+    <table class="rev-table">
+      <thead>
+        <tr>
+          <th>Revenue Stream</th>
+          <th>Unit Price</th>
+          <th>Volume Needed</th>
+          <th>Monthly USD</th>
+          <th>Speed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Corporate Content Bureau Package</strong><br><span style="color: var(--muted); font-size: 12px;">SAR 8,500/month — 4 episodes/month, full pipeline</span></td>
+          <td>$2,260</td>
+          <td>6 clients</td>
+          <td>$13,560</td>
+          <td><span class="tag fast">30–45 days</span></td>
+        </tr>
+        <tr>
+          <td><strong>Vision 2030 Enterprise Partnership</strong><br><span style="color: var(--muted); font-size: 12px;">One government-linked entity — monthly content retainer</span></td>
+          <td>$6,000+</td>
+          <td>1 client</td>
+          <td>$6,000+</td>
+          <td><span class="tag medium">45–75 days</span></td>
+        </tr>
+        <tr>
+          <td><strong>Content Production Workshop (Saudi)</strong><br><span style="color: var(--muted); font-size: 12px;">2-day intensive: "Corporate Podcast Mastery" — sold to comms/marketing teams</span></td>
+          <td>$600/person</td>
+          <td>1 workshop, 15 seats</td>
+          <td>$9,000 one-time</td>
+          <td><span class="tag fast">21–30 days</span></td>
+        </tr>
+        <tr>
+          <td><strong>Saudi Studio Network Partner Fee</strong><br><span style="color: var(--muted); font-size: 12px;">2–3 Riyadh studios pay a monthly fee to receive overflow DPS bookings</span></td>
+          <td>$500/month</td>
+          <td>3 studios</td>
+          <td>$1,500</td>
+          <td><span class="tag fast">14–21 days</span></td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="3"><strong>Combined (6 retainers + 1 enterprise + 1 workshop + 3 partners)</strong></td>
+          <td><strong>$30,060</strong></td>
+          <td><span class="tag fast">Month 3</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-label">Month 1 Target</div>
+        <div class="card-value">$9K</div>
+        <div class="card-desc">1 workshop (15 seats) + 2 Bureau retainers + 3 studio partners</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Month 2 Target</div>
+        <div class="card-value">$16K</div>
+        <div class="card-desc">5 Bureau retainers + 1 enterprise deal closed + 3 partners</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Month 3 Target</div>
+        <div class="card-value">$30K+</div>
+        <div class="card-desc">6 retainers + 1–2 enterprise + recurring workshop + network fees</div>
+      </div>
+    </div>
+
+    <div class="insight purple">
+      <div class="insight-label">The Workshop As The Fastest Cash Move</div>
+      <p>A 2-day "Corporate Podcast Mastery" workshop in Riyadh sells faster than any retainer. You sell 15 seats at SAR 2,250/seat to marketing, comms, and PR directors from Saudi corporates. Total: SAR 33,750 (~$9,000) in one weekend. <strong>But more importantly, every workshop attendee becomes a warm Bureau retainer prospect.</strong> The workshop is a paid acquisition funnel for your monthly clients. Deliver one workshop in Week 3, close 3–4 retainers from the attendee list by Week 6.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 6: THE 90-DAY PLAN -->
+  <div class="section">
+    <div class="section-label">06 — 90-Day Execution Plan</div>
+    <h2>What you do <span>starting tomorrow.</span></h2>
+    <p class="section-intro">
+      "Build Now, Trigger Later" — the plan works whether or not conflict materialises. If Dubai stays stable, Saudi becomes an expansion. If it doesn't, Saudi becomes your cash engine. Either way, you win. Start building today.
+    </p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot w1">W1</div>
+        <div class="tl-content">
+          <div class="tl-week">Week 1 — Infrastructure</div>
+          <div class="tl-title">Build the remote intake system. Make it Saudi-ready.</div>
+          <ul class="tl-items">
+            <li><strong>Create the "DPS Bureau" intake form</strong> — Tally form: client name, episode brief, raw file upload link, delivery preference (Arabic/English/both)</li>
+            <li><strong>Set up Saudi-specific Airtable workspace</strong> — separate client tracking from Dubai operations</li>
+            <li><strong>Localise the DPS Master Template</strong> — Arabic lower-thirds, Saudi brand colour options, bilingual end cards</li>
+            <li><strong>Register DPS on LinkedIn as a "Content Production Company"</strong> — set location as Dubai + Riyadh</li>
+            <li><strong>Draft the workshop curriculum</strong> — "Corporate Podcast Mastery: From Recording to 8 Deliverables in 24 Hours"</li>
+          </ul>
+          <div class="tl-target">Target: 0 clients / System built</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot w2">W2</div>
+        <div class="tl-content">
+          <div class="tl-week">Week 2 — Saudi Market Entry</div>
+          <div class="tl-title">Identify 3 Saudi studio partners. Begin LinkedIn outreach.</div>
+          <ul class="tl-items">
+            <li><strong>Find 3 Riyadh podcast studios</strong> via Podeo, Anghami listings, Instagram search — approach them as partners, not competitors: "We send you overflow bookings, you pay us SAR 2,000/month network fee"</li>
+            <li><strong>LinkedIn outreach — 50 Saudi decision-makers</strong> per day: CMOs, Comms Directors, Marketing Directors at Vision 2030 entities (NEOM, Saudi Tourism, PIF, Misk Foundation, Diriyah Co.)</li>
+            <li><strong>Message template:</strong> "We run Dubai's largest podcast studio network. We're bringing our 24-hour content production pipeline to Saudi. I'd like to offer your team a free pilot episode — you record, we deliver everything within 24 hours."</li>
+            <li><strong>Post 3 pieces of content on LinkedIn</strong> targeting Saudi audience — behind-the-scenes of the pipeline, results from Dubai clients, "Why Saudi corporates are sleeping on podcasts"</li>
+          </ul>
+          <div class="tl-target">Target: 3 studio partners signed / 10+ warm leads</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot w3">W3</div>
+        <div class="tl-content">
+          <div class="tl-week">Week 3 — First Cash</div>
+          <div class="tl-title">Host the first workshop in Riyadh. Close free pilots into paid clients.</div>
+          <ul class="tl-items">
+            <li><strong>Fly to Riyadh for 3 days</strong> — host the 2-day Corporate Podcast Mastery workshop at a hotel conference room (cost: SAR 3,000 room rental). Target SAR 33,750 revenue from 15 seats.</li>
+            <li><strong>During workshop: offer attendees Bureau package at SAR 7,500/month</strong> (workshop alumni discount). Close minimum 3 retainers on the day.</li>
+            <li><strong>Free pilot conversions:</strong> follow up on the 2–3 free pilots you ran in Week 2. Convert minimum 1 to paid.</li>
+            <li><strong>Vision 2030 enterprise outreach:</strong> identify 5 government-linked entities via LinkedIn and warm intro requests. Book discovery calls.</li>
+          </ul>
+          <div class="tl-target">Target: $9K revenue (workshop) + 3–4 Bureau retainers signed</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot m2">M2</div>
+        <div class="tl-content">
+          <div class="tl-week">Month 2 — Scale</div>
+          <div class="tl-title">From 4 clients to 6. Close the enterprise deal.</div>
+          <ul class="tl-items">
+            <li><strong>Continue LinkedIn outreach</strong> — 30 new outreaches per day. Focus on warm leads from workshop attendees and referrals.</li>
+            <li><strong>Enterprise discovery calls:</strong> present DPS Bureau as "Content Infrastructure" not "production service" — for Saudi entities, framing it as infrastructure increases budget approval rate</li>
+            <li><strong>Case study content:</strong> publish results from Month 1 clients on LinkedIn — episode count, deliverables, turnaround time. Proof-of-concept builds trust faster in Saudi than any brochure.</li>
+            <li><strong>Hire 1 Saudi-based community manager</strong> (SAR 5,000/month) to handle client communication in Arabic and run local outreach</li>
+            <li><strong>Run second workshop</strong> — now with social proof from Month 1 clients. Target 20 seats.</li>
+          </ul>
+          <div class="tl-target">Target: $16K/month recurring + enterprise deal in final stages</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot m3">M3</div>
+        <div class="tl-content">
+          <div class="tl-week">Month 3 — $20K+ Locked</div>
+          <div class="tl-title">6 Bureau clients + 1 enterprise + recurring workshops = $30K/month.</div>
+          <ul class="tl-items">
+            <li><strong>6 Corporate Bureau retainers</strong> at $2,260 average = $13,560/month</li>
+            <li><strong>1 enterprise partnership</strong> (government-linked entity) = $6,000–10,000/month</li>
+            <li><strong>Monthly workshop</strong> (12 seats, recurring) = $7,200/month</li>
+            <li><strong>3 studio network partners</strong> = $1,500/month</li>
+            <li><strong>Dubai operations running in parallel</strong> — if conflict resolved, DPS has a second revenue engine. If not, Saudi carries the business.</li>
+            <li><strong>Begin evaluation of Riyadh physical studio</strong> — at 6+ clients, a local recording space makes business sense (not a requirement, an enhancement)</li>
+          </ul>
+          <div class="tl-target">Target: $28,000–$32,000/month — $20K is a floor, not a ceiling</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: TARGET CLIENTS -->
+  <div class="section">
+    <div class="section-label">07 — Saudi Target Client List</div>
+    <h2>Who to <span>call first.</span></h2>
+    <p class="section-intro">
+      These are not random companies. These are organisations with confirmed massive content budgets, a mandate to produce Arabic-language content, and zero internal production capability. They are actively looking for what you offer.
+    </p>
+
+    <ul class="bullet-list">
+      <li>
+        <strong>NEOM — Communications &amp; Marketing Division</strong>
+        <div class="muted">$500B megacity project with a global communications mandate. Produces English and Arabic content. Budget is limitless. Entry through LinkedIn to their CMO or Head of Media.</div>
+      </li>
+      <li>
+        <strong>Saudi Tourism Authority (Visit Saudi)</strong>
+        <div class="muted">Government entity with a 9-figure marketing budget. They are actively producing podcast and video content about Saudi tourism. They need a production partner who understands the regional market.</div>
+      </li>
+      <li>
+        <strong>Misk Foundation (Mohammed bin Salman's youth initiative)</strong>
+        <div class="muted">Runs events, programmes, and media for Saudi youth. Podcasting is central to their communications strategy. Decision-makers are young, LinkedIn-active, and open to new partnerships.</div>
+      </li>
+      <li>
+        <strong>Saudi Entrepreneurship Authority (Riyadah)</strong>
+        <div class="muted">Government body supporting Saudi startups. Multiple podcast series in production. Would benefit from a professional production partner at corporate pricing.</div>
+      </li>
+      <li>
+        <strong>Diriyah Company</strong>
+        <div class="muted">Leading the development of Diriyah as a cultural and heritage destination. Active content production programme. High-budget, government-backed, seeking quality production.</div>
+      </li>
+      <li>
+        <strong>Saudi Media Company (SMC)</strong>
+        <div class="muted">Saudi Arabia's national media company. Produces Arabic content across multiple platforms. Partnership opportunity: DPS handles post-production for their corporate and podcast divisions.</div>
+      </li>
+      <li>
+        <strong>PIF (Public Investment Fund) Portfolio Companies</strong>
+        <div class="muted">PIF has 90+ portfolio companies (Lucid Motors, STC Pay, Saudi Telecom, Noon, Jarir, etc.) — every one of them has a marketing/comms budget and a mandate to produce content for Vision 2030.</div>
+      </li>
+      <li>
+        <strong>Top 10 Saudi Law Firms + Consulting Firms (McKinsey KSA, PwC KSA, BCG Riyadh)</strong>
+        <div class="muted">Consulting and professional services firms are the fastest-growing podcast segment globally. Their thought leadership content needs are high. Average contract: SAR 8,000–15,000/month.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SECTION 8: THE LINKEDIN PLAYBOOK -->
+  <div class="section">
+    <div class="section-label">08 — The LinkedIn Entry Playbook</div>
+    <h2>How to <span>reach decision-makers</span> in Saudi within 48 hours</h2>
+    <p class="section-intro">
+      Saudi corporate decision-makers are highly active on LinkedIn. Cold email is dead in Saudi. LinkedIn DMs with a specific value proposition convert significantly better.
+    </p>
+
+    <div class="insight green">
+      <div class="insight-label">The Message That Opens Doors (Copy-Paste Ready)</div>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.9; color: var(--text);">
+        "Hi [Name] — I run Dubai Podcast Studio, Business Bay's largest podcast production network (7 studios).<br><br>
+        We've just launched a remote production service specifically for Saudi corporates: your team records anywhere, we deliver mastered audio + 4K video + 5 branded Reels + full transcript + social content within 24 hours.<br><br>
+        Given what [Company] is doing with its content strategy, I'd like to offer you a <strong>free pilot episode</strong> — no obligation, no pitch. You record a 30-minute episode, we deliver everything within 24 hours, you see the quality.<br><br>
+        Interested? Takes 15 minutes to set up."
+      </p>
+    </div>
+
+    <div class="insight">
+      <div class="insight-label">Why "Free Pilot" Works Better Than Any Brochure</div>
+      <p>In Saudi corporate culture, relationships and demonstrated results matter more than credentials. Offering a free pilot removes all friction from the first interaction. <strong>Your pipeline delivers results so clearly that the pilot sells itself.</strong> Of every 5 pilots you run, 2–3 convert to monthly retainers. At SAR 8,500/retainer, a free pilot episode costing you 35 minutes of team time is worth SAR 102,000 in annual revenue per conversion.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Daily LinkedIn Outreach</div>
+        <div class="card-value">50</div>
+        <div class="card-desc">Personalised connection requests + DMs to Saudi CMOs, Comms Directors, Marketing VPs. 10% response rate = 5 conversations/day.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Content Posts Per Week</div>
+        <div class="card-value">3–4</div>
+        <div class="card-desc">Behind-the-scenes of the pipeline, client results, "why Saudi podcasting is 3 years behind" — builds credibility with every scroll.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Free Pilots Per Month</div>
+        <div class="card-value">5–8</div>
+        <div class="card-desc">Each costs 35 min of team time. Each converts at 50–60%. Expected conversion: 3–4 new retainers per month from pilots alone.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Expected Month 1 Pipeline</div>
+        <div class="card-value">20–30</div>
+        <div class="card-desc">Warm leads in active conversation after 4 weeks of consistent outreach. Close rate: 15–20% = 3–6 clients.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: BUILD NOW TRIGGER LATER -->
+  <div class="section">
+    <div class="section-label">09 — The Master Strategy</div>
+    <h2>"Build Now, <span>Trigger Later</span>"</h2>
+    <p class="section-intro">
+      This is not a crisis plan. This is an expansion plan that doubles as a contingency. Start building it in July 2026. If conflict hits in September, you are already generating $10K+/month from Saudi before it escalates. If conflict does not hit, you have quietly built a second revenue engine.
+    </p>
+
+    <div class="principle">
+      <div class="principle-label">The Strategic Logic</div>
+      <div class="principle-text">
+        Every day you wait to enter Saudi, a competitor gets one day closer to taking the position you should own. <span>The podcast production gap in Riyadh is the same gap Dubai had in 2019.</span> You know exactly what happens when that gap closes — <span class="green">the first serious operator wins 60% of the market.</span> Don't let someone else be DPS Saudi.
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="insight green" style="margin-bottom: 0;">
+        <div class="insight-label">If Conflict Hits</div>
+        <p><strong>Activate the Saudi engine immediately.</strong> Shift 2 team members to full-time Saudi remote operations. Sublet Dubai studios at a reduced rate to creators (cash flow during downtime). You are generating $10K+ within 45 days. Dubai operations resume when the situation normalises — with Saudi still running as an expansion.</p>
+      </div>
+      <div class="insight blue" style="margin-bottom: 0;">
+        <div class="insight-label">If Conflict Does Not Hit</div>
+        <p><strong>You have quietly launched DPS Saudi.</strong> By October 2026, you have 4–6 Saudi retainer clients generating $9,000–13,000/month with essentially no overhead. Dubai runs at full capacity. Saudi runs in parallel. You have just doubled your revenue without opening a single new physical room.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 10: RISK MATRIX -->
+  <div class="section">
+    <div class="section-label">10 — Risk Matrix</div>
+    <h2>What could go <span>wrong</span> and the mitigation</h2>
+
+    <div class="risk-table">
+      <div class="risk-row">
+        <div class="risk-cell header">Risk</div>
+        <div class="risk-cell header">Probability</div>
+        <div class="risk-cell header">Impact</div>
+        <div class="risk-cell header">Mitigation</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-cell"><strong>Saudi clients slow to pay</strong></div>
+        <div class="risk-cell"><span class="med">Medium</span></div>
+        <div class="risk-cell"><span class="med">Medium</span></div>
+        <div class="risk-cell" style="font-size: 13px; color: var(--muted);">Require 1-month advance payment from all retainer clients. Workshop fees are full payment upfront.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-cell"><strong>No inbound from LinkedIn outreach</strong></div>
+        <div class="risk-cell"><span class="low">Low</span></div>
+        <div class="risk-cell"><span class="med">Medium</span></div>
+        <div class="risk-cell" style="font-size: 13px; color: var(--muted);">At 50 outreaches/day with free pilot offer, 5% response = 2.5 conversations/day minimum. The offer is too compelling to generate zero response.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-cell"><strong>Remote file upload quality issues</strong></div>
+        <div class="risk-cell"><span class="low">Low</span></div>
+        <div class="risk-cell"><span class="low">Low</span></div>
+        <div class="risk-cell" style="font-size: 13px; color: var(--muted);">Include a "recording guide" PDF in the onboarding. Auphonic handles most audio cleanup automatically. For video, recommend specific Saudi studio partners for recording.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-cell"><strong>A Saudi competitor copies the model</strong></div>
+        <div class="risk-cell"><span class="med">Medium</span></div>
+        <div class="risk-cell"><span class="med">Medium</span></div>
+        <div class="risk-cell" style="font-size: 13px; color: var(--muted);">Speed is your moat. Enter Saudi now, before any competitor has the pipeline built. Brand relationships in Saudi are extremely sticky — once you are their production partner, switching cost is high.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-cell"><strong>Dubai conflict is longer than 90 days</strong></div>
+        <div class="risk-cell"><span class="low">Very Low</span></div>
+        <div class="risk-cell"><span class="high">High</span></div>
+        <div class="risk-cell" style="font-size: 13px; color: var(--muted);">By Month 3, Saudi revenue fully covers DPS operating costs even with Dubai at zero. Monthly studio rental in Dubai is the primary cost — negotiate a 3-month suspension clause into your next lease renewal now.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-cell"><strong>Team unwilling to shift to remote model</strong></div>
+        <div class="risk-cell"><span class="low">Low</span></div>
+        <div class="risk-cell"><span class="med">Medium</span></div>
+        <div class="risk-cell" style="font-size: 13px; color: var(--muted);">The pipeline SOP means any team member can process Saudi files remotely. No new skills required — they already know the workflow. Remote = same workflow, different file source.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CALL TO ACTION -->
+  <div class="section">
+    <div class="section-label">11 — The Decision</div>
+    <h2>What to do <span>in the next 7 days</span></h2>
+
+    <div class="principle">
+      <div class="principle-label">The 7-Day Action List</div>
+      <div class="principle-text">
+        Day 1: <span>Update LinkedIn profile</span> to include "Riyadh" and "Remote Content Production".<br>
+        Day 2: <span>Build the Saudi intake form</span> in Tally. 20 minutes.<br>
+        Day 3: <span>Research 50 Saudi decision-makers</span> on LinkedIn. Save to a spreadsheet.<br>
+        Day 4: <span>Begin outreach.</span> 50 connection requests with personalised note.<br>
+        Day 5: <span>Contact 3 Riyadh studios</span> about the network partner model.<br>
+        Day 6: <span>Book Riyadh trip</span> for Week 3. Hotel + workshop venue.<br>
+        Day 7: <span>Draft workshop agenda</span> and set ticket price at SAR 2,250.
+      </div>
+    </div>
+
+    <div class="quote">
+      <div class="quote-text">"The podcasting gap in Saudi Arabia today is identical to the gap in Dubai in 2019. You already know the outcome — the first serious operator wins the market. <em>The only question is whether that operator is you or someone who read this document after you did.</em>"</div>
+      <div class="quote-attr">DPS Marketing Strategy — Contingency &amp; Expansion</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">DPS <span>Strategic Intelligence</span></div>
+    <div class="footer-meta">
+      Confidential — For Internal Use Only<br>
+      Dubai Podcast Studio · Business Bay · June 2026<br>
+      Contingency &amp; Expansion Framework
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
