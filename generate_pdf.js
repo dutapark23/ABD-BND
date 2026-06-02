@@ -13,6 +13,7 @@ const docs = [
   { html: 'dps_production_pipeline.html',          pdf: 'dps_production_pipeline.pdf' },
   { html: 'dps_contingency_20k_strategy.html',    pdf: 'dps_contingency_20k_strategy.pdf' },
   { html: 'dps_industry_expansion_playbook.html', pdf: 'dps_industry_expansion_playbook.pdf' },
+  { html: 'dps_youtube_bali_strategy.html',      pdf: 'dps_youtube_bali_strategy.pdf' },
 ];
 
 (async () => {
