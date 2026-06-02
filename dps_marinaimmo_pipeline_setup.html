@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marina Immo Dubai — Run Your Own Channel Through the DPS Pipeline</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:   #C9A84C;
+    --bg:     #080808;
+    --bg2:    #111111;
+    --bg3:    #181818;
+    --border: #252525;
+    --text:   #E8E8E8;
+    --muted:  #888888;
+    --red:    #E05555;
+    --green:  #4CAF82;
+    --blue:   #5B8FD4;
+    --teal:   #3DBFB8;
+    --purple: #9B72CF;
+    --orange: #E07B40;
+  }
+
+  html { font-size: 16px; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 60px 48px; }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; position: relative;
+    padding: 80px 0; border-bottom: 1px solid var(--border); margin-bottom: 80px;
+  }
+  .cover-bar {
+    position: absolute; top: 0; left: -48px; width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--teal), var(--gold), var(--purple));
+  }
+  .cover-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal); margin-bottom: 28px; }
+  .cover-title { font-size: 52px; font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px; }
+  .cover-title span { color: var(--gold); }
+  .cover-title .teal { color: var(--teal); }
+  .cover-sub { font-size: 17px; font-weight: 300; color: var(--muted); max-width: 620px; margin-bottom: 56px; line-height: 1.75; }
+  .cover-meta { display: flex; gap: 40px; flex-wrap: wrap; }
+  .cover-meta-item label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .cover-meta-item span { font-size: 15px; font-weight: 600; }
+
+  /* SECTION */
+  .section { margin-bottom: 72px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px; }
+  h2 span { color: var(--gold); }
+  h2 .teal { color: var(--teal); }
+  h2 .red { color: var(--red); }
+  .section-intro { font-size: 15px; color: var(--muted); max-width: 700px; margin-bottom: 32px; line-height: 1.75; }
+  .section-intro strong { color: var(--text); }
+
+  /* INSIGHT */
+  .insight { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 22px 26px; margin-bottom: 20px; }
+  .insight.gold { border-left: 3px solid var(--gold); }
+  .insight.teal { border-left: 3px solid var(--teal); }
+  .insight.green { border-left: 3px solid var(--green); }
+  .insight.red { border-left: 3px solid var(--red); }
+  .insight.purple { border-left: 3px solid var(--purple); }
+  .insight.blue { border-left: 3px solid var(--blue); }
+  .insight-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+  .insight.gold .insight-label { color: var(--gold); }
+  .insight.teal .insight-label { color: var(--teal); }
+  .insight.green .insight-label { color: var(--green); }
+  .insight.red .insight-label { color: var(--red); }
+  .insight.purple .insight-label { color: var(--purple); }
+  .insight.blue .insight-label { color: var(--blue); }
+  .insight p { font-size: 14px; line-height: 1.75; }
+  .insight strong { color: var(--text); }
+
+  /* BEFORE / AFTER */
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+  .ba-card { border-radius: 10px; padding: 24px 26px; }
+  .ba-card.before { background: rgba(224,85,85,0.05); border: 1px solid rgba(224,85,85,0.2); }
+  .ba-card.after { background: rgba(61,191,184,0.05); border: 1px solid rgba(61,191,184,0.25); }
+  .ba-label { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 14px; }
+  .ba-card.before .ba-label { color: var(--red); }
+  .ba-card.after .ba-label { color: var(--teal); }
+  .ba-items { list-style: none; }
+  .ba-items li { font-size: 13px; color: var(--muted); padding: 6px 0 6px 18px; position: relative; line-height: 1.55; border-bottom: 1px solid var(--border); }
+  .ba-items li:last-child { border-bottom: none; }
+  .ba-card.before .ba-items li::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+  .ba-card.after .ba-items li::before { content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+  .ba-items li strong { color: var(--text); }
+
+  /* PIPELINE STEP */
+  .pipeline-step {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 12px;
+    padding: 32px 36px; margin-bottom: 24px; position: relative;
+  }
+  .step-header { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px; }
+  .step-num {
+    width: 48px; height: 48px; border-radius: 10px; display: flex;
+    align-items: center; justify-content: center; font-size: 18px; font-weight: 900;
+    flex-shrink: 0; letter-spacing: -0.02em;
+  }
+  .step-num.s0 { background: rgba(136,136,136,0.15); color: var(--muted); }
+  .step-num.s1 { background: rgba(201,168,76,0.12); color: var(--gold); }
+  .step-num.s2 { background: rgba(76,175,130,0.12); color: var(--green); }
+  .step-num.s3 { background: rgba(91,143,212,0.12); color: var(--blue); }
+  .step-num.s4 { background: rgba(155,114,207,0.12); color: var(--purple); }
+  .step-num.s5 { background: rgba(61,191,184,0.12); color: var(--teal); }
+  .step-num.s6 { background: rgba(224,123,64,0.12); color: var(--orange); }
+  .step-num.s7 { background: rgba(76,175,130,0.12); color: var(--green); }
+  .step-meta { flex: 1; }
+  .step-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .step-title { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .step-time { font-size: 13px; color: var(--muted); }
+  .step-time strong { color: var(--gold); }
+  .step-body { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
+  .step-body strong { color: var(--text); }
+
+  /* SPEC TABLE (inside pipeline steps) */
+  .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  .spec-table td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table tr { background: var(--bg2); }
+  .spec-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .spec-key { font-weight: 600; color: var(--text); width: 35%; }
+  .spec-val { color: var(--muted); }
+  .spec-val code { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--teal); background: rgba(61,191,184,0.08); padding: 2px 6px; border-radius: 4px; }
+
+  /* CODE BLOCK */
+  .code-block {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 20px 22px; margin-bottom: 16px; overflow-x: auto;
+  }
+  .code-block pre { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.9; color: var(--text); white-space: pre-wrap; }
+  .code-block .comment { color: var(--muted); }
+  .code-block .key { color: var(--gold); }
+  .code-block .val { color: var(--teal); }
+  .code-block .action { color: var(--green); }
+  .code-block .label-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: block; }
+
+  /* TEMPLATE VISUAL */
+  .template-mockup {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+    overflow: hidden; margin-bottom: 20px;
+  }
+  .template-header { background: var(--bg3); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+  .template-title { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .template-badge { font-size: 11px; font-weight: 700; color: var(--teal); }
+  .template-body { padding: 20px; }
+
+  /* OVERLAY CARD PREVIEW */
+  .overlay-preview {
+    background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 8px;
+    padding: 16px 20px; margin-bottom: 12px; font-size: 13px;
+  }
+  .overlay-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .overlay-row:last-child { border-bottom: none; }
+  .overlay-key { color: var(--muted); font-size: 12px; }
+  .overlay-val { font-weight: 700; font-size: 13px; }
+  .overlay-val.gold { color: var(--gold); }
+  .overlay-val.green { color: var(--green); }
+  .overlay-val.red { color: var(--red); }
+  .overlay-val.teal { color: var(--teal); }
+  .overlay-val.muted { color: var(--muted); }
+
+  /* CASTMAGIC PROMPTS */
+  .prompt-box {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 20px 24px; margin-bottom: 16px;
+  }
+  .prompt-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+  .prompt-text { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.85; color: var(--text); white-space: pre-wrap; }
+  .prompt-text .hl { color: var(--teal); }
+
+  /* MAKE FLOW */
+  .make-flow { display: flex; flex-direction: column; gap: 0; margin-bottom: 28px; }
+  .make-step { display: flex; gap: 0; }
+  .make-step-connector { display: flex; flex-direction: column; align-items: center; width: 44px; flex-shrink: 0; }
+  .make-step-dot { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; z-index: 1; }
+  .make-step-dot.trigger { background: rgba(61,191,184,0.15); border: 2px solid var(--teal); }
+  .make-step-dot.action { background: rgba(76,175,130,0.15); border: 2px solid var(--green); }
+  .make-step-dot.filter { background: rgba(201,168,76,0.15); border: 2px solid var(--gold); }
+  .make-step-dot.output { background: rgba(155,114,207,0.15); border: 2px solid var(--purple); }
+  .make-step-line { flex: 1; width: 2px; background: var(--border); min-height: 16px; }
+  .make-step-content { flex: 1; padding: 10px 0 20px 20px; }
+  .make-step-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .make-step-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .make-step-desc code { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--teal); background: rgba(61,191,184,0.08); padding: 1px 6px; border-radius: 3px; }
+  .make-step-desc strong { color: var(--text); }
+
+  /* THUMBNAIL GRID */
+  .thumb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+  .thumb-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .thumb-preview {
+    height: 80px; display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 900; letter-spacing: -0.02em; text-align: center;
+    padding: 12px; line-height: 1.2;
+  }
+  .thumb-preview.v { background: linear-gradient(135deg, rgba(224,85,85,0.2), rgba(224,85,85,0.05)); color: var(--red); }
+  .thumb-preview.a { background: linear-gradient(135deg, rgba(91,143,212,0.2), rgba(91,143,212,0.05)); color: var(--blue); }
+  .thumb-preview.t { background: linear-gradient(135deg, rgba(61,191,184,0.2), rgba(61,191,184,0.05)); color: var(--teal); }
+  .thumb-preview.c { background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05)); color: var(--gold); }
+  .thumb-preview.d { background: linear-gradient(135deg, rgba(76,175,130,0.2), rgba(76,175,130,0.05)); color: var(--green); }
+  .thumb-preview.l { background: linear-gradient(135deg, rgba(155,114,207,0.2), rgba(155,114,207,0.05)); color: var(--purple); }
+  .thumb-label { padding: 10px 12px; font-size: 11px; color: var(--muted); line-height: 1.4; border-top: 1px solid var(--border); }
+  .thumb-label strong { color: var(--text); display: block; font-size: 12px; margin-bottom: 3px; }
+
+  /* CONTENT CALENDAR */
+  .cal-row { display: grid; grid-template-columns: 100px 1fr 1fr 1fr; gap: 1px; background: var(--border); }
+  .cal-cell { background: var(--bg2); padding: 12px 16px; font-size: 13px; }
+  .cal-cell.header { background: var(--bg3); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .cal-table { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 36px; }
+  .cal-cell.day { font-weight: 700; color: var(--muted); font-size: 12px; }
+
+  /* METRIC GRID */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+  .metric { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .metric-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .metric-value { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--teal); }
+  .metric-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 48px; margin-top: 80px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; }
+  .footer-brand { font-size: 22px; font-weight: 900; letter-spacing: -0.02em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-meta { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.8; }
+
+  @media print { .cover { min-height: auto; padding: 60px 0; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-bar"></div>
+    <div class="cover-eyebrow">Marina Immo Dubai — Production Operations Setup</div>
+    <h1 class="cover-title">
+      The Cobbler's<br>
+      <span>Children</span><br>
+      Get <span class="teal">Shoes.</span>
+    </h1>
+    <p class="cover-sub">
+      You built a 35-minute, 8-deliverable production pipeline for paying clients and you are not running your own channel through it. This document fixes that. Every screen, every template, every Make scenario, every Castmagic prompt — built specifically for Marina Immo Dubai.
+    </p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <label>Current Production Time / Video</label>
+        <span>3–5 hours (estimated)</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>After This Setup</label>
+        <span>35 minutes</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Output Per Episode</label>
+        <span>10+ deliverables</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Frequency Possible</label>
+        <span>3–4 videos / week</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div class="section">
+    <div class="section-label">00 — The Gap</div>
+    <h2>What is <span class="red">probably happening now</span> vs. what should be</h2>
+
+    <div class="before-after">
+      <div class="ba-card before">
+        <div class="ba-label">Current Reality</div>
+        <ul class="ba-items">
+          <li><strong>3–5 hours</strong> editing one video manually</li>
+          <li><strong>No consistent template</strong> — different look each episode</li>
+          <li><strong>No subtitles</strong> — invisible to non-French YouTube search</li>
+          <li><strong>Show notes written manually</strong> — or not at all</li>
+          <li><strong>One piece of content per shoot</strong> — no repurposing</li>
+          <li><strong>Reels done separately</strong> — another 1–2 hours</li>
+          <li><strong>Thumbnail takes 30+ min</strong> — starting from scratch each time</li>
+          <li><strong>No automatic newsletter</strong> — written from scratch weekly</li>
+          <li><strong>Lives are archived</strong> but never clipped into content</li>
+          <li><strong>Upload frequency: irregular</strong> — 1–2 per month at best</li>
+        </ul>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-label">After This Setup</div>
+        <ul class="ba-items">
+          <li><strong>35 minutes total</strong> from raw file to all deliverables published</li>
+          <li><strong>Marina Immo Master Template</strong> — identical look, every episode</li>
+          <li><strong>French + English subtitles auto-generated</strong> — 2× SEO reach</li>
+          <li><strong>Show notes, blog, 10 social posts</strong> auto-generated in French</li>
+          <li><strong>10+ pieces of content</strong> from every single shoot</li>
+          <li><strong>5 branded Reels auto-generated</strong> by Opus Clip</li>
+          <li><strong>Thumbnail in 5 min</strong> — swap photo + title in template</li>
+          <li><strong>Newsletter drafted automatically</strong> from Castmagic output</li>
+          <li><strong>Lives auto-clipped</strong> into 5–8 Shorts via Opus Clip</li>
+          <li><strong>Upload frequency: 3–4 per week</strong> — sustainable cadence</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight red">
+      <div class="insight-label">The Real Cost of Not Doing This</div>
+      <p>At 1 video per month, it takes 3 years to build the content library needed to rank on YouTube search. At 3 videos per week using the pipeline, you build the same library in 12 weeks. <strong>The bottleneck has never been ideas or time in Bali. It has been production friction.</strong> Remove the friction and the channel velocity multiplies by 12. The pipeline pays for itself in month one.</p>
+    </div>
+  </div>
+
+  <!-- STEP 0 -->
+  <div class="section">
+    <div class="section-label">01 — Field Setup</div>
+    <h2>Before you press <span>record in Bali</span></h2>
+
+    <div class="pipeline-step">
+      <div class="step-header">
+        <div class="step-num s0">0</div>
+        <div class="step-meta">
+          <div class="step-tag">On Location — Bali</div>
+          <div class="step-title">File naming and simultaneous capture</div>
+          <div class="step-time">Time: <strong>0 minutes</strong> — discipline, not effort</div>
+        </div>
+      </div>
+      <div class="step-body">
+        The pipeline only works if files arrive named and organized correctly. One bad naming decision costs 20 minutes of confusion later. Set this as a non-negotiable personal SOP from your first Bali shoot.
+      </div>
+
+      <div class="code-block">
+        <span class="code-block label-tag">File Naming Convention — Marina Immo Dubai</span>
+        <pre><span class="comment"># Format: Channel_EpisodeType_Location_Number_Date</span>
+
+<span class="key">Studio talking-head:</span>   <span class="val">MID_Studio_Explainer_001_20260610</span>
+<span class="key">Property walk-through:</span> <span class="val">MID_Bali_PropertyVisit_007_20260612</span>
+<span class="key">Developer interview:</span>   <span class="val">MID_Bali_DevInterview_003_20260613</span>
+<span class="key">Live stream archive:</span>  <span class="val">MID_Live_BaliUpdate_020_20260614</span>
+<span class="key">B-roll footage:</span>       <span class="val">MID_BROLL_Uluwatu_20260612</span>
+
+<span class="comment"># MID = Marina Immo Dubai</span></pre>
+      </div>
+
+      <table class="spec-table">
+        <tr><td class="spec-key">Primary camera (studio)</td><td class="spec-val">Sony FX30 — already in DPS. 4K/25fps, S-Cinetone, Eye AF on.</td></tr>
+        <tr><td class="spec-key">Field camera (Bali walks)</td><td class="spec-val">Sony ZV-1 II for handheld property walk-throughs. Or iPhone 16 Pro — acceptable for B-roll and Reels raw footage.</td></tr>
+        <tr><td class="spec-key">Audio on location</td><td class="spec-val">Rode Wireless GO II clipped to lapel for all talking-to-camera property commentary. Never rely on camera mic in Bali wind.</td></tr>
+        <tr><td class="spec-key">Google Drive folder structure</td><td class="spec-val"><code>/MarinImmo/[Year]/[TripOrEpisode]/Raw/</code> — all files upload here. Make watches this folder.</td></tr>
+        <tr><td class="spec-key">Record simultaneously</td><td class="spec-val">For property walk-through episodes: run both FX30 (wide) + ZV-1 II (close-up detail shots) simultaneously. DaVinci multi-cam sync handles it in 2 clicks.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="section">
+    <div class="section-label">02 — Export &amp; Organize</div>
+    <div class="pipeline-step">
+      <div class="step-header">
+        <div class="step-num s1">1</div>
+        <div class="step-meta">
+          <div class="step-tag">Step 1 — On Arrival Home or Back at DPS</div>
+          <div class="step-title">Dump files. Trigger the pipeline.</div>
+          <div class="step-time">Time: <strong>8 minutes</strong></div>
+        </div>
+      </div>
+      <div class="step-body">
+        Copy all files to the correct Google Drive folder. This single action triggers the entire automated chain via Make. Nothing else needs to happen manually until Step 3.
+      </div>
+      <table class="spec-table">
+        <tr><td class="spec-key">Audio file</td><td class="spec-val">Export WAV from DPS studio DAW if studio-recorded. Wireless GO II recording exported as WAV. Goes to <code>/MarinImmo/[Episode]/Raw/Audio/</code></td></tr>
+        <tr><td class="spec-key">Video files</td><td class="spec-val">FX30 + ZV-1 II card dumps to <code>/MarinImmo/[Episode]/Raw/Video/</code></td></tr>
+        <tr><td class="spec-key">B-roll</td><td class="spec-val">Separate folder <code>/Raw/Broll/</code> — DaVinci knows to pull from here for cutaways</td></tr>
+        <tr><td class="spec-key">Make trigger fires</td><td class="spec-val">New file detected in <code>/Raw/</code> → Auphonic API called automatically → processing begins</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="section">
+    <div class="section-label">03 — Audio Mastering</div>
+    <div class="pipeline-step">
+      <div class="step-header">
+        <div class="step-num s2">2</div>
+        <div class="step-meta">
+          <div class="step-tag">Step 2 — Automatic</div>
+          <div class="step-title">Auphonic masters the audio</div>
+          <div class="step-time">Time: <strong>0 minutes</strong> — Make handles it</div>
+        </div>
+      </div>
+      <div class="step-body">
+        Auphonic runs automatically via the Make trigger. For Marina Immo Dubai content specifically, the Auphonic preset needs one additional parameter vs the standard DPS client preset: <strong>noise reduction set to "High"</strong> for Bali outdoor recordings (wind, motorbikes, pool ambient noise are all standard in field recordings).
+      </div>
+      <table class="spec-table">
+        <tr><td class="spec-key">Auphonic preset name</td><td class="spec-val"><code>MarinImmo_Field</code> for outdoor Bali recordings (High NR, -16 LUFS)</td></tr>
+        <tr><td class="spec-key">Auphonic preset name</td><td class="spec-val"><code>MarinImmo_Studio</code> for DPS studio recordings (Standard NR, -16 LUFS)</td></tr>
+        <tr><td class="spec-key">Output format</td><td class="spec-val">Mastered MP3 (podcast) + WAV (for DaVinci sync) → both to <code>/Processed/Audio/</code></td></tr>
+        <tr><td class="spec-key">Bali-specific note</td><td class="spec-val">Pool, beach, and rice field ambient noise is not always a problem — sometimes it is atmosphere. Flag Auphonic at "Adaptive" not "Aggressive" for outdoor property walk-throughs where ambient sound adds context.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- STEP 3 — CASTMAGIC -->
+  <div class="section">
+    <div class="section-label">04 — French Content Generation</div>
+    <div class="pipeline-step">
+      <div class="step-header">
+        <div class="step-num s3">3</div>
+        <div class="step-meta">
+          <div class="step-tag">Step 3 — 5 minutes human effort</div>
+          <div class="step-title">Castmagic generates all French text content</div>
+          <div class="step-time">Time: <strong>5 minutes to upload + review</strong> — then automatic</div>
+        </div>
+      </div>
+      <div class="step-body">
+        This is the most important customisation in the entire Marina Immo setup. Castmagic needs French-language custom prompts written specifically for real estate investment content. The default prompts produce generic English output. The custom prompts below produce ready-to-publish French content that matches the channel voice.
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-label">Castmagic Custom Prompt 1 — YouTube Description (French + SEO)</div>
+        <div class="prompt-text">Tu es un expert en référencement YouTube francophone spécialisé dans l'immobilier à Bali et Dubaï.
+
+À partir de la transcription ci-dessous, rédige une description YouTube en français de 250 mots maximum qui :
+<span class="hl">- Commence par la promesse principale de la vidéo (sans "Dans cette vidéo")</span>
+<span class="hl">- Intègre naturellement ces mots-clés : immobilier Bali, investissement Bali, rendement locatif Bali, acheter à Bali, propriété Bali</span>
+- Inclut 3 à 5 chapitres horodatés (exemple : 00:00 Introduction, 03:45 Analyse du marché...)
+- Termine par un appel à l'action vers le Club Investisseurs et le Guide Gratuit
+- Ton : direct, honnête, expert — jamais promotionnel</div>
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-label">Castmagic Custom Prompt 2 — 10 Instagram/LinkedIn Captions (French)</div>
+        <div class="prompt-text">À partir de la transcription, génère <span class="hl">10 posts distincts en français</span> pour Instagram et LinkedIn.
+
+Format pour chaque post :
+<span class="hl">— Accroche (1 phrase choc, jamais de question banale)</span>
+<span class="hl">— Corps (3 à 5 insights actionnables tirés de la vidéo)</span>
+<span class="hl">— Conclusion (vérité inconfortable OU chiffre surprenant)</span>
+— Call-to-action (lien en bio / commentez "BALI" pour recevoir le guide)
+— 5 hashtags pertinents
+
+Varier les formats : thread, liste numérotée, "ce qu'on ne vous dit pas", "j'ai fait l'erreur de...", comparatif chiffré.
+Ton : franc, sans langue de bois, comme quelqu'un qui a vraiment investi.</div>
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-label">Castmagic Custom Prompt 3 — Weekly Newsletter Paragraph (French)</div>
+        <div class="prompt-text">À partir de la transcription, rédige <span class="hl">un paragraphe de 150 mots</span> pour la newsletter hebdomadaire "La Lettre de l'Investisseur".
+
+Le paragraphe doit :
+<span class="hl">- Extraire L'insight le plus contre-intuitif ou surprenant de la vidéo</span>
+- Donner un chiffre concret ou une réalité de terrain
+- Terminer par une question qui pousse à la réflexion
+- Ton : celui d'un investisseur qui partage un café avec un ami, pas un article de presse
+
+Ne pas commencer par "Dans notre dernière vidéo..." — commencer directement par l'insight.</div>
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-label">Castmagic Custom Prompt 4 — English Summary (for subtitle base + English audience)</div>
+        <div class="prompt-text">From the French transcript, generate a <span class="hl">concise English summary of 100 words</span> capturing the 3 key investment insights discussed.
+
+This will be used as the English subtitle track description and to reach English-speaking investors who find the channel via YouTube search.
+
+Tone: factual, data-driven, no hype. Focus on numbers, legal structures, and honest yield figures discussed.</div>
+      </div>
+
+      <table class="spec-table" style="margin-top:16px;">
+        <tr><td class="spec-key">Bilingual subtitle workflow</td><td class="spec-val">Castmagic generates French transcript → paste into DeepL API (or ChatGPT with translation prompt) → get English translation → add both .srt files to YouTube upload. French viewers get French CC. English viewers find the video via English keywords in the auto-translated captions.</td></tr>
+        <tr><td class="spec-key">Why this doubles your reach</td><td class="spec-val">YouTube's algorithm reads subtitle files for ranking. An English subtitle track means the video ranks for English Bali real estate searches AND French ones. A French-language video with English subtitles is genuinely unique in this niche.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- STEP 4 — DAVINCI -->
+  <div class="section">
+    <div class="section-label">05 — The Master Template</div>
+    <div class="pipeline-step">
+      <div class="step-header">
+        <div class="step-num s4">4</div>
+        <div class="step-meta">
+          <div class="step-tag">Step 4 — 12 minutes — Most important build</div>
+          <div class="step-title">DaVinci Resolve — Marina Immo Master Template</div>
+          <div class="step-time">Time: <strong>12 minutes per episode once template is built</strong> (build time: ~3 hours, once)</div>
+        </div>
+      </div>
+      <div class="step-body">
+        The Marina Immo Dubai DaVinci template is separate from the DPS client template. It needs to reflect the channel's brand — not the studio's brand. Build it once, use it on every video forever. This is the element that will make the channel instantly recognisable and look more professional than 99% of real estate YouTube.
+      </div>
+
+      <div class="template-mockup">
+        <div class="template-header">
+          <div class="template-title">Template Component: Property Visit Overlay Card</div>
+          <div class="template-badge">Appears on screen during property walk-through</div>
+        </div>
+        <div class="template-body">
+          <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">This overlay card animates in (slide from left, 0.3s) when you cut to a new property. It gives viewers immediate context — price, yield, structure, area — without you having to say it. It is also the most shareable screenshot from your videos.</p>
+          <div class="overlay-preview">
+            <div class="overlay-row">
+              <span class="overlay-key">🏠 Propriété</span>
+              <span class="overlay-val gold">Villa Bingin — Uluwatu</span>
+            </div>
+            <div class="overlay-row">
+              <span class="overlay-key">💰 Prix d'achat</span>
+              <span class="overlay-val">€ 245 000</span>
+            </div>
+            <div class="overlay-row">
+              <span class="overlay-key">📊 Rendement projeté (agent)</span>
+              <span class="overlay-val muted">18% brut</span>
+            </div>
+            <div class="overlay-row">
+              <span class="overlay-key">✅ Rendement réel estimé</span>
+              <span class="overlay-val green">11–13% net</span>
+            </div>
+            <div class="overlay-row">
+              <span class="overlay-key">📋 Structure juridique</span>
+              <span class="overlay-val teal">Leasehold 30+30 ans</span>
+            </div>
+            <div class="overlay-row">
+              <span class="overlay-key">🌊 Distance plage</span>
+              <span class="overlay-val">8 min à pied</span>
+            </div>
+            <div class="overlay-row">
+              <span class="overlay-key">⚠️ Mon verdict</span>
+              <span class="overlay-val green">✓ Recommandé</span>
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--muted);">The "Mon verdict" line is the killer differentiator. No other channel does this. It is honest, visual, and immediately shareable on social media. Every viewer will screenshot it.</p>
+        </div>
+      </div>
+
+      <table class="spec-table">
+        <tr><td class="spec-key">Intro sequence</td><td class="spec-val">5 seconds. Marina Immo Dubai logo reveal (gold wave animation). Location flag: 🇦🇪 + 🇮🇩. Tagline: "L'investisseur honnête." No music bed — immediate cut to face-to-camera hook.</td></tr>
+        <tr><td class="spec-key">Lower thirds</td><td class="spec-val">French text only. Format: [Speaker Name] · [Title in French]. Example: "Karim — Fondateur, Marina Immo Dubai". Gold underline bar. Appears at 3 seconds into any new person speaking.</td></tr>
+        <tr><td class="spec-key">Property overlay card</td><td class="spec-val">See above. Animates in at start of each property segment. Stays on screen 8 seconds then fades. Build as a Fusion macro in DaVinci — drag and drop to apply, just update text fields.</td></tr>
+        <tr><td class="spec-key">Chapter title cards</td><td class="spec-val">Full-screen black card, 2 seconds, gold text chapter number + title. Example: "Chapitre 2 : Les chiffres réels". Paste chapter titles from Castmagic output directly.</td></tr>
+        <tr><td class="spec-key">Verdict card (end of property)</td><td class="spec-val">Full-screen for 3 seconds: large "VERDICT" text, then either ✅ RECOMMANDÉ / ❌ DÉCONSEILLÉ / ⚠️ À SURVEILLER in colour-coded card. This is the moment designed to be clipped into a Reel.</td></tr>
+        <tr><td class="spec-key">Outro (last 20 seconds)</td><td class="spec-val">Two CTAs side by side: "Rejoignez le Club Investisseurs → [link]" and "Téléchargez le Guide Gratuit → [link]". End screen with subscribe button and "Prochaine vidéo" preview card.</td></tr>
+        <tr><td class="spec-key">Color grade preset</td><td class="spec-val">For Bali footage: warm colour grade (boost oranges, lift shadows slightly — the Bali light is already good). For DPS studio: cool, clinical grade (trust/authority feel for explainers). Two DaVinci LUT presets saved as <code>MID_Bali_Warm</code> and <code>MID_Studio_Cool</code>.</td></tr>
+        <tr><td class="spec-key">Subtitle track</td><td class="spec-val">French .srt file imported and burned-in as closed captions (not open captions) — viewers toggle on/off. English .srt also uploaded as second language track. DaVinci exports both simultaneously.</td></tr>
+        <tr><td class="spec-key">Export settings</td><td class="spec-val">4K H.265 / 25fps / 50 Mbps for YouTube. Separate 1080p export for Instagram Reels master source.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- STEP 5 — OPUS CLIP -->
+  <div class="section">
+    <div class="section-label">06 — Reels Factory</div>
+    <div class="pipeline-step">
+      <div class="step-header">
+        <div class="step-num s5">5</div>
+        <div class="step-meta">
+          <div class="step-tag">Step 5 — 5 minutes upload + automatic</div>
+          <div class="step-title">Opus Clip — 5 Reels + YouTube Shorts from every video</div>
+          <div class="step-time">Time: <strong>5 minutes to upload · 0 minutes to wait</strong></div>
+        </div>
+      </div>
+      <div class="step-body">
+        Opus Clip's AI identifies the most engaging moments. For Marina Immo Dubai content, set the following custom instructions so Opus Clip prioritises the right moments — not generic "engaging" moments but the ones that are specifically compelling for a French real estate investment audience.
+      </div>
+
+      <div class="code-block">
+        <span class="code-block label-tag">Opus Clip Custom Instructions — Marina Immo Dubai Profile</span>
+        <pre><span class="key">Channel language:</span> <span class="val">French</span>
+<span class="key">Target audience:</span> <span class="val">French-speaking investors interested in Bali and Dubai real estate</span>
+
+<span class="key">Prioritise clips that contain:</span>
+<span class="val">— A specific number (yield percentage, price, distance, ROI figure)
+— A "truth reveal" moment (what the agent said vs reality)
+— A verdict or recommendation (buy / avoid / watch)
+— A legal structure explanation (PT PMA, leasehold)
+— A surprising comparison (Dubaï vs Bali yield, projected vs actual)</span>
+
+<span class="key">Hook style for French audience:</span>
+<span class="val">— "Ce que personne ne vous dit sur..." (What nobody tells you about...)
+— "J'ai visité X propriétés, voici la vérité..." (I visited X properties, here's the truth)
+— "Le rendement réel après frais: X%" (The real yield after costs: X%)</span>
+
+<span class="key">Avoid clipping:</span>
+<span class="val">— Introductions and outros
+— Transition moments without information
+— Generic tourism commentary</span></pre>
+      </div>
+
+      <table class="spec-table">
+        <tr><td class="spec-key">Reels distribution</td><td class="spec-val">Instagram Reels (primary), TikTok (secondary, same content), YouTube Shorts (same clips — feeds YouTube algorithm separately from long-form).</td></tr>
+        <tr><td class="spec-key">From Lives specifically</td><td class="spec-val">Every YouTube Live (you already do these) → upload archive to Opus Clip → extract 5–8 Shorts. A 60-minute live becomes 6 pieces of stand-alone content automatically. Currently these lives are archived and never repurposed. That stops now.</td></tr>
+        <tr><td class="spec-key">Branding on Reels</td><td class="spec-val">Opus Clip adds Marina Immo Dubai logo + French subtitles automatically once the brand kit is configured. Set up once. Gold logo, dark background, French subtitle font matching DaVinci template.</td></tr>
+        <tr><td class="spec-key">Upload schedule</td><td class="spec-val">Do NOT post all 5 Reels on the same day. Schedule via Buffer or Later: 1 Reel every 2 days. A single 45-minute property visit video produces Reels content for 10 days across Instagram.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- STEP 6 — CANVA THUMBNAILS -->
+  <div class="section">
+    <div class="section-label">07 — Thumbnail System</div>
+    <div class="pipeline-step">
+      <div class="step-header">
+        <div class="step-num s6">6</div>
+        <div class="step-meta">
+          <div class="step-tag">Step 6 — 5 minutes per video</div>
+          <div class="step-title">Canva thumbnail kit — 6 templates for 6 content types</div>
+          <div class="step-time">Time: <strong>5 minutes</strong> — swap photo + text, done</div>
+        </div>
+      </div>
+      <div class="step-body">
+        The Marina Immo Dubai thumbnail system has 6 templates — one per content series. Each template is designed for its specific emotional trigger. The investor audience clicks on different visual cues depending on what they're looking for: truth content triggers on a bold number, legal content triggers on a warning icon, property visits trigger on a beautiful property photo + price.
+      </div>
+
+      <div class="thumb-grid">
+        <div class="thumb-card">
+          <div class="thumb-preview v">VÉRITÉ<br>6.2%</div>
+          <div class="thumb-label"><strong>Template V — La Vérité</strong>Red background, large number (the honest yield), your skeptical face in the corner. For truth/honest content series.</div>
+        </div>
+        <div class="thumb-card">
+          <div class="thumb-preview a">ANALYSE<br>vs</div>
+          <div class="thumb-label"><strong>Template A — Analyse</strong>Blue split-screen (Dubai flag / Bali flag). For comparison videos. Clean, data-focused visual.</div>
+        </div>
+        <div class="thumb-card">
+          <div class="thumb-preview t">⚠️<br>PT PMA</div>
+          <div class="thumb-label"><strong>Template T — Terrain Juridique</strong>Warning tone, yellow/amber. For legal structure and risk explainers. Authority feel.</div>
+        </div>
+        <div class="thumb-card">
+          <div class="thumb-preview c">€245K<br>VILLA ✓</div>
+          <div class="thumb-label"><strong>Template C — Compte Rendu</strong>Property photo + price badge + verdict icon. For property visit walk-through videos.</div>
+        </div>
+        <div class="thumb-card">
+          <div class="thumb-preview d">JOURNAL<br>BALI</div>
+          <div class="thumb-label"><strong>Template D — Diary</strong>Cinematic wide crop of Bali location, title overlay. For the real-time diary series. Lifestyle feel.</div>
+        </div>
+        <div class="thumb-card">
+          <div class="thumb-preview l">LIVE<br>RÉSUMÉ</div>
+          <div class="thumb-label"><strong>Template L — Live Recap</strong>For uploading clipped/edited Live summaries. Distinct from regular videos so returning audience knows the format.</div>
+        </div>
+      </div>
+
+      <table class="spec-table">
+        <tr><td class="spec-key">The number rule</td><td class="spec-val">Every single thumbnail must contain at least one number. "Rendement 11%" beats "Mon expérience à Bali" by 300% in CTR for this audience. The investor brain clicks on data, not vague promises.</td></tr>
+        <tr><td class="spec-key">Face rule</td><td class="spec-val">Your face in the thumbnail increases CTR by 30–40% on average. Expression should match content: skeptical/raised eyebrow for truth content, confident/direct for analysis, curious for property visits. Never smiling blankly.</td></tr>
+        <tr><td class="spec-key">French text rule</td><td class="spec-val">Maximum 5 words on the thumbnail. Ideally 3. Large, bold, readable at 200×112px (mobile preview). Use "VÉRITÉ", "ARNAQUE", "CHIFFRES RÉELS", "ÉVITEZ ÇA" — strong verbs and nouns.</td></tr>
+        <tr><td class="spec-key">A/B testing</td><td class="spec-val">YouTube allows thumbnail A/B testing. For the first 20 videos: test two thumbnails per video (48-hour test). The data will tell you definitively whether the number-first or face-first approach wins for your specific audience.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- STEP 7 — MAKE AUTOMATION -->
+  <div class="section">
+    <div class="section-label">08 — The Make Scenario</div>
+    <div class="pipeline-step">
+      <div class="step-header">
+        <div class="step-num s7">7</div>
+        <div class="step-meta">
+          <div class="step-tag">Step 7 — 0 minutes · Fully automatic</div>
+          <div class="step-title">Make scenario: from Drive to published — zero human action</div>
+          <div class="step-time">Time: <strong>0 minutes</strong> after one-time setup</div>
+        </div>
+      </div>
+      <div class="step-body">
+        This is a separate Make scenario from the DPS client pipeline. Marina Immo Dubai has its own automation chain. Once the 4K video, Castmagic outputs, and thumbnail are in the designated folders, Make does the rest.
+      </div>
+
+      <div class="make-flow">
+        <div class="make-step">
+          <div class="make-step-connector">
+            <div class="make-step-dot trigger">📁</div>
+            <div class="make-step-line"></div>
+          </div>
+          <div class="make-step-content">
+            <div class="make-step-title">Trigger: New file in Google Drive</div>
+            <div class="make-step-desc">Watches folder <code>/MarinImmo/Processed/ReadyToPublish/</code>. Fires when the 4K video file lands there (placed manually after DaVinci export in Step 4). This is the human "approve" gate — nothing publishes until you deliberately move the video to this folder.</div>
+          </div>
+        </div>
+        <div class="make-step">
+          <div class="make-step-connector">
+            <div class="make-step-dot action">📋</div>
+            <div class="make-step-line"></div>
+          </div>
+          <div class="make-step-content">
+            <div class="make-step-title">Read Castmagic outputs</div>
+            <div class="make-step-desc">Make reads the matching Castmagic output files: <code>description_FR.txt</code>, <code>chapters.txt</code>, <code>tags_FR.txt</code>, <code>summary_EN.txt</code>. These were generated in Step 3 and saved to <code>/MarinImmo/Processed/[Episode]/Castmagic/</code></div>
+          </div>
+        </div>
+        <div class="make-step">
+          <div class="make-step-connector">
+            <div class="make-step-dot action">▶️</div>
+            <div class="make-step-line"></div>
+          </div>
+          <div class="make-step-content">
+            <div class="make-step-title">Upload to YouTube with full metadata</div>
+            <div class="make-step-desc">Make uses the YouTube API module. Uploads the 4K video with: <strong>French title</strong> (from filename), <strong>description</strong> (Castmagic output), <strong>chapters</strong> (timestamps from Castmagic), <strong>tags</strong> (French SEO tags), <strong>thumbnail</strong> (pulled from <code>/Processed/[Episode]/Thumbnail/</code>), <strong>both subtitle files</strong> (FR + EN .srt). Sets visibility to <strong>Scheduled</strong> (you set the publish time in the filename: <code>…_PUBLISH20260615T0900</code>).</div>
+          </div>
+        </div>
+        <div class="make-step">
+          <div class="make-step-connector">
+            <div class="make-step-dot action">📱</div>
+            <div class="make-step-line"></div>
+          </div>
+          <div class="make-step-content">
+            <div class="make-step-title">Schedule Reels to Instagram via Buffer</div>
+            <div class="make-step-desc">Make reads the 5 Reels from <code>/Processed/[Episode]/Reels/</code>. Sends to Buffer API with captions (from Castmagic social posts output). Schedules one per day over 10 days. <strong>Zero manual Instagram posting ever again.</strong></div>
+          </div>
+        </div>
+        <div class="make-step">
+          <div class="make-step-connector">
+            <div class="make-step-dot action">✉️</div>
+            <div class="make-step-line"></div>
+          </div>
+          <div class="make-step-content">
+            <div class="make-step-title">Draft newsletter in Beehiiv</div>
+            <div class="make-step-desc">Make creates a draft newsletter in Beehiiv using the newsletter paragraph from Castmagic (Prompt 3). Adds the YouTube video embed. Sets subject line to the video title. You receive a notification to review and hit send — 30 seconds of human effort.</div>
+          </div>
+        </div>
+        <div class="make-step">
+          <div class="make-step-connector">
+            <div class="make-step-dot output">📊</div>
+          </div>
+          <div class="make-step-content">
+            <div class="make-step-title">Update Airtable content calendar</div>
+            <div class="make-step-desc">New row added to <code>MarinImmo_ContentCalendar</code> Airtable base: episode title, publish date, YouTube URL (once live), Reel schedule dates, newsletter sent date, views at 7 days, views at 30 days. Full visibility of your content pipeline and performance in one dashboard.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT CALENDAR -->
+  <div class="section">
+    <div class="section-label">09 — Weekly Content Calendar</div>
+    <h2>3 videos a week. <span>35 minutes each.</span></h2>
+    <p class="section-intro">At the current cadence (1–2 videos per month), the channel grows slowly regardless of quality. The pipeline enables 3 videos per week. Here is the weekly content structure — it does not require 3 trips to Bali per week. Most content can be made at the DPS studio in Dubai from research, analysis, and interview.</p>
+
+    <div class="cal-table">
+      <div class="cal-row">
+        <div class="cal-cell header">Day</div>
+        <div class="cal-cell header">YouTube</div>
+        <div class="cal-cell header">Instagram Reels</div>
+        <div class="cal-cell header">Newsletter</div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-cell day">Lundi</div>
+        <div class="cal-cell"><strong>Explainer / Vérité</strong><br><span style="font-size:12px;color:var(--muted);">Legal, yield breakdown, market analysis — filmed at DPS studio. Serie 2 or Serie 3.</span></div>
+        <div class="cal-cell"><span style="font-size:12px;color:var(--muted);">Reel 1 from Thursday's video (from previous week) published.</span></div>
+        <div class="cal-cell"><span style="font-size:12px;color:var(--muted);">—</span></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-cell day">Mercredi</div>
+        <div class="cal-cell"><strong>Property Visit / Terrain</strong><br><span style="font-size:12px;color:var(--muted);">Walk-through video from most recent Bali trip. Property overlay card, honest verdict. Serie 5 or Serie 6.</span></div>
+        <div class="cal-cell"><span style="font-size:12px;color:var(--muted);">Reel 2 from Monday's video published. Reel from Monday's video scheduled.</span></div>
+        <div class="cal-cell"><span style="font-size:12px;color:var(--muted);">—</span></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-cell day">Vendredi</div>
+        <div class="cal-cell"><strong>Opinion / Comparaison</strong><br><span style="font-size:12px;color:var(--muted);">Dubai vs Bali, market update, "what I've learned this week." Can be short (8–12 min). Filmed at DPS studio. Serie 4.</span></div>
+        <div class="cal-cell"><span style="font-size:12px;color:var(--muted);">Reel from Wednesday published. Best Reel of the week boosted with €10 Meta spend.</span></div>
+        <div class="cal-cell"><strong>La Lettre de l'Investisseur</strong><br><span style="font-size:12px;color:var(--muted);">One insight from the week's best video. Beehiiv draft ready automatically. 30 sec to review and send.</span></div>
+      </div>
+      <div class="cal-row">
+        <div class="cal-cell day">Dimanche</div>
+        <div class="cal-cell"><strong>🔴 YouTube Live</strong><br><span style="font-size:12px;color:var(--muted);">30–45 min Q&A + market update. Already part of your cadence. Archive → Opus Clip → 6 Shorts during the week.</span></div>
+        <div class="cal-cell"><span style="font-size:12px;color:var(--muted);">Live announced on stories + posts.</span></div>
+        <div class="cal-cell"><span style="font-size:12px;color:var(--muted);">—</span></div>
+      </div>
+    </div>
+
+    <div class="insight teal">
+      <div class="insight-label">The Most Important Rule in the Calendar</div>
+      <p>Wednesday's property visit video does NOT require a trip to Bali that week. You film one trip's worth of properties (8–10 walk-throughs in 5 days), then process them over the following 10 weeks at one per week. <strong>One Bali trip generates 10 weeks of property content.</strong> Combined with the studio-filmed explainer and opinion videos, you never run out of content between trips.</p>
+    </div>
+  </div>
+
+  <!-- THE LIVE WORKFLOW -->
+  <div class="section">
+    <div class="section-label">10 — The Live Repurposing System</div>
+    <h2>Your <span>Lives are sitting idle.</span> Not anymore.</h2>
+    <p class="section-intro">You already run YouTube Lives. From the research: "🔴 LIVE (2) MARINA IMMO A BALI!" — these are 30–60 minute sessions that get archived and never touched again. Each one is a goldmine of short-form content that is currently being wasted.</p>
+
+    <table class="spec-table">
+      <tr><td class="spec-key">After every Live</td><td class="spec-val">Download the archive from YouTube Studio. Upload to Opus Clip with the custom Marina Immo profile. Opus Clip extracts 6–8 Shorts (60–90 seconds each). These are your Reels + YouTube Shorts for the following week.</td></tr>
+      <tr><td class="spec-key">What Opus Clip looks for in Lives</td><td class="spec-val">In the custom profile: prioritise audience questions answered (high engagement moments), any specific number mentioned, any "myth busted" moment, any "I would never buy in X because..." moment. These are the clips that stop the scroll.</td></tr>
+      <tr><td class="spec-key">The "Q&amp;A Clip" format</td><td class="spec-val">Best performing Live clips: question on screen as text overlay + your direct answer. Make creates a template: viewer's question appears at top of frame (white text on dark bg), your answer runs below. Castmagic generates French subtitle track automatically.</td></tr>
+      <tr><td class="spec-key">Weekly output from one Live</td><td class="spec-val">1 Live (40 min) → 6 Reels → published over 12 days. That single Live session contributes to Instagram feed content for nearly 2 weeks with zero additional filming.</td></tr>
+    </table>
+  </div>
+
+  <!-- THE METRICS -->
+  <div class="section">
+    <div class="section-label">11 — The Numbers</div>
+    <h2>What changes when you <span class="teal">run the pipeline</span></h2>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">Videos / Month</div>
+        <div class="metric-value">12–16</div>
+        <div class="metric-sub">vs ~2 currently</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Reels / Month</div>
+        <div class="metric-value">60–80</div>
+        <div class="metric-sub">incl. Live clips</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Newsletter Issues / Year</div>
+        <div class="metric-value">52</div>
+        <div class="metric-sub">weekly, auto-drafted</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Production Time / Video</div>
+        <div class="metric-value">35 min</div>
+        <div class="metric-sub">down from 3–5 hrs</div>
+      </div>
+    </div>
+
+    <div class="insight green">
+      <div class="insight-label">Channel Velocity Impact</div>
+      <p>YouTube's algorithm rewards consistency above almost everything else. At 3 videos/week, the channel sends 3× the signals to the algorithm compared to 1 video/week. <strong>This is not a linear improvement — it is exponential.</strong> Channels that go from 1/week to 3/week typically see subscriber growth rate triple within 60 days, not just because of volume but because the algorithm begins recommending the channel to new audiences it had previously deprioritised. The DPS pipeline makes 3/week sustainable without increasing your workload.</p>
+    </div>
+  </div>
+
+  <!-- SETUP CHECKLIST -->
+  <div class="section">
+    <div class="section-label">12 — Setup Checklist</div>
+    <h2>Build this in <span>one weekend.</span></h2>
+    <p class="section-intro">The entire technical setup below takes one focused weekend. After that, every video costs 35 minutes. Here is the build sequence.</p>
+
+    <table class="spec-table">
+      <tr><td class="spec-key" style="color:var(--green);">✓ Day 1 Morning</td><td class="spec-val"><strong>Google Drive structure:</strong> create all folders (<code>/MarinImmo/YYYY/[Episode]/Raw/</code>, <code>/Processed/</code>, <code>/ReadyToPublish/</code>). Set up sharing permissions for team member access if needed.</td></tr>
+      <tr><td class="spec-key" style="color:var(--green);">✓ Day 1 Afternoon</td><td class="spec-val"><strong>Castmagic prompts:</strong> create the 4 custom prompt templates above in Castmagic. Test with one existing video's transcript. Review and refine the French output. Save as "Marina Immo Dubai" preset.</td></tr>
+      <tr><td class="spec-key" style="color:var(--green);">✓ Day 1 Evening</td><td class="spec-val"><strong>Auphonic presets:</strong> create <code>MarinImmo_Field</code> and <code>MarinImmo_Studio</code> presets. Test with one Bali field recording. Check noise reduction level is appropriate.</td></tr>
+      <tr><td class="spec-key" style="color:var(--gold);">◎ Day 2 Morning</td><td class="spec-val"><strong>DaVinci Master Template:</strong> build the Marina Immo Dubai template (3 hours). Lower thirds, property overlay card (Fusion macro), chapter title cards, verdict card, intro/outro. This is the longest build task but it is done once, forever.</td></tr>
+      <tr><td class="spec-key" style="color:var(--gold);">◎ Day 2 Afternoon</td><td class="spec-val"><strong>Canva thumbnail kit:</strong> build the 6 templates (90 minutes). Brand kit: Marina Immo Dubai gold/teal palette, logo uploaded, font set. Each template: 15 minutes to build. Save as a Canva Brand Kit.</td></tr>
+      <tr><td class="spec-key" style="color:var(--gold);">◎ Day 2 Evening</td><td class="spec-val"><strong>Opus Clip brand kit + custom profile:</strong> upload Marina Immo Dubai logo, set brand colours, write the custom instructions for clip selection. Test with one existing video.</td></tr>
+      <tr><td class="spec-key" style="color:var(--blue);">○ Day 3</td><td class="spec-val"><strong>Make scenario:</strong> build the automation chain. Connect Google Drive → Auphonic API → Castmagic → YouTube API → Buffer → Beehiiv → Airtable. Test end-to-end with one video. This is the complex build — use the DPS team member who already manages the existing Make scenarios.</td></tr>
+      <tr><td class="spec-key" style="color:var(--blue);">○ Day 3 Evening</td><td class="spec-val"><strong>Beehiiv setup:</strong> create the "La Lettre de l'Investisseur — Bali &amp; Dubaï" newsletter. Import existing audience if any. Set up the Make webhook connection. Publish first issue manually to test the flow.</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">DPS <span>Strategic Intelligence</span></div>
+    <div class="footer-meta">
+      Confidential — For Internal Use Only<br>
+      Marina Immo Dubai · Pipeline Operations Setup · June 2026<br>
+      One Weekend Build · 35 Minutes Per Episode Forever
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
