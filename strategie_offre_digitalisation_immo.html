@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Immo Powerhouse — Stratégie & Architecture de l'Offre</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', serif;
+    background: #fafaf8;
+    color: #1a1a1a;
+    line-height: 1.8;
+  }
+  .cover {
+    background: #1a1a1a;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+    page-break-after: always;
+  }
+  .cover .pretitle { font-size: 0.8em; letter-spacing: 4px; color: #c8a96e; margin-bottom: 20px; text-transform: uppercase; }
+  .cover h1 { font-size: 2.6em; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .cover .subtitle { font-size: 1.15em; color: #c8a96e; letter-spacing: 1px; margin-bottom: 40px; max-width: 600px; }
+  .cover .tagline { font-size: 1.05em; color: #aaa; font-style: italic; max-width: 520px; border-top: 1px solid #444; padding-top: 20px; }
+  .cover .date { margin-top: 40px; font-size: 0.85em; color: #666; letter-spacing: 2px; }
+
+  .section { max-width: 800px; margin: 0 auto; padding: 60px 40px; page-break-before: always; }
+  .section-header { border-left: 4px solid #c8a96e; padding-left: 20px; margin-bottom: 40px; }
+  .section-header h2 { font-size: 1.7em; text-transform: uppercase; letter-spacing: 2px; }
+  .section-header .num { font-size: 0.85em; color: #c8a96e; letter-spacing: 3px; font-style: italic; }
+
+  .lead { font-size: 1.05em; color: #444; margin-bottom: 25px; }
+  .lead strong { color: #1a1a1a; }
+
+  .callout {
+    background: #1a1a1a; color: #fff; border-radius: 8px; padding: 28px 32px; margin: 25px 0;
+  }
+  .callout .label { font-size: 0.75em; color: #c8a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .callout p { color: #ddd; font-size: 0.98em; margin-bottom: 8px; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout strong { color: #fff; }
+
+  .verdict-box {
+    border: 2px solid #c8a96e; border-radius: 8px; padding: 26px 30px; margin: 25px 0;
+  }
+  .verdict-box .v-label { font-size: 0.75em; color: #c8a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+  .verdict-box .v-text { font-size: 1.15em; font-style: italic; color: #1a1a1a; }
+
+  table.niche-table { width: 100%; border-collapse: collapse; margin: 20px 0 30px; font-size: 0.92em; }
+  table.niche-table th { background: #1a1a1a; color: #c8a96e; padding: 12px 14px; text-align: left; font-size: 0.75em; letter-spacing: 1.5px; text-transform: uppercase; }
+  table.niche-table td { padding: 12px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
+  table.niche-table tr:nth-child(even) td { background: #f5f5f2; }
+  table.niche-table tr.retained td { background: #fff8ee !important; font-weight: bold; }
+  .badge { display: inline-block; background: #c8a96e; color: #fff; font-size: 0.68em; padding: 2px 8px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
+  .badge.reject { background: #999; }
+
+  .icp-card { background: #fff; border: 1px solid #e0e0d8; border-radius: 8px; padding: 26px 30px; margin: 20px 0; }
+  .icp-card h4 { color: #c8a96e; font-size: 0.8em; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+  .icp-card ul { list-style: none; padding: 0; }
+  .icp-card ul li { padding: 6px 0 6px 22px; position: relative; font-size: 0.95em; color: #333; border-bottom: 1px solid #f5f5f2; }
+  .icp-card ul li::before { content: '→'; position: absolute; left: 0; color: #c8a96e; }
+
+  .duo-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 25px 0; }
+  .duo-card { background: #1a1a1a; color: #fff; border-radius: 8px; padding: 24px 26px; }
+  .duo-card .duo-name { font-size: 1.05em; font-weight: bold; color: #c8a96e; margin-bottom: 4px; }
+  .duo-card .duo-role { font-size: 0.8em; color: #999; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+  .duo-card ul { list-style: none; padding: 0; }
+  .duo-card ul li { padding: 4px 0 4px 20px; position: relative; font-size: 0.92em; color: #ccc; }
+  .duo-card ul li::before { content: '✓'; position: absolute; left: 0; color: #c8a96e; }
+
+  .offer-block { background: #1a1a1a; color: #fff; border-radius: 8px; padding: 32px 34px; margin: 25px 0; }
+  .offer-block .offer-name { font-size: 1.5em; font-weight: bold; color: #fff; margin-bottom: 4px; }
+  .offer-block .offer-promise { font-size: 1em; color: #c8a96e; font-style: italic; margin-bottom: 20px; }
+  .offer-block p { color: #ccc; font-size: 0.95em; margin-bottom: 10px; }
+  .offer-block strong { color: #fff; }
+
+  table.tier-table { width: 100%; border-collapse: collapse; margin: 20px 0 30px; font-size: 0.9em; }
+  table.tier-table th { background: #1a1a1a; color: #c8a96e; padding: 11px 13px; text-align: left; font-size: 0.72em; letter-spacing: 1.5px; text-transform: uppercase; }
+  table.tier-table td { padding: 11px 13px; border-bottom: 1px solid #eee; vertical-align: top; }
+  table.tier-table tr:nth-child(even) td { background: #f5f5f2; }
+
+  .week-title { background: #1a1a1a; color: #c8a96e; padding: 12px 20px; font-size: 0.85em; letter-spacing: 3px; text-transform: uppercase; margin: 30px 0 0; border-radius: 4px 4px 0 0; }
+
+  .module-card { border: 1px solid #e0e0d8; border-radius: 0 0 8px 8px; padding: 22px 26px; margin-bottom: 20px; background: #fff; }
+  .module-card .m-title { font-size: 1.05em; font-weight: bold; color: #1a1a1a; margin-bottom: 10px; }
+  .module-card ul { list-style: none; padding: 0; }
+  .module-card ul li { padding: 5px 0 5px 20px; position: relative; font-size: 0.93em; color: #444; }
+  .module-card ul li::before { content: '—'; position: absolute; left: 0; color: #c8a96e; }
+
+  .funnel { text-align: center; margin: 30px 0; }
+  .funnel-step { background: #f5f5f2; border: 1px solid #e0e0d8; border-radius: 6px; padding: 14px 20px; margin: 4px auto; font-size: 0.92em; max-width: 460px; }
+  .funnel-step.highlight { background: #1a1a1a; color: #c8a96e; font-weight: bold; border-color: #1a1a1a; }
+  .funnel-arrow { color: #c8a96e; font-size: 1.2em; margin: 2px 0; }
+
+  .note-blue { background: #f0f7ff; border-left: 3px solid #4a90d9; padding: 12px 16px; margin-top: 16px; font-size: 0.88em; color: #2a5a8a; border-radius: 0 4px 4px 0; }
+  .note-blue strong { display: block; margin-bottom: 4px; text-transform: uppercase; font-size: 0.78em; letter-spacing: 1px; }
+
+  .footer { background: #1a1a1a; color: #555; text-align: center; padding: 30px; font-size: 0.8em; letter-spacing: 1px; }
+  .footer span { color: #c8a96e; }
+
+  @media print {
+    .cover { min-height: 100vh; }
+    .section { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COUVERTURE -->
+<div class="cover">
+  <div class="pretitle">Confidentiel — Usage interne</div>
+  <h1>Immo Powerhouse</h1>
+  <div class="subtitle">Stratégie de niche & Architecture de l'offre High-Ticket</div>
+  <div class="tagline">"Devenez votre propre agence." — Accompagnement pour professionnels de l'immobilier qui veulent construire leur moteur d'acquisition, pas dépendre du marché.</div>
+  <div class="date">SEPTEMBRE 2026 — DOCUMENT DE TRAVAIL V1.0</div>
+</div>
+
+<!-- SECTION 1 : DIAGNOSTIC -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 01</div>
+    <h2>Diagnostic</h2>
+  </div>
+
+  <p class="lead">L'activité principale — vente de biens sur plan à Dubaï, quelques biens à Bali — ralentit fortement à cause du contexte géopolitique actuel. C'est un ralentissement de <strong>marché</strong>, pas un ralentissement de <strong>compétence</strong>. La chaîne YouTube "Marina Immo" a atteint le sommet de sa niche — agence immobilière francophone à Dubaï — entièrement en organique, sans dépenser en publicité, sur un seul canal choisi délibérément.</p>
+
+  <div class="callout">
+    <div class="label">Le vrai actif</div>
+    <p>L'actif le plus précieux n'est pas le stock de biens à vendre — celui-ci dépend du marché et donc, en ce moment, ne travaille plus pour vous. L'actif le plus précieux est la <strong>capacité prouvée à construire une audience de confiance, francophone, à fort pouvoir d'achat, sans budget publicitaire</strong>. C'est une compétence rare dans l'immobilier. Presque aucun agent ne sait la reproduire — la plupart dépendent de portails, de leads achetés ou d'une agence qui capte la valeur de leur travail.</p>
+  </div>
+
+  <p class="lead"><strong>La conséquence stratégique :</strong> ne pas vendre "comment devenir agent immobilier à Dubaï" — ce pitch est mort tant que le marché est nerveux. Vendre "comment construire, en tant que professionnel de l'immobilier, un moteur d'acquisition qui ne dépend plus des cycles du marché." C'est un message qui devient <em>plus</em> fort quand le marché ralentit, pas moins — c'est exactement le moment où les agents cherchent une solution.</p>
+</div>
+
+<!-- SECTION 2 : COMPARATIF DES NICHES -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 02</div>
+    <h2>Comparatif des 4 Niches Envisagées</h2>
+  </div>
+
+  <table class="niche-table">
+    <tr>
+      <th>Niche</th>
+      <th>Pont de crédibilité</th>
+      <th>Preuve disponible</th>
+      <th>Verdict</th>
+    </tr>
+    <tr class="retained">
+      <td><strong>Digitalisation des pros de l'immobilier</strong><br><span style="font-weight:normal; font-size:0.85em; color:#666;">(agents, agences, marchands de biens, promoteurs)</span></td>
+      <td>Direct — même métier, même audience potentielle</td>
+      <td>Vous ÊTES le cas d'étude : dominant organique, zéro pub</td>
+      <td><span class="badge">Retenue</span></td>
+    </tr>
+    <tr>
+      <td><strong>Devenir agent à Dubaï</strong></td>
+      <td>Direct</td>
+      <td>Forte, mais le marché est retourné contre ce pitch</td>
+      <td><span class="badge reject">Écartée</span> — timing mort</td>
+    </tr>
+    <tr>
+      <td><strong>Fitness</strong><br><span style="font-weight:normal; font-size:0.85em; color:#666;">(garder la forme, entrepreneur marié, cuisine maghrébine)</span></td>
+      <td>Aucun — audience ne vous connaît pas pour ça</td>
+      <td>À construire de zéro</td>
+      <td><span class="badge reject">Écartée</span> — repart à zéro sur la preuve</td>
+    </tr>
+    <tr>
+      <td><strong>Professions libérales en France</strong><br><span style="font-weight:normal; font-size:0.85em; color:#666;">(ex. dentistes)</span></td>
+      <td>Aucun — sujet et audience différents</td>
+      <td>Marché déjà saturé d'agences spécialisées</td>
+      <td><span class="badge reject">Écartée</span> — pas d'avantage concurrentiel</td>
+    </tr>
+  </table>
+
+  <div class="verdict-box">
+    <div class="v-label">Pourquoi ce choix l'emporte largement</div>
+    <div class="v-text">Le high-ticket se vend sur la confiance, pas sur la taille du marché. Vous n'avez pas besoin d'un marché immense — vous avez besoin d'acheteurs qui ont de la trésorerie et un problème urgent. Un agent établi ou un marchand de biens de 35-50 ans dont le pipeline s'assèche a les deux.</div>
+  </div>
+
+  <p class="lead">La niche retenue mérite d'être élargie au-delà de "Dubaï" : professionnels de l'immobilier francophones au sens large — Dubaï, France, Maroc, Bali — qui vendent des biens à fort ticket et veulent arrêter de dépendre d'une agence ou d'un portail pour générer leurs propres acheteurs.</p>
+</div>
+
+<!-- SECTION 3 : POSITIONNEMENT -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 03</div>
+    <h2>Le Débat de Positionnement</h2>
+  </div>
+
+  <p class="lead">Deux visions s'opposent : celle de Ben (esthétique Iman Gadzi — signes extérieurs de richesse, Lamborghini, penthouse, "regarde ma vie, achète ma formation") contre une approche plus sobre, centrée sur la preuve.</p>
+
+  <div class="callout">
+    <div class="label">Recommandation</div>
+    <p><strong>L'approche sobre l'emporte, et ce n'est pas une question de goût — c'est une question de cible.</strong> L'audience actuelle a 25 ans et plus, avec une moyenne forte autour de 35-40 ans, établie, entrepreneurs et professions libérales. Ce public n'achète pas sur le fantasme — il a déjà l'argent, il achète sur la preuve, la compétence et la confiance. L'esthétique "flex" cible une audience jeune en quête d'identité aspirationnelle, ce qui n'est pas votre audience.</p>
+      <p>De plus, le marché "coach Dubaï" est aujourd'hui saturé et abîmé par les scammers qui utilisent précisément cette esthétique. S'y aligner, c'est se fondre dans un bruit dont le public se méfie déjà. À l'inverse, votre vrai avantage concurrentiel aujourd'hui est d'être <strong>l'anti-Iman-Gadzi</strong> : "on l'a construit lentement, en organique, sans un centime de publicité, sur un seul canal — et ça marche. Voici exactement comment." C'est plus différenciant maintenant que jamais, précisément parce que le marché est saturé de l'autre discours.</p>
+  </div>
+
+  <p class="lead"><strong>Le rôle de Ben n'est pas à écarter</strong> — son énergie plus clivante, ses langues (russe, espagnol, italien, anglais, français, arabe), sa mobilité (30 pays en 4 mois) sont un vrai actif de contenu. Mais comme moteur de portée et de personnalité, pas comme vitrine de richesse.</p>
+
+  <div class="duo-grid">
+    <div class="duo-card">
+      <div class="duo-name">Vous</div>
+      <div class="duo-role">L'ancre de confiance</div>
+      <ul>
+        <li>Contenu pédagogique, structure, méthode</li>
+        <li>Visage principal de la page de vente et des témoignages</li>
+        <li>Voix qui rassure — closing et suivi des clients</li>
+      </ul>
+    </div>
+    <div class="duo-card">
+      <div class="duo-name">Ben</div>
+      <div class="duo-role">Le moteur de portée</div>
+      <ul>
+        <li>Contenu terrain, voyages, rencontres avec des agents dans d'autres pays</li>
+        <li>Format "électron libre" — interviews multilingues, coulisses</li>
+        <li>Apporte l'énergie et la découvrabilité, pas la vente</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="lead">Duo sage / électron libre plutôt que duo tape-à-l'œil. C'est un format qui a fait ses preuves (bon flic / mauvais flic éditorial) et qui évite de forcer Ben dans un personnage qui dilue la différenciation réelle de la marque.</p>
+</div>
+
+<!-- SECTION 4 : ICP -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 04</div>
+    <h2>Client Idéal (ICP)</h2>
+  </div>
+
+  <div class="icp-card">
+    <h4>Qui il est</h4>
+    <ul>
+      <li>Agent immobilier indépendant, petite agence, marchand de biens ou promoteur</li>
+      <li>Francophone — Dubaï, France, Maroc, ou zone francophone au sens large</li>
+      <li>35-55 ans, déjà établi, pas un débutant sans capital</li>
+      <li>Vend des biens à ticket élevé (off-plan, luxe, réhabilitation) — la commission ou la marge justifie l'investissement dans l'accompagnement</li>
+    </ul>
+  </div>
+
+  <div class="icp-card">
+    <h4>Sa douleur actuelle</h4>
+    <ul>
+      <li>Dépend d'une agence, d'un portail ou de leads achetés — marge captée par un tiers</li>
+      <li>Le ralentissement du marché a asséché son pipeline habituel</li>
+      <li>Il sait que le contenu digital fonctionne mais ne sait pas par où commencer, ou l'a essayé sans résultat</li>
+      <li>Il ne veut pas dépendre d'une audience jeune ou d'une esthétique "coach Dubaï" qui ne lui ressemble pas</li>
+    </ul>
+  </div>
+
+  <div class="icp-card">
+    <h4>Ce qu'il achète réellement</h4>
+    <ul>
+      <li>Un système reproductible, pas une promesse de lifestyle</li>
+      <li>La méthode exacte utilisée pour dominer une niche YouTube sans budget pub</li>
+      <li>La capacité à devenir sa propre "powerhouse" — indépendant du réseau d'une agence</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 5 : ARCHITECTURE DE L'OFFRE -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 05</div>
+    <h2>Architecture de l'Offre</h2>
+  </div>
+
+  <div class="offer-block">
+    <div class="offer-name">Immo Powerhouse <span style="font-size:0.6em; color:#888; font-weight:normal;">(nom provisoire)</span></div>
+    <div class="offer-promise">"Devenez votre propre agence."</div>
+    <p>La promesse centrale n'est pas "vendez plus de biens à Dubaï" — c'est <strong>"arrêtez de dépendre du marché et de l'agence pour générer vos acheteurs."</strong> Ce cadrage reste vrai peu importe le cycle immobilier, ce qui protège l'offre d'un futur ralentissement comme celui que vous traversez actuellement.</p>
+  </div>
+
+  <table class="tier-table">
+    <tr>
+      <th>Palier</th>
+      <th>Format</th>
+      <th>Pour qui</th>
+      <th>Fourchette indicative</th>
+    </tr>
+    <tr>
+      <td><strong>Fondations</strong></td>
+      <td>Formation en ligne — modules vidéo + exercices</td>
+      <td>Agents qui démarrent leur présence digitale</td>
+      <td>1 500 – 2 500 €</td>
+    </tr>
+    <tr>
+      <td><strong>Accompagnement Groupe</strong></td>
+      <td>Formation + sessions live hebdomadaires + communauté privée</td>
+      <td>Agents/agences qui veulent un suivi et de la responsabilisation</td>
+      <td>3 500 – 5 000 €</td>
+    </tr>
+    <tr>
+      <td><strong>Powerhouse Privé</strong></td>
+      <td>Accompagnement individuel 3-6 mois, accès direct, places limitées</td>
+      <td>Agences établies, marchands de biens, promoteurs à fort volume</td>
+      <td>8 000 – 15 000 €</td>
+    </tr>
+  </table>
+
+  <div class="note-blue">
+    <strong>Note sur le pricing</strong>
+    Ces fourchettes reflètent un vrai high-ticket B2B — cohérent avec un ICP qui a déjà des revenus établis et pour qui le ROI (un seul deal supplémentaire généré en direct) couvre largement l'investissement. À affiner une fois les premiers appels de découverte réalisés avec des prospects réels.
+  </div>
+</div>
+
+<!-- SECTION 6 : PLAN DE LANCEMENT -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 06</div>
+    <h2>S'appuyer sur Marina Immo pour Lancer</h2>
+  </div>
+
+  <p class="lead">Le plus gros avantage : il n'y a pas d'audience à construire de zéro. La chaîne Marina Immo est déjà regardée par des entrepreneurs et professions libérales établis — un profil qui recoupe largement les futurs clients de l'offre B2B, même si le contenu jusqu'ici s'adressait aux acheteurs de biens plutôt qu'aux professionnels.</p>
+
+  <div class="funnel">
+    <div class="funnel-step highlight">Contenu Marina Immo existant (YouTube — grand public)</div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">Nouveau segment de contenu — "coulisses" : comment on a construit la chaîne sans pub</div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step">Communauté privée dédiée aux professionnels de l'immobilier</div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step highlight">Offre Immo Powerhouse — 3 paliers</div>
+  </div>
+
+  <p class="lead">Le contenu de lancement ne doit pas être une rupture avec l'identité actuelle — c'est une extension naturelle : "comment on l'a fait" plutôt que "regardez notre vie." Chaque vidéo qui montre les coulisses de la stratégie de contenu existante sert doublement de preuve sociale pour la nouvelle offre.</p>
+</div>
+
+<!-- SECTION 7 : CURRICULUM (GRANDES LIGNES) -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">Section 07</div>
+    <h2>Curriculum — Grandes Lignes</h2>
+  </div>
+
+  <p class="lead" style="margin-bottom: 10px;">Structure proposée à 5 modules, à détailler (scripts, exercices, lives) dans un document dédié une fois cette architecture validée — sur le même modèle que ce qui a été fait pour d'autres formations du même système.</p>
+
+  <div class="week-title">Module 1</div>
+  <div class="module-card">
+    <div class="m-title">Le Positionnement — Devenir une Marque, pas un Numéro d'Agent</div>
+    <ul>
+      <li>Choisir un canal unique et s'y tenir — la leçon centrale de Marina Immo</li>
+      <li>Définir sa promesse et son audience — éviter le piège du contenu générique</li>
+      <li>Construire une identité qui survit à un ralentissement de marché</li>
+    </ul>
+  </div>
+
+  <div class="week-title">Module 2</div>
+  <div class="module-card">
+    <div class="m-title">Le Contenu qui Génère des Acheteurs Sérieux</div>
+    <ul>
+      <li>Formats qui filtrent (attirent les acheteurs qualifiés, pas les curieux)</li>
+      <li>Construire la confiance avant le premier contact commercial</li>
+      <li>Étude de cas : ce qui a fonctionné et n'a pas fonctionné sur Marina Immo</li>
+    </ul>
+  </div>
+
+  <div class="week-title">Module 3</div>
+  <div class="module-card">
+    <div class="m-title">De l'Audience au Deal</div>
+    <ul>
+      <li>Construire un tunnel simple — contenu → communauté privée → prise de contact</li>
+      <li>Qualifier sans dépendre d'une agence ou d'un portail</li>
+      <li>Négocier son indépendance — quand et comment sortir du modèle agence classique</li>
+    </ul>
+  </div>
+
+  <div class="week-title">Module 4</div>
+  <div class="module-card">
+    <div class="m-title">Systèmes & Autonomie</div>
+    <ul>
+      <li>Outils et process pour produire du contenu sans y passer ses journées</li>
+      <li>Déléguer ce qui peut l'être — rester concentré sur ce qui vend</li>
+      <li>Construire une réputation qui tient dans la durée, pas un coup d'éclat</li>
+    </ul>
+  </div>
+
+  <div class="week-title">Module 5</div>
+  <div class="module-card">
+    <div class="m-title">Devenir sa Propre Powerhouse</div>
+    <ul>
+      <li>Cas des marchands de biens et promoteurs — vendre en direct après réhabilitation</li>
+      <li>Construire un réseau qui remplace la dépendance à une agence</li>
+      <li>Plan personnel — 90 jours pour lancer sa présence</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  Document préparé pour l'équipe <span>Immo Powerhouse</span> — Confidentiel — Usage interne uniquement<br>
+  Version 1.0 — Septembre 2026
+</div>
+
+</body>
+</html>
