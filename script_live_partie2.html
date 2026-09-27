@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Script Live — Où Vivre en 2026 ? Partie 2</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #fafaf8; color: #1a1a1a; line-height: 1.75; }
+
+  .cover { background: #1a1a1a; color: #fff; padding: 80px 40px; text-align: center; page-break-after: always; }
+  .cover .kicker { color: #c8a96e; font-size: 0.85em; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; }
+  .cover h1 { font-size: 2.3em; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; line-height: 1.3; }
+  .cover .sub { color: #c8a96e; font-size: 1em; letter-spacing: 2px; margin-bottom: 30px; }
+  .cover .tagline { color: #aaa; font-style: italic; max-width: 520px; margin: 0 auto; border-top: 1px solid #333; padding-top: 20px; }
+  .cover .date { color: #666; font-size: 0.85em; margin-top: 30px; letter-spacing: 2px; }
+
+  .section { max-width: 780px; margin: 0 auto; padding: 60px 30px; page-break-before: always; }
+  .section-header { border-left: 4px solid #c8a96e; padding-left: 20px; margin-bottom: 35px; }
+  .section-header h2 { font-size: 1.6em; text-transform: uppercase; letter-spacing: 2px; }
+  .section-header .num { font-size: 0.8em; color: #c8a96e; letter-spacing: 3px; font-style: italic; }
+
+  h3 { font-size: 1.05em; text-transform: uppercase; letter-spacing: 2px; margin: 30px 0 12px; color: #1a1a1a; }
+  p { margin-bottom: 12px; font-size: 0.95em; color: #333; }
+  ul, ol { margin: 0 0 16px 22px; font-size: 0.93em; color: #333; }
+  li { margin-bottom: 6px; }
+
+  .intro-box { background: #1a1a1a; color: #fff; border-radius: 8px; padding: 22px 28px; margin-bottom: 28px; }
+  .intro-box .label { font-size: 0.75em; color: #c8a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .intro-box p, .intro-box li { color: #ccc; font-size: 0.93em; }
+  .intro-box strong { color: #fff; }
+
+  .warn { background: #fff8e8; border-left: 4px solid #d9a441; border-radius: 6px; padding: 16px 20px; margin: 20px 0; }
+  .warn .label { font-size: 0.75em; font-weight: bold; color: #8a6415; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .warn p, .warn li { font-size: 0.9em; color: #5a4520; }
+
+  .timing { display: inline-block; background: #c8a96e; color: #1a1a1a; font-weight: bold; font-size: 0.8em; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; }
+
+  .line { margin: 0 0 14px; padding: 12px 18px; background: #fff; border: 1px solid #e6e6de; border-radius: 6px; page-break-inside: avoid; }
+  .line .who { font-size: 0.72em; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .line.a .who { color: #a0782e; }
+  .line.b .who { color: #2e6aa0; }
+  .line p { margin: 0 0 6px; font-size: 0.95em; color: #1a1a1a; }
+  .line p:last-child { margin: 0; }
+
+  .cue { margin: 0 0 14px; padding: 8px 14px; border-left: 3px solid #999; background: #f0f0ea; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 0.8em; color: #555; border-radius: 0 4px 4px 0; }
+  .cue strong { color: #1a1a1a; letter-spacing: 1px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.82em; page-break-inside: avoid; }
+  th { background: #1a1a1a; color: #c8a96e; text-align: left; padding: 10px; letter-spacing: 1px; font-weight: normal; text-transform: uppercase; font-size: 0.85em; }
+  td { background: #fff; border-bottom: 1px solid #e6e6de; padding: 10px; vertical-align: top; color: #333; }
+  td:first-child { font-weight: bold; color: #1a1a1a; }
+
+  .qa { border: 1px solid #e0e0d8; border-radius: 8px; margin-bottom: 16px; overflow: hidden; page-break-inside: avoid; }
+  .qa .q { background: #1a1a1a; color: #fff; padding: 12px 18px; font-size: 0.92em; }
+  .qa .q span { color: #c8a96e; font-weight: bold; margin-right: 8px; }
+  .qa .r { background: #fff; padding: 14px 18px; font-size: 0.92em; color: #333; }
+
+  .checklist li { list-style: none; margin-left: -22px; padding-left: 26px; position: relative; }
+  .checklist li::before { content: "☐"; position: absolute; left: 0; color: #c8a96e; }
+
+  .footer { text-align: center; color: #999; font-size: 0.8em; padding: 40px; letter-spacing: 2px; }
+
+  @media (max-width: 600px) {
+    .cover { padding: 60px 20px; }
+    .cover h1 { font-size: 1.6em; }
+    .section { padding: 40px 16px; }
+    table { font-size: 0.72em; display: block; overflow-x: auto; }
+    th, td { padding: 7px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ COUVERTURE ============ -->
+<div class="cover">
+  <div class="kicker">Script de live YouTube — Suite</div>
+  <h1>Où vivre en 2026 ?<br>Partie 2</h1>
+  <div class="sub">On a choisi. Maintenant, comment on s'installe ?</div>
+  <p class="tagline">Dubaï, Bali, USA, Thaïlande : le plan concret pour passer du rêve au départ en 90 jours. Script intégral, minute par minute.</p>
+  <p class="date">Durée : 75 minutes · Format : live + Q&amp;A · 2 animateurs</p>
+</div>
+
+<!-- ============ 0. MODE D'EMPLOI ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">00 — Avant de commencer</div>
+    <h2>Mode d'emploi du script</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">Le concept</div>
+    <p>La Partie 1 répondait à <strong>« OÙ ? »</strong>. La Partie 2 répond à <strong>« COMMENT ? »</strong> : visas, budget, fiscalité, erreurs à éviter, et le plan d'installation à Dubaï étape par étape.</p>
+    <p>Objectif business : transformer les spectateurs qui rêvent en <strong>contacts qualifiés</strong> grâce à une checklist gratuite et un appel découverte.</p>
+  </div>
+
+  <h3>Qui parle</h3>
+  <ul>
+    <li><strong>ANIMATRICE</strong> — la voix principale, experte Dubaï et immobilier. Mène le live.</li>
+    <li><strong>CO-ANIMATEUR</strong> — joue le rôle du spectateur : pose les questions que le public se pose, lit le chat, relance.</li>
+  </ul>
+  <p>Remplacez ces rôles par vos prénoms. Si vous êtes seul(e), l'animatrice lit elle-même les questions du chat aux moments indiqués.</p>
+
+  <h3>Légende</h3>
+  <div class="line a"><div class="who">Animatrice</div><p>Texte à dire (à reformuler avec vos mots — ne lisez pas mot à mot).</p></div>
+  <div class="line b"><div class="who">Co-animateur</div><p>Texte à dire par le co-animateur.</p></div>
+  <div class="cue"><strong>[ÉCRAN]</strong> ce qui s'affiche · <strong>[RÉGIE]</strong> action technique · <strong>[CHAT]</strong> interaction avec le public</div>
+
+  <div class="warn">
+    <div class="label">⚠ À vérifier avant le live</div>
+    <p>Les règles de visa, les seuils d'investissement et la fiscalité changent souvent. Tous les chiffres de ce script sont des <strong>ordres de grandeur à confirmer</strong> sur les sites officiels (ou avec un avocat / fiscaliste) la semaine du live. La liste complète est en fin de document. Dites-le aussi à l'antenne : ça renforce votre crédibilité.</p>
+  </div>
+
+  <h3>Déroulé général</h3>
+  <table>
+    <tr><th>Timing</th><th>Segment</th><th>Objectif</th></tr>
+    <tr><td>-15 → 0</td><td>Écran d'attente</td><td>Remplir la salle</td></tr>
+    <tr><td>0 → 5</td><td>1. Le hook</td><td>Accrocher, annoncer le programme</td></tr>
+    <tr><td>5 → 20</td><td>2. Le match des 4 destinations</td><td>Donner une réponse claire et concrète</td></tr>
+    <tr><td>20 → 30</td><td>3. Les 7 erreurs qui font revenir</td><td>Créer la confiance, montrer l'expertise</td></tr>
+    <tr><td>30 → 50</td><td>4. Le plan Dubaï en 90 jours</td><td>Le cœur du live — votre terrain</td></tr>
+    <tr><td>50 → 70</td><td>5. Q&amp;A en direct</td><td>Engagement, objections</td></tr>
+    <tr><td>70 → 75</td><td>6. Appel à l'action + Partie 3</td><td>Capturer les contacts</td></tr>
+  </table>
+</div>
+
+<!-- ============ 1. PRÉPARATION ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">01 — La semaine d'avant</div>
+    <h2>Préparer le live</h2>
+  </div>
+
+  <h3>J-7 : Le sondage communauté</h3>
+  <div class="cue"><strong>[POST COMMUNAUTÉ YOUTUBE + STORY INSTAGRAM]</strong></div>
+  <div class="line a"><div class="who">Texte du post</div>
+    <p>🔥 PARTIE 2 confirmée ! Dans le premier live, on a parlé de OÙ vivre. Maintenant, on passe au COMMENT. Mais d'abord, dites-nous : vous partiriez où en 2026 ?</p>
+    <p>🇦🇪 Dubaï · 🇮🇩 Bali · 🇺🇸 USA · 🇹🇭 Thaïlande</p>
+    <p>Et posez votre question en commentaire : on répond aux plus demandées EN DIRECT 👇</p>
+  </div>
+
+  <h3>J-3 : Le teaser</h3>
+  <div class="line a"><div class="who">Texte du teaser (short / reel de 20 s)</div>
+    <p>« Vous êtes des milliers à nous avoir demandé : "OK, j'ai choisi mon pays… mais je commence par quoi ?" Dimanche, on vous donne le plan exact. Visa, budget, impôts, et les erreurs qui font revenir la moitié des expats en moins de deux ans. Activez la cloche. »</p>
+  </div>
+
+  <h3>Jour J : Checklist technique</h3>
+  <ul class="checklist">
+    <li>Résultat du sondage prêt en visuel (écran « Le verdict de la communauté »)</li>
+    <li>Tableau comparatif des 4 pays en visuel plein écran</li>
+    <li>Visuel « Les 7 erreurs » (une erreur par écran)</li>
+    <li>Frise « Plan Dubaï 90 jours » (J1-30 / J31-60 / J61-90)</li>
+    <li>Lien de la checklist gratuite prêt à épingler dans le chat</li>
+    <li>Top 12 des questions de la Partie 1 et du sondage, triées</li>
+    <li>QR code vers la checklist, affichable à l'écran</li>
+    <li>Test son, lumière, connexion 30 min avant</li>
+  </ul>
+</div>
+
+<!-- ============ ÉCRAN D'ATTENTE + HOOK ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">02 — De -15 à 5 minutes</div>
+    <h2>Écran d'attente &amp; hook</h2>
+  </div>
+
+  <div class="timing">-15:00 → 00:00</div>
+  <div class="cue"><strong>[ÉCRAN]</strong> Visuel fixe « LIVE DANS QUELQUES MINUTES — Où vivre en 2026 ? Partie 2 » + musique douce. <strong>[CHAT]</strong> Message épinglé : « Dites-nous d'où vous nous regardez 🌍 et où vous rêvez de vivre ! »</div>
+  <div class="cue"><strong>[RÉGIE]</strong> Le co-animateur répond déjà dans le chat : « Bienvenue ! On démarre dans 5 min 🔥 »</div>
+
+  <div class="timing">00:00 → 05:00 — Le hook</div>
+  <div class="cue"><strong>[ÉCRAN]</strong> Les deux animateurs face caméra. Énergie haute dès la première seconde. Pas de « euh, on attend que les gens arrivent ».</div>
+
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Dans le dernier live, on vous a posé une question simple : où vivre en 2026 ? Et vous avez été des milliers à répondre. Dubaï, Bali, les États-Unis, la Thaïlande…</p>
+    <p>Mais on a reçu un message qui revenait sans arrêt. Toujours le même. Je vous le lis :</p>
+    <p><em>« OK, j'ai choisi. Mais concrètement… je commence par quoi ? »</em></p>
+    <p>Eh bien aujourd'hui, c'est exactement ce qu'on fait. Bienvenue dans la Partie 2 !</p>
+  </div>
+
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Et on vous prévient : aujourd'hui, on ne vend pas du rêve. Le rêve, c'était la Partie 1. Aujourd'hui, c'est le concret : les visas, le budget réel, les impôts, et surtout les erreurs qui font que beaucoup de gens rentrent au bout d'un an ou deux.</p>
+  </div>
+
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Voilà le programme. Un : on fait le match final des quatre destinations, avec les vrais chiffres. Deux : les sept erreurs qui font revenir les expatriés. Trois : notre plan d'installation à Dubaï en 90 jours, étape par étape. Et à la fin, on répond à VOS questions en direct.</p>
+    <p>Et restez jusqu'au bout, parce qu'on vous offre la checklist complète qu'on utilise avec nos clients pour s'installer.</p>
+  </div>
+
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Avant de commencer : écrivez dans le chat d'où vous nous regardez. Je vois déjà Paris, Bruxelles, Montréal, Casablanca… Et si ce live vous aide, un petit like, ça pousse la vidéo à plus de monde. Merci !</p>
+  </div>
+
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Et d'ailleurs, on vous avait demandé de voter cette semaine. Le verdict de la communauté…</p>
+  </div>
+  <div class="cue"><strong>[ÉCRAN]</strong> Résultat du sondage en plein écran. <strong>[RÉGIE]</strong> Petit effet sonore.</div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>[Commentez le résultat réel.] Intéressant ! On va voir si le vainqueur mérite vraiment sa place.</p>
+  </div>
+</div>
+
+<!-- ============ 2. LE MATCH ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">03 — De 5 à 20 minutes</div>
+    <h2>Le match des 4 destinations</h2>
+  </div>
+
+  <div class="cue"><strong>[ÉCRAN]</strong> Tableau comparatif en plein écran pendant l'introduction, puis une carte par pays.</div>
+
+  <table>
+    <tr><th>Critère</th><th>🇦🇪 Dubaï</th><th>🇮🇩 Bali</th><th>🇺🇸 USA</th><th>🇹🇭 Thaïlande</th></tr>
+    <tr><td>Visa longue durée</td><td>Remote work, freelance, investisseur, Golden Visa 10 ans</td><td>Visa « remote worker » (E33G), second home</td><td>E-2 investisseur, EB-5, visas de travail</td><td>DTV (5 ans), LTR (10 ans)</td></tr>
+    <tr><td>Impôt sur le revenu</td><td>0 % pour les particuliers</td><td>Progressif si résident fiscal</td><td>Fédéral + État (0 % d'État en Floride, Texas)</td><td>Progressif, revenus étrangers rapatriés taxables</td></tr>
+    <tr><td>Achat immobilier</td><td>Pleine propriété dans les zones « freehold »</td><td>Pas de pleine propriété : bail long (leasehold)</td><td>Libre</td><td>Terrain interdit, condo autorisé</td></tr>
+    <tr><td>Sécurité</td><td>Très élevée</td><td>Bonne</td><td>Variable selon la ville</td><td>Bonne</td></tr>
+    <tr><td>Coût de la vie</td><td>Élevé</td><td>Faible à moyen</td><td>Élevé (santé très chère)</td><td>Faible</td></tr>
+    <tr><td>Idéal pour</td><td>Entrepreneurs, investisseurs, familles</td><td>Créatifs, nomades, petit budget</td><td>Gros projets business</td><td>Nomades, retraités, qualité de vie</td></tr>
+  </table>
+
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Voilà le tableau qu'on aurait aimé avoir quand on est parti. On le prend pays par pays, et je vous donne à chaque fois trois choses : comment rester légalement, combien ça coûte vraiment, et pour qui c'est fait. Et je vais être honnête : même sur Dubaï, qui est notre terrain.</p>
+  </div>
+
+  <h3>Carte 1 — Dubaï (5:00 → 9:00)</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Dubaï d'abord. Le gros argument, tout le monde le connaît : pas d'impôt sur le revenu pour les particuliers. Mais attention, zéro impôt à Dubaï ne veut pas dire zéro impôt en France. Il faut réellement quitter la France fiscalement, on en reparle dans les erreurs.</p>
+    <p>Côté visa, vous avez plusieurs portes : le visa de travail à distance si vous êtes salarié ou freelance avec un revenu minimum, la création de société qui vous donne un visa, et le Golden Visa de 10 ans, accessible notamment via un investissement immobilier à partir de 2 millions de dirhams, soit autour de 500 000 euros.</p>
+  </div>
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Et le coût de la vie ? Parce que c'est ce que tout le monde dit : « Dubaï, c'est hors de prix ».</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>C'est cher sur le logement, oui. Le loyer, c'est le gros poste. Par contre, vous ne payez pas d'impôt sur votre salaire, et la TVA est à 5 %. Donc pour quelqu'un qui gagne bien sa vie, le calcul est souvent gagnant. Pour quelqu'un qui part avec un petit budget et sans revenu, Dubaï n'est pas la bonne première étape. Je préfère vous le dire.</p>
+    <p><strong>Pour qui :</strong> entrepreneurs, investisseurs, familles qui veulent la sécurité et de bonnes écoles.</p>
+  </div>
+
+  <h3>Carte 2 — Bali (9:00 → 12:30)</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Bali. La carte postale. Et c'est vrai que la qualité de vie peut être incroyable pour un budget bien plus faible qu'en Europe.</p>
+    <p>Pour rester, l'Indonésie a un visa « remote worker » qui demande de justifier un revenu annuel élevé venant de l'étranger, et un visa « second home » qui demande de bloquer une somme importante en banque.</p>
+    <p>Mais le point que personne ne dit : en tant qu'étranger, vous ne pouvez pas acheter un terrain en pleine propriété. Vous achetez un bail, souvent 25 ou 30 ans. Et beaucoup de gens se font piéger avec des montages à prête-nom, qui sont risqués juridiquement.</p>
+  </div>
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Donc Bali pour vivre, oui. Pour investir, prudence.</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Exactement. <strong>Pour qui :</strong> créatifs, nomades digitaux, personnes qui veulent ralentir. Pas idéal pour une famille avec besoin d'écoles internationales à petit budget, ni pour un premier investissement.</p>
+  </div>
+
+  <h3>Carte 3 — USA (12:30 → 16:00)</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Les États-Unis. Le rêve américain, les opportunités business énormes… mais le visa, c'est le parcours du combattant.</p>
+    <p>Pour un entrepreneur français, la voie classique, c'est le visa E-2 : vous investissez une somme « substantielle » dans une entreprise américaine que vous dirigez. La France fait partie des pays éligibles. Il y a aussi le EB-5 qui donne la carte verte, mais on parle de centaines de milliers de dollars d'investissement.</p>
+  </div>
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Et les impôts ?</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Impôt fédéral pour tout le monde, plus l'impôt de l'État. Et là, astuce : certains États comme la Floride ou le Texas n'ont pas d'impôt d'État sur le revenu. Mais le vrai piège aux USA, c'est la santé. Sans bonne assurance, une hospitalisation peut vous ruiner.</p>
+    <p><strong>Pour qui :</strong> entrepreneurs avec un vrai projet et du capital, qui visent un grand marché.</p>
+  </div>
+
+  <h3>Carte 4 — Thaïlande (16:00 → 19:00)</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>La Thaïlande a été la grosse surprise de ces dernières années. Elle a lancé le visa DTV : un visa de 5 ans pour les travailleurs à distance et freelances, avec des séjours longs, en justifiant une épargne minimum. Il y a aussi le visa LTR de 10 ans pour les profils plus aisés.</p>
+    <p>Le coût de la vie est bas, la santé privée est excellente et abordable. Par contre, deux points d'attention. Un : un étranger ne peut pas posséder de terrain, seulement un appartement en condominium. Deux : la Thaïlande taxe désormais les revenus étrangers que vous rapatriez dans le pays si vous y êtes résident fiscal.</p>
+    <p><strong>Pour qui :</strong> nomades, retraités, personnes qui veulent une excellente qualité de vie pour un budget raisonnable.</p>
+  </div>
+
+  <h3>Le verdict (19:00 → 20:00)</h3>
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Alors, verdict ? Si tu devais choisir pour quelqu'un qui nous regarde là, maintenant ?</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Il n'y a pas de meilleur pays. Il y a le meilleur pays <em>pour votre situation</em>. Petit budget et envie de liberté : Thaïlande ou Bali. Gros projet business et du capital : USA. Vous voulez construire un patrimoine, payer moins d'impôts légalement et vivre en sécurité avec votre famille : Dubaï.</p>
+    <p>Écrivez dans le chat votre situation en une phrase, et on vous dit en direct quel pays on vous conseillerait.</p>
+  </div>
+  <div class="cue"><strong>[CHAT]</strong> Le co-animateur lit 2 ou 3 réponses et l'animatrice répond en 15 secondes chacune.</div>
+</div>
+
+<!-- ============ 3. LES 7 ERREURS ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">04 — De 20 à 30 minutes</div>
+    <h2>Les 7 erreurs qui font revenir</h2>
+  </div>
+
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Maintenant, la partie que je préfère. Parce qu'on en voit passer, des gens qui partent… et qui reviennent. Et c'est presque toujours pour les mêmes raisons. Voici les sept erreurs.</p>
+  </div>
+  <div class="cue"><strong>[ÉCRAN]</strong> Un visuel par erreur. Environ 1 min 20 par erreur.</div>
+
+  <h3>Erreur n°1 — Partir sans revenu</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Partir en se disant « je trouverai sur place ». Parfois ça marche. Souvent, les économies fondent en six mois. Règle d'or : partez avec un revenu déjà en place, ou au minimum douze mois de dépenses de côté.</p>
+  </div>
+
+  <h3>Erreur n°2 — Croire qu'on n'est plus imposable en France</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>C'est la plus coûteuse. Ce n'est pas parce que vous vivez à Dubaï que vous n'êtes plus résident fiscal français. La France regarde où est votre foyer, où vous travaillez, et où sont vos intérêts économiques. Si votre famille, votre entreprise ou vos revenus restent en France, le fisc peut considérer que vous êtes toujours résident. Faites-vous accompagner par un fiscaliste avant de partir.</p>
+  </div>
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Et la règle des 183 jours ?</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>C'est un critère parmi d'autres, pas une formule magique. Et si vous détenez des parts de société importantes, renseignez-vous aussi sur l'« exit tax ».</p>
+  </div>
+
+  <h3>Erreur n°3 — Acheter trop vite</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Et je le dis alors que l'immobilier, c'est notre métier : n'achetez pas le premier mois. Louez d'abord, vivez le quartier, comprenez le marché. Les meilleurs achats se font quand on connaît le terrain.</p>
+  </div>
+
+  <h3>Erreur n°4 — Sous-estimer le budget d'installation</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Caution, frais d'agence, visa, assurance santé, voiture, écoles… Les trois premiers mois coûtent souvent deux à trois fois plus qu'un mois « normal ». Prévoyez-le.</p>
+  </div>
+
+  <h3>Erreur n°5 — Négliger l'assurance santé</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Quand on quitte la France, on quitte souvent la Sécurité sociale. Il faut une assurance internationale sérieuse. Aux USA, c'est vital. Ailleurs, c'est indispensable.</p>
+  </div>
+
+  <h3>Erreur n°6 — Rester dans la bulle des Français</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>C'est rassurant au début. Mais ceux qui réussissent leur expatriation sont ceux qui se créent un vrai réseau local et international. Les opportunités, elles sont là.</p>
+  </div>
+
+  <h3>Erreur n°7 — Partir pour fuir, pas pour construire</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>La dernière, c'est la plus humaine. Si vous partez uniquement pour fuir quelque chose, vos problèmes voyagent avec vous. Partez pour construire un projet. C'est ça qui vous fait tenir les jours difficiles.</p>
+  </div>
+
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Dites-nous dans le chat : laquelle de ces erreurs vous avez déjà faite, ou failli faire ? Mettez juste le numéro.</p>
+  </div>
+  <div class="cue"><strong>[CHAT]</strong> Lire quelques réponses. <strong>[RÉGIE]</strong> Épingler le premier message CTA (voir section « Messages à épingler »).</div>
+</div>
+
+<!-- ============ 4. PLAN DUBAÏ 90 JOURS ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">05 — De 30 à 50 minutes</div>
+    <h2>Le plan Dubaï en 90 jours</h2>
+  </div>
+
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>On arrive au cœur du live. Beaucoup d'entre vous ont voté Dubaï, et c'est là qu'on vit et qu'on travaille tous les jours. Donc je vais vous donner exactement le plan qu'on suit avec nos clients. Trois phases de 30 jours.</p>
+  </div>
+  <div class="cue"><strong>[ÉCRAN]</strong> Frise 90 jours. Mettre en surbrillance la phase en cours.</div>
+
+  <h3>Phase 1 — Jours 1 à 30 : préparer depuis chez vous (30:00 → 36:00)</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Avant même de prendre l'avion, quatre choses.</p>
+    <p><strong>Un : choisir votre porte d'entrée.</strong> Salarié, freelance, créateur d'entreprise ou investisseur ? Ça détermine votre visa. Si vous avez un employeur à distance, le visa de travail à distance. Si vous avez une activité, la création de société en zone franche ou sur le territoire, qui vous donne votre visa de résident.</p>
+    <p><strong>Deux : le rendez-vous fiscaliste.</strong> On l'a dit dans les erreurs. C'est maintenant qu'on organise votre départ fiscal de France, pas après.</p>
+    <p><strong>Trois : les documents.</strong> Passeport valide, diplômes, actes de naissance et de mariage, parfois légalisés ou apostillés selon les cas. Ça prend du temps, commencez tôt.</p>
+    <p><strong>Quatre : le budget.</strong> On fait le calcul complet : visa, logement, caution, assurance, écoles si vous avez des enfants.</p>
+  </div>
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Et pour les enfants, les écoles, c'est compliqué d'avoir une place ?</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Dans les écoles les plus demandées, il y a des listes d'attente. Donc si vous avez des enfants, les inscriptions se font pendant cette phase 1. N'attendez pas d'être sur place.</p>
+  </div>
+
+  <h3>Phase 2 — Jours 31 à 60 : l'atterrissage (36:00 → 43:00)</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Vous arrivez. Là, l'ordre est important.</p>
+    <p><strong>Un : le logement temporaire.</strong> Un mois en location courte durée, le temps de visiter les quartiers. Dubai Marina, Downtown, JVC, Dubai Hills… chaque quartier a une vie complètement différente.</p>
+    <p><strong>Deux : le visa et l'Emirates ID.</strong> Visite médicale, prise d'empreintes, et vous recevez votre carte d'identité émiratie. C'est la clé de tout le reste.</p>
+    <p><strong>Trois : le compte bancaire.</strong> Avec l'Emirates ID, vous ouvrez votre compte local. Venez avec justificatifs de revenus et de domicile, les banques sont exigeantes.</p>
+    <p><strong>Quatre : le bail longue durée.</strong> Une fois le quartier choisi, vous signez un bail annuel. À Dubaï, on paie souvent le loyer en plusieurs chèques sur l'année, c'est négociable.</p>
+  </div>
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Question qui revient beaucoup dans le chat : on peut ouvrir un compte bancaire avant d'avoir le visa ?</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Certaines banques proposent des comptes pour non-résidents, mais c'est plus limité. Le plus simple, c'est d'attendre l'Emirates ID. Ça va vite une fois le visa lancé.</p>
+  </div>
+
+  <h3>Phase 3 — Jours 61 à 90 : construire (43:00 → 50:00)</h3>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Vous êtes installé. Maintenant, on construit.</p>
+    <p><strong>Un : le réseau.</strong> Événements business, associations d'entrepreneurs, clubs de sport. À Dubaï, beaucoup de choses se font par recommandation.</p>
+    <p><strong>Deux : le permis de conduire.</strong> Selon votre nationalité, vous pouvez convertir votre permis. Pour un permis français, c'est généralement simple.</p>
+    <p><strong>Trois : réfléchir à l'investissement.</strong> Et là, je vous parle en tant que professionnelle de l'immobilier. Maintenant que vous connaissez les quartiers, vous pouvez envisager d'acheter : pour y vivre, ou pour louer.</p>
+  </div>
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Justement, c'est quoi la différence entre acheter sur plan et acheter un bien déjà construit ?</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Sur plan, ce qu'on appelle « off-plan » : vous achetez un bien qui n'est pas encore construit. Avantage : un prix d'entrée souvent plus bas et un paiement étalé, avec un acompte au départ et le reste pendant la construction, parfois même après la livraison. Inconvénient : vous attendez, et vous dépendez du sérieux du promoteur. D'où l'importance de choisir des promoteurs reconnus et de vérifier que les fonds passent par un compte séquestre.</p>
+    <p>Le bien déjà construit, le « ready » : vous pouvez l'habiter ou le louer tout de suite, donc des revenus immédiats. Mais il faut payer plus au départ.</p>
+    <p>Et dans les deux cas, prévoyez les frais d'enregistrement auprès du Dubai Land Department, autour de 4 % du prix, plus les frais d'agence.</p>
+  </div>
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Et le fameux Golden Visa par l'immobilier ?</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>À partir d'un investissement immobilier d'environ 2 millions de dirhams, vous pouvez prétendre au Golden Visa de 10 ans, pour vous et votre famille. C'est un vrai plus pour la stabilité. On en fera d'ailleurs un live dédié.</p>
+  </div>
+
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Voilà le plan. Et tout ce que je viens de dire, étape par étape, avec les documents, les délais et les pièges, on l'a mis dans une checklist. Elle est gratuite, le lien est épinglé dans le chat.</p>
+  </div>
+  <div class="cue"><strong>[ÉCRAN]</strong> QR code + « Checklist gratuite : S'installer à Dubaï en 90 jours » pendant 20 secondes. <strong>[RÉGIE]</strong> Épingler le lien.</div>
+</div>
+
+<!-- ============ 5. Q&A ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">06 — De 50 à 70 minutes</div>
+    <h2>Questions &amp; réponses en direct</h2>
+  </div>
+
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>On passe à vos questions ! J'ai sélectionné les plus demandées depuis la Partie 1, et je prends aussi celles qui arrivent en direct.</p>
+  </div>
+  <div class="cue"><strong>[RÉGIE]</strong> Priorité aux questions du chat en direct. Utiliser les questions ci-dessous pour relancer quand le chat est calme. Réponses courtes : 60 à 90 secondes maximum.</div>
+
+  <div class="qa"><div class="q"><span>Q1</span>Quel budget minimum pour s'installer à Dubaï seul ?</div>
+    <div class="r">« Ça dépend énormément du quartier et du mode de vie. Mais le plus gros poste, c'est le loyer, qu'on paie à l'année. Mon conseil : calculez un an de loyer, plus trois mois de dépenses de vie, plus le coût du visa et de l'installation. Et partez avec un revenu. On détaille le calcul dans la checklist. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q2</span>Est-ce qu'on peut vivre à Dubaï en gardant son entreprise en France ?</div>
+    <div class="r">« Techniquement oui, mais c'est justement le cas où le fisc français peut considérer que vos intérêts économiques sont restés en France. C'est typiquement le sujet à traiter avec un fiscaliste avant de partir. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q3</span>Il fait trop chaud l'été, non ?</div>
+    <div class="r">« Oui, de juin à septembre c'est très chaud, on ne va pas mentir. Tout est climatisé, et beaucoup d'expatriés rentrent en Europe une partie de l'été. En contrepartie, d'octobre à avril, le climat est parfait. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q4</span>Dubaï, c'est une bulle immobilière ?</div>
+    <div class="r">« Le marché est cyclique, il a déjà connu des corrections. C'est pour ça qu'on insiste sur trois règles : choisir le bon quartier, un promoteur solide, et investir pour le long terme, pas pour un coup rapide. Personne ne peut vous garantir l'avenir, et méfiez-vous de ceux qui le font. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q5</span>Est-ce qu'une femme peut vivre seule sereinement à Dubaï ?</div>
+    <div class="r">« Oui, et c'est l'un des retours les plus fréquents : le sentiment de sécurité, y compris le soir. Il y a des règles culturelles à respecter, comme dans tout pays, mais au quotidien la vie est très libre. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q6</span>Je suis retraité, quel pays me conseillez-vous ?</div>
+    <div class="r">« La Thaïlande est très attractive pour les retraités : coût de la vie bas, santé privée de qualité. Dubaï a aussi un visa retraité, sous conditions de revenus ou de patrimoine. Tout dépend de votre budget et de la proximité voulue avec la famille en France. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q7</span>On peut acheter à Dubaï sans y habiter ?</div>
+    <div class="r">« Oui, un étranger non-résident peut acheter en pleine propriété dans les zones ouvertes aux étrangers. Beaucoup de nos clients investissent depuis la France et font gérer la location. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q8</span>Bali, c'est encore un bon plan avec tous les touristes ?</div>
+    <div class="r">« Pour vivre, ça dépend des zones : certaines sont saturées, d'autres restent très calmes. Pour investir, soyez très prudent : bail limité dans le temps, règles qui évoluent, montages à risque. Faites-vous accompagner par un notaire local indépendant. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q9</span>Combien de temps pour obtenir un visa à Dubaï ?</div>
+    <div class="r">« Quand le dossier est complet, ça va généralement vite : quelques semaines, parfois moins. Ce qui prend du temps, c'est la préparation des documents. D'où la phase 1. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q10</span>Les USA sans gros capital, c'est possible ?</div>
+    <div class="r">« C'est difficile. Sans employeur qui vous sponsorise, sans capital et sans profil exceptionnel, les options sont limitées. Certains passent d'abord par une expérience ailleurs, construisent leur business, puis visent les USA. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q11</span>On peut partir avec des enfants en bas âge ?</div>
+    <div class="r">« Bien sûr, beaucoup de familles le font, et Dubaï est souvent cité comme très adapté aux familles. Le budget école est à prévoir sérieusement, c'est souvent le deuxième poste après le logement. »</div></div>
+
+  <div class="qa"><div class="q"><span>Q12</span>Vous regrettez d'être parti(e) ?</div>
+    <div class="r">[Réponse personnelle et sincère de l'animatrice : un moment difficile, ce qui a fait tenir, ce que ça a changé. C'est souvent le moment le plus fort du live. Ne pas le scripter mot à mot.]</div></div>
+
+  <div class="cue"><strong>[RÉGIE]</strong> Vers 60:00, relancer le CTA : « Petit rappel : la checklist est gratuite, lien épinglé. Et si vous voulez qu'on regarde votre situation personnellement, on propose un appel découverte gratuit, le lien est juste en dessous. »</div>
+</div>
+
+<!-- ============ 6. CTA & CLÔTURE ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">07 — De 70 à 75 minutes</div>
+    <h2>Appel à l'action &amp; clôture</h2>
+  </div>
+
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>On arrive à la fin, et je veux vous dire une chose. Vous êtes nombreux ce soir à rêver de partir. La différence entre ceux qui partent et ceux qui en parlent encore dans cinq ans, ce n'est pas l'argent, ce n'est pas la chance. C'est d'avoir un plan, et de faire la première étape.</p>
+  </div>
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Et la première étape, elle est simple.</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Un : téléchargez la checklist gratuite. Tout le plan de 90 jours est dedans. Le lien est épinglé et dans la description.</p>
+    <p>Deux : si vous avez un projet sérieux, installation ou investissement à Dubaï, réservez un appel découverte gratuit avec nous. On regarde votre situation, et on vous dit honnêtement si Dubaï est fait pour vous, ou pas.</p>
+  </div>
+  <div class="cue"><strong>[ÉCRAN]</strong> QR code checklist + QR code appel découverte, côte à côte.</div>
+
+  <div class="line b"><div class="who">Co-animateur</div>
+    <p>Et on vous a promis une suite…</p>
+  </div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>La Partie 3 ! Aujourd'hui on a parlé de s'installer. La prochaine fois : <strong>investir depuis l'étranger</strong>. Comment acheter à Dubaï sans y vivre, combien ça rapporte vraiment, et comment éviter les arnaques. Écrivez « PARTIE 3 » dans le chat si vous voulez qu'on le fasse vite.</p>
+  </div>
+  <div class="cue"><strong>[CHAT]</strong> Laisser le chat se remplir de « PARTIE 3 » quelques secondes, le commenter.</div>
+  <div class="line a"><div class="who">Animatrice</div>
+    <p>Merci à tous d'avoir été là. Abonnez-vous, activez la cloche, et on se retrouve très vite. Où que vous soyez dans le monde… à bientôt !</p>
+  </div>
+  <div class="cue"><strong>[RÉGIE]</strong> Écran de fin 20 secondes, puis couper le live.</div>
+</div>
+
+<!-- ============ MESSAGES & APRÈS-LIVE ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">08 — Pendant et après</div>
+    <h2>Messages chat &amp; après-live</h2>
+  </div>
+
+  <h3>Messages à épingler dans le chat</h3>
+  <ol>
+    <li><strong>Au début :</strong> « Bienvenue 🔥 Dites-nous d'où vous regardez et où vous rêvez de vivre en 2026 ! »</li>
+    <li><strong>Vers 28:00 :</strong> « 📋 CHECKLIST GRATUITE : S'installer à Dubaï en 90 jours ➜ [lien] »</li>
+    <li><strong>Vers 60:00 :</strong> « 📞 Projet sérieux ? Appel découverte gratuit ➜ [lien] »</li>
+    <li><strong>À la fin :</strong> « Écrivez PARTIE 3 si vous voulez le live sur l'investissement depuis l'étranger 👇 »</li>
+  </ol>
+
+  <h3>Titre de la rediffusion</h3>
+  <ul>
+    <li>🔥 OÙ VIVRE EN 2026 ? Partie 2 : le plan exact pour s'installer (Dubaï, Bali, USA, Thaïlande)</li>
+    <li><em>Alternatives :</em> « On a choisi… et maintenant ? Le guide concret pour partir en 2026 » · « Dubaï vs Bali vs USA vs Thaïlande : le VERDICT final »</li>
+  </ul>
+
+  <h3>Description YouTube</h3>
+  <div class="line a"><div class="who">À copier-coller</div>
+    <p>Dans la Partie 1, on a répondu à « OÙ vivre en 2026 ? ». Dans cette Partie 2, on passe au concret : visas, budget réel, fiscalité, les 7 erreurs qui font revenir les expatriés, et notre plan d'installation à Dubaï en 90 jours.</p>
+    <p>📋 Checklist gratuite « S'installer à Dubaï en 90 jours » : [lien]<br>📞 Appel découverte gratuit : [lien]<br>▶️ Partie 1 : [lien]</p>
+    <p>⚠️ Les informations de cette vidéo sont générales et ne constituent pas un conseil fiscal ou juridique. Les règles évoluent : vérifiez toujours auprès de sources officielles ou d'un professionnel.</p>
+  </div>
+
+  <h3>Chapitres</h3>
+  <p>00:00 Introduction · 05:00 Dubaï · 09:00 Bali · 12:30 USA · 16:00 Thaïlande · 19:00 Le verdict · 20:00 Les 7 erreurs · 30:00 Plan Dubaï 90 jours · 50:00 Vos questions · 70:00 La suite</p>
+  <p><em>Ajustez les minutages réels après le live (ne comptez pas l'écran d'attente).</em></p>
+
+  <h3>5 shorts / reels à découper</h3>
+  <ol>
+    <li><strong>« Zéro impôt à Dubaï ≠ zéro impôt en France »</strong> — l'erreur n°2 (fort potentiel de partage)</li>
+    <li><strong>« Pourquoi il ne faut PAS acheter le premier mois »</strong> — l'erreur n°3 (crédibilité : une agente immobilière qui dit d'attendre)</li>
+    <li><strong>« Bali : ce que personne ne vous dit sur l'achat »</strong> — le leasehold</li>
+    <li><strong>« Off-plan ou ready : lequel choisir ? »</strong> — extrait de la phase 3</li>
+    <li><strong>« Vous regrettez d'être partie ? »</strong> — la réponse personnelle (émotion = partages)</li>
+  </ol>
+
+  <h3>Post communauté le lendemain</h3>
+  <div class="line a"><div class="who">Texte</div>
+    <p>Merci pour hier soir 🙏 Vous avez été [X] en direct ! La rediffusion est dispo, avec les chapitres pour aller directement à votre pays. Et vous avez été nombreux à écrire PARTIE 3… alors c'est validé 🔥 Quelle question voulez-vous qu'on traite en priorité sur l'investissement depuis l'étranger ? 👇</p>
+  </div>
+</div>
+
+<!-- ============ FACT-CHECK ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">09 — Obligatoire avant le live</div>
+    <h2>Chiffres à vérifier</h2>
+  </div>
+
+  <div class="warn">
+    <div class="label">Pourquoi c'est important</div>
+    <p>Un chiffre faux en direct, c'est un commentaire qui vous corrige, et de la crédibilité perdue. Ces points évoluent régulièrement : vérifiez chacun sur la source officielle la semaine du live.</p>
+  </div>
+
+  <table>
+    <tr><th>Sujet</th><th>Ce que dit le script</th><th>Où vérifier</th></tr>
+    <tr><td>Golden Visa immobilier Dubaï</td><td>À partir d'environ 2 M AED (≈ 500 k€)</td><td>ICP / GDRFA Dubaï, Dubai Land Department</td></tr>
+    <tr><td>Visa travail à distance Dubaï</td><td>Revenu mensuel minimum exigé</td><td>Visit Dubai / GDRFA — montant exact</td></tr>
+    <tr><td>Frais d'enregistrement DLD</td><td>Environ 4 % du prix</td><td>Dubai Land Department</td></tr>
+    <tr><td>Fiscalité EAU</td><td>0 % impôt sur le revenu des particuliers, TVA 5 %</td><td>Federal Tax Authority (EAU)</td></tr>
+    <tr><td>Visa retraité Dubaï</td><td>Sous conditions de revenus ou patrimoine</td><td>GDRFA Dubaï — seuils actuels</td></tr>
+    <tr><td>Indonésie : remote worker &amp; second home</td><td>Revenu annuel / dépôt bancaire importants</td><td>Direction de l'immigration indonésienne — montants actuels</td></tr>
+    <tr><td>Bali : propriété étrangère</td><td>Pas de pleine propriété, bail long</td><td>Notaire local indépendant</td></tr>
+    <tr><td>USA : E-2 et EB-5</td><td>E-2 ouvert aux Français, EB-5 à plusieurs centaines de milliers de $</td><td>travel.state.gov, uscis.gov — montants EB-5 actuels</td></tr>
+    <tr><td>Thaïlande : DTV et LTR</td><td>DTV 5 ans avec épargne minimum, LTR 10 ans</td><td>Ambassade de Thaïlande / BOI Thaïlande</td></tr>
+    <tr><td>Thaïlande : revenus étrangers</td><td>Revenus rapatriés taxables si résident fiscal</td><td>Revenue Department (Thaïlande), fiscaliste</td></tr>
+    <tr><td>Résidence fiscale France</td><td>Foyer, activité, intérêts économiques</td><td>impots.gouv.fr (article 4 B du CGI)</td></tr>
+    <tr><td>Exit tax</td><td>Concerne les détenteurs de participations importantes</td><td>impots.gouv.fr — seuils actuels</td></tr>
+  </table>
+
+  <div class="intro-box">
+    <div class="label">Dernier conseil</div>
+    <p>Dites à l'antenne : <strong>« On vérifie tous nos chiffres, mais les règles changent vite. Avant de décider, faites-vous accompagner. »</strong> Ce n'est pas une faiblesse, c'est ce qui vous différencie des vendeurs de rêve. Et c'est exactement le positionnement qui donne envie de réserver un appel avec vous.</p>
+  </div>
+</div>
+
+<div class="footer">SCRIPT LIVE — OÙ VIVRE EN 2026 ? PARTIE 2</div>
+
+</body>
+</html>
