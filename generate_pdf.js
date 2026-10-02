@@ -16,6 +16,7 @@ const docs = [
   { html: 'dps_youtube_bali_strategy.html',      pdf: 'dps_youtube_bali_strategy.pdf' },
   { html: 'dps_marinaimmo_pipeline_setup.html',  pdf: 'dps_marinaimmo_pipeline_setup.pdf' },
   { html: 'marinaimmo_meta_ads_october_2026.html', pdf: 'marinaimmo_meta_ads_october_2026.pdf' },
+  { html: 'dps_meta_ads_october_2026.html',        pdf: 'dps_meta_ads_october_2026.pdf' },
 ];
 
 (async () => {
