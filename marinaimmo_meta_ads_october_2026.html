@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marina Immo Dubai — 4 Meta Ads, October 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C; --bg: #080808; --bg2: #111111; --bg3: #181818;
+    --border: #252525; --text: #E8E8E8; --muted: #888888;
+    --red: #E05555; --green: #4CAF82; --blue: #5B8FD4;
+    --teal: #3DBFB8; --purple: #9B72CF; --orange: #E07B40;
+  }
+  html { font-size: 16px; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { max-width: 900px; margin: 0 auto; padding: 56px 48px; }
+
+  /* COVER */
+  .cover { padding: 72px 0 80px; border-bottom: 1px solid var(--border); margin-bottom: 72px; position: relative; }
+  .cover-bar { position: absolute; top: 0; left: -48px; width: 4px; height: 100%; background: linear-gradient(180deg, var(--red), var(--gold), var(--teal), var(--green)); }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); margin-bottom: 24px; }
+  .cover h1 { font-size: 56px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .cover h1 span { color: var(--gold); }
+  .cover-sub { font-size: 16px; color: var(--muted); max-width: 580px; line-height: 1.75; margin-bottom: 44px; }
+  .cover-pills { display: flex; gap: 12px; flex-wrap: wrap; }
+  .pill { padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; border: 1px solid var(--border); color: var(--muted); }
+  .pill.hot { background: rgba(224,85,85,0.1); border-color: rgba(224,85,85,0.3); color: var(--red); }
+  .pill.warm { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.3); color: var(--gold); }
+  .pill.cold { background: rgba(91,143,212,0.1); border-color: rgba(91,143,212,0.3); color: var(--blue); }
+
+  /* AD CARD */
+  .ad { border-radius: 14px; overflow: hidden; margin-bottom: 48px; border: 1px solid var(--border); }
+  .ad-header { padding: 28px 32px 24px; display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+  .ad-1 .ad-header { background: linear-gradient(135deg, rgba(224,85,85,0.08), rgba(224,85,85,0.02)); border-bottom: 1px solid rgba(224,85,85,0.15); }
+  .ad-2 .ad-header { background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.02)); border-bottom: 1px solid rgba(201,168,76,0.15); }
+  .ad-3 .ad-header { background: linear-gradient(135deg, rgba(61,191,184,0.08), rgba(61,191,184,0.02)); border-bottom: 1px solid rgba(61,191,184,0.15); }
+  .ad-4 .ad-header { background: linear-gradient(135deg, rgba(76,175,130,0.08), rgba(76,175,130,0.02)); border-bottom: 1px solid rgba(76,175,130,0.15); }
+  .ad-num { font-size: 48px; font-weight: 900; letter-spacing: -0.04em; opacity: 0.12; line-height: 1; flex-shrink: 0; }
+  .ad-1 .ad-num { color: var(--red); }
+  .ad-2 .ad-num { color: var(--gold); }
+  .ad-3 .ad-num { color: var(--teal); }
+  .ad-4 .ad-num { color: var(--green); }
+  .ad-meta { flex: 1; }
+  .ad-type { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 8px; }
+  .ad-1 .ad-type { color: var(--red); }
+  .ad-2 .ad-type { color: var(--gold); }
+  .ad-3 .ad-type { color: var(--teal); }
+  .ad-4 .ad-type { color: var(--green); }
+  .ad-title { font-size: 22px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 8px; }
+  .ad-goal { font-size: 13px; color: var(--muted); }
+
+  .ad-body { padding: 28px 32px; background: var(--bg3); display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .ad-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+
+  /* HOOK DISPLAY */
+  .hook-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; margin-bottom: 0; }
+  .hook-timer { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .hook-timer::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .hook-text { font-size: 15px; font-weight: 800; line-height: 1.45; letter-spacing: -0.01em; font-style: italic; }
+  .hook-text.red { color: var(--red); }
+  .hook-text.gold { color: var(--gold); }
+  .hook-text.teal { color: var(--teal); }
+  .hook-text.green { color: var(--green); }
+
+  /* SCRIPT */
+  .script-block { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; line-height: 1.8; color: var(--muted); }
+  .script-block strong { color: var(--text); }
+  .script-block .cta-line { margin-top: 10px; font-weight: 700; }
+  .ad-1 .script-block .cta-line { color: var(--red); }
+  .ad-2 .script-block .cta-line { color: var(--gold); }
+  .ad-3 .script-block .cta-line { color: var(--teal); }
+  .ad-4 .script-block .cta-line { color: var(--green); }
+
+  /* SPECS PANEL */
+  .specs { padding: 20px 32px; background: var(--bg2); border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .spec { }
+  .spec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .spec-value { font-size: 13px; font-weight: 600; line-height: 1.4; }
+  .ad-1 .spec-value { color: var(--red); }
+  .ad-2 .spec-value { color: var(--gold); }
+  .ad-3 .spec-value { color: var(--teal); }
+  .ad-4 .spec-value { color: var(--green); }
+
+  /* WHY BOX */
+  .why-box { padding: 18px 32px; border-top: 1px solid var(--border); background: var(--bg3); font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .why-box strong { color: var(--text); }
+
+  /* ALGO NOTES */
+  .algo { background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--purple); border-radius: 8px; padding: 20px 24px; margin-bottom: 48px; }
+  .algo-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
+  .algo p { font-size: 13px; color: var(--muted); line-height: 1.75; }
+  .algo strong { color: var(--text); }
+
+  /* BUDGET */
+  .budget { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
+  .bcard { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
+  .bcard-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .bcard-value { font-size: 22px; font-weight: 900; letter-spacing: -0.02em; }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+  .footer-brand { font-size: 20px; font-weight: 900; }
+  .footer-brand span { color: var(--gold); }
+  .footer-meta { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+
+  @media print { .cover { padding: 48px 0 56px; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="cover">
+    <div class="cover-bar"></div>
+    <div class="eyebrow">Marina Immo Dubai — Meta Ads · Octobre 2026</div>
+    <h1>4 Ads.<br><span>Octobre.</span><br>Lancez.</h1>
+    <p class="cover-sub">Marché étudié. Algorithme analysé. Quatre créatives pensées pour le seul mois de l'année où les investisseurs francophones reviennent à Dubaï avec du budget et l'intention d'agir.</p>
+    <div class="cover-pills">
+      <span class="pill hot">Retargeting chaud</span>
+      <span class="pill warm">Lookalike tiède</span>
+      <span class="pill cold">Audience froide</span>
+      <span class="pill">Reels · Carrousel · Vidéo</span>
+      <span class="pill">Français · GCC + Europe</span>
+    </div>
+  </div>
+
+  <!-- ALGO NOTES -->
+  <div class="algo">
+    <div class="algo-label">Meta Algorithm — Octobre 2026 : Ce qui a changé</div>
+    <p><strong>Reels dominent à 68% de reach organique et payant.</strong> Les vidéos statiques et images perdent en distribution depuis Q2 2026 — Meta pousse activement les formats verticaux dans le feed. <strong>Le hook des 3 premières secondes</strong> détermine 80% des performances : si l'utilisateur scroll avant 3s, Meta réduit immédiatement la distribution. <strong>L'audience large (broad) + test créatif</strong> bat systématiquement le ciblage intérêt granulaire — Meta's AI trouve votre client mieux que vous depuis début 2026. <strong>Octobre = CPM élevé</strong> (Q4 budget saison, +25–40% vs été) mais intent d'achat au maximum de l'année. C'est le mois où les investisseurs agissent, pas ceux où ils réfléchissent. <strong>Une réalité de terrain dans le hook</strong> ("18% → réalité 11%") surperforme les promesses de +300% en moyenne sur cette audience.</p>
+  </div>
+
+  <!-- AD 1 -->
+  <div class="ad ad-1">
+    <div class="ad-header">
+      <div class="ad-meta">
+        <div class="ad-type">Ad 01 — Reel Vertical · Froid · Awareness + Abonnés</div>
+        <div class="ad-title">"L'agent m'a dit 18%.<br>La réalité après 12 mois : 6,2%."</div>
+        <div class="ad-goal">Objectif : Notoriété + trafic chaîne YouTube · Audience : Investisseurs francophones froids · France / Belgique / Suisse / Maroc / Expats UAE</div>
+      </div>
+      <div class="ad-num">1</div>
+    </div>
+    <div class="ad-body">
+      <div>
+        <div class="ad-section-label">Hook — Secondes 0 à 3</div>
+        <div class="hook-box">
+          <div class="hook-timer">0:00 → 0:03 · Face caméra · Pas de musique</div>
+          <div class="hook-text red">"Mon agent Bali m'a promis 18% de rendement. Voici les vrais chiffres 12 mois plus tard."</div>
+        </div>
+      </div>
+      <div>
+        <div class="ad-section-label">Script Complet (45 secondes)</div>
+        <div class="script-block">
+          <strong>[0:03–0:12]</strong> Toi face caméra, tableau ou téléphone montrant deux colonnes : "Promis" vs "Réel". Montre la différence sans honte — frais OTA, gestion, taxes, vacance.<br><br>
+          <strong>[0:12–0:35]</strong> "Canggu, 4 chambres, 245.000€. L'agent disait 18% brut. Après la commission Airbnb, la gestion, les charges et la taxe de retenue à la source — 6,2% net réel. Pas une arnaque — personne ne vous dit juste la vérité."<br><br>
+          <strong>[0:35–0:45]</strong> "J'ai fait la même analyse sur 11 propriétés. Résultats complets en commentaire — lien vers la vidéo complète."
+          <div class="cta-line">CTA : "Commente CHIFFRES et je t'envoie le tableau complet."</div>
+        </div>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 45s · Face caméra</div></div>
+      <div class="spec"><div class="spec-label">Ciblage</div><div class="spec-value">Large + langue française · âge 32–58</div></div>
+      <div class="spec"><div class="spec-label">Objectif</div><div class="spec-value">Trafic vidéo / Vues</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">€15/jour · 14 jours</div></div>
+    </div>
+    <div class="why-box"><strong>Pourquoi ça marche en octobre :</strong> Les investisseurs rentrent de vacances avec l'intention d'agir avant fin d'année. Une réalité chiffrée sur Bali stoppe le scroll immédiatement. Le hook fonctionne car il valide une peur existante ("et si j'avais été trompé ?"). La mécanique "commente CHIFFRES" boost l'engagement algorithmique et génère des leads qualifiés en DM — Meta distribue massivement les vidéos avec des commentaires dans les premières heures.</div>
+  </div>
+
+  <!-- AD 2 -->
+  <div class="ad ad-2">
+    <div class="ad-header">
+      <div class="ad-meta">
+        <div class="ad-type">Ad 02 — Carrousel · Tiède · Lead Gen Dubaï Q4</div>
+        <div class="ad-title">"Dubaï Q4 2026 : les 3 off-plans<br>sold out avant janvier."</div>
+        <div class="ad-goal">Objectif : Leads WhatsApp pour consultations immobilières Dubai · Audience : Retargeting vidéos + Lookalike acheteurs Dubai · Expats francophones UAE + Europe</div>
+      </div>
+      <div class="ad-num">2</div>
+    </div>
+    <div class="ad-body">
+      <div>
+        <div class="ad-section-label">Hook — Carte 1 (image carrousel)</div>
+        <div class="hook-box">
+          <div class="hook-timer">Carte 1 · Texte gros plan · Pas de visuel propriété</div>
+          <div class="hook-text gold">"3 projets off-plan à Dubaï que les agents francophones ne vous montrent pas. Q4 2026 — fenêtre 6 semaines."</div>
+        </div>
+      </div>
+      <div>
+        <div class="ad-section-label">Structure Carrousel (5 cartes)</div>
+        <div class="script-block">
+          <strong>Carte 1 :</strong> Hook texte (ci-dessus). Fond sombre, texte or. Accroche pure.<br><br>
+          <strong>Carte 2–4 :</strong> Un projet par carte. Format identique : nom du projet · zone · prix d'entrée · rendement locatif projeté (honnête) · statut : "Unités restantes : 12". Visuel propre du projet.<br><br>
+          <strong>Carte 5 :</strong> Face caméra photo. Texte : "Je fais la même analyse pour toi gratuitement — 20 minutes sur WhatsApp avant le 31 octobre."
+          <div class="cta-line">CTA : Bouton "Envoyer un message" → WhatsApp direct. Message pré-rempli : "Je veux l'analyse Q4 Dubaï".</div>
+        </div>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Carrousel 1:1 · 5 cartes · Canva</div></div>
+      <div class="spec"><div class="spec-label">Ciblage</div><div class="spec-value">Retargeting 60j + Lookalike 1%</div></div>
+      <div class="spec"><div class="spec-label">Objectif</div><div class="spec-value">Messages WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">€25/jour · 21 jours</div></div>
+    </div>
+    <div class="why-box"><strong>Pourquoi ça marche en octobre :</strong> GITEX est en cours — 100.000+ décideurs business à Dubaï. Les expatriés francophones qui rentrent en octobre cherchent à placer du capital avant la fin d'exercice fiscal. La scarcité ("6 semaines") est réelle : les off-plans Q4 clôturent fin novembre. La consultation WhatsApp gratuite est le tunnel le plus court vers une commission de référence (3–5% sur une vente = AED 15.000–50.000).</div>
+  </div>
+
+  <!-- AD 3 -->
+  <div class="ad ad-3">
+    <div class="ad-header">
+      <div class="ad-meta">
+        <div class="ad-type">Ad 03 — Reel Vertical · Chaud · Conversion Voyage Investisseurs</div>
+        <div class="ad-title">"Bali — Décembre 2026.<br>2 places restantes sur 10."</div>
+        <div class="ad-goal">Objectif : Vente directe voyage investisseurs €4.200/personne · Audience : Retargeting chaud — vues 75%+ vidéos Bali + visiteurs site</div>
+      </div>
+      <div class="ad-num">3</div>
+    </div>
+    <div class="ad-body">
+      <div>
+        <div class="ad-section-label">Hook — Secondes 0 à 3</div>
+        <div class="hook-box">
+          <div class="hook-timer">0:00 → 0:03 · B-roll Bali + voix off · Pas de musique</div>
+          <div class="hook-text teal">"8 investisseurs francophones ont déjà réservé. Il reste 2 places pour Bali en décembre."</div>
+        </div>
+      </div>
+      <div>
+        <div class="ad-section-label">Script (60 secondes)</div>
+        <div class="script-block">
+          <strong>[0:03–0:20]</strong> B-roll Bali tourné lors d'un vrai trip (propriétés, couchers de soleil, réunions avec développeurs). Voix over : "5 jours. 10 propriétés vérifiées. Un avocat indonésien francophone. Les vrais chiffres des propriétaires actuels."<br><br>
+          <strong>[0:20–0:45]</strong> Coupe sur toi, face caméra : "Ce voyage n'est pas un séjour touristique. C'est 5 jours de due diligence accéléré avec des gens qui ont les mêmes questions que toi. 8 personnes l'ont déjà compris. 3 d'entre elles ont acheté dans les 60 jours après."<br><br>
+          <strong>[0:45–1:00]</strong> "Lien en bio — formulaire de 3 questions. Je te réponds dans 24h pour confirmer ta place."
+          <div class="cta-line">CTA : "Je réserve ma place" → landing page avec formulaire de 3 questions.</div>
+        </div>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 60s · B-roll + face cam</div></div>
+      <div class="spec"><div class="spec-label">Ciblage</div><div class="spec-value">Retargeting chaud · vues 75%+ seulement</div></div>
+      <div class="spec"><div class="spec-label">Objectif</div><div class="spec-value">Trafic → landing page</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">€20/jour · 30 jours</div></div>
+    </div>
+    <div class="why-box"><strong>Pourquoi ça marche en octobre :</strong> Cibler uniquement les personnes qui ont regardé 75%+ de tes vidéos Bali = audience ultra-qualifiée qui te fait déjà confiance. La scarcité "2 places restantes" est authentique et urgente. Décembre est le timing parfait — après GITEX, avant les fêtes, les investisseurs ont leur bonus Q3 et un billet Dubaï → Bali vaut le déplacement. Le ROI de l'ad : une seule vente = €4.200 + 2–3 commissions de propriété à €6.000–10.000 chacune.</div>
+  </div>
+
+  <!-- AD 4 -->
+  <div class="ad ad-4">
+    <div class="ad-header">
+      <div class="ad-meta">
+        <div class="ad-type">Ad 04 — Vidéo · Tiède → Chaud · Conversion Club Investisseurs</div>
+        <div class="ad-title">"Ce que j'envoie à mes 200 membres<br>avant de le poster publiquement."</div>
+        <div class="ad-goal">Objectif : Abonnements Club Investisseurs €99/mois · Audience : Retargeting 30 jours + Lookalike abonnés newsletter</div>
+      </div>
+      <div class="ad-num">4</div>
+    </div>
+    <div class="ad-body">
+      <div>
+        <div class="ad-section-label">Hook — Secondes 0 à 3</div>
+        <div class="hook-box">
+          <div class="hook-timer">0:00 → 0:03 · Écran téléphone visible + voix directe</div>
+          <div class="hook-text green">"Hier soir j'ai envoyé ça à mes membres. Aujourd'hui c'est public. Voilà ce que tu rates chaque semaine."</div>
+        </div>
+      </div>
+      <div>
+        <div class="ad-section-label">Script (45 secondes)</div>
+        <div class="script-block">
+          <strong>[0:03–0:20]</strong> Montre l'écran de téléphone (WhatsApp du groupe ou message) avec un vrai deal alert floutté partiellement. Pas besoin de montrer les détails — la preuve que ça existe suffit. Voix : "Chaque semaine, avant que ça parte dans la chaîne publique, mes membres reçoivent : l'alerte deal, l'analyse honnête, et mes questions à poser au développeur."<br><br>
+          <strong>[0:20–0:40]</strong> Face caméra : "Ce n'est pas un groupe Telegram avec 10.000 personnes. C'est 200 investisseurs francophones sérieux. On fait des Q&amp;A mensuels en direct. Et 3 d'entre eux étaient dans le voyage Bali de septembre."<br><br>
+          <strong>[0:40–0:45]</strong> "€99 par mois. Tu peux annuler demain. Lien en bio."
+          <div class="cta-line">CTA : "Rejoindre le Club" → page de vente avec témoignages membres.</div>
+        </div>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Vidéo 9:16 · 45s · Téléphone + face</div></div>
+      <div class="spec"><div class="spec-label">Ciblage</div><div class="spec-value">Retargeting 30j + Lookalike newsletter</div></div>
+      <div class="spec"><div class="spec-label">Objectif</div><div class="spec-value">Conversion abonnement</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">€15/jour · 30 jours</div></div>
+    </div>
+    <div class="why-box"><strong>Pourquoi ça marche en octobre :</strong> Le hook "ce que tu rates" active la FOMO sans être agressif — il montre une réalité (les membres ont eu l'info en premier) plutôt que de la promettre. L'audience retargeting 30 jours te connaît déjà : le seul obstacle est le passage à l'acte. "€99 / annulable demain" retire la friction d'engagement. Un Club à 200 membres = €19.800/mois récurrent — cette ad se rentabilise avec 2 nouveaux abonnés.</div>
+  </div>
+
+  <!-- BUDGET SUMMARY -->
+  <div style="margin-bottom:48px;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;">Budget Mensuel Total<span style="flex:1;height:1px;background:var(--border);display:block;"></span></div>
+    <div class="budget">
+      <div class="bcard"><div class="bcard-label">Ad 1 — Awareness</div><div class="bcard-value" style="color:var(--red);">€210</div></div>
+      <div class="bcard"><div class="bcard-label">Ad 2 — Dubai Leads</div><div class="bcard-value" style="color:var(--gold);">€525</div></div>
+      <div class="bcard"><div class="bcard-label">Ad 3 — Voyage Bali</div><div class="bcard-value" style="color:var(--teal);">€600</div></div>
+      <div class="bcard"><div class="bcard-label">Ad 4 — Club</div><div class="bcard-value" style="color:var(--green);">€450</div></div>
+    </div>
+    <div style="background:rgba(76,175,130,0.06);border:1px solid rgba(76,175,130,0.2);border-radius:10px;padding:20px 24px;font-size:14px;color:var(--muted);line-height:1.75;">
+      <strong style="color:var(--text);">Budget total : €1.785/mois.</strong> Un seul abonné Club = €99. Une seule consultation WhatsApp Dubai convertie en vente = commission minimale €5.000. Une place Voyage Bali vendue = €4.200 + commissions. <strong style="color:var(--green);">Le seuil de rentabilité de la campagne entière est atteint avec une seule transaction.</strong>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">Marina Immo <span>Dubai</span></div>
+    <div class="footer-meta">Campagne Meta — Octobre 2026<br>4 créatives · €1.785 budget total · Lancez avant le 7 octobre</div>
+  </div>
+
+</div>
+</body>
+</html>
