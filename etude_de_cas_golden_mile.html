@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Étude de cas — Golden Mile, Palm Jumeirah</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #fafaf8; color: #1a1a1a; line-height: 1.75; }
+
+  .cover { background: #1a1a1a; color: #fff; padding: 80px 40px; text-align: center; page-break-after: always; }
+  .cover .kicker { color: #c8a96e; font-size: 0.85em; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; }
+  .cover h1 { font-size: 2.3em; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; line-height: 1.3; }
+  .cover .sub { color: #c8a96e; font-size: 1em; letter-spacing: 2px; margin-bottom: 30px; }
+  .cover .tagline { color: #aaa; font-style: italic; max-width: 540px; margin: 0 auto; border-top: 1px solid #333; padding-top: 20px; }
+  .cover .date { color: #777; font-size: 0.85em; margin-top: 30px; letter-spacing: 2px; }
+
+  .section { max-width: 800px; margin: 0 auto; padding: 60px 30px; page-break-before: always; }
+  .section-header { border-left: 4px solid #c8a96e; padding-left: 20px; margin-bottom: 30px; }
+  .section-header h2 { font-size: 1.6em; text-transform: uppercase; letter-spacing: 2px; }
+  .section-header .num { font-size: 0.8em; color: #8a6a2e; letter-spacing: 3px; font-style: italic; }
+
+  h3 { font-size: 1.05em; text-transform: uppercase; letter-spacing: 2px; margin: 30px 0 12px; }
+  p { margin-bottom: 12px; font-size: 0.95em; color: #333; }
+  ul { margin: 0 0 16px 22px; font-size: 0.93em; color: #333; }
+  li { margin-bottom: 6px; }
+
+  .intro-box { background: #1a1a1a; color: #fff; border-radius: 8px; padding: 22px 28px; margin-bottom: 28px; page-break-inside: avoid; }
+  .intro-box .label { font-size: 0.75em; color: #c8a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .intro-box p, .intro-box li { color: #ccc; font-size: 0.95em; }
+  .intro-box strong { color: #fff; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0 30px; }
+  .stat { background: #fff; border: 1px solid #e0e0d8; border-radius: 8px; padding: 16px 14px; page-break-inside: avoid; }
+  .stat .v { font-size: 1.6em; font-weight: bold; color: #1a1a1a; line-height: 1.2; }
+  .stat .l { font-size: 0.75em; color: #6b6b63; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+  figure { background: #fff; border: 1px solid #e0e0d8; border-radius: 8px; padding: 18px 16px 12px; margin: 20px 0 28px; page-break-inside: avoid; }
+  figure .ft { font-size: 0.95em; font-weight: bold; margin-bottom: 2px; }
+  figure .fs { font-size: 0.8em; color: #6b6b63; margin-bottom: 10px; }
+  figure svg { width: 100%; height: auto; display: block; }
+  figcaption { font-size: 0.75em; color: #6b6b63; margin-top: 8px; font-style: italic; }
+
+  .scen { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .card { border: 1px solid #e0e0d8; border-radius: 8px; overflow: hidden; background: #fff; page-break-inside: avoid; }
+  .card .hd { background: #1a1a1a; color: #fff; padding: 14px 18px; }
+  .card .hd .tag { font-size: 0.7em; letter-spacing: 3px; color: #c8a96e; text-transform: uppercase; }
+  .card .hd .nm { font-size: 1.05em; font-weight: bold; }
+  .card .bd { padding: 14px 18px; font-size: 0.88em; color: #333; }
+  .card .bd .row { display: flex; justify-content: space-between; border-bottom: 1px solid #f0f0ea; padding: 5px 0; gap: 10px; }
+  .card .bd .row span:last-child { font-weight: bold; color: #1a1a1a; text-align: right; }
+  .card .res { padding: 12px 18px; font-weight: bold; font-size: 0.95em; }
+  .card.loss .res { background: #fff0f0; color: #8a2a2a; border-top: 3px solid #c0504d; }
+  .card.win .res { background: #f0f7f1; color: #1f5a33; border-top: 3px solid #3d8a55; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.82em; }
+  th { background: #1a1a1a; color: #c8a96e; text-align: right; padding: 9px 10px; letter-spacing: 1px; font-weight: normal; text-transform: uppercase; font-size: 0.8em; }
+  th:first-child, td:first-child { text-align: left; }
+  td { background: #fff; border-bottom: 1px solid #e6e6de; padding: 7px 10px; text-align: right; color: #333; font-variant-numeric: tabular-nums; }
+  tr { page-break-inside: avoid; }
+
+  .line { margin: 0 0 14px; padding: 12px 18px; background: #fff; border: 1px solid #e6e6de; border-radius: 6px; page-break-inside: avoid; }
+  .line .who { font-size: 0.72em; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; color: #8a6a2e; }
+  .line p { margin: 0 0 6px; color: #1a1a1a; }
+  .line p:last-child { margin: 0; }
+  .cue { margin: 0 0 14px; padding: 8px 14px; border-left: 3px solid #999; background: #f0f0ea; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 0.8em; color: #555; border-radius: 0 4px 4px 0; }
+  .cue strong { color: #1a1a1a; }
+
+  .warn { background: #fff8e8; border-left: 4px solid #d9a441; border-radius: 6px; padding: 16px 20px; margin: 20px 0; page-break-inside: avoid; }
+  .warn .label { font-size: 0.75em; font-weight: bold; color: #8a6415; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .warn p, .warn li { font-size: 0.88em; color: #5a4520; }
+
+  .footer { text-align: center; color: #999; font-size: 0.8em; padding: 40px; letter-spacing: 2px; }
+
+  @media (max-width: 640px) {
+    .cover { padding: 60px 20px; }
+    .cover h1 { font-size: 1.6em; }
+    .section { padding: 40px 16px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .scen { grid-template-columns: 1fr; }
+    .tablewrap { overflow-x: auto; }
+    table { font-size: 0.74em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="kicker">Étude de cas · Données officielles DLD</div>
+  <h1>Golden Mile<br>Palm Jumeirah</h1>
+  <div class="sub">22 ans de transactions. Une seule leçon : le timing et la patience.</div>
+  <p class="tagline">2 078 ventes enregistrées au Dubai Land Department, de la première vente sur plan en 2004 à la dernière transaction de septembre 2026. Même immeuble, mêmes appartements : seuls le moment d'achat et la patience ont changé le résultat.</p>
+  <p class="date">Données arrêtées au 14 septembre 2026 (ventes) · 2 octobre 2026 (loyers)</p>
+</div>
+
+<!-- ===== 1. L'ESSENTIEL ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">01 — L'essentiel en 30 secondes</div>
+    <h2>Ce que disent les chiffres</h2>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="v">810</div><div class="l">AED/pi² au lancement (2004)</div></div>
+    <div class="stat"><div class="v">1 338</div><div class="l">AED/pi² au pic de 2014</div></div>
+    <div class="stat"><div class="v">722</div><div class="l">AED/pi² au creux de 2020</div></div>
+    <div class="stat"><div class="v">1 937</div><div class="l">AED/pi² en 2026</div></div>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">Le message de la vidéo</div>
+    <p>En <strong>2020, on achetait un appartement de Golden Mile moins cher qu'au lancement du projet en 2004</strong>, seize ans plus tôt. Cinq ans plus tard, le même appartement valait <strong>près de trois fois plus</strong>.</p>
+    <p>Ceux qui ont vendu au mauvais moment ont perdu jusqu'à <strong>la moitié de leur mise</strong>. Ceux qui ont acheté au même prix, mais qui ont attendu, ont <strong>doublé leur capital</strong> loyers compris.</p>
+  </div>
+
+  <h3>Le projet</h3>
+  <ul>
+    <li><strong>Où :</strong> sur le « tronc » de la Palm Jumeirah, entre l'entrée de l'île et les palmes.</li>
+    <li><strong>Quoi :</strong> 10 immeubles résidentiels (Golden Mile 1 à 10), environ 1 200 appartements, avec un centre commercial au pied (Golden Mile Galleria).</li>
+    <li><strong>Développeurs :</strong> IFA Hotels &amp; Resorts et Nakheel. Travaux lancés en mai 2006, livraison en août 2009.</li>
+    <li><strong>Activité :</strong> 2 078 ventes enregistrées pour environ 5 milliards d'AED au total, et plus de 5 500 contrats de location sur les dix dernières années.</li>
+  </ul>
+</div>
+
+<!-- ===== 2. LA COURBE ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">02 — 2009 à 2026</div>
+    <h2>Les montagnes russes</h2>
+  </div>
+
+  <figure>
+    <div class="ft">Prix médian au pied carré, toutes ventes Golden Mile</div>
+    <div class="fs">AED par pi², par année · survolez un point pour le détail</div>
+    <svg viewBox="0 0 760 380" role="img" aria-label="Prix médian au pied carré, Golden Mile, 2009-2026" font-family="Helvetica, Arial, sans-serif">
+<text x="144.5" y="20" text-anchor="middle" font-size="11" fill="#6b6b63" letter-spacing="1">APRÈS-CRISE</text>
+<rect x="196.8" y="30" width="116.7" height="310" fill="#f3eee2"/>
+<text x="255.2" y="20" text-anchor="middle" font-size="11" fill="#6b6b63" letter-spacing="1">BOOM</text>
+<text x="416.1" y="20" text-anchor="middle" font-size="11" fill="#6b6b63" letter-spacing="1">CORRECTION</text>
+<rect x="518.7" y="30" width="241.4" height="310" fill="#f3eee2"/>
+<text x="629.4" y="20" text-anchor="middle" font-size="11" fill="#6b6b63" letter-spacing="1">SUPER-CYCLE</text>
+<line x1="56" x2="740" y1="340.0" y2="340.0" stroke="#e6e6de"/>
+<text x="48" y="344.0" text-anchor="end" font-size="11" fill="#6b6b63">0</text>
+<line x1="56" x2="740" y1="269.5" y2="269.5" stroke="#e6e6de"/>
+<text x="48" y="273.5" text-anchor="end" font-size="11" fill="#6b6b63">500</text>
+<line x1="56" x2="740" y1="199.1" y2="199.1" stroke="#e6e6de"/>
+<text x="48" y="203.1" text-anchor="end" font-size="11" fill="#6b6b63">1 000</text>
+<line x1="56" x2="740" y1="128.6" y2="128.6" stroke="#e6e6de"/>
+<text x="48" y="132.6" text-anchor="end" font-size="11" fill="#6b6b63">1 500</text>
+<line x1="56" x2="740" y1="58.2" y2="58.2" stroke="#e6e6de"/>
+<text x="48" y="62.2" text-anchor="end" font-size="11" fill="#6b6b63">2 000</text>
+<text x="56.0" y="358" text-anchor="middle" font-size="11" fill="#6b6b63">2009</text>
+<text x="136.5" y="358" text-anchor="middle" font-size="11" fill="#6b6b63">2011</text>
+<text x="216.9" y="358" text-anchor="middle" font-size="11" fill="#6b6b63">2013</text>
+<text x="297.4" y="358" text-anchor="middle" font-size="11" fill="#6b6b63">2015</text>
+<text x="377.9" y="358" text-anchor="middle" font-size="11" fill="#6b6b63">2017</text>
+<text x="458.4" y="358" text-anchor="middle" font-size="11" fill="#6b6b63">2019</text>
+<text x="538.8" y="358" text-anchor="middle" font-size="11" fill="#6b6b63">2021</text>
+<text x="619.3" y="358" text-anchor="middle" font-size="11" fill="#6b6b63">2023</text>
+<text x="699.8" y="358" text-anchor="middle" font-size="11" fill="#6b6b63">2025</text>
+<text x="740.0" y="358" text-anchor="middle" font-size="11" fill="#6b6b63">2026</text>
+<line x1="56" x2="740" y1="225.9" y2="225.9" stroke="#6b6b63" stroke-dasharray="4 4"/>
+<text x="740" y="241.9" text-anchor="end" font-size="11" fill="#6b6b63">Prix de lancement 2004 : 810 AED/pi²</text>
+<polyline points="56.0,221.2 96.2,227.8 136.5,231.3 176.7,223.9 216.9,207.9 257.2,151.5 297.4,162.6 337.6,198.6 377.9,172.5 418.1,199.6 458.4,220.5 498.6,238.2 538.8,220.5 579.1,183.6 619.3,148.0 659.5,116.9 699.8,82.3 740.0,67.1" fill="none" stroke="#8a6a2e" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="56.0" cy="221.2" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2009 : 843 AED/pi² (628 ventes)</title></circle>
+<circle cx="96.2" cy="227.8" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2010 : 796 AED/pi² (84 ventes)</title></circle>
+<circle cx="136.5" cy="231.3" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2011 : 771 AED/pi² (78 ventes)</title></circle>
+<circle cx="176.7" cy="223.9" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2012 : 824 AED/pi² (150 ventes)</title></circle>
+<circle cx="216.9" cy="207.9" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2013 : 938 AED/pi² (175 ventes)</title></circle>
+<circle cx="257.2" cy="151.5" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2014 : 1 338 AED/pi² (81 ventes)</title></circle>
+<circle cx="297.4" cy="162.6" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2015 : 1 259 AED/pi² (55 ventes)</title></circle>
+<circle cx="337.6" cy="198.6" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2016 : 1 003 AED/pi² (82 ventes)</title></circle>
+<circle cx="377.9" cy="172.5" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2017 : 1 189 AED/pi² (73 ventes)</title></circle>
+<circle cx="418.1" cy="199.6" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2018 : 996 AED/pi² (50 ventes)</title></circle>
+<circle cx="458.4" cy="220.5" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2019 : 848 AED/pi² (37 ventes)</title></circle>
+<circle cx="498.6" cy="238.2" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2020 : 722 AED/pi² (29 ventes)</title></circle>
+<circle cx="538.8" cy="220.5" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2021 : 848 AED/pi² (64 ventes)</title></circle>
+<circle cx="579.1" cy="183.6" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2022 : 1 110 AED/pi² (116 ventes)</title></circle>
+<circle cx="619.3" cy="148.0" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2023 : 1 363 AED/pi² (145 ventes)</title></circle>
+<circle cx="659.5" cy="116.9" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2024 : 1 584 AED/pi² (96 ventes)</title></circle>
+<circle cx="699.8" cy="82.3" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2025 : 1 829 AED/pi² (84 ventes)</title></circle>
+<circle cx="740.0" cy="67.1" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2026 : 1 937 AED/pi² (33 ventes)</title></circle>
+<text x="257.2" y="137.5" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">1 338</text>
+<text x="498.6" y="260.2" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">722</text>
+<text x="746.0" y="53.1" text-anchor="end" font-size="13" font-weight="bold" fill="#1a1a1a">1 937</text>
+</svg>
+    <figcaption>Source : Dubai Land Department, ventes résidentielles enregistrées. Médiane annuelle (pas la moyenne), pour ne pas être faussée par quelques ventes extrêmes.</figcaption>
+  </figure>
+
+  <h3>Les quatre phases</h3>
+  <ul>
+    <li><strong>2009-2012, l'après-crise.</strong> Le projet est livré en pleine crise financière mondiale. Les prix stagnent autour de 770-850 AED/pi², au niveau du lancement de 2004.</li>
+    <li><strong>2013-2014, le boom.</strong> Dubaï remporte l'Expo 2020, l'argent revient. En deux ans, le prix au pi² bondit de plus de 60 %, jusqu'à 1 338 AED/pi² en 2014.</li>
+    <li><strong>2015-2020, la longue correction.</strong> Chute du pétrole, offre abondante, puis Covid. Six ans de baisse, jusqu'à 722 AED/pi² en 2020 : <strong>−46 % depuis le pic</strong>, et moins cher qu'au lancement.</li>
+    <li><strong>2021-2026, le super-cycle.</strong> Visas longue durée, afflux d'expatriés et d'investisseurs. Le prix au pi² est multiplié par <strong>2,7</strong> et atteint un record de 1 937 AED/pi² en 2026. En 2026, la hausse marque une pause : les prix plafonnent au niveau de fin 2025.</li>
+  </ul>
+
+  <figure>
+    <div class="ft">Nombre de ventes par an</div>
+    <div class="fs">Toutes ventes enregistrées · 2009 inclut les ventes initiales du développeur</div>
+    <svg viewBox="0 0 760 220" role="img" aria-label="Nombre de ventes par an, Golden Mile" font-family="Helvetica, Arial, sans-serif">
+<line x1="56" x2="740" y1="186.0" y2="186.0" stroke="#e6e6de"/>
+<text x="48" y="190.0" text-anchor="end" font-size="11" fill="#6b6b63">0</text>
+<line x1="56" x2="740" y1="138.6" y2="138.6" stroke="#e6e6de"/>
+<text x="48" y="142.6" text-anchor="end" font-size="11" fill="#6b6b63">200</text>
+<line x1="56" x2="740" y1="91.1" y2="91.1" stroke="#e6e6de"/>
+<text x="48" y="95.1" text-anchor="end" font-size="11" fill="#6b6b63">400</text>
+<line x1="56" x2="740" y1="43.7" y2="43.7" stroke="#e6e6de"/>
+<text x="48" y="47.7" text-anchor="end" font-size="11" fill="#6b6b63">600</text>
+<path d="M59.0,186 V40.6 q0,-4 4,-4 H87.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2009 : 630 ventes</title></path>
+<text x="75.0" y="30.6" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">630</text>
+<text x="75.0" y="202" text-anchor="middle" font-size="11" fill="#6b6b63">2009</text>
+<path d="M97.0,186 V169.8 q0,-4 4,-4 H125.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2010 : 85 ventes</title></path>
+<path d="M135.0,186 V171.5 q0,-4 4,-4 H163.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2011 : 78 ventes</title></path>
+<text x="151.0" y="202" text-anchor="middle" font-size="11" fill="#6b6b63">2011</text>
+<path d="M173.0,186 V154.4 q0,-4 4,-4 H201.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2012 : 150 ventes</title></path>
+<path d="M211.0,186 V148.5 q0,-4 4,-4 H239.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2013 : 175 ventes</title></path>
+<text x="227.0" y="202" text-anchor="middle" font-size="11" fill="#6b6b63">2013</text>
+<path d="M249.0,186 V170.8 q0,-4 4,-4 H277.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2014 : 81 ventes</title></path>
+<text x="265.0" y="160.8" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">81</text>
+<path d="M287.0,186 V177.0 q0,-4 4,-4 H315.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2015 : 55 ventes</title></path>
+<text x="303.0" y="202" text-anchor="middle" font-size="11" fill="#6b6b63">2015</text>
+<path d="M325.0,186 V170.6 q0,-4 4,-4 H353.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2016 : 82 ventes</title></path>
+<path d="M363.0,186 V172.7 q0,-4 4,-4 H391.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2017 : 73 ventes</title></path>
+<text x="379.0" y="202" text-anchor="middle" font-size="11" fill="#6b6b63">2017</text>
+<path d="M401.0,186 V178.1 q0,-4 4,-4 H429.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2018 : 50 ventes</title></path>
+<path d="M439.0,186 V181.2 q0,-4 4,-4 H467.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2019 : 37 ventes</title></path>
+<text x="455.0" y="202" text-anchor="middle" font-size="11" fill="#6b6b63">2019</text>
+<path d="M477.0,186 V183.1 q0,-4 4,-4 H505.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2020 : 29 ventes</title></path>
+<text x="493.0" y="173.1" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">29</text>
+<path d="M515.0,186 V174.8 q0,-4 4,-4 H543.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2021 : 64 ventes</title></path>
+<text x="531.0" y="202" text-anchor="middle" font-size="11" fill="#6b6b63">2021</text>
+<path d="M553.0,186 V162.5 q0,-4 4,-4 H581.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2022 : 116 ventes</title></path>
+<path d="M591.0,186 V155.6 q0,-4 4,-4 H619.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2023 : 145 ventes</title></path>
+<text x="607.0" y="145.6" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">145</text>
+<text x="607.0" y="202" text-anchor="middle" font-size="11" fill="#6b6b63">2023</text>
+<path d="M629.0,186 V167.2 q0,-4 4,-4 H657.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2024 : 96 ventes</title></path>
+<path d="M667.0,186 V170.1 q0,-4 4,-4 H695.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2025 : 84 ventes</title></path>
+<text x="683.0" y="202" text-anchor="middle" font-size="11" fill="#6b6b63">2025</text>
+<path d="M705.0,186 V182.2 q0,-4 4,-4 H733.0 q4,0 4,4 V186 Z" fill="#8a6a2e"><title>2026 : 33 ventes</title></path>
+<text x="721.0" y="202" text-anchor="middle" font-size="11" fill="#6b6b63">2026</text>
+</svg>
+    <figcaption>Au creux de 2020, seulement 29 ventes : presque personne ne vendait. Les propriétaires patients ont simplement attendu.</figcaption>
+  </figure>
+</div>
+
+<!-- ===== 3. MÊME APPARTEMENT ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">03 — Même appartement, quatre prix</div>
+    <h2>Le 2 chambres de 1 794 pi²</h2>
+  </div>
+
+  <p>Pour comparer ce qui est comparable, on suit un seul type d'appartement : le <strong>2 chambres de 1 794 pi² (167 m²)</strong>, le plan le plus vendu de Golden Mile, avec 240 ventes enregistrées depuis 2009. Même surface, même immeuble, même vue sur la marina ou la mer selon l'étage.</p>
+
+  <figure>
+    <div class="ft">Prix de vente médian du 2 chambres de 1 794 pi²</div>
+    <div class="fs">AED · quatre moments du cycle</div>
+    <svg viewBox="0 0 760 300" role="img" aria-label="Prix médian du même 2 chambres de 1 794 pi² à quatre moments" font-family="Helvetica, Arial, sans-serif">
+<line x1="56" x2="740" y1="260.0" y2="260.0" stroke="#e6e6de"/>
+<text x="48" y="264.0" text-anchor="end" font-size="11" fill="#6b6b63">0 M</text>
+<line x1="56" x2="740" y1="209.8" y2="209.8" stroke="#e6e6de"/>
+<text x="48" y="213.8" text-anchor="end" font-size="11" fill="#6b6b63">1 M</text>
+<line x1="56" x2="740" y1="159.6" y2="159.6" stroke="#e6e6de"/>
+<text x="48" y="163.6" text-anchor="end" font-size="11" fill="#6b6b63">2 M</text>
+<line x1="56" x2="740" y1="109.3" y2="109.3" stroke="#e6e6de"/>
+<text x="48" y="113.3" text-anchor="end" font-size="11" fill="#6b6b63">3 M</text>
+<line x1="56" x2="740" y1="59.1" y2="59.1" stroke="#e6e6de"/>
+<text x="48" y="63.1" text-anchor="end" font-size="11" fill="#6b6b63">4 M</text>
+<path d="M102.2,260 V173.6 q0,-4 4,-4 H176.8 q4,0 4,4 V260 Z" fill="#8a6a2e"><title>Livraison 2009 : 1 800 000 AED (83 ventes)</title></path>
+<text x="141.5" y="161.6" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">1,80 M AED</text>
+<text x="141.5" y="278" text-anchor="middle" font-size="12" fill="#1a1a1a">Livraison 2009</text>
+<text x="141.5" y="292" text-anchor="middle" font-size="10" fill="#6b6b63">83 ventes</text>
+<path d="M273.2,260 V125.9 q0,-4 4,-4 H347.8 q4,0 4,4 V260 Z" fill="#8a6a2e"><title>Pic 2014 : 2 750 000 AED (10 ventes)</title></path>
+<text x="312.5" y="113.9" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">2,75 M AED</text>
+<text x="312.5" y="278" text-anchor="middle" font-size="12" fill="#1a1a1a">Pic 2014</text>
+<text x="312.5" y="292" text-anchor="middle" font-size="10" fill="#6b6b63">10 ventes</text>
+<path d="M444.2,260 V193.7 q0,-4 4,-4 H518.8 q4,0 4,4 V260 Z" fill="#8a6a2e"><title>Creux 2020 : 1 400 000 AED (4 ventes)</title></path>
+<text x="483.5" y="181.7" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">1,40 M AED</text>
+<text x="483.5" y="278" text-anchor="middle" font-size="12" fill="#1a1a1a">Creux 2020</text>
+<text x="483.5" y="292" text-anchor="middle" font-size="10" fill="#6b6b63">4 ventes</text>
+<path d="M615.2,260 V63.1 q0,-4 4,-4 H689.8 q4,0 4,4 V260 Z" fill="#8a6a2e"><title>2025 : 4 000 000 AED (8 ventes)</title></path>
+<text x="654.5" y="51.1" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">4,00 M AED</text>
+<text x="654.5" y="278" text-anchor="middle" font-size="12" fill="#1a1a1a">2025</text>
+<text x="654.5" y="292" text-anchor="middle" font-size="10" fill="#6b6b63">8 ventes</text>
+</svg>
+    <figcaption>Peu de ventes en 2020 (4) et 2025 (8) pour ce plan précis. Les médianes de l'ensemble des 2 chambres confirment la tendance : 1,35 M AED en 2020, 3,80 M AED en 2025.</figcaption>
+  </figure>
+
+  <div class="intro-box">
+    <div class="label">À retenir</div>
+    <p>Le même appartement s'est vendu <strong>2,75 M AED en 2014</strong>, <strong>1,40 M AED en 2020</strong>, puis <strong>4,00 M AED en 2025</strong>. L'appartement n'a pas changé. Seul le moment a changé.</p>
+  </div>
+</div>
+
+<!-- ===== 4. QUATRE INVESTISSEURS ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">04 — Quatre investisseurs, un seul appartement</div>
+    <h2>Timing et patience</h2>
+  </div>
+
+  <p>Quatre profils, tous propriétaires du même 2 chambres de 1 794 pi². Prix d'achat et de revente : médianes réelles enregistrées au DLD. Loyers : loyer annuel moyen réel d'un 2 chambres à Golden Mile (voir section 05).</p>
+
+  <div class="scen">
+    <div class="card win">
+      <div class="hd"><div class="tag">Investisseur A</div><div class="nm">Le pionnier patient</div></div>
+      <div class="bd">
+        <div class="row"><span>Achat (livraison 2009)</span><span>1,80 M AED</span></div>
+        <div class="row"><span>Valeur en 2025</span><span>4,00 M AED</span></div>
+        <div class="row"><span>Plus-value</span><span>+2,20 M (+122 %)</span></div>
+        <div class="row"><span>Loyers 2013-2025*</span><span>+1,75 M AED</span></div>
+      </div>
+      <div class="res">Gain total ≈ +3,95 M AED. Il a traversé une baisse de près de 50 % sans vendre.</div>
+    </div>
+
+    <div class="card loss">
+      <div class="hd"><div class="tag">Investisseur B</div><div class="nm">Acheté au pic, vendu dans la panique</div></div>
+      <div class="bd">
+        <div class="row"><span>Achat (pic 2014)</span><span>2,75 M AED</span></div>
+        <div class="row"><span>Vente (creux 2020)</span><span>1,40 M AED</span></div>
+        <div class="row"><span>Moins-value</span><span>−1,35 M (−49 %)</span></div>
+        <div class="row"><span>Loyers 2015-2019</span><span>+0,70 M AED</span></div>
+      </div>
+      <div class="res">Perte nette ≈ −0,65 M AED. Il a vendu juste avant la plus forte hausse de l'histoire du projet.</div>
+    </div>
+
+    <div class="card win">
+      <div class="hd"><div class="tag">Investisseur C</div><div class="nm">Acheté au pic, mais patient</div></div>
+      <div class="bd">
+        <div class="row"><span>Achat (pic 2014)</span><span>2,75 M AED</span></div>
+        <div class="row"><span>Valeur en 2025</span><span>4,00 M AED</span></div>
+        <div class="row"><span>Plus-value</span><span>+1,25 M (+45 %)</span></div>
+        <div class="row"><span>Loyers 2015-2025</span><span>+1,48 M AED</span></div>
+      </div>
+      <div class="res">Gain total ≈ +2,73 M AED : il a presque doublé sa mise, même en achetant au pire moment.</div>
+    </div>
+
+    <div class="card win">
+      <div class="hd"><div class="tag">Investisseur D</div><div class="nm">Acheté quand tout le monde avait peur</div></div>
+      <div class="bd">
+        <div class="row"><span>Achat (creux 2020)</span><span>1,40 M AED</span></div>
+        <div class="row"><span>Valeur en 2025</span><span>4,00 M AED</span></div>
+        <div class="row"><span>Plus-value</span><span>+2,60 M (+186 %)</span></div>
+        <div class="row"><span>Loyers 2021-2025</span><span>+0,69 M AED</span></div>
+      </div>
+      <div class="res">Gain total ≈ +3,29 M AED en 5 ans. Rendement locatif brut à l'achat : environ 7 %.</div>
+    </div>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">La leçon</div>
+    <p><strong>B et C ont acheté le même appartement, le même jour, au même prix.</strong> L'un a perdu 650 000 AED, l'autre en a gagné 2,7 millions. La seule différence : la patience.</p>
+    <p>Et <strong>D</strong> montre l'autre face : le meilleur moment pour acheter, c'est souvent quand les titres de presse sont les plus inquiétants.</p>
+  </div>
+
+  <div class="warn">
+    <div class="label">Méthode et limites</div>
+    <ul>
+      <li>Calculs bruts : frais d'acquisition (4 % DLD + agence), charges de copropriété, entretien, vacance locative et financement ne sont pas déduits. Ils réduisent tous les gains, sans changer l'ordre des résultats.</li>
+      <li>*Loyers : pas de données exploitables avant 2013, donc le gain réel de l'investisseur A est sous-estimé. Pour chaque année, on retient le plus bas entre le loyer moyen des nouveaux contrats et celui des renouvellements (estimation prudente).</li>
+      <li>Ce sont des médianes : un appartement précis (étage, vue, état) peut se vendre au-dessus ou en dessous. Les performances passées ne garantissent pas les performances futures.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== 5. LOYERS ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">05 — Pendant qu'on attend</div>
+    <h2>Les loyers</h2>
+  </div>
+
+  <p>La patience n'est pas gratuite, mais elle est payée. Pendant toute la période, l'appartement a continué à générer des loyers, y compris pendant la correction.</p>
+
+  <figure>
+    <div class="ft">Loyer annuel moyen d'un 2 chambres à Golden Mile</div>
+    <div class="fs">AED par an · nouveaux contrats Ejari</div>
+    <svg viewBox="0 0 760 280" role="img" aria-label="Loyer annuel moyen d'un 2 chambres, nouveaux contrats" font-family="Helvetica, Arial, sans-serif">
+<line x1="56" x2="740" y1="244.0" y2="244.0" stroke="#e6e6de"/>
+<text x="48" y="248.0" text-anchor="end" font-size="11" fill="#6b6b63">0 k</text>
+<line x1="56" x2="740" y1="200.0" y2="200.0" stroke="#e6e6de"/>
+<text x="48" y="204.0" text-anchor="end" font-size="11" fill="#6b6b63">50 k</text>
+<line x1="56" x2="740" y1="156.0" y2="156.0" stroke="#e6e6de"/>
+<text x="48" y="160.0" text-anchor="end" font-size="11" fill="#6b6b63">100 k</text>
+<line x1="56" x2="740" y1="112.0" y2="112.0" stroke="#e6e6de"/>
+<text x="48" y="116.0" text-anchor="end" font-size="11" fill="#6b6b63">150 k</text>
+<line x1="56" x2="740" y1="68.0" y2="68.0" stroke="#e6e6de"/>
+<text x="48" y="72.0" text-anchor="end" font-size="11" fill="#6b6b63">200 k</text>
+<line x1="56" x2="740" y1="24.0" y2="24.0" stroke="#e6e6de"/>
+<text x="48" y="28.0" text-anchor="end" font-size="11" fill="#6b6b63">250 k</text>
+<text x="56.0" y="262" text-anchor="middle" font-size="11" fill="#6b6b63">2013</text>
+<text x="161.2" y="262" text-anchor="middle" font-size="11" fill="#6b6b63">2015</text>
+<text x="266.5" y="262" text-anchor="middle" font-size="11" fill="#6b6b63">2017</text>
+<text x="371.7" y="262" text-anchor="middle" font-size="11" fill="#6b6b63">2019</text>
+<text x="476.9" y="262" text-anchor="middle" font-size="11" fill="#6b6b63">2021</text>
+<text x="582.2" y="262" text-anchor="middle" font-size="11" fill="#6b6b63">2023</text>
+<text x="687.4" y="262" text-anchor="middle" font-size="11" fill="#6b6b63">2025</text>
+<polyline points="56.0,138.3 108.6,116.3 161.2,110.6 213.8,109.5 266.5,117.1 319.1,131.3 371.7,134.5 424.3,159.9 476.9,149.7 529.5,126.0 582.2,88.1 634.8,70.8 687.4,61.2 740.0,81.6" fill="none" stroke="#8a6a2e" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="56.0" cy="138.3" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2013 : 120 143 AED/an (75 contrats)</title></circle>
+<circle cx="108.6" cy="116.3" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2014 : 145 127 AED/an (63 contrats)</title></circle>
+<circle cx="161.2" cy="110.6" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2015 : 151 608 AED/an (100 contrats)</title></circle>
+<circle cx="213.8" cy="109.5" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2016 : 152 815 AED/an (143 contrats)</title></circle>
+<circle cx="266.5" cy="117.1" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2017 : 144 244 AED/an (272 contrats)</title></circle>
+<circle cx="319.1" cy="131.3" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2018 : 128 046 AED/an (331 contrats)</title></circle>
+<circle cx="371.7" cy="134.5" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2019 : 124 375 AED/an (312 contrats)</title></circle>
+<circle cx="424.3" cy="159.9" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2020 : 95 545 AED/an (321 contrats)</title></circle>
+<circle cx="476.9" cy="149.7" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2021 : 107 196 AED/an (321 contrats)</title></circle>
+<circle cx="529.5" cy="126.0" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2022 : 134 132 AED/an (297 contrats)</title></circle>
+<circle cx="582.2" cy="88.1" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2023 : 177 159 AED/an (272 contrats)</title></circle>
+<circle cx="634.8" cy="70.8" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2024 : 196 763 AED/an (227 contrats)</title></circle>
+<circle cx="687.4" cy="61.2" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2025 : 207 743 AED/an (226 contrats)</title></circle>
+<circle cx="740.0" cy="81.6" r="4.5" fill="#8a6a2e" stroke="#fff" stroke-width="2"><title>2026 : 184 506 AED/an (149 contrats)</title></circle>
+<text x="213.8" y="97.5" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">153 k</text>
+<text x="424.3" y="181.9" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">96 k</text>
+<text x="687.4" y="49.2" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">208 k</text>
+</svg>
+    <figcaption>Source : contrats Ejari (DLD) publiés par Property Finder. 2026 : janvier à début octobre.</figcaption>
+  </figure>
+
+  <ul>
+    <li><strong>Au creux de 2020</strong>, même le loyer le plus bas (environ 96 000 AED/an pour un 2 chambres) payait encore environ 7 % brut par an sur un achat à 1,40 M AED.</li>
+    <li><strong>Les loyers ont doublé</strong> entre 2020 et 2025 (de 96 000 à 208 000 AED/an).</li>
+    <li><strong>Aujourd'hui</strong>, avec un prix autour de 4 M AED, le rendement brut tourne autour de 5 % : le prix a monté plus vite que le loyer.</li>
+  </ul>
+</div>
+
+<!-- ===== 6. SCRIPT VIDÉO ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">06 — Pour la caméra</div>
+    <h2>Script de la vidéo</h2>
+  </div>
+  <div class="cue"><strong>Durée visée :</strong> 10 à 12 minutes. <strong>[ÉCRAN]</strong> = visuel à afficher. Reformulez avec vos mots.</div>
+
+  <h3>Hook (0:00 - 0:45)</h3>
+  <div class="cue"><strong>[ÉCRAN]</strong> Plan drone de la Palm, puis les deux prix en grand : « 2,75 M » et « 1,40 M ».</div>
+  <div class="line"><div class="who">Face caméra</div>
+    <p>Même immeuble. Même étage. Même appartement. En 2014, il s'est vendu 2,75 millions de dirhams. En 2020 : 1,40 million. La moitié.</p>
+    <p>Et cinq ans plus tard ? 4 millions.</p>
+    <p>Aujourd'hui, je vous montre 22 ans de transactions réelles sur la Golden Mile, à la Palm Jumeirah. Pas des estimations, pas des annonces : les ventes officielles enregistrées au Dubai Land Department. Et vous allez voir pourquoi, à Dubaï, ce n'est pas le bien qui fait votre argent. C'est le timing, et la patience.</p>
+  </div>
+
+  <h3>Le projet (0:45 - 2:00)</h3>
+  <div class="cue"><strong>[ÉCRAN]</strong> Carte de la Palm, les 10 immeubles sur le tronc.</div>
+  <div class="line"><div class="who">Face caméra</div>
+    <p>La Golden Mile, ce sont 10 immeubles sur le tronc de la Palm, environ 1 200 appartements. Lancé en 2004, livré en 2009. Plus de 2 000 ventes depuis : c'est l'un des projets les plus échangés de la Palm, donc parfait pour lire le marché.</p>
+  </div>
+
+  <h3>La courbe (2:00 - 5:00)</h3>
+  <div class="cue"><strong>[ÉCRAN]</strong> Graphique du prix au pi², animé phase par phase.</div>
+  <div class="line"><div class="who">Face caméra</div>
+    <p>Au lancement, environ 810 dirhams le pied carré. Livraison en 2009, en pleine crise mondiale : les prix ne bougent pas pendant quatre ans.</p>
+    <p>2013-2014 : Dubaï gagne l'Expo, tout le monde veut acheter. Plus 60 % en deux ans. 1 338 dirhams le pied carré.</p>
+    <p>Et là, six ans de baisse. Le pétrole s'effondre, beaucoup de nouveaux projets sortent, puis le Covid. En 2020 : 722 dirhams. Moins cher qu'au lancement… seize ans plus tôt.</p>
+    <p>Regardez ce chiffre : en 2020, il n'y a eu que 29 ventes sur toute la Golden Mile. Presque personne ne vendait.</p>
+    <p>Et ensuite ? 2021 à 2026 : multiplié par 2,7. Record historique à 1 937 dirhams le pied carré.</p>
+  </div>
+
+  <h3>Les quatre investisseurs (5:00 - 8:30)</h3>
+  <div class="cue"><strong>[ÉCRAN]</strong> Les quatre cartes, révélées une par une. Garder B et C côte à côte.</div>
+  <div class="line"><div class="who">Face caméra</div>
+    <p>Prenons quatre investisseurs, tous avec le même 2 chambres de 1 794 pieds carrés.</p>
+    <p><strong>A</strong> achète à la livraison, 1,8 million. Il voit son bien perdre presque la moitié de sa valeur entre 2014 et 2020. Il ne vend pas. Aujourd'hui : 4 millions, plus près de 1,75 million de loyers.</p>
+    <p><strong>B</strong> achète au pic de 2014, 2,75 millions. En 2020, il panique, il vend 1,40 million. Même avec ses loyers, il perd 650 000 dirhams.</p>
+    <p><strong>C</strong> achète exactement comme B. Même prix, même année. Mais lui ne vend pas. Résultat : plus 1,25 million de plus-value, et presque 1,5 million de loyers. Il a quasiment doublé sa mise.</p>
+    <p>B et C, c'est la même décision d'achat. Ce qui les sépare, c'est uniquement la patience.</p>
+    <p>Et <strong>D</strong> ? Il achète en 2020, quand tout le monde avait peur. 1,40 million. Cinq ans plus tard : 4 millions. Presque trois fois sa mise.</p>
+  </div>
+
+  <h3>Les loyers (8:30 - 9:30)</h3>
+  <div class="cue"><strong>[ÉCRAN]</strong> Graphique des loyers.</div>
+  <div class="line"><div class="who">Face caméra</div>
+    <p>Pendant qu'on attend, l'appartement travaille. Même au pire moment, en 2020, un 2 chambres se louait environ 96 000 dirhams par an. Pour celui qui achetait à 1,40 million, c'était 7 % brut par an. Depuis, les loyers ont doublé.</p>
+  </div>
+
+  <h3>Les 3 leçons (9:30 - 11:00)</h3>
+  <div class="line"><div class="who">Face caméra</div>
+    <p><strong>Un : le marché de Dubaï est cyclique.</strong> Des hausses fortes, des baisses fortes. Ceux qui vous disent que ça ne fait que monter vous mentent.</p>
+    <p><strong>Deux : le vrai risque, c'est de devoir vendre au mauvais moment.</strong> Achetez avec une marge de sécurité, sans crédit trop tendu, avec un bien qui se loue. Ce qui vous permet d'attendre.</p>
+    <p><strong>Trois : les meilleures affaires se font quand tout le monde a peur.</strong> En 2020, il y avait 29 vendeurs. Ceux qui ont acheté à ce moment-là ont fait le meilleur investissement de l'histoire de la Golden Mile.</p>
+    <p>Et en 2026 ? Les prix font une pause, au niveau de fin 2025. Est-ce qu'on est en haut d'un cycle, ou au milieu ? On en parle dans les commentaires.</p>
+  </div>
+
+  <h3>Call to action (11:00 - 11:30)</h3>
+  <div class="line"><div class="who">Face caméra</div>
+    <p>Si vous voulez qu'on analyse un immeuble ou un quartier en particulier avec les vraies données, écrivez-le en commentaire, on en fait la prochaine vidéo. Et si vous avez un projet d'investissement à Dubaï, le lien pour réserver un appel est dans la description.</p>
+  </div>
+
+  <div class="warn">
+    <div class="label">À dire à l'antenne (conformité)</div>
+    <p>« Ces chiffres viennent des transactions officielles du Dubai Land Department. Ce sont des médianes, avant frais. Ce n'est pas un conseil en investissement, et le passé ne garantit pas l'avenir. »</p>
+  </div>
+</div>
+
+<!-- ===== 7. DONNÉES ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">07 — Annexe</div>
+    <h2>Les données année par année</h2>
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <tr><th>Année</th><th>Ventes</th><th>Médiane AED/pi²</th><th>Médiane 2 ch. (AED)</th><th>Loyer moyen 2 ch. (AED/an)</th></tr>
+    <tr><td>2009</td><td>630</td><td>843</td><td>1 600 000</td><td>—</td></tr><tr><td>2010</td><td>85</td><td>796</td><td>1 500 000</td><td>—</td></tr><tr><td>2011</td><td>78</td><td>771</td><td>1 450 000</td><td>—</td></tr><tr><td>2012</td><td>150</td><td>824</td><td>1 550 000</td><td>—</td></tr><tr><td>2013</td><td>175</td><td>938</td><td>1 820 000</td><td>120 143</td></tr><tr><td>2014</td><td>81</td><td>1 338</td><td>2 600 000</td><td>145 127</td></tr><tr><td>2015</td><td>55</td><td>1 259</td><td>2 370 000</td><td>151 608</td></tr><tr><td>2016</td><td>82</td><td>1 003</td><td>2 050 000</td><td>152 815</td></tr><tr><td>2017</td><td>73</td><td>1 189</td><td>2 200 000</td><td>144 244</td></tr><tr><td>2018</td><td>50</td><td>996</td><td>1 900 000</td><td>128 046</td></tr><tr><td>2019</td><td>37</td><td>848</td><td>1 550 000</td><td>124 375</td></tr><tr><td>2020</td><td>29</td><td>722</td><td>1 350 000</td><td>95 545</td></tr><tr><td>2021</td><td>64</td><td>848</td><td>1 650 000</td><td>107 196</td></tr><tr><td>2022</td><td>116</td><td>1 110</td><td>2 000 000</td><td>134 132</td></tr><tr><td>2023</td><td>145</td><td>1 363</td><td>2 550 000</td><td>177 159</td></tr><tr><td>2024</td><td>96</td><td>1 584</td><td>3 150 000</td><td>196 763</td></tr><tr><td>2025</td><td>84</td><td>1 829</td><td>3 800 000</td><td>207 743</td></tr><tr><td>2026</td><td>33</td><td>1 937</td><td>3 537 500</td><td>184 506</td></tr>
+  </table>
+  </div>
+
+  <h3>Sources et méthode</h3>
+  <ul>
+    <li><strong>Ventes :</strong> Dubai Land Department (open data), via le jeu de données « Dubai Real Estate Sales Transactions 2004-2026 » publié par Dubai Real Estate Data (dubairealestatedata.com) sous licence CC BY 4.0. Instantané arrêté au 14 septembre 2026. Projet « GOLDEN MILE », Palm Jumeirah : 2 078 ventes.</li>
+    <li><strong>Filtre prix :</strong> ventes résidentielles ayant passé tous les contrôles qualité du jeu de données (2 073 ventes). Médianes, jamais de moyennes.</li>
+    <li><strong>Note :</strong> jusqu'en 2016, le DLD enregistre la plupart des ventes en « pré-enregistrement » (avant l'émission des titres de propriété), même après la livraison de 2009. Les ventes de 2009 comprennent en grande partie la livraison aux premiers acheteurs.</li>
+    <li><strong>Loyers :</strong> contrats Ejari du DLD, tels que publiés sur Property Finder (Golden Mile, 2 chambres), consultés le 3 octobre 2026. Données exploitables à partir de 2013.</li>
+    <li><strong>Projet :</strong> dates et développeurs d'après Propsearch.ae.</li>
+  </ul>
+</div>
+
+<div class="footer">ÉTUDE DE CAS — GOLDEN MILE, PALM JUMEIRAH</div>
+
+</body>
+</html>
