@@ -14,6 +14,18 @@ Pour chaque demande :
 
 Même pour une petite tâche, prévoir au minimum un agent qui fait le travail et un agent qui le vérifie.
 
+## Style de communication avec le propriétaire
+
+Style direct, à la Alex Hormozi : **court, efficace, percutant.**
+
+- Le résultat d'abord. Pas d'intro, pas de politesse inutile.
+- Phrases courtes. Des chiffres concrets plutôt que des adjectifs.
+- Une idée par ligne. Puces plutôt que paragraphes.
+- Dire clairement ce qui marche, ce qui ne marche pas, et la prochaine action.
+- Zéro remplissage : si ça n'aide pas à décider ou à agir, on coupe.
+
+Ce style s'applique aux réponses dans la conversation. Les livrables (scripts, guides) gardent le ton adapté à leur public.
+
 ## Contexte du projet
 
 - Documents en français, style maison : fichiers HTML + PDF à la racine (couverture noire, accents dorés #c8a96e).
