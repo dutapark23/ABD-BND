@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #000; font-family: 'Inter', sans-serif; }
+
+  .card {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── SHARED ELEMENTS ── */
+  .logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+  .logo span { color: #C9A84C; }
+
+  .card-counter {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #555;
+  }
+
+  /* ══════════════════════════════════════════
+     CARD 1 — HOOK
+  ══════════════════════════════════════════ */
+  #card1 {
+    background: #000;
+    justify-content: space-between;
+    padding: 64px 72px;
+  }
+  #card1 .top { display: flex; justify-content: space-between; align-items: center; }
+  #card1 .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0 20px;
+  }
+  #card1 .eyebrow {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E07B40;
+    margin-bottom: 36px;
+  }
+  #card1 .headline {
+    font-size: 74px;
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 1.0;
+    color: #fff;
+    margin-bottom: 40px;
+  }
+  #card1 .headline .accent { color: #E07B40; }
+  #card1 .sub {
+    font-size: 22px;
+    font-weight: 600;
+    color: #666;
+    line-height: 1.5;
+  }
+  #card1 .swipe {
+    font-size: 18px;
+    font-weight: 700;
+    color: #E07B40;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #card1 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+
+  /* ══════════════════════════════════════════
+     CARD 2 — HIRE COST
+  ══════════════════════════════════════════ */
+  #card2 {
+    background: #080808;
+    padding: 56px 72px;
+    justify-content: space-between;
+  }
+  #card2 .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; }
+  #card2 .card-title {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: #E05555;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  #card2 .table-title {
+    font-size: 38px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    line-height: 1.15;
+  }
+  #card2 .table-title span { color: #E05555; }
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 28px;
+  }
+  .cost-row .label { color: #777; font-weight: 500; }
+  .cost-row .val { font-weight: 800; color: #E05555; }
+  .cost-row .val.dimmed { color: #444; font-weight: 600; }
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 28px 0 0;
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: 900;
+  }
+  .total-row .label { color: #fff; }
+  .total-row .val { color: #E05555; font-size: 56px; }
+  #card2 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+
+  /* ══════════════════════════════════════════
+     CARD 3 — DPS COST
+  ══════════════════════════════════════════ */
+  #card3 {
+    background: #030d07;
+    padding: 56px 72px;
+    justify-content: space-between;
+  }
+  #card3 .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; }
+  #card3 .card-title {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #4CAF82;
+  }
+  #card3 .table-title {
+    font-size: 38px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    line-height: 1.15;
+  }
+  #card3 .table-title span { color: #4CAF82; }
+  #card3 .cost-row .val { color: #4CAF82; }
+  #card3 .cost-row .val.zero { color: #2a6645; font-size: 26px; }
+  #card3 .total-row .val { color: #4CAF82; font-size: 56px; }
+  #card3 .total-row .label { color: #fff; }
+  #card3 .note {
+    font-size: 16px;
+    color: #4CAF82;
+    font-weight: 600;
+    margin-top: 16px;
+    padding: 12px 20px;
+    border: 1px solid rgba(76,175,130,0.2);
+    border-radius: 8px;
+    background: rgba(76,175,130,0.05);
+  }
+  #card3 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+
+  /* ══════════════════════════════════════════
+     CARD 4 — COMPARISON
+  ══════════════════════════════════════════ */
+  #card4 {
+    background: #060606;
+    padding: 56px 72px;
+    justify-content: space-between;
+  }
+  #card4 .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+  #card4 .card-title { font-size: 20px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: #C9A84C; }
+  #card4 .compare-header {
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    line-height: 1.2;
+  }
+  .cols { display: flex; gap: 24px; flex: 1; }
+  .col {
+    flex: 1;
+    border-radius: 16px;
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .col.red { background: rgba(224,85,85,0.07); border: 1px solid rgba(224,85,85,0.2); }
+  .col.green { background: rgba(76,175,130,0.07); border: 1px solid rgba(76,175,130,0.2); }
+  .col-title {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .col.red .col-title { color: #E05555; }
+  .col.green .col-title { color: #4CAF82; }
+  .stat-label { font-size: 18px; color: #555; font-weight: 500; margin-bottom: 6px; }
+  .stat-val { font-size: 52px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
+  .col.red .stat-val { color: #E05555; }
+  .col.green .stat-val { color: #4CAF82; }
+  .winner {
+    background: rgba(76,175,130,0.08);
+    border: 1px solid rgba(76,175,130,0.25);
+    border-radius: 12px;
+    padding: 20px 24px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 900;
+    color: #4CAF82;
+    margin-top: 20px;
+    letter-spacing: -0.01em;
+  }
+  #card4 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+
+  /* ══════════════════════════════════════════
+     CARD 5 — CTA
+  ══════════════════════════════════════════ */
+  #card5 {
+    background: #050400;
+    padding: 64px 72px;
+    justify-content: space-between;
+  }
+  #card5 .top { display: flex; justify-content: space-between; align-items: center; }
+  #card5 .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+  }
+  #card5 .label {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C9A84C;
+  }
+  #card5 .headline {
+    font-size: 62px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: #fff;
+  }
+  #card5 .headline span { color: #C9A84C; }
+  #card5 .sub {
+    font-size: 22px;
+    font-weight: 500;
+    color: #777;
+    line-height: 1.6;
+    max-width: 780px;
+  }
+  #card5 .cta-box {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  #card5 .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: #C9A84C;
+    color: #000;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 20px 36px;
+    border-radius: 12px;
+    letter-spacing: -0.01em;
+    width: fit-content;
+  }
+  #card5 .scarcity {
+    font-size: 17px;
+    font-weight: 700;
+    color: #E07B40;
+    letter-spacing: 0.02em;
+  }
+  #card5 .wa {
+    font-size: 18px;
+    color: #555;
+    font-weight: 500;
+  }
+  #card5 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  #card5 .disclaimer { font-size: 14px; color: #333; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- ═══ CARD 1 ═══ -->
+<div class="card" id="card1">
+  <div class="top">
+    <div class="logo">Dubai <span>Podcast Studio</span></div>
+    <div class="card-counter">01 / 05</div>
+  </div>
+  <div class="body">
+    <div class="eyebrow">Before you sign that job offer</div>
+    <div class="headline">Hiring a<br>content manager<br>costs <span class="accent">AED&nbsp;220K</span><br>in Year&nbsp;1.</div>
+    <div class="sub">Most Dubai businesses don't realise this until after the visa is stamped.</div>
+    <div class="swipe">Swipe to see the full breakdown →</div>
+  </div>
+  <div class="bottom">
+    <div style="font-size:15px; color:#333; font-weight:600;">Business Bay · 7 Studios</div>
+    <div style="font-size:15px; color:#333;">dubaipocast.com</div>
+  </div>
+</div>
+
+<!-- ═══ CARD 2 ═══ -->
+<div class="card" id="card2">
+  <div class="top">
+    <div class="card-title">The Real Cost</div>
+    <div class="card-counter">02 / 05</div>
+  </div>
+  <div class="table-title">Full-Time Hire<br><span>Year 1 breakdown</span></div>
+  <div style="flex:1;">
+    <div class="cost-row"><span class="label">Salary (12 months)</span><span class="val">AED 168,000</span></div>
+    <div class="cost-row"><span class="label">Visa + Emirates ID</span><span class="val">AED 8,500</span></div>
+    <div class="cost-row"><span class="label">Medical insurance</span><span class="val">AED 4,200</span></div>
+    <div class="cost-row"><span class="label">Camera + mic + edit PC</span><span class="val">AED 22,000</span></div>
+    <div class="cost-row"><span class="label">Adobe CC + software</span><span class="val">AED 7,200</span></div>
+    <div class="cost-row"><span class="label">Onboarding downtime</span><span class="val">AED 6,000</span></div>
+    <div class="total-row"><span class="label">Total Year 1</span><span class="val">AED 215,900</span></div>
+  </div>
+  <div class="bottom">
+    <div class="logo">Dubai <span>Podcast Studio</span></div>
+    <div class="card-counter" style="font-size:15px; color:#333;">Output: 60–96 content pieces/year</div>
+  </div>
+</div>
+
+<!-- ═══ CARD 3 ═══ -->
+<div class="card" id="card3">
+  <div class="top">
+    <div class="card-title" style="color:#4CAF82;">DPS Content Engine</div>
+    <div class="card-counter">03 / 05</div>
+  </div>
+  <div class="table-title">DPS Content Engine<br><span>Year 1 breakdown</span></div>
+  <div style="flex:1;">
+    <div class="cost-row"><span class="label">Studio sessions (4×/month)</span><span class="val" style="color:#4CAF82;">AED 28,800</span></div>
+    <div class="cost-row"><span class="label">Content Engine add-on</span><span class="val" style="color:#4CAF82;">AED 24,000</span></div>
+    <div class="cost-row"><span class="label">Visa</span><span class="val zero" style="color:#2a6645;">AED 0</span></div>
+    <div class="cost-row"><span class="label">Equipment</span><span class="val zero" style="color:#2a6645;">AED 0</span></div>
+    <div class="cost-row"><span class="label">Software</span><span class="val zero" style="color:#2a6645;">AED 0</span></div>
+    <div class="cost-row"><span class="label">Notice period risk</span><span class="val zero" style="color:#2a6645;">AED 0</span></div>
+    <div class="total-row" style="color:#fff;"><span class="label">Total Year 1</span><span class="val" style="color:#4CAF82; font-size:42px;">AED 52,800</span></div>
+  </div>
+  <div class="note">No visa. No equipment. No notice period. Cancel anytime.</div>
+  <div class="bottom" style="margin-top:20px;">
+    <div class="logo">Dubai <span>Podcast Studio</span></div>
+    <div style="font-size:15px; color:#2a6645; font-weight:600;">Output: 384+ content pieces/year</div>
+  </div>
+</div>
+
+<!-- ═══ CARD 4 ═══ -->
+<div class="card" id="card4">
+  <div class="top">
+    <div class="card-title">Side by Side</div>
+    <div class="card-counter">04 / 05</div>
+  </div>
+  <div class="compare-header">The numbers speak.</div>
+  <div class="cols">
+    <div class="col red">
+      <div class="col-title">Hire</div>
+      <div>
+        <div class="stat-label">Year 1 cost</div>
+        <div class="stat-val">AED 215,900</div>
+      </div>
+      <div>
+        <div class="stat-label">Content pieces / year</div>
+        <div class="stat-val">60–96</div>
+      </div>
+      <div>
+        <div class="stat-label">Cost per piece</div>
+        <div class="stat-val">AED 2,249</div>
+      </div>
+    </div>
+    <div class="col green">
+      <div class="col-title">DPS</div>
+      <div>
+        <div class="stat-label">Year 1 cost</div>
+        <div class="stat-val">AED 52,800</div>
+      </div>
+      <div>
+        <div class="stat-label">Content pieces / year</div>
+        <div class="stat-val">384+</div>
+      </div>
+      <div>
+        <div class="stat-label">Cost per piece</div>
+        <div class="stat-val">AED 137</div>
+      </div>
+    </div>
+  </div>
+  <div class="winner">DPS = 16× more content at ¼ the cost</div>
+  <div class="bottom" style="margin-top:20px;">
+    <div class="logo">Dubai <span>Podcast Studio</span></div>
+    <div></div>
+  </div>
+</div>
+
+<!-- ═══ CARD 5 ═══ -->
+<div class="card" id="card5">
+  <div class="top">
+    <div class="logo">Dubai <span>Podcast Studio</span></div>
+    <div class="card-counter">05 / 05</div>
+  </div>
+  <div class="body">
+    <div class="label">Before you decide</div>
+    <div class="headline">See it in<br><span>20 minutes.</span><br>No commitment.</div>
+    <div class="sub">We'll show you exactly what your content output looks like — episode, clips, captions, LinkedIn post — from a single 2-hour studio session.</div>
+    <div class="cta-box">
+      <div class="cta-btn">Message us on WhatsApp →</div>
+      <div class="scarcity">⚡ 3 corporate slots remaining in October</div>
+      <div class="wa">Business Bay · dubaipocast.com</div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="disclaimer">Dubai Podcast Studio · 7 Studios · Business Bay</div>
+    <div></div>
+  </div>
+</div>
+
+</body>
+</html>
