@@ -17,6 +17,7 @@ const docs = [
   { html: 'dps_marinaimmo_pipeline_setup.html',  pdf: 'dps_marinaimmo_pipeline_setup.pdf' },
   { html: 'marinaimmo_meta_ads_october_2026.html', pdf: 'marinaimmo_meta_ads_october_2026.pdf' },
   { html: 'dps_meta_ads_october_2026.html',        pdf: 'dps_meta_ads_october_2026.pdf' },
+  { html: 'dps_meta_ad_carousel_hire_vs_dps.html', pdf: 'dps_meta_ad_carousel_hire_vs_dps.pdf' },
 ];
 
 (async () => {

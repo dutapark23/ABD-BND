@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DPS — Meta Carousel Ad: Hire vs DPS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C; --bg: #080808; --bg2: #111111; --bg3: #181818;
+    --border: #252525; --text: #E8E8E8; --muted: #888888;
+    --red: #E05555; --green: #4CAF82; --orange: #E07B40;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { max-width: 900px; margin: 0 auto; padding: 56px 48px; }
+
+  /* COVER */
+  .cover { padding: 64px 0 72px; border-bottom: 1px solid var(--border); margin-bottom: 60px; position: relative; }
+  .cover-bar { position: absolute; top: 0; left: -48px; width: 4px; height: 100%; background: linear-gradient(180deg, var(--orange), var(--gold)); }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; }
+  .cover h1 { font-size: 48px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 18px; }
+  .cover h1 span { color: var(--orange); }
+  .cover-sub { font-size: 15px; color: var(--muted); max-width: 580px; line-height: 1.8; margin-bottom: 36px; }
+  .cover-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; border: 1px solid var(--border); color: var(--muted); }
+  .pill.o { background: rgba(224,123,64,0.1); border-color: rgba(224,123,64,0.3); color: var(--orange); }
+  .pill.g { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.3); color: var(--gold); }
+  .pill.gr { background: rgba(76,175,130,0.1); border-color: rgba(76,175,130,0.3); color: var(--green); }
+
+  /* SECTION TITLES */
+  .sec-title { font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); display: block; }
+
+  /* TARGETING BLOCK */
+  .targeting { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 52px; }
+  .tcard { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .tcard-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .tcard-value { font-size: 13px; font-weight: 600; color: var(--orange); line-height: 1.5; }
+
+  /* CARDS GRID */
+  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 52px; }
+
+  /* CAROUSEL CARD MOCK */
+  .card-mock { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .card-mock.full-width { grid-column: 1 / -1; }
+  .card-mock-header { padding: 14px 18px 10px; background: var(--bg3); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .card-mock-num { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; flex-shrink: 0; }
+  .card-1 .card-mock-num { background: rgba(224,123,64,0.15); color: var(--orange); }
+  .card-2 .card-mock-num { background: rgba(224,85,85,0.15); color: var(--red); }
+  .card-3 .card-mock-num { background: rgba(76,175,130,0.15); color: var(--green); }
+  .card-4 .card-mock-num { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .card-5 .card-mock-num { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .card-mock-title { font-size: 12px; font-weight: 700; }
+  .card-1 .card-mock-title { color: var(--orange); }
+  .card-2 .card-mock-title { color: var(--red); }
+  .card-3 .card-mock-title { color: var(--green); }
+  .card-4 .card-mock-title { color: var(--gold); }
+  .card-5 .card-mock-title { color: var(--gold); }
+
+  .card-visual { padding: 22px 22px 18px; }
+
+  /* CARD 1 — HOOK */
+  .hook-visual { background: #0a0a0a; border: 1px solid #222; border-radius: 8px; padding: 28px 24px; text-align: center; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+  .hook-pre { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .hook-main { font-size: 20px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.25; color: var(--text); }
+  .hook-main span { color: var(--orange); }
+  .hook-sub { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* CARD 2 — HIRE COST */
+  .cost-table { width: 100%; }
+  .cost-title { font-size: 12px; font-weight: 800; color: var(--red); margin-bottom: 12px; letter-spacing: -0.01em; }
+  .cost-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 12px; }
+  .cost-row:last-of-type { border-bottom: none; }
+  .cost-label { color: var(--muted); }
+  .cost-val { font-weight: 700; }
+  .cost-val.red { color: var(--red); }
+  .cost-val.orange { color: var(--orange); }
+  .cost-val.green { color: var(--green); }
+  .cost-total { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0 0; margin-top: 8px; border-top: 1px solid var(--border); font-size: 13px; font-weight: 900; }
+  .cost-total .cost-val { font-size: 16px; }
+
+  /* CARD 3 — DPS COST */
+  .dps-cost { }
+
+  /* CARD 4 — COMPARISON */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .compare-col { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .compare-col.bad { border-color: rgba(224,85,85,0.2); }
+  .compare-col.good { border-color: rgba(76,175,130,0.2); }
+  .compare-col-title { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+  .compare-col.bad .compare-col-title { color: var(--red); }
+  .compare-col.good .compare-col-title { color: var(--green); }
+  .compare-stat { margin-bottom: 8px; }
+  .compare-stat-label { font-size: 10px; color: var(--muted); }
+  .compare-stat-value { font-size: 15px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; }
+  .compare-col.bad .compare-stat-value { color: var(--red); }
+  .compare-col.good .compare-stat-value { color: var(--green); }
+  .compare-winner { background: rgba(76,175,130,0.07); border: 1px solid rgba(76,175,130,0.18); border-radius: 8px; padding: 10px 14px; text-align: center; font-size: 12px; font-weight: 800; color: var(--green); margin-top: 10px; }
+
+  /* CARD 5 — CTA */
+  .cta-visual { background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(224,123,64,0.04)); border: 1px solid rgba(201,168,76,0.15); border-radius: 8px; padding: 24px 20px; text-align: center; }
+  .cta-headline { font-size: 16px; font-weight: 900; letter-spacing: -0.02em; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+  .cta-sub { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+  .cta-btn { display: inline-block; background: var(--gold); color: #000; font-size: 12px; font-weight: 800; padding: 9px 22px; border-radius: 6px; letter-spacing: 0.04em; }
+  .scarcity { font-size: 11px; color: var(--orange); font-weight: 700; margin-top: 10px; }
+
+  /* COPY BLOCK */
+  .copy-section { margin-bottom: 52px; }
+  .copy-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
+  .copy-block-header { padding: 12px 20px; background: var(--bg2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .copy-num { font-size: 11px; font-weight: 900; background: rgba(224,123,64,0.15); color: var(--orange); padding: 2px 8px; border-radius: 4px; }
+  .copy-block-title { font-size: 12px; font-weight: 700; color: var(--text); }
+  .copy-block-body { padding: 16px 20px; font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .copy-block-body strong { color: var(--text); }
+  .copy-block-body .headline { font-size: 15px; font-weight: 800; color: var(--text); font-style: italic; margin-bottom: 8px; display: block; }
+  .copy-block-body .cta-text { font-weight: 700; color: var(--gold); margin-top: 6px; display: block; }
+
+  /* SPECS ROW */
+  .specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 52px; }
+  .spec { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; }
+  .spec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .spec-value { font-size: 13px; font-weight: 700; color: var(--orange); line-height: 1.4; }
+
+  /* WHY */
+  .why { background: rgba(76,175,130,0.04); border: 1px solid rgba(76,175,130,0.15); border-radius: 10px; padding: 22px 26px; margin-bottom: 52px; font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .why strong { color: var(--text); }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 36px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { font-size: 18px; font-weight: 900; }
+  .footer-brand span { color: var(--gold); }
+  .footer-meta { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-bar"></div>
+    <div class="eyebrow">Dubai Podcast Studio — Meta Carousel Ad · October 2026</div>
+    <h1>"Before you hire a<br>content manager at<br><span>AED 15,000/month</span>,<br>read this."</h1>
+    <p class="cover-sub">A 5-card carousel that does one thing: makes the cost of hiring look irrational next to DPS. No emotion. Pure numbers. Built for SME owners and GMs who are actively weighing the hiring decision right now in Q4.</p>
+    <div class="cover-pills">
+      <span class="pill o">Format: Carousel · 5 Cards · 1:1</span>
+      <span class="pill g">Audience: SME Owners · GMs · Cold + Warm</span>
+      <span class="pill gr">Objective: Lead Gen · WhatsApp / Calendly</span>
+    </div>
+  </div>
+
+  <!-- TARGETING -->
+  <div class="sec-title">Targeting & Setup</div>
+  <div class="targeting">
+    <div class="tcard">
+      <div class="tcard-label">Primary Audience</div>
+      <div class="tcard-value">Business owners, GMs, managing directors · UAE · Age 32–58 · Broad (let Meta optimise)</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-label">Secondary Layer</div>
+      <div class="tcard-value">Retargeting: website visitors 60 days + Lookalike 2% from past clients + LinkedIn job title list upload</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-label">Exclusions</div>
+      <div class="tcard-value">Exclude current clients + people who booked in last 90 days (use customer list upload)</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-label">Placement</div>
+      <div class="tcard-value">Instagram Feed + Facebook Feed only · Disable Reels, Stories, Audience Network for this creative</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-label">Budget</div>
+      <div class="tcard-value">AED 120/day · 21 days · AED 2,520 total · CBO campaign</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-label">CTA</div>
+      <div class="tcard-value">"Send Message" → WhatsApp · Pre-filled: "I want to compare costs for my business"</div>
+    </div>
+  </div>
+
+  <!-- CARD PREVIEWS -->
+  <div class="sec-title">The 5 Cards — Visual Brief</div>
+  <div class="cards-grid">
+
+    <!-- Card 1 -->
+    <div class="card-mock card-1">
+      <div class="card-mock-header">
+        <div class="card-mock-num">1</div>
+        <div class="card-mock-title">HOOK — Stop the scroll</div>
+      </div>
+      <div class="card-visual">
+        <div class="hook-visual">
+          <div class="hook-pre">Before you sign that job offer</div>
+          <div class="hook-main">Hiring a content manager<br>costs <span>AED 220,000</span><br>in Year 1.</div>
+          <div class="hook-sub">Swipe to see what you actually get<br>— and what you could get instead.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card-mock card-2">
+      <div class="card-mock-header">
+        <div class="card-mock-num">2</div>
+        <div class="card-mock-title">THE REAL COST OF HIRING</div>
+      </div>
+      <div class="card-visual">
+        <div class="cost-title">Full-Time Content Manager · Year 1</div>
+        <div class="cost-table">
+          <div class="cost-row"><span class="cost-label">Salary (12 months)</span><span class="cost-val red">AED 168,000</span></div>
+          <div class="cost-row"><span class="cost-label">Visa + Emirates ID</span><span class="cost-val orange">AED 8,500</span></div>
+          <div class="cost-row"><span class="cost-label">Medical insurance</span><span class="cost-val orange">AED 4,200</span></div>
+          <div class="cost-row"><span class="cost-label">Camera + mic + edit PC</span><span class="cost-val orange">AED 22,000</span></div>
+          <div class="cost-row"><span class="cost-label">Software (Adobe CC etc.)</span><span class="cost-val orange">AED 7,200</span></div>
+          <div class="cost-row"><span class="cost-label">Onboarding lost time</span><span class="cost-val orange">AED 6,000</span></div>
+          <div class="cost-total"><span>Total Year 1</span><span class="cost-val red">AED 215,900</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card-mock card-3">
+      <div class="card-mock-header">
+        <div class="card-mock-num">3</div>
+        <div class="card-mock-title">DPS CONTENT ENGINE · YEAR 1</div>
+      </div>
+      <div class="card-visual">
+        <div class="cost-title" style="color: var(--green);">DPS Content Engine · Year 1</div>
+        <div class="cost-table">
+          <div class="cost-row"><span class="cost-label">Studio booking (4×/month)</span><span class="cost-val green">AED 28,800</span></div>
+          <div class="cost-row"><span class="cost-label">Content Engine add-on</span><span class="cost-val green">AED 24,000</span></div>
+          <div class="cost-row"><span class="cost-label">Visa cost</span><span class="cost-val green">AED 0</span></div>
+          <div class="cost-row"><span class="cost-label">Equipment</span><span class="cost-val green">AED 0</span></div>
+          <div class="cost-row"><span class="cost-label">Software</span><span class="cost-val green">AED 0</span></div>
+          <div class="cost-row"><span class="cost-label">Notice period risk</span><span class="cost-val green">AED 0</span></div>
+          <div class="cost-total"><span>Total Year 1</span><span class="cost-val green">AED 52,800</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card-mock card-4">
+      <div class="card-mock-header">
+        <div class="card-mock-num">4</div>
+        <div class="card-mock-title">SIDE BY SIDE</div>
+      </div>
+      <div class="card-visual">
+        <div class="compare-grid">
+          <div class="compare-col bad">
+            <div class="compare-col-title">Hire</div>
+            <div class="compare-stat">
+              <div class="compare-stat-label">Year 1 Cost</div>
+              <div class="compare-stat-value">AED 215,900</div>
+            </div>
+            <div class="compare-stat">
+              <div class="compare-stat-label">Content pieces/year</div>
+              <div class="compare-stat-value">60–96</div>
+            </div>
+            <div class="compare-stat">
+              <div class="compare-stat-label">Cost per piece</div>
+              <div class="compare-stat-value">AED 2,249</div>
+            </div>
+          </div>
+          <div class="compare-col good">
+            <div class="compare-col-title">DPS</div>
+            <div class="compare-stat">
+              <div class="compare-stat-label">Year 1 Cost</div>
+              <div class="compare-stat-value">AED 52,800</div>
+            </div>
+            <div class="compare-stat">
+              <div class="compare-stat-label">Content pieces/year</div>
+              <div class="compare-stat-value">384+</div>
+            </div>
+            <div class="compare-stat">
+              <div class="compare-stat-label">Cost per piece</div>
+              <div class="compare-stat-value">AED 137</div>
+            </div>
+          </div>
+        </div>
+        <div class="compare-winner">DPS = 16× more content at ¼ the cost</div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="card-mock card-5 full-width">
+      <div class="card-mock-header">
+        <div class="card-mock-num">5</div>
+        <div class="card-mock-title">CTA — CLOSE</div>
+      </div>
+      <div class="card-visual">
+        <div class="cta-visual">
+          <div class="cta-headline">See this in action before you decide.<br>20-minute call. No commitment.</div>
+          <div class="cta-sub">We'll show you exactly what your content output could look like — episode, clips, captions, LinkedIn post — all from a single 2-hour studio session. Then you decide.</div>
+          <div class="cta-btn">Send a Message on WhatsApp →</div>
+          <div class="scarcity">3 corporate slots remaining in October</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AD COPY -->
+  <div class="copy-section">
+    <div class="sec-title">Ad Copy (Primary Text + Headline)</div>
+
+    <div class="copy-block">
+      <div class="copy-block-header">
+        <span class="copy-num">Primary Text</span>
+        <span class="copy-block-title">Shown above the carousel in the feed</span>
+      </div>
+      <div class="copy-block-body">
+        <span class="headline">"Most Dubai businesses spend AED 200,000+ hiring someone to manage their content. Then they get 5 posts a month and a resignation letter in 8 months."</span>
+        We built a different model. One studio session at DPS = 8 pieces of content, automatically produced and delivered within 24 hours. No visa. No equipment. No notice period. Swipe to see the actual numbers →
+        <span class="cta-text">→ Message us to see the breakdown for your business</span>
+      </div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-block-header">
+        <span class="copy-num">Headline</span>
+        <span class="copy-block-title">Shown below the carousel image</span>
+      </div>
+      <div class="copy-block-body">
+        <strong>Option A (numbers-first):</strong> "AED 137 per content piece. Not AED 2,249."<br>
+        <strong>Option B (question):</strong> "Is your content team worth AED 215,000 a year?"<br>
+        <strong>Option C (direct):</strong> "The math on hiring vs. DPS — swipe before you decide."<br><br>
+        <em style="color:var(--muted); font-size:12px;">A/B test Options A and B first — run each for 5 days with AED 50/day before scaling the winner.</em>
+      </div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-block-header">
+        <span class="copy-num">Description</span>
+        <span class="copy-block-title">Shown under the headline on some placements</span>
+      </div>
+      <div class="copy-block-body">
+        "Dubai Podcast Studio · Business Bay · 7 Studios · Book by the hour or the month."
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECS -->
+  <div class="sec-title">Technical Specs</div>
+  <div class="specs">
+    <div class="spec"><div class="spec-label">Card Size</div><div class="spec-value">1080 × 1080px (1:1) for all 5 cards</div></div>
+    <div class="spec"><div class="spec-label">Design Tool</div><div class="spec-value">Canva Pro · Use dark template, Inter font, DPS colour palette</div></div>
+    <div class="spec"><div class="spec-label">Cards 2–4 Style</div><div class="spec-value">Dark bg · Table rows · Numbers large and bold · No stock photos</div></div>
+    <div class="spec"><div class="spec-label">Card 1 Style</div><div class="spec-value">Black bg · 3 lines of bold white text · Orange accent on "AED 220,000" · Zero imagery</div></div>
+  </div>
+
+  <!-- WHY IT WORKS -->
+  <div class="why">
+    <strong>Why this converts in October 2026:</strong> Q4 is when SME owners make staffing decisions for the coming year — HR budgets are reviewed, headcount approved or frozen. This ad intercepts the hire intent at the exact moment it exists and reframes the decision as a financial one, not a creative one. <strong>Numbers-only creatives have the highest share rate on Meta among business audiences</strong> — people tag their business partners, forward to finance directors, save for reference. The "cost per content piece" comparison (AED 137 vs AED 2,249) is the number that makes the carousel screenshot-worthy. <strong>The CTA is a conversation, not a demo</strong> — "20-minute call" removes the fear of being sold to, which is the primary objection in this audience segment. Carousel format earns 3–5 additional swipes of attention after the first card, meaning the argument has time to land before the decision.
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">Dubai <span>Podcast Studio</span></div>
+    <div class="footer-meta">Meta Carousel Ad · October 2026<br>5 Cards · AED 120/day · AED 2,520 total spend</div>
+  </div>
+
+</div>
+</body>
+</html>
