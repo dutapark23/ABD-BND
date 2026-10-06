@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #000; font-family: 'Inter', sans-serif; }
+  body { background: #000; font-family: 'Montserrat', sans-serif; }
 
   .card {
     width: 1080px;
@@ -16,11 +16,20 @@
     flex-direction: column;
   }
 
-  /* ── SHARED ELEMENTS ── */
+  /* ── BRAND TOKENS ── */
+  /* --bg:       #0A0A0E  near-black with cool tint        */
+  /* --blue:     #00B4FF  neon blue — DPS studio LED        */
+  /* --green:    #00E5A0  neon green — positive side        */
+  /* --red:      #FF3D3D  neon red — hire cost              */
+  /* --gold:     #C9A84C  luxury amber — DPS logo           */
+  /* --text:     #FFFFFF                                    */
+  /* --muted:    #555566                                    */
+
   .logo {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 900;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     color: #fff;
   }
   .logo span { color: #C9A84C; }
@@ -28,275 +37,323 @@
   .card-counter {
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    color: #555;
+    letter-spacing: 0.12em;
+    color: #333344;
   }
 
-  /* ══════════════════════════════════════════
+  /* thin neon rule — brand signature */
+  .neon-rule {
+    width: 56px;
+    height: 3px;
+    background: #00B4FF;
+    border-radius: 2px;
+    box-shadow: 0 0 10px #00B4FF, 0 0 24px rgba(0,180,255,0.4);
+    margin-bottom: 28px;
+  }
+
+  /* ═══════════════════════════════════════
      CARD 1 — HOOK
-  ══════════════════════════════════════════ */
+  ═══════════════════════════════════════ */
   #card1 {
-    background: #000;
+    background: #0A0A0E;
+    padding: 60px 72px;
     justify-content: space-between;
-    padding: 64px 72px;
   }
   #card1 .top { display: flex; justify-content: space-between; align-items: center; }
-  #card1 .body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 0 20px;
-  }
+  #card1 .body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0; }
   #card1 .eyebrow {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #E07B40;
-    margin-bottom: 36px;
+    color: #00B4FF;
+    margin-bottom: 24px;
   }
   #card1 .headline {
-    font-size: 74px;
+    font-size: 72px;
     font-weight: 900;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.03em;
     line-height: 1.0;
     color: #fff;
-    margin-bottom: 40px;
+    text-transform: uppercase;
+    margin-bottom: 36px;
   }
-  #card1 .headline .accent { color: #E07B40; }
+  #card1 .headline .accent {
+    color: #00B4FF;
+    text-shadow: 0 0 30px rgba(0,180,255,0.5), 0 0 60px rgba(0,180,255,0.2);
+  }
   #card1 .sub {
-    font-size: 22px;
-    font-weight: 600;
-    color: #666;
-    line-height: 1.5;
+    font-size: 20px;
+    font-weight: 500;
+    color: #555566;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-bottom: 28px;
   }
   #card1 .swipe {
-    font-size: 18px;
-    font-weight: 700;
-    color: #E07B40;
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #00B4FF;
   }
   #card1 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  #card1 .tag { font-size: 13px; color: #333344; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 
-  /* ══════════════════════════════════════════
+  /* ═══════════════════════════════════════
      CARD 2 — HIRE COST
-  ══════════════════════════════════════════ */
+  ═══════════════════════════════════════ */
   #card2 {
-    background: #080808;
+    background: #0A0A0E;
     padding: 56px 72px;
     justify-content: space-between;
   }
-  #card2 .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; }
-  #card2 .card-title {
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: -0.01em;
-    color: #E05555;
+  #card2 .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; }
+  #card2 .card-tag {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    color: #FF3D3D;
   }
-  #card2 .table-title {
-    font-size: 38px;
+  #card2 .section-title {
+    font-size: 36px;
     font-weight: 900;
     color: #fff;
-    letter-spacing: -0.02em;
-    margin-bottom: 28px;
-    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 32px;
   }
-  #card2 .table-title span { color: #E05555; }
+  #card2 .section-title span { color: #FF3D3D; }
+
   .cost-row {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    padding: 22px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    font-size: 28px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 26px;
   }
-  .cost-row .label { color: #777; font-weight: 500; }
-  .cost-row .val { font-weight: 800; color: #E05555; }
-  .cost-row .val.dimmed { color: #444; font-weight: 600; }
-  .total-row {
+  .cost-row .lbl { color: #555566; font-weight: 500; }
+  .cost-row .val { font-weight: 800; }
+
+  #card2 .cost-row .val { color: #FF3D3D; }
+  #card2 .total-row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding: 28px 0 0;
-    margin-top: 10px;
-    font-size: 30px;
-    font-weight: 900;
+    padding: 24px 0 0;
+    margin-top: 6px;
   }
-  .total-row .label { color: #fff; }
-  .total-row .val { color: #E05555; font-size: 56px; }
+  #card2 .total-row .lbl { font-size: 26px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 0.04em; }
+  #card2 .total-row .val {
+    font-size: 58px;
+    font-weight: 900;
+    color: #FF3D3D;
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 30px rgba(255,61,61,0.4);
+  }
   #card2 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  #card2 .output-note { font-size: 13px; color: #333344; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
 
-  /* ══════════════════════════════════════════
+  /* ═══════════════════════════════════════
      CARD 3 — DPS COST
-  ══════════════════════════════════════════ */
+  ═══════════════════════════════════════ */
   #card3 {
-    background: #030d07;
+    background: #040D0A;
     padding: 56px 72px;
     justify-content: space-between;
   }
-  #card3 .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; }
-  #card3 .card-title {
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: 0.06em;
+  #card3 .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; }
+  #card3 .card-tag {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #4CAF82;
+    color: #00E5A0;
   }
-  #card3 .table-title {
-    font-size: 38px;
+  #card3 .section-title {
+    font-size: 36px;
     font-weight: 900;
     color: #fff;
-    letter-spacing: -0.02em;
-    margin-bottom: 28px;
-    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 32px;
   }
-  #card3 .table-title span { color: #4CAF82; }
-  #card3 .cost-row .val { color: #4CAF82; }
-  #card3 .cost-row .val.zero { color: #2a6645; font-size: 26px; }
-  #card3 .total-row .val { color: #4CAF82; font-size: 56px; }
-  #card3 .total-row .label { color: #fff; }
-  #card3 .note {
-    font-size: 16px;
-    color: #4CAF82;
-    font-weight: 600;
-    margin-top: 16px;
-    padding: 12px 20px;
-    border: 1px solid rgba(76,175,130,0.2);
-    border-radius: 8px;
-    background: rgba(76,175,130,0.05);
+  #card3 .section-title span { color: #00E5A0; }
+
+  #card3 .cost-row .val { color: #00E5A0; }
+  #card3 .cost-row .val.zero {
+    color: #1a3d2e;
+    font-size: 22px;
+  }
+  #card3 .total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 24px 0 0;
+    margin-top: 6px;
+  }
+  #card3 .total-row .lbl { font-size: 26px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 0.04em; }
+  #card3 .total-row .val {
+    font-size: 58px;
+    font-weight: 900;
+    color: #00E5A0;
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 30px rgba(0,229,160,0.4);
   }
   #card3 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  #card3 .output-note { font-size: 13px; color: #1a3d2e; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  #card3 .tagline {
+    font-size: 15px;
+    font-weight: 700;
+    color: #00E5A0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border: 1px solid rgba(0,229,160,0.2);
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 14px;
+  }
 
-  /* ══════════════════════════════════════════
+  /* ═══════════════════════════════════════
      CARD 4 — COMPARISON
-  ══════════════════════════════════════════ */
+  ═══════════════════════════════════════ */
   #card4 {
-    background: #060606;
-    padding: 56px 72px;
+    background: #080810;
+    padding: 52px 72px;
     justify-content: space-between;
   }
-  #card4 .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-  #card4 .card-title { font-size: 20px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: #C9A84C; }
-  #card4 .compare-header {
-    font-size: 28px;
+  #card4 .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+  #card4 .card-tag {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #00B4FF;
+  }
+  #card4 .section-title {
+    font-size: 34px;
     font-weight: 900;
     color: #fff;
-    letter-spacing: -0.02em;
-    margin-bottom: 32px;
-    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 28px;
   }
-  .cols { display: flex; gap: 24px; flex: 1; }
+  .cols { display: flex; gap: 20px; flex: 1; }
   .col {
     flex: 1;
-    border-radius: 16px;
-    padding: 36px 40px;
+    border-radius: 14px;
+    padding: 36px 36px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
   }
-  .col.red { background: rgba(224,85,85,0.07); border: 1px solid rgba(224,85,85,0.2); }
-  .col.green { background: rgba(76,175,130,0.07); border: 1px solid rgba(76,175,130,0.2); }
-  .col-title {
-    font-size: 16px;
-    font-weight: 900;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+  .col.red-col {
+    background: rgba(255,61,61,0.06);
+    border: 1px solid rgba(255,61,61,0.18);
   }
-  .col.red .col-title { color: #E05555; }
-  .col.green .col-title { color: #4CAF82; }
-  .stat-label { font-size: 18px; color: #555; font-weight: 500; margin-bottom: 6px; }
-  .stat-val { font-size: 52px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
-  .col.red .stat-val { color: #E05555; }
-  .col.green .stat-val { color: #4CAF82; }
-  .winner {
-    background: rgba(76,175,130,0.08);
-    border: 1px solid rgba(76,175,130,0.25);
-    border-radius: 12px;
-    padding: 20px 24px;
-    text-align: center;
-    font-size: 26px;
+  .col.green-col {
+    background: rgba(0,229,160,0.06);
+    border: 1px solid rgba(0,229,160,0.18);
+  }
+  .col-title {
+    font-size: 14px;
     font-weight: 900;
-    color: #4CAF82;
-    margin-top: 20px;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .col.red-col .col-title { color: #FF3D3D; }
+  .col.green-col .col-title { color: #00E5A0; }
+  .stat-lbl { font-size: 15px; color: #444455; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .stat-val {
+    font-size: 50px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .col.red-col .stat-val { color: #FF3D3D; }
+  .col.green-col .stat-val { color: #00E5A0; }
+  .winner-bar {
+    background: rgba(0,180,255,0.07);
+    border: 1px solid rgba(0,180,255,0.22);
+    border-radius: 10px;
+    padding: 18px 24px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 900;
+    color: #00B4FF;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 18px;
+    text-shadow: 0 0 20px rgba(0,180,255,0.4);
   }
   #card4 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
 
-  /* ══════════════════════════════════════════
+  /* ═══════════════════════════════════════
      CARD 5 — CTA
-  ══════════════════════════════════════════ */
+  ═══════════════════════════════════════ */
   #card5 {
-    background: #050400;
-    padding: 64px 72px;
+    background: #0A0A0E;
+    padding: 60px 72px;
     justify-content: space-between;
   }
   #card5 .top { display: flex; justify-content: space-between; align-items: center; }
-  #card5 .body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 28px;
-  }
-  #card5 .label {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+  #card5 .body { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
+  #card5 .eyebrow {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #C9A84C;
+    color: #00B4FF;
   }
   #card5 .headline {
-    font-size: 62px;
+    font-size: 64px;
     font-weight: 900;
     letter-spacing: -0.03em;
-    line-height: 1.05;
+    line-height: 1.0;
     color: #fff;
+    text-transform: uppercase;
   }
-  #card5 .headline span { color: #C9A84C; }
+  #card5 .headline .accent {
+    color: #00B4FF;
+    text-shadow: 0 0 30px rgba(0,180,255,0.5);
+  }
   #card5 .sub {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
-    color: #777;
-    line-height: 1.6;
-    max-width: 780px;
-  }
-  #card5 .cta-box {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 14px;
+    color: #555566;
+    line-height: 1.65;
+    max-width: 820px;
   }
   #card5 .cta-btn {
     display: inline-flex;
     align-items: center;
     gap: 14px;
-    background: #C9A84C;
+    background: #00B4FF;
     color: #000;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 900;
     padding: 20px 36px;
-    border-radius: 12px;
-    letter-spacing: -0.01em;
+    border-radius: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     width: fit-content;
+    box-shadow: 0 0 30px rgba(0,180,255,0.35), 0 0 60px rgba(0,180,255,0.15);
   }
   #card5 .scarcity {
-    font-size: 17px;
-    font-weight: 700;
-    color: #E07B40;
-    letter-spacing: 0.02em;
-  }
-  #card5 .wa {
-    font-size: 18px;
-    color: #555;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 800;
+    color: #C9A84C;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
   #card5 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
-  #card5 .disclaimer { font-size: 14px; color: #333; font-weight: 500; }
+  #card5 .sub-brand { font-size: 13px; color: #333344; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
 </style>
 </head>
 <body>
@@ -304,108 +361,109 @@
 <!-- ═══ CARD 1 ═══ -->
 <div class="card" id="card1">
   <div class="top">
-    <div class="logo">Dubai <span>Podcast Studio</span></div>
+    <div class="logo">Dubai <span>Podcast</span> Studio</div>
     <div class="card-counter">01 / 05</div>
   </div>
   <div class="body">
+    <div class="neon-rule"></div>
     <div class="eyebrow">Before you sign that job offer</div>
-    <div class="headline">Hiring a<br>content manager<br>costs <span class="accent">AED&nbsp;220K</span><br>in Year&nbsp;1.</div>
+    <div class="headline">Hiring a content<br>manager costs<br><span class="accent">AED 220K</span><br>in Year 1.</div>
     <div class="sub">Most Dubai businesses don't realise this until after the visa is stamped.</div>
     <div class="swipe">Swipe to see the full breakdown →</div>
   </div>
   <div class="bottom">
-    <div style="font-size:15px; color:#333; font-weight:600;">Business Bay · 7 Studios</div>
-    <div style="font-size:15px; color:#333;">dubaipocast.com</div>
+    <div class="tag">Business Bay · 7 Studios</div>
+    <div class="tag">@dubaipodcaststudio</div>
   </div>
 </div>
 
 <!-- ═══ CARD 2 ═══ -->
 <div class="card" id="card2">
   <div class="top">
-    <div class="card-title">The Real Cost</div>
+    <div class="card-tag">The real cost of hiring</div>
     <div class="card-counter">02 / 05</div>
   </div>
-  <div class="table-title">Full-Time Hire<br><span>Year 1 breakdown</span></div>
-  <div style="flex:1;">
-    <div class="cost-row"><span class="label">Salary (12 months)</span><span class="val">AED 168,000</span></div>
-    <div class="cost-row"><span class="label">Visa + Emirates ID</span><span class="val">AED 8,500</span></div>
-    <div class="cost-row"><span class="label">Medical insurance</span><span class="val">AED 4,200</span></div>
-    <div class="cost-row"><span class="label">Camera + mic + edit PC</span><span class="val">AED 22,000</span></div>
-    <div class="cost-row"><span class="label">Adobe CC + software</span><span class="val">AED 7,200</span></div>
-    <div class="cost-row"><span class="label">Onboarding downtime</span><span class="val">AED 6,000</span></div>
-    <div class="total-row"><span class="label">Total Year 1</span><span class="val">AED 215,900</span></div>
+  <div class="section-title">Full-Time Hire<br><span>Year 1 Breakdown</span></div>
+  <div style="flex:1">
+    <div class="cost-row"><span class="lbl">Salary (12 months)</span><span class="val">AED 168,000</span></div>
+    <div class="cost-row"><span class="lbl">Visa + Emirates ID</span><span class="val">AED 8,500</span></div>
+    <div class="cost-row"><span class="lbl">Medical insurance</span><span class="val">AED 4,200</span></div>
+    <div class="cost-row"><span class="lbl">Camera + mic + edit PC</span><span class="val">AED 22,000</span></div>
+    <div class="cost-row"><span class="lbl">Adobe CC + software</span><span class="val">AED 7,200</span></div>
+    <div class="cost-row"><span class="lbl">Onboarding downtime</span><span class="val">AED 6,000</span></div>
+    <div class="total-row"><span class="lbl">Total Year 1</span><span class="val">AED 215,900</span></div>
   </div>
   <div class="bottom">
-    <div class="logo">Dubai <span>Podcast Studio</span></div>
-    <div class="card-counter" style="font-size:15px; color:#333;">Output: 60–96 content pieces/year</div>
+    <div class="logo">Dubai <span>Podcast</span> Studio</div>
+    <div class="output-note">Output: 60–96 pieces / year</div>
   </div>
 </div>
 
 <!-- ═══ CARD 3 ═══ -->
 <div class="card" id="card3">
   <div class="top">
-    <div class="card-title" style="color:#4CAF82;">DPS Content Engine</div>
+    <div class="card-tag" style="color:#00E5A0">DPS Content Engine</div>
     <div class="card-counter">03 / 05</div>
   </div>
-  <div class="table-title">DPS Content Engine<br><span>Year 1 breakdown</span></div>
-  <div style="flex:1;">
-    <div class="cost-row"><span class="label">Studio sessions (4×/month)</span><span class="val" style="color:#4CAF82;">AED 28,800</span></div>
-    <div class="cost-row"><span class="label">Content Engine add-on</span><span class="val" style="color:#4CAF82;">AED 24,000</span></div>
-    <div class="cost-row"><span class="label">Visa</span><span class="val zero" style="color:#2a6645;">AED 0</span></div>
-    <div class="cost-row"><span class="label">Equipment</span><span class="val zero" style="color:#2a6645;">AED 0</span></div>
-    <div class="cost-row"><span class="label">Software</span><span class="val zero" style="color:#2a6645;">AED 0</span></div>
-    <div class="cost-row"><span class="label">Notice period risk</span><span class="val zero" style="color:#2a6645;">AED 0</span></div>
-    <div class="total-row" style="color:#fff;"><span class="label">Total Year 1</span><span class="val" style="color:#4CAF82; font-size:42px;">AED 52,800</span></div>
+  <div class="section-title">DPS Content Engine<br><span>Year 1 Breakdown</span></div>
+  <div style="flex:1">
+    <div class="cost-row"><span class="lbl">Studio sessions (4 × /month)</span><span class="val" style="color:#00E5A0">AED 28,800</span></div>
+    <div class="cost-row"><span class="lbl">Content Engine add-on</span><span class="val" style="color:#00E5A0">AED 24,000</span></div>
+    <div class="cost-row"><span class="lbl">Visa</span><span class="val zero">AED 0</span></div>
+    <div class="cost-row"><span class="lbl">Equipment</span><span class="val zero">AED 0</span></div>
+    <div class="cost-row"><span class="lbl">Software</span><span class="val zero">AED 0</span></div>
+    <div class="cost-row"><span class="lbl">Notice period risk</span><span class="val zero">AED 0</span></div>
+    <div class="total-row"><span class="lbl">Total Year 1</span><span class="val" style="color:#00E5A0">AED 52,800</span></div>
   </div>
-  <div class="note">No visa. No equipment. No notice period. Cancel anytime.</div>
-  <div class="bottom" style="margin-top:20px;">
-    <div class="logo">Dubai <span>Podcast Studio</span></div>
-    <div style="font-size:15px; color:#2a6645; font-weight:600;">Output: 384+ content pieces/year</div>
+  <div class="tagline">No visa · No equipment · Cancel anytime</div>
+  <div class="bottom" style="margin-top:20px">
+    <div class="logo">Dubai <span>Podcast</span> Studio</div>
+    <div class="output-note" style="color:#00E5A0">Output: 384+ pieces / year</div>
   </div>
 </div>
 
 <!-- ═══ CARD 4 ═══ -->
 <div class="card" id="card4">
   <div class="top">
-    <div class="card-title">Side by Side</div>
+    <div class="card-tag">Side by Side</div>
     <div class="card-counter">04 / 05</div>
   </div>
-  <div class="compare-header">The numbers speak.</div>
+  <div class="section-title">The Numbers Speak.</div>
   <div class="cols">
-    <div class="col red">
+    <div class="col red-col">
       <div class="col-title">Hire</div>
       <div>
-        <div class="stat-label">Year 1 cost</div>
+        <div class="stat-lbl">Year 1 Cost</div>
         <div class="stat-val">AED 215,900</div>
       </div>
       <div>
-        <div class="stat-label">Content pieces / year</div>
+        <div class="stat-lbl">Content / Year</div>
         <div class="stat-val">60–96</div>
       </div>
       <div>
-        <div class="stat-label">Cost per piece</div>
+        <div class="stat-lbl">Cost per piece</div>
         <div class="stat-val">AED 2,249</div>
       </div>
     </div>
-    <div class="col green">
+    <div class="col green-col">
       <div class="col-title">DPS</div>
       <div>
-        <div class="stat-label">Year 1 cost</div>
+        <div class="stat-lbl">Year 1 Cost</div>
         <div class="stat-val">AED 52,800</div>
       </div>
       <div>
-        <div class="stat-label">Content pieces / year</div>
+        <div class="stat-lbl">Content / Year</div>
         <div class="stat-val">384+</div>
       </div>
       <div>
-        <div class="stat-label">Cost per piece</div>
+        <div class="stat-lbl">Cost per piece</div>
         <div class="stat-val">AED 137</div>
       </div>
     </div>
   </div>
-  <div class="winner">DPS = 16× more content at ¼ the cost</div>
-  <div class="bottom" style="margin-top:20px;">
-    <div class="logo">Dubai <span>Podcast Studio</span></div>
+  <div class="winner-bar">DPS = 16× More Content at ¼ the Cost</div>
+  <div class="bottom" style="margin-top:18px">
+    <div class="logo">Dubai <span>Podcast</span> Studio</div>
     <div></div>
   </div>
 </div>
@@ -413,21 +471,19 @@
 <!-- ═══ CARD 5 ═══ -->
 <div class="card" id="card5">
   <div class="top">
-    <div class="logo">Dubai <span>Podcast Studio</span></div>
+    <div class="logo">Dubai <span>Podcast</span> Studio</div>
     <div class="card-counter">05 / 05</div>
   </div>
   <div class="body">
-    <div class="label">Before you decide</div>
-    <div class="headline">See it in<br><span>20 minutes.</span><br>No commitment.</div>
-    <div class="sub">We'll show you exactly what your content output looks like — episode, clips, captions, LinkedIn post — from a single 2-hour studio session.</div>
-    <div class="cta-box">
-      <div class="cta-btn">Message us on WhatsApp →</div>
-      <div class="scarcity">⚡ 3 corporate slots remaining in October</div>
-      <div class="wa">Business Bay · dubaipocast.com</div>
-    </div>
+    <div class="neon-rule"></div>
+    <div class="eyebrow">Before you decide</div>
+    <div class="headline">See it in<br><span class="accent">20 minutes.</span><br>No commitment.</div>
+    <div class="sub">We'll show you exactly what your content output looks like — episode, clips, captions, LinkedIn post — from one 2-hour studio session.</div>
+    <div class="cta-btn">Message us on WhatsApp →</div>
+    <div class="scarcity">⚡ 3 Corporate Slots Remaining in October</div>
   </div>
   <div class="bottom">
-    <div class="disclaimer">Dubai Podcast Studio · 7 Studios · Business Bay</div>
+    <div class="sub-brand">Business Bay · 7 Studios · @dubaipodcaststudio</div>
     <div></div>
   </div>
 </div>
