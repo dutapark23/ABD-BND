@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DPS — GITEX Ad Scripts · Pre-Event · October 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0A0A0E; --bg2: #111118; --bg3: #16161E;
+    --border: #1E1E2A; --text: #E8E8F0; --muted: #555570;
+    --blue: #00B4FF; --gold: #C9A84C; --red: #FF3D3D; --green: #00E5A0;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { max-width: 900px; margin: 0 auto; padding: 56px 48px; }
+
+  /* COVER */
+  .cover { padding: 64px 0 72px; border-bottom: 1px solid var(--border); margin-bottom: 64px; position: relative; }
+  .cover-bar { position: absolute; top: 0; left: -48px; width: 4px; height: 100%; background: linear-gradient(180deg, var(--blue), var(--gold)); }
+  .neon-rule { width: 48px; height: 3px; background: var(--blue); border-radius: 2px; box-shadow: 0 0 12px var(--blue); margin-bottom: 24px; }
+  .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; }
+  .cover h1 { font-size: 52px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; text-transform: uppercase; margin-bottom: 18px; }
+  .cover h1 span { color: var(--blue); }
+  .cover-sub { font-size: 15px; color: var(--muted); max-width: 600px; line-height: 1.8; margin-bottom: 36px; }
+  .cover-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); }
+  .pill.b { background: rgba(0,180,255,0.08); border-color: rgba(0,180,255,0.25); color: var(--blue); }
+  .pill.g { background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.25); color: var(--gold); }
+
+  /* URGENCY BAR */
+  .urgency { background: rgba(255,61,61,0.07); border: 1px solid rgba(255,61,61,0.2); border-radius: 10px; padding: 16px 24px; margin-bottom: 56px; display: flex; align-items: center; gap: 14px; }
+  .urgency-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); box-shadow: 0 0 10px var(--red); flex-shrink: 0; }
+  .urgency-text { font-size: 13px; font-weight: 700; color: var(--red); letter-spacing: 0.04em; text-transform: uppercase; }
+  .urgency-sub { font-size: 13px; color: var(--muted); margin-left: auto; }
+
+  /* SCRIPT CARD */
+  .script { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 56px; }
+  .script-header { padding: 28px 36px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .script-1 .script-header { background: linear-gradient(135deg, rgba(0,180,255,0.06), transparent); border-bottom: 1px solid rgba(0,180,255,0.12); }
+  .script-2 .script-header { background: linear-gradient(135deg, rgba(201,168,76,0.06), transparent); border-bottom: 1px solid rgba(201,168,76,0.12); }
+  .script-num { font-size: 52px; font-weight: 900; opacity: 0.08; letter-spacing: -0.04em; line-height: 1; }
+  .script-1 .script-num { color: var(--blue); }
+  .script-2 .script-num { color: var(--gold); }
+  .script-info { flex: 1; }
+  .script-label { font-size: 10px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 8px; }
+  .script-1 .script-label { color: var(--blue); }
+  .script-2 .script-label { color: var(--gold); }
+  .script-title { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 8px; }
+  .script-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* SPECS ROW */
+  .specs-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid var(--border); }
+  .spec { padding: 16px 24px; border-right: 1px solid var(--border); }
+  .spec:last-child { border-right: none; }
+  .spec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .spec-value { font-size: 12px; font-weight: 700; }
+  .script-1 .spec-value { color: var(--blue); }
+  .script-2 .spec-value { color: var(--gold); }
+
+  /* SCRIPT BODY */
+  .script-body { padding: 32px 36px; background: var(--bg2); }
+
+  /* SCENE BLOCKS */
+  .scene { margin-bottom: 28px; display: flex; gap: 20px; }
+  .scene:last-child { margin-bottom: 0; }
+  .scene-timing {
+    flex-shrink: 0;
+    width: 80px;
+    text-align: right;
+    padding-top: 2px;
+  }
+  .timing-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .script-1 .timing-badge { background: rgba(0,180,255,0.1); color: var(--blue); }
+  .script-2 .timing-badge { background: rgba(201,168,76,0.1); color: var(--gold); }
+  .scene-content { flex: 1; }
+  .scene-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .scene-direction { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 8px; line-height: 1.5; }
+  .scene-line {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    padding: 14px 18px;
+    background: var(--bg3);
+    border-radius: 8px;
+    border-left: 3px solid;
+    position: relative;
+  }
+  .script-1 .scene-line { border-left-color: var(--blue); }
+  .script-2 .scene-line { border-left-color: var(--gold); }
+  .scene-line .hook-word { font-style: normal; }
+  .script-1 .scene-line .hook-word { color: var(--blue); }
+  .script-2 .scene-line .hook-word { color: var(--gold); }
+
+  /* ON-SCREEN TEXT */
+  .onscreen-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; margin-top: 10px; }
+  .onscreen-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .onscreen-items { display: flex; flex-direction: column; gap: 6px; }
+  .onscreen-item { font-size: 13px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 10px; }
+  .onscreen-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .script-1 .onscreen-item::before { background: var(--blue); box-shadow: 0 0 6px var(--blue); }
+  .script-2 .onscreen-item::before { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+
+  /* NOTES */
+  .script-notes { padding: 20px 36px; border-top: 1px solid var(--border); background: var(--bg); }
+  .note-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .note-items { display: flex; flex-direction: column; gap: 6px; }
+  .note-item { font-size: 13px; color: var(--muted); line-height: 1.6; display: flex; gap: 10px; }
+  .note-item::before { content: '→'; flex-shrink: 0; font-weight: 700; }
+  .script-1 .note-item::before { color: var(--blue); }
+  .script-2 .note-item::before { color: var(--gold); }
+  .note-item strong { color: var(--text); }
+
+  /* SECTION DIVIDER */
+  .sec-title { font-size: 10px; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); display: block; }
+
+  /* LAUNCH PLAN */
+  .launch { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 56px; }
+  .launch-header { padding: 20px 28px; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 800; color: var(--text); text-transform: uppercase; letter-spacing: 0.1em; }
+  .launch-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .launch-col { padding: 20px 24px; border-right: 1px solid var(--border); }
+  .launch-col:last-child { border-right: none; }
+  .launch-col-label { font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .launch-col-value { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.6; }
+  .launch-col-value span { color: var(--blue); font-weight: 800; }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 36px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-meta { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-bar"></div>
+    <div class="neon-rule"></div>
+    <div class="eyebrow">Dubai Podcast Studio — Meta Ad Scripts</div>
+    <h1>GITEX 2026<br><span>Pre-Event</span><br>Reel Script</h1>
+    <p class="cover-sub">The stronger GITEX play. Run this in the 2 weeks before the event — when founders are in preparation mode and ready to act. You reach them before the noise starts, before the competition floods their feed, and before they run out of time.</p>
+    <div class="cover-pills">
+      <span class="pill b">1 Script · Ready to Film</span>
+      <span class="pill g">Reel 9:16 · Face Cam · WhatsApp CTA</span>
+      <span class="pill b">Launch: Oct 1 → Oct 12 (Pre-GITEX)</span>
+    </div>
+  </div>
+
+  <!-- URGENCY -->
+  <div class="urgency">
+    <div class="urgency-dot" style="background: var(--blue); box-shadow: 0 0 10px var(--blue);"></div>
+    <div class="urgency-text" style="color: var(--blue);">Pre-GITEX Window — Oct 1 → Oct 12, 2027</div>
+    <div class="urgency-sub">Launch 12 days before GITEX opens · Stop on event day</div>
+  </div>
+
+  <!-- SCRIPT 1 — PRE-GITEX -->
+  <div class="script script-1">
+    <div class="script-header">
+      <div class="script-info">
+        <div class="script-label">Script 01 — The Pre-Event Setup</div>
+        <div class="script-title">"The Founders Who<br>Win at GITEX<br>Prepare Now."</div>
+        <div class="script-desc">25 seconds. Founder face cam, in-studio. Runs in the 2 weeks before GITEX opens. Targets founders who are going — intercepts them in preparation mode, when they are most willing to take action. The strongest moment to sell: before the event, not after the regret.</div>
+      </div>
+      <div class="script-num">01</div>
+    </div>
+
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Length</div><div class="spec-value">25 seconds</div></div>
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · Face cam</div></div>
+      <div class="spec"><div class="spec-label">Setting</div><div class="spec-value">DPS studio · desk + mic</div></div>
+      <div class="spec"><div class="spec-label">CTA</div><div class="spec-value">Click-to-WhatsApp</div></div>
+    </div>
+
+    <div class="script-body">
+
+      <div class="scene">
+        <div class="scene-timing"><span class="timing-badge">0:00–0:03</span></div>
+        <div class="scene-content">
+          <div class="scene-tag">Hook — Self-identification filter, no intro</div>
+          <div class="scene-direction">Direct eye contact. No greeting. Start mid-thought, like you're continuing a conversation they're already part of.</div>
+          <div class="scene-line">"If you're going to GITEX next week and you don't have content already scheduled — <span class="hook-word">you're already behind</span>."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="scene-timing"><span class="timing-badge">0:03–0:12</span></div>
+        <div class="scene-content">
+          <div class="scene-tag">The Insight — What the top founders do differently</div>
+          <div class="scene-direction">Measured, authoritative — not urgent. You're sharing insider knowledge. Lean slightly forward.</div>
+          <div class="scene-line">"The founders who convert GITEX into real business every year aren't the ones with the best booth or the sharpest pitch. They're the ones whose content is already running <span class="hook-word">before they walk through the door</span>. Their leads see them on LinkedIn the morning of the event. During the event. Every day after."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="scene-timing"><span class="timing-badge">0:12–0:21</span></div>
+        <div class="scene-content">
+          <div class="scene-tag">The Offer — Specific, fast, no fluff</div>
+          <div class="scene-direction">Slightly faster pacing. Practical now. This is the thing they can do today.</div>
+          <div class="scene-line">"Come record at our studio this week. Two hours. We produce <span class="hook-word">8 pieces of content</span> — episode, clips, LinkedIn posts, audiogram. You schedule them to publish during GITEX. You walk into that event already in your prospects' heads."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="scene-timing"><span class="timing-badge">0:21–0:25</span></div>
+        <div class="scene-content">
+          <div class="scene-tag">CTA — One action, one sentence</div>
+          <div class="scene-direction">Direct. Calm. Not a hard sell. Like you're doing them a favour by telling them this.</div>
+          <div class="scene-line">"Message us on <span class="hook-word">WhatsApp</span>. We'll get you in before GITEX starts."</div>
+          <div class="onscreen-block">
+            <div class="onscreen-label">On-Screen Text Overlay (Captions App or CapCut)</div>
+            <div class="onscreen-items">
+              <div class="onscreen-item">0:00 — "Going to GITEX next week?"</div>
+              <div class="onscreen-item">0:03 — "The top founders arrive with content already live"</div>
+              <div class="onscreen-item">0:12 — "1 session → 8 pieces → 30 days of visibility"</div>
+              <div class="onscreen-item">0:21 — End card: "Dubai Podcast Studio · WhatsApp → Book before GITEX"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="script-notes">
+      <div class="note-label">Filming Notes</div>
+      <div class="note-items">
+        <div class="note-item"><strong>No intro, no name</strong> — go straight to "If you're going to GITEX next week." The self-filter hook ("if you're going to GITEX") immediately stops the right person and lets the wrong person scroll. That's exactly what you want.</div>
+        <div class="note-item"><strong>One take feel</strong> — aim for take 3–5, not take 15. Natural > polished. This is the format that clocks 28% lower CPA for premium B2B services.</div>
+        <div class="note-item"><strong>Audio quality</strong> — record using the studio mic setup. The audio quality itself is a sales argument for a podcast studio — it has to be immaculate.</div>
+        <div class="note-item"><strong>Targeting</strong> — Broad · UAE · Business owners, founders, directors · Age 30–55. Let Andromeda find the audience via the creative. Do NOT layer GITEX interest targeting — that audience is too small and Meta will under-deliver.</div>
+        <div class="note-item"><strong>Budget & timeline</strong> — AED 100/day · Oct 1–12 (12 days · AED 1,200 total). Objective: Leads → Click-to-WhatsApp. Pre-fill message: "I want to book a session before GITEX."</div>
+        <div class="note-item"><strong>Why pre-event beats post-event</strong> — you reach people in preparation mode (high intent, low noise), before 50 other studio ads hit them post-event. CPMs are also 15–20% lower pre-event than during/post-GITEX week.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAUNCH PLAN -->
+  <div class="sec-title">Launch Plan</div>
+  <div class="launch">
+    <div class="launch-header">Pre-GITEX Launch Plan — Oct 1 → Oct 12 (2027)</div>
+    <div class="launch-grid">
+      <div class="launch-col">
+        <div class="launch-col-label">Launch (Oct 1)</div>
+        <div class="launch-col-value">Start at <span>AED 100/day.</span> Objective: Leads → Click-to-WhatsApp. Broad UAE, age 30–55, no interest layer. Pre-fill WhatsApp: "I want to book before GITEX." Total budget: AED 1,200.</div>
+      </div>
+      <div class="launch-col">
+        <div class="launch-col-label">Mid-Run Check (Oct 6)</div>
+        <div class="launch-col-value">If CPL is under <span>AED 150</span>, scale to AED 150/day for the final 6 days. If CPL is above AED 250, test a new hook angle — the audience is right, the hook may need adjusting.</div>
+      </div>
+      <div class="launch-col">
+        <div class="launch-col-label">Kill Switch (Oct 12)</div>
+        <div class="launch-col-value"><span>Pause on Oct 12</span>, the day GITEX opens. Urgency expires. Archive the creative — relaunch with updated dates at GITEX 2027. Do not run during the event itself.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">Dubai <span>Podcast</span> Studio</div>
+    <div class="footer-meta">GITEX Pre-Event Ad Script · October 2027<br>1 Script · AED 1,200 budget · Launch Oct 1</div>
+  </div>
+
+</div>
+</body>
+</html>
