@@ -1,0 +1,169 @@
+<title>Le Coffre Vidéo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a single-column vault list of video chapters below a dark cover hero; each entry
+   is a locked/unlocked card holding a 16:9 placeholder, a teaser line, and a status pill. */
+:root{
+  --bg:#faf8f4; --surface:#ffffff; --ink:#19171a; --ink-soft:#5a5650;
+  --gold:#a3792f; --gold-soft:#e8d9bc; --line:#e7e1d6; --danger:#8a3b2e;
+  --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body:'Work Sans', -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121012; --surface:#1b181a; --ink:#f3efe8; --ink-soft:#b6aea2;
+    --gold:#d6b370; --gold-soft:#3a3024; --line:#2d2a28; --danger:#e08a78;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121012; --surface:#1b181a; --ink:#f3efe8; --ink-soft:#b6aea2;
+  --gold:#d6b370; --gold-soft:#3a3024; --line:#2d2a28; --danger:#e08a78;
+  color-scheme: dark;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body);
+  line-height:1.6; padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+}
+.wrap{max-width:720px; margin:0 auto; padding-block:0 64px;}
+
+.hero{
+  background:#121012; color:#f3efe8; margin:0 calc(-1 * max(16px, env(safe-area-inset-left,0px))) 0 calc(-1 * max(16px, env(safe-area-inset-right,0px)));
+  padding:48px max(16px, env(safe-area-inset-left,0px)) 40px max(16px, env(safe-area-inset-right,0px));
+  text-align:center;
+}
+.hero .eyebrow{
+  font-family:var(--font-body); font-size:0.72rem; letter-spacing:.18em; text-transform:uppercase;
+  color:#d6b370; margin-bottom:14px;
+}
+.hero h1{
+  font-family:var(--font-display); font-weight:700; font-size:clamp(1.9rem,6vw,2.7rem);
+  margin:0 0 14px; text-wrap:balance; letter-spacing:-0.01em;
+}
+.hero p{
+  font-size:0.98rem; color:#c9c2b6; max-width:46ch; margin:0 auto; text-wrap:balance;
+}
+.hero .hint{
+  margin-top:26px; display:inline-flex; gap:8px; align-items:center; font-size:0.82rem;
+  color:#8f887c; border:1px solid #352f29; border-radius:999px; padding:8px 16px;
+}
+
+.section-label{
+  font-family:var(--font-body); font-size:0.72rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-soft); margin:40px 0 16px; padding-top:24px; border-top:1px solid var(--line);
+}
+.section-label:first-of-type{border-top:none; margin-top:28px;}
+
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:14px;
+  overflow:hidden; margin-bottom:18px; scroll-margin-top:24px;
+}
+.card .frame{
+  aspect-ratio:16/9; max-width:100%; position:relative; background:
+    linear-gradient(160deg, var(--gold-soft), transparent 60%), var(--bg);
+  display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--line);
+}
+.card .frame .play{
+  width:52px; height:52px; border-radius:50%; background:var(--gold); color:#19171a;
+  display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0;
+}
+.card .frame .soon{
+  position:absolute; top:12px; right:12px; font-family:var(--font-body); font-size:0.68rem;
+  letter-spacing:.1em; text-transform:uppercase; background:var(--surface); color:var(--ink-soft);
+  border:1px solid var(--line); border-radius:999px; padding:4px 10px;
+}
+.card .body{padding:18px 20px 20px;}
+.card .chap{
+  font-family:var(--font-body); font-size:0.72rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:6px;
+}
+.card h2{
+  font-family:var(--font-display); font-weight:600; font-size:1.2rem; margin:0 0 8px; text-wrap:balance;
+}
+.card .teaser{
+  font-style:italic; color:var(--ink-soft); font-size:0.92rem; margin:0; text-wrap:balance;
+}
+
+.footer-note{
+  margin-top:44px; padding-top:24px; border-top:1px solid var(--line);
+  font-size:0.86rem; color:var(--ink-soft); text-align:center;
+}
+.footer-note strong{color:var(--ink);}
+</style>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Réservé aux acheteurs — Émirats Sans Filtre</div>
+    <h1>Le Coffre Vidéo</h1>
+    <p>Les capsules qui accompagnent le dossier écrit — filmées sur le terrain, jamais publiées ailleurs. Scannez le code en haut de chaque chapitre pour arriver directement ici.</p>
+    <div class="hint">⬡ Lien privé — ne le partagez pas</div>
+  </div>
+
+  <div class="section-label">Chapitre 01</div>
+  <div class="card" id="ch1">
+    <div class="frame"><span class="play">▶</span><span class="soon">Tournage à venir</span></div>
+    <div class="body">
+      <div class="chap">Le vrai diagnostic</div>
+      <h2>Le mot d'accueil</h2>
+      <p class="teaser">"Si vous lisez ce dossier, c'est que vous envisagez sérieusement de partir."</p>
+    </div>
+  </div>
+
+  <div class="section-label">Chapitre 03</div>
+  <div class="card" id="ch3">
+    <div class="frame"><span class="play">▶</span><span class="soon">Tournage à venir</span></div>
+    <div class="body">
+      <div class="chap">Le choix du quartier</div>
+      <h2>La vraie différence entre deux quartiers</h2>
+      <p class="teaser">Filmée sur le terrain, entre JVC et Dubai Marina — ce que les chiffres ne montrent pas.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Chapitre 04</div>
+  <div class="card" id="ch4">
+    <div class="frame"><span class="play">▶</span><span class="soon">Tournage à venir</span></div>
+    <div class="body">
+      <div class="chap">Les visas</div>
+      <h2>Un vrai dossier, décortiqué</h2>
+      <p class="teaser">Les trois endroits où 90% des gens se plantent sur un dossier de visa investisseur.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Chapitre 05</div>
+  <div class="card" id="ch5">
+    <div class="frame"><span class="play">▶</span><span class="soon">Tournage à venir</span></div>
+    <div class="body">
+      <div class="chap">Le piège fiscal français</div>
+      <h2>Le mythe des 183 jours, démonté</h2>
+      <p class="teaser">"Je vais vous corriger quelque chose que presque tout le monde croit."</p>
+    </div>
+  </div>
+
+  <div class="section-label">Chapitre 06</div>
+  <div class="card" id="ch6">
+    <div class="frame"><span class="play">▶</span><span class="soon">Tournage à venir</span></div>
+    <div class="body">
+      <div class="chap">Les 10 arnaques</div>
+      <h2>L'arnaque qu'on a vue de près</h2>
+      <p class="teaser">Un couple est venu nous voir après avoir perdu 25 000 AED sur un appartement qui n'existait pas.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Chapitre 12</div>
+  <div class="card" id="ch12">
+    <div class="frame"><span class="play">▶</span><span class="soon">Tournage à venir</span></div>
+    <div class="body">
+      <div class="chap">La discipline géographique</div>
+      <h2>En vrai</h2>
+      <p class="teaser">"Je vais vous dire quelque chose que je n'ai jamais dit publiquement."</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Les capsules s'ajoutent ici au fil du tournage — <strong>même lien, même QR code</strong>, pas de nouvelle édition à acheter.
+  </div>
+</div>
