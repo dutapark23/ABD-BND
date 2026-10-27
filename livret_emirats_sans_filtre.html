@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Émirats Sans Filtre — Le Dossier Confidentiel</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', serif;
+    background: #fafaf8;
+    color: #1a1a1a;
+    line-height: 1.75;
+  }
+  .cover {
+    background: #0e0e0e;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+    page-break-after: always;
+  }
+  .cover .pretitle { font-size: 0.85em; letter-spacing: 5px; color: #c8a96e; margin-bottom: 25px; text-transform: uppercase; }
+  .cover h1 { font-size: 3.2em; letter-spacing: 1px; margin-bottom: 15px; line-height: 1.1; }
+  .cover h1 span { color: #c8a96e; }
+  .cover .subtitle { font-size: 1.2em; color: #ccc; margin-bottom: 45px; max-width: 600px; font-style: italic; }
+  .cover .warning-box {
+    border: 1px solid #c8a96e; border-radius: 6px; padding: 20px 28px; max-width: 520px;
+    font-size: 0.92em; color: #ddd; text-align: left; margin-bottom: 30px;
+  }
+  .cover .warning-box strong { color: #c8a96e; display: block; margin-bottom: 8px; letter-spacing: 1px; font-size: 0.85em; text-transform: uppercase; }
+  .cover .date { font-size: 0.85em; color: #666; letter-spacing: 2px; margin-top: 20px; }
+
+  .toc { max-width: 700px; margin: 0 auto; padding: 80px 40px; page-break-after: always; }
+  .toc h2 { font-size: 1.6em; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 35px; color: #1a1a1a; border-left: 4px solid #c8a96e; padding-left: 18px; }
+  .toc ol { list-style: none; counter-reset: chap; }
+  .toc ol li { counter-increment: chap; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 1.02em; display: flex; justify-content: space-between; }
+  .toc ol li::before { content: counter(chap, decimal-leading-zero) " — "; color: #c8a96e; font-weight: bold; margin-right: 8px; }
+
+  .chapter { max-width: 760px; margin: 0 auto; padding: 70px 40px; page-break-before: always; }
+  .chap-num { font-size: 0.8em; color: #c8a96e; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 8px; }
+  .chapter h2 { font-size: 2em; color: #1a1a1a; margin-bottom: 28px; line-height: 1.2; border-left: 5px solid #c8a96e; padding-left: 20px; }
+  .chapter h3 { font-size: 1.25em; color: #1a1a1a; margin: 36px 0 14px; }
+  .lead { font-size: 1.08em; color: #333; margin-bottom: 20px; }
+  .lead strong { color: #000; }
+  p { margin-bottom: 14px; }
+
+  .truth-box { background: #1a1a1a; color: #fff; border-radius: 8px; padding: 24px 28px; margin: 24px 0; }
+  .truth-box .tb-label { font-size: 0.75em; color: #c8a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; font-weight: bold; }
+  .truth-box p { color: #ddd; margin-bottom: 8px; }
+  .truth-box p:last-child { margin-bottom: 0; }
+  .truth-box strong { color: #fff; }
+
+  .danger-box { background: #2a1414; border-left: 4px solid #b23b3b; border-radius: 0 6px 6px 0; padding: 20px 26px; margin: 22px 0; color: #f0d8d8; }
+  .danger-box .db-label { font-size: 0.75em; color: #e08080; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; font-weight: bold; }
+  .danger-box strong { color: #fff; }
+
+  .tip-box { background: #fff8ee; border-left: 4px solid #c8a96e; border-radius: 0 6px 6px 0; padding: 20px 26px; margin: 22px 0; }
+  .tip-box .tip-label { font-size: 0.75em; color: #a3813f; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; font-weight: bold; }
+
+  .verify-box { background: #f0f7ff; border-left: 4px solid #4a90d9; border-radius: 0 6px 6px 0; padding: 16px 22px; margin: 18px 0; font-size: 0.92em; color: #2a5a8a; }
+  .sim-box { display: flex; align-items: center; gap: 22px; background: #1a1a1a; color: #fff; border-radius: 10px; padding: 24px 28px; margin: 22px 0; }
+  .sim-box .sim-qr { background: #fff; border-radius: 8px; padding: 8px; width: 92px; height: 92px; flex-shrink: 0; }
+  .sim-box .sim-qr img { width: 100%; display: block; }
+  .sim-box .sim-label { font-size: 0.72em; color: #c8a96e; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; font-weight: bold; }
+  .sim-box strong { display: block; font-size: 1.08em; margin-bottom: 4px; }
+  .sim-box p { margin: 0; color: #ccc; font-size: 0.9em; }
+
+  .video-box { background: #1a1a1a; border-radius: 8px; padding: 20px 24px; margin: 24px 0; display: flex; gap: 20px; align-items: center; }
+  .video-box img { width: 90px; height: 90px; border-radius: 6px; background: #fff; padding: 4px; flex-shrink: 0; }
+  .video-box .vb-label { font-size: 0.72em; color: #c8a96e; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; font-weight: bold; }
+  .video-box p { color: #ddd; font-size: 0.92em; margin: 0; }
+
+  .bonus-page { background: #0e0e0e; color: #fff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 60px 40px; page-break-after: always; text-align: center; }
+  .bonus-page .bp-eyebrow { font-size: 0.8em; letter-spacing: 4px; color: #c8a96e; text-transform: uppercase; margin-bottom: 20px; }
+  .bonus-page h2 { font-size: 2em; margin-bottom: 16px; color: #fff; }
+  .bonus-page .bp-sub { color: #aaa; max-width: 480px; margin: 0 auto 36px; font-size: 1.02em; }
+  .bonus-page .bp-qr { background: #fff; border-radius: 10px; padding: 14px; width: 150px; margin: 0 auto 30px; }
+  .bonus-page .bp-qr img { width: 100%; display: block; }
+  .bonus-page .bp-list { max-width: 460px; margin: 0 auto; text-align: left; }
+  .bonus-page .bp-item { border-top: 1px solid #2a2a2a; padding: 16px 0; }
+  .bonus-page .bp-item:first-child { border-top: none; }
+  .bonus-page .bp-num { font-size: 0.72em; color: #c8a96e; letter-spacing: 2px; text-transform: uppercase; }
+  .bonus-page .bp-item strong { display: block; font-size: 1.05em; color: #fff; margin: 4px 0 4px; }
+  .bonus-page .bp-item span { color: #999; font-size: 0.9em; font-style: italic; }
+  .verify-box strong { color: #1a3a5a; }
+
+  table.data-table { width: 100%; border-collapse: collapse; margin: 18px 0 28px; font-size: 0.92em; }
+  table.data-table th { background: #1a1a1a; color: #c8a96e; padding: 10px 13px; text-align: left; font-size: 0.74em; letter-spacing: 1.5px; text-transform: uppercase; }
+  table.data-table td { padding: 10px 13px; border-bottom: 1px solid #eee; vertical-align: top; }
+  table.data-table tr:nth-child(even) td { background: #f5f5f2; }
+
+  ol.numbered-list { padding-left: 0; counter-reset: num; margin: 20px 0; }
+  ol.numbered-list li {
+    counter-increment: num; list-style: none; position: relative; padding: 14px 0 14px 50px;
+    border-bottom: 1px solid #eee; font-size: 1em;
+  }
+  ol.numbered-list li::before {
+    content: counter(num); position: absolute; left: 0; top: 10px; background: #1a1a1a; color: #c8a96e;
+    width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 0.9em;
+  }
+  ol.numbered-list li strong { display: block; margin-bottom: 4px; font-size: 1.05em; color: #1a1a1a; }
+
+  .checklist { list-style: none; padding: 0; margin: 18px 0; }
+  .checklist li { padding: 7px 0 7px 28px; position: relative; font-size: 0.97em; }
+  .checklist li::before { content: '☐'; position: absolute; left: 0; color: #c8a96e; font-size: 1.1em; }
+
+  .profile-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 20px 0; }
+  .profile-card { background: #fff; border: 1px solid #e0e0d8; border-radius: 8px; padding: 22px 26px; }
+  .profile-card .pc-name { font-size: 1.1em; font-weight: bold; color: #1a1a1a; margin-bottom: 4px; }
+  .profile-card .pc-tag { font-size: 0.78em; color: #c8a96e; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+
+  .quote-pull { font-size: 1.3em; font-style: italic; color: #1a1a1a; border-top: 2px solid #c8a96e; border-bottom: 2px solid #c8a96e; padding: 20px 0; margin: 30px 0; text-align: center; }
+
+  .confidence { display: inline-block; font-size: 0.7em; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: bold; margin-left: 6px; }
+  .confidence.high { background: #d4edda; color: #1e5c2a; }
+  .confidence.mid { background: #fff3cd; color: #7a5a1a; }
+
+  .footer-chapter { font-size: 0.82em; color: #888; font-style: italic; margin-top: 40px; padding-top: 16px; border-top: 1px solid #eee; }
+
+  .closing { background: #0e0e0e; color: #fff; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; padding: 70px 50px; page-break-before: always; }
+  .closing h2 { color: #c8a96e; font-size: 1.8em; margin-bottom: 20px; }
+  .closing p { color: #ddd; }
+
+  @media print { .cover, .closing { min-height: 100vh; } .chapter, .toc { page-break-before: always; } }
+</style>
+</head>
+<body>
+
+<!-- COUVERTURE -->
+<div class="cover">
+  <div class="pretitle">Dossier confidentiel — édition octobre 2026</div>
+  <h1>ÉMIRATS <span>SANS FILTRE</span></h1>
+  <div class="subtitle">Le dossier que les guides gratuits ne peuvent pas écrire — Dubaï, Abu Dhabi, Sharjah : la vérité chiffrée, sans publicité, sans cliché.</div>
+  <div class="warning-box">
+    <strong>Avant d'ouvrir ce dossier</strong>
+    Ce n'est pas un guide touristique. C'est un document de travail : chiffres vérifiés, pièges juridiques réels, et les quelques décisions qui déterminent si votre installation vous enrichit ou vous coûte une année de votre vie. Écrit depuis Dubaï, par des gens qui vendent de l'immobilier sur ce marché depuis plus de dix ans — pas par une agence de contenu qui n'y a jamais vécu.
+    <p style="margin-top:12px; font-size:0.85em; color:#aaa;">Ce document est une information générale, pas un conseil juridique, fiscal ou financier personnalisé — sur tout sujet engageant (visa, fiscalité, contrat, litige), consultez un professionnel qualifié avant d'agir. Les seuils et règles cités évoluent rapidement aux Émirats : chaque chiffre est daté à octobre 2026 et doit être revérifié sur la source officielle au moment où vous en avez besoin.</p>
+  </div>
+  <div class="date">VERSION 1.0 — RÉSERVÉ AUX ACHETEURS — MISES À JOUR GRATUITES À VIE</div>
+</div>
+
+<!-- TABLE DES MATIERES -->
+<div class="toc">
+  <h2>Sommaire</h2>
+  <ol>
+    <li>Le vrai diagnostic — pourquoi maintenant</li>
+    <li>Dubaï, Abu Dhabi, Sharjah — lequel est fait pour vous</li>
+    <li>Le choix du quartier — budget réel par profil</li>
+    <li>Les visas — ce qu'on ne vous dit jamais</li>
+    <li>Le piège fiscal français</li>
+    <li>Les 10 arnaques qui coûtent le plus cher</li>
+    <li>Le point de rupture culturel</li>
+    <li>Banque et argent — ouvrir un compte sans se faire avoir</li>
+    <li>Monter son business — la vraie promesse derrière "zéro impôt"</li>
+    <li>Santé, écoles, enfants</li>
+    <li>Déménager sans arnaque</li>
+    <li>La discipline géographique — s'enrichir en vivant moins cher</li>
+    <li>S'intégrer sans s'isoler</li>
+    <li>La boîte à outils — tous les sites qu'il vous faut</li>
+    <li>Plan d'action — les 90 jours avant le départ</li>
+    <li>Les bons plans du quotidien</li>
+    <li>Activités — au-delà des clichés</li>
+    <li>Les bonnes adresses de Marina Immo</li>
+  </ol>
+</div>
+
+<!-- PAGE BONUS VIDEO -->
+<div class="bonus-page">
+  <div class="bp-eyebrow">Exclusif — réservé aux acheteurs</div>
+  <h2>3 vidéos que personne d'autre n'a vues</h2>
+  <p class="bp-sub">Filmées sur le terrain à Dubaï, pour accompagner trois des chapitres les plus denses de ce dossier. Scannez une seule fois, le lien s'enrichit au fil du tournage — pas de nouvelle édition à acheter.</p>
+  <div class="bp-qr"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAAC4klEQVR4nO2cTYrcMBBGX8WCXsrQB5ij2DcLc6TcwD5KDjBgLQckviwk989MMiHE47RD1cLY6rf4QJRKVSW1iT+x+csf4eC8885/Kp+s2Zjag7kvZiNQH83CPnqc35APQJcBMOiyEXOwYUE2W5dFOmeGCSCdd9Dj/GfwzTkppikFIAU0UczGmKkuPu6ox/mt+HD7EXOAKGzuO2xYznl3Pc5/Ip9OMutBE6Apvhpz/w/1OP/XfPXfliTVtThkoBjEZU2eooC0hx7nt+WRlvV1WDr99NGsk6ZH0+/8b0xvbKrDXf26vrVfH02/87/lU4D5muECDHq1+sOwlPrm+e8heVY3BU10qsv1oAxECaK0LuG+Ph+PD0AJIp2zEV8MAM3WCZLRft1Pj/Pb8rwPvRefjpKm1YkZFvffQ/IpYCPFbKQTwwLMfTFNFLuCeu530uP8hjySMtLSqVU1AIabmAw1MR58/3xAvs5vW4Gvi3TMl+3WJRP2+T0g3+obNbiuYfbucY88mn7nP7bWH5z7DiMCxFfT3HcIMsxPOVhrIeYd9Di/Ld/2z1NsS3MLx1o7R4N0KVK6/x6Pv42/tb8QM5riuzF8fg/Kp9Pqut9P1U3bWAp1TPoeaJP8gPqd/8ikBdrWal2V666ZmC/Vj/XN/fdg/NofjNeoe98wii079vzosHwnTekkGwFpKQaU2lC6OdPx7P2jA/KtdCW1gkYbvdY3lG/aSe6/R+Nb/G1dQV0KGq10ddPun3z/fED+7vzG8qbgnG9m2utXR+Wv9xfo1q5gCujZWui1EfD86JD8/f2FYhCBQSUYcamMSMUgnfPj6Xf+Y6snrtYKc5cNSjszO4/1/IZRS9RP7r//Bd8OYdnXuqemlittTJ4fHY9/cz8Fhm8hW7uk8oINKmE9ibWHHue35e/uLwCan3L9FOkkm/uXXfU4vz1/rVU1bzbri7WAm9aeQy1yPKJ+539t5v/P4Lzzh+V/AJ+bMHNjyLSTAAAAAElFTkSuQmCC" alt="QR code vers le coffre vidéo"></div>
+  <div class="bp-list">
+    <div class="bp-item">
+      <div class="bp-num">Vidéo 01 — lié au Chapitre 01</div>
+      <strong>L'accueil, en vidéo</strong>
+      <span>Pourquoi on a écrit ce dossier — 90 secondes, droit au but.</span>
+    </div>
+    <div class="bp-item">
+      <div class="bp-num">Vidéo 02 — lié au Chapitre 04</div>
+      <strong>Un vrai dossier de visa, décortiqué</strong>
+      <span>Les 3 endroits où 90% des gens se plantent sur un visa investisseur.</span>
+    </div>
+    <div class="bp-item">
+      <div class="bp-num">Vidéo 03 — lié au Chapitre 06</div>
+      <strong>L'arnaque qu'on a vue de près</strong>
+      <span>25 000 AED perdus sur un appartement qui n'existait pas — le récit complet.</span>
+    </div>
+  </div>
+</div>
+
+<!-- BUDGET EXPRESS -->
+<div class="chapter">
+  <div class="chap-num">Avant de commencer</div>
+  <h2>Votre budget, en un coup d'œil</h2>
+  <p class="lead">La question qu'on nous pose en premier, toujours : "est-ce que je peux me le permettre ?" Voici la réponse honnête, par profil — détail complet, méthodologie et sources au Chapitre 03.</p>
+
+  <table class="data-table">
+    <tr><th>Profil</th><th>Budget mensuel réaliste</th></tr>
+    <tr><td>Entrepreneur/freelance qui démarre, colocation</td><td>2 800-4 900 AED (hors licence/visa)</td></tr>
+    <tr><td>Célibataire/freelance installé</td><td>8 000-16 000 AED selon quartier</td></tr>
+    <tr><td>Couple deux salaires</td><td>18 000-35 000 AED selon quartier</td></tr>
+    <tr><td>Famille, 1-2 enfants</td><td>30 000-60 000 AED (école = le plus gros poste)</td></tr>
+    <tr><td>Famille, école premium</td><td>65 000-90 000+ AED</td></tr>
+  </table>
+
+  <div class="tip-box">
+    <div class="tip-label">Avant de déménager pour chercher un emploi</div>
+    Si vous venez sans poste sécurisé, ne faites pas l'erreur la plus coûteuse : <strong>venez d'abord pour les entretiens, pas pour chercher sur place.</strong> Un aller-retour de 3-5 jours coûte environ 860 à 1 550€ tout compris, sans visa nécessaire pour un Français — bien moins risqué qu'un déménagement complet sans offre en main. Détail complet au Chapitre 03.
+  </div>
+
+  <div class="sim-box">
+    <div class="sim-qr"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAAC8klEQVR4nO2cS2rkMBRFz2sbMrQhC+ilyDvIkppeUnZQXkp2IA0DMrcHkspOD1IJOMaGp0FRdp3BBXGl95HKxHfG/OtbODjvvPM/yierY0pmZuNikHpsAphHaL/3x+hxfkceKXaSJBGU0Q0gSAI6EWIngqTC3c6m3/mv8NWcdLI/sRMkM0JcjHmEYvHpQD3O78X324f0nGHIaB5BkHvN07F6nN+X/zC/LKbZQCGOML9E2dF6nN+XL/PbkqQuA2AMwsJbnwmvz8AgIB2hx/l9+R5YNi61EJ+zhdc+b6C5AN0Bepzfl++rOYHqUEDwbswjJtLq7iP0OL8v3/Kj2JWESDcoSZJ0T5dWzvOj6/HDuwGL6QbU/AiwiU4lnJYyZr/zMXqc35FntS7QSYpQHjdFDmV0G+T+vRxfzNlKV6thJd2GfEe8fnVRvu2rG8Pe3w0SIUKZc/fvFfm6PodiWNX1eTPTdycX5Gz6nX8wpMgmTG6GVWkt1B/cv1flt/4tCdFm181s1me5fy/KL1abwCMQ3vo6q6V1NEjlXXk8o37nPxk1OFbeRlplVpudi5NL9eNs+p1/MGpA1aoaMNSAat2Yy6Pvv1fke0rXKC2m+SUCLD0hLli45d4YItTqxxF6nN+Xb2XmQRv/1g+gnc+p1Q/379X4Fj9H6gq82YnXmR4ydeE+m37nH/JDRn/HTjYBZiPYVHrCtTGsW+o3/E/rcX5HvsTP1Zxrk0H3JDhCi7ncv9fjW/x8r2UEZWpBI67UvTt8Nv3OP+SbdZt/a1Zk09C6RtXE3v+9JL/eX2Ax/R0B0lM9BA11O66V6BPqd/6T0fJf6qnJ9i2WQ9AWXkGkrh23O5t+57/C1/sLycrVo1aE7gQs7U7SgXqc34v/cL59yL0FLb0gY4CJ1GUDsNJJOpt+57/Lpycxj7WwZVN77fvvJfmP9wel/zr97eCO938vyn+4v5BGVBoKaSzxFbBYjbrScz6ffuc/H6bHzGb4/zM47/yJ+H+bdyYhbxN4VAAAAABJRU5ErkJggg==" alt="QR code simulateur de budget"></div>
+    <div>
+      <div class="sim-label">Outil exclusif acheteurs</div>
+      <strong>Simulez votre propre budget, en direct</strong>
+      <p>Scannez ce code : répondez à quelques questions sur votre profil, votre quartier, votre transport, votre alimentation — et obtenez votre budget mensuel estimé, recalculé en temps réel.</p>
+    </div>
+  </div>
+
+  <p class="footer-chapter">Ces chiffres sont des points de repère, pas des promesses — chaque ligne est détaillée, sourcée et nuancée au Chapitre 03, avec les modules transport/alimentation/sport qui expliquent l'écart entre le bas et le haut de chaque fourchette.</p>
+</div>
+
+<!-- CHAPITRE 1 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 01</div>
+  <h2>Le vrai diagnostic — pourquoi maintenant</h2>
+
+  <p class="lead">Personne ne part pour une seule raison. Mais il y a un fil commun chez les gens qui réussissent leur installation : ils ne partent pas <em>vers</em> quelque chose de flou ("une vie meilleure"), ils partent <em>loin</em> de quelque chose de précis — l'incertitude économique, le sentiment de stagnation, la fatigue administrative, parfois le climat social. Et ils arrivent avec un plan, pas un rêve.</p>
+
+  <div class="truth-box">
+    <div class="tb-label">La vérité</div>
+    <p>Le climat d'incertitude en France — économique, politique, social — semble, selon notre expérience de terrain, pousser plus de gens à regarder ailleurs qu'il y a quelques années. Nous n'avons pas de statistique officielle à citer là-dessus, seulement ce que nous observons côté demande — c'est une impression de terrain, pas une prédiction. Nous n'allons pas vous promettre que la France va s'effondrer pour vous vendre un billet d'avion — ce serait malhonnête, et vous le sentiriez. Ce qui est vrai : l'incertitude elle-même, qu'elle débouche sur quoi que ce soit ou non, a un coût réel sur votre capacité à construire sereinement.</p>
+    <p>Attention à ne pas confondre avec une promesse de stabilité absolue : ce dossier documente lui-même, chapitre après chapitre, un cadre réglementaire émirati qui bouge vite (seuils de visa relevés, plafonds de loyer introduits, règles fiscales des entreprises qui évoluent). Chaque changement ici est annoncé et daté sur un portail officiel — à vous de le vérifier au bon moment, ce que ce dossier vous aide à faire.</p>
+  </div>
+
+  <p>Ce dossier part d'un principe simple : vous n'avez pas besoin d'un rêve, vous avez besoin d'un plan d'exécution. Chaque chapitre qui suit répond à une question concrète que vous vous poserez dans l'ordre où vous vous la poserez — pas dans l'ordre pratique pour un site web de référencement.</p>
+
+  <div class="tip-box">
+    <div class="tip-label">L'astuce d'initié</div>
+    La majorité des guides sur Dubaï sont écrits pour faire du trafic, pas pour vous faire gagner de l'argent ou vous éviter des problèmes. Vous le reconnaissez à un signe simple : ils vous disent quoi faire, jamais pourquoi ça peut mal se passer. Ce dossier fait l'inverse — chaque chapitre commence par ce qui peut vous coûter cher.
+  </div>
+
+  <div class="verify-box">
+    <strong>Ce que ce dossier ne remplace pas :</strong> ce document vous donne la carte. Il ne monte pas votre dossier de visa à votre place, ne négocie pas votre bail, ne structure pas votre entreprise avec vous. Si vous préférez être accompagné pas à pas plutôt que de tout exécuter seul, on propose un accompagnement pour ça — les détails sont en fin de dossier.
+  </div>
+</div>
+
+<!-- CHAPITRE 2 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 02</div>
+  <h2>Dubaï, Abu Dhabi, Sharjah — lequel est fait pour vous</h2>
+
+  <p class="lead">"S'expatrier aux Émirats" ne veut rien dire. Ce sont trois marchés, trois ambiances, trois coûts de la vie — et la plupart des gens choisissent Dubaï par défaut, simplement parce que c'est le seul nom qu'ils connaissent.</p>
+
+  <div class="profile-grid">
+    <div class="profile-card">
+      <div class="pc-name">Dubaï</div>
+      <div class="pc-tag">Le hub — lifestyle, business, réseau</div>
+      <p>Le choix par défaut, et souvent le bon : accès métro étendu, densité d'opportunités professionnelles, vie nocturne et sociale, communauté internationale la plus large. C'est aussi le marché le plus cher et le plus concurrentiel — vous payez pour la centralité.</p>
+    </div>
+    <div class="profile-card">
+      <div class="pc-name">Abu Dhabi</div>
+      <div class="pc-tag">L'institutionnel — calme, famille, culture</div>
+      <p>Tissu plus institutionnel (administration, énergie, défense, culture), ambiance plus conservatrice et plus discrète, rythme plus calme. Pas de métro — tout repose sur la voiture ou le bus (carte Hafilat). Logement sensiblement moins cher qu'un bien comparable à Dubaï sur la majorité du marché, à vérifier avec un comparatif de zones équivalentes au moment de votre recherche — sauf sur les secteurs les plus demandés de Saadiyat (Beach Residences), qui rejoignent le niveau de Dubai Marina selon le Chapitre 3 ; Reem Island, à l'inverse, reste globalement moins cher même sur ses meilleurs immeubles. Forte identité culturelle française historique : Lycée Louis-Massignon (1972), Alliance française (1974), Sorbonne Abu Dhabi, Louvre Abu Dhabi.</p>
+    </div>
+    <div class="profile-card">
+      <div class="pc-name">Sharjah</div>
+      <div class="pc-tag">Le conservateur — budget serré, discipline</div>
+      <p>Sensiblement moins cher que Dubaï pour un bien comparable sur la majorité du marché — mais pas sur les développements vitrines (Aljada, Al Zahia), dont les prix rejoignent ceux de JVC à Dubaï (Chapitre 3) : l'écart réel se trouve sur les quartiers plus anciens/moins prestigieux, pas sur le haut de gamme sharjahois. Seul émirat totalement sec (aucun alcool, même à domicile — ça vaut aussi pour non-musulmans de plus de 21 ans ; restez prudent même en transit, les règles aéroportuaires exactes méritent d'être vérifiées au cas par cas). Profil : familles conservatrices, étudiants, budgets serrés, salariés travaillant à Dubaï. Le vrai coût caché n'est pas le loyer, c'est le trajet (voir Chapitre 12).</p>
+    </div>
+  </div>
+
+  <div class="verify-box">
+    <strong>Une seule règle légale change vraiment d'un émirat à l'autre :</strong> l'alcool. Sharjah l'interdit intégralement. Le reste — cohabitation hors mariage (dépénalisée fédéralement depuis 2020), chèques sans provision (dépénalisation partielle fédérale depuis 2022) — s'applique dans toute l'Union, avec parfois une interprétation légèrement différente selon les tribunaux locaux. Ne croyez jamais un guide qui vous dit qu'une règle "n'existe qu'à Dubaï" sans vérifier qu'il ne généralise pas une exception.
+  </div>
+
+  <h3>À l'intérieur même de Dubaï : les poches conservatrices</h3>
+  <p>Vous n'êtes pas obligé de choisir entre "Dubaï lifestyle" et "ailleurs, plus calme". Des communautés comme Town Square (Nshama) ou DAMAC Hills 2 (ex-Akoya Oxygen) offrent un cadre familial, abordable et plus posé, sans sortir du territoire de Dubaï — utile si vous voulez garder l'adresse "Dubaï" sur un CV ou un visa tout en vivant dans un cadre moins exposé.</p>
+</div>
+
+<!-- CHAPITRE 3 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 03</div>
+  <h2>Le choix du quartier — budget réel par profil</h2>
+
+  <p class="lead">Fin 2026, le marché semble globalement orienté locataire — sauf sur quelques niches ultra-rares. L'offre d'appartements augmente nettement, et les loyers reculent dans la majorité des zones comparées (baisses marquées à Downtown, Business Bay et JVC, notamment). Seules les villas familiales établies (Arabian Ranches 1/2, Dubai Hills) et quelques niches ultra-luxe (Jumeirah Islands, Emirates Hills, District One) semblent résister, faute d'offre locative suffisante. <strong>Demandez une estimation actualisée avant toute décision — ce marché bouge vite et les chiffres ci-dessous datent d'octobre 2026.</strong> Valeurs en milliers d'AED/an sauf indication contraire — prix affichés (asking), pas toujours des transactions signées.</p>
+
+  <div class="truth-box">
+    <div class="tb-label">Ce que personne ne vous explique</div>
+    <p>"Quartier qui baisse" et "quartier qui monte" ne sont PAS la même chose. Les zones d'appartements qui baissent sont aussi celles qui concentrent 45% du stock en construction 2026-2030 — mauvaise nouvelle si vous achetez pour louer, bonne nouvelle si vous êtes locataire. Les villas établies et le bord de mer restent en demande forte avec une offre limitée : résistants à la baisse. Choisissez votre quartier selon que vous êtes locataire ou investisseur — jamais le même raisonnement pour les deux.</p>
+  </div>
+
+  <h3>Appartements — zones principales</h3>
+  <table class="data-table">
+    <tr><th>Zone</th><th>Studio</th><th>1 ch.</th><th>2 ch.</th><th>Métro</th><th>Profil</th></tr>
+    <tr><td>JVC</td><td>40-55k</td><td>48-70k</td><td>—</td><td>Non</td><td>Jeunes actifs, familles jeunes</td></tr>
+    <tr><td>Dubai Marina</td><td>40-95k</td><td>95-140k</td><td>145-220k</td><td>Oui</td><td>Cadres internationaux, lifestyle</td></tr>
+    <tr><td>Business Bay</td><td>50-100k</td><td>70-155k</td><td>90-160k</td><td>Oui</td><td>Cadres finance/business</td></tr>
+    <tr><td>Downtown Dubai</td><td>60k+</td><td>~133k</td><td>~223k</td><td>Oui</td><td>Cadres sup., prestige, très central</td></tr>
+    <tr><td>Al Furjan</td><td>35-50k</td><td>60-75k</td><td>—</td><td>Oui (station propre)</td><td>Familles jeunes, bon rapport qualité-prix</td></tr>
+    <tr><td>Discovery Gardens</td><td>35-50k</td><td>48-80k</td><td>—</td><td>Oui</td><td>Petits budgets avec accès métro</td></tr>
+    <tr><td>Al Barsha</td><td>40-55k</td><td>50-80k</td><td>—</td><td>Partiel</td><td>Familles classe moyenne</td></tr>
+    <tr><td>International City</td><td>~30,5-41k</td><td>~61k</td><td>—</td><td>Non</td><td>Budget minimal, le plus isolé</td></tr>
+    <tr><td>Dubai Creek Harbour</td><td>—</td><td>84-130k</td><td>140-171k</td><td>Non (chantiers)</td><td>Jeunes cadres/familles, vue Downtown, standing</td></tr>
+    <tr><td>City Walk</td><td>—</td><td>100-185k</td><td>150-236k</td><td>Non direct</td><td>Jeunes cadres aisés, lifestyle ultra-central</td></tr>
+    <tr><td>Bluewaters Island</td><td>—</td><td>314k</td><td>421k</td><td>Non direct (pont+tram)</td><td>Ultra-fortunés, vue Ain Dubai</td></tr>
+    <tr><td>Palm Jumeirah</td><td>—</td><td>169k</td><td>249k</td><td>Non (monorail/tram)</td><td>Ultra-fortunés, plage privée — tendance 2026 contestée (+5% selon Bayut, -15% selon Gulf News)</td></tr>
+    <tr><td>JBR / The Walk</td><td>55-70k</td><td>75-100k</td><td>100-145k</td><td>Non direct (tram)</td><td>Jeunes actifs, locations courte/moyenne durée</td></tr>
+    <tr><td>DIFC</td><td>60-75k</td><td>80-120k</td><td>110-175k</td><td>Oui (Financial Centre)</td><td>Cadres finance/juridique, hub pro n°1</td></tr>
+    <tr><td>Dubai Sports City</td><td>43-50k</td><td>55-67k</td><td>—</td><td>Non</td><td>Jeunes actifs budget, sportifs</td></tr>
+    <tr><td>Motor City</td><td>33-35k</td><td>50k</td><td>65-80k</td><td>Non</td><td>Jeunes actifs/familles modestes</td></tr>
+    <tr><td>Studio City</td><td>37-40k</td><td>—</td><td>—</td><td>Non</td><td>Jeunes actifs/étudiants budget serré</td></tr>
+    <tr><td>Dubai South</td><td>43-55k</td><td>60k</td><td>—</td><td>Partiel (Route 2020)</td><td>Aéroport/Expo, meilleurs rendements locatifs de Dubaï</td></tr>
+    <tr><td>DIP (Investment Park)</td><td>42k</td><td>44-58k</td><td>65-82k</td><td>Non</td><td>Budget, zone verte, très excentré</td></tr>
+    <tr><td>Al Jaddaf</td><td>—</td><td>95-130k</td><td>—</td><td>Oui (Green Line)</td><td>Central, mais données de loyer incohérentes (marché peu liquide)</td></tr>
+    <tr><td>Arjan</td><td>53k</td><td>65-85k</td><td>105-135k</td><td>Non</td><td>Jeunes actifs/petites familles, en hausse selon les relevés récents</td></tr>
+    <tr><td>JLT (26 clusters)</td><td>55-93k (+ jusqu'à 106k premium)</td><td>80-120k</td><td>120-180k</td><td>Oui (station DMCC, passerelles couvertes)</td><td>Expatriés toutes générations — souvent absent des comparatifs car trop morcelé en clusters pour une moyenne fiable ; pas de donnée 3 ch. trouvée</td></tr>
+  </table>
+  <p class="footer-chapter">Trous de données signalés par la recherche plutôt que comblés par une estimation : Majan et Al Sufouh n'ont renvoyé aucun chiffre fiable.</p>
+
+  <h3>Villas établies</h3>
+  <table class="data-table">
+    <tr><th>Communauté</th><th>3 ch.</th><th>4 ch.</th><th>5 ch.+</th><th>Profil / note</th></tr>
+    <tr><td>Dubai Hills Estate</td><td>250-400k</td><td>320-650k</td><td>500k-2,36M</td><td>Familles aisées, golf, mall — chantiers actifs, prix en forte hausse</td></tr>
+    <tr><td>Arabian Ranches 1/2</td><td>276k</td><td>392-404k</td><td>523-619k</td><td>Communauté la plus mature/prisée — en hausse, résiste à la correction du marché</td></tr>
+    <tr><td>Arabian Ranches 3</td><td>170k</td><td>341k</td><td>419k</td><td>Plus récent, jugé moins mature — <strong>correction nette -19% sur un an</strong></td></tr>
+    <tr><td>Damac Hills (1)</td><td>210-220k</td><td>230-300k</td><td>400-480k</td><td>Golf Trump International, légère hausse</td></tr>
+    <tr><td>Damac Hills 2 (ex-Akoya Oxygen)</td><td>112k</td><td>124k</td><td>149-237k (6ch.)</td><td>Le quartier villa le plus abordable — très excentré</td></tr>
+    <tr><td>The Springs</td><td>269k</td><td>319k</td><td>—</td><td>Emirates Living, lacs, proche Mall of the Emirates</td></tr>
+    <tr><td>The Meadows</td><td>364k</td><td>—</td><td>480-650k (6ch.)</td><td>Villas plus grandes, vue lac — données 4ch. incohérentes</td></tr>
+    <tr><td>Jumeirah Park</td><td>260-340k</td><td>290-500k</td><td>410k-1M</td><td>Nakheel, bien entretenu, proche Marina/JLT</td></tr>
+    <tr><td>Jumeirah Islands</td><td>—</td><td>843k</td><td>2,5M-3,25M</td><td>HNW, chaque villa sur îlot privé — marché très étroit, moyennes peu fiables</td></tr>
+    <tr><td>Emirates Hills</td><td>300-450k</td><td>450-700k</td><td>600k-1,2M</td><td>"Beverly Hills de Dubaï" — quasi aucun bien à louer</td></tr>
+    <tr><td>Victory Heights</td><td>195k</td><td>282k</td><td>476-900k</td><td>Thème espagnol, vue golf, prix compétitif</td></tr>
+    <tr><td>Mira / Mira Oasis</td><td>125-185k</td><td>~200k</td><td>—</td><td>Emaar, bon rapport qualité-prix, très excentré</td></tr>
+    <tr><td>The Villa</td><td>309k</td><td>333k</td><td>569k</td><td>Dubai Properties, style espagnol, jardins privés</td></tr>
+    <tr><td>Al Furjan (villas)</td><td>120-260k*</td><td>150-361k*</td><td>190-467k*</td><td>Seul grand quartier villa avec métro direct — *sources très divergentes</td></tr>
+    <tr><td>Tilal Al Ghaf</td><td>170-210k</td><td>260-650k</td><td>349-800k (6ch. 1,6M)</td><td>Concept lagune, très demandé, en hausse selon les relevés récents, construction active</td></tr>
+    <tr><td>Al Barari</td><td colspan="3">410k-2,35M selon sous-projet</td><td>Concept forêt urbaine/éco-luxe — marché étroit et incohérent</td></tr>
+    <tr><td>Living Legends</td><td>—</td><td>152-266k</td><td>200-350k</td><td>Bon rapport taille/prix, très excentré</td></tr>
+    <tr><td>The Sustainable City</td><td>275-300k</td><td>220-290k</td><td>—</td><td>Concept zéro carbone, communauté soudée, offre limitée</td></tr>
+    <tr><td>District One (MBR City)</td><td>—</td><td>670-920k</td><td>1,65M-5,2M (6ch.)</td><td>Standing ultra-premium, Crystal Lagoon — quasi aucune offre locative réelle</td></tr>
+    <tr><td>Al Waha</td><td>195-220k</td><td>—</td><td>—</td><td>Nakheel, prix accessibles, peu documenté</td></tr>
+    <tr><td>Mudon</td><td>—</td><td>—</td><td>—</td><td>Townhouses calmes — <strong>aucun chiffre isolé fiable trouvé</strong>, demandez une fourchette actualisée à un agent avant de vous positionner</td></tr>
+  </table>
+  <p class="footer-chapter">Aucune donnée fiable trouvée pour The Lakes et Nad Al Sheba malgré recherche ciblée — ne pas se fier à un chiffre trouvé ailleurs sans le recouper.</p>
+
+  <h3>Villas et townhouses récentes ou abordables</h3>
+  <table class="data-table">
+    <tr><th>Communauté</th><th>3 ch.</th><th>4 ch.</th><th>Profil / note</th></tr>
+    <tr><td>Town Square (Nshama)</td><td>163-220k</td><td>190-250k</td><td>Excellent rapport qualité-prix, parc central équipé, chantiers encore actifs</td></tr>
+    <tr><td>Serena</td><td>~180k</td><td>—</td><td>Marché de niche, un seul point de donnée fiable</td></tr>
+    <tr><td>Remraam</td><td colspan="2">—</td><td>Offre orientée appartement — pas de villa/townhouse trouvée dans cette zone</td></tr>
+  </table>
+  <p class="footer-chapter">Dubailand Residence Complex et Mudon Views : aucun chiffre trouvé — zones trop récentes ou trop peu documentées pour ce livret, à vérifier directement avec un agent avant de s'engager.</p>
+
+  <h3>Pour les investisseurs — rendement locatif brut par zone</h3>
+  <table class="data-table">
+    <tr><th>Zone</th><th>Rendement brut estimé</th><th>Confiance</th></tr>
+    <tr><td>Discovery Gardens</td><td>7,5-9%</td><td>Moyenne, bonne convergence entre sources</td></tr>
+    <tr><td>JVC</td><td>7-8%</td><td>Moyenne</td></tr>
+    <tr><td>Al Furjan (studio)</td><td>7-8,5%</td><td>Moyenne</td></tr>
+    <tr><td>Dubai South</td><td>7-9,5%</td><td>Faible-moyenne, pas de chiffre officiel précis trouvé</td></tr>
+    <tr><td>Business Bay</td><td>6-7%</td><td>Faible-moyenne, forte dispersion</td></tr>
+    <tr><td>Arjan</td><td>6,5-7,5%</td><td>Moyenne</td></tr>
+    <tr><td>JVT</td><td>6,5-8%</td><td>Faible, sources surtout promotionnelles</td></tr>
+    <tr><td>Dubai Marina</td><td>5,5-6,5%</td><td>Faible-moyenne, forte dispersion</td></tr>
+    <tr><td>Damac Hills 2 (villas)</td><td>5,5-6,7%</td><td>Faible-moyenne</td></tr>
+    <tr><td>Downtown Dubai</td><td>5-6%</td><td>Moyenne</td></tr>
+    <tr><td>Dubai Hills (appart. / villa)</td><td>5,6-6,5% / ~4,2%</td><td>Moyenne</td></tr>
+    <tr><td>Arabian Ranches (villas)</td><td>4,9-6,4%</td><td>Faible-moyenne</td></tr>
+    <tr><td>Palm Jumeirah</td><td>~4,7% (le plus bas)</td><td>Moyenne</td></tr>
+  </table>
+  <div class="verify-box">
+    <strong>Ces chiffres divergent selon la méthodologie :</strong> la moyenne "toute la ville" citée va de 6,8% à 8,16% selon la source — un écart qui en dit long sur la fiabilité du calcul de rendement en ligne. Avant d'investir, consultez directement le rapport Cavendish Maxwell ou le Dubai Smart Rental Index (DLD) plutôt que ces estimations de blogs, et rappelez-vous que le rendement net (après charges, vacance, commission de gestion) est généralement 1,5 à 3 points inférieur au brut affiché ici.
+  </div>
+
+  <h3>Sharjah — les quartiers qui comptent</h3>
+  <table class="data-table">
+    <tr><th>Quartier</th><th>Loyer/an</th><th>Profil / note</th></tr>
+    <tr><td>Al Khan</td><td>Moyenne tous types : environ 59k — le plus cher de Sharjah</td><td>Front de mer, standing, ~25-30 min de Dubaï Downtown</td></tr>
+    <tr><td>Corniche (Al Majaz 1/2/3)</td><td>2 ch. : 40-67k selon secteur</td><td>Tours au bord du lagon Khalid, ambiance animée le soir, familles et jeunes pros</td></tr>
+    <tr><td>Aljada (Arada, flagship)</td><td>1 ch. : 47-65k / 2 ch. : 78-95k</td><td>East Village (jeunes), Sarab (seul secteur villas), pôle commerces East Boulevard — ~35-45 min de Dubaï</td></tr>
+    <tr><td>Al Zahia (Arada/Majid Al Futtaim)</td><td>1 ch. : 36-50k / 2 ch. : 76-95k</td><td>Communauté familiale gérée, autour du plus grand mall du Nord des Émirats</td></tr>
+    <tr><td>Masaar (Arada) — communauté-forêt</td><td>Location villa 2 ch. : 110k / 4 ch. : 265-300k / vente dès 4,16M</td><td>Villas gated à thème nature, piscines privées — propose bien de la location, pas que de la vente</td></tr>
+    <tr><td>Al Nahda (Sharjah)</td><td>Studio ~29k / 1 ch. ~33-34k / 2 ch. ~44-46k / 3 ch. ~67-70k</td><td>Forte présence de communautés sud-asiatiques, profil budget — <strong>à corriger par rapport à une version précédente : pas de "frontière piétonne directe" confirmée</strong> avec la station de métro Al Nahda (Dubaï) ; la distance réelle serait plutôt ~1,2 km / ~12 min en voiture selon les sources, à vérifier sur place avant d'en faire un critère de choix</td></tr>
+  </table>
+  <p class="footer-chapter">Rappel : Sharjah reste le seul émirat totalement sec (Chapitre 2). Aucune ligne de métro propre à Sharjah — bus publics ou voiture vers Dubaï.</p>
+
+  <h3>Abu Dhabi — Al Reem Island et Saadiyat Island en détail</h3>
+  <table class="data-table">
+    <tr><th>Secteur</th><th>1 ch.</th><th>2 ch.</th><th>3 ch.</th><th>Note</th></tr>
+    <tr><td>Reem — Shams Abu Dhabi</td><td>80-110k</td><td>97-145k</td><td>—</td><td>Tours Sky/Sun/Burj Al Shams, standing variable</td></tr>
+    <tr><td>Reem — Marina Square</td><td>87-90k</td><td>90-105k</td><td>~217k</td><td>Moyenne île : 1ch. 57k / 2ch. 85k / 3ch. 129k</td></tr>
+    <tr><td>Saadiyat — Soho Square</td><td>~100k</td><td>130-140k</td><td>~180k</td><td>Zone la plus abordable de l'île</td></tr>
+    <tr><td>Saadiyat — Beach Residences</td><td>130-150k</td><td>156-170k</td><td>200-245k</td><td>Le plus haut de gamme, proche plage</td></tr>
+    <tr><td>Saadiyat — Jawaher (villas)</td><td colspan="3">582-700k/an (4 ch.)</td><td>Villas familiales aisées</td></tr>
+    <tr><td>Yas Island (villas uniquement)</td><td colspan="3">4 ch. : 289,9-420k / 5 ch. : 350-550k</td><td>Loisirs + résidentiel haut de gamme (Yas Mall, Ferrari World, golf Yas Links) — aucune donnée appartement trouvée</td></tr>
+    <tr><td>Khalifa City (villas)</td><td colspan="3">4 ch. : 140-290k (moyenne ~194k) — 3 ch. non trouvé, données obsolètes</td><td>Familles classe moyenne, alternative abordable à Saadiyat/Reem — ~10-20 min de l'aéroport, pas de métro</td></tr>
+  </table>
+  <div class="verify-box">
+    <strong>Important :</strong> Abu Dhabi a introduit en 2026 un encadrement des hausses de loyer au renouvellement, avec des règles encore mouvantes — vérifiez le plafond exact en vigueur et l'organisme compétent (DMT/TAMM) au moment de votre renouvellement plutôt que de vous fier à un chiffre figé ici. Les nouveaux baux, eux, restent globalement chers. Reem reste à 1h20-1h30 de Dubaï — zone non pertinente pour un commute quotidien vers Dubaï.
+  </div>
+
+  <h3>Composez votre budget — les modules</h3>
+  <p class="lead">Un budget d'expatrié n'est pas une moyenne, c'est une addition de choix. Voici les trois postes où l'écart est le plus grand selon vos choix — ajoutez-les au loyer (déjà vu plus haut) pour construire votre propre chiffre.</p>
+
+  <table class="data-table">
+    <tr><th>Transport</th><th>Coût mensuel</th><th>Note</th></tr>
+    <tr><td>Transports en commun (Nol card, métro/bus)</td><td>~300-400 AED/mois</td><td>Abonnement illimité — à confirmer sur l'app RTA, tarifs non revérifiés cette édition</td></tr>
+    <tr><td>Location longue durée (citadine)</td><td>900-1 400 AED/mois</td><td>899 AED/mois reste un prix d'appel confirmé 2026 (Yaris, Accent) ; carburant et Salik en plus</td></tr>
+    <tr><td>Achat — occasion fiable (5-8 ans)</td><td>25 000-45 000 AED à l'achat</td><td>Toyota/Nissan/Hyundai citadine, selon kilométrage</td></tr>
+    <tr><td>Achat — neuve entrée de gamme</td><td>~40 000-55 000 AED à l'achat</td><td>À confirmer auprès des concessionnaires — prix affichés très divergents selon finition</td></tr>
+  </table>
+  <p class="footer-chapter">Essence (octobre 2026, prix mensuel fixé par le gouvernement — a bondi de 11 à 17% ce mois-ci, à revérifier chaque mois) : Super 98 à 4,40 AED/litre, Special 95 à 4,28 AED/litre, Diesel à 4,80 AED/litre.</p>
+
+  <table class="data-table">
+    <tr><th>Alimentation</th><th>Coût mensuel (1 pers.)</th><th>Note</th></tr>
+    <tr><td>Cuisiner, courses discount (type Viva)</td><td>~500-950 AED/mois</td><td>Estimation générale, pas de prix Viva spécifique confirmé — comptez large</td></tr>
+    <tr><td>Manger dehors, économique (fast-food/cafétéria)</td><td>~900-1 500 AED/mois</td><td>15-25 AED/repas, 2 repas/jour dehors</td></tr>
+    <tr><td>Manger dehors, confort (DIFC/Business Bay/malls)</td><td>2 000-4 000+ AED/mois</td><td>45-70 AED un déjeuner correct sans table, 80-180 AED un vrai restaurant — vite cumulatif au quotidien</td></tr>
+  </table>
+
+  <table class="data-table">
+    <tr><th>Sport</th><th>Coût mensuel</th><th>Note</th></tr>
+    <tr><td>Gym de l'immeuble (inclus au loyer)</td><td>0 AED</td><td>Très répandu à Dubaï — un vrai levier budget : privilégier un immeuble avec gym/piscine inclus plutôt qu'un abonnement externe</td></tr>
+    <tr><td>Abonnement salle de sport (chaîne)</td><td>300-600 AED/mois</td><td>Non vérifié sur site officiel — ordre de grandeur seulement</td></tr>
+    <tr><td>Padel / golf</td><td>Voir Chapitre 17</td><td>Fourchettes détaillées par activité</td></tr>
+  </table>
+
+  <h3>Les profils qui comptent vraiment</h3>
+
+  <div class="profile-grid">
+    <div class="profile-card">
+      <div class="pc-name">Célibataire entrepreneur / freelance qui démarre</div>
+      <div class="pc-tag">Budget serré, sans revenu garanti les premiers mois</div>
+      <p>Hors licence/visa (Chapitre 9, ~AED 7 000-26 000/an selon zone franche), comptez un plancher de survie de <strong>2 800 à 4 900 AED/mois</strong> en colocation économique, sans extras — en composant avec les modules ci-dessus plutôt qu'avec un studio entier. Confiance moyenne-faible : synthèse de guides non officiels, pas de statistique gouvernementale.</p>
+    </div>
+    <div class="profile-card">
+      <div class="pc-name">Célibataire en recherche d'emploi (ingénieur ou autre)</div>
+      <div class="pc-tag">La vraie question : avez-vous fait les choses dans l'ordre ?</div>
+      <p><strong>Ne déménagez pas pour chercher un emploi — déménagez une fois l'emploi trouvé.</strong> La bonne séquence : décrocher des entretiens à distance depuis la France, puis venir à Dubaï spécifiquement pour les passer en personne (3-5 jours). Aucun visa requis pour un Français sur ce format (exemption touriste 90 jours). Budget réaliste pour ce voyage éclair : vol AR 450-700€, hôtel correct 3★ 250-550€, transport local/repas/imprévus 160-300€ — <strong>soit environ 860 à 1 550€ au total</strong>, bien moins risqué qu'un déménagement complet sans offre en main.</p>
+    </div>
+    <div class="profile-card">
+      <div class="pc-name">Célibataire, la trentaine</div>
+      <div class="pc-tag">Plus de stabilité, pas nécessairement plus de budget</div>
+      <p>Aucune donnée fiable trouvée comparant précisément les dépenses 20 ans vs 30 ans+ à Dubaï — à prendre comme un angle mort de la recherche, pas comme "pas de différence". Qualitativement : plus de moyens pour un logement privé plutôt qu'une colocation, mais la colocation reste un levier valable à cet âge aussi — voir l'encadré ci-dessous avant de vous y engager.</p>
+    </div>
+  </div>
+
+  <div class="danger-box">
+    <div class="db-label">La colocation a changé de statut légal en 2026</div>
+    Le Décret-loi n°4 de 2026 sur le logement partagé est en vigueur depuis le <strong>26 août 2026</strong>. Désormais, seul le propriétaire ou un exploitant agréé par la Dubai Municipality peut légalement louer en colocation — <strong>trouver des colocataires soi-même via Dubizzle/Facebook sous un seul Ejari est une sous-location non autorisée</strong>, visée explicitement par la loi. Sanctions : amendes de 500 à 500 000 AED (jusqu'à 1 million en récidive selon une source), suspension, coupure d'eau/électricité, expulsion. Autre règle, distincte : le partage entre non-apparentés est interdit sur les grands axes (Sheikh Zayed Road, Jumeirah Road, Al Wasl Road, Bani Yas Road), avec mise en conformité exigée des propriétaires/exploitants pour le 8 septembre 2027. <strong>La colocation "classique" entre inconnus reste très pratiquée, mais n'est plus un simple flou toléré — vérifiez le statut du bail avant de vous engager.</strong>
+  </div>
+
+  <table class="data-table">
+    <tr><th>Profil</th><th>Périphérie (JVC/Al Furjan)</th><th>Zone centrale (Marina/Downtown)</th></tr>
+    <tr><td>Couple deux salaires</td><td>18 000–25 000 AED</td><td>25 000–35 000 AED</td></tr>
+    <tr><td>Famille, 1 enfant, budget maîtrisé</td><td>30 000–40 000 AED</td><td>—</td></tr>
+    <tr><td>Famille, 2 enfants, confort</td><td>45 000–60 000 AED</td><td>—</td></tr>
+    <tr><td>Famille, école premium, haut de gamme</td><td colspan="2">65 000–90 000+ AED</td></tr>
+  </table>
+  <p class="footer-chapter">Confiance moyenne — estimations de planification croisées (Numbeo, guides 2026) : aucun budget chiffré vérifié de famille francophone n'a été trouvé publiquement. Pour les enfants, l'école reste de loin le plus gros poste (Chapitre 10) — construisez votre budget ligne par ligne plutôt que de vous fier à une moyenne.</p>
+
+  <div class="danger-box">
+    <div class="db-label">Coûts récurrents que tout le monde oublie</div>
+    Dépôt DEWA : 2 000 AED (appartement) / 4 000 AED (villa), remboursable. Ejari : ~178-240 AED/an. Caution locative : pratique courante de 5% (non meublé) à 10% (meublé) du loyer annuel — <strong>non confirmé par une source datée 2026, négociez-le explicitement</strong>. Nombre de chèques de loyer : 4 chèques est le standard le plus fréquent, mais tout va de 1 à 12 selon négociation — moins de chèques = loyer mieux négocié, mais apport initial plus lourd.
+  </div>
+</div>
+
+<!-- CHAPITRE 4 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 04</div>
+  <h2>Les visas — ce qu'on ne vous dit jamais</h2>
+
+  <table class="data-table">
+    <tr><th>Visa</th><th>Durée</th><th>Seuil clé</th></tr>
+    <tr><td>Emploi standard</td><td>2-3 ans</td><td>Salaire minimum variable selon secteur, sponsor employeur</td></tr>
+    <tr><td>Golden Visa (immobilier)</td><td>5 ans</td><td>AED 2 000 000 — valeur totale du bien, hypothéqué ou non (NOC bancaire si crédit en cours)</td></tr>
+    <tr><td>Golden Visa (entrepreneur)</td><td>5 ans</td><td>Projet valorisé AED 500 000 min. + lettre d'incubateur</td></tr>
+    <tr><td>Freelance / Green Visa</td><td>5 ans</td><td>Revenu freelance ≥ AED 360 000/an sur 2 ans + permis MoHRE</td></tr>
+    <tr><td>Remote Work Visa</td><td>12 mois (max 36)</td><td>Revenu ≥ 5 000 USD/mois — seuil relevé en 2026, à reconfirmer sur le portail officiel</td></tr>
+    <tr><td>Retraite</td><td>5 ans renouvelable</td><td>≥55 ans + épargne AED 1M ou revenu AED 240 000/an ou bien immobilier AED 1M</td></tr>
+  </table>
+
+  <div class="truth-box">
+    <div class="tb-label">La vérité que les guides généralistes n'ont pas encore intégrée</div>
+    <p>Le seuil de revenu minimum du Remote Work Visa a été relevé en 2026 — l'ancien chiffre de 3 500 USD/mois encore affiché sur beaucoup de guides est obsolète, le seuil actuel tournerait plutôt autour de 5 000 USD/mois, avec des relevés bancaires exigés sur plusieurs mois consécutifs. <strong>Vérifiez le montant et la durée de relevés exigée sur le portail officiel ICP/GDRFA avant de constituer votre dossier</strong> — ces seuils ont déjà bougé une fois en 2026 et peuvent rebouger. Le revenu doit venir <strong>exclusivement de l'étranger</strong> — travailler pour un client basé aux UAE avec ce visa est une infraction, pas une zone grise.</p>
+  </div>
+
+  <ol class="numbered-list">
+    <li><strong>L'annulation automatique après 6 mois d'absence.</strong> Un séjour hors UAE de plus de 6 mois annule automatiquement votre visa de résidence. "Garder son statut" pendant un long séjour en France sans vérifier est le piège classique.</li>
+    <li><strong>Vous ne pouvez pas annuler votre propre visa.</strong> Seul le sponsor (employeur, ou conjoint en visa famille) peut initier l'annulation. Ne signez jamais les papiers d'annulation avant d'avoir reçu votre solde de tout compte.</li>
+    <li><strong>Le piège de l'indivision immobilière.</strong> Pour un visa investisseur immobilier en copropriété, chaque co-investisseur doit en général détenir une part minimale pour obtenir son propre visa — le seuil exact a varié dans le temps et selon le type de visa visé (golden vs investisseur classique). Beaucoup de couples ou d'associés achètent en indivision sans vérifier ce point : faites confirmer le montant exact par le DLD/GDRFA avant de structurer l'achat ainsi.</li>
+    <li><strong>Le délai de grâce après perte d'emploi dépend de votre niveau de compétence contractuel</strong> (60 jours cité comme base depuis fin 2024, mais possiblement 30 ou 180 jours selon le "skill level" inscrit au contrat) — vérifiez sur ICP Smart Services ou l'app GDRFA au moment précis de l'annulation, pas sur un blog.</li>
+    <li><strong>Un divorce ou un décès fait tomber le visa du conjoint dépendant.</strong> Une prolongation d'urgence existe mais n'est pas automatique. Pour les Françaises mariées à un sponsor non-français, la reconnaissance en France d'un divorce émirati est signalée comme longue et incertaine.</li>
+  </ol>
+
+  <div class="tip-box">
+    <div class="tip-label">L'astuce d'initié</div>
+    Un délai "officiel" annoncé (ex. "5 jours ouvrés") sous-estime systématiquement le délai réel, qui dépend de la disponibilité des créneaux médicaux et de la charge du GDRFA. Budgetez toujours 2 à 4 semaines de marge au-delà de ce qu'on vous annonce — c'est plus honnête qu'un chiffre inventé, et ça vous évite de signer un bail ou de démissionner trop vite.
+  </div>
+</div>
+
+<!-- CHAPITRE 5 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 05</div>
+  <h2>Le piège fiscal français</h2>
+
+  <div class="truth-box">
+    <div class="tb-label">Le mythe à tuer immédiatement</div>
+    <p><strong>"183 jours hors de France = non-résident fiscal automatique" est faux.</strong> L'article 4B du Code général des impôts retient plusieurs critères alternatifs : foyer familial, lieu de séjour principal, activité professionnelle principale, centre des intérêts économiques. <strong>Un seul critère suffit à vous garder résident fiscal français</strong> — y compris si vous passez 300 jours par an à Dubaï, si votre famille reste en France.</p>
+  </div>
+
+  <p>L'erreur la plus fréquente et la plus coûteuse, citée par plusieurs cabinets fiscalistes : partir seul en laissant la famille en France. Conséquence possible : rappel d'impôt sur 10 années, intérêts de retard, majorations.</p>
+
+  <ol class="numbered-list">
+    <li><strong>Les UAE transmettent déjà vos données bancaires à la France.</strong> Échange automatique CRS depuis 2018. Un compte émirati non déclaré en France coûte 1 500 €/an d'amende par compte (article 1649 A du CGI) — et d'autres pénalités, potentiellement plus lourdes selon les montants et le type de structure détenue (compte, trust, société), peuvent s'y ajouter. Un avocat fiscaliste doit vérifier votre cas précis : les textes applicables sont nombreux et ne se recoupent pas tous. Ce type de dossier a déjà donné lieu à des redressements fiscaux documentés par la jurisprudence administrative française sur des virements dont l'origine n'a pas pu être justifiée.</li>
+    <li><strong>Une société à Dubaï ne règle rien si la direction effective reste en France.</strong> Articles 155A et 123 bis du CGI : si vous pilotez réellement votre activité depuis la France, le montage peut être requalifié, peu importe où est domiciliée la société.</li>
+    <li><strong>L'exit tax peut s'appliquer</strong> pour les patrimoines mobiliers importants, avec une demande de sursis à déposer dans un délai contraint avant le départ — point presque jamais mentionné dans les guides généralistes.</li>
+    <li><strong>Les loyers et plus-values immobilières de source française restent imposables en France</strong> même après votre départ, convention fiscale ou non.</li>
+  </ol>
+
+  <div class="verify-box">
+    <strong>Il n'existe aucun simulateur fiscal officiel combiné France-UAE.</strong> Le simulateur impots.gouv.fr ne fonctionne pas pour les non-résidents, et aucun outil officiel ne croise les deux systèmes. Ne faites confiance à aucun "simulateur" trouvé en ligne pour ce calcul — c'est le seul chapitre de ce dossier où nous vous recommandons explicitement de payer un avocat fiscaliste plutôt qu'un outil ou un guide.
+  </div>
+</div>
+
+<!-- CHAPITRE 6 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 06</div>
+  <h2>Les 10 arnaques qui coûtent le plus cher</h2>
+
+  <ol class="numbered-list">
+    <li><strong>L'agent immobilier non enregistré.</strong> Contacté via Instagram/Dubizzle, demande un acompte avant toute visite, puis disparaît. Des pertes de plusieurs milliers à plusieurs dizaines de milliers d'AED sont rapportées par des victimes dans la presse locale. Réflexe systématique : vérifier le numéro RERA de l'agent (carte professionnelle, vérifiable via l'app Dubai REST) avant tout versement.</li>
+    <li><strong>Le bail sans Ejari.</strong> Sans enregistrement Ejari, aucun recours légal, pas de visa de résidence lié à ce bail, pas de DEWA. Des faux baux falsifiés ayant mené à des condamnations ont été rapportés par la presse locale — ce n'est pas un scénario théorique.</li>
+    <li><strong>Le faux visa freelance vendu sur les réseaux.</strong> Vendu via TikTok/Instagram à des prix "trop beaux" (parfois AED 7 000-9 000 pour 2 ans). Des montages impliquant des centaines de victimes et plusieurs millions d'AED de pertes ont été rapportés par la presse locale. Signal d'alerte : "visa garanti à 100%", paiement cash sans reçu, virement vers un compte personnel.</li>
+    <li><strong>Le bait-and-switch à l'emploi.</strong> Le poste/salaire présenté avant le départ diffère de ce qui est réellement signé sur place. Ne démissionnez jamais de votre poste en France avant d'avoir vérifié le contrat via le portail MOHRE.</li>
+    <li><strong>Les frais de recrutement facturés au candidat.</strong> Interdits par la loi fédérale du travail (MOHRE), mais encore pratiqués. Un réseau arrêté à Dubaï facturait 1 000-3 000 AED par victime (affaire rapportée par Gulf News).</li>
+    <li><strong>L'arnaque à l'investissement WhatsApp/Telegram.</strong> Captures de "profits" fabriquées, incitation à payer pour "débloquer" un retrait. Un cas documenté par Khaleej Times : un consultant bancaire a perdu 100 000 AED. Selon une enquête citée par PayIt, 56% des résidents UAE rencontrent une tentative d'arnaque mensuelle — seulement 9% des victimes récupèrent leur argent.</li>
+    <li><strong>Le change informel via Facebook/WhatsApp.</strong> Des pertes de plusieurs dizaines de milliers d'AED ont été rapportées dans la presse locale suite à des échanges de devises organisés sur des groupes Facebook.</li>
+    <li><strong>Les frais cachés de location de voiture.</strong> Salik facturé avec majoration, amendes avec frais administratifs ajoutés en fin de contrat, caution retenue 15-30 jours. Toujours exiger un devis écrit "tout compris" et filmer l'état du véhicule à la prise en main.</li>
+    <li><strong>Les "concours" et arnaques lifestyle d'influenceurs.</strong> Loteries immobilières nécessitant l'achat d'un produit, promotion non déclarée d'applications de trading à "rendements garantis" — plusieurs cas documentés impliquant des créateurs français basés à Dubaï, avec amendes de la répression des fraudes française.</li>
+    <li><strong>Le rendement garanti supérieur à 15-20%/an.</strong> Aucune banque ni plateforme légitime ne le propose. L'affaire Exential (environ 300 millions $, plus de 7 000 victimes rapportées par Gulf News) montre que même des investisseurs expérimentés tombent dans ces schémas.</li>
+  </ol>
+
+  <div class="quote-pull">"Le seul document qui vous protège vraiment, c'est l'enregistrement officiel — un numéro RERA, un Ejari, un contrat MOHRE. Tout le reste n'est qu'une promesse verbale."</div>
+</div>
+
+<!-- CHAPITRE 7 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 07</div>
+  <h2>Le point de rupture culturel</h2>
+
+  <h3>Les chèques postdatés et l'interdiction de sortie du territoire</h3>
+  <p>Depuis la réforme de 2022, un chèque impayé par simple insuffisance de fonds et sans mauvaise foi n'entraîne plus systématiquement la prison comme avant — c'est une loi <strong>fédérale</strong>, applicable à Dubaï, Abu Dhabi et Sharjah. Mais les critères exacts (seuils de montant, définition précise de la "mauvaise foi") sont techniques et évoluent : <strong>ne vous fiez jamais à un seuil chiffré trouvé dans un guide pour juger votre propre situation — consultez un avocat local avant de signer tout chèque important.</strong></p>
+
+  <div class="danger-box">
+    <div class="db-label">Le vrai risque, que la "dépénalisation" masque</div>
+    Une action civile reste possible pour récupérer la somme, et <strong>un juge civil peut imposer une interdiction de sortie du territoire tant que la dette n'est pas réglée</strong> — même sans aucune poursuite pénale. Aux Émirats, les baux (chèques de loyer postdatés), les financements auto et certains crédits sont classiquement garantis par des chèques signés à l'avance. Un virement de salaire en retard qui fait "rebondir" un chèque de loyer peut déclencher cette procédure. Perdre son emploi ne suspend pas l'obligation des chèques déjà signés. C'est le point de rupture culturel le plus coûteux pour un Français habitué au système de prélèvement/découvert.
+  </div>
+
+  <h3>Réseaux sociaux : la loi ne distingue pas privé et public</h3>
+  <div class="truth-box">
+    <div class="tb-label">Ce qui choque le plus les Français</div>
+    <p>La loi fédérale sur la cybercriminalité (2021) prévoit prison et amende pour quiconque insulte autrui ou lui attribue un fait exposant au mépris, <strong>via un réseau d'information — y compris un message WhatsApp strictement privé.</strong> Des associations de défense des droits ont documenté des arrestations liées à des messages strictement privés échangés via des applications de messagerie. Même "liker" un contenu jugé diffamatoire peut être considéré comme participation à l'infraction selon plusieurs cabinets. Règle pratique : ne publiez et n'envoyez jamais, même en privé, ce que vous ne diriez pas devant un tribunal.</p>
+  </div>
+
+  <h3>Cohabitation hors mariage — ce qui est réglé, ce qui ne l'est pas</h3>
+  <p>Dépénalisée fédéralement fin 2020. Mais le droit de la famille reste largement régi par la charia : en cas de séparation, succession, ou reconnaissance d'un enfant né hors mariage, un couple non marié se trouve dans un vide juridique quasi total — le PACS n'est pas reconnu. C'est le vrai piège, pas la loi pénale elle-même.</p>
+
+  <h3>Alcool, conduite, employés de maison</h3>
+  <ul class="checklist">
+    <li>Alcool : 21 ans minimum, jamais dans la rue ou en voiture, tolérance zéro au volant. Sharjah reste totalement sec.</li>
+    <li>Accident de voiture : ne jamais admettre sa responsabilité verbalement sur place — attendez le rapport de police. Ne postez jamais une vidéo d'accident en ligne : filmer pour preuve privée est légal, la diffuser publiquement vous expose, vous, à des poursuites.</li>
+    <li>Employée de maison logée : relation encadrée par un contrat type MOHRE, pas par un arrangement oral informel comme en France — sous peine de plainte MOHRE et de blocage de visa.</li>
+  </ul>
+</div>
+
+<!-- CHAPITRE 8 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 08</div>
+  <h2>Banque et argent — ouvrir un compte sans se faire avoir</h2>
+
+  <div class="truth-box">
+    <div class="tb-label">L'idée reçue à corriger</div>
+    <p>Non, les banques digitales (Wio, Liv, YAP) <strong>ne permettent pas</strong> d'ouvrir un compte complet sans Emirates ID et visa de résidence valides, malgré ce que certains guides laissent croire. Seule exception : des comptes d'investissement réglementés (type Sarwa) avec passeport seul, sans IBAN courant complet.</p>
+  </div>
+
+  <table class="data-table">
+    <tr><th>Banque</th><th>Seuil salaire/dépôt</th><th>Spécificité</th></tr>
+    <tr><td>Emirates NBD</td><td>AED 5 000 à 49 999 selon l'offre</td><td>Banque historique, large réseau</td></tr>
+    <tr><td>Mashreq</td><td>Variable selon l'offre</td><td>Mashreq Neo 100% digital — le compte de base n'exigerait pas de salaire minimum, certaines offres premium si ; à confirmer directement auprès de la banque</td></tr>
+    <tr><td>Wio Bank</td><td>Pas de salaire minimum</td><td>100% app — la pré-demande démarre avec le visa de travail, mais le compte n'est activé qu'une fois l'Emirates ID délivrée</td></tr>
+    <tr><td>Liv. (Emirates NBD)</td><td>Visa + Emirates ID requis</td><td>Virements locaux gratuits, sans agence</td></tr>
+  </table>
+
+  <div class="danger-box">
+    <div class="db-label">Attention — Revolut n'est toujours pas disponible</div>
+    Le lancement de Revolut aux UAE est annoncé depuis plusieurs années sans date ferme. À la date de rédaction, le service n'est pas encore ouvert aux résidents UAE. <strong>Vérifiez le statut actuel directement sur le site de Revolut</strong> avant de résilier votre compte européen.
+  </div>
+
+  <h3>Transférer de l'argent France → UAE</h3>
+  <p>Wise reste une référence courante (frais de l'ordre de quelques euros pour 1 000 €, tarif dégressif au-delà — à vérifier sur wise.com, ces tarifs évoluent régulièrement). Les plafonds SEPA ont été largement levés depuis fin 2025 pour les paiements instantanés — vérifiez les conditions exactes auprès de votre banque. Ne confondez pas trois régimes différents : la déclaration douanière ne concerne que le <strong>cash physique</strong> (au-delà de AED 60 000 aux UAE, 10 000 € à l'entrée de l'UE) — un virement électronique n'a aucun seuil de déclaration douanière, mais reste soumis aux contrôles anti-blanchiment classiques des banques.</p>
+</div>
+
+<!-- CHAPITRE 9 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 09</div>
+  <h2>Monter son business — la vraie promesse derrière "zéro impôt"</h2>
+
+  <div class="truth-box">
+    <div class="tb-label">Le mythe "zéro taxe, zéro paperasse"</div>
+    <p>Faux depuis 2023. Entre l'enregistrement TVA tardif (AED 10 000 d'amende), l'enregistrement à l'impôt sur les sociétés tardif (AED 10 000 d'amende séparée) et la déclaration annuelle en retard (AED 500/mois puis AED 1 000/mois), les pénalités cumulées peuvent atteindre des montants significatifs pour une charge qui semblait "symbolique" au départ.</p>
+  </div>
+
+  <h3>Mainland ou free zone</h3>
+  <p>Depuis 2021, le mainland permet par défaut 100% de propriété étrangère pour la très grande majorité des activités, sans sponsor local à 51% — ce n'est plus l'exception, c'est la règle. Restent exclues certaines activités stratégiques (agences commerciales, pétrole/gaz). Le mainland exige généralement un bureau physique réel (bail Ejari) ; la free zone accepte souvent un bureau virtuel ("flexi-desk"), mais le nombre de visas autorisés dépend directement du type d'espace loué.</p>
+
+  <table class="data-table">
+    <tr><th>Profil</th><th>Free zone recommandée (indicatif)</th></tr>
+    <tr><td>Freelance / conseil</td><td>Meydan, IFZA (parmi les moins chères)</td></tr>
+    <tr><td>E-commerce</td><td>Meydan, IFZA</td></tr>
+    <tr><td>Import-export avec stock</td><td>DAFZA (proche aéroport) ou JAFZA (proche port)</td></tr>
+    <tr><td>Budget minimal absolu</td><td>SHAMS (Sharjah, à partir d'environ AED 5 000-6 000/an selon l'offre en cours) — hors Dubai</td></tr>
+  </table>
+  <div class="verify-box">
+    <strong>Ce tableau est une orientation générale, pas une recommandation personnalisée.</strong> Chaque free zone a ses propres règles de visas, coûts cachés et activités autorisées — exactement le genre de décision de structuration qui mérite un avocat ou un consultant business setup avant de signer, pas seulement ce tableau.
+  </div>
+
+  <h3>Fiscalité des entreprises 2026</h3>
+  <ul class="checklist">
+    <li>0% sur les premiers AED 375 000 de bénéfice taxable, 9% au-delà</li>
+    <li>Small Business Relief : plafond de chiffre d'affaires AED 3 000 000 — date de fin contestée entre sources (2026 vs 2029), à vérifier avant d'en dépendre dans votre plan</li>
+    <li>TVA obligatoire au-delà de AED 375 000 de CA taxable, enregistrement volontaire possible dès AED 187 500</li>
+    <li>Déclaration et paiement de l'impôt sur les sociétés : 9 mois après la fin de l'exercice</li>
+  </ul>
+
+  <div class="verify-box">
+    <strong>Rappel du Chapitre 5 :</strong> une société basée à Dubaï ne vous met pas automatiquement à l'abri de la fiscalité française si vous en pilotez réellement la direction depuis la France.
+  </div>
+</div>
+
+<!-- CHAPITRE 10 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 10</div>
+  <h2>Santé, écoles, enfants</h2>
+
+  <h3>Santé — ce qu'il faut vérifier avant de signer une assurance</h3>
+  <ul class="checklist">
+    <li>La liste nominative des hôpitaux couverts en tiers payant (pas juste "réseau privé")</li>
+    <li>Le plafond annuel global de la police</li>
+    <li>Si la maternité/l'accouchement est couvert en tiers payant intégral ou seulement remboursé après avance de frais — comptez plusieurs dizaines de milliers d'AED pour un accouchement privé selon l'établissement, <strong>à confirmer précisément avec votre assureur avant la grossesse</strong></li>
+  </ul>
+
+  <div class="danger-box">
+    <div class="db-label">Les médicaments français qui vous attendent à la douane</div>
+    Lexomil (bromazépam), Xanax (alprazolam), Valium (diazépam), codéine (Dafalgan codéine, Efferalgan codéine) sont des substances contrôlées aux UAE. Un permis MOHAP est obligatoire pour en importer, quelle que soit la durée de traitement — <strong>obtenez-le avant le départ</strong>, avec ordonnance et emballage d'origine à l'appui. Faites cette démarche avant de déménager, pas à l'arrivée, et vérifiez la quantité autorisée directement auprès du MOHAP.
+  </div>
+
+  <h3>Scolarité — la vraie contrainte de calendrier</h3>
+  <p>Les écoles réputées (Lycée Français International, GEMS, Nord Anglia, Dubai British School) ont des listes d'attente réelles, parfois de plusieurs centaines de noms par niveau. Les frais annuels vont de la maternelle aux alentours de 29 000 AED jusqu'à plus de 100 000 AED en terminale dans les écoles premium britanniques — <strong>tarifs à reconfirmer directement auprès de chaque école</strong>, ils évoluent chaque année. Stratégie recommandée : candidater à au moins 3 écoles en parallèle, viser la fenêtre juin-août pour une entrée en cours d'année (période de plus forte rotation des places), et ne jamais attendre d'être sur place pour commencer les démarches — certaines écoles ouvrent leurs inscriptions près d'un an avant la rentrée visée.</p>
+
+  <div class="verify-box">
+    <strong>Changement possible pour 2026-2027 :</strong> certaines écoles annoncent revoir leur date de référence pour calculer l'âge d'admission — ça peut décaler d'un an l'entrée d'un enfant né en fin d'année selon l'établissement. À vérifier école par école, cette règle n'est pas uniforme.
+  </div>
+</div>
+
+<!-- CHAPITRE 11 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 11</div>
+  <h2>Déménager sans arnaque</h2>
+
+  <p class="lead">C'est le chapitre où les guides génériques inventent des chiffres précis. Nous préférons vous dire où l'information est fiable, et où elle ne l'est pas.</p>
+
+  <div class="verify-box">
+    <strong>Conteneur de déménagement :</strong> les estimations trouvées varient d'un facteur 3 selon la source (de ~1 850 € à plus de 6 000 € pour un volume comparable). Exigez au moins 3 devis détaillés "porte-à-porte" (volume exact, port d'arrivée, douane, délai garanti) avant de vous fier à n'importe quel chiffre en ligne, y compris les nôtres.
+  </div>
+
+  <div class="verify-box">
+    <strong>Importer sa voiture :</strong> des droits de douane et une TVA s'appliquent sur la valeur du véhicule, en plus de frais d'inspection — mais les taux et conditions exacts rapportés par nos sources se contredisent sur des points structurants (type de véhicule éligible, âge limite). Impossible de trancher "ça vaut le coup" sans devis réel auprès de Dubai Customs/RTA. La tendance rapportée (non confirmée par témoignage direct) est que la majorité des expatriés vendent leur véhicule plutôt que d'en importer un.
+  </div>
+
+  <div class="danger-box">
+    <div class="db-label">Animaux de compagnie — le point qui bloque tout</div>
+    Certaines races (pit bulls, mastiffs, rottweilers, dobermans, boxers et leurs croisements sont souvent cités) sont interdites ou restreintes à l'entrée — <strong>liste non exhaustive et sujette à changement, à vérifier impérativement auprès du MOCCAE avant de réserver un vol</strong> pour votre animal. Puce + vaccination antirabique + test sérologique 21 jours après vaccination + certificat MOCCAE sont obligatoires. Comptez 1 300 à 3 850 € de transport pour un animal standard, en fret animalier uniquement (jamais en cabine). Vérifiez l'adhésion IPATA de tout agent choisi sur l'annuaire officiel avant de payer.
+  </div>
+</div>
+
+<!-- CHAPITRE 12 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 12</div>
+  <h2>La discipline géographique — s'enrichir en vivant moins cher</h2>
+
+  <p class="lead">Voici l'idée que personne ne vous donne, parce qu'elle va contre l'instinct de tout le monde : choisir une ville moins chère et moins "glamour" peut littéralement vous enrichir plus vite que de vous installer en plein Dubaï — pas seulement parce que le loyer est moins cher.</p>
+
+  <div class="truth-box">
+    <div class="tb-label">Le mécanisme</div>
+    <p>Vivre à Sharjah plutôt qu'à Dubaï crée une <strong>distance physique</strong> : le trajet (de l'ordre de 400 à 700 AED/mois de Salik en heure de pointe selon le nombre de passages, plus l'essence et le temps) rend chaque aller-retour coûteux en argent et en énergie. Cette distance agit comme une discipline forcée contre le réflexe le plus cher de la première année d'expatriation : le <strong>FOMO</strong> — la peur de rater une opportunité, qui pousse à vouloir sans cesse être à Dubaï, réseauter, lancer une activité, "se créer un revenu" par anxiété plutôt que par vrai besoin.</p>
+    <p>La vraie compétence de la première année n'est pas de remplir son agenda. C'est souvent de savoir <strong>vivre sur la rente du capital déjà construit</strong> — loyers perçus en France, revenus d'un business existant — sans se précipiter vers une nouvelle activité par peur de voir ces revenus diminuer. Gérer son temps libre sans culpabilité est une compétence, pas un luxe.</p>
+  </div>
+
+  <p class="footer-chapter">Confiance moyenne — aucun témoignage publié n'articule explicitement ce mécanisme : c'est un raisonnement, pas un fait rapporté. Mais la logique tient : moins de tentation de dépense de standing, moins de proximité physique avec le bruit social de Dubaï, plus de distance pour juger si une décision est réfléchie ou réactive.</p>
+
+  <div class="tip-box">
+    <div class="tip-label">L'astuce d'initié</div>
+    Si vous arrivez avec un capital ou des revenus passifs, donnez-vous explicitement une règle écrite avant de partir : "Je ne lance aucune nouvelle activité avant 12 mois, sauf opportunité exceptionnelle documentée." Cette règle, écrite à froid en France, vous protégera de vous-même une fois sur place — le FOMO ne s'annonce jamais comme du FOMO, il se présente toujours comme une opportunité unique.
+  </div>
+</div>
+
+<!-- CHAPITRE 13 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 13</div>
+  <h2>S'intégrer sans s'isoler</h2>
+
+  <p class="lead">Dubaï est une ville de passage — turnover très élevé des expatriés. L'intégration ne se fait pas "naturellement" ici comme elle pourrait se faire dans une ville où les gens restent toute leur vie. Il faut la construire activement, dès les premiers mois.</p>
+
+  <div class="danger-box">
+    <div class="db-label">L'envers du décor qu'Instagram ne montre pas</div>
+    Plusieurs témoignages décrivent un vrai décalage entre l'image "brunchs et soirées" de Dubaï et un vécu d'isolement réel, notamment chez ceux qui travaillent à distance ou vivent dans un logement isolé sans réseau construit. Ce n'est pas une fatalité — c'est une raison de plus de rejoindre une communauté dès l'arrivée, pas après six mois de solitude.</p>
+  </div>
+
+  <ul class="checklist">
+    <li>Inscription au registre consulaire des Français établis hors de France (gratuite, facilite toutes les démarches, donne accès à la liste électorale consulaire)</li>
+    <li>Alliance Française Dubaï (plusieurs centres à Dubaï — vérifiez les adresses actuelles, elles évoluent)</li>
+    <li>CCI France UAE (plusieurs centaines d'entreprises membres, chiffre à confirmer) pour le réseau professionnel</li>
+    <li>Le Petit Journal Dubaï pour l'actualité communautaire continue</li>
+  </ul>
+
+  <h3>Pour le public à forte composante maghrébine</h3>
+  <p>Une partie significative des Français qui choisissent les Émirats le font pour une raison précise, documentée par la presse (Bladi, JDD, citant le politologue Jérôme Fourquet) : le sentiment de ne plus avoir à choisir entre être français et musulman, dans un cadre où la pratique religieuse est simple et non stigmatisée — salles de prière partout, Ramadan vécu sans se sentir remarqué. Plusieurs mosquées sont ouvertes aux visites de non-musulmans à Dubaï, dont Jumeirah Mosque et Al Farooq Omar Bin Al Khattab.</p>
+  <p>Honnêteté requise : ce n'est pas un consensus idyllique. Plusieurs témoins reconnaissent explicitement une liberté d'expression réduite ("on ne peut pas critiquer ouvertement"), sans regretter leur choix pour autant. Certains découvrent aussi, une fois sur place, que Dubaï "n'est pas un paradis islamique" — une déception partielle, documentée mais peu détaillée dans les sources disponibles.</p>
+
+  <div class="truth-box">
+    <div class="tb-label">Ce qui surprend presque tout le monde, positivement</div>
+    <p>La sécurité (objets perdus systématiquement retrouvés, absence de peur du cambriolage) et la propreté urbaine arrivent en tête des satisfactions rapportées, souvent en contraste explicite avec le vécu en France.</p>
+  </div>
+</div>
+
+<!-- CHAPITRE 14 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 14</div>
+  <h2>La boîte à outils — tous les sites qu'il vous faut</h2>
+
+  <div class="danger-box">
+    <div class="db-label">Ne faites jamais ça</div>
+    Ne tapez jamais ces noms sur Google et ne cliquez pas sur le premier résultat sponsorisé — les faux sites imitant les portails officiels (ICP, GDRFA, DEWA) existent, et un intermédiaire non officiel qui se fait passer pour un portail d'État est exactement le mécanisme derrière plusieurs arnaques du Chapitre 6. Tapez l'URL exacte ci-dessous, à la main.
+  </div>
+
+  <table class="data-table">
+    <tr><th>Catégorie</th><th>Nom</th><th>Usage</th></tr>
+    <tr><td>Portail fédéral</td><td>u.ae</td><td>Visas, Emirates ID, installation, santé, UAE Pass</td></tr>
+    <tr><td>Résidence</td><td>ICP (icp.gov.ae) + app UAEICP</td><td>Emirates ID, visas de résidence fédéraux</td></tr>
+    <tr><td>Résidence Dubaï</td><td>GDRFA Dubai + app GDRFA DXB</td><td>Permis secteur privé, Golden/Green Visa, statut de visa</td></tr>
+    <tr><td>Travail</td><td>MOHRE (mohre.gov.ae) — numéro de contact sur le site, à confirmer</td><td>Contrats, plaintes salariales, permis de travail</td></tr>
+    <tr><td>Immobilier officiel</td><td>DLD + app Dubai REST</td><td>Vérification titres, baux, agents agréés (RERA)</td></tr>
+    <tr><td>Utilities</td><td>DEWA</td><td>Ouverture compteur eau/électricité</td></tr>
+    <tr><td>Transport</td><td>RTA — apps RTA Dubai et S'hail</td><td>Nol card, Salik, Journey Planner</td></tr>
+    <tr><td>Sécurité</td><td>Dubai Police — 901 (non-urgence), 999 (urgence)</td><td>eCrime, signalements</td></tr>
+    <tr><td>Immobilier (annonces)</td><td>Property Finder, Bayut, Dubizzle</td><td>Location/achat, estimation de prix</td></tr>
+    <tr><td>Données de marché</td><td>DXB Interact</td><td>Transactions réelles DLD (partenariat public-privé, pas un site DLD strict)</td></tr>
+    <tr><td>Banque digitale</td><td>Wio Bank, Liv.</td><td>Ouverture de compte 100% app (Emirates ID requis)</td></tr>
+    <tr><td>Transfert d'argent</td><td>Wise</td><td>Transferts France-UAE, frais transparents</td></tr>
+    <tr><td>Écoles — régulation</td><td>KHDA (web.khda.gov.ae)</td><td>Rapports d'inspection des écoles privées de Dubaï</td></tr>
+    <tr><td>Scolarité française</td><td>lfidubai.aflec-fr.org</td><td>Lycée Français International, admissions</td></tr>
+    <tr><td>Consulat</td><td>ae.diplomatie.gouv.fr</td><td>Services consulaires, registre, urgences</td></tr>
+    <tr><td>Communauté</td><td>Alliance Française Dubaï (afdubai.org)</td><td>Cours, médiathèque, événements</td></tr>
+    <tr><td>Réseau pro</td><td>CCI France UAE</td><td>Chambre de commerce franco-émiratie</td></tr>
+    <tr><td>Coût de la vie</td><td>Numbeo</td><td>Comparateur détaillé (données crowdsourcées, indicatives)</td></tr>
+  </table>
+
+  <div class="verify-box">
+    <strong>Les groupes Facebook francophones existent</strong> (plusieurs noms circulent : "Les Nouveaux Aventuriers", "Ze French in Dubai", "Francophones aux Émirats") mais changent vite — vérifiez-les manuellement sur Facebook juste avant votre départ plutôt que de vous fier à un nom figé dans un guide.
+  </div>
+</div>
+
+<!-- CHAPITRE 15 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 15</div>
+  <h2>Plan d'action — les 90 jours avant le départ</h2>
+
+  <h3>J-90 à J-60</h3>
+  <ul class="checklist">
+    <li>Choisir l'émirat ET le quartier selon votre profil réel (Chapitres 2-3), pas selon Instagram</li>
+    <li>Démarrer les démarches de visa adapté à votre situation (Chapitre 4)</li>
+    <li>Consulter un avocat fiscaliste franco-émirati — pas un simulateur en ligne (Chapitre 5)</li>
+    <li>Si enfants scolarisés : déposer les candidatures scolaires dès maintenant (Chapitre 10)</li>
+    <li>Demander 3 devis de déménagement détaillés "porte-à-porte" (Chapitre 11)</li>
+  </ul>
+
+  <h3>J-60 à J-30</h3>
+  <ul class="checklist">
+    <li>Obtenir les permis MOHAP pour tout médicament contrôlé (Chapitre 10)</li>
+    <li>Lancer les démarches d'import pour animaux de compagnie si applicable (Chapitre 11)</li>
+    <li>Ouvrir un compte Wise ou équivalent pour les premiers transferts (Chapitre 8)</li>
+    <li>Écrire votre règle personnelle anti-FOMO avant de partir, à froid (Chapitre 12)</li>
+    <li>S'inscrire aux groupes communautaires pertinents, vérifiés manuellement (Chapitre 14)</li>
+  </ul>
+
+  <h3>J-30 à J-0</h3>
+  <ul class="checklist">
+    <li>Ne signer AUCUN bail avant d'avoir le visa de travail confirmé ou l'offre finale signée</li>
+    <li>Préparer tous les documents (bulletins, diplômes, actes) pour légalisation/apostille</li>
+    <li>S'inscrire au registre consulaire dès l'arrivée</li>
+    <li>Vérifier le numéro RERA de tout agent avant tout versement immobilier</li>
+  </ul>
+
+  <div class="tip-box">
+    <div class="tip-label">La dernière astuce d'initié</div>
+    Le document le plus utile que vous emporterez n'est pas une liste de contacts — c'est votre propre checklist, personnalisée à partir de celle-ci, avec vos propres chiffres vérifiés. Ce dossier vous donne le squelette et les pièges à éviter. Le reste — vos devis réels, vos rendez-vous pris, vos chiffres confirmés — c'est le travail qui transforme une bonne intention en installation réussie.
+  </div>
+</div>
+
+<!-- CHAPITRE 16 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 16</div>
+  <h2>Les bons plans du quotidien</h2>
+
+  <p class="lead">Dubaï n'est pas forcément plus chère que la France au quotidien — à condition de savoir où regarder. Voici les apps et enseignes qui font une vraie différence sur un budget mensuel, pas les clichés "Dubaï c'est cher" ou "Dubaï c'est donné".</p>
+
+  <h3>Applications de réduction et cashback</h3>
+  <table class="data-table">
+    <tr><th>App</th><th>Coût indicatif</th><th>Ce qu'elle couvre vraiment</th></tr>
+    <tr><td><strong>The Entertainer</strong></td><td>De l'ordre de AED 600/an (formule UAE)</td><td>Le plus rentable si vous sortez souvent : un payant = un gratuit sur restos, brunchs, spa, loisirs. Formule désormais unifiée UAE (plus de version "Dubaï seul").</td></tr>
+    <tr><td>Zomato Pro</td><td>Environ AED 150/an</td><td>Réduction sur l'addition dans les restos partenaires</td></tr>
+    <tr><td>Talabat Pro</td><td>Environ AED 230/an</td><td>Livraison gratuite dès AED 30, + courses (Talabat Mart) et pharmacie</td></tr>
+    <tr><td>Noon One</td><td>De l'ordre de AED 90-100/an</td><td>Livraison gratuite noon + Food + courses + musique — souvent offerte 1 an via une carte bancaire co-brandée</td></tr>
+    <tr><td>Carte ruya Bank Mastercard</td><td>Gratuite à l'ouverture</td><td>Cashback annoncé sur une large gamme de transactions, conforme charia — vérifiez les plafonds et exclusions exacts, c'est un produit financier réel qui mérite lecture des conditions</td></tr>
+  </table>
+  <div class="verify-box">
+    <strong>Mise en garde :</strong> tous les tarifs ci-dessus sont indicatifs pour 2026 et changent chaque année — vérifiez sur l'app avant de vous abonner. Groupon et Cobone circulent encore dans les guides, mais leur activité réelle n'a pas pu être confirmée de façon fiable — vérifiez directement sur leur site avant de miser sur eux. Et si vous entendez parler d'une app "Riyali", c'est très probablement une confusion : le produit qui correspond le mieux à cette description est la carte ruya ci-dessus, à confirmer vous-même.
+  </div>
+
+  <h3>Supermarchés — du moins cher au plus cher</h3>
+  <table class="data-table">
+    <tr><th>Enseigne</th><th>Positionnement</th><th>Équivalent français</th></tr>
+    <tr><td><strong>Viva</strong></td><td>Discounteur, le moins cher</td><td>≈ Lidl / Aldi — marques propres, formats compacts</td></tr>
+    <tr><td>Carrefour</td><td>Budget à milieu de gamme, meilleur rapport qualité-prix</td><td>= Carrefour (même enseigne, exploitée sous franchise)</td></tr>
+    <tr><td>Lulu Hypermarket</td><td>Budget, très compétitif sur le frais</td><td>Pas d'équivalent direct — hypermarché généraliste à forte dominante indienne/asiatique</td></tr>
+    <tr><td>Choithrams</td><td>Milieu de gamme</td><td>≈ épicerie de quartier un peu haut de gamme (type Monoprix de proximité)</td></tr>
+    <tr><td><strong>Spinneys</strong> ("Spinis")</td><td>Haut de gamme, sensiblement plus cher que Carrefour (ordre de grandeur, pas un pourcentage fiable)</td><td>≈ Monoprix haut de gamme — bio, boucherie/poissonnerie qualité</td></tr>
+    <tr><td><strong>Waitrose</strong></td><td>Le plus premium — serait exploité sous licence par Spinneys, à confirmer</td><td>Pensez "la Grande Épicerie" en version supermarché courant</td></tr>
+  </table>
+  <p class="footer-chapter">Confiance moyenne — l'ordre exact entre Carrefour/Lulu/Choithrams varie selon la catégorie de produit, aucun relevé de prix indépendant récent n'a été trouvé. À traiter comme une tendance générale, tout comme les tarifs d'apps ci-dessus et l'adresse Odéon ci-dessous — rien dans ce chapitre n'a été vérifié sur place au moment de la rédaction.</p>
+
+  <h3>Trouver ses produits français</h3>
+  <div class="tip-box">
+    <div class="tip-label">Une adresse à explorer</div>
+    <strong>Odéon</strong> (Jumeirah Beach Road) — épicerie fine + traiteur + restaurant, orientation française revendiquée, plusieurs milliers de produits référencés, comptoirs Fromagerie/Boucherie/Poissonnerie/Boulangerie. L'association précise à un chef nommé et le nombre exact de références sont à reconfirmer sur place ou via leurs canaux officiels avant de la présenter comme établie.
+  </div>
+  <ul class="checklist">
+    <li>Jones the Grocer — épicerie fine (australienne, pas française) pour du fromage/charcuterie européens haut de gamme</li>
+    <li>PAUL — boulangerie-restaurant française, plusieurs adresses à Dubaï (vérifiez les emplacements actuels, les succursales évoluent)</li>
+    <li>La Farine (Business Bay) — boulangerie-café à l'orientation française, adresse à confirmer</li>
+  </ul>
+  <div class="verify-box">
+    <strong>Attention aux confusions :</strong> Comptoir 102 (Jumeirah Beach Road) existe bien, mais c'est un concept-store lifestyle et un café "clean eating" — pas une épicerie de produits alimentaires français, malgré son nom à consonance parisienne.
+  </div>
+  <p>Sur le prix : une baguette industrielle de supermarché revient à peu près au même prix qu'en France (AED 1,50-4). C'est la boulangerie artisanale française qui coûte réellement plus cher — comptez le double ou plus par rapport à une boulangerie de quartier en France.</p>
+</div>
+
+<!-- CHAPITRE 17 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 17</div>
+  <h2>Activités — au-delà des clichés</h2>
+
+  <p class="lead">Burj Khalifa et désert en 4x4, tout le monde les fait une fois. Voici ce que font réellement les résidents, semaine après semaine.</p>
+
+  <h3>Padel — l'activité la plus "résident" de Dubaï</h3>
+  <p>Plusieurs centaines de terrains dans la ville, en augmentation constante. Fourchette pratique : <strong>AED 30-60/heure</strong> en club accessible (Ahdaaf, Padelae), <strong>AED 150-250/heure</strong> en club premium indoor. Un abonnement dans un club avec créneaux heure creuse gratuits (type Viya Padel) peut être le meilleur rapport qualité-prix si vous jouez régulièrement.</p>
+
+  <h3>Golf — attention à l'inflation récente</h3>
+  <div class="danger-box">
+    <div class="db-label">Le piège budget</div>
+    Les tarifs ont fortement grimpé ces dernières années — un green fee sur un parcours championship en saison peut atteindre AED 3 500. Option réaliste pour un budget maîtrisé : les parcours "Par 3"/académie (nettement moins chers) ou les tarifs d'été hors saison.
+  </div>
+
+  <h3>Beach clubs — journée à la plage, en pratique</h3>
+  <table class="data-table">
+    <tr><th>Gamme</th><th>Prix jour</th><th>Note</th></tr>
+    <tr><td>Accessible</td><td>AED 100-250</td><td>Souvent "consommable" (déductible en nourriture/boissons)</td></tr>
+    <tr><td>Haut de gamme</td><td>AED 300-500+</td><td>Souvent non remboursable, non consommable</td></tr>
+  </table>
+
+  <h3>Coworking</h3>
+  <p>Fourchette large : dès AED 10/heure dans les espaces économiques sans prestige particulier, jusqu'à une centaine d'AED par jour dans les enseignes internationales classiques (tarifs très variables selon le site, à demander directement). Les espaces "avec vue" (Marina, DIFC) existent mais sans tarif fiable trouvé — à comparer sur place avant de s'engager sur un abonnement mensuel.</p>
+
+  <div class="tip-box">
+    <div class="tip-label">L'astuce d'initié</div>
+    Le réflexe qui change le budget loisirs : utilisez une app de réduction (Chapitre 16) systématiquement avant de réserver un beach club ou un resto — le prix "affiché" d'un beach club haut de gamme est presque toujours négociable à la baisse via un abonnement BOGO, alors que la plupart des résidents paient plein tarif simplement parce qu'ils réservent en direct sans vérifier.
+  </div>
+</div>
+
+<!-- CHAPITRE 18 -->
+<div class="chapter">
+  <div class="chap-num">Chapitre 18</div>
+  <h2>Les bonnes adresses de Marina Immo</h2>
+
+  <div class="tip-box">
+    <div class="tip-label">Chapitre en construction — mise à jour gratuite à venir</div>
+    Ce chapitre est pensé comme une liste pêle-mêle de nos propres adresses — cafés de spécialité, restaurants émiratis, petits malls méconnus — donnée sans détail ni justification, exactement comme on la donnerait à un ami, à partir de notre usage réel plutôt que d'une recherche en ligne. Elle sera enrichie dans une prochaine mise à jour gratuite de ce dossier, envoyée automatiquement aux acheteurs. Pour l'instant, une seule adresse à retenir :
+  </div>
+
+  <h3>Malls et petites adresses méconnues</h3>
+  <p><strong>Mercato Mall</strong> — l'un des plus méconnus parmi les centres commerciaux de Dubaï à l'architecture distinctive, loin du circuit touristique des mégacentres.</p>
+</div>
+
+<!-- ANNEXE GLOSSAIRE -->
+<div class="chapter">
+  <div class="chap-num">Annexe</div>
+  <h2>Glossaire des acronymes</h2>
+  <table class="data-table">
+    <tr><th>Acronyme</th><th>Signification / rôle</th></tr>
+    <tr><td>ICP</td><td>Federal Authority for Identity, Citizenship, Customs & Port Security — Emirates ID, visas fédéraux</td></tr>
+    <tr><td>GDRFA</td><td>General Directorate of Residency and Foreigners Affairs (Dubaï) — visas secteur privé, Golden/Green Visa</td></tr>
+    <tr><td>MOHRE</td><td>Ministry of Human Resources and Emiratisation — contrats de travail, plaintes salariales</td></tr>
+    <tr><td>DLD</td><td>Dubai Land Department — titres de propriété, baux, agents agréés</td></tr>
+    <tr><td>RERA</td><td>Real Estate Regulatory Agency — vérification des agents immobiliers (via DLD)</td></tr>
+    <tr><td>DEWA</td><td>Dubai Electricity and Water Authority — compteurs eau/électricité</td></tr>
+    <tr><td>RTA</td><td>Roads and Transport Authority — Nol card, Salik, transport public</td></tr>
+    <tr><td>DHA</td><td>Dubai Health Authority — régulation santé, vérification assurance</td></tr>
+    <tr><td>KHDA</td><td>Knowledge and Human Development Authority — régulation des écoles privées de Dubaï</td></tr>
+    <tr><td>ADEK</td><td>Abu Dhabi Department of Education and Knowledge — équivalent KHDA pour Abu Dhabi</td></tr>
+    <tr><td>MOHAP</td><td>Ministry of Health and Prevention — permis d'importation de médicaments contrôlés</td></tr>
+    <tr><td>MOCCAE</td><td>Ministry of Climate Change and Environment — import d'animaux de compagnie</td></tr>
+    <tr><td>ADREC</td><td>Abu Dhabi Real Estate Centre — régulation du marché locatif à Abu Dhabi</td></tr>
+    <tr><td>Ejari</td><td>Enregistrement officiel obligatoire d'un bail (Dubaï)</td></tr>
+    <tr><td>Tawtheeq</td><td>Équivalent d'Ejari pour Abu Dhabi</td></tr>
+    <tr><td>CRS</td><td>Common Reporting Standard — échange automatique de données bancaires entre pays, dont UAE→France</td></tr>
+    <tr><td>QFZP</td><td>Qualifying Free Zone Person — statut fiscal avantageux en free zone, sous conditions</td></tr>
+  </table>
+</div>
+
+<div class="closing">
+  <h2>Ce dossier n'est pas la fin — c'est le point de départ.</h2>
+  <p>Chaque chiffre ici a été recherché avec le niveau d'exigence qu'on applique à nos propres clients depuis plus de dix ans sur ce marché. Là où l'information était incertaine, on vous l'a dit plutôt que d'inventer un chiffre pour faire joli — et on vous le redit : vérifiez tout seuil chiffré sur la source officielle au moment où vous en avez besoin. C'est exactement la différence entre ce dossier et un guide gratuit.</p>
+  <p style="margin-top:16px;">Les règles changent vite aux Émirats — c'est tout l'objet de ce dossier. C'est pour ça que les acheteurs reçoivent les mises à jour gratuitement, pas seulement la version achetée aujourd'hui.</p>
+
+  <div class="truth-box" style="margin-top:32px; text-align:left;">
+    <div class="tb-label">Si vous préférez ne pas le faire seul</div>
+    <p>Ce dossier vous donne la méthode et les pièges à éviter. Il ne monte pas votre dossier à votre place, ne négocie pas pour vous, et ne vous tient pas la main les six premiers mois. C'est exactement ce que fait notre accompagnement personnalisé — pour ceux qui veulent déléguer l'exécution plutôt que tout faire eux-mêmes. Contactez-nous directement pour en discuter ; les acheteurs de ce dossier ont un accès prioritaire.</p>
+  </div>
+
+  <p style="margin-top:20px; color:#c8a96e; font-style:italic;">Bon départ.</p>
+</div>
+
+</body>
+</html>
