@@ -1,0 +1,292 @@
+<title>Simulateur de Budget</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: two-column on desktop — scrollable question stack on the left, a sticky
+   result card on the right; stacks to one column (result card first) on phone width. */
+:root{
+  --bg:#faf8f4; --surface:#ffffff; --ink:#19171a; --ink-soft:#5a5650;
+  --gold:#a3792f; --gold-strong:#8a632a; --gold-soft:#e8d9bc; --line:#e7e1d6;
+  --accent-bg:#1a1a1a; --accent-fg:#f3efe8;
+  --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body:'Work Sans', -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121012; --surface:#1b181a; --ink:#f3efe8; --ink-soft:#b6aea2;
+    --gold:#d6b370; --gold-strong:#e6c988; --gold-soft:#3a3024; --line:#2d2a28;
+    --accent-bg:#000000; --accent-fg:#f3efe8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121012; --surface:#1b181a; --ink:#f3efe8; --ink-soft:#b6aea2;
+  --gold:#d6b370; --gold-strong:#e6c988; --gold-soft:#3a3024; --line:#2d2a28;
+  --accent-bg:#000000; --accent-fg:#f3efe8;
+  color-scheme: dark;
+}
+*{box-sizing:border-box; min-width:0;}
+body{
+  margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body);
+  line-height:1.55; padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+}
+.wrap{max-width:980px; margin:0 auto; padding-block:36px 64px;}
+
+header{text-align:center; margin-bottom:32px;}
+header .eyebrow{font-size:0.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-strong); margin-bottom:10px;}
+header h1{font-family:var(--font-display); font-weight:700; font-size:clamp(1.7rem,5vw,2.3rem); margin:0 0 10px; text-wrap:balance;}
+header p{color:var(--ink-soft); max-width:50ch; margin:0 auto; font-size:0.95rem; text-wrap:balance;}
+
+.grid{display:grid; grid-template-columns: 1fr 320px; gap:28px; align-items:start;}
+@media (max-width: 760px){ .grid{grid-template-columns: 1fr;} .result{order:-1;} }
+
+fieldset{border:1px solid var(--line); border-radius:12px; padding:18px 20px 20px; margin:0 0 18px; background:var(--surface);}
+legend{font-family:var(--font-display); font-weight:600; font-size:1.02rem; padding:0 6px; color:var(--ink);}
+.sub{font-size:0.82rem; color:var(--ink-soft); margin:-2px 0 12px;}
+
+.opt{display:flex; align-items:flex-start; gap:10px; padding:9px 0; border-top:1px solid var(--line); cursor:pointer;}
+.opt:first-of-type{border-top:none;}
+.opt input{margin-top:3px; accent-color:var(--gold-strong); flex-shrink:0;}
+.opt .lbl{font-weight:500; font-size:0.94rem;}
+.opt .meta{display:block; font-size:0.8rem; color:var(--ink-soft); margin-top:1px;}
+.opt .price{margin-left:auto; font-variant-numeric:tabular-nums; font-size:0.88rem; color:var(--gold-strong); font-weight:600; white-space:nowrap; padding-left:10px;}
+
+.row{display:flex; align-items:center; gap:12px; margin-top:10px;}
+.row label{font-size:0.9rem; color:var(--ink-soft);}
+.stepper{display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+.stepper button{background:var(--bg); border:none; color:var(--ink); width:32px; height:32px; font-size:1.1rem; cursor:pointer;}
+.stepper span{width:36px; text-align:center; font-variant-numeric:tabular-nums; font-weight:600;}
+
+.note{background:var(--gold-soft); border-radius:8px; padding:10px 14px; font-size:0.82rem; color:var(--ink); margin-top:10px;}
+.hidden{display:none !important;}
+
+.select-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;}
+.select-row button{
+  border:1px solid var(--line); background:var(--bg); color:var(--ink); border-radius:999px;
+  padding:7px 16px; font-size:0.86rem; font-family:var(--font-body); cursor:pointer;
+}
+.select-row button[aria-pressed="true"]{background:var(--accent-bg); color:var(--accent-fg); border-color:var(--accent-bg);}
+
+.result{
+  background:var(--accent-bg); color:var(--accent-fg); border-radius:14px; padding:24px 22px;
+  position:sticky; top:16px;
+}
+.result .r-label{font-size:0.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:6px;}
+.result .r-total{font-family:var(--font-display); font-weight:700; font-size:2.1rem; margin:0 0 2px; font-variant-numeric:tabular-nums;}
+.result .r-eur{color:#b9b3a8; font-size:0.86rem; margin-bottom:18px;}
+.result .r-line{display:flex; justify-content:space-between; font-size:0.86rem; padding:7px 0; border-top:1px solid #2c2a28;}
+.result .r-line:first-of-type{border-top:none;}
+.result .r-line span:last-child{font-variant-numeric:tabular-nums; color:#e8e3d9;}
+.result .r-foot{font-size:0.74rem; color:#8f887c; margin-top:16px; padding-top:14px; border-top:1px solid #2c2a28;}
+
+.interview-card{background:var(--surface); border:1px solid var(--gold); border-radius:12px; padding:20px 22px; margin-bottom:18px;}
+.interview-card .ic-label{font-size:0.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-strong); margin-bottom:8px; font-weight:700;}
+.interview-card .ic-total{font-family:var(--font-display); font-size:1.6rem; font-weight:700; margin:6px 0;}
+.interview-card button{
+  margin-top:10px; background:var(--accent-bg); color:var(--accent-fg); border:none; border-radius:8px;
+  padding:10px 18px; font-size:0.88rem; font-family:var(--font-body); cursor:pointer;
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Émirats Sans Filtre — Outil interactif</div>
+    <h1>Simulateur de Budget</h1>
+    <p>Répondez à quelques questions, votre budget mensuel se calcule en direct. Les chiffres viennent du Chapitre 03 du dossier — rien n'est inventé pour cet outil.</p>
+  </header>
+
+  <div class="grid">
+    <div class="questions">
+
+      <fieldset>
+        <legend>Votre profil</legend>
+        <div class="select-row" id="profile-row">
+          <button data-profile="single" aria-pressed="true">Célibataire</button>
+          <button data-profile="entrepreneur">Entrepreneur / freelance</button>
+          <button data-profile="jobsearch">Recherche d'emploi</button>
+          <button data-profile="couple">Couple sans enfant</button>
+          <button data-profile="family">Famille avec enfant(s)</button>
+        </div>
+      </fieldset>
+
+      <div id="jobsearch-card" class="interview-card hidden">
+        <div class="ic-label">Avant de déménager — la vraie première dépense</div>
+        <p style="margin:0 0 4px; font-size:0.92rem;">Un aller-retour de 3-5 jours pour passer vos entretiens en personne, sans déménager :</p>
+        <div class="ic-total">860 – 1 550 €</div>
+        <p style="margin:0; font-size:0.82rem; color:var(--ink-soft);">Vol AR (450-700€) + hôtel 3★ (250-550€) + transport/repas (160-300€). Aucun visa requis pour un Français sur ce format.</p>
+        <button id="jobsearch-continue" type="button">Et une fois le poste décroché ? Simuler mon budget →</button>
+      </div>
+
+      <div id="main-form">
+
+        <fieldset>
+          <legend>Logement</legend>
+          <div class="sub">Tailles et prix par quartier détaillés au Chapitre 03 — ici, deux grandes familles de zones.</div>
+          <label class="opt"><input type="radio" name="zone" value="perif" checked><span class="lbl">Périphérie / budget<span class="meta">JVC, Al Furjan, Discovery Gardens, Al Barsha…</span></span></label>
+          <label class="opt"><input type="radio" name="zone" value="central"><span class="lbl">Centrale / standing<span class="meta">Dubai Marina, Business Bay, Downtown…</span></span></label>
+          <div class="row">
+            <label for="taille">Taille :</label>
+            <select id="taille">
+              <option value="studio">Studio</option>
+              <option value="1ch" selected>1 chambre</option>
+              <option value="2ch">2 chambres</option>
+              <option value="villa">Villa 3 ch.+</option>
+            </select>
+          </div>
+          <label class="opt hidden" id="coloc-opt"><input type="checkbox" id="coloc"><span class="lbl">Vivre en colocation (chambre privée) plutôt que seul<span class="meta">Statut légal changé en 2026 — détail au Chapitre 03 avant de vous engager</span></span></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Transport</legend>
+          <label class="opt"><input type="radio" name="transport" value="commun" checked><span class="lbl">Transports en commun<span class="meta">Nol card, métro/bus</span></span><span class="price">~350 AED</span></label>
+          <label class="opt"><input type="radio" name="transport" value="location"><span class="lbl">Voiture de location<span class="meta">Citadine + carburant + Salik</span></span><span class="price">~1 500 AED</span></label>
+          <label class="opt"><input type="radio" name="transport" value="occasion"><span class="lbl">Voiture achetée d'occasion<span class="meta">Coût d'usage mensuel estimé</span></span><span class="price">~900 AED</span></label>
+          <label class="opt"><input type="radio" name="transport" value="neuve"><span class="lbl">Voiture achetée neuve<span class="meta">Coût d'usage mensuel estimé</span></span><span class="price">~1 400 AED</span></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Alimentation</legend>
+          <div class="sub">Par adulte — les enfants comptent pour une demi-part.</div>
+          <label class="opt"><input type="radio" name="food" value="cuisine" checked><span class="lbl">Cuisiner, courses discount<span class="meta">Type Viva</span></span><span class="price">~700 AED</span></label>
+          <label class="opt"><input type="radio" name="food" value="eco"><span class="lbl">Manger dehors, économique<span class="meta">Fast-food / cafétéria</span></span><span class="price">~1 200 AED</span></label>
+          <label class="opt"><input type="radio" name="food" value="confort"><span class="lbl">Manger dehors, confort<span class="meta">DIFC, Business Bay, malls</span></span><span class="price">~3 000 AED</span></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Sport</legend>
+          <div class="sub">Par adulte.</div>
+          <label class="opt"><input type="radio" name="sport" value="gym_immeuble" checked><span class="lbl">Gym de l'immeuble<span class="meta">Inclus au loyer — très répandu</span></span><span class="price">0 AED</span></label>
+          <label class="opt"><input type="radio" name="sport" value="abonnement"><span class="lbl">Abonnement salle de sport<span class="meta">Chaîne standard</span></span><span class="price">~450 AED</span></label>
+          <label class="opt"><input type="radio" name="sport" value="pratique"><span class="lbl">Pratiquer un sport<span class="meta">Padel, golf — voir Chapitre 17</span></span><span class="price">~600 AED</span></label>
+        </fieldset>
+
+        <fieldset id="kids-fieldset" class="hidden">
+          <legend>Enfants</legend>
+          <div class="row">
+            <label>Nombre d'enfants scolarisés :</label>
+            <div class="stepper">
+              <button type="button" id="kids-minus">−</button>
+              <span id="kids-count">1</span>
+              <button type="button" id="kids-plus">+</button>
+            </div>
+          </div>
+          <div class="sub" style="margin-top:14px;">École — le plus gros poste du budget familial (Chapitre 10).</div>
+          <label class="opt"><input type="radio" name="school" value="budget" checked><span class="lbl">École correcte, budget maîtrisé<span class="meta">~29-45k AED/an</span></span><span class="price">~3 000 AED</span></label>
+          <label class="opt"><input type="radio" name="school" value="confort"><span class="lbl">École confort<span class="meta">~60-80k AED/an</span></span><span class="price">~5 500 AED</span></label>
+          <label class="opt"><input type="radio" name="school" value="premium"><span class="lbl">École premium<span class="meta">100k+ AED/an</span></span><span class="price">~9 000 AED</span></label>
+        </fieldset>
+
+        <fieldset id="entrepreneur-fieldset" class="hidden">
+          <legend>Business</legend>
+          <p style="margin:0 0 10px; font-size:0.88rem; color:var(--ink-soft);">Licence + visa free zone : 7 000 à 26 000 AED/an selon la zone (Chapitre 9) — pas un coût mensuel, mais vous pouvez l'amortir ici pour voir son effet sur votre budget de trésorerie.</p>
+          <label class="opt"><input type="checkbox" id="amortir-licence"><span class="lbl">Amortir la licence sur 12 mois<span class="meta">Ajoute une marge de trésorerie mensuelle</span></span><span class="price">~1 100 AED</span></label>
+        </fieldset>
+
+      </div>
+    </div>
+
+    <div class="result" id="result">
+      <div class="r-label">Votre budget mensuel estimé</div>
+      <div class="r-total" id="r-total">0 AED</div>
+      <div class="r-eur" id="r-eur">≈ 0 €</div>
+      <div id="r-lines"></div>
+      <div class="r-foot">Estimation construite à partir des modules du Chapitre 03 — un point de départ pour composer votre propre budget, pas un devis.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const LOGEMENT = {
+    perif:   { studio:3500, '1ch':4800, '2ch':7000,  villa:15000 },
+    central: { studio:5500, '1ch':9500, '2ch':14000, villa:23000 }
+  };
+  const COLOC = { perif:2000, central:4000 };
+  const TRANSPORT = { commun:350, location:1500, occasion:900, neuve:1400 };
+  const FOOD = { cuisine:700, eco:1200, confort:3000 };
+  const SPORT = { gym_immeuble:0, abonnement:450, pratique:600 };
+  const ECOLE = { budget:3000, confort:5500, premium:9000 };
+  const LICENCE_AMORTIE = 1100;
+  const AED_TO_EUR = 0.255;
+
+  let profile = 'single';
+  let kids = 1;
+
+  const $ = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
+  const val = (name) => $(`input[name="${name}"]:checked`).value;
+
+  function adultsFor(p){ return (p === 'couple' || p === 'family') ? 2 : 1; }
+
+  function setProfile(p){
+    profile = p;
+    $$('#profile-row button').forEach(b => b.setAttribute('aria-pressed', b.dataset.profile === p ? 'true' : 'false'));
+
+    const isJobsearch = p === 'jobsearch';
+    $('#jobsearch-card').classList.toggle('hidden', !isJobsearch);
+    $('#main-form').classList.toggle('hidden', isJobsearch);
+
+    $('#kids-fieldset').classList.toggle('hidden', p !== 'family');
+    $('#entrepreneur-fieldset').classList.toggle('hidden', p !== 'entrepreneur');
+    $('#coloc-opt').classList.toggle('hidden', !(p === 'single' || p === 'entrepreneur' || p === 'jobsearch'));
+    if (!(p === 'single' || p === 'entrepreneur')) $('#coloc').checked = false;
+
+    compute();
+  }
+
+  function fmt(n){ return Math.round(n).toLocaleString('fr-FR'); }
+
+  function compute(){
+    const zone = val('zone');
+    const taille = $('#taille').value;
+    const coloc = $('#coloc').checked && !$('#coloc-opt').classList.contains('hidden');
+    const transportKey = val('transport');
+    const foodKey = val('food');
+    const sportKey = val('sport');
+    const adults = adultsFor(profile);
+    const nKids = profile === 'family' ? kids : 0;
+
+    const logement = coloc ? COLOC[zone] : LOGEMENT[zone][taille];
+    const transport = TRANSPORT[transportKey];
+    const food = FOOD[foodKey] * adults + (nKids ? FOOD[foodKey] * 0.5 * nKids : 0);
+    const sport = SPORT[sportKey] * adults;
+    const ecole = (profile === 'family' && nKids) ? ECOLE[val('school')] * nKids : 0;
+    const licence = (profile === 'entrepreneur' && $('#amortir-licence').checked) ? LICENCE_AMORTIE : 0;
+
+    const total = logement + transport + food + sport + ecole + licence;
+
+    $('#r-total').textContent = fmt(total) + ' AED';
+    $('#r-eur').textContent = '≈ ' + fmt(total * AED_TO_EUR) + ' €  (taux indicatif)';
+
+    const lines = [
+      ['Logement' + (coloc ? ' (colocation)' : ''), logement],
+      ['Transport', transport],
+      ['Alimentation', food],
+      ['Sport', sport],
+    ];
+    if (ecole) lines.push(['École (' + nKids + ' enfant' + (nKids>1?'s':'') + ')', ecole]);
+    if (licence) lines.push(['Licence amortie', licence]);
+
+    $('#r-lines').innerHTML = lines.map(([label, v]) =>
+      `<div class="r-line"><span>${label}</span><span>${fmt(v)} AED</span></div>`
+    ).join('');
+  }
+
+  $$('#profile-row button').forEach(b => b.addEventListener('click', () => setProfile(b.dataset.profile)));
+  $$('input[type=radio], input[type=checkbox]').forEach(el => el.addEventListener('change', compute));
+  $('#taille').addEventListener('change', compute);
+
+  $('#kids-minus').addEventListener('click', () => { kids = Math.max(0, kids-1); $('#kids-count').textContent = kids; compute(); });
+  $('#kids-plus').addEventListener('click', () => { kids = Math.min(6, kids+1); $('#kids-count').textContent = kids; compute(); });
+
+  $('#jobsearch-continue').addEventListener('click', () => {
+    $('#jobsearch-card').classList.add('hidden');
+    $('#main-form').classList.remove('hidden');
+    compute();
+  });
+
+  setProfile('single');
+})();
+</script>
