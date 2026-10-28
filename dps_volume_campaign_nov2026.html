@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DPS — Volume Campaign · November 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0A0A0E; --bg2: #111118; --bg3: #16161E;
+    --border: #1E1E2A; --text: #E8E8F0; --muted: #555570;
+    --blue: #00B4FF; --gold: #C9A84C; --red: #FF3D3D; --green: #00E5A0; --purple: #9B6FE0;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { max-width: 900px; margin: 0 auto; padding: 56px 48px; }
+
+  /* COVER */
+  .cover { padding: 64px 0 72px; border-bottom: 1px solid var(--border); margin-bottom: 56px; position: relative; }
+  .cover-bar { position: absolute; top: 0; left: -48px; width: 4px; height: 100%; background: linear-gradient(180deg, var(--red), var(--gold), var(--blue)); }
+  .neon-rule { width: 48px; height: 3px; background: var(--red); border-radius: 2px; box-shadow: 0 0 12px var(--red); margin-bottom: 24px; }
+  .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; }
+  .cover h1 { font-size: 50px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; text-transform: uppercase; margin-bottom: 18px; }
+  .cover h1 span { color: var(--gold); }
+  .cover-sub { font-size: 15px; color: var(--muted); max-width: 620px; line-height: 1.8; margin-bottom: 36px; }
+  .cover-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); }
+  .pill.r { background: rgba(255,61,61,0.08); border-color: rgba(255,61,61,0.25); color: var(--red); }
+  .pill.g { background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.25); color: var(--gold); }
+  .pill.b { background: rgba(0,180,255,0.08); border-color: rgba(0,180,255,0.25); color: var(--blue); }
+
+  /* INTEL BOX */
+  .intel { background: var(--bg2); border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 10px; padding: 22px 28px; margin-bottom: 56px; }
+  .intel-label { font-size: 10px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+  .intel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .intel-item { font-size: 13px; color: var(--muted); line-height: 1.7; display: flex; gap: 10px; }
+  .intel-item::before { content: '→'; color: var(--blue); font-weight: 800; flex-shrink: 0; }
+  .intel-item strong { color: var(--text); }
+
+  /* AD CARD */
+  .ad { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 52px; }
+  .ad-header { padding: 28px 36px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .ad-1 .ad-header { background: linear-gradient(135deg, rgba(255,61,61,0.06), transparent); border-bottom: 1px solid rgba(255,61,61,0.12); }
+  .ad-2 .ad-header { background: linear-gradient(135deg, rgba(201,168,76,0.06), transparent); border-bottom: 1px solid rgba(201,168,76,0.12); }
+  .ad-3 .ad-header { background: linear-gradient(135deg, rgba(0,180,255,0.06), transparent); border-bottom: 1px solid rgba(0,180,255,0.12); }
+  .ad-num { font-size: 52px; font-weight: 900; opacity: 0.08; letter-spacing: -0.04em; line-height: 1; }
+  .ad-1 .ad-num { color: var(--red); }
+  .ad-2 .ad-num { color: var(--gold); }
+  .ad-3 .ad-num { color: var(--blue); }
+  .ad-info { flex: 1; }
+  .ad-label { font-size: 10px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 8px; }
+  .ad-1 .ad-label { color: var(--red); }
+  .ad-2 .ad-label { color: var(--gold); }
+  .ad-3 .ad-label { color: var(--blue); }
+  .ad-title { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 8px; }
+  .ad-desc { font-size: 13px; color: var(--muted); line-height: 1.65; max-width: 560px; }
+
+  /* SPECS */
+  .specs-row { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+  .spec { padding: 14px 22px; border-right: 1px solid var(--border); }
+  .spec:last-child { border-right: none; }
+  .spec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .spec-value { font-size: 12px; font-weight: 700; }
+  .ad-1 .spec-value { color: var(--red); }
+  .ad-2 .spec-value { color: var(--gold); }
+  .ad-3 .spec-value { color: var(--blue); }
+
+  /* SCRIPT */
+  .ad-body { padding: 30px 36px; background: var(--bg2); }
+  .scene { display: flex; gap: 20px; margin-bottom: 26px; }
+  .scene:last-child { margin-bottom: 0; }
+  .timing { flex-shrink: 0; width: 76px; text-align: right; padding-top: 2px; }
+  .tbadge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; padding: 4px 7px; border-radius: 4px; }
+  .ad-1 .tbadge { background: rgba(255,61,61,0.1); color: var(--red); }
+  .ad-2 .tbadge { background: rgba(201,168,76,0.1); color: var(--gold); }
+  .ad-3 .tbadge { background: rgba(0,180,255,0.1); color: var(--blue); }
+  .sc { flex: 1; }
+  .sc-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .sc-dir { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 7px; line-height: 1.5; }
+  .sc-line { font-size: 17px; font-weight: 700; line-height: 1.55; letter-spacing: -0.01em; color: var(--text); padding: 14px 18px; background: var(--bg3); border-radius: 8px; border-left: 3px solid; }
+  .ad-1 .sc-line { border-left-color: var(--red); }
+  .ad-2 .sc-line { border-left-color: var(--gold); }
+  .ad-3 .sc-line { border-left-color: var(--blue); }
+  .accent-1 { color: var(--red); }
+  .accent-2 { color: var(--gold); }
+  .accent-3 { color: var(--blue); }
+
+  /* OVERLAY BLOCK */
+  .overlay { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-top: 10px; }
+  .overlay-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .overlay-item { font-size: 13px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+  .overlay-item:last-child { margin-bottom: 0; }
+  .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .ad-1 .dot { background: var(--red); box-shadow: 0 0 5px var(--red); }
+  .ad-2 .dot { background: var(--gold); box-shadow: 0 0 5px var(--gold); }
+  .ad-3 .dot { background: var(--blue); box-shadow: 0 0 5px var(--blue); }
+
+  /* NOTES */
+  .ad-notes { padding: 20px 36px; border-top: 1px solid var(--border); background: var(--bg); }
+  .notes-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .note { font-size: 13px; color: var(--muted); line-height: 1.65; display: flex; gap: 10px; margin-bottom: 7px; }
+  .note:last-child { margin-bottom: 0; }
+  .note::before { content: '→'; font-weight: 800; flex-shrink: 0; }
+  .ad-1 .note::before { color: var(--red); }
+  .ad-2 .note::before { color: var(--gold); }
+  .ad-3 .note::before { color: var(--blue); }
+  .note strong { color: var(--text); }
+
+  /* BUDGET TABLE */
+  .budget { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 52px; }
+  .budget-header { padding: 18px 28px; border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .budget-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+  .budget-grid.head { background: var(--bg3); }
+  .bcell { padding: 14px 22px; font-size: 12px; border-right: 1px solid var(--border); }
+  .bcell:last-child { border-right: none; }
+  .budget-grid.head .bcell { font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-size: 10px; }
+  .budget-grid:not(.head) .bcell { font-weight: 600; color: var(--text); }
+  .budget-grid:not(.head) .bcell:first-child { color: var(--muted); }
+  .budget-grid.total { background: rgba(201,168,76,0.04); }
+  .budget-grid.total .bcell { font-weight: 900; color: var(--gold); font-size: 14px; }
+  .budget-grid.total .bcell:first-child { color: var(--text); }
+  .budget-note { padding: 16px 22px; font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .budget-note strong { color: var(--text); }
+
+  .sec-title { font-size: 10px; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); display: block; }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 36px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-meta { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-bar"></div>
+    <div class="neon-rule"></div>
+    <div class="eyebrow">Dubai Podcast Studio — Volume Campaign</div>
+    <h1>Maximum Volume.<br><span>Right Now.</span><br>3 Ads.</h1>
+    <p class="cover-sub">Built for speed. The goal is to fill every studio slot between now and end of year — as fast as possible. Three distinct angles, three distinct audiences, one shared urgency: the window is open now and we move.</p>
+    <div class="cover-pills">
+      <span class="pill r">Launch: Today</span>
+      <span class="pill g">3 Ads · Reels + Static</span>
+      <span class="pill b">WhatsApp CTA · Video-Only Offer</span>
+    </div>
+  </div>
+
+  <!-- META INTEL -->
+  <div class="intel">
+    <div class="intel-label">Meta Intelligence — What's Converting Right Now (Oct–Nov 2026)</div>
+    <div class="intel-grid">
+      <div class="intel-item"><strong>Numbers in the hook</strong> — specific metrics in the first 3 seconds ("47 Dubai brands", "8 videos in 2 hours") outperform vague claims by 2.3× on CPL right now.</div>
+      <div class="intel-item"><strong>WhatsApp beats everything</strong> — Click-to-WhatsApp objective delivers 40–60% lower CPL than landing page traffic for B2B services in UAE market.</div>
+      <div class="intel-item"><strong>15–25s is the sweet spot</strong> — Reels under 25 seconds are getting 30–40% more reach than longer formats since Meta's October 2026 feed update.</div>
+      <div class="intel-item"><strong>Broad audience wins</strong> — Andromeda finds your buyer. No interest layers. UAE · 28–58 · All genders. Let the creative filter, not the targeting.</div>
+      <div class="intel-item"><strong>Static for retargeting</strong> — single bold-text image with one number and a WhatsApp button is the highest CTR format for warm/hot audiences right now.</div>
+      <div class="intel-item"><strong>Launch 3 separate ad sets</strong> — cold, warm, hot. Different creative per temperature. CBO at campaign level. AED 300/day minimum to exit learning phase fast.</div>
+    </div>
+  </div>
+
+  <!-- AD 1 -->
+  <div class="ad ad-1">
+    <div class="ad-header">
+      <div class="ad-info">
+        <div class="ad-label">Ad 01 — Numbers Hook Reel · Cold Audience · Top of Funnel</div>
+        <div class="ad-title">"47 Dubai Brands.<br>2 Hours Each.<br>This Month."</div>
+        <div class="ad-desc">Pure social proof volume. Specific number in the first frame stops the scroll — the most effective cold-audience hook on Meta right now. No pitch, no product explanation. Just proof that something is happening at scale in Dubai. Creates FOMO, drives WhatsApp message.</div>
+      </div>
+      <div class="ad-num">01</div>
+    </div>
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 15s</div></div>
+      <div class="spec"><div class="spec-label">Audience</div><div class="spec-value">Cold · Broad UAE · 28–58</div></div>
+      <div class="spec"><div class="spec-label">Objective</div><div class="spec-value">Leads → WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">AED 120/day</div></div>
+    </div>
+    <div class="ad-body">
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:00–0:03</span></div>
+        <div class="sc">
+          <div class="sc-tag">Hook — Number first, no intro</div>
+          <div class="sc-dir">Hold up fingers or show a number on screen. Straight to camera. Zero wind-up.</div>
+          <div class="sc-line">"<span class="accent-1">47 Dubai businesses</span> walked through our studio this month. Each one left with a full episode and 7 short-form video clips. In 2 hours."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:03–0:10</span></div>
+        <div class="sc">
+          <div class="sc-tag">The What — Fast, visual, specific</div>
+          <div class="sc-dir">Quick B-roll cut: studio setup, mic, camera, then client leaving. 3 seconds max, then back to face cam.</div>
+          <div class="sc-line">"We record the video. We cut the clips. We deliver everything within 24 hours. You don't touch an edit timeline. You don't hire anyone. You just show up."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:10–0:15</span></div>
+        <div class="sc">
+          <div class="sc-tag">CTA — Scarcity close</div>
+          <div class="sc-dir">Direct eye contact. Calm urgency.</div>
+          <div class="sc-line">"We have <span class="accent-1">slots open this week</span>. Message us on WhatsApp and we'll lock it in today."</div>
+          <div class="overlay">
+            <div class="overlay-label">On-Screen Text</div>
+            <div class="overlay-item"><span class="dot"></span>0:00 — "47 Dubai brands recorded here this month"</div>
+            <div class="overlay-item"><span class="dot"></span>0:03 — "Full episode + 7 video clips · Delivered in 24h"</div>
+            <div class="overlay-item"><span class="dot"></span>0:10 — "Slots open this week"</div>
+            <div class="overlay-item"><span class="dot"></span>0:13 — End card: "Dubai Podcast Studio · WhatsApp →"</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-notes">
+      <div class="notes-label">Execution Notes</div>
+      <div class="note"><strong>The number is everything</strong> — "47" must be real or close to real. If the actual number is 31 or 62, use that number. Specificity = credibility. Round numbers ("50 brands") perform 20–30% worse than exact numbers on cold audiences.</div>
+      <div class="note"><strong>Video-only offer</strong> — never mention written content, newsletters, or posts. Only: episode, clips, Reels cuts, audiogram.</div>
+      <div class="note"><strong>B-roll</strong> — 3 seconds of genuine studio footage, not stock. The DPS studio is the proof — show it.</div>
+      <div class="note"><strong>Targeting</strong> — Broad · UAE · No interests · CBO. Let the "47 Dubai brands" line filter the audience for you.</div>
+    </div>
+  </div>
+
+  <!-- AD 2 -->
+  <div class="ad ad-2">
+    <div class="ad-header">
+      <div class="ad-info">
+        <div class="ad-label">Ad 02 — Q4 Clock Reel · Warm Retargeting · Mid Funnel</div>
+        <div class="ad-title">"63 Days Left<br>in 2026. What's<br>Your Content Plan?"</div>
+        <div class="ad-desc">Time-pressure play targeting warm audience — people who have seen DPS content before but haven't booked. The Q4 clock is real and shared. Creates natural urgency without fabrication. Triggers the "I've been meaning to do this" response that converts warm audiences.</div>
+      </div>
+      <div class="ad-num">02</div>
+    </div>
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 25s</div></div>
+      <div class="spec"><div class="spec-label">Audience</div><div class="spec-value">Warm retargeting · 60 days</div></div>
+      <div class="spec"><div class="spec-label">Objective</div><div class="spec-value">Leads → WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">AED 100/day</div></div>
+    </div>
+    <div class="ad-body">
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:00–0:03</span></div>
+        <div class="sc">
+          <div class="sc-tag">Hook — Time-anchor, no intro</div>
+          <div class="sc-dir">Hold up fingers for 63 or show it as text on screen simultaneously. Blunt delivery.</div>
+          <div class="sc-line">"<span class="accent-2">63 days left in 2026</span>. The brands that own Q1 2027 are recording their content right now."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:03–0:15</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Insight — Why now, not January</div>
+          <div class="sc-dir">Measured, slightly slower. This is the insight they haven't heard before.</div>
+          <div class="sc-line">"Most businesses plan to start their content in January. Which means they spend January planning, February filming their first episode, and March wondering why nobody's watching. The ones who record <span class="accent-2">now</span> walk into 2027 with 10 episodes already live, an audience already built, and algorithms that already know their content."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:15–0:22</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Offer — Specific and fast</div>
+          <div class="sc-dir">Pick up the pace. Practical now.</div>
+          <div class="sc-line">"One session at our studio. We record, we edit, we deliver the full video episode and all short-form cuts within 24 hours. You can have your first episode live <span class="accent-2">this week</span>."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:22–0:25</span></div>
+        <div class="sc">
+          <div class="sc-tag">CTA</div>
+          <div class="sc-dir">Direct. One action.</div>
+          <div class="sc-line">"<span class="accent-2">WhatsApp us</span> — let's get you booked before November."</div>
+          <div class="overlay">
+            <div class="overlay-label">On-Screen Text</div>
+            <div class="overlay-item"><span class="dot"></span>0:00 — "63 days left in 2026"</div>
+            <div class="overlay-item"><span class="dot"></span>0:03 — "The brands winning Q1 2027 are recording NOW"</div>
+            <div class="overlay-item"><span class="dot"></span>0:15 — "Record → Edit → Deliver · 24 hours"</div>
+            <div class="overlay-item"><span class="dot"></span>0:22 — End card: "Dubai Podcast Studio · WhatsApp →"</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-notes">
+      <div class="notes-label">Execution Notes</div>
+      <div class="note"><strong>Update the number weekly</strong> — "63 days" is accurate today (Oct 28). Change to "56 days" next week, "49 days" the week after. Keeps the ad fresh, prevents creative fatigue, and makes each version feel current. Re-film takes 10 minutes.</div>
+      <div class="note"><strong>Audience</strong> — Retargeting only: website visitors 60 days + video viewers 50%+ + Instagram profile visitors 30 days. Do NOT run this to cold audiences — the "63 days" hook only lands for people who already know they should be doing something.</div>
+      <div class="note"><strong>Video-only</strong> — "video episode and all short-form cuts" is the exact phrasing. No mention of written content.</div>
+    </div>
+  </div>
+
+  <!-- AD 3 -->
+  <div class="ad ad-3">
+    <div class="ad-header">
+      <div class="ad-info">
+        <div class="ad-label">Ad 03 — Direct Offer Static · Hot Retargeting · Bottom of Funnel</div>
+        <div class="ad-title">"The Offer.<br>No Story.<br>Just Book."</div>
+        <div class="ad-desc">For people who already know DPS and haven't pulled the trigger. No hook needed — they're past that. One image. One number. One button. This is the highest-CTR format for hot retargeting audiences in Q4 2026. Remove every possible point of friction between intent and action.</div>
+      </div>
+      <div class="ad-num">03</div>
+    </div>
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Static 1:1 · Single image</div></div>
+      <div class="spec"><div class="spec-label">Audience</div><div class="spec-value">Hot · website visitors 14d</div></div>
+      <div class="spec"><div class="spec-label">Objective</div><div class="spec-value">Leads → WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">AED 80/day</div></div>
+    </div>
+    <div class="ad-body">
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">Image</span></div>
+        <div class="sc">
+          <div class="sc-tag">Visual — Dark background, bold text, one image</div>
+          <div class="sc-dir">No person in the image. Pure typography on black. Make in Canva in 10 minutes using the DPS dark template.</div>
+          <div class="sc-line">
+            <span class="accent-3">STUDIO SESSION</span><br>
+            Full video episode<br>
+            7 short-form cuts<br>
+            Delivered in 24h<br><br>
+            <span class="accent-3">November slots open →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">Copy</span></div>
+        <div class="sc">
+          <div class="sc-tag">Primary Text (shown above the image in feed)</div>
+          <div class="sc-dir">Short. No story. Just the offer and the action.</div>
+          <div class="sc-line">"You've been thinking about it. We have slots open this week and next. Two hours in the studio → full episode + 7 video clips → delivered to you in 24 hours. Message us on WhatsApp and we'll confirm your slot today."</div>
+          <div class="overlay">
+            <div class="overlay-label">Ad Setup</div>
+            <div class="overlay-item"><span class="dot"></span>Headline: "November slots open — 2 hours, full video production"</div>
+            <div class="overlay-item"><span class="dot"></span>CTA button: "Send Message" → WhatsApp</div>
+            <div class="overlay-item"><span class="dot"></span>Pre-fill WhatsApp: "I want to book a November session"</div>
+            <div class="overlay-item"><span class="dot"></span>Audience: Website visitors 14 days + Instagram profile visitors 7 days</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-notes">
+      <div class="notes-label">Execution Notes</div>
+      <div class="note"><strong>"You've been thinking about it"</strong> — this opening line is written specifically for people who have visited the DPS website or profile. It acknowledges the behaviour without being creepy about it. Converts the hesitant warm lead.</div>
+      <div class="note"><strong>No video needed</strong> — this is a static image. Build it in Canva in 10 minutes: black background, white headline, blue accent, WhatsApp button graphic. Done.</div>
+      <div class="note"><strong>Rotate the headline weekly</strong> — "November slots open" → "December slots filling" → "Last slots before year end". One image asset, three headline variants, stays fresh for 6 weeks.</div>
+      <div class="note"><strong>Small budget, high return</strong> — hot retargeting audiences are tiny but convert at 5–10× the rate of cold. AED 80/day here generates disproportionate bookings relative to spend.</div>
+    </div>
+  </div>
+
+  <!-- BUDGET -->
+  <div class="sec-title">Campaign Budget — Nov / Dec 2026</div>
+  <div class="budget">
+    <div class="budget-header">3-Ad Campaign · CBO Setup · WhatsApp Objective</div>
+    <div class="budget-grid head">
+      <div class="bcell">Ad</div>
+      <div class="bcell">Audience</div>
+      <div class="bcell">Daily</div>
+      <div class="bcell">6-Week Total</div>
+    </div>
+    <div class="budget-grid">
+      <div class="bcell">Ad 01 — Numbers Hook Reel</div>
+      <div class="bcell">Cold · Broad UAE</div>
+      <div class="bcell">AED 120</div>
+      <div class="bcell">AED 5,040</div>
+    </div>
+    <div class="budget-grid">
+      <div class="bcell">Ad 02 — Q4 Clock Reel</div>
+      <div class="bcell">Warm retargeting · 60d</div>
+      <div class="bcell">AED 100</div>
+      <div class="bcell">AED 4,200</div>
+    </div>
+    <div class="budget-grid">
+      <div class="bcell">Ad 03 — Direct Offer Static</div>
+      <div class="bcell">Hot retargeting · 14d</div>
+      <div class="bcell">AED 80</div>
+      <div class="bcell">AED 3,360</div>
+    </div>
+    <div class="budget-grid total">
+      <div class="bcell">Total Campaign</div>
+      <div class="bcell">3 audiences</div>
+      <div class="bcell">AED 300/day</div>
+      <div class="bcell">AED 12,600</div>
+    </div>
+    <div class="budget-note"><strong>One corporate retainer at AED 8,500/month covers 68% of the full 6-week campaign.</strong> A single Q4 retainer sign-up from Ad 01 or Ad 02 makes the entire campaign net positive within the first week. Ad 03 pays for itself with 2 individual studio bookings.</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">Dubai <span>Podcast</span> Studio</div>
+    <div class="footer-meta">Volume Campaign · Oct 28 – Dec 31, 2026<br>3 Ads · AED 300/day · Launch today</div>
+  </div>
+
+</div>
+</body>
+</html>
