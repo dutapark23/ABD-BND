@@ -20,6 +20,7 @@ const docs = [
   { html: 'dps_gitex_ad_scripts.html',             pdf: 'dps_gitex_ad_scripts.pdf' },
   { html: 'dps_meta_ad_carousel_hire_vs_dps.html', pdf: 'dps_meta_ad_carousel_hire_vs_dps.pdf' },
   { html: 'dps_volume_campaign_nov2026.html',      pdf: 'dps_volume_campaign_nov2026.pdf' },
+  { html: 'dps_november_reels_2026.html',          pdf: 'dps_november_reels_2026.pdf' },
 ];
 
 (async () => {

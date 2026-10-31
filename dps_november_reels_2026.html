@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DPS — November Reels · 3 New Video Ads</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0A0A0E; --bg2: #111118; --bg3: #16161E;
+    --border: #1E1E2A; --text: #E8E8F0; --muted: #555570;
+    --blue: #00B4FF; --gold: #C9A84C; --red: #FF3D3D; --green: #00E5A0; --purple: #9B6FE0;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { max-width: 900px; margin: 0 auto; padding: 56px 48px; }
+
+  /* COVER */
+  .cover { padding: 64px 0 72px; border-bottom: 1px solid var(--border); margin-bottom: 56px; position: relative; }
+  .cover-bar { position: absolute; top: 0; left: -48px; width: 4px; height: 100%; background: linear-gradient(180deg, var(--purple), var(--blue), var(--green)); }
+  .neon-rule { width: 48px; height: 3px; background: var(--blue); border-radius: 2px; box-shadow: 0 0 12px var(--blue); margin-bottom: 24px; }
+  .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; }
+  .cover h1 { font-size: 50px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; text-transform: uppercase; margin-bottom: 18px; }
+  .cover h1 span { color: var(--gold); }
+  .cover-sub { font-size: 15px; color: var(--muted); max-width: 640px; line-height: 1.8; margin-bottom: 36px; }
+  .cover-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); }
+  .pill.b { background: rgba(0,180,255,0.08); border-color: rgba(0,180,255,0.25); color: var(--blue); }
+  .pill.g { background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.25); color: var(--gold); }
+  .pill.gr { background: rgba(0,229,160,0.08); border-color: rgba(0,229,160,0.25); color: var(--green); }
+  .pill.p { background: rgba(155,111,224,0.08); border-color: rgba(155,111,224,0.25); color: var(--purple); }
+
+  /* STATUS BAR */
+  .status-bar { background: var(--bg2); border: 1px solid var(--border); border-left: 3px solid var(--green); border-radius: 10px; padding: 16px 24px; margin-bottom: 52px; display: flex; gap: 32px; flex-wrap: wrap; }
+  .status-item { font-size: 12px; color: var(--muted); display: flex; gap: 8px; align-items: center; }
+  .status-item strong { color: var(--text); font-weight: 700; }
+  .dot-live { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); flex-shrink: 0; }
+  .dot-soon { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px var(--gold); flex-shrink: 0; }
+  .dot-new { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 8px var(--blue); flex-shrink: 0; }
+
+  /* AD CARD */
+  .ad { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 52px; }
+  .ad-header { padding: 28px 36px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .ad-1 .ad-header { background: linear-gradient(135deg, rgba(155,111,224,0.06), transparent); border-bottom: 1px solid rgba(155,111,224,0.12); }
+  .ad-2 .ad-header { background: linear-gradient(135deg, rgba(0,229,160,0.06), transparent); border-bottom: 1px solid rgba(0,229,160,0.12); }
+  .ad-3 .ad-header { background: linear-gradient(135deg, rgba(201,168,76,0.06), transparent); border-bottom: 1px solid rgba(201,168,76,0.12); }
+  .ad-num { font-size: 52px; font-weight: 900; opacity: 0.08; letter-spacing: -0.04em; line-height: 1; }
+  .ad-1 .ad-num { color: var(--purple); }
+  .ad-2 .ad-num { color: var(--green); }
+  .ad-3 .ad-num { color: var(--gold); }
+  .ad-info { flex: 1; }
+  .ad-label { font-size: 10px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 8px; }
+  .ad-1 .ad-label { color: var(--purple); }
+  .ad-2 .ad-label { color: var(--green); }
+  .ad-3 .ad-label { color: var(--gold); }
+  .ad-title { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 8px; }
+  .ad-desc { font-size: 13px; color: var(--muted); line-height: 1.65; max-width: 560px; }
+
+  /* SPECS */
+  .specs-row { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+  .spec { padding: 14px 22px; border-right: 1px solid var(--border); }
+  .spec:last-child { border-right: none; }
+  .spec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .spec-value { font-size: 12px; font-weight: 700; }
+  .ad-1 .spec-value { color: var(--purple); }
+  .ad-2 .spec-value { color: var(--green); }
+  .ad-3 .spec-value { color: var(--gold); }
+
+  /* SCRIPT */
+  .ad-body { padding: 30px 36px; background: var(--bg2); }
+  .scene { display: flex; gap: 20px; margin-bottom: 26px; }
+  .scene:last-child { margin-bottom: 0; }
+  .timing { flex-shrink: 0; width: 76px; text-align: right; padding-top: 2px; }
+  .tbadge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; padding: 4px 7px; border-radius: 4px; }
+  .ad-1 .tbadge { background: rgba(155,111,224,0.12); color: var(--purple); }
+  .ad-2 .tbadge { background: rgba(0,229,160,0.12); color: var(--green); }
+  .ad-3 .tbadge { background: rgba(201,168,76,0.12); color: var(--gold); }
+  .sc { flex: 1; }
+  .sc-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .sc-dir { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 7px; line-height: 1.5; }
+  .sc-line { font-size: 17px; font-weight: 700; line-height: 1.6; letter-spacing: -0.01em; color: var(--text); padding: 14px 18px; background: var(--bg3); border-radius: 8px; border-left: 3px solid; }
+  .ad-1 .sc-line { border-left-color: var(--purple); }
+  .ad-2 .sc-line { border-left-color: var(--green); }
+  .ad-3 .sc-line { border-left-color: var(--gold); }
+  .accent-1 { color: var(--purple); }
+  .accent-2 { color: var(--green); }
+  .accent-3 { color: var(--gold); }
+
+  /* OVERLAY */
+  .overlay { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-top: 12px; }
+  .overlay-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .overlay-item { font-size: 13px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+  .overlay-item:last-child { margin-bottom: 0; }
+  .dot-ov { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .ad-1 .dot-ov { background: var(--purple); box-shadow: 0 0 5px var(--purple); }
+  .ad-2 .dot-ov { background: var(--green); box-shadow: 0 0 5px var(--green); }
+  .ad-3 .dot-ov { background: var(--gold); box-shadow: 0 0 5px var(--gold); }
+
+  /* NOTES */
+  .ad-notes { padding: 20px 36px; border-top: 1px solid var(--border); background: var(--bg); }
+  .notes-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .note { font-size: 13px; color: var(--muted); line-height: 1.65; display: flex; gap: 10px; margin-bottom: 7px; }
+  .note:last-child { margin-bottom: 0; }
+  .note::before { content: '→'; font-weight: 800; flex-shrink: 0; }
+  .ad-1 .note::before { color: var(--purple); }
+  .ad-2 .note::before { color: var(--green); }
+  .ad-3 .note::before { color: var(--gold); }
+  .note strong { color: var(--text); }
+
+  /* LIVE TRACKER */
+  .tracker { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 52px; }
+  .tracker-header { padding: 18px 28px; border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); }
+  .tracker-row { display: grid; grid-template-columns: 40px 2fr 1fr 1fr 1fr; border-bottom: 1px solid var(--border); align-items: center; }
+  .tracker-row:last-child { border-bottom: none; }
+  .tracker-row.head { background: var(--bg3); }
+  .tcell { padding: 13px 18px; font-size: 12px; border-right: 1px solid var(--border); }
+  .tcell:last-child { border-right: none; }
+  .tracker-row.head .tcell { font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-size: 10px; }
+  .tcell .badge { display: inline-block; font-size: 10px; font-weight: 800; padding: 3px 9px; border-radius: 10px; }
+  .badge-live { background: rgba(0,229,160,0.1); color: var(--green); border: 1px solid rgba(0,229,160,0.2); }
+  .badge-soon { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.2); }
+  .badge-new { background: rgba(0,180,255,0.1); color: var(--blue); border: 1px solid rgba(0,180,255,0.2); }
+  .tcell-num { font-size: 18px; font-weight: 900; opacity: 0.15; text-align: center; }
+
+  .sec-title { font-size: 10px; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); display: block; }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 36px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-meta { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-bar"></div>
+    <div class="neon-rule"></div>
+    <div class="eyebrow">Dubai Podcast Studio — November 2026</div>
+    <h1>3 New<br>Video <span>Scripts.</span><br>Launch Now.</h1>
+    <p class="cover-sub">Three angles that haven't run yet. Built to sit alongside the "62 days left" Reel launching tomorrow — different hooks, different audiences, same urgency. All pure video. No carousels. No static.</p>
+    <div class="cover-pills">
+      <span class="pill b">3 Reels · 9:16</span>
+      <span class="pill g">15–25 seconds each</span>
+      <span class="pill gr">WhatsApp CTA · Video-only offer</span>
+      <span class="pill p">Launch: November 2026</span>
+    </div>
+  </div>
+
+  <!-- LIVE STATUS -->
+  <div class="status-bar">
+    <div class="status-item"><span class="dot-live"></span><strong>Ad 01 (Numbers Hook)</strong> — In flight · AED 120/day · Cold</div>
+    <div class="status-item"><span class="dot-soon"></span><strong>Ad 02 (62 Days Left)</strong> — Launching tomorrow · Warm retargeting</div>
+    <div class="status-item"><span class="dot-new"></span><strong>Ads below</strong> — New scripts · Ready to film</div>
+  </div>
+
+  <!-- AD A -->
+  <div class="ad ad-1">
+    <div class="ad-header">
+      <div class="ad-info">
+        <div class="ad-label">Ad A — FOMO Reel · Cold + Warm · "Your Competitor"</div>
+        <div class="ad-title">"Your competitor<br>booked a session<br>last week."</div>
+        <div class="ad-desc">The most powerful trigger in a competitive market like Dubai: someone else is moving. No need to name competitors, attack anyone, or oversell. One line creates the itch. Works cold and warm. Forces a decision — book now or watch your market go to someone who already did.</div>
+      </div>
+      <div class="ad-num">A</div>
+    </div>
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 18s</div></div>
+      <div class="spec"><div class="spec-label">Audience</div><div class="spec-value">Cold + Warm · UAE</div></div>
+      <div class="spec"><div class="spec-label">Objective</div><div class="spec-value">Leads → WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">AED 100/day</div></div>
+    </div>
+    <div class="ad-body">
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:00–0:03</span></div>
+        <div class="sc">
+          <div class="sc-tag">Hook — Lean in, conversational, slightly conspiratorial</div>
+          <div class="sc-dir">Low energy at the start. Like you're telling them something they don't know. Slight pause after "last week."</div>
+          <div class="sc-line">"Your competitor was in our studio last week. They recorded a full video episode, 7 clips, and an audiogram. <span class="accent-1">In two hours.</span>"</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:03–0:11</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Twist — Reframe the real cost of not acting</div>
+          <div class="sc-dir">Calm. No aggression. This is a conversation with someone who respects their own time.</div>
+          <div class="sc-line">"By the time you're done watching this, they've already distributed that content to their entire network. Their algorithm is warming up. Their clients are watching. <span class="accent-1">Yours aren't seeing anything yet.</span>"</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:11–0:18</span></div>
+        <div class="sc">
+          <div class="sc-tag">CTA — One action, no options</div>
+          <div class="sc-dir">Calm urgency. This isn't panic — it's a simple practical decision.</div>
+          <div class="sc-line">"We have slots open this week. Message us on WhatsApp now and you'll be live <span class="accent-1">before November is over.</span>"</div>
+          <div class="overlay">
+            <div class="overlay-label">On-Screen Text Overlays</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:00 — "Your competitor was in our studio last week"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:03 — "Full episode · 7 clips · Audiogram · 2 hours"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:11 — "Slots open this week"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:15 — End card: "Dubai Podcast Studio · WhatsApp →"</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-notes">
+      <div class="notes-label">Execution Notes</div>
+      <div class="note"><strong>Don't name the competitor</strong> — "your competitor" is more powerful than any real name. The viewer fills in whoever they're actually worried about. Universal and personal at the same time.</div>
+      <div class="note"><strong>Tone is key</strong> — this is not a threat or a taunt. It's a friendly heads-up from someone who knows something you don't. Calm, not loud.</div>
+      <div class="note"><strong>B-roll option</strong> — if you want a visual cut at 0:03, show the studio door closing or an empty chair in the booth. Suggests a session just ended. Seconds of footage only, then back to face cam.</div>
+      <div class="note"><strong>Rotate the vertical</strong> — "Your competitor in <span style="color:var(--purple)">real estate</span> / in <span style="color:var(--purple)">consulting</span> / in <span style="color:var(--purple)">finance</span> was in our studio last week." Three separate versions of the same script. Same film, different first line. Triples your targeting precision with one shoot day.</div>
+    </div>
+  </div>
+
+  <!-- AD B -->
+  <div class="ad ad-2">
+    <div class="ad-header">
+      <div class="ad-info">
+        <div class="ad-label">Ad B — Objection Killer Reel · Warm · "I Don't Know What to Say"</div>
+        <div class="ad-title">"I don't know<br>what to talk<br>about on camera."</div>
+        <div class="ad-desc">The single most common reason people who want to book DPS don't book DPS. This ad finds every warm lead who's been circling the idea for weeks, names their exact fear, and removes it in 20 seconds. Highest conversion potential of any warm-audience video right now.</div>
+      </div>
+      <div class="ad-num">B</div>
+    </div>
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 22s</div></div>
+      <div class="spec"><div class="spec-label">Audience</div><div class="spec-value">Warm retargeting · 30d</div></div>
+      <div class="spec"><div class="spec-label">Objective</div><div class="spec-value">Leads → WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">AED 80/day</div></div>
+    </div>
+    <div class="ad-body">
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:00–0:03</span></div>
+        <div class="sc">
+          <div class="sc-tag">Hook — Say their exact thought out loud</div>
+          <div class="sc-dir">Say this like you've heard it a hundred times. No judgment — just recognition. This line alone is why the viewer stops scrolling: someone finally said it.</div>
+          <div class="sc-line">"<span class="accent-2">'I don't know what to talk about on camera.'</span> That's the number one thing we hear before every single session."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:03–0:14</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Reframe — Kill the objection with specificity</div>
+          <div class="sc-dir">Shift to warm confidence. You've solved this before. Many times.</div>
+          <div class="sc-line">"Here's what we do: before your session, we spend 15 minutes on the phone. We ask you 5 questions about your work. By the time you sit in front of the camera, <span class="accent-2">you already know exactly what you're saying</span> — because you just said it to us."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:14–0:19</span></div>
+        <div class="sc">
+          <div class="sc-tag">Proof + Result</div>
+          <div class="sc-dir">Quick, confident. One breath.</div>
+          <div class="sc-line">"Every single client who walked in thinking they had nothing to say left with a <span class="accent-2">full episode and 7 clips</span> they were proud of."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:19–0:22</span></div>
+        <div class="sc">
+          <div class="sc-tag">CTA</div>
+          <div class="sc-dir">Gentle. This person is already 80% convinced — don't oversell.</div>
+          <div class="sc-line">"Message us on WhatsApp. The prep call is free. <span class="accent-2">Come in ready.</span>"</div>
+          <div class="overlay">
+            <div class="overlay-label">On-Screen Text Overlays</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:00 — "'I don't know what to say on camera.'"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:03 — "We prep you. 15 min. Before your session."</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:14 — "Full episode + 7 clips · Every time"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:19 — End card: "Dubai Podcast Studio · WhatsApp →"</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-notes">
+      <div class="notes-label">Execution Notes</div>
+      <div class="note"><strong>The hook is the ad</strong> — say it in quotes, slightly slower, like you're quoting a real person. The viewer who has thought this exact thing will feel seen in the first 2 seconds. That's the conversion mechanism.</div>
+      <div class="note"><strong>The "prep call" must exist</strong> — only use this script if DPS genuinely does a brief pre-session prep conversation. If the format is different (an intake form, a questionnaire), swap the detail to match your actual process.</div>
+      <div class="note"><strong>Warm audience only</strong> — don't run this cold. The objection-killer format assumes the viewer already knows what DPS is. Cold audiences need the offer first, the objection second.</div>
+      <div class="note"><strong>Optional variant</strong> — same script, different hook: "Everyone who came to us said 'I'm not interesting enough for a podcast.'" Swap and A/B test after week 2.</div>
+    </div>
+  </div>
+
+  <!-- AD C -->
+  <div class="ad ad-3">
+    <div class="ad-header">
+      <div class="ad-info">
+        <div class="ad-label">Ad C — November Deadline Reel · Cold · "Book This Month"</div>
+        <div class="ad-title">"If you book<br>in November,<br>you're live in 2026."</div>
+        <div class="ad-desc">A deadline that is completely true and requires no fabrication: anyone who records in November gets their content out before the year ends. This is the cleanest urgency play in the campaign. Pairs with the broader Q4 message and creates a specific, actionable timeline.</div>
+      </div>
+      <div class="ad-num">C</div>
+    </div>
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 20s</div></div>
+      <div class="spec"><div class="spec-label">Audience</div><div class="spec-value">Cold · Broad UAE · 28–55</div></div>
+      <div class="spec"><div class="spec-label">Objective</div><div class="spec-value">Leads → WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">AED 100/day</div></div>
+    </div>
+    <div class="ad-body">
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:00–0:04</span></div>
+        <div class="sc">
+          <div class="sc-tag">Hook — The exact offer, the exact window</div>
+          <div class="sc-dir">Start mid-sentence, no intro. Like you're picking up a conversation already in progress. Slightly fast pace — this person is busy and so are you.</div>
+          <div class="sc-line">"If you record a video episode with us <span class="accent-3">in November</span>, you can have it live on every platform before the year ends."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:04–0:13</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Offer — Fast, specific, no fluff</div>
+          <div class="sc-dir">Cut to a quick studio B-roll shot (2 seconds), then back to face cam.</div>
+          <div class="sc-line">"Two hours in our studio in Dubai. We record everything — your full episode, your short-form video clips, your Reels cuts. We deliver the completed files within 24 hours. <span class="accent-3">You publish. Your audience grows. Starting this month.</span>"</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:13–0:17</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Why Now — Close the "I'll do it in January" loop</div>
+          <div class="sc-dir">One beat slower. This is the insight.</div>
+          <div class="sc-line">"January is when everyone starts. <span class="accent-3">November is when you get ahead.</span>"</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:17–0:20</span></div>
+        <div class="sc">
+          <div class="sc-tag">CTA — Tight</div>
+          <div class="sc-dir">Direct eye contact. No hesitation.</div>
+          <div class="sc-line">"<span class="accent-3">WhatsApp us</span>. Let's get November locked in."</div>
+          <div class="overlay">
+            <div class="overlay-label">On-Screen Text Overlays</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:00 — "Record in November → Live before 2027"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:04 — "2 hours · Full episode · 7 clips · 24h delivery"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:13 — "January = everyone starts. November = you lead."</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:17 — End card: "Dubai Podcast Studio · WhatsApp →"</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-notes">
+      <div class="notes-label">Execution Notes</div>
+      <div class="note"><strong>"January is when everyone starts. November is when you get ahead."</strong> — this line at 0:13 is the most quotable, most shareable line in the entire campaign. It can also run as the standalone hook on a re-edited 5-second cut for Story placement.</div>
+      <div class="note"><strong>This ad expires naturally</strong> — it's only true in November. On Dec 1, swap: "If you record in December, you start 2027 with content already live." One re-shoot of the hook line, same body. New asset in 20 minutes.</div>
+      <div class="note"><strong>Cold audience works here</strong> — this is simple enough that no prior awareness is needed. The "November → live before year-end" logic is immediately understandable by anyone who has thought about content once.</div>
+      <div class="note"><strong>The 2-second B-roll cut</strong> — 4 seconds into the ad is where most cold viewers decide to stay or scroll. A brief shot of the studio at this moment (mic, camera, booth) confirms this is real. No stock footage — shoot it on your phone in 2 minutes.</div>
+    </div>
+  </div>
+
+  <!-- CAMPAIGN TRACKER -->
+  <div class="sec-title">Full Campaign Tracker — November 2026</div>
+  <div class="tracker">
+    <div class="tracker-header">All Active Video Ads · WhatsApp Objective · CBO</div>
+    <div class="tracker-row head">
+      <div class="tcell"></div>
+      <div class="tcell">Ad</div>
+      <div class="tcell">Audience</div>
+      <div class="tcell">Daily</div>
+      <div class="tcell">Status</div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">01</div>
+      <div class="tcell">Numbers Hook Reel — "47 Dubai brands"</div>
+      <div class="tcell">Cold · Broad UAE</div>
+      <div class="tcell">AED 120</div>
+      <div class="tcell"><span class="badge badge-live">Live</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">02</div>
+      <div class="tcell">Q4 Clock Reel — "62 days left in 2026"</div>
+      <div class="tcell">Warm retargeting · 60d</div>
+      <div class="tcell">AED 100</div>
+      <div class="tcell"><span class="badge badge-soon">Tomorrow</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">A</div>
+      <div class="tcell">FOMO Reel — "Your competitor booked"</div>
+      <div class="tcell">Cold + Warm · UAE</div>
+      <div class="tcell">AED 100</div>
+      <div class="tcell"><span class="badge badge-new">Film now</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">B</div>
+      <div class="tcell">Objection Killer — "I don't know what to say"</div>
+      <div class="tcell">Warm retargeting · 30d</div>
+      <div class="tcell">AED 80</div>
+      <div class="tcell"><span class="badge badge-new">Film now</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">C</div>
+      <div class="tcell">November Deadline — "Book this month"</div>
+      <div class="tcell">Cold · Broad UAE</div>
+      <div class="tcell">AED 100</div>
+      <div class="tcell"><span class="badge badge-new">Film now</span></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">Dubai <span>Podcast</span> Studio</div>
+    <div class="footer-meta">November 2026 · 5 Ads Running · AED 500/day total<br>All video · All WhatsApp CTA · All DPS offer</div>
+  </div>
+
+</div>
+</body>
+</html>
