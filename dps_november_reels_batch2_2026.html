@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DPS — November Reels Batch 2 · 4 Video Scripts</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0A0A0E; --bg2: #111118; --bg3: #16161E;
+    --border: #1E1E2A; --text: #E8E8F0; --muted: #555570;
+    --blue: #00B4FF; --gold: #C9A84C; --red: #FF3D3D; --green: #00E5A0; --orange: #FF8C00; --teal: #00D4C8;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { max-width: 900px; margin: 0 auto; padding: 56px 48px; }
+
+  /* COVER */
+  .cover { padding: 64px 0 72px; border-bottom: 1px solid var(--border); margin-bottom: 52px; position: relative; }
+  .cover-bar { position: absolute; top: 0; left: -48px; width: 4px; height: 100%; background: linear-gradient(180deg, var(--orange), var(--teal), var(--gold)); }
+  .neon-rule { width: 48px; height: 3px; background: var(--orange); border-radius: 2px; box-shadow: 0 0 12px var(--orange); margin-bottom: 24px; }
+  .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; }
+  .cover h1 { font-size: 50px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; text-transform: uppercase; margin-bottom: 18px; }
+  .cover h1 span { color: var(--gold); }
+  .cover-sub { font-size: 15px; color: var(--muted); max-width: 640px; line-height: 1.8; margin-bottom: 36px; }
+  .cover-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); }
+  .pill.o { background: rgba(255,140,0,0.08); border-color: rgba(255,140,0,0.25); color: var(--orange); }
+  .pill.t { background: rgba(0,212,200,0.08); border-color: rgba(0,212,200,0.25); color: var(--teal); }
+  .pill.g { background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.25); color: var(--gold); }
+  .pill.b { background: rgba(0,180,255,0.08); border-color: rgba(0,180,255,0.25); color: var(--blue); }
+
+  /* CONTEXT BOX */
+  .context { background: var(--bg2); border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: 10px; padding: 20px 28px; margin-bottom: 52px; }
+  .ctx-label { font-size: 10px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .ctx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ctx-item { font-size: 12px; color: var(--muted); display: flex; gap: 10px; line-height: 1.5; }
+  .ctx-item::before { content: '✓'; color: var(--teal); font-weight: 900; flex-shrink: 0; }
+  .ctx-item strong { color: var(--text); }
+
+  /* AD CARD */
+  .ad { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 52px; }
+  .ad-header { padding: 28px 36px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .ad-d .ad-header { background: linear-gradient(135deg, rgba(255,140,0,0.06), transparent); border-bottom: 1px solid rgba(255,140,0,0.12); }
+  .ad-e .ad-header { background: linear-gradient(135deg, rgba(0,212,200,0.06), transparent); border-bottom: 1px solid rgba(0,212,200,0.12); }
+  .ad-f .ad-header { background: linear-gradient(135deg, rgba(255,61,61,0.06), transparent); border-bottom: 1px solid rgba(255,61,61,0.12); }
+  .ad-g .ad-header { background: linear-gradient(135deg, rgba(0,180,255,0.06), transparent); border-bottom: 1px solid rgba(0,180,255,0.12); }
+  .ad-num { font-size: 52px; font-weight: 900; opacity: 0.08; letter-spacing: -0.04em; line-height: 1; }
+  .ad-d .ad-num { color: var(--orange); }
+  .ad-e .ad-num { color: var(--teal); }
+  .ad-f .ad-num { color: var(--red); }
+  .ad-g .ad-num { color: var(--blue); }
+  .ad-info { flex: 1; }
+  .ad-label { font-size: 10px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 8px; }
+  .ad-d .ad-label { color: var(--orange); }
+  .ad-e .ad-label { color: var(--teal); }
+  .ad-f .ad-label { color: var(--red); }
+  .ad-g .ad-label { color: var(--blue); }
+  .ad-title { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 8px; }
+  .ad-desc { font-size: 13px; color: var(--muted); line-height: 1.65; max-width: 560px; }
+
+  /* SPECS */
+  .specs-row { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+  .spec { padding: 14px 22px; border-right: 1px solid var(--border); }
+  .spec:last-child { border-right: none; }
+  .spec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .spec-value { font-size: 12px; font-weight: 700; }
+  .ad-d .spec-value { color: var(--orange); }
+  .ad-e .spec-value { color: var(--teal); }
+  .ad-f .spec-value { color: var(--red); }
+  .ad-g .spec-value { color: var(--blue); }
+
+  /* SCRIPT */
+  .ad-body { padding: 30px 36px; background: var(--bg2); }
+  .scene { display: flex; gap: 20px; margin-bottom: 26px; }
+  .scene:last-child { margin-bottom: 0; }
+  .timing { flex-shrink: 0; width: 76px; text-align: right; padding-top: 2px; }
+  .tbadge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; padding: 4px 7px; border-radius: 4px; }
+  .ad-d .tbadge { background: rgba(255,140,0,0.12); color: var(--orange); }
+  .ad-e .tbadge { background: rgba(0,212,200,0.12); color: var(--teal); }
+  .ad-f .tbadge { background: rgba(255,61,61,0.12); color: var(--red); }
+  .ad-g .tbadge { background: rgba(0,180,255,0.12); color: var(--blue); }
+  .sc { flex: 1; }
+  .sc-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .sc-dir { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 7px; line-height: 1.5; }
+  .sc-line { font-size: 17px; font-weight: 700; line-height: 1.6; letter-spacing: -0.01em; color: var(--text); padding: 14px 18px; background: var(--bg3); border-radius: 8px; border-left: 3px solid; }
+  .ad-d .sc-line { border-left-color: var(--orange); }
+  .ad-e .sc-line { border-left-color: var(--teal); }
+  .ad-f .sc-line { border-left-color: var(--red); }
+  .ad-g .sc-line { border-left-color: var(--blue); }
+  .a-d { color: var(--orange); }
+  .a-e { color: var(--teal); }
+  .a-f { color: var(--red); }
+  .a-g { color: var(--blue); }
+
+  /* OVERLAY */
+  .overlay { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-top: 12px; }
+  .overlay-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .overlay-item { font-size: 13px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+  .overlay-item:last-child { margin-bottom: 0; }
+  .dot-ov { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .ad-d .dot-ov { background: var(--orange); box-shadow: 0 0 5px var(--orange); }
+  .ad-e .dot-ov { background: var(--teal); box-shadow: 0 0 5px var(--teal); }
+  .ad-f .dot-ov { background: var(--red); box-shadow: 0 0 5px var(--red); }
+  .ad-g .dot-ov { background: var(--blue); box-shadow: 0 0 5px var(--blue); }
+
+  /* NOTES */
+  .ad-notes { padding: 20px 36px; border-top: 1px solid var(--border); background: var(--bg); }
+  .notes-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .note { font-size: 13px; color: var(--muted); line-height: 1.65; display: flex; gap: 10px; margin-bottom: 7px; }
+  .note:last-child { margin-bottom: 0; }
+  .note::before { content: '→'; font-weight: 800; flex-shrink: 0; }
+  .ad-d .note::before { color: var(--orange); }
+  .ad-e .note::before { color: var(--teal); }
+  .ad-f .note::before { color: var(--red); }
+  .ad-g .note::before { color: var(--blue); }
+  .note strong { color: var(--text); }
+
+  /* FULL TRACKER */
+  .tracker { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 52px; }
+  .tracker-header { padding: 18px 28px; border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .tracker-row { display: grid; grid-template-columns: 36px 2fr 1.4fr 80px 100px; border-bottom: 1px solid var(--border); align-items: center; }
+  .tracker-row:last-child { border-bottom: none; }
+  .tracker-row.head { background: var(--bg3); }
+  .tcell { padding: 12px 16px; font-size: 12px; border-right: 1px solid var(--border); }
+  .tcell:last-child { border-right: none; }
+  .tracker-row.head .tcell { font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-size: 10px; }
+  .tcell-num { font-size: 16px; font-weight: 900; opacity: 0.18; text-align: center; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 800; padding: 3px 9px; border-radius: 10px; }
+  .live { background: rgba(0,229,160,0.1); color: #00E5A0; border: 1px solid rgba(0,229,160,0.2); }
+  .running { background: rgba(0,180,255,0.1); color: var(--blue); border: 1px solid rgba(0,180,255,0.2); }
+  .film { background: rgba(255,140,0,0.1); color: var(--orange); border: 1px solid rgba(255,140,0,0.2); }
+  .tracker-row.total-row { background: rgba(201,168,76,0.04); }
+  .tracker-row.total-row .tcell { font-weight: 800; color: var(--gold); font-size: 13px; }
+  .tracker-row.total-row .tcell:first-child { color: var(--text); }
+
+  .sec-title { font-size: 10px; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); display: block; }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 36px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-meta { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-bar"></div>
+    <div class="neon-rule"></div>
+    <div class="eyebrow">Dubai Podcast Studio — November 2026 · Batch 2</div>
+    <h1>4 More.<br>The Month<br><span>Is Covered.</span></h1>
+    <p class="cover-sub">Four angles that haven't run yet. Each one targets a different reason people haven't booked. Together with the 5 already running, this is a full-funnel November campaign — 9 ads, every psychological trigger covered, every audience temperature addressed.</p>
+    <div class="cover-pills">
+      <span class="pill o">4 New Reels · 9:16</span>
+      <span class="pill t">15–22 seconds each</span>
+      <span class="pill g">WhatsApp CTA · Video-only</span>
+      <span class="pill b">Launch: November 3–30</span>
+    </div>
+  </div>
+
+  <!-- WHAT'S ALREADY RUNNING -->
+  <div class="context">
+    <div class="ctx-label">Already In Flight — Do Not Duplicate These Angles</div>
+    <div class="ctx-grid">
+      <div class="ctx-item"><strong>Social proof volume</strong> — "47 Dubai brands" (numbers hook)</div>
+      <div class="ctx-item"><strong>Q4 countdown</strong> — "62 days left in 2026"</div>
+      <div class="ctx-item"><strong>Competitor FOMO</strong> — "Your competitor booked last week"</div>
+      <div class="ctx-item"><strong>Objection: camera fear</strong> — "I don't know what to say"</div>
+      <div class="ctx-item"><strong>Month deadline</strong> — "Record in November, live in 2026"</div>
+    </div>
+  </div>
+
+  <!-- AD D -->
+  <div class="ad ad-d">
+    <div class="ad-header">
+      <div class="ad-info">
+        <div class="ad-label">Ad D — Math Reel · Cold · "One Session = 30 Days of Content"</div>
+        <div class="ad-title">"Two hours.<br>Thirty days of<br>content. The math."</div>
+        <div class="ad-desc">The content multiplication argument. Most people think about video production as a one-off cost for one piece of content. This ad reframes the math entirely — 2 hours in the studio produces enough content to post every single day for a month. When the numbers land, the objection of "it's not worth my time" disappears instantly.</div>
+      </div>
+      <div class="ad-num">D</div>
+    </div>
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 22s</div></div>
+      <div class="spec"><div class="spec-label">Audience</div><div class="spec-value">Cold · Broad UAE · 28–58</div></div>
+      <div class="spec"><div class="spec-label">Objective</div><div class="spec-value">Leads → WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">AED 110/day</div></div>
+    </div>
+    <div class="ad-body">
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:00–0:03</span></div>
+        <div class="sc">
+          <div class="sc-tag">Hook — The number first, no context</div>
+          <div class="sc-dir">Hold up two fingers or show "2 HRS" as text on screen. Blunt, zero intro. This is the pattern interrupt.</div>
+          <div class="sc-line">"<span class="a-d">Two hours</span> in our studio. That's all it takes. Let me show you what comes out."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:03–0:15</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Breakdown — List it fast, stack it high</div>
+          <div class="sc-dir">Fast pace. Each item on screen as you say it. This is the moment — land each number with a beat.</div>
+          <div class="sc-line">"One full video episode — <span class="a-d">that's 4 weeks of weekly content</span>. Seven short-form clips for Reels — <span class="a-d">that's 7 posts</span>. Five 60-second cuts — <span class="a-d">5 more</span>. An audiogram. A highlight reel. You walk out with <span class="a-d">more than 30 pieces of content</span> from a single two-hour session."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:15–0:19</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Close — Let the math do the work</div>
+          <div class="sc-dir">Slower now. Calm. One sentence.</div>
+          <div class="sc-line">"<span class="a-d">One session. One month of content. Done.</span>"</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:19–0:22</span></div>
+        <div class="sc">
+          <div class="sc-tag">CTA</div>
+          <div class="sc-dir">Direct. Practical.</div>
+          <div class="sc-line">"Message us on WhatsApp and we'll book you in this week."</div>
+          <div class="overlay">
+            <div class="overlay-label">On-Screen Text Overlays</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:00 — "2 hours in the studio →"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:03 — Stack on screen: "1 full episode / 7 Reels clips / 5 × 60s cuts / audiogram / highlight reel"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:15 — "= 30+ pieces of content"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:19 — End card: "Dubai Podcast Studio · WhatsApp →"</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-notes">
+      <div class="notes-label">Execution Notes</div>
+      <div class="note"><strong>The stacked list is the visual</strong> — as each deliverable is said, show it appearing on screen as text. This is a simple CapCut or DaVinci edit: text appearing on beat. Takes 20 minutes to produce. The visual stack landing one by one is what makes this ad feel different from the others.</div>
+      <div class="note"><strong>Adjust the numbers to DPS reality</strong> — "30 pieces of content" is the claim. Only use it if it's accurate. If a standard DPS session delivers 15 pieces, say 15. Specificity beats inflation every time.</div>
+      <div class="note"><strong>Universal cold audience</strong> — this ad works without any prior knowledge of DPS. The hook is just math. Anyone who creates content — or wants to — will stop for it.</div>
+    </div>
+  </div>
+
+  <!-- AD E -->
+  <div class="ad ad-e">
+    <div class="ad-header">
+      <div class="ad-info">
+        <div class="ad-label">Ad E — Self-ID Filter Reel · Cold · "Stop Scrolling If…"</div>
+        <div class="ad-title">"Stop scrolling<br>if you're a Dubai<br>business owner…"</div>
+        <div class="ad-desc">The self-identification hook — one of the highest-performing cold formats on Meta right now because the algorithm reads who stops and optimises toward that exact audience. No spray and pray. The viewer pre-qualifies themselves by staying. Andromeda then finds more people exactly like them.</div>
+      </div>
+      <div class="ad-num">E</div>
+    </div>
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 18s</div></div>
+      <div class="spec"><div class="spec-label">Audience</div><div class="spec-value">Cold · Broad UAE · 28–55</div></div>
+      <div class="spec"><div class="spec-label">Objective</div><div class="spec-value">Leads → WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">AED 100/day</div></div>
+    </div>
+    <div class="ad-body">
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:00–0:04</span></div>
+        <div class="sc">
+          <div class="sc-tag">Hook — The filter. Say it like a command, not a question.</div>
+          <div class="sc-dir">Hold up a hand toward camera. Confident. This is the pattern interrupt — the word "stop" triggers a pause reflex. Pause naturally after the first sentence.</div>
+          <div class="sc-line">"<span class="a-e">Stop scrolling</span> if you're a Dubai business owner who's been meaning to start creating video content — but hasn't actually done it yet."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:04–0:12</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Bridge — Why they haven't done it yet (and why that ends today)</div>
+          <div class="sc-dir">Conversational. You're finishing their own sentence for them.</div>
+          <div class="sc-line">"You haven't done it because you don't have a team, you don't have equipment, and you don't have time to figure it out. <span class="a-e">We are that team. We have that equipment.</span> You bring yourself and your knowledge. We handle everything else — recording, editing, all the cuts, delivered in 24 hours."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:12–0:18</span></div>
+        <div class="sc">
+          <div class="sc-tag">CTA — Complete the loop</div>
+          <div class="sc-dir">Smooth, no hard sell. They already know this is for them.</div>
+          <div class="sc-line">"This is Dubai Podcast Studio. If this is you, <span class="a-e">message us on WhatsApp</span>. We have slots open this week."</div>
+          <div class="overlay">
+            <div class="overlay-label">On-Screen Text Overlays</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:00 — "STOP SCROLLING IF →"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:01 — "you're a Dubai business owner who hasn't started video yet"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:04 — "No team. No equipment. No time to figure it out."</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:08 — "We are that team."</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:12 — End card: "Dubai Podcast Studio · WhatsApp →"</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-notes">
+      <div class="notes-label">Execution Notes</div>
+      <div class="note"><strong>The algorithm learns from who stops</strong> — "Stop scrolling if…" is not just a hook device. Every person who pauses on this ad tells Meta exactly who your buyer is. After 200–300 stops, Andromeda has a precise model and starts finding more of them automatically. This is why the format works so well cold.</div>
+      <div class="note"><strong>Three reasons they haven't started</strong> — "no team, no equipment, no time" covers the three universal blockers. If DPS research shows a fourth common one specific to Dubai, add it. But don't exceed four — the list needs to feel complete, not exhaustive.</div>
+      <div class="note"><strong>Variant</strong> — swap "business owner" for the specific verticals DPS serves most: "Stop scrolling if you're a Dubai real estate agent / financial advisor / consultant who's been meaning to start video." One re-film of the first line, three targeted versions.</div>
+    </div>
+  </div>
+
+  <!-- AD F -->
+  <div class="ad ad-f">
+    <div class="ad-header">
+      <div class="ad-info">
+        <div class="ad-label">Ad F — Cost Reality Reel · Cold + Warm · "What a Video Team Actually Costs"</div>
+        <div class="ad-title">"Do you know<br>what a Dubai<br>video team costs?"</div>
+        <div class="ad-desc">The price anchor. Most DPS prospects have no idea what professional video production costs in Dubai — so when they see DPS pricing, they don't know if it's cheap or expensive. This ad sets the anchor. Once they've heard the real market rate, DPS feels like a no-brainer. No discounts. Just context.</div>
+      </div>
+      <div class="ad-num">F</div>
+    </div>
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 20s</div></div>
+      <div class="spec"><div class="spec-label">Audience</div><div class="spec-value">Cold + Warm · UAE</div></div>
+      <div class="spec"><div class="spec-label">Objective</div><div class="spec-value">Leads → WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">AED 100/day</div></div>
+    </div>
+    <div class="ad-body">
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:00–0:04</span></div>
+        <div class="sc">
+          <div class="sc-tag">Hook — The question that earns the watch</div>
+          <div class="sc-dir">Direct question to camera. Slightly rhetorical — you already know the answer. Pause after the question.</div>
+          <div class="sc-line">"Do you know what it actually costs to build a proper video content team in Dubai?"</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:04–0:13</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Anchor — Real numbers, no exaggeration needed</div>
+          <div class="sc-dir">Measured. Let each number breathe for a beat.</div>
+          <div class="sc-line">"A videographer: <span class="a-f">AED 3,000 to 5,000</span> per day. An editor: <span class="a-f">AED 8,000 a month</span>. A sound engineer, a studio rental, equipment. You're looking at <span class="a-f">AED 15,000 to 25,000 a month</span> before you've published a single video."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:13–0:17</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Alternative — DPS, no price mentioned. Let them ask.</div>
+          <div class="sc-dir">Shift tone. This is the relief.</div>
+          <div class="sc-line">"Or you come to <span class="a-f">Dubai Podcast Studio</span>. Two hours. Full production. Everything delivered. No team to manage. No monthly overhead."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:17–0:20</span></div>
+        <div class="sc">
+          <div class="sc-tag">CTA — Make them ask the next question</div>
+          <div class="sc-dir">Slight smile. Easy close.</div>
+          <div class="sc-line">"<span class="a-f">WhatsApp us</span> and ask what a session costs. You'll be surprised."</div>
+          <div class="overlay">
+            <div class="overlay-label">On-Screen Text Overlays</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:04 — "Videographer: AED 3,000–5,000/day"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:07 — "Editor: AED 8,000/month"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:09 — "Studio + Equipment + Sound"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:11 — "= AED 15,000–25,000/month"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:13 — "Or: Dubai Podcast Studio"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:17 — End card: "Dubai Podcast Studio · WhatsApp →"</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-notes">
+      <div class="notes-label">Execution Notes</div>
+      <div class="note"><strong>Never say the DPS price in this ad</strong> — the entire mechanism is anchoring. If you say "and we only charge AED X", you turn this into a price comparison ad and lose control. The "WhatsApp us and ask — you'll be surprised" close is intentional: curiosity converts. Let the WhatsApp conversation do the price reveal.</div>
+      <div class="note"><strong>Verify the Dubai market numbers</strong> — AED 3,000–5,000/day for a videographer and AED 8,000/month for an editor are real Dubai market rates as of late 2026. If DPS has more precise data from its network, use those exact numbers.</div>
+      <div class="note"><strong>Works cold and warm</strong> — cold audiences are shocked by the market rate (creates instant value perception for DPS). Warm audiences who already know DPS are now re-anchored — "I didn't realise how much I'd save."</div>
+    </div>
+  </div>
+
+  <!-- AD G -->
+  <div class="ad ad-g">
+    <div class="ad-header">
+      <div class="ad-info">
+        <div class="ad-label">Ad G — December Warning Reel · Warm · "December Is Already Too Late"</div>
+        <div class="ad-title">"Don't wait<br>for December.<br>Here's why."</div>
+        <div class="ad-desc">The sharpest urgency play of the campaign — and the most honest. December in Dubai means holidays, clients travelling, and decision-makers mentally checked out until January. This ad doesn't fabricate pressure. It explains why the window is actually November, not December. The most powerful close for warm leads sitting on the fence right now.</div>
+      </div>
+      <div class="ad-num">G</div>
+    </div>
+    <div class="specs-row">
+      <div class="spec"><div class="spec-label">Format</div><div class="spec-value">Reel 9:16 · 22s</div></div>
+      <div class="spec"><div class="spec-label">Audience</div><div class="spec-value">Warm retargeting · 45d</div></div>
+      <div class="spec"><div class="spec-label">Objective</div><div class="spec-value">Leads → WhatsApp</div></div>
+      <div class="spec"><div class="spec-label">Budget</div><div class="spec-value">AED 80/day</div></div>
+    </div>
+    <div class="ad-body">
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:00–0:03</span></div>
+        <div class="sc">
+          <div class="sc-tag">Hook — The counterintuitive opener</div>
+          <div class="sc-dir">Lean in, slightly conspiratorial. Like you're giving them information most people don't have.</div>
+          <div class="sc-line">"If you're planning to book your studio session in December — don't."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:03–0:14</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Real Reason — Honest, Dubai-specific, no manufactured fear</div>
+          <div class="sc-dir">Measured explanation. This should feel like advice from someone who knows the market.</div>
+          <div class="sc-line">"In Dubai, December means half your network is travelling, the other half is at events every night, and nobody is making decisions until after the new year. <span class="a-g">Content you publish in December gets buried.</span> Content you publish in November — when people are still at their desks, still focused — that's content that actually reaches someone."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:14–0:19</span></div>
+        <div class="sc">
+          <div class="sc-tag">The Window — Make it concrete</div>
+          <div class="sc-dir">Slightly faster now. The practical close.</div>
+          <div class="sc-line">"We have <span class="a-g">slots open in November</span>. Record now, publish while your audience is still paying attention, start 2027 ahead."</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="timing"><span class="tbadge">0:19–0:22</span></div>
+        <div class="sc">
+          <div class="sc-tag">CTA</div>
+          <div class="sc-dir">Direct. One action.</div>
+          <div class="sc-line">"<span class="a-g">WhatsApp us today</span> and let's lock in November."</div>
+          <div class="overlay">
+            <div class="overlay-label">On-Screen Text Overlays</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:00 — "Don't wait for December."</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:03 — "December in Dubai = half your network is gone"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:08 — "Content published in December gets buried"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:14 — "November slots open now"</div>
+            <div class="overlay-item"><span class="dot-ov"></span>0:19 — End card: "Dubai Podcast Studio · WhatsApp →"</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-notes">
+      <div class="notes-label">Execution Notes</div>
+      <div class="note"><strong>Warm audience only</strong> — this ad assumes the viewer already knows what DPS does. Cold audiences need the offer explained before they can act on the urgency. Run this exclusively against retargeting lists: website visitors 45 days, video viewers 50%+, Instagram profile visitors 30 days.</div>
+      <div class="note"><strong>The Dubai December insight is real</strong> — this isn't fabricated scarcity. Dubai genuinely slows down in December as residents travel and the business calendar winds down. The ad is honest and that's why it works — viewers who know Dubai will nod in recognition.</div>
+      <div class="note"><strong>This ad expires Dec 1</strong> — run it November 3–30 only. Do not run it in December. On Dec 1, retire it or swap: "January in Dubai is when the market wakes back up — and the brands with content already live will own it."</div>
+      <div class="note"><strong>The most important close of the campaign</strong> — this is the ad that converts the warm leads who've been watching DPS content for weeks and keep saying "next month." It takes away next month as an option.</div>
+    </div>
+  </div>
+
+  <!-- FULL CAMPAIGN TRACKER -->
+  <div class="sec-title">Complete November Campaign — All 9 Ads</div>
+  <div class="tracker">
+    <div class="tracker-header">Full Funnel · CBO · WhatsApp Objective · AED 790/day total</div>
+    <div class="tracker-row head">
+      <div class="tcell"></div>
+      <div class="tcell">Ad — Angle</div>
+      <div class="tcell">Audience</div>
+      <div class="tcell">Daily</div>
+      <div class="tcell">Status</div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">01</div>
+      <div class="tcell">"47 Dubai brands this month" — Social proof</div>
+      <div class="tcell">Cold · Broad UAE</div>
+      <div class="tcell">AED 120</div>
+      <div class="tcell"><span class="badge live">Live</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">02</div>
+      <div class="tcell">"62 days left in 2026" — Q4 clock</div>
+      <div class="tcell">Warm · 60d retargeting</div>
+      <div class="tcell">AED 100</div>
+      <div class="tcell"><span class="badge live">Live</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">A</div>
+      <div class="tcell">"Your competitor booked" — FOMO</div>
+      <div class="tcell">Cold + Warm</div>
+      <div class="tcell">AED 100</div>
+      <div class="tcell"><span class="badge running">Ready</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">B</div>
+      <div class="tcell">"I don't know what to say" — Objection</div>
+      <div class="tcell">Warm · 30d retargeting</div>
+      <div class="tcell">AED 80</div>
+      <div class="tcell"><span class="badge running">Ready</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">C</div>
+      <div class="tcell">"Record in November, live in 2026" — Deadline</div>
+      <div class="tcell">Cold · Broad UAE</div>
+      <div class="tcell">AED 100</div>
+      <div class="tcell"><span class="badge running">Ready</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">D</div>
+      <div class="tcell">"2 hours = 30 days of content" — Math</div>
+      <div class="tcell">Cold · Broad UAE</div>
+      <div class="tcell">AED 110</div>
+      <div class="tcell"><span class="badge film">Film now</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">E</div>
+      <div class="tcell">"Stop scrolling if you're a Dubai business owner" — Self-ID</div>
+      <div class="tcell">Cold · Broad UAE</div>
+      <div class="tcell">AED 100</div>
+      <div class="tcell"><span class="badge film">Film now</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">F</div>
+      <div class="tcell">"What a Dubai video team actually costs" — Price anchor</div>
+      <div class="tcell">Cold + Warm</div>
+      <div class="tcell">AED 100</div>
+      <div class="tcell"><span class="badge film">Film now</span></div>
+    </div>
+    <div class="tracker-row">
+      <div class="tcell tcell-num">G</div>
+      <div class="tcell">"Don't wait for December" — December warning</div>
+      <div class="tcell">Warm · 45d retargeting</div>
+      <div class="tcell">AED 80</div>
+      <div class="tcell"><span class="badge film">Film now</span></div>
+    </div>
+    <div class="tracker-row total-row">
+      <div class="tcell"></div>
+      <div class="tcell">9 ads · Full funnel · November 2026</div>
+      <div class="tcell">Cold + Warm + Hot</div>
+      <div class="tcell">AED 790</div>
+      <div class="tcell">Total/day</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">Dubai <span>Podcast</span> Studio</div>
+    <div class="footer-meta">November 2026 · 9 Ads Total · AED 790/day<br>All video · All WhatsApp CTA · Full funnel covered</div>
+  </div>
+
+</div>
+</body>
+</html>
