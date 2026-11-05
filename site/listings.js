@@ -33,6 +33,9 @@
  *  - handover : date de livraison pour un bien sur plan (ex. : "T4 2027"),
  *              ou null si le bien est déjà livré
  *  - est_yield_pct : rendement locatif brut estimé en %, ou null
+ *  - permit  : (facultatif) numéro de permis publicitaire Trakheesi / DLD,
+ *              OBLIGATOIRE pour toute vraie annonce à Dubaï
+ *              (ex. permit: "1234567890") — affiché dans la fiche du bien
  *
  *  IMPORTANT — LES EXEMPLES
  *  Les 12 annonces ci-dessous sont des EXEMPLES ILLUSTRATIFS, pas de

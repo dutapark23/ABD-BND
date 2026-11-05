@@ -52,10 +52,8 @@ def head(title, desc, path, robots='index, follow', extra=''):
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#1a1a1a">
   <link rel="icon" href="{FAVICON}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="{FONTS}" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="{FONTS}"></noscript>
+  <link rel="preload" href="fonts/PlayfairDisplay-latin-48d1e9.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="styles.css">
 {extra}</head>
 '''
@@ -103,7 +101,7 @@ FOOTER = '''  <footer class="site-footer">
         <li><a href="confidentialite.html" data-i18n="privacyLink">Confidentialité</a></li>
         <li data-cookie-settings hidden><button type="button" data-i18n="cookieLink">Cookies</button></li>
       </ul>
-      <p class="disclaimer" data-i18n="disclaimer">Les biens marqués « Exemple » sont des illustrations. Les prix sont indicatifs et peuvent évoluer. Les rendements affichés sont des estimations. Ce site ne constitue pas un conseil en investissement.</p>
+      <p class="disclaimer" data-i18n="disclaimer">Les biens marqués « Exemple » sont des illustrations. Les prix sont indicatifs et peuvent évoluer. Les rendements affichés sont des estimations brutes, non garanties. Ce site ne constitue pas un conseil en investissement.</p>
       <p class="rera" data-rera hidden></p>
       <p class="copyright">© <span id="year">2026</span> <span data-brand>Marina Immo</span>. <span data-i18n="rights">Tous droits réservés.</span></p>
     </div>
@@ -166,7 +164,7 @@ def write(name, s):
 # ---- index ----
 write('index.html',
       head('Marina Immo — Investir à Dubaï, Bali et en Géorgie',
-           "Marina Immo : biens immobiliers à Dubaï, Bali et en Géorgie. Prêts ou sur plan, prix vérifiés, accompagnement en français et en anglais de la recherche à la remise des clés.",
+           "Marina Immo : biens immobiliers à Dubaï, Bali et en Géorgie. Prêts ou sur plan, prix analysés, accompagnement en français et en anglais de la recherche à la remise des clés.",
            '', extra=JSONLD)
       + '<body data-page="home" data-title-key="title_home">\n' + header('#top')
       + '\n  <main id="main">\n' + HOME_HERO + '    ' + LISTINGS + DEST + WHYCONTACT + '  </main>\n\n'
@@ -175,16 +173,16 @@ write('index.html',
 # ---- landing pages ----
 LP = [
     ('dubai', 'dubai.html', 'Investir à Dubaï — Biens prêts et sur plan | Marina Immo',
-     "Investir à Dubaï : appartements, villas et biens sur plan, prix vérifiés sur les transactions du Dubai Land Department. 0 % d'impôt sur les loyers. Conseil en français.",
-     'Immobilier à Dubaï', "Investir à Dubaï : 0&nbsp;% d'impôt sur les loyers, des prix vérifiés sur les ventes réelles.",
+     "Investir à Dubaï : appartements, villas et biens sur plan, prix comparés aux transactions du Dubai Land Department. Pas d'impôt sur le revenu aux Émirats. Conseil en français.",
+     'Immobilier à Dubaï', "Investir à Dubaï : pas d'impôt sur le revenu aux Émirats, des prix comparés aux ventes réelles.",
      "Appartements, villas et biens sur plan dans les meilleurs quartiers. Chaque prix est comparé aux transactions du Dubai Land Department avant de vous être proposé."),
-    ('bali', 'bali.html', 'Investir à Bali — Villas et appartements | Marina Immo',
-     "Investir à Bali : villas et appartements sélectionnés pour la location saisonnière à Canggu, Uluwatu et Ubud. Cadre juridique expliqué, accompagnement en français.",
-     'Immobilier à Bali', "Investir à Bali : des villas qui se louent toute l'année.",
-     "Canggu, Uluwatu, Ubud… Des villas et appartements sélectionnés pour la location saisonnière, avec un cadre juridique expliqué clairement."),
+    ('bali', 'bali.html', 'Investir à Bali — Villas | Marina Immo',
+     "Investir à Bali : villas sélectionnées pour la location saisonnière à Canggu, Uluwatu et Ubud. Cadre juridique expliqué, accompagnement en français.",
+     'Immobilier à Bali', "Investir à Bali : des villas tropicales pensées pour la location saisonnière.",
+     "Canggu, Uluwatu, Ubud… Des villas sélectionnées pour la location saisonnière, avec un cadre juridique expliqué clairement."),
     ('georgia', 'georgie.html', 'Investir en Géorgie — Appartements à Tbilissi et Batoumi | Marina Immo',
      "Investir en Géorgie : appartements à Tbilissi et Batoumi, ticket d'entrée accessible, pleine propriété pour les étrangers. Accompagnement en français et en anglais.",
-     'Immobilier en Géorgie', "Investir en Géorgie : un ticket d'entrée bas, une propriété en pleine possession.",
+     'Immobilier en Géorgie', "Investir en Géorgie : un ticket d'entrée bas, en pleine propriété.",
      "Tbilissi et Batoumi : des appartements à prix d'entrée accessible, achetables en pleine propriété par les étrangers."),
 ]
 for c, f, title, desc, eb, h1, lead in LP:
