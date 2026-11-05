@@ -13,7 +13,7 @@
  *  2. Collez-le juste en dessous du dernier bloc de la liste.
  *  3. Changez les valeurs : identifiant (id), ville, prix, surface,
  *     titre, description, etc. Chaque id doit être unique
- *     (ex. : DXB-005, BAL-005, GEO-005).
+ *     (ex. : DXB-005, BAL-005).
  *  4. Gardez bien les virgules entre les blocs et entre les lignes,
  *     ainsi que les guillemets autour des textes.
  *
@@ -22,7 +22,9 @@
  *  Ne supprimez pas les noms de champs (price:, city:, etc.).
  *
  *  RÈGLES DES CHAMPS
- *  - country : "dubai", "bali" ou "georgia"
+ *  - country : "dubai" ou "bali"
+ *              ("georgia" est en « Bientôt disponible » : voir comingSoon
+ *              tout en bas du fichier, dans COUNTRIES.georgia)
  *  - type    : "apartment", "villa", "penthouse" ou "townhouse"
  *  - status  : "ready" (livré) ou "offplan" (sur plan)
  *  - bedrooms : nombre de chambres (0 = studio)
@@ -36,9 +38,16 @@
  *  - permit  : (facultatif) numéro de permis publicitaire Trakheesi / DLD,
  *              OBLIGATOIRE pour toute vraie annonce à Dubaï
  *              (ex. permit: "1234567890") — affiché dans la fiche du bien
+ *  - images  : (facultatif) liste de photos du bien. La 1re photo sert
+ *              d'image sur la carte ; toutes s'affichent en galerie dans
+ *              la fiche. Sans photo, une illustration du pays s'affiche.
+ *              Placez les fichiers dans un dossier « photos » à côté de
+ *              index.html, puis écrivez par exemple :
+ *              images: ["photos/dxb-001-salon.jpg", "photos/dxb-001-vue.jpg"],
+ *              (format conseillé : JPG ou WebP, 1600 px de large, < 300 Ko)
  *
  *  IMPORTANT — LES EXEMPLES
- *  Les 12 annonces ci-dessous sont des EXEMPLES ILLUSTRATIFS, pas de
+ *  Les 8 annonces ci-dessous sont des EXEMPLES ILLUSTRATIFS, pas de
  *  vrais biens. La ligne « sample: true » affiche un badge « Exemple »
  *  sur l'annonce. Pour une vraie annonce, mettez « sample: false »
  *  (ou supprimez simplement le bloc d'exemple).
@@ -280,124 +289,6 @@ window.LISTINGS = [
       en: ["Private pool", "Roof terrace", "Delivered furnished", "Staged payments", "Near the beach"]
     },
     sample: true
-  },
-
-  /* =========================== GÉORGIE =========================== */
-  {
-    id: "GEO-001",
-    country: "georgia",
-    city: "Batumi",
-    type: "apartment",
-    status: "offplan",
-    bedrooms: 1,
-    bathrooms: 1,
-    size_sqm: 48,
-    price: 78000,
-    currency: "USD",
-    price_usd: 78000,
-    tenure: { fr: "Pleine propriété", en: "Freehold" },
-    handover: "T2 2027",
-    est_yield_pct: 8,
-    title: {
-      fr: "Appartement 1 chambre sur plan, front de mer de Batumi",
-      en: "Off-plan 1-bedroom seafront apartment, Batumi"
-    },
-    description: {
-      fr: "Appartement d'une chambre dans une résidence neuve en construction, à proximité du boulevard de Batumi et de la mer Noire. Livraison en finition blanche ou meublée selon option. Un ticket d'entrée modéré sur le littoral géorgien.",
-      en: "A one-bedroom apartment in a new residence under construction, close to Batumi Boulevard and the Black Sea. Delivered white-box or furnished, depending on the option chosen. A moderate entry ticket on the Georgian coast."
-    },
-    features: {
-      fr: ["Vue mer partielle", "Proche boulevard", "Option meublée", "Paiement échelonné", "Résidence avec piscine"],
-      en: ["Partial sea views", "Near the boulevard", "Furnished option", "Staged payments", "Residence with pool"]
-    },
-    sample: true
-  },
-  {
-    id: "GEO-002",
-    country: "georgia",
-    city: "Batumi",
-    type: "apartment",
-    status: "ready",
-    bedrooms: 2,
-    bathrooms: 1,
-    size_sqm: 68,
-    price: 105000,
-    currency: "USD",
-    price_usd: 105000,
-    tenure: { fr: "Pleine propriété", en: "Freehold" },
-    handover: null,
-    est_yield_pct: 7.5,
-    title: {
-      fr: "Appartement 2 chambres meublé à Batumi",
-      en: "Furnished 2-bedroom apartment in Batumi"
-    },
-    description: {
-      fr: "Appartement livré et meublé dans le nouveau Batumi, à quelques minutes à pied de la plage. Séjour avec balcon et cuisine équipée. Prêt à être occupé ou mis en location.",
-      en: "A completed, furnished apartment in New Batumi, a few minutes' walk from the beach. Living room with balcony and fitted kitchen. Ready to move in or to rent out."
-    },
-    features: {
-      fr: ["Meublé", "Balcon", "Cuisine équipée", "Proche plage", "Prêt à louer"],
-      en: ["Furnished", "Balcony", "Fitted kitchen", "Near the beach", "Rental-ready"]
-    },
-    sample: true
-  },
-  {
-    id: "GEO-003",
-    country: "georgia",
-    city: "Tbilisi — Vake",
-    type: "apartment",
-    status: "ready",
-    bedrooms: 2,
-    bathrooms: 2,
-    size_sqm: 95,
-    price: 210000,
-    currency: "USD",
-    price_usd: 210000,
-    tenure: { fr: "Pleine propriété", en: "Freehold" },
-    handover: null,
-    est_yield_pct: 7,
-    title: {
-      fr: "Appartement 2 chambres dans le quartier de Vake",
-      en: "2-bedroom apartment in the Vake district"
-    },
-    description: {
-      fr: "Appartement rénové à Vake, quartier résidentiel prisé de Tbilissi, proche du parc Vake et des avenues commerçantes. Pièces lumineuses, deux salles de bains et balcon. Adapté à la location longue durée.",
-      en: "A renovated apartment in Vake, a sought-after residential district of Tbilisi, close to Vake Park and the main shopping avenues. Bright rooms, two bathrooms and a balcony. Suited to long-term rental."
-    },
-    features: {
-      fr: ["Rénové", "Deux salles de bains", "Balcon", "Proche parc Vake", "Chauffage central"],
-      en: ["Renovated", "Two bathrooms", "Balcony", "Near Vake Park", "Central heating"]
-    },
-    sample: true
-  },
-  {
-    id: "GEO-004",
-    country: "georgia",
-    city: "Tbilisi — Old Town",
-    type: "penthouse",
-    status: "ready",
-    bedrooms: 3,
-    bathrooms: 2,
-    size_sqm: 140,
-    price: 295000,
-    currency: "USD",
-    price_usd: 295000,
-    tenure: { fr: "Pleine propriété", en: "Freehold" },
-    handover: null,
-    est_yield_pct: null,
-    title: {
-      fr: "Penthouse 3 chambres avec terrasse, vieille ville de Tbilissi",
-      en: "3-bedroom penthouse with terrace, Old Tbilisi"
-    },
-    description: {
-      fr: "Dernier étage d'un immeuble restauré de la vieille ville de Tbilissi, avec terrasse ouverte sur les toits et la forteresse de Narikala. Volumes généreux et cachet préservé. Proche des bains de soufre et des rues piétonnes.",
-      en: "The top floor of a restored building in Old Tbilisi, with a terrace overlooking the rooftops and Narikala Fortress. Generous volumes and preserved character. Close to the sulphur baths and pedestrian streets."
-    },
-    features: {
-      fr: ["Terrasse sur les toits", "Vue sur Narikala", "Immeuble restauré", "Hauts plafonds", "Quartier historique"],
-      en: ["Rooftop terrace", "Narikala views", "Restored building", "High ceilings", "Historic district"]
-    },
-    sample: true
   }
 ];
 
@@ -449,6 +340,9 @@ window.COUNTRIES = {
     }
   },
   georgia: {
+    // Bientôt disponible : aucune annonce affichée, liste d'attente sur georgie.html.
+    // Pour ouvrir la Géorgie : passez à false ET ajoutez des annonces country: "georgia".
+    comingSoon: true,
     name: { fr: "Géorgie", en: "Georgia" },
     tagline: {
       fr: "Des prix d'entrée bas, entre mer Noire et capitale.",

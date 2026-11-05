@@ -1,0 +1,35 @@
+<!-- HOW IT WORKS -->
+    <section class="section section-soft" id="etapes" aria-labelledby="steps-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-i18n="stepsEyebrow">Comment ça marche</p>
+          <h2 id="steps-title" data-i18n="stepsTitle">De votre premier message à la remise des clés</h2>
+        </header>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <h3 data-i18n="step1Title">Appel découverte</h3>
+            <p data-i18n="step1Text">Un échange par WhatsApp ou en visio pour cerner votre budget, vos objectifs et votre calendrier. Sans engagement.</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <h3 data-i18n="step2Title">Sélection de biens et analyse chiffrée</h3>
+            <p data-i18n="step2Text">Une courte liste de biens adaptés, avec pour chacun : prix comparé au marché, frais à prévoir, rendement estimé et points de vigilance.</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <h3 data-i18n="step3Title">Visite (sur place ou vidéo) et réservation</h3>
+            <p data-i18n="step3Text">Vous visitez sur place ou en vidéo, en direct. Une fois le bien choisi, nous vous guidons pour l'offre et la réservation.</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">4</span>
+            <h3 data-i18n="step4Title">Accompagnement jusqu'aux clés</h3>
+            <p data-i18n="step4Text">Démarches, signature et remise des clés. Si vous le souhaitez, mise en relation avec un gestionnaire pour la location.</p>
+          </li>
+        </ol>
+        <div class="steps-cta">
+          <a class="btn btn-wa" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">WA_SVG<span data-i18n="stepsCta">Réserver mon appel découverte</span></a>
+        </div>
+      </div>
+    </section>
+

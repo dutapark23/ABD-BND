@@ -13,7 +13,6 @@
               <option value="" data-i18n="optAll">Tous</option>
               <option value="dubai" data-i18n="country_dubai">Dubaï</option>
               <option value="bali" data-i18n="country_bali">Bali</option>
-              <option value="georgia" data-i18n="country_georgia">Géorgie</option>
             </select>
           </div>
           <div class="field">
@@ -60,11 +59,26 @@
           </div>
         </form>
 
-        <p class="result-count" id="result-count" aria-live="polite"></p>
+        <div class="results-bar">
+          <p class="result-count" id="result-count" aria-live="polite"></p>
+          <div class="sort">
+            <label for="f-sort" data-i18n="sortLabel">Trier</label>
+            <select id="f-sort" name="sort">
+              <option value="reco" data-i18n="sortReco">Recommandés</option>
+              <option value="price-asc" data-i18n="sortPriceAsc">Prix croissant</option>
+              <option value="price-desc" data-i18n="sortPriceDesc">Prix décroissant</option>
+              <option value="yield" data-i18n="sortYield">Rendement</option>
+            </select>
+          </div>
+        </div>
         <div class="grid" id="grid"></div>
         <div class="empty" id="empty" hidden>
-          <p data-i18n="emptyText">Aucun bien ne correspond à ces critères.</p>
-          <button type="button" class="btn btn-ghost" data-reset data-i18n="fReset">Réinitialiser</button>
+          <p class="empty-title" data-i18n="emptyText">Aucun bien ne correspond à ces critères.</p>
+          <p class="empty-help" data-i18n="emptyHelp">Élargissez vos filtres, ou décrivez-nous votre recherche : nous vous envoyons une sélection sur mesure.</p>
+          <div class="empty-actions">
+            <button type="button" class="btn btn-ghost" data-reset data-i18n="fReset">Réinitialiser</button>
+            <a class="btn btn-wa" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">WA_SVG<span data-i18n="waCta">Écrire sur WhatsApp</span></a>
+          </div>
         </div>
       </div>
     </section>

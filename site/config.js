@@ -7,6 +7,8 @@ window.SITE_CONFIG = {
   defaultLang: "fr",
   // Numéro de courtier RERA (ORN) à Dubaï — affiché en pied de page s'il est rempli
   reraOrn: "",
+  // Lien de la chaîne YouTube (ex. "https://www.youtube.com/@marinaimmo") — vide = bandeau masqué
+  youtube: "",
   // Identifiants de suivi publicitaire — laisser vide pour désactiver.
   // Les scripts ne se chargent qu'après acceptation des cookies par le visiteur.
   tracking: {
