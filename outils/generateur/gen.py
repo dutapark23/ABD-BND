@@ -5,11 +5,81 @@ G = os.path.dirname(os.path.abspath(__file__)) + '/'
 OUT = os.path.normpath(os.path.join(G, '..', '..', 'site')) + '/'
 DOMAIN = 'https://www.marina-immo.com/'
 part = lambda n: open(G + n).read()
-LISTINGS, DEST, WHYCONTACT, MODAL = part('listings.part'), part('dest.part'), part('whycontact.part'), part('modal.part')
 
 FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231a1a1a'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23c8a96e'%3EMI%3C/text%3E%3C/svg%3E"
 FONTS = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
 WA_SVG = '<svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg>'
+
+
+def wpart(n):
+    return part(n).replace('WA_SVG', WA_SVG)
+
+
+LISTINGS, DEST, MODAL = wpart('listings.part'), wpart('dest.part'), wpart('modal.part')
+_wc = wpart('whycontact.part')
+WHY, CONTACT = _wc[:_wc.index('<!-- CONTACT -->')], '    ' + _wc[_wc.index('<!-- CONTACT -->'):]
+STEPS, YOUTUBE, WAITLIST = wpart('steps.part'), wpart('youtube.part'), wpart('waitlist.part')
+CALC = '''<!-- CALCULATOR (filled by widgets.js) -->
+    <section id="calculateur" class="section"></section>
+
+    '''
+MARCHE = '''<!-- MARKET DATA (filled by widgets.js) -->
+    <section id="marche" class="section"></section>
+
+    '''
+
+# FAQ — FR is the default HTML + JSON-LD; EN lives in site/app.js (keys faqNQ / faqNA)
+FAQ = [
+    ("Un étranger peut-il acheter à Dubaï ?",
+     "Oui. Dans les zones dites « freehold », les étrangers peuvent acheter en pleine propriété, sans être résidents aux Émirats. Nous vérifions le statut de chaque bien avant de vous le proposer."),
+    ("Et à Bali ?",
+     "Un étranger ne peut pas détenir un terrain en pleine propriété en Indonésie. L'achat se fait le plus souvent en bail longue durée (leasehold), ou via une société locale à capitaux étrangers (PT PMA). Permis de construire, zonage et titre du bail doivent être vérifiés avant de signer."),
+    ("Sur plan ou prêt à louer : que choisir ?",
+     "Un bien sur plan demande souvent un ticket d'entrée plus bas et se paie en plusieurs fois jusqu'à la livraison, mais il faut attendre et accepter un risque de retard. Un bien livré peut être loué tout de suite. Nous comparons les deux options selon votre budget et votre horizon."),
+    ("Peut-on acheter à distance ?",
+     "Oui, c'est courant. Visite en vidéo, documents envoyés à l'avance, signature électronique ou procuration selon les cas, paiement par virement. Vous pouvez aussi venir sur place : nous organisons les visites."),
+    ("Quels frais prévoir en plus du prix ?",
+     "À Dubaï : environ 4 % de frais d'enregistrement au Dubai Land Department (DLD), plus les frais d'agence et quelques frais administratifs. À Bali : frais de notaire, de vérification et de bail, qui varient selon le bien. Nous vous donnons une estimation chiffrée avant toute offre."),
+    ("Qui s'occupe de la location ?",
+     "Nous pouvons vous mettre en relation avec des gestionnaires locatifs sur place, pour de la location longue durée ou saisonnière. Les rendements affichés sur le site sont des estimations brutes, avant frais de gestion et charges, et ne sont pas garantis."),
+    ("Et la Géorgie ?",
+     'Notre sélection à Tbilissi et Batoumi arrive bientôt. Inscrivez-vous sur la <a href="georgie.html#liste-attente">liste d\'attente</a> pour être prévenu en premier.'),
+]
+
+
+def faq_section():
+    items = ''
+    for i, (q, a) in enumerate(FAQ, 1):
+        attr = 'data-i18n-html' if '<a ' in a else 'data-i18n'
+        items += f'''          <details class="faq-item">
+            <summary data-i18n="faq{i}Q">{q}</summary>
+            <p {attr}="faq{i}A">{a}</p>
+          </details>
+'''
+    return f'''<!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-wrap">
+        <header class="section-head">
+          <p class="eyebrow" data-i18n="faqEyebrow">Questions fréquentes</p>
+          <h2 id="faq-title" data-i18n="faqTitle">Vos questions, nos réponses</h2>
+        </header>
+        <div class="faq">
+{items}        </div>
+      </div>
+    </section>
+
+    '''
+
+
+def faq_jsonld():
+    import json, re
+    data = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q,
+         "acceptedAnswer": {"@type": "Answer", "text": re.sub(r'<[^>]+>', '', a)}} for q, a in FAQ]}
+    return '  <script type="application/ld+json">\n' + json.dumps(data, ensure_ascii=False, indent=2).replace('</', '<\\/') + '\n  </script>\n'
+
+
+FAQ_HTML = faq_section()
 
 JSONLD = '''  <script type="application/ld+json">
   {

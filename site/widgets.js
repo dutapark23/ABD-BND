@@ -260,7 +260,7 @@
     });
     // étiquettes x (une année sur deux)
     DATA.forEach(function (d) {
-      if ((d[0] - x0) % 2 === 0) s += '<text x="' + X(d[0]) + '" y="' + (H - m.b + 18) + '" text-anchor="middle" font-size="' + fs + '" fill="#5b564e">' + d[0] + '</text>';
+      if ((d[0] - x0) % 2 === 0) s += '<text x="' + X(d[0]) + '" y="' + (H - m.b + 18) + '" text-anchor="middle" font-size="' + fs + '" fill="#5b564e">' + (W < 480 ? '\u2019' + String(d[0]).slice(2) : d[0]) + '</text>';
     });
     // référence lancement 2004
     s += '<line x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + Y(LAUNCH) + '" y2="' + Y(LAUNCH) + '" stroke="#8a6a2e" stroke-width="1.25" stroke-dasharray="5 4"/>' +
@@ -316,6 +316,8 @@
       '<p class="w-source">' + esc(t('source')) + '</p>' +
       '<a class="w-cta w-cta-dark" href="#contact">' + esc(t('mktCta')) + '</a>' +
       '</div>';
+    var box = root.querySelector('.w-chart');
+    if (box && box.clientWidth && Math.abs(box.clientWidth - chartW) > 2) { chartW = box.clientWidth; box.innerHTML = chartSVG(chartW); }
   }
 
   /* ================= Initialisation ================= */

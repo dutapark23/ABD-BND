@@ -1,0 +1,55 @@
+<!-- GEORGIA WAITLIST -->
+    <section class="section section-soft" id="liste-attente" aria-labelledby="wait-title">
+      <div class="container contact-grid">
+        <div class="contact-intro">
+          <p class="eyebrow" data-i18n="waitEyebrow">Liste d'attente</p>
+          <h2 id="wait-title" data-i18n="waitTitle">Soyez prévenu en premier</h2>
+          <p data-i18n="waitLead">Nous préparons une sélection d'appartements à Tbilissi et Batoumi. Inscrivez-vous : vous recevrez les premiers biens et leur analyse chiffrée avant leur mise en ligne.</p>
+          <ul class="wait-points">
+            <li data-i18n="waitPoint1">Accès anticipé aux premiers biens</li>
+            <li data-i18n="waitPoint2">Analyse chiffrée : prix, frais, rendement estimé</li>
+            <li data-i18n="waitPoint3">Aucun engagement, désinscription en un message</li>
+          </ul>
+        </div>
+
+        <form class="lead-form" name="georgie-liste-attente" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci.html">
+          <input type="hidden" name="form-name" value="georgie-liste-attente">
+          <p class="hp" aria-hidden="true">
+            <label>Ne pas remplir <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
+          <div class="form-row">
+            <div class="field">
+              <label for="w-name" data-i18n="lName">Nom complet</label>
+              <input id="w-name" name="name" type="text" autocomplete="name" data-i18n-ph="phName" placeholder="Prénom Nom">
+            </div>
+            <div class="field">
+              <label for="w-email"><span data-i18n="lEmail">E-mail</span> <span class="req" aria-hidden="true">*</span></label>
+              <input id="w-email" name="email" type="email" autocomplete="email" required data-i18n-ph="phEmail" placeholder="vous@exemple.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="w-phone" data-i18n="lPhone">WhatsApp / téléphone</label>
+              <input id="w-phone" name="whatsapp" type="tel" autocomplete="tel" data-i18n-ph="phPhone" placeholder="+33 6 12 34 56 78">
+            </div>
+            <div class="field">
+              <label for="w-budget" data-i18n="lBudget">Budget (USD)</label>
+              <select id="w-budget" name="budget">
+                <option value="" data-i18n="optChoose">Choisir…</option>
+                <option value="under-100k" data-i18n="wBudget1">Moins de 100 000 $</option>
+                <option value="100k-250k" data-i18n="wBudget2">100 000 – 250 000 $</option>
+                <option value="250k-500k" data-i18n="budget2">250 000 – 500 000 $</option>
+                <option value="over-500k" data-i18n="wBudget4">Plus de 500 000 $</option>
+              </select>
+            </div>
+          </div>
+          <div class="field field-check">
+            <input id="w-consent" name="consent" type="checkbox" value="yes" required>
+            <label for="w-consent"><span data-i18n-html="lConsentWait">J'accepte que Marina Immo utilise ces informations pour me prévenir de l'ouverture de la Géorgie et me recontacter. Elles ne sont ni vendues ni partagées. Voir la <a href="confidentialite.html">politique de confidentialité</a>.</span> <span class="req" aria-hidden="true">*</span></label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" data-i18n="waitSubmit">Rejoindre la liste d'attente</button>
+          <p class="form-note" data-i18n="requiredNote">* Champs obligatoires</p>
+        </form>
+      </div>
+    </section>
+
