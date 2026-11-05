@@ -72,6 +72,7 @@
                 <option value="dubai" data-i18n="country_dubai">Dubaï</option>
                 <option value="bali" data-i18n="country_bali">Bali</option>
                 <option value="georgia" data-i18n="country_georgia">Géorgie</option>
+                <option value="saudi" data-i18n="country_saudi">Arabie saoudite</option>
                 <option value="undecided" data-i18n="undecided" selected>Je ne sais pas encore</option>
               </select>
             </div>

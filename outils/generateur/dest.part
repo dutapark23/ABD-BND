@@ -2,7 +2,7 @@
     <section class="section section-dark" id="destinations" aria-labelledby="dest-title">
       <div class="container">
         <header class="section-head">
-          <p class="eyebrow" data-i18n="destEyebrow">Trois marchés</p>
+          <p class="eyebrow" data-i18n="destEyebrow">Quatre marchés</p>
           <h2 id="dest-title" data-i18n="destTitle">Destinations</h2>
         </header>
         <div class="dest-grid" id="dest-grid"></div>

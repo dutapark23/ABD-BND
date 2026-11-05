@@ -127,17 +127,18 @@ a:hover { color: var(--ink); }
 .hero-art-item .art { width: 100%; height: 100%; display: block; }
 .hero-art-trio { justify-content: space-between; }
 .hero-art-trio .hero-art-item { flex: 1 1 0; }
-.hero-art-trio .hero-art-bali, .hero-art-trio .hero-art-georgia { display: none; }
+.hero-art-trio .hero-art-bali, .hero-art-trio .hero-art-georgia, .hero-art-trio .hero-art-saudi { display: none; }
 @media (min-width: 720px) {
   .hero-art { opacity: .3; height: 58%; }
-  .hero-art-trio .hero-art-bali, .hero-art-trio .hero-art-georgia { display: block; }
+  .hero-art-trio .hero-art-bali, .hero-art-trio .hero-art-georgia, .hero-art-trio .hero-art-saudi { display: block; }
 }
 .hero::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(90deg, rgba(26,26,26,.85) 0%, rgba(26,26,26,.35) 60%, transparent 100%); }
 .soon-badge { display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 5px 10px; border-radius: 2px; margin: 0 0 14px; }
 .hero h1 { max-width: 22ch; color: var(--white); }
 .hero-lead { color: #ddd6c9; font-size: 1.08rem; max-width: 60ch; margin-bottom: 2rem; }
 .hero-picks { display: grid; grid-template-columns: 1fr; gap: 10px; max-width: 720px; }
-@media (min-width: 560px) { .hero-picks { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 560px) { .hero-picks { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .hero-picks { grid-template-columns: repeat(4, 1fr); max-width: 1080px; } }
 .pick {
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
   background: rgba(255,255,255,.04); color: var(--white); border: 1px solid rgba(200,169,110,.55);
@@ -227,6 +228,7 @@ textarea { resize: vertical; min-height: 110px; }
 .ph-dubai { background: radial-gradient(ellipse at 80% 15%, rgba(200,169,110,.28), transparent 55%), linear-gradient(160deg, #15130f 0%, #2e261b 60%, #4a3a24 100%); }
 .ph-bali { background: radial-gradient(ellipse at 80% 15%, rgba(200,169,110,.24), transparent 55%), linear-gradient(160deg, #0e1613 0%, #1b2d25 60%, #2c4536 100%); }
 .ph-georgia { background: radial-gradient(ellipse at 80% 15%, rgba(200,169,110,.24), transparent 55%), linear-gradient(160deg, #170f11 0%, #2e1c1f 60%, #4a2c2b 100%); }
+.ph-saudi { background: radial-gradient(ellipse at 80% 15%, rgba(200,169,110,.26), transparent 55%), linear-gradient(160deg, #17140e 0%, #2e271b 60%, #4a3d27 100%); }
 .ph-country { font: 600 1.25rem/1.1 var(--serif); }
 .ph-note { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-top: 4px; }
 .ph-lg { aspect-ratio: 16 / 8; }
@@ -239,11 +241,12 @@ textarea { resize: vertical; min-height: 110px; }
 
 /* ---------- Destinations ---------- */
 .dest-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-@media (min-width: 900px) { .dest-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 720px) { .dest-grid { grid-template-columns: repeat(2, 1fr); } }
 .dest { border: 1px solid rgba(200,169,110,.35); padding: 28px 24px; border-radius: var(--radius); display: flex; flex-direction: column; background: var(--ink-2); color: var(--white); }
 .dest-band { height: 4px; width: 56px; margin-bottom: 20px; background: var(--gold); }
 .dest-bali .dest-band { background: #8fae8b; }
 .dest-georgia .dest-band { background: #c48b7c; }
+.dest-saudi .dest-band { background: #d9c29a; }
 .dest h3 { font-size: 1.6rem; color: var(--white); }
 .dest-tagline { color: var(--gold); font-style: italic; font-family: var(--serif); font-size: 1.05rem; }
 .dest-list { list-style: none; padding: 0; margin: 0 0 24px; color: #ddd6c9; }
@@ -381,7 +384,7 @@ textarea { resize: vertical; min-height: 110px; }
 .yt-icon { width: 20px; height: 20px; flex: none; }
 .yt-strip :focus-visible { outline-color: var(--gold); }
 
-/* ---------- Georgia waitlist ---------- */
+/* ---------- Coming-soon waitlists (Georgia, Saudi Arabia) ---------- */
 .wait-points { list-style: none; padding: 0; margin: 24px 0 0; }
 .wait-points li { padding: 8px 0 8px 26px; position: relative; color: var(--ink-2); }
 .wait-points li::before { content: ""; position: absolute; left: 0; top: 15px; width: 12px; height: 7px; border-left: 2px solid var(--gold-dark); border-bottom: 2px solid var(--gold-dark); transform: rotate(-45deg); }

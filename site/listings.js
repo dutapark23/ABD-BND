@@ -4,7 +4,8 @@
  * =====================================================================
  *
  *  Ce fichier contient toutes les annonces affichées sur le site,
- *  ainsi que la présentation des trois pays (Dubaï, Bali, Géorgie).
+ *  ainsi que la présentation des quatre pays (Dubaï, Bali, Géorgie,
+ *  Arabie saoudite).
  *  Vous pouvez le modifier avec n'importe quel éditeur de texte.
  *
  *  POUR AJOUTER UNE ANNONCE
@@ -23,8 +24,9 @@
  *
  *  RÈGLES DES CHAMPS
  *  - country : "dubai" ou "bali"
- *              ("georgia" est en « Bientôt disponible » : voir comingSoon
- *              tout en bas du fichier, dans COUNTRIES.georgia)
+ *              ("georgia" et "saudi" sont en « Bientôt disponible » : voir
+ *              comingSoon tout en bas du fichier, dans COUNTRIES.georgia
+ *              et COUNTRIES.saudi)
  *  - type    : "apartment", "villa", "penthouse" ou "townhouse"
  *  - status  : "ready" (livré) ou "offplan" (sur plan)
  *  - bedrooms : nombre de chambres (0 = studio)
@@ -362,6 +364,32 @@ window.COUNTRIES = {
         "Low entry prices compared with Western European markets.",
         "Two complementary markets: seaside Batumi on the Black Sea and the capital, Tbilisi.",
         "Residence permit possible through property investment above a certain threshold, subject to conditions."
+      ]
+    }
+  },
+  saudi: {
+    // Bientôt disponible : aucune annonce affichée, liste d'attente sur arabie-saoudite.html.
+    // Pour ouvrir l'Arabie saoudite : passez à false ET ajoutez des annonces country: "saudi".
+    comingSoon: true,
+    name: { fr: "Arabie saoudite", en: "Saudi Arabia" },
+    tagline: {
+      fr: "Un marché qui s'ouvre aux étrangers, porté par Vision 2030.",
+      en: "A market opening up to foreign buyers, driven by Vision 2030."
+    },
+    highlights: {
+      fr: [
+        "Nouvelle loi (approuvée en juillet 2025, en vigueur depuis janvier 2026) : les non-Saoudiens peuvent acheter, sous conditions.",
+        "Achat possible dans des zones définies par les autorités, principalement Riyad et Djeddah.",
+        "La Mecque et Médine restent soumises à des restrictions strictes.",
+        "Grands projets de Vision 2030 et forte demande de logements.",
+        "Premium Residency : une voie de résidence liée à un investissement immobilier au-delà d'un seuil, selon la réglementation en vigueur."
+      ],
+      en: [
+        "New law (approved in July 2025, in force since January 2026): non-Saudis can buy property, subject to conditions.",
+        "Purchases allowed in zones defined by the authorities, mainly Riyadh and Jeddah.",
+        "Mecca and Medina remain subject to strict restrictions.",
+        "Vision 2030 giga-projects and strong housing demand.",
+        "Premium Residency: a residency route linked to property investment above a threshold, under the regulations in force."
       ]
     }
   }

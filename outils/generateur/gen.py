@@ -44,16 +44,28 @@ FAQ = [
      "Nous pouvons vous mettre en relation avec des gestionnaires locatifs sur place, pour de la location longue durée ou saisonnière. Les rendements affichés sur le site sont des estimations brutes, avant frais de gestion et charges, et ne sont pas garantis."),
     ("Et la Géorgie ?",
      'Notre sélection à Tbilissi et Batoumi arrive bientôt. Inscrivez-vous sur la <a href="georgie.html#liste-attente">liste d\'attente</a> pour être prévenu en premier.'),
+    ("Et l'Arabie saoudite ?",
+     'Bientôt disponible. Depuis janvier 2026, une nouvelle loi permet aux non-Saoudiens d\'acheter un bien immobilier, sous conditions et dans des zones définies par les autorités (principalement Riyad et Djeddah). Inscrivez-vous sur la <a href="arabie-saoudite.html#liste-attente">liste d\'attente</a> pour être prévenu en premier.'),
+]
+
+# Saudi Arabia landing page FAQ — EN in site/app.js (keys faqSaNQ / faqSaNA)
+FAQ_SA = [
+    ("Un étranger peut-il acheter en Arabie saoudite ?",
+     "Oui, sous conditions. Une nouvelle loi, approuvée en juillet 2025 et entrée en vigueur en janvier 2026, permet aux non-Saoudiens de devenir propriétaires dans des zones définies par les autorités, selon la réglementation en vigueur."),
+    ("Dans quelles villes ?",
+     "Les principales zones ouvertes sont à Riyad et à Djeddah. La Mecque et Médine restent soumises à des restrictions strictes et à des conditions particulières. Nous vérifions le statut de chaque bien avant de vous le proposer."),
+    ("L'achat donne-t-il un droit de résidence ?",
+     "Pas automatiquement. Le programme Premium Residency prévoit une voie de résidence liée à un investissement immobilier au-delà d'un certain seuil, sous conditions et selon la réglementation en vigueur. Nous vous orientons vers des professionnels qualifiés pour ce volet."),
 ]
 
 
-def faq_section():
+def faq_section(faq=None, key='faq'):
     items = ''
-    for i, (q, a) in enumerate(FAQ, 1):
+    for i, (q, a) in enumerate(faq or FAQ, 1):
         attr = 'data-i18n-html' if '<a ' in a else 'data-i18n'
         items += f'''          <details class="faq-item">
-            <summary data-i18n="faq{i}Q">{q}</summary>
-            <p {attr}="faq{i}A">{a}</p>
+            <summary data-i18n="{key}{i}Q">{q}</summary>
+            <p {attr}="{key}{i}A">{a}</p>
           </details>
 '''
     return f'''<!-- FAQ -->
@@ -71,11 +83,11 @@ def faq_section():
     '''
 
 
-def faq_jsonld():
+def faq_jsonld(faq=None):
     import json, re
     data = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q,
-         "acceptedAnswer": {"@type": "Answer", "text": re.sub(r'<[^>]+>', '', a)}} for q, a in FAQ]}
+         "acceptedAnswer": {"@type": "Answer", "text": re.sub(r'<[^>]+>', '', a)}} for q, a in (faq or FAQ)]}
     return '  <script type="application/ld+json">\n' + json.dumps(data, ensure_ascii=False, indent=2).replace('</', '<\\/') + '\n  </script>\n'
 
 
@@ -92,10 +104,11 @@ JSONLD = '''  <script type="application/ld+json">
     "areaServed": [
       {"@type": "Place", "name": "Dubai, United Arab Emirates"},
       {"@type": "Place", "name": "Bali, Indonesia"},
-      {"@type": "Place", "name": "Georgia"}
+      {"@type": "Place", "name": "Georgia"},
+      {"@type": "Place", "name": "Saudi Arabia"}
     ],
     "knowsLanguage": ["fr", "en"],
-    "description": "Agence d'investissement immobilier à Dubaï, Bali et en Géorgie. Accompagnement en français et en anglais."
+    "description": "Agence d'investissement immobilier à Dubaï et Bali ; Géorgie et Arabie saoudite bientôt. Accompagnement en français et en anglais."
   }
   </script>
 '''
@@ -171,7 +184,7 @@ FOOTER = '''  <footer class="site-footer">
     <div class="container footer-inner">
       <div>
         <p class="footer-brand" data-brand>Marina Immo</p>
-        <p class="footer-tag" data-i18n="footerTag">Immobilier d'investissement · Dubaï · Bali · Géorgie</p>
+        <p class="footer-tag" data-i18n="footerTag">Immobilier d'investissement · Dubaï · Bali · Géorgie · Arabie saoudite</p>
       </div>
       <ul class="footer-links">
         <li><a href="mentions-legales.html" data-i18n="legalLink">Mentions légales</a></li>
@@ -203,15 +216,16 @@ def scripts(listings=True, widgets=False):
 
 
 HOME_HERO = f'''<section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-art hero-art-trio" data-art="dubai bali georgia" aria-hidden="true"></div>
+      <div class="hero-art hero-art-trio" data-art="dubai bali georgia saudi" aria-hidden="true"></div>
       <div class="container hero-inner">
-        <p class="eyebrow" data-i18n="heroEyebrow">Dubaï · Bali · Géorgie (bientôt)</p>
+        <p class="eyebrow" data-i18n="heroEyebrow">Dubaï · Bali · Bientôt : Géorgie, Arabie saoudite</p>
         <h1 id="hero-title" data-i18n="heroTitle">Investissez à Dubaï et à Bali. Avec des chiffres, pas des promesses.</h1>
         <p class="hero-lead" data-i18n="heroLead">Des biens sélectionnés, prêts ou sur plan. Une analyse claire du prix, du rendement et des risques. Un accompagnement en français, de la recherche à la remise des clés.</p>
         <div class="hero-picks" role="group" aria-label="Choisir une destination" data-i18n-aria="heroPickLabel">
           <button type="button" class="pick" data-pick="dubai"><span data-i18n="country_dubai">Dubaï</span><span class="pick-arrow" aria-hidden="true">→</span></button>
           <button type="button" class="pick" data-pick="bali"><span data-i18n="country_bali">Bali</span><span class="pick-arrow" aria-hidden="true">→</span></button>
           <button type="button" class="pick pick-soon" data-pick="georgia"><span data-i18n="country_georgia">Géorgie</span><span class="soon-pill" data-i18n="soonPill">Bientôt</span></button>
+          <button type="button" class="pick pick-soon" data-pick="saudi"><span data-i18n="country_saudi">Arabie saoudite</span><span class="soon-pill" data-i18n="soonPill">Bientôt</span></button>
         </div>
         <a class="hero-secondary" href="#contact" data-i18n="heroCta">Parler à un conseiller</a>
       </div>
@@ -262,8 +276,8 @@ OTHER_DEST = DEST.replace('<!-- DESTINATIONS -->', '<!-- OTHER DESTINATIONS -->'
 
 # ---- index ----
 write('index.html',
-      head('Marina Immo — Investir à Dubaï et Bali, Géorgie bientôt',
-           "Marina Immo : biens immobiliers à Dubaï et à Bali, prêts ou sur plan. Prix analysés, rendement estimé, accompagnement en français et en anglais jusqu'à la remise des clés. Géorgie bientôt disponible.",
+      head('Marina Immo — Investir à Dubaï et Bali, Géorgie et Arabie saoudite bientôt',
+           "Marina Immo : biens immobiliers à Dubaï et à Bali, prêts ou sur plan. Prix analysés, rendement estimé, accompagnement en français et en anglais jusqu'à la remise des clés. Géorgie et Arabie saoudite bientôt disponibles.",
            '', extra=JSONLD + faq_jsonld(), widgets=True)
       + '<body data-page="home" data-title-key="title_home">\n' + header('#top')
       + '\n  <main id="main">\n'
@@ -305,6 +319,43 @@ write('georgie.html',
       + sections(landing_hero('georgia', 'Immobilier en Géorgie', 'Géorgie — bientôt disponible',
                               "Tbilissi et Batoumi : nous préparons une sélection d'appartements analysés et chiffrés. Inscrivez-vous pour la recevoir en premier.", soon=True),
                  WAITLIST, FAQ_HTML, OTHER_DEST)
+      + '  </main>\n\n'
+      + FOOTER + scripts(listings=True))
+
+# ---- Saudi Arabia: coming-soon landing page with waitlist (same pattern as Georgia) ----
+CITY_SELECT = '''<div class="field">
+            <label for="w-city" data-i18n="lCity">Ville d'intérêt</label>
+            <select id="w-city" name="ville">
+              <option value="" data-i18n="optChoose">Choisir…</option>
+              <option value="riyad" data-i18n="city_riyadh">Riyad</option>
+              <option value="djeddah" data-i18n="city_jeddah">Djeddah</option>
+              <option value="autre" data-i18n="city_other">Autre</option>
+            </select>
+          </div>
+          <div class="field field-check">'''
+WAITLIST_SA = WAITLIST
+for old, new in [
+    ('<!-- GEORGIA WAITLIST -->', '<!-- SAUDI ARABIA WAITLIST -->'),
+    ('georgie-liste-attente', 'arabie-saoudite-liste-attente'),
+    ('<p data-i18n="waitLead">Nous préparons une sélection d\'appartements à Tbilissi et Batoumi.',
+     '<p data-i18n="waitLead_saudi">Nous préparons une sélection de biens à Riyad et Djeddah, dans les zones ouvertes aux acheteurs étrangers.'),
+    ('data-i18n-html="lConsentWait">', 'data-i18n-html="lConsentWait_saudi">'),
+    ("de l'ouverture de la Géorgie", "de l'ouverture de l'Arabie saoudite"),
+    ('<div class="field field-check">', CITY_SELECT),
+]:
+    assert old in WAITLIST_SA, old
+    WAITLIST_SA = WAITLIST_SA.replace(old, new)
+
+NAV_SA = dict(NAV_GEO)
+write('arabie-saoudite.html',
+      head('Arabie saoudite — Bientôt disponible | Marina Immo',
+           "Immobilier en Arabie saoudite (Riyad, Djeddah) : le marché s'ouvre aux acheteurs étrangers, sous conditions. Notre sélection arrive bientôt : rejoignez la liste d'attente, en français ou en anglais.",
+           'arabie-saoudite.html', extra=faq_jsonld(FAQ_SA))
+      + '<body data-page="landing" data-country="saudi" data-title-key="title_saudi">\n' + header('index.html', NAV_SA)
+      + '\n  <main id="main">\n'
+      + sections(landing_hero('saudi', 'Immobilier en Arabie saoudite', 'Arabie saoudite — bientôt disponible',
+                              "Riyad et Djeddah : le marché s'ouvre aux acheteurs étrangers, sous conditions. Nous préparons une sélection de biens analysés et chiffrés. Inscrivez-vous pour la recevoir en premier.", soon=True),
+                 WAITLIST_SA, faq_section(FAQ_SA, 'faqSa'), OTHER_DEST)
       + '  </main>\n\n'
       + FOOTER + scripts(listings=True))
 

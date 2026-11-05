@@ -5,8 +5,8 @@
   var CFG = window.SITE_CONFIG || {};
   var LISTINGS = Array.isArray(window.LISTINGS) ? window.LISTINGS : [];
   var COUNTRIES = window.COUNTRIES || {};
-  var COUNTRY_KEYS = ["dubai", "bali", "georgia"];
-  var LANDING = { dubai: "dubai.html", bali: "bali.html", georgia: "georgie.html" };
+  var COUNTRY_KEYS = ["dubai", "bali", "georgia", "saudi"];
+  var LANDING = { dubai: "dubai.html", bali: "bali.html", georgia: "georgie.html", saudi: "arabie-saoudite.html" };
   var BRAND = CFG.brand || "Marina Immo";
   var WA_NUMBER = String(CFG.whatsapp || "").replace(/\D/g, "");
   var EMAIL = CFG.email || "";
@@ -34,6 +34,7 @@
       skip: "Aller au contenu",
       menuLabel: "Menu",
       waDefault_georgia: "Bonjour {brand}, je souhaite être prévenu(e) de l'ouverture de vos biens en Géorgie.",
+      waDefault_saudi: "Bonjour {brand}, je souhaite être prévenu(e) de l'ouverture de vos biens en Arabie saoudite.",
       waBar: "Une question ? WhatsApp",
       sortLabel: "Trier", sortReco: "Recommandés", sortPriceAsc: "Prix croissant", sortPriceDesc: "Prix décroissant", sortYield: "Rendement",
       soonPill: "Bientôt", soonBadge: "Bientôt disponible", waitCta: "Être prévenu en premier",
@@ -60,7 +61,18 @@
       faq6A: "Nous pouvons vous mettre en relation avec des gestionnaires locatifs sur place, pour de la location longue durée ou saisonnière. Les rendements affichés sur le site sont des estimations brutes, avant frais de gestion et charges, et ne sont pas garantis.",
       faq7Q: "Et la Géorgie ?",
       faq7A: "Notre sélection à Tbilissi et Batoumi arrive bientôt. Inscrivez-vous sur la <a href=\"georgie.html#liste-attente\">liste d'attente</a> pour être prévenu en premier.",
+      faq8Q: "Et l'Arabie saoudite ?",
+      faq8A: "Bientôt disponible. Depuis janvier 2026, une nouvelle loi permet aux non-Saoudiens d'acheter un bien immobilier, sous conditions et dans des zones définies par les autorités (principalement Riyad et Djeddah). Inscrivez-vous sur la <a href=\"arabie-saoudite.html#liste-attente\">liste d'attente</a> pour être prévenu en premier.",
+      faqSa1Q: "Un étranger peut-il acheter en Arabie saoudite ?",
+      faqSa1A: "Oui, sous conditions. Une nouvelle loi, approuvée en juillet 2025 et entrée en vigueur en janvier 2026, permet aux non-Saoudiens de devenir propriétaires dans des zones définies par les autorités, selon la réglementation en vigueur.",
+      faqSa2Q: "Dans quelles villes ?",
+      faqSa2A: "Les principales zones ouvertes sont à Riyad et à Djeddah. La Mecque et Médine restent soumises à des restrictions strictes et à des conditions particulières. Nous vérifions le statut de chaque bien avant de vous le proposer.",
+      faqSa3Q: "L'achat donne-t-il un droit de résidence ?",
+      faqSa3A: "Pas automatiquement. Le programme Premium Residency prévoit une voie de résidence liée à un investissement immobilier au-delà d'un certain seuil, sous conditions et selon la réglementation en vigueur. Nous vous orientons vers des professionnels qualifiés pour ce volet.",
       waitEyebrow: "Liste d'attente", waitTitle: "Soyez prévenu en premier",
+      waitLead_saudi: "Nous préparons une sélection de biens à Riyad et Djeddah, dans les zones ouvertes aux acheteurs étrangers. Inscrivez-vous : vous recevrez les premiers biens et leur analyse chiffrée avant leur mise en ligne.",
+      lCity: "Ville d'intérêt", city_riyadh: "Riyad", city_jeddah: "Djeddah", city_other: "Autre",
+      lConsentWait_saudi: "J'accepte que {brand} utilise ces informations pour me prévenir de l'ouverture de l'Arabie saoudite et me recontacter. Elles ne sont ni vendues ni partagées. Voir la <a href=\"confidentialite.html\">politique de confidentialité</a>.",
       waitLead: "Nous préparons une sélection d'appartements à Tbilissi et Batoumi. Inscrivez-vous : vous recevrez les premiers biens et leur analyse chiffrée avant leur mise en ligne.",
       waitPoint1: "Accès anticipé aux premiers biens", waitPoint2: "Analyse chiffrée : prix, frais, rendement estimé", waitPoint3: "Aucun engagement, désinscription en un message",
       wBudget1: "Moins de 100 000 $", wBudget2: "100 000 – 250 000 $", wBudget4: "Plus de 500 000 $",
@@ -68,14 +80,15 @@
       waitSubmit: "Rejoindre la liste d'attente",
       navLabel: "Navigation principale", langLabel: "Langue",
       navListings: "Biens", navCalc: "Calculateur", navDestinations: "Destinations", navContact: "Contact",
-      title_home: "Marina Immo — Investir à Dubaï et Bali, Géorgie bientôt",
+      title_home: "Marina Immo — Investir à Dubaï et Bali, Géorgie et Arabie saoudite bientôt",
       title_dubai: "Investir à Dubaï — Biens prêts et sur plan | Marina Immo",
       title_bali: "Investir à Bali — Villas | Marina Immo",
       title_georgia: "Géorgie — Bientôt disponible | Marina Immo",
+      title_saudi: "Arabie saoudite — Bientôt disponible | Marina Immo",
       title_merci: "Merci — Marina Immo",
       title_legal: "Mentions légales — Marina Immo",
       title_privacy: "Politique de confidentialité — Marina Immo",
-      heroEyebrow: "Dubaï · Bali · Géorgie (bientôt)",
+      heroEyebrow: "Dubaï · Bali · Bientôt : Géorgie, Arabie saoudite",
       heroTitle: "Investissez à Dubaï et à Bali. Avec des chiffres, pas des promesses.",
       heroLead: "Des biens sélectionnés, prêts ou sur plan. Une analyse claire du prix, du rendement et des risques. Un accompagnement en français, de la recherche à la remise des clés.",
       heroPickLabel: "Choisir une destination",
@@ -89,10 +102,13 @@
       heroEyebrow_georgia: "Immobilier en Géorgie",
       heroTitle_georgia: "Géorgie — bientôt disponible",
       heroLead_georgia: "Tbilissi et Batoumi : nous préparons une sélection d'appartements analysés et chiffrés. Inscrivez-vous pour la recevoir en premier.",
+      heroEyebrow_saudi: "Immobilier en Arabie saoudite",
+      heroTitle_saudi: "Arabie saoudite — bientôt disponible",
+      heroLead_saudi: "Riyad et Djeddah : le marché s'ouvre aux acheteurs étrangers, sous conditions. Nous préparons une sélection de biens analysés et chiffrés. Inscrivez-vous pour la recevoir en premier.",
       seeListings: "Voir les biens",
       seeListingsIn: "Voir les biens · {country}",
       landingPage: "Page dédiée",
-      country_dubai: "Dubaï", country_bali: "Bali", country_georgia: "Géorgie",
+      country_dubai: "Dubaï", country_bali: "Bali", country_georgia: "Géorgie", country_saudi: "Arabie saoudite",
       listingsEyebrow: "Sélection", listingsTitle: "Nos biens",
       filtersLabel: "Filtrer les biens",
       fCountry: "Pays", fType: "Type", fStatus: "Statut", fBeds: "Chambres min.", fBudget: "Budget max (USD)", fReset: "Réinitialiser",
@@ -113,7 +129,7 @@
       waListing: "Bonjour {brand}, je suis intéressé(e) par le bien {id} — {title}. Pouvez-vous m'en dire plus ?",
       waDefault: "Bonjour {brand}, je souhaite des informations sur l'investissement immobilier.",
       waDefaultCountry: "Bonjour {brand}, je souhaite des informations sur l'investissement immobilier à {country}.",
-      destEyebrow: "Trois marchés", destTitle: "Destinations",
+      destEyebrow: "Quatre marchés", destTitle: "Destinations",
       focusEyebrow: "Pourquoi ce marché",
       whyEyebrow: "Notre méthode", whyTitle: "Pourquoi Marina Immo",
       why1Title: "Expertise locale", why1Text: "Nous connaissons chaque quartier, chaque promoteur et les pièges à éviter sur place.",
@@ -131,7 +147,7 @@
       budget1: "Moins de 250 000 $", budget2: "250 000 – 500 000 $", budget3: "500 000 – 1 000 000 $", budget4: "1 – 2 millions $", budget5: "Plus de 2 millions $",
       budgetMax: "≤ {n} USD",
       submit: "Envoyer ma demande", requiredNote: "* Champs obligatoires",
-      footerTag: "Immobilier d'investissement · Dubaï · Bali · Géorgie",
+      footerTag: "Immobilier d'investissement · Dubaï · Bali · Géorgie · Arabie saoudite",
       disclaimer: "Les biens marqués « Exemple » sont des illustrations. Les prix sont indicatifs et peuvent évoluer. Les rendements affichés sont des estimations brutes, non garanties. Ce site ne constitue pas un conseil en investissement.",
       rights: "Tous droits réservés.",
       legalLink: "Mentions légales", privacyLink: "Confidentialité", cookieLink: "Cookies",
@@ -148,6 +164,7 @@
       skip: "Skip to content",
       menuLabel: "Menu",
       waDefault_georgia: "Hello {brand}, I'd like to be notified when your Georgia properties launch.",
+      waDefault_saudi: "Hello {brand}, I'd like to be notified when your Saudi Arabia properties launch.",
       waBar: "Questions? WhatsApp us",
       sortLabel: "Sort", sortReco: "Recommended", sortPriceAsc: "Price: low to high", sortPriceDesc: "Price: high to low", sortYield: "Yield",
       soonPill: "Soon", soonBadge: "Coming soon", waitCta: "Get early access",
@@ -174,7 +191,18 @@
       faq6A: "We can introduce you to local rental management companies, for long-term or holiday letting. Yields shown on this website are gross estimates, before management fees and charges, and are not guaranteed.",
       faq7Q: "What about Georgia?",
       faq7A: "Our selection in Tbilisi and Batumi is coming soon. Join the <a href=\"georgie.html#liste-attente\">waitlist</a> to be the first to know.",
+      faq8Q: "What about Saudi Arabia?",
+      faq8A: "Coming soon. Since January 2026, a new law allows non-Saudis to buy property, subject to conditions and in zones defined by the authorities (mainly Riyadh and Jeddah). Join the <a href=\"arabie-saoudite.html#liste-attente\">waitlist</a> to be the first to know.",
+      faqSa1Q: "Can foreigners buy property in Saudi Arabia?",
+      faqSa1A: "Yes, subject to conditions. A new law, approved in July 2025 and in force since January 2026, allows non-Saudis to own property in zones defined by the authorities, under the regulations in force.",
+      faqSa2Q: "In which cities?",
+      faqSa2A: "The main open zones are in Riyadh and Jeddah. Mecca and Medina remain subject to strict restrictions and special conditions. We check the status of every property before showing it to you.",
+      faqSa3Q: "Does buying give a right of residence?",
+      faqSa3A: "Not automatically. The Premium Residency programme offers a residency route linked to property investment above a certain threshold, subject to conditions and under the regulations in force. We refer you to qualified professionals for this part.",
       waitEyebrow: "Waitlist", waitTitle: "Be the first to know",
+      waitLead_saudi: "We are preparing a selection of properties in Riyadh and Jeddah, in the zones open to foreign buyers. Sign up to receive the first properties and their costed analysis before they go online.",
+      lCity: "City of interest", city_riyadh: "Riyadh", city_jeddah: "Jeddah", city_other: "Other",
+      lConsentWait_saudi: "I agree that {brand} may use this information to notify me when Saudi Arabia launches and to contact me. It is never sold or shared. See the <a href=\"confidentialite.html\">privacy policy</a>.",
       waitLead: "We are preparing a selection of apartments in Tbilisi and Batumi. Sign up to receive the first properties and their costed analysis before they go online.",
       waitPoint1: "Early access to the first properties", waitPoint2: "Costed analysis: price, fees, estimated yield", waitPoint3: "No commitment, unsubscribe with one message",
       wBudget1: "Under $100,000", wBudget2: "$100,000 – $250,000", wBudget4: "Over $500,000",
@@ -182,14 +210,15 @@
       waitSubmit: "Join the waitlist",
       navLabel: "Main navigation", langLabel: "Language",
       navListings: "Properties", navCalc: "Calculator", navDestinations: "Destinations", navContact: "Contact",
-      title_home: "Marina Immo — Invest in Dubai and Bali, Georgia soon",
+      title_home: "Marina Immo — Invest in Dubai and Bali, Georgia and Saudi Arabia soon",
       title_dubai: "Invest in Dubai — Ready and off-plan properties | Marina Immo",
       title_bali: "Invest in Bali — Villas | Marina Immo",
       title_georgia: "Georgia — Coming soon | Marina Immo",
+      title_saudi: "Saudi Arabia — Coming soon | Marina Immo",
       title_merci: "Thank you — Marina Immo",
       title_legal: "Legal notice — Marina Immo",
       title_privacy: "Privacy policy — Marina Immo",
-      heroEyebrow: "Dubai · Bali · Georgia (soon)",
+      heroEyebrow: "Dubai · Bali · Soon: Georgia, Saudi Arabia",
       heroTitle: "Invest in Dubai and Bali. Backed by numbers, not promises.",
       heroLead: "Hand-picked properties, ready or off-plan. A clear analysis of price, yield and risk. Guidance in English and French, from search to handover.",
       heroPickLabel: "Choose a destination",
@@ -203,10 +232,13 @@
       heroEyebrow_georgia: "Georgia real estate",
       heroTitle_georgia: "Georgia — coming soon",
       heroLead_georgia: "Tbilisi and Batumi: we are preparing a selection of analysed, fully costed apartments. Sign up to get it first.",
+      heroEyebrow_saudi: "Saudi Arabia real estate",
+      heroTitle_saudi: "Saudi Arabia — coming soon",
+      heroLead_saudi: "Riyadh and Jeddah: the market is opening up to foreign buyers, subject to conditions. We are preparing a selection of analysed, fully costed properties. Sign up to get it first.",
       seeListings: "See properties",
       seeListingsIn: "See properties · {country}",
       landingPage: "Dedicated page",
-      country_dubai: "Dubai", country_bali: "Bali", country_georgia: "Georgia",
+      country_dubai: "Dubai", country_bali: "Bali", country_georgia: "Georgia", country_saudi: "Saudi Arabia",
       listingsEyebrow: "Selection", listingsTitle: "Our properties",
       filtersLabel: "Filter properties",
       fCountry: "Country", fType: "Type", fStatus: "Status", fBeds: "Min. bedrooms", fBudget: "Max budget (USD)", fReset: "Reset",
@@ -227,7 +259,7 @@
       waListing: "Hello {brand}, I'm interested in listing {id} — {title}. Could you tell me more?",
       waDefault: "Hello {brand}, I'd like information about property investment.",
       waDefaultCountry: "Hello {brand}, I'd like information about property investment in {country}.",
-      destEyebrow: "Three markets", destTitle: "Destinations",
+      destEyebrow: "Four markets", destTitle: "Destinations",
       focusEyebrow: "Why this market",
       whyEyebrow: "Our approach", whyTitle: "Why Marina Immo",
       why1Title: "Local expertise", why1Text: "We know every community, every developer and the pitfalls to avoid on the ground.",
@@ -245,7 +277,7 @@
       budget1: "Under $250,000", budget2: "$250,000 – $500,000", budget3: "$500,000 – $1,000,000", budget4: "$1M – $2M", budget5: "Over $2M",
       budgetMax: "≤ {n} USD",
       submit: "Send my request", requiredNote: "* Required fields",
-      footerTag: "Investment real estate · Dubai · Bali · Georgia",
+      footerTag: "Investment real estate · Dubai · Bali · Georgia · Saudi Arabia",
       disclaimer: "Listings marked \"Sample\" are illustrations. Prices are indicative and may change. Yields shown are gross estimates and are not guaranteed. This website does not constitute investment advice.",
       rights: "All rights reserved.",
       legalLink: "Legal notice", privacyLink: "Privacy", cookieLink: "Cookies",
@@ -414,7 +446,22 @@
       '<path d="M186 182v-38h40v38M182 144l24-18 24 18M192 154h8v8h-8zM212 154h8v8h-8zM190 170h32"/>' +
       '<path d="M230 182v-24l16-12 16 12v24M240 182v-12h12v12"/>' +
       '<path d="M266 182v-36h30v36M262 146l19-14 19 14M272 156h6v8h-6zM284 156h6v8h-6zM300 182v-22l20-14"/>' +
-      '<path d="M0 182h320M0 190h320" opacity=".5"/>'
+      '<path d="M0 182h320M0 190h320" opacity=".5"/>',
+    saudi:
+      // sun + dunes
+      '<circle cx="268" cy="40" r="14" opacity=".6"/>' +
+      '<path d="M0 190q40-10 86-2t96-2 80 0 58-4M0 198q60-8 120 0t120-2 80-2" opacity=".5"/>' +
+      // palm
+      '<path d="M44 182q-8-48 6-90"/><path d="M50 92q-24-4-38 10M50 92q-12-18-32-18M50 92q4-22 26-28M50 92q22-4 36 10M50 92q8 14 4 30M50 92q-14 8-18 26"/>' +
+      // generic towers
+      '<path d="M84 182v-40h22v40M89 154h12M89 168h12"/>' +
+      '<path d="M112 182v-74l12-8 12 8v74M118 120h12M118 136h12M118 152h12M118 168h12"/>' +
+      '<path d="M142 182V66l10-22 10 22v116M147 84h10M147 102h10M147 120h10M147 138h10M147 156h10M152 44v-12"/>' +
+      '<path d="M168 182v-92h24v92M173 102h14M173 118h14M173 134h14M173 150h14M173 166h14"/>' +
+      '<path d="M198 182v-58h20v58M202 136h12M202 150h12M202 164h12"/>' +
+      // low mud-brick style wall with stepped crenellations
+      '<path d="M226 182v-30h70v30M226 152v-6h6v6h8v-6h6v6h8v-6h6v6h8v-6h6v6h8v-6h6v6M250 182v-14a8 8 0 0 1 16 0v14M236 162h6v8h-6zM278 162h6v8h-6z" opacity=".85"/>' +
+      '<path d="M0 182h320" opacity=".5"/>'
   };
   function flip(id) { // mirror every other listing's illustration so cards don't look identical
     var h = 0; String(id).replace(/\d/g, function (d) { h += Number(d); });
@@ -556,6 +603,7 @@
     var qp = "";
     try { qp = (new URLSearchParams(location.search).get("pays") || "").toLowerCase(); } catch (e) { /* old browser */ }
     if (qp === "georgie") qp = "georgia";
+    if (qp === "arabie-saoudite" || qp === "arabie") qp = "saudi";
     if (qp === "dubai" || qp === "dubaï") qp = "dubai";
     F.country.value = LIVE_KEYS.indexOf(qp) > -1 ? qp : (LIVE_KEYS.indexOf(PAGE_COUNTRY) > -1 ? PAGE_COUNTRY : "");
     grid.addEventListener("click", function (e) {
@@ -827,7 +875,7 @@
   if (consent() === "granted") loadTracking();
 
   // Lead form: mark submission; conversion fires on merci.html (reliable after redirect)
-  $$('form[name="contact"], form[name="georgie-liste-attente"]').forEach(function (form) {
+  $$('form[name="contact"], form[name="georgie-liste-attente"], form[name="arabie-saoudite-liste-attente"]').forEach(function (form) {
     form.addEventListener("submit", function () { store("sessionStorage", "mi_lead", "1"); });
   });
   if (PAGE === "merci" && store("sessionStorage", "mi_lead") === "1") {
