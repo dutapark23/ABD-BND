@@ -1,0 +1,72 @@
+<!-- LISTINGS -->
+    <section class="section" id="biens" aria-labelledby="listings-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-i18n="listingsEyebrow">Sélection</p>
+          <h2 id="listings-title" data-i18n="listingsTitle">Nos biens</h2>
+        </header>
+
+        <form class="filters" id="filters" aria-label="Filtrer les biens" data-i18n-aria="filtersLabel" onsubmit="return false">
+          <div class="field">
+            <label for="f-country" data-i18n="fCountry">Pays</label>
+            <select id="f-country" name="country">
+              <option value="" data-i18n="optAll">Tous</option>
+              <option value="dubai" data-i18n="country_dubai">Dubaï</option>
+              <option value="bali" data-i18n="country_bali">Bali</option>
+              <option value="georgia" data-i18n="country_georgia">Géorgie</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-type" data-i18n="fType">Type</label>
+            <select id="f-type" name="type">
+              <option value="" data-i18n="optAll">Tous</option>
+              <option value="apartment" data-i18n="type_apartment">Appartement</option>
+              <option value="villa" data-i18n="type_villa">Villa</option>
+              <option value="penthouse" data-i18n="type_penthouse">Penthouse</option>
+              <option value="townhouse" data-i18n="type_townhouse">Maison de ville</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-status" data-i18n="fStatus">Statut</label>
+            <select id="f-status" name="status">
+              <option value="" data-i18n="optAll">Tous</option>
+              <option value="ready" data-i18n="status_ready">Prêt à emménager</option>
+              <option value="offplan" data-i18n="status_offplan">Sur plan</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-beds" data-i18n="fBeds">Chambres min.</label>
+            <select id="f-beds" name="beds">
+              <option value="" data-i18n="optAny">Indifférent</option>
+              <option value="1">1+</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-budget" data-i18n="fBudget">Budget max (USD)</label>
+            <select id="f-budget" name="budget">
+              <option value="" data-i18n="optAny">Indifférent</option>
+              <option value="250000" data-num="250000"></option>
+              <option value="500000" data-num="500000"></option>
+              <option value="1000000" data-num="1000000"></option>
+              <option value="2000000" data-num="2000000"></option>
+              <option value="5000000" data-num="5000000"></option>
+            </select>
+          </div>
+          <div class="field field-reset">
+            <button type="button" class="btn btn-ghost" id="f-reset" data-i18n="fReset">Réinitialiser</button>
+          </div>
+        </form>
+
+        <p class="result-count" id="result-count" aria-live="polite"></p>
+        <div class="grid" id="grid"></div>
+        <div class="empty" id="empty" hidden>
+          <p data-i18n="emptyText">Aucun bien ne correspond à ces critères.</p>
+          <button type="button" class="btn btn-ghost" data-reset data-i18n="fReset">Réinitialiser</button>
+        </div>
+      </div>
+    </section>
+
+    
