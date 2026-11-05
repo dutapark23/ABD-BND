@@ -101,13 +101,13 @@ JSONLD = '''  <script type="application/ld+json">
 '''
 
 
-def head(title, desc, path, robots='index, follow', extra=''):
+def head(title, desc, path, robots='index, follow', extra='', widgets=False):
     url = DOMAIN + path
     return f'''<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{title}</title>
   <meta name="description" content="{desc}">
   <meta name="robots" content="{robots}">
@@ -125,12 +125,15 @@ def head(title, desc, path, robots='index, follow', extra=''):
   <link rel="preload" href="fonts/PlayfairDisplay-latin-48d1e9.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="styles.css">
-{extra}</head>
+{'  <link rel="stylesheet" href="widgets.css">' + chr(10) if widgets else ''}{extra}</head>
 '''
 
 
-def header(home, sections=True):
-    pre = '' if sections else 'index.html'
+NAV_HOME = {'biens': '#biens', 'calc': '#calculateur', 'dest': '#destinations', 'contact': '#contact'}
+NAV_OUT = {k: 'index.html' + v for k, v in NAV_HOME.items()}
+
+
+def header(home, nav=NAV_HOME):
     return f'''  <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
 
   <header class="site-header">
@@ -139,10 +142,11 @@ def header(home, sections=True):
         <span class="brand-mark" aria-hidden="true">MI</span>
         <span class="brand-name" data-brand>Marina Immo</span>
       </a>
-      <nav class="main-nav" aria-label="Navigation principale" data-i18n-aria="navLabel">
-        <a href="{pre}#biens" data-i18n="navListings">Biens</a>
-        <a href="{pre}#destinations" data-i18n="navDestinations">Destinations</a>
-        <a href="{pre}#contact" data-i18n="navContact">Contact</a>
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale" data-i18n-aria="navLabel">
+        <a href="{nav['biens']}" data-i18n="navListings">Biens</a>
+        <a href="{nav['calc']}" data-i18n="navCalc">Calculateur</a>
+        <a href="{nav['dest']}" data-i18n="navDestinations">Destinations</a>
+        <a href="{nav['contact']}" data-i18n="navContact">Contact</a>
       </nav>
       <div class="header-actions">
         <div class="lang-switch" role="group" aria-label="Langue" data-i18n-aria="langLabel">
@@ -150,10 +154,13 @@ def header(home, sections=True):
           <span aria-hidden="true">|</span>
           <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
         </div>
-        <a class="btn btn-wa btn-sm" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">
+        <a class="btn btn-wa btn-sm header-wa" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">
           {WA_SVG}
           <span class="wa-label">WhatsApp</span>
         </a>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu" data-i18n-aria="menuLabel">
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </header>
@@ -179,39 +186,56 @@ FOOTER = '''  <footer class="site-footer">
 '''
 
 
-def scripts(listings=True):
-    s = '  <script src="config.js"></script>\n'
+WA_BAR = f'''  <div class="wa-bar" data-wa-bar>
+    <a class="btn btn-wa btn-block" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">{WA_SVG}<span data-i18n="waBar">Une question ? WhatsApp</span></a>
+  </div>
+'''
+
+
+def scripts(listings=True, widgets=False):
+    s = WA_BAR + '  <script src="config.js"></script>\n'
     if listings:
         s += '  <script src="listings.js"></script>\n'
-    return s + '  <script src="app.js"></script>\n</body>\n</html>\n'
+    s += '  <script src="app.js"></script>\n'
+    if widgets:
+        s += '  <script src="widgets.js" defer></script>\n'
+    return s + '</body>\n</html>\n'
 
 
-HOME_HERO = '''    <section class="hero" id="top" aria-labelledby="hero-title">
+HOME_HERO = f'''<section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-art hero-art-trio" data-art="dubai bali georgia" aria-hidden="true"></div>
       <div class="container hero-inner">
-        <p class="eyebrow" data-i18n="heroEyebrow">Dubaï · Bali · Géorgie</p>
-        <h1 id="hero-title" data-i18n="heroTitle">Investissez à Dubaï, Bali et en Géorgie. Avec des chiffres, pas des promesses.</h1>
+        <p class="eyebrow" data-i18n="heroEyebrow">Dubaï · Bali · Géorgie (bientôt)</p>
+        <h1 id="hero-title" data-i18n="heroTitle">Investissez à Dubaï et à Bali. Avec des chiffres, pas des promesses.</h1>
         <p class="hero-lead" data-i18n="heroLead">Des biens sélectionnés, prêts ou sur plan. Une analyse claire du prix, du rendement et des risques. Un accompagnement en français, de la recherche à la remise des clés.</p>
         <div class="hero-picks" role="group" aria-label="Choisir une destination" data-i18n-aria="heroPickLabel">
           <button type="button" class="pick" data-pick="dubai"><span data-i18n="country_dubai">Dubaï</span><span class="pick-arrow" aria-hidden="true">→</span></button>
           <button type="button" class="pick" data-pick="bali"><span data-i18n="country_bali">Bali</span><span class="pick-arrow" aria-hidden="true">→</span></button>
-          <button type="button" class="pick" data-pick="georgia"><span data-i18n="country_georgia">Géorgie</span><span class="pick-arrow" aria-hidden="true">→</span></button>
+          <button type="button" class="pick pick-soon" data-pick="georgia"><span data-i18n="country_georgia">Géorgie</span><span class="soon-pill" data-i18n="soonPill">Bientôt</span></button>
         </div>
         <a class="hero-secondary" href="#contact" data-i18n="heroCta">Parler à un conseiller</a>
       </div>
     </section>
-
 '''
 
 
-def landing_hero(c, eyebrow, h1, lead):
-    return f'''    <section class="hero" id="top" aria-labelledby="hero-title">
+def landing_hero(c, eyebrow, h1, lead, soon=False):
+    if soon:
+        ctas = f'''<a class="btn btn-gold" href="#liste-attente" data-i18n="waitCta">Être prévenu en premier</a>
+          <a class="btn btn-wa" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">{WA_SVG}<span data-i18n="waCta">Écrire sur WhatsApp</span></a>'''
+        badge = '<p class="soon-badge" data-i18n="soonBadge">Bientôt disponible</p>\n        '
+    else:
+        ctas = f'''<a class="btn btn-gold" href="#biens" data-i18n="seeListings">Voir les biens</a>
+          <a class="btn btn-wa" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">{WA_SVG}<span data-i18n="waCta">Écrire sur WhatsApp</span></a>'''
+        badge = ''
+    return f'''<section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-art" data-art="{c}" aria-hidden="true"></div>
       <div class="container hero-inner">
-        <p class="eyebrow" data-i18n="heroEyebrow_{c}">{eyebrow}</p>
+        {badge}<p class="eyebrow" data-i18n="heroEyebrow_{c}">{eyebrow}</p>
         <h1 id="hero-title" data-i18n="heroTitle_{c}">{h1}</h1>
         <p class="hero-lead" data-i18n="heroLead_{c}">{lead}</p>
         <div class="hero-ctas">
-          <a class="btn btn-gold" href="#biens" data-i18n="seeListings">Voir les biens</a>
-          <a class="btn btn-wa" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">{WA_SVG}<span data-i18n="waCta">Écrire sur WhatsApp</span></a>
+          {ctas}
         </div>
       </div>
     </section>
@@ -222,7 +246,6 @@ def landing_hero(c, eyebrow, h1, lead):
         <div id="dest-focus"></div>
       </div>
     </section>
-
 '''
 
 
@@ -231,14 +254,22 @@ def write(name, s):
     print('wrote', name, len(s))
 
 
+def sections(*chunks):
+    return '    ' + '\n\n    '.join(c.strip() for c in chunks) + '\n'
+
+
+OTHER_DEST = DEST.replace('<!-- DESTINATIONS -->', '<!-- OTHER DESTINATIONS -->')
+
 # ---- index ----
 write('index.html',
-      head('Marina Immo — Investir à Dubaï, Bali et en Géorgie',
-           "Marina Immo : biens immobiliers à Dubaï, Bali et en Géorgie. Prêts ou sur plan, prix analysés, accompagnement en français et en anglais de la recherche à la remise des clés.",
-           '', extra=JSONLD)
+      head('Marina Immo — Investir à Dubaï et Bali, Géorgie bientôt',
+           "Marina Immo : biens immobiliers à Dubaï et à Bali, prêts ou sur plan. Prix analysés, rendement estimé, accompagnement en français et en anglais jusqu'à la remise des clés. Géorgie bientôt disponible.",
+           '', extra=JSONLD + faq_jsonld(), widgets=True)
       + '<body data-page="home" data-title-key="title_home">\n' + header('#top')
-      + '\n  <main id="main">\n' + HOME_HERO + '    ' + LISTINGS + DEST + WHYCONTACT + '  </main>\n\n'
-      + FOOTER + '\n  ' + MODAL + scripts())
+      + '\n  <main id="main">\n'
+      + sections(HOME_HERO, LISTINGS, CALC, STEPS, MARCHE, DEST, WHY, YOUTUBE, FAQ_HTML, CONTACT)
+      + '  </main>\n\n'
+      + FOOTER + '\n  ' + MODAL + scripts(widgets=True))
 
 # ---- landing pages ----
 LP = [
@@ -250,21 +281,37 @@ LP = [
      "Investir à Bali : villas sélectionnées pour la location saisonnière à Canggu, Uluwatu et Ubud. Cadre juridique expliqué, accompagnement en français.",
      'Immobilier à Bali', "Investir à Bali : des villas tropicales pensées pour la location saisonnière.",
      "Canggu, Uluwatu, Ubud… Des villas sélectionnées pour la location saisonnière, avec un cadre juridique expliqué clairement."),
-    ('georgia', 'georgie.html', 'Investir en Géorgie — Appartements à Tbilissi et Batoumi | Marina Immo',
-     "Investir en Géorgie : appartements à Tbilissi et Batoumi, ticket d'entrée accessible, pleine propriété pour les étrangers. Accompagnement en français et en anglais.",
-     'Immobilier en Géorgie', "Investir en Géorgie : un ticket d'entrée bas, en pleine propriété.",
-     "Tbilissi et Batoumi : des appartements à prix d'entrée accessible, achetables en pleine propriété par les étrangers."),
 ]
+NAV_BALI = dict(NAV_HOME, calc='index.html#calculateur')
 for c, f, title, desc, eb, h1, lead in LP:
-    write(f, head(title, desc, f)
-          + f'<body data-page="landing" data-country="{c}" data-title-key="title_{c}">\n' + header('index.html')
-          + '\n  <main id="main">\n' + landing_hero(c, eb, h1, lead) + '    ' + LISTINGS + WHYCONTACT + DEST.replace('<!-- DESTINATIONS -->', '<!-- OTHER DESTINATIONS -->') + '  </main>\n\n'
-          + FOOTER + '\n  ' + MODAL + scripts())
+    dubai = c == 'dubai'
+    if dubai:
+        body = sections(landing_hero(c, eb, h1, lead), LISTINGS, CALC, MARCHE, STEPS, WHY, YOUTUBE, FAQ_HTML, CONTACT, OTHER_DEST)
+    else:
+        body = sections(landing_hero(c, eb, h1, lead), LISTINGS, STEPS, WHY, YOUTUBE, FAQ_HTML, CONTACT, OTHER_DEST)
+    write(f, head(title, desc, f, widgets=dubai)
+          + f'<body data-page="landing" data-country="{c}" data-title-key="title_{c}">\n' + header('index.html', NAV_HOME if dubai else NAV_BALI)
+          + '\n  <main id="main">\n' + body + '  </main>\n\n'
+          + FOOTER + '\n  ' + MODAL + scripts(widgets=dubai))
+
+# ---- Georgia: coming-soon landing page with waitlist ----
+NAV_GEO = {'biens': 'index.html#biens', 'calc': 'index.html#calculateur', 'dest': '#destinations', 'contact': '#liste-attente'}
+write('georgie.html',
+      head('Géorgie — Bientôt disponible | Marina Immo',
+           "Immobilier en Géorgie (Tbilissi, Batoumi) : notre sélection arrive bientôt. Rejoignez la liste d'attente pour recevoir les premiers biens et leur analyse chiffrée, en français ou en anglais.",
+           'georgie.html')
+      + '<body data-page="landing" data-country="georgia" data-title-key="title_georgia">\n' + header('index.html', NAV_GEO)
+      + '\n  <main id="main">\n'
+      + sections(landing_hero('georgia', 'Immobilier en Géorgie', 'Géorgie — bientôt disponible',
+                              "Tbilissi et Batoumi : nous préparons une sélection d'appartements analysés et chiffrés. Inscrivez-vous pour la recevoir en premier.", soon=True),
+                 WAITLIST, FAQ_HTML, OTHER_DEST)
+      + '  </main>\n\n'
+      + FOOTER + scripts(listings=True))
 
 # ---- merci ----
 write('merci.html',
       head('Merci — Marina Immo', "Votre demande a bien été envoyée à Marina Immo.", 'merci.html', robots='noindex, follow')
-      + '<body data-page="merci" data-title-key="title_merci">\n' + header('index.html', sections=False)
+      + '<body data-page="merci" data-title-key="title_merci">\n' + header('index.html', NAV_OUT)
       + f'''
   <main id="main" class="page-simple">
     <div class="container merci-box">
@@ -407,6 +454,6 @@ for f, title, desc, key, fr, en in [
     ('confidentialite.html', 'Politique de confidentialité — Marina Immo', "Politique de confidentialité et cookies du site Marina Immo.", 'title_privacy', PRIV_FR, PRIV_EN),
 ]:
     write(f, head(title, desc, f)
-          + f'<body data-page="legal" data-title-key="{key}">\n' + header('index.html', sections=False)
+          + f'<body data-page="legal" data-title-key="{key}">\n' + header('index.html', NAV_OUT)
           + '\n  <main id="main" class="page-simple">\n    <article class="container legal">' + fr + en
           + '    </article>\n  </main>\n\n' + FOOTER + scripts(listings=False))

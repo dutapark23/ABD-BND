@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Merci — Marina Immo</title>
   <meta name="description" content="Votre demande a bien été envoyée à Marina Immo.">
   <meta name="robots" content="noindex, follow">
@@ -30,8 +30,9 @@
         <span class="brand-mark" aria-hidden="true">MI</span>
         <span class="brand-name" data-brand>Marina Immo</span>
       </a>
-      <nav class="main-nav" aria-label="Navigation principale" data-i18n-aria="navLabel">
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale" data-i18n-aria="navLabel">
         <a href="index.html#biens" data-i18n="navListings">Biens</a>
+        <a href="index.html#calculateur" data-i18n="navCalc">Calculateur</a>
         <a href="index.html#destinations" data-i18n="navDestinations">Destinations</a>
         <a href="index.html#contact" data-i18n="navContact">Contact</a>
       </nav>
@@ -41,10 +42,13 @@
           <span aria-hidden="true">|</span>
           <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
         </div>
-        <a class="btn btn-wa btn-sm" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">
+        <a class="btn btn-wa btn-sm header-wa" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">
           <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg>
           <span class="wa-label">WhatsApp</span>
         </a>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu" data-i18n-aria="menuLabel">
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </header>
@@ -77,6 +81,9 @@
       <p class="copyright">© <span id="year">2026</span> <span data-brand>Marina Immo</span>. <span data-i18n="rights">Tous droits réservés.</span></p>
     </div>
   </footer>
+  <div class="wa-bar" data-wa-bar>
+    <a class="btn btn-wa btn-block" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg><span data-i18n="waBar">Une question ? WhatsApp</span></a>
+  </div>
   <script src="config.js"></script>
   <script src="app.js"></script>
 </body>

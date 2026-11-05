@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Investir à Bali — Villas | Marina Immo</title>
   <meta name="description" content="Investir à Bali : villas sélectionnées pour la location saisonnière à Canggu, Uluwatu et Ubud. Cadre juridique expliqué, accompagnement en français.">
   <meta name="robots" content="index, follow">
@@ -30,8 +30,9 @@
         <span class="brand-mark" aria-hidden="true">MI</span>
         <span class="brand-name" data-brand>Marina Immo</span>
       </a>
-      <nav class="main-nav" aria-label="Navigation principale" data-i18n-aria="navLabel">
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale" data-i18n-aria="navLabel">
         <a href="#biens" data-i18n="navListings">Biens</a>
+        <a href="index.html#calculateur" data-i18n="navCalc">Calculateur</a>
         <a href="#destinations" data-i18n="navDestinations">Destinations</a>
         <a href="#contact" data-i18n="navContact">Contact</a>
       </nav>
@@ -41,16 +42,20 @@
           <span aria-hidden="true">|</span>
           <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
         </div>
-        <a class="btn btn-wa btn-sm" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">
+        <a class="btn btn-wa btn-sm header-wa" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener">
           <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg>
           <span class="wa-label">WhatsApp</span>
         </a>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu" data-i18n-aria="menuLabel">
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </header>
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-art" data-art="bali" aria-hidden="true"></div>
       <div class="container hero-inner">
         <p class="eyebrow" data-i18n="heroEyebrow_bali">Immobilier à Bali</p>
         <h1 id="hero-title" data-i18n="heroTitle_bali">Investir à Bali : des villas tropicales pensées pour la location saisonnière.</h1>
@@ -84,7 +89,6 @@
               <option value="" data-i18n="optAll">Tous</option>
               <option value="dubai" data-i18n="country_dubai">Dubaï</option>
               <option value="bali" data-i18n="country_bali">Bali</option>
-              <option value="georgia" data-i18n="country_georgia">Géorgie</option>
             </select>
           </div>
           <div class="field">
@@ -131,11 +135,61 @@
           </div>
         </form>
 
-        <p class="result-count" id="result-count" aria-live="polite"></p>
+        <div class="results-bar">
+          <p class="result-count" id="result-count" aria-live="polite"></p>
+          <div class="sort">
+            <label for="f-sort" data-i18n="sortLabel">Trier</label>
+            <select id="f-sort" name="sort">
+              <option value="reco" data-i18n="sortReco">Recommandés</option>
+              <option value="price-asc" data-i18n="sortPriceAsc">Prix croissant</option>
+              <option value="price-desc" data-i18n="sortPriceDesc">Prix décroissant</option>
+              <option value="yield" data-i18n="sortYield">Rendement</option>
+            </select>
+          </div>
+        </div>
         <div class="grid" id="grid"></div>
         <div class="empty" id="empty" hidden>
-          <p data-i18n="emptyText">Aucun bien ne correspond à ces critères.</p>
-          <button type="button" class="btn btn-ghost" data-reset data-i18n="fReset">Réinitialiser</button>
+          <p class="empty-title" data-i18n="emptyText">Aucun bien ne correspond à ces critères.</p>
+          <p class="empty-help" data-i18n="emptyHelp">Élargissez vos filtres, ou décrivez-nous votre recherche : nous vous envoyons une sélection sur mesure.</p>
+          <div class="empty-actions">
+            <button type="button" class="btn btn-ghost" data-reset data-i18n="fReset">Réinitialiser</button>
+            <a class="btn btn-wa" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg><span data-i18n="waCta">Écrire sur WhatsApp</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section section-soft" id="etapes" aria-labelledby="steps-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-i18n="stepsEyebrow">Comment ça marche</p>
+          <h2 id="steps-title" data-i18n="stepsTitle">De votre premier message à la remise des clés</h2>
+        </header>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <h3 data-i18n="step1Title">Appel découverte</h3>
+            <p data-i18n="step1Text">Un échange par WhatsApp ou en visio pour cerner votre budget, vos objectifs et votre calendrier. Sans engagement.</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <h3 data-i18n="step2Title">Sélection de biens et analyse chiffrée</h3>
+            <p data-i18n="step2Text">Une courte liste de biens adaptés, avec pour chacun : prix comparé au marché, frais à prévoir, rendement estimé et points de vigilance.</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <h3 data-i18n="step3Title">Visite (sur place ou vidéo) et réservation</h3>
+            <p data-i18n="step3Text">Vous visitez sur place ou en vidéo, en direct. Une fois le bien choisi, nous vous guidons pour l'offre et la réservation.</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">4</span>
+            <h3 data-i18n="step4Title">Accompagnement jusqu'aux clés</h3>
+            <p data-i18n="step4Text">Démarches, signature et remise des clés. Si vous le souhaitez, mise en relation avec un gestionnaire pour la location.</p>
+          </li>
+        </ol>
+        <div class="steps-cta">
+          <a class="btn btn-wa" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg><span data-i18n="stepsCta">Réserver mon appel découverte</span></a>
         </div>
       </div>
     </section>
@@ -169,6 +223,60 @@
             <p data-i18n="why4Text">Tout est expliqué dans votre langue. Les documents, les chiffres, les étapes.</p>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <!-- YOUTUBE (shown only if SITE_CONFIG.youtube is set) -->
+    <section class="yt-strip" id="youtube" data-youtube hidden aria-labelledby="yt-title">
+      <div class="container yt-inner">
+        <div>
+          <p class="eyebrow" data-i18n="ytEyebrow">Vu sur YouTube</p>
+          <h2 id="yt-title" class="yt-title" data-i18n="ytTitle">Visites de biens et analyses de marché, en vidéo.</h2>
+        </div>
+        <a class="btn btn-gold" data-youtube-link href="#" target="_blank" rel="noopener">
+          <svg class="yt-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.7 15.1V8.9L15.5 12l-5.8 3.1Z"/></svg>
+          <span data-i18n="ytCta">Voir la chaîne</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-wrap">
+        <header class="section-head">
+          <p class="eyebrow" data-i18n="faqEyebrow">Questions fréquentes</p>
+          <h2 id="faq-title" data-i18n="faqTitle">Vos questions, nos réponses</h2>
+        </header>
+        <div class="faq">
+          <details class="faq-item">
+            <summary data-i18n="faq1Q">Un étranger peut-il acheter à Dubaï ?</summary>
+            <p data-i18n="faq1A">Oui. Dans les zones dites « freehold », les étrangers peuvent acheter en pleine propriété, sans être résidents aux Émirats. Nous vérifions le statut de chaque bien avant de vous le proposer.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq2Q">Et à Bali ?</summary>
+            <p data-i18n="faq2A">Un étranger ne peut pas détenir un terrain en pleine propriété en Indonésie. L'achat se fait le plus souvent en bail longue durée (leasehold), ou via une société locale à capitaux étrangers (PT PMA). Permis de construire, zonage et titre du bail doivent être vérifiés avant de signer.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq3Q">Sur plan ou prêt à louer : que choisir ?</summary>
+            <p data-i18n="faq3A">Un bien sur plan demande souvent un ticket d'entrée plus bas et se paie en plusieurs fois jusqu'à la livraison, mais il faut attendre et accepter un risque de retard. Un bien livré peut être loué tout de suite. Nous comparons les deux options selon votre budget et votre horizon.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq4Q">Peut-on acheter à distance ?</summary>
+            <p data-i18n="faq4A">Oui, c'est courant. Visite en vidéo, documents envoyés à l'avance, signature électronique ou procuration selon les cas, paiement par virement. Vous pouvez aussi venir sur place : nous organisons les visites.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq5Q">Quels frais prévoir en plus du prix ?</summary>
+            <p data-i18n="faq5A">À Dubaï : environ 4 % de frais d'enregistrement au Dubai Land Department (DLD), plus les frais d'agence et quelques frais administratifs. À Bali : frais de notaire, de vérification et de bail, qui varient selon le bien. Nous vous donnons une estimation chiffrée avant toute offre.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq6Q">Qui s'occupe de la location ?</summary>
+            <p data-i18n="faq6A">Nous pouvons vous mettre en relation avec des gestionnaires locatifs sur place, pour de la location longue durée ou saisonnière. Les rendements affichés sur le site sont des estimations brutes, avant frais de gestion et charges, et ne sont pas garantis.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq7Q">Et la Géorgie ?</summary>
+            <p data-i18n-html="faq7A">Notre sélection à Tbilissi et Batoumi arrive bientôt. Inscrivez-vous sur la <a href="georgie.html#liste-attente">liste d'attente</a> pour être prévenu en premier.</p>
+          </details>
+        </div>
       </div>
     </section>
 
@@ -248,7 +356,8 @@
         </form>
       </div>
     </section>
-  <!-- OTHER DESTINATIONS -->
+
+    <!-- OTHER DESTINATIONS -->
     <section class="section section-dark" id="destinations" aria-labelledby="dest-title">
       <div class="container">
         <header class="section-head">
@@ -258,8 +367,7 @@
         <div class="dest-grid" id="dest-grid"></div>
       </div>
     </section>
-
-      </main>
+  </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -289,7 +397,10 @@
     </div>
   </div>
 
-    <script src="config.js"></script>
+    <div class="wa-bar" data-wa-bar>
+    <a class="btn btn-wa btn-block" data-wa-link href="https://wa.me/971500000000" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg><span data-i18n="waBar">Une question ? WhatsApp</span></a>
+  </div>
+  <script src="config.js"></script>
   <script src="listings.js"></script>
   <script src="app.js"></script>
 </body>
