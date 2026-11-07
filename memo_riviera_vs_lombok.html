@@ -1,0 +1,126 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Riviera ou Lombok</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Mise en page : mémo d'une colonne, verdict en tête, tableau comparatif, conclusion encadrée. */
+:root {
+  --bg: #fafaf8; --fg: #1a1a1a; --muted: #5f5b52; --line: #e3ded2;
+  --card: #ffffff; --gold: #8a6a2e; --gold-soft: #c8a96e; --ink-box: #1a1a1a; --ink-box-fg: #f2efe8;
+  --good: #1f6a3a; --warn: #8a5a12;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141311; --fg: #ece8df; --muted: #a9a294; --line: #2e2b26; --card: #1c1a17;
+  --gold: #d6b77a; --gold-soft: #c8a96e; --ink-box: #0c0b0a; --ink-box-fg: #ece8df; --good: #7fcf98; --warn: #e3b46a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141311; --fg: #ece8df; --muted: #a9a294; --line: #2e2b26; --card: #1c1a17;
+  --gold: #d6b77a; --gold-soft: #c8a96e; --ink-box: #0c0b0a; --ink-box-fg: #ece8df; --good: #7fcf98; --warn: #e3b46a; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 16px/1.65 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 40px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 28px; }
+.eyebrow { font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 6px; }
+h1 { font: 700 2rem/1.2 var(--serif); margin: 0; text-wrap: balance; }
+h2 { font: 700 1.2rem/1.3 var(--serif); margin: 0 0 10px; }
+p { margin: 0 0 10px; }
+ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.verdict { background: var(--ink-box); color: var(--ink-box-fg); border-radius: 10px; padding: 22px 24px; border-left: 4px solid var(--gold-soft); }
+.verdict .eyebrow { color: var(--gold-soft); }
+.verdict p { font-size: 1.05rem; }
+.verdict strong { color: #fff; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .9rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td:first-child { font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+.win { color: var(--good); font-weight: 600; }
+.risk { color: var(--warn); font-weight: 600; }
+.note { font-size: .82rem; color: var(--muted); }
+.box { border: 1px solid var(--line); background: var(--card); border-radius: 10px; padding: 18px 20px; }
+.conclusion { border: 2px solid var(--gold-soft); border-radius: 10px; padding: 22px 24px; background: var(--card); }
+.conclusion h2 { color: var(--gold); }
+ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+</style>
+
+</head><body><div class="wrap">
+  <header>
+    <p class="eyebrow">Mémo stratégique · novembre 2026</p>
+    <h1>Riviera ou Lombok : où mettre notre énergie</h1>
+  </header>
+
+  <section class="verdict">
+    <p class="eyebrow">En une phrase</p>
+    <p><strong>Pour le même travail, la Riviera peut rapporter plus, sans mettre notre capital en risque.</strong> Le contenu immobilier sur Monaco et la Côte d'Azur, en arabe et en français, pour des acheteurs du Golfe, est notre meilleur ratio temps / capital / gain.</p>
+  </section>
+
+  <section>
+    <h2>Le calcul</h2>
+    <p>Sur une revente médiane à Monaco (4 M€), les honoraires sont d'environ 320 000 € HT : 3 % côté acheteur, 5 % côté vendeur (barème de la Chambre immobilière monégasque, négociable sur les gros dossiers).</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Notre statut</th><th>Comment on est payés</th><th>Par vente à 4 M€</th></tr></thead>
+        <tbody>
+          <tr><td>Apporteur d'affaires</td><td>Une part de l'honoraire acheteur</td><td>36 à 60 k€</td></tr>
+          <tr><td>Agent rattaché à l'agence</td><td>Une part de l'honoraire, négociée</td><td>60 à 130 k€ (estimation)</td></tr>
+          <tr><td>Notre propre licence</td><td>Partage classique entre agences, souvent 50/50</td><td>≈ 160 k€</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Sur la Côte d'Azur française, c'est en général un seul honoraire, souvent payé par le vendeur : on partage moins par vente qu'à Monaco, mais il y a plus de ventes.</p>
+  </section>
+
+  <section>
+    <h2>Riviera contre Lombok</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Critère</th><th>Riviera (contenu + agence partenaire)</th><th>Lombok (phase 1 : 4 villas)</th></tr></thead>
+        <tbody>
+          <tr><td>Capital en risque</td><td class="win">≈ 0 (contenu, déplacements)</td><td class="risk">≈ 140 k$ (terrain + montage)</td></tr>
+          <tr><td>Gain</td><td class="win">2 ventes/an ≈ 72 à 320 k€, selon le statut</td><td>≈ 107 k$ en scénario de base, en ~18 mois</td></tr>
+          <tr><td>Pire cas</td><td>Du temps passé sans vente</td><td class="risk">≈ −118 k$ (scénario prudent)</td></tr>
+          <tr><td>Charge de travail</td><td>Contenu + relation client</td><td class="risk">Chantier, permis, juridique, acheteurs, opérateur</td></tr>
+          <tr><td>Notre avantage</td><td class="win">Français, arabophones, musulmans, réseau du Golfe. Aucun créateur arabophone repéré sur cette niche.</td><td>Le show remplace la commission d'agent</td></tr>
+          <tr><td>Délai avant cash</td><td>Lent : 6 à 18 mois par client</td><td>Lent : pré-ventes puis chantier</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Chiffres Lombok : modèle financier du Plan 2027 (estimations sur prix affichés). Chiffres Monaco : IMSEE 2025 et barème de la Chambre immobilière monégasque, via petrini.mc et monaco-tribune.com.</p>
+  </section>
+
+  <section>
+    <h2>Riviera contre Dubaï</h2>
+    <p>Nos ventes à Dubaï : des biens de <strong>1 à 1,5 M AED</strong>. Avec une commission usuelle de 2 %, ça fait <strong>20 à 30 k AED par vente, soit environ 5 à 7,5 k€</strong>, avant partage. Et le marché se resserre : moins de ventes en ce moment, et de plus en plus d'agences francophones sur le même gâteau.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Une vente</th><th>Ce qu'on touche</th><th>Équivalent en ventes à Dubaï</th></tr></thead>
+        <tbody>
+          <tr><td>Dubaï, 1 à 1,5 M AED</td><td>≈ 5 à 7,5 k€</td><td>1</td></tr>
+          <tr><td>Monaco, statut apporteur</td><td>36 à 60 k€</td><td class="win">≈ 5 à 12</td></tr>
+          <tr><td>Monaco, notre propre licence</td><td>≈ 160 k€</td><td class="win">≈ 21 à 32</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Taux de change approximatif : 1 AED ≈ 0,25 €. Commission Dubaï : chiffres du propriétaire et taux usuel du marché.</p>
+  </section>
+
+  <section class="box">
+    <h2>Ce qu'il faut accepter</h2>
+    <ul>
+      <li><strong>Les milliardaires n'achètent pas sur TikTok.</strong> Le contenu crée la crédibilité ; les ventes viennent des relations, des family offices et des recommandations.</li>
+      <li><strong>Monaco est petit :</strong> 429 reventes en 2025. Élargir à Cannes, Cap-Ferrat, Cap d'Antibes et Beaulieu. Monaco reste la vitrine.</li>
+      <li><strong>Ce n'est pas du cash rapide.</strong> Année 1 : on construit le pipeline. Année 2 : premières commissions possibles.</li>
+      <li><strong>Le bon statut dès le départ.</strong> En France, un apporteur doit rester occasionnel : il faut être agent rattaché à une agence ou avoir sa propre carte. À Monaco, une autorisation est obligatoire. À valider avec un avocat.</li>
+    </ul>
+  </section>
+
+  <section class="conclusion">
+    <h2>Conclusion</h2>
+    <p><strong>Face à Lombok, la Riviera l'emporte clairement :</strong> même travail, gain potentiel par vente plus élevé, aucun capital en risque, et un avantage que peu ont sur ce marché.</p>
+    <p><strong>Face à Dubaï, la Riviera l'emporte aussi.</strong> Une seule vente à Monaco vaut entre 5 et 32 ventes à Dubaï, selon notre statut. Le marché de Dubaï se resserre pour nous : moins de ventes, plus de concurrents francophones. Sur la Riviera, en arabe, la place est encore libre.</p>
+    <p>Pour nos autres activités, on applique le même test à chacune : gain moyen par affaire, nombre d'affaires par an, heures par mois.</p>
+    <p><strong>Notre proposition : la Riviera devient notre moteur principal. Dubaï reste notre base et notre réseau du Golfe. Lombok passe en projet secondaire, à la commission</strong> (5-6 %, avec un promoteur partenaire), pas en tant que promoteurs.</p>
+  </section>
+
+  <p class="note">Recherche, pas un conseil juridique ou financier. Chiffres à confirmer avec une agence partenaire (son vrai partage d'honoraires) et un avocat (statut en France et à Monaco, honoraires transfrontaliers depuis Dubaï).</p>
+</div>
+</body></html>
