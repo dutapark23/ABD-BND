@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storyboard Saison 2</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { max-width: 100%; overflow-x: hidden; }
+  body { font-family: 'Georgia', serif; background: #fafaf8; color: #1a1a1a; line-height: 1.7; overflow-wrap: break-word; }
+
+  .cover { background: #1a1a1a; color: #fff; padding: 80px 40px; text-align: center; page-break-after: always; }
+  .cover .kicker { color: #c8a96e; font-size: 0.85em; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; }
+  .cover h1 { font-size: 2.3em; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; line-height: 1.3; }
+  .cover .sub { color: #c8a96e; font-size: 1em; letter-spacing: 2px; margin-bottom: 30px; }
+  .cover .tagline { color: #aaa; font-style: italic; max-width: 560px; margin: 0 auto; border-top: 1px solid #333; padding-top: 20px; }
+  .cover .date { color: #777; font-size: 0.85em; margin-top: 30px; letter-spacing: 2px; }
+
+  .section { max-width: 800px; margin: 0 auto; padding: 60px 30px; page-break-before: always; }
+  .section-header { border-left: 4px solid #c8a96e; padding-left: 20px; margin-bottom: 30px; }
+  .section-header h2 { font-size: 1.6em; text-transform: uppercase; letter-spacing: 2px; line-height: 1.3; }
+  .section-header .num { font-size: 0.8em; color: #8a6a2e; letter-spacing: 3px; font-style: italic; }
+
+  h3 { font-size: 1.05em; text-transform: uppercase; letter-spacing: 2px; margin: 30px 0 12px; }
+  p { margin-bottom: 12px; font-size: 0.95em; color: #333; }
+  ul, ol { margin: 0 0 16px 22px; font-size: 0.93em; color: #333; }
+  li { margin-bottom: 6px; }
+  .small { font-size: 0.8em; color: #6b6b63; }
+
+  .intro-box { background: #1a1a1a; color: #fff; border-radius: 8px; padding: 22px 28px; margin-bottom: 28px; page-break-inside: avoid; }
+  .intro-box .label { font-size: 0.75em; color: #c8a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .intro-box p, .intro-box li { color: #ccc; font-size: 0.95em; }
+  .intro-box strong { color: #fff; }
+
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 24px 0 30px; }
+  .stats.four { grid-template-columns: repeat(4, 1fr); }
+  .stat { background: #fff; border: 1px solid #e0e0d8; border-radius: 8px; padding: 14px 12px; page-break-inside: avoid; min-width: 0; }
+  .stat .v { font-size: 1.45em; font-weight: bold; color: #1a1a1a; line-height: 1.2; }
+  .stat .l { font-size: 0.7em; color: #6b6b63; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+  .scen { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .scen.three { grid-template-columns: 1fr 1fr 1fr; }
+  .card { border: 1px solid #e0e0d8; border-radius: 8px; overflow: hidden; background: #fff; page-break-inside: avoid; min-width: 0; }
+  .card .hd { background: #1a1a1a; color: #fff; padding: 14px 18px; }
+  .card .hd .tag { font-size: 0.7em; letter-spacing: 3px; color: #c8a96e; text-transform: uppercase; }
+  .card .hd .nm { font-size: 1.05em; font-weight: bold; }
+  .card .bd { padding: 14px 18px; font-size: 0.88em; color: #333; }
+  .card .bd ol, .card .bd ul { margin: 0 0 0 18px; font-size: 1em; }
+  .card .bd .row { display: flex; justify-content: space-between; border-bottom: 1px solid #f0f0ea; padding: 5px 0; gap: 10px; }
+  .card .bd .row span:last-child { font-weight: bold; color: #1a1a1a; text-align: right; }
+  .card .res { padding: 12px 18px; font-weight: bold; font-size: 0.92em; }
+  .card.loss .res { background: #fff0f0; color: #8a2a2a; border-top: 3px solid #c0504d; }
+  .card.win .res { background: #f0f7f1; color: #1f5a33; border-top: 3px solid #3d8a55; }
+  .card.mid .res { background: #f6f1e6; color: #6a5220; border-top: 3px solid #c8a96e; }
+
+  .tablewrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82em; }
+  th { background: #1a1a1a; color: #c8a96e; text-align: right; padding: 9px 10px; letter-spacing: 1px; font-weight: normal; text-transform: uppercase; font-size: 0.8em; }
+  th:first-child, td:first-child { text-align: left; }
+  td { background: #fff; border-bottom: 1px solid #e6e6de; padding: 7px 10px; text-align: right; color: #333; font-variant-numeric: tabular-nums; vertical-align: top; }
+  table.txt td, table.txt th { text-align: left; }
+  tr { page-break-inside: avoid; }
+  td.hi { font-weight: bold; color: #1a1a1a; background: #f6f1e6; }
+
+  .warn { background: #fff8e8; border-left: 4px solid #d9a441; border-radius: 6px; padding: 16px 20px; margin: 20px 0; page-break-inside: avoid; }
+  .warn .label { font-size: 0.75em; font-weight: bold; color: #8a6415; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .warn p, .warn li { font-size: 0.88em; color: #5a4520; }
+
+  .check { list-style: none; margin-left: 0; }
+  .check li { padding-left: 28px; position: relative; }
+  .check li::before { content: "☐"; position: absolute; left: 4px; color: #8a6a2e; }
+
+  .say { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 24px; }
+  .say .card .bd li { margin-bottom: 5px; }
+
+  .sources li { font-size: 0.8em; word-break: break-word; }
+  .footer { text-align: center; color: #999; font-size: 0.8em; padding: 40px; letter-spacing: 2px; }
+
+  @media (max-width: 640px) {
+    .cover { padding: 60px 16px; }
+    .cover h1 { font-size: 1.6em; }
+    .section { padding: 40px 16px; }
+    .stats, .stats.four { grid-template-columns: 1fr 1fr; }
+    .scen, .scen.three, .say { grid-template-columns: 1fr; }
+    table { font-size: 0.74em; }
+    .intro-box { padding: 18px 18px; }
+  }
+  @page { size: A4; margin: 12mm 12mm; }
+  @media print {
+    body { background: #fff; font-size: 10pt; line-height: 1.45; }
+    .cover { padding: 220px 40px; }
+    .section { max-width: none; padding: 0; }
+    .section-header { margin-bottom: 14px; }
+    .section-header h2 { font-size: 1.35em; }
+    h3 { margin: 16px 0 8px; font-size: 0.95em; }
+    p, ul, ol { margin-bottom: 8px; }
+    li { margin-bottom: 3px; }
+    .tablewrap { overflow: visible; margin: 8px 0 12px; }
+    table { font-size: 7.6pt; }
+    th, td { padding: 4px 6px; }
+    .intro-box { padding: 12px 16px; margin-bottom: 14px; }
+    .stats { margin: 12px 0 14px; }
+    .stat { padding: 8px; }
+    .stat .v { font-size: 1.2em; }
+    .card .bd { padding: 8px 12px; }
+    .card .hd { padding: 8px 12px; }
+    .card .res { padding: 7px 12px; }
+    .warn { padding: 10px 14px; margin: 12px 0; }
+    .footer { padding: 10px; }
+    .section.flow { page-break-before: auto; margin-top: 18px; }
+  }
+  .wt { font-size: 0.85em; color: #6b6b63; font-style: italic; margin-top: 4px; }
+  .pill { display: inline-block; font-size: 0.68em; letter-spacing: 1px; text-transform: uppercase; padding: 1px 8px; border-radius: 10px; margin-right: 6px; vertical-align: 1px; white-space: nowrap; }
+  .pill.p { background: #1a1a1a; color: #c8a96e; }
+  .pill.v { background: #fff0f0; color: #8a2a2a; border: 1px solid #e3b3b1; }
+  .pill.c { background: #fff8e8; color: #8a6415; border: 1px solid #e8cf96; }
+  .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 18px; }
+  .meta div { background: #fff; border: 1px solid #e0e0d8; border-radius: 6px; padding: 8px 12px; font-size: 0.84em; color: #333; min-width: 0; }
+  .meta b { display: block; font-size: 0.72em; letter-spacing: 2px; text-transform: uppercase; color: #8a6a2e; font-weight: normal; }
+  .promise { font-size: 1em; color: #1a1a1a; border-left: 3px solid #c8a96e; padding-left: 12px; margin: 0 0 18px; }
+  .bal { display: flex; height: 26px; border-radius: 6px; overflow: hidden; margin: 6px 0 4px; font-size: 0.72em; letter-spacing: 1px; }
+  .bal span { display: flex; align-items: center; padding: 0 8px; white-space: nowrap; overflow: hidden; }
+  .bal .re { background: #1a1a1a; color: #c8a96e; }
+  .bal .ls { background: #e9dcc0; color: #4a3a18; }
+  ol.beats { margin-left: 20px; }
+  ol.beats li { margin-bottom: 8px; }
+  .ud { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .ud div { border-radius: 6px; padding: 10px 14px; font-size: 0.86em; min-width: 0; }
+  .ud .up { background: #f0f7f1; color: #1f5a33; border-top: 3px solid #3d8a55; }
+  .ud .dn { background: #fff0f0; color: #8a2a2a; border-top: 3px solid #c0504d; }
+  .ud b { display: block; font-size: 0.75em; letter-spacing: 2px; text-transform: uppercase; }
+  .rows { border-top: 1px solid #e6e6de; margin: 10px 0 0; }
+  .rows .r { display: grid; grid-template-columns: 140px 1fr; gap: 12px; padding: 7px 0; border-bottom: 1px solid #e6e6de; font-size: 0.88em; color: #333; }
+  .rows .r > b { font-size: 0.72em; letter-spacing: 2px; text-transform: uppercase; color: #8a6a2e; font-weight: normal; padding-top: 3px; }
+  .rows ul { margin: 0 0 0 18px; font-size: 1em; }
+  .tc { font-variant-numeric: tabular-nums; color: #8a6a2e; font-size: 0.85em; white-space: nowrap; }
+  @media (max-width: 640px) {
+    .meta, .ud { grid-template-columns: 1fr; }
+    .rows .r { grid-template-columns: 1fr; gap: 2px; }
+  }
+  @media print { .meta div, .ud div { padding: 5px 8px; } ol.beats li { margin-bottom: 3px; } .rows .r { padding: 3px 0; } }
+
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="kicker">Marina Immo Dubai · Storyboard</div>
+  <h1>Saison 2<br>Bangkok · Bali · Lombok</h1>
+  <div class="sub">10 épisodes. Un terrain. 4 villas. Une décision. Votre choix.</div>
+  <p class="tagline">Le storyboard de la série, épisode par épisode : les beats, les rebondissements possibles, les rubriques, les invités, les miniatures et les Shorts. Pas un script : une carte pour savoir où poser la caméra. On filme ce qui arrive vraiment.</p>
+  <p class="date">Version du 7 novembre 2026 · Document interne · Basé sur le Plan 2027 validé</p>
+</div>
+
+<div class="section">
+  <div class="section-header"><div class="num">01 — La colonne vertébrale</div><h2>Ce que la saison raconte</h2></div>
+  <div class="intro-box">
+    <div class="label">La question de la saison</div>
+    <p><strong>« Deux Français de Dubaï peuvent-ils sécuriser un terrain propre à Lombok et lancer 4 villas, sans rien promettre qu'ils ne peuvent tenir ? »</strong></p>
+    <p>Réponse au final : oui, oui sous conditions, ou non. Avec les preuves, à l'écran.</p>
+  </div>
+
+  <h3>Les 3 tags à lire</h3>
+  <ul>
+    <li><span class="pill p">prévu</span> on le filme à coup sûr (visite, rendez-vous, rubrique).</li>
+    <li><span class="pill v">à vivre</span> un enjeu réel <b>possible</b>. On place la caméra. On garde seulement si ça arrive. Chaque épisode a son « si ça n'arrive pas ».</li>
+    <li><span class="pill c">sous condition</span> ne se diffuse qu'après une validation (souvent l'avocat).</li>
+  </ul>
+
+  <h3>Le compte à rebours (uniquement des dates réelles)</h3>
+  <ul>
+    <li><b>Ramadan ≈ 8 février - 9 mars 2027</b> : Lombok ralentit. Ce qui doit avancer sur le terrain doit avancer avant.</li>
+    <li><b>Aïd ≈ 9-10 mars</b> : administrations fermées ≈ 1 semaine. <b>Nyepi ≈ 8 mars</b> : Bali fermé 24 h, rien du 7 au 10.</li>
+    <li><b>Saison des pluies</b> (décembre-mars) : routes boueuses, drone limité, visites annulées.</li>
+    <li><b>Le final (≈ 4 avril)</b> : la date où le duo dit oui ou non en public. Une date de <b>décision</b>, jamais une date de signature. Pas de « J-60 » affiché.</li>
+  </ul>
+
+  <h3>Ce qui est en jeu</h3>
+  <ul>
+    <li><b>≈ 140 k$ de leur argent</b> : terrain + montage. Plafonné.</li>
+    <li><b>L'agence de Dubaï</b> : sa réputation, sa licence, ses clients. Elle doit tourner pendant le tournage.</li>
+    <li><b>L'amitié des associés</b> : deux visions du même projet.</li>
+    <li><b>La confiance de l'audience</b> : la transparence est le produit.</li>
+  </ul>
+
+  <h3>Les deux arcs</h3>
+  <div class="scen">
+    <div class="card mid"><div class="hd"><div class="tag">Associé A</div><div class="nm">Le Visionnaire</div></div>
+      <div class="bd"><p>Arrive avec The Retreat en tête : 8 villas + hub wellness. Il vit le sport et la récupération.</p>
+      <p><b>Apprend</b> qu'un hôtel demande 8 clés et un capital que le duo n'a pas. Accepte « les villas d'abord, le Retreat ensuite ».</p>
+      <p><b>Au final</b> : il porte la porte « Séjourner ».</p></div></div>
+    <div class="card mid"><div class="hd"><div class="tag">Associé B</div><div class="nm">Le Garde-fou</div></div>
+      <div class="bd"><p>Le tableur, les règles, la peur de perdre 140 k$ et l'agence.</p>
+      <p><b>Apprend</b> à décider sans certitude totale, une fois tout vérifié. Apprend à vendre la vision, pas seulement les risques.</p>
+      <p><b>Au final</b> : il porte la porte « Posséder ».</p></div></div>
+  </div>
+  <p class="small">Rôles à attribuer selon les vraies positions des deux associés. On ne force pas un rôle. Tournants : ép. 1 (deux visions), ép. 5 (contourner ou pas), ép. 6 (premium ou budget), ép. 9 (le face-à-face), ép. 10 (le choix commun). Les désaccords d'argent entre associés restent hors caméra.</p>
+
+  <h3>Le fil rouge lifestyle : « une base, pas des vacances »</h3>
+  <p>Bali et Lombok ne sont plus seulement des destinations de vacances. Nomades digitaux, télétravailleurs, familles, Australiens, Néo-Zélandais, Européens : beaucoup s'y installent pour des mois ou des années. Ce sont les futurs locataires et acheteurs des villas. Chaque épisode leur donne la parole.</p>
+  <ul>
+    <li>Fait sourcé : l'Australie est le 1er marché de Bali, 1,63 M d'arrivées sur 6,9 M en 2025 (BPS Bali).</li>
+    <li>Fait sourcé : l'Europe pèse plus de 30 % des arrivées aériennes étrangères à Lombok, la France ≈ 5 % (C9/Horwath 2025).</li>
+    <li>Le nombre de nomades digitaux à Bali ou Lombok n'est pas sourcé dans notre recherche : on ne cite aucun chiffre sans source. Les résidents le racontent eux-mêmes.</li>
+  </ul>
+  <p><b>Équilibre visé par épisode : 55-60 % immobilier, 40-45 % lifestyle.</b> Sur la saison : 197 min d'immobilier, 141 min de lifestyle, 338 min au total. Chaque scène lifestyle est reliée au projet : la routine de récupération explique le Retreat, le coworking montre qui louera les villas.</p>
+</div>
+
+<div class="section">
+  <div class="section-header"><div class="num">02 — Les rubriques</div><h2>Les repères du spectateur</h2></div>
+  <div class="tablewrap"><table class="txt">
+    <tr><th>Rubrique</th><th>Durée</th><th>Ce que c'est</th></tr>
+    <tr><td><b>Le Compteur</b></td><td>20-30 s</td><td>Ouverture et fin d'épisode : budget du show dépensé (sur 10 k$), apport projet engagé (sur ≈ 140 k$), statut du terrain. Pas de compte à rebours de signature.</td></tr>
+    <tr><td><b>Le Dossier</b></td><td>30-60 s</td><td>La checklist juridique : avis, titre, zonage, bail, structure, permis (PBG), séquestre. ✓ ou ✗. Elle se remplit (ou pas) au fil de la saison.</td></tr>
+    <tr><td><b>Le Tableau</b></td><td>60-90 s</td><td>Les vrais coûts : prix du sol, prix au m², devis, budget engagé. Des coûts, jamais de rendement. QR code à l'écran.</td></tr>
+    <tr><td><b>La Villa</b></td><td>3-4 min</td><td>Visite d'une belle villa (Bali, Lombok, Gili). Prix de la nuit, ce qu'on copie, ce qu'on évite. L'évasion de l'épisode, et le repère pour nos villas.</td></tr>
+    <tr><td><b>La Routine</b></td><td>1-4 min</td><td>Le sport et la récupération du matin : surf, course, padel, salle, bain froid, sauna, lumière rouge, respiration. Lieux offerts ou day-pass. La preuve vivante du Retreat.</td></tr>
+    <tr><td><b>Ici, on vit comme ça</b></td><td>1,5-2 min</td><td>Un résident qui a fait de Bali ou Lombok sa base : nomade, famille, Australien, Européen. Pourquoi ici, ce que ça coûte de vivre là, ce qui manque. Le portrait de notre futur client.</td></tr>
+    <tr><td><b>Red Flag / Green Flag</b></td><td>20 s</td><td>Après chaque visite, chaque associé lève un drapeau. Le récap du final n'utilise que ces drapeaux.</td></tr>
+    <tr><td><b>Le Confessionnal</b></td><td>1-3 min</td><td>Chaque associé seul, chaque soir, 5 questions fixes : ça a marché ? qu'est-ce qui t'inquiète ? en désaccord sur quoi ? combien ça coûte ? on décide quoi demain ?</td></tr>
+    <tr><td><b>Premier contact</b></td><td>—</td><td>Badge à l'écran quand le duo rencontre quelqu'un pour la première fois devant la caméra (opérateur, notaire, propriétaire, architecte, chef du village).</td></tr>
+  </table></div>
+
+  <h3>Le gabarit d'un épisode de 28 à 40 minutes</h3>
+  <div class="tablewrap"><table class="txt">
+    <tr><th>Moment</th><th>Bloc</th></tr>
+    <tr><td>0:00-0:60</td><td>Cold open : le moment le plus fort, puis générique + « précédemment » en 15 s + Le Compteur</td></tr>
+    <tr><td>≈ 2:00</td><td>La question de l'épisode, face caméra</td></tr>
+    <tr><td>Acte 1</td><td>Arrivée, Routine, rencontre, première découverte</td></tr>
+    <tr><td>≈ 1/3</td><td>Mini-cliffhanger → mid-roll manuel n° 1</td></tr>
+    <tr><td>Acte 2</td><td>L'obstacle + Le Tableau (QR) + La Villa</td></tr>
+    <tr><td>≈ 2/3</td><td>Mini-cliffhanger → mid-roll n° 2 (n° 3 au-delà de 35 min)</td></tr>
+    <tr><td>Acte 3</td><td>La décision sous pression, Ici on vit comme ça, confessionnaux</td></tr>
+    <tr><td>−2:30</td><td>Un seul CTA, QR code 20 s, mention « Publicité »</td></tr>
+    <tr><td>−0:40</td><td>Cliffhanger + teaser + écran de fin</td></tr>
+  </table></div>
+  <p class="small">Cible : ≥ 35 % de durée moyenne vue. Gros textes et QR codes : ≈ 35 % du temps YouTube se regarde sur TV. Chapitres nommés comme des moments d'histoire.</p>
+</div>
+
+<div class="section">
+  <div class="section-header"><div class="num">03 — Calendrier</div><h2>10 épisodes, 10 dimanches d'hiver</h2></div>
+  <div class="stats four">
+    <div class="stat"><div class="v">338 min</div><div class="l">durée totale</div></div>
+    <div class="stat"><div class="v">24 janv.</div><div class="l">épisode 1</div></div>
+    <div class="stat"><div class="v">4 avr.</div><div class="l">le final</div></div>
+    <div class="stat"><div class="v">≤ 10 k$</div><div class="l">budget show</div></div>
+  </div>
+  <div class="tablewrap"><table class="txt">
+    <tr><th>#</th><th>Titre</th><th>Durée</th><th>Tournage</th><th>Diffusion</th><th>CTA</th></tr>
+    <tr><td>1</td><td>140 000 $ sur une île que personne ne connaît ?</td><td>28 min</td><td>Déc. 2026, semaine 1 (2-3 jours)</td><td>dim. 24 janv. 2027</td><td>Guide PDF</td></tr><tr><td>2</td><td>Bali : trop tard pour nous ?</td><td>32 min</td><td>Déc. 2026, semaine 2 (4-5 jours)</td><td>dim. 31 janv. 2027</td><td>Guide PDF</td></tr><tr><td>3</td><td>Lombok : la vraie (et l'homme qui la connaît)</td><td>34 min</td><td>Déc. 2026, semaine 3</td><td>dim. 7 févr. 2027. Jour cadreur + jour drone n° 1</td><td>Guide PDF</td></tr><tr><td>4</td><td>Gili : l'île sans voitures (et ses vrais problèmes)</td><td>30 min</td><td>Déc. 2026, semaine 3</td><td>dim. 14 févr. 2027</td><td>Le Tableau</td></tr><tr><td>5</td><td>Chez le notaire : ce qu'un étranger peut vraiment posséder</td><td>37 min</td><td>Janv. 2027, semaine 1-2. Jour cadreur</td><td>dim. 21 févr. 2027</td><td>Le Tableau</td></tr><tr><td>6</td><td>3 devis, 1 budget : qui se trompe ?</td><td>35 min</td><td>Janv. 2027, semaine 2-3. Jour cadreur</td><td>dim. 28 févr. 2027</td><td>Le Tableau</td></tr><tr><td>7</td><td>Avant le Ramadan, tout se joue</td><td>33 min</td><td>Fin janv. / début févr. 2027, avant ≈ 8 févr</td><td>dim. 7 mars 2027</td><td>Le Tableau</td></tr><tr><td>Joker</td><td>Live Q&amp;R + coulisses Dubaï (semaine de l'Aïd)</td><td>≈ 60 min live</td><td>—</td><td>dim. 14 mars 2027</td><td>Liste prioritaire</td></tr><tr><td>8</td><td>Il pré-vend déjà. Et nous ?</td><td>31 min</td><td>Févr. 2027 (Bali + Dubaï). Nyepi ≈ 8 mars : rien du 7 au 10 mars</td><td>dim. 21 mars 2027</td><td>Liste + appel 15 min</td></tr><tr><td>9</td><td>On signe ou pas ?</td><td>38 min</td><td>≈ 11-20 mars 2027 (bloc 3). Jour cadreur</td><td>dim. 28 mars 2027 (Pâques : tester une sortie le samedi 27)</td><td>Liste + appel 15 min</td></tr><tr><td>10</td><td>Séjourner ou Posséder ?</td><td>40 min</td><td>≈ 11-20 mars 2027 + jour drone n° 2</td><td>dim. 4 avr. 2027</td><td>Le Choix</td></tr>
+  </table></div>
+  <ul>
+    <li><b>Rythme</b> : un épisode chaque dimanche. Bande-annonce fin décembre. Montage 2 à 3 semaines derrière le tournage. Toujours 2 épisodes d'avance, plus le joker.</li>
+    <li><b>Blocs de tournage</b> : décembre (Bangkok, Bali, Lombok, Gili : ép. 1-4) ; janvier, avant le Ramadan (Lombok : ép. 5-7) ; février (Bali + Dubaï : ép. 8) ; ≈ 11-20 mars, après l'Aïd (Lombok : ép. 9-10 + les deux portes).</li>
+    <li><b>Point serré</b> : ép. 9 et 10 sortent 1 à 3 semaines après leur tournage. Le duo prépare les rushes chaque soir (timecodes). Repli : le final glisse au 11 avril. On décale la pré-vente, jamais la qualité.</li>
+  </ul>
+
+  <h3>Le budget du show tient-il ? (≤ 10 k$)</h3>
+  <ul>
+    <li><b>Cadreur local, 5 jours</b> : ép. 3, 5, 6, 9, 10. Le reste est auto-filmé (téléphone sur trépied, micro-cravate).</li>
+    <li><b>Drone, 2 jours</b> avec pilote local licencié : ép. 3 (décembre, si la pluie le permet) et ép. 10 (l'aube du final).</li>
+    <li><b>Lifestyle à coût zéro ou presque</b> : centres de récupération, salles, padel, beach clubs, coworkings offerts contre visibilité (mention « Publicité ») ou day-pass. Accord écrit pour chaque lieu.</li>
+    <li><b>Montage ≈ 400 $ par épisode</b> (plan validé, base 25 min). Ici : 338 min au lieu de 250, soit +35 % (≈ +1 400 $ au prorata, plus les deux portes) : les imprévus (≈ 650 $) ne suffisent pas. Règle : le duo fait le pré-montage (dérushage, sélection, bout-à-bout chaque soir), le monteur fait la finition (rythme, son, étalonnage, habillage des rubriques) à ≈ 400 $. Si ça ne tient pas, raccourcir l'épisode, pas le budget.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="num">Épisode 01 · 28 min · Bangkok</div>
+    <h2>140 000 $ sur une île que personne ne connaît ?</h2>
+    <div class="wt">Titre de travail (EN) : The Briefing</div>
+  </div>
+  <p class="promise"><strong>Promesse :</strong> Le plan complet en une soirée : pourquoi on sort du confort de Dubaï, ce qu'on risque, nos règles, notre budget, notre date de décision.</p>
+  <div class="meta">
+    <div><b>Lieux</b>Bangkok : hôtel de luxe (accord écrit), rooftop, ville, parc Lumpini, street food</div>
+    <div><b>Tournage → diffusion</b>Déc. 2026, semaine 1 (2-3 jours) → dim. 24 janv. 2027</div>
+    <div><b>Invités</b>Aucun invité. Cameo : un Français installé à Bangkok (« Ici, on vit comme ça »), si accord</div>
+    <div><b>Rubriques</b>Le Compteur (n° 1), Le Tableau, Le Dossier (vide), Le Confessionnal, La Routine, Ici on vit comme ça</div>
+  </div>
+  <div><span class="small">Équilibre : immobilier 16 min / lifestyle 12 min (57 / 43 %)</span>
+    <div class="bal"><span class="re" style="width:57%">Immobilier 16 min</span><span class="ls" style="width:43%">Lifestyle 12 min</span></div></div>
+  <div class="intro-box" style="margin-top:16px">
+    <div class="label">Cold open · 0:00-0:50</div>
+    <p>Nuit, rooftop, la ville en bas. La carte Dubaï → Bali → Lombok sur la table. A : « Si on se plante, c'est 140 000 dollars. Les nôtres. » B : « Et gagner, ça veut dire quoi ? On le pose maintenant. » Noir. Générique.</p>
+  </div>
+  <h3>Les beats (immobilier)</h3>
+  <ol class="beats"><li><span class="pill p">prévu</span> <b>Arrivée.</b> Check-in, la suite, la vue. Le prix réel de la nuit à l'écran. Mention « Publicité » si la nuit est offerte. Pourquoi Bangkok : l'escale entre Dubaï et l'Indonésie, le dernier soir de confort.</li><li><span class="pill p">prévu</span> <b>Le Briefing</b> (le cœur, ≈ 8 min). Pourquoi quitter le confort de Dubaï : construire un actif à soi, pas seulement vendre ceux des autres. L'enjeu : ≈ 140 k$ d'apport (terrain + montage), la réputation de l'agence, l'amitié.</li><li><span class="pill p">prévu</span> <b>Les 6 règles</b> posées à l'écran (carton plein écran) : pas un dollar client avant avis juridique + titre + permis + séquestre ; aucun prête-nom ; apport plafonné ≈ 140 k$ ; show ≤ 10 k$ ; on ne rejoue rien ; l'agence de Dubaï continue de tourner. Date de décision : <b>le final</b>. Une décision, pas une signature.</li><li><span class="pill p">prévu</span> <b>Le Tableau n° 1 : deux visions.</b> A veut The Retreat tout de suite (8 villas d'1 chambre + hub wellness de 250 m²). B veut 4 villas d'abord. Le fait qui tranche : un hôtel demande 8 clés minimum et ne se découpe pas en phases. Capex modélisé ≈ 1,1 M$ (base, estimation). Aucun rendement montré.</li><li><span class="pill v">à vivre</span> <b>Confessionnaux du soir 1.</b> « Qu'est-ce qui t'inquiète ? » La vraie peur de chacun (l'agence, la famille, l'argent).</li><li><span class="pill v">à vivre</span> <b>Le message vocal</b> d'un contact à Lombok (opérateur ou fixer) : un rendez-vous confirmé, annulé, ou un terrain qui bouge.</li></ol>
+  <h3>Lifestyle (où, quoi, pourquoi ça sert le projet)</h3>
+  <ul><li><b>La Routine n° 1</b> (lever du soleil) : footing au parc Lumpini + sauna / bain froid de l'hôtel. Lien business : « c'est exactement ce qu'on veut vendre au Retreat ».</li><li><b>Food</b> : street food le soir, puis le rooftop. Contraste prix (un plat de rue vs un cocktail de rooftop) : le ton de la série, luxe mais factuel.</li><li><b>Ici, on vit comme ça</b> (si cameo) : un Français installé à Bangkok. Pourquoi l'Asie est devenue une base, pas un séjour. Pose le thème de la saison.</li><li><b>Thème « base, pas vacances »</b> posé en voix off : les gens ne viennent plus seulement en vacances en Asie du Sud-Est, ils s'y installent. C'est notre futur client.</li></ul>
+  <div class="ud"><div class="up"><b>Le haut</b>Le luxe, la ville, la clarté du plan. Les règles donnent un cadre au spectateur.</div><div class="dn"><b>Le bas</b>Premier vrai désaccord : Retreat ou villas. Rien n'est tranché.</div></div>
+  <div class="rows">
+    <div class="r"><b>Cliffhanger</b><div><span class="pill v">à vivre</span> Le vocal de Lombok, écouté à deux sur le rooftop. On coupe sur le visage de B.</div></div>
+    <div class="r"><b>Si ça n'arrive pas</b><div><span class="pill p">prévu</span> B referme le carnet : « On ne décide rien ici. On va voir Bali. Si Bali est le bon plan, on s'arrête là. »</div></div>
+    <div class="r"><b>CTA</b><div>≈ 25:30. Liste prioritaire, récompense : guide PDF « Acheter à Lombok quand on est étranger ». QR code 20 s + URL courte dite à voix haute.</div></div>
+    <div class="r"><b>Miniature</b><div>Le duo sur le rooftop de nuit, une feuille « 140 000 $ » dans la main. Texte : <b>« 140 000 $ SUR UNE ÎLE ? »</b></div></div>
+    <div class="r"><b>Shorts</b><div><ul><li>Les 6 règles qu'on s'impose avant d'acheter un terrain</li><li>Pourquoi on sort (un peu) du confort de Dubaï</li><li>Sauna + bain froid à Bangkok : notre routine</li></ul></div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header">
+    <div class="num">Épisode 02 · 32 min · Bali</div>
+    <h2>Bali : trop tard pour nous ?</h2>
+    <div class="wt">Titre de travail (EN) : Is Bali Too Late?</div>
+  </div>
+  <p class="promise"><strong>Promesse :</strong> Les vrais prix de Bali, terrain par terrain, et pourquoi un petit ticket n'y a plus sa place. Avec les plus belles villas de la saison.</p>
+  <div class="meta">
+    <div><b>Lieux</b>Bali : Canggu / Pererenan, Uluwatu (falaises), Tabanan (rizières), un coworking de Canggu</div>
+    <div><b>Tournage → diffusion</b>Déc. 2026, semaine 2 (4-5 jours) → dim. 31 janv. 2027</div>
+    <div><b>Invités</b>Un agent immobilier local (premier contact) ; l'ami promoteur de Bali (premier passage) ; un expatrié installé à Canggu (Australien ou Européen)</div>
+    <div><b>Rubriques</b>La Villa (×2), Le Tableau, Red Flag / Green Flag, Le Confessionnal, La Routine, Ici on vit comme ça, Le Compteur</div>
+  </div>
+  <div><span class="small">Équilibre : immobilier 19 min / lifestyle 13 min (59 / 41 %)</span>
+    <div class="bal"><span class="re" style="width:59%">Immobilier 19 min</span><span class="ls" style="width:41%">Lifestyle 13 min</span></div></div>
+  <div class="intro-box" style="margin-top:16px">
+    <div class="label">Cold open · 0:00-0:45</div>
+    <p>Coucher de soleil sur une villa à flanc de falaise, Uluwatu. B lit son téléphone : « Pererenan : 26 à 43 millions de roupies l'are, par an. » A : « Et à Lombok ? » B : « Environ 8 fois moins. » A regarde la piscine : « Alors pourquoi tout le monde est ici ? »</p>
+  </div>
+  <h3>Les beats (immobilier)</h3>
+  <ol class="beats"><li><span class="pill p">prévu</span> <b>La Villa n° 1</b> (Canggu / Pererenan) : villa 2 chambres. Prix de la nuit à l'écran, ce qu'on copie, ce qu'on évite.</li><li><span class="pill p">prévu</span> <b>Premier rendez-vous filmé avec un agent.</b> Baux : Pererenan IDR 26-43 M/are/an, Uluwatu 15-30 M+. Les prix affichés, pas transactés : on le dit.</li><li><span class="pill p">prévu</span> <b>Les rizières.</b> Le décret du gouverneur 5/2025 interdit d'y construire des villas. Plan large sur une rizière de Tabanan. « Le terrain le moins cher de Bali est celui qu'on n'a pas le droit de toucher. »</li><li><span class="pill p">prévu</span> <b>Le Tableau n° 2 : la même villa (2 ch., 110 m²), Bali contre Lombok.</b> Terrain = 28 % du coût à Bali, 7 % à Lombok (modèle 05). Conclusion dite simplement : à Bali, pour nous, le calcul ne passe pas.</li><li><span class="pill p">prévu</span> <b>Saturation, en 3 chiffres.</b> 6,9 M d'arrivées étrangères en 2025 (BPS). Annonces Airbnb +18 % sur un an contre +13,9 % d'arrivées. 342 expulsions d'étrangers au 1er semestre 2026. L'image du « promoteur étranger illégal ».</li><li><span class="pill v">à vivre</span> <b>L'ami promoteur de Bali</b> : « Bali, c'est fini pour un ticket comme le vôtre. Le vrai coup, c'est Lombok. » Ou l'inverse : il essaie de les retenir. On filme ce qu'il dit vraiment.</li></ol>
+  <h3>Lifestyle (où, quoi, pourquoi ça sert le projet)</h3>
+  <ul><li><b>La Routine</b> : surf à l'aube à Canggu (cours si besoin), puis centre de récupération (bain froid + sauna). Day-pass ou accueil offert contre visibilité (« Publicité »).</li><li><b>Ici, on vit comme ça</b> : un Australien ou un Européen installé à Canggu. Pourquoi Bali est devenu sa base (travail à distance, école, sport). Fait sourcé : l'Australie est le 1er marché de Bali, 1,63 M d'arrivées sur 6,9 M en 2025 (BPS).</li><li><b>Coworking</b> à Canggu : qui travaille ici, d'où, combien de temps. Lien business : « ce sont eux qui louent des villas au mois ».</li><li><b>Beach club + dîner</b> au coucher du soleil : débrief Red Flag / Green Flag sur Bali.</li><li><b>La Villa n° 2</b> (Uluwatu, falaise) : l'image d'évasion de l'épisode, prix de la nuit à l'écran.</li></ul>
+  <div class="ud"><div class="up"><b>Le haut</b>Les villas sont sublimes. Le style de vie de Bali fait rêver, et prouve la demande.</div><div class="dn"><b>Le bas</b>Les chiffres tuent le rêve Bali pour un premier projet.</div></div>
+  <div class="rows">
+    <div class="r"><b>Cliffhanger</b><div><span class="pill v">à vivre</span> L'ami promoteur, à la sortie du dîner : « Avant Lombok… il faut que vous sachiez un truc sur les terrains là-bas. »</div></div>
+    <div class="r"><b>Si ça n'arrive pas</b><div><span class="pill p">prévu</span> Le billet de bateau pour Lombok à l'écran. A : « Si Lombok ne tient pas non plus, on rentre à Dubaï. »</div></div>
+    <div class="r"><b>CTA</b><div>≈ 29:30. Liste prioritaire → guide PDF. QR code 20 s.</div></div>
+    <div class="r"><b>Miniature</b><div>Villa sur la falaise au coucher du soleil, gros tampon rouge sur la piscine. Texte : <b>« BALI, C'EST FINI ? »</b></div></div>
+    <div class="r"><b>Shorts</b><div><ul><li>Combien coûte 1 are à Bali en 2027</li><li>Rizières : interdit de construire</li><li>Pourquoi les Australiens vivent à Bali</li></ul></div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header">
+    <div class="num">Épisode 03 · 34 min · Lombok sud</div>
+    <h2>Lombok : la vraie (et l'homme qui la connaît)</h2>
+    <div class="wt">Titre de travail (EN) : Lombok, the Real One</div>
+  </div>
+  <p class="promise"><strong>Promesse :</strong> Le premier vrai repérage : prix du terrain, routes, eau, courant. Et la rencontre avec l'opérateur qui vit ici depuis 10 ans.</p>
+  <div class="meta">
+    <div><b>Lieux</b>Lombok sud : Kuta / Mandalika, Selong Belanak, Gerupuk, routes de l'intérieur</div>
+    <div><b>Tournage → diffusion</b>Déc. 2026, semaine 3 → dim. 7 févr. 2027. Jour cadreur + jour drone n° 1</div>
+    <div><b>Invités</b>L'opérateur (10 ans à Gili/Lombok), premier face-à-face filmé ; le fixer local (premier contact) ; un expatrié installé à Kuta</div>
+    <div><b>Rubriques</b>Le Compteur, Le Dossier (s'ouvre), Le Tableau, La Villa, Red Flag / Green Flag, La Routine, Ici on vit comme ça</div>
+  </div>
+  <div><span class="small">Équilibre : immobilier 20 min / lifestyle 14 min (59 / 41 %)</span>
+    <div class="bal"><span class="re" style="width:59%">Immobilier 20 min</span><span class="ls" style="width:41%">Lifestyle 14 min</span></div></div>
+  <div class="intro-box" style="margin-top:16px">
+    <div class="label">Cold open · 0:00-0:50</div>
+    <p>Pluie de décembre, route de terre, la voiture patine. Plan suivant : le drone (pilote local) monte au-dessus de Selong Belanak. Plage vide. B : « Il n'y a personne. C'est une chance… ou un problème ? »</p>
+  </div>
+  <h3>Les beats (immobilier)</h3>
+  <ol class="beats"><li><span class="pill p">prévu</span> <b>Arrivée + le fixer</b> (premier contact). La route du sud en saison des pluies. Ce que ça dit des infrastructures.</li><li><span class="pill p">prévu</span> <b>Rencontre avec l'opérateur.</b> 10 ans sur place. Ce qui marche, ce qui casse : eau, électricité, basse saison à 20-30 % d'occupation. Il cite lui-même la suroffre : annonces de villas +89 % en 2024, prix de la nuit −21 % (C9/AirDNA).</li><li><span class="pill p">prévu</span> <b>Repérage de 3 parcelles</b> avec le fixer. Red Flag / Green Flag à chaque visite.</li><li><span class="pill p">prévu</span> <b>Le Tableau n° 3 : le prix du sol.</b> Bail à Lombok sud ≈ IDR 3-4 M/are/an (base du modèle : 3,6 M ; une annonce vue : 3,04 M sur 85 ans). Soit ≈ 12 k$ de terrain par villa (2 ares, 30 ans). Notre plafond : 4 M/are/an. Le Dossier s'ouvre : titre ✗, zonage ✗, bail ✗.</li><li><span class="pill p">prévu</span> <b>La demande, honnêtement.</b> ≈ 0,43 M de visiteurs étrangers à Lombok en 2024 contre 6,9 M à Bali en 2025. Atout : la France ≈ 5 % des arrivées aériennes étrangères.</li><li><span class="pill v">à vivre</span> <b>La parcelle coup de cœur… et le premier drapeau rouge</b> : accès, eau, plusieurs héritiers, ou zonage.</li></ol>
+  <h3>Lifestyle (où, quoi, pourquoi ça sert le projet)</h3>
+  <ul><li><b>La Routine</b> : surf à Gerupuk à l'aube (bateau de pêcheur), course sur la plage. Lien : surf + nature = le cœur du futur Retreat.</li><li><b>La Villa n° 3</b> (Kuta Lombok) : villa 2 chambres. Repère marché : ≈ 189 $ la nuit en moyenne en 2024 (C9).</li><li><b>Ici, on vit comme ça</b> : un expatrié installé à Kuta (surfeur, nomade, famille). Pourquoi Lombok plutôt que Bali : le calme, le prix, la nature. C'est le profil de nos futurs locataires.</li><li><b>Food</b> : warung de plage, poisson grillé. Coucher de soleil à Bukit Merese, débrief à deux.</li></ul>
+  <div class="ud"><div class="up"><b>Le haut</b>Les plages vides. Le prix du sol divisé par 8 par rapport à Bali.</div><div class="dn"><b>Le bas</b>Les routes, l'eau, le courant. Et 16× moins de visiteurs étrangers qu'à Bali.</div></div>
+  <div class="rows">
+    <div class="r"><b>Cliffhanger</b><div><span class="pill v">à vivre</span> « La parcelle parfaite… mais la famille a 7 héritiers. »</div></div>
+    <div class="r"><b>Si ça n'arrive pas</b><div><span class="pill p">prévu</span> Le fixer, au téléphone : « Le propriétaire veut vous voir. Mais il a une condition. »</div></div>
+    <div class="r"><b>CTA</b><div>≈ 31:30. Liste prioritaire → guide PDF. QR code.</div></div>
+    <div class="r"><b>Miniature</b><div>Drone : plage vide, le duo minuscule sur le sable. Texte : <b>« PERSONNE NE CONNAÎT ÇA »</b></div></div>
+    <div class="r"><b>Shorts</b><div><ul><li>Combien coûte un terrain à Lombok</li><li>Surf à Gerupuk avant le petit-déj</li><li>10 ans à Lombok : ce que l'opérateur nous a dit</li></ul></div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header">
+    <div class="num">Épisode 04 · 30 min · Gili Trawangan</div>
+    <h2>Gili : l'île sans voitures (et ses vrais problèmes)</h2>
+    <div class="wt">Titre de travail (EN) : Gili, the School</div>
+  </div>
+  <p class="promise"><strong>Promesse :</strong> Comment on fait vraiment tourner un hôtel sur une île : les coulisses, l'équipe, l'eau, les coûts. Et pourquoi le foncier de Gili est un piège.</p>
+  <div class="meta">
+    <div><b>Lieux</b>Gili Trawangan : hôtel de l'opérateur (hébergement chez lui), plages, bateau rapide</div>
+    <div><b>Tournage → diffusion</b>Déc. 2026, semaine 3 → dim. 14 févr. 2027</div>
+    <div><b>Invités</b>L'opérateur et son équipe ; un ancien acheteur Gili (sous condition) ; un résident de Gili (coach yoga, moniteur de plongée)</div>
+    <div><b>Rubriques</b>La Villa, Le Dossier, Le Tableau (en téléchargement), Le Confessionnal, La Routine, Ici on vit comme ça</div>
+  </div>
+  <div><span class="small">Équilibre : immobilier 17 min / lifestyle 13 min (57 / 43 %)</span>
+    <div class="bal"><span class="re" style="width:57%">Immobilier 17 min</span><span class="ls" style="width:43%">Lifestyle 13 min</span></div></div>
+  <div class="intro-box" style="margin-top:16px">
+    <div class="label">Cold open · 0:00-0:45</div>
+    <p>Le bateau rapide accoste. Pas une voiture. Une charrette (cidomo) charge des sacs de ciment. A : « Tout ce qu'on construit ici arrive comme ça. » Prévu. Si le jour même l'hôtel a une vraie panne (eau, groupe électrogène), elle devient le cold open.</p>
+  </div>
+  <h3>Les beats (immobilier)</h3>
+  <ol class="beats"><li><span class="pill p">prévu</span> <b>Construire sur une île sans voitures.</b> Bateau, charrette : construction ≈ +20 à 30 % (estimation de la recherche, dite comme telle).</li><li><span class="pill p">prévu</span> <b>Les coulisses de l'hôtel de l'opérateur.</b> Back office, équipe, maintenance, eau. Ce qu'exigent 8 clés au quotidien. C'est l'école du futur Retreat.</li><li><span class="pill p">prévu</span> <b>Le Dossier : le foncier de Gili.</b> ≈ 65 ha de Gili Trawangan sous droit de gestion de la province (HPL). Le contrat de l'ancien exploitant résilié en 2021. Règle : Gili seulement avec un bail d'au moins 25 ans restant.</li><li><span class="pill v">à vivre</span> <b>Négociation n° 1 avec l'opérateur.</b> B demande les comptes de l'hôtel de Gili. Son rôle : gestion optionnelle des villas, Retreat en phase 2. On filme sa vraie réponse.</li><li><span class="pill c">sous condition</span> <b>Un ancien acheteur à Gili</b> raconte l'achat à distance : ce qu'il referait, ce qu'il éviterait. <b>Seulement après l'avis de l'avocat.</b> Aucune mention de la vente Gili du duo, ni de « 30 investisseurs », ni d'un revenu. Sinon : coupé au montage.</li></ol>
+  <h3>Lifestyle (où, quoi, pourquoi ça sert le projet)</h3>
+  <ul><li><b>La Routine</b> : yoga au lever du soleil, vélo autour de l'île, snorkeling avec les tortues.</li><li><b>Ici, on vit comme ça</b> : un résident de Gili (coach, moniteur). Comment on vit à l'année sur une île sans voitures. Lien : qui travaille dans un hôtel wellness.</li><li><b>La Villa n° 4</b> (Gili) : villa avec bassin, prix de la nuit à l'écran.</li><li><b>Food + coucher de soleil</b> côté ouest, vue sur le Rinjani. Débrief : Gili ou Lombok ?</li></ul>
+  <div class="ud"><div class="up"><b>Le haut</b>Évasion maximale. L'expertise de l'opérateur, vue de l'intérieur.</div><div class="dn"><b>Le bas</b>Foncier fragile. Construction plus chère. La dépendance à un seul opérateur.</div></div>
+  <div class="rows">
+    <div class="r"><b>Cliffhanger</b><div><span class="pill v">à vivre</span> L'opérateur, en aparté : « J'ai peut-être un terrain. Mais pas là où vous croyez. »</div></div>
+    <div class="r"><b>Si ça n'arrive pas</b><div><span class="pill p">prévu</span> Désaccord en confessionnal : A veut Gili (le charme, l'historique de l'opérateur), B refuse (titres fragiles). « On tranche chez le notaire. »</div></div>
+    <div class="r"><b>CTA</b><div>≈ 27:30. Liste prioritaire → « Le Tableau » de la saison en téléchargement. QR code.</div></div>
+    <div class="r"><b>Miniature</b><div>Le duo à vélo sur le sable blanc, eau turquoise, sacs de ciment sur une charrette. Texte : <b>« ZÉRO VOITURE. VRAIS PROBLÈMES. »</b></div></div>
+    <div class="r"><b>Shorts</b><div><ul><li>Construire sur une île sans voitures</li><li>Les coulisses d'un hôtel à Gili</li><li>Gili : le piège du foncier</li></ul></div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header">
+    <div class="num">Épisode 05 · 37 min · Lombok · notaire</div>
+    <h2>Chez le notaire : ce qu'un étranger peut vraiment posséder</h2>
+    <div class="wt">Titre de travail (EN) : At the Notary</div>
+  </div>
+  <p class="promise"><strong>Promesse :</strong> Bail, titre, société étrangère : la vérité juridique en clair. Et un vrai terrain passé au crible devant vous.</p>
+  <div class="meta">
+    <div><b>Lieux</b>Lombok : bureau du notaire (Mataram ou Praya), registre foncier, la parcelle cible</div>
+    <div><b>Tournage → diffusion</b>Janv. 2027, semaine 1-2. Jour cadreur → dim. 21 févr. 2027</div>
+    <div><b>Invités</b>Le notaire PPAT (premier contact) ; un avocat indonésien (visio) ; le propriétaire du terrain (premier contact) ; le fixer en traducteur</div>
+    <div><b>Rubriques</b>Le Dossier (en grand), Le Tableau, Le Compteur, Le Confessionnal, La Routine, Ici on vit comme ça</div>
+  </div>
+  <div><span class="small">Équilibre : immobilier 22 min / lifestyle 15 min (59 / 41 %)</span>
+    <div class="bal"><span class="re" style="width:59%">Immobilier 22 min</span><span class="ls" style="width:41%">Lifestyle 15 min</span></div></div>
+  <div class="intro-box" style="margin-top:16px">
+    <div class="label">Cold open · 0:00-0:50</div>
+    <p><span class="pill v">à vivre</span> Le notaire repose le dossier : « En l'état, je ne valide pas. » Si ça n'arrive pas, <span class="pill p">prévu</span> le notaire, face caméra : « Pleine propriété ? Pas pour vous. Jamais. » A et B se regardent.</p>
+  </div>
+  <h3>Les beats (immobilier)</h3>
+  <ol class="beats"><li><span class="pill p">prévu</span> <b>Le Dossier, en grand : ce qu'un étranger peut détenir.</b> Hak Milik (pleine propriété) réservée aux Indonésiens. Le bail (Hak Sewa) : 25 à 30 ans en général, renouvellement pas automatique, donc prix et conditions écrits dans l'acte. Le prête-nom : nul en droit. Règle n° 2 rappelée.</li><li><span class="pill p">prévu</span> <b>Première rencontre avec le propriétaire</b> de la parcelle cible. Ce qu'il veut, ce qu'il craint. Le fixer traduit.</li><li><span class="pill p">prévu</span> <b>Vérification du titre au registre foncier (BPN).</b> Propriétaire(s), bornage, zonage. Numéros de parcelle et prix floutés tant que rien n'est signé.</li><li><span class="pill p">prévu</span> <b>Le Tableau n° 5 : la structure.</b> Société à capitaux étrangers (PT PMA) : capital libéré minimum IDR 2,5 Md, ≈ 139 k$. Presque tout notre apport. Une lecture du règlement ajoute un plan d'investissement > IDR 10 Md (≈ 560 k$). Les sources se contredisent : l'avocat tranche. Alternative : passer par la société existante de l'opérateur ou d'un promoteur local.</li><li><span class="pill v">à vivre</span> <b>Le problème du jour</b> : titre en indivision, héritiers, bornage qui chevauche, ou zonage non touristique.</li><li><span class="pill p">prévu</span> <b>Confessionnaux.</b> A : « On trouvera un montage. » B : « On ne contourne rien. » Désaccord de méthode, à l'écran. L'argent entre associés reste hors caméra.</li></ol>
+  <h3>Lifestyle (où, quoi, pourquoi ça sert le projet)</h3>
+  <ul><li><b>La Routine</b> : séance de sport en salle à Kuta (day-pass), puis bain froid. Le corps tient le stress du jour.</li><li><b>Ici, on vit comme ça</b> : une famille européenne installée à Lombok. L'école, la santé, le visa : ce qu'ils ont dû régler. Lien : la vraie question des acheteurs n'est pas le m², c'est « peut-on vivre ici ? ».</li><li><b>Food</b> : déjeuner sasak avec le fixer (ayam taliwang, plecing kangkung).</li><li><b>Coucher de soleil</b> sur la parcelle cible : premier débrief juridique, sans caméra en face, juste le paysage.</li></ul>
+  <div class="ud"><div class="up"><b>Le haut</b>On comprend enfin le montage. Le propriétaire est accueillant.</div><div class="dn"><b>Le bas</b>La structure coûte plus que prévu. Le titre a un problème.</div></div>
+  <div class="rows">
+    <div class="r"><b>Cliffhanger</b><div><span class="pill v">à vivre</span> « Il faut 3 mois pour régler ça. » Le terrain peut nous échapper.</div></div>
+    <div class="r"><b>Si ça n'arrive pas</b><div><span class="pill p">prévu</span> L'avocat, en visio : « Votre apport suffit pour créer la société. Pour le reste, il faudra un partenaire. »</div></div>
+    <div class="r"><b>CTA</b><div>≈ 34:30. Liste prioritaire → « Le Tableau » en téléchargement. QR code.</div></div>
+    <div class="r"><b>Miniature</b><div>Le duo face au notaire, document flouté, tampon rouge. Texte : <b>« POSSÉDER ? PAS VRAIMENT »</b> (ou « LE NOTAIRE DIT NON » seulement si c'est arrivé)</div></div>
+    <div class="r"><b>Shorts</b><div><ul><li>Un étranger peut-il acheter en Indonésie ?</li><li>Le prête-nom : pourquoi on dit non</li><li>Bail de 30 ans : le piège du renouvellement</li></ul></div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header">
+    <div class="num">Épisode 06 · 35 min · Lombok · devis</div>
+    <h2>3 devis, 1 budget : qui se trompe ?</h2>
+    <div class="wt">Titre de travail (EN) : The Quotes</div>
+  </div>
+  <p class="promise"><strong>Promesse :</strong> Combien coûte vraiment une villa à Lombok, devis ligne par ligne. Et le premier dessin de nos 4 villas.</p>
+  <div class="meta">
+    <div><b>Lieux</b>Lombok : bureau de l'architecte, un chantier en cours, la parcelle</div>
+    <div><b>Tournage → diffusion</b>Janv. 2027, semaine 2-3. Jour cadreur → dim. 28 févr. 2027</div>
+    <div><b>Invités</b>L'architecte (premier contact) ; 3 entrepreneurs ; le chef d'un chantier voisin ; un nomade digital installé à Kuta</div>
+    <div><b>Rubriques</b>Le Tableau, Le Dossier, La Villa, Le Confessionnal, La Routine, Ici on vit comme ça</div>
+  </div>
+  <div><span class="small">Équilibre : immobilier 21 min / lifestyle 14 min (60 / 40 %)</span>
+    <div class="bal"><span class="re" style="width:60%">Immobilier 21 min</span><span class="ls" style="width:40%">Lifestyle 14 min</span></div></div>
+  <div class="intro-box" style="margin-top:16px">
+    <div class="label">Cold open · 0:00-0:45</div>
+    <p><span class="pill v">à vivre</span> Deux devis posés côte à côte sur le même plan. Écart énorme. B : « 15 millions le m² ? On avait dit 12. » Si ça n'arrive pas, <span class="pill p">prévu</span> l'architecte déroule le premier croquis des 4 villas sur la parcelle vide.</p>
+  </div>
+  <h3>Les beats (immobilier)</h3>
+  <ol class="beats"><li><span class="pill p">prévu</span> <b>L'architecte</b> (premier contact) : le programme de la phase 1. 4 villas 2 chambres, ≈ 110 m² + piscine, sur un terrain assez grand pour la phase 2. Premier croquis.</li><li><span class="pill p">prévu</span> <b>Visite d'un chantier en cours</b> (avec accord) : ce qui rate dans une villa. Étanchéité, saison des pluies, finitions.</li><li><span class="pill p">prévu</span> <b>Le Tableau n° 6 : les 3 devis.</b> Notre plafond : ≤ IDR 12 M/m², à prix ferme. Base du modèle : 11 M/m², soit ≈ 67 k$ pour 110 m². Repère du marché : luxe 12-15 M/m², devis souvent gonflés de 30 %. Les postes oubliés : piscine 12-15 k$, réseaux 6-8 k$ par villa.</li><li><span class="pill v">à vivre</span> <b>Le moins cher refuse le prix ferme</b> ou les pénalités de retard. Ou un devis dépasse le plafond.</li><li><span class="pill p">prévu</span> <b>Ce qui est en jeu, dit simplement</b> : construction +20 %, notre marge fond de plus de moitié. Tout se joue sur le prix ferme.</li><li><span class="pill v">à vivre</span> <b>Désaccord réel en confessionnal</b> : A veut des villas plus grandes et plus premium (pour préparer le Retreat). B veut tenir le budget.</li></ol>
+  <h3>Lifestyle (où, quoi, pourquoi ça sert le projet)</h3>
+  <ul><li><b>La Routine</b> : surf à l'aube, puis séance de respiration (breathwork) sur la plage.</li><li><b>La Villa n° 5</b> : une villa d'architecte à Lombok. Ce qu'on copie pour nos plans (patio, matériaux, ventilation).</li><li><b>Ici, on vit comme ça</b> : un nomade digital à Kuta. Combien de temps il reste, ce qu'il paie, ce qui lui manque (fibre, salle de sport, coworking). Lien : c'est le cahier des charges de nos villas.</li><li><b>Coworking ou café</b> de Kuta : le duo y travaille sur les devis. La vie réelle d'un projet à distance.</li></ul>
+  <div class="ud"><div class="up"><b>Le haut</b>Le design prend vie. L'architecte est brillant.</div><div class="dn"><b>Le bas</b>Les devis dépassent. La pluie annule une visite. Les associés ne sont pas d'accord.</div></div>
+  <div class="rows">
+    <div class="r"><b>Cliffhanger</b><div><span class="pill v">à vivre</span> A, en confessionnal : « Si on fait des villas au rabais, je ne suis pas sûr de suivre. »</div></div>
+    <div class="r"><b>Si ça n'arrive pas</b><div><span class="pill p">prévu</span> L'architecte : « Pour tenir 12 millions, il faut enlever quelque chose. À vous de choisir quoi. »</div></div>
+    <div class="r"><b>CTA</b><div>≈ 32:30. Liste prioritaire → « Le Tableau » en téléchargement. QR code.</div></div>
+    <div class="r"><b>Miniature</b><div>Deux devis côte à côte, l'un barré en rouge, le duo perplexe. Texte : <b>« ×2 SUR LE MÊME PLAN »</b> (si l'écart est réel ; sinon « LE VRAI PRIX D'UNE VILLA »)</div></div>
+    <div class="r"><b>Shorts</b><div><ul><li>Combien coûte 1 m² à Lombok</li><li>Les postes que les devis oublient</li><li>Le premier croquis de nos villas</li></ul></div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header">
+    <div class="num">Épisode 07 · 33 min · Lombok · village</div>
+    <h2>Avant le Ramadan, tout se joue</h2>
+    <div class="wt">Titre de travail (EN) : Race Before Ramadan</div>
+  </div>
+  <p class="promise"><strong>Promesse :</strong> La course pour faire avancer le terrain avant que Lombok ralentisse un mois. Et ce que le village demande en échange.</p>
+  <div class="meta">
+    <div><b>Lieux</b>Lombok sud : le village de la parcelle, chez le fixer, la parcelle</div>
+    <div><b>Tournage → diffusion</b>Fin janv. / début févr. 2027, avant ≈ 8 févr. → dim. 7 mars 2027</div>
+    <div><b>Invités</b>Le chef du village (kepala desa, premier contact) ; le propriétaire (2e rendez-vous) ; le fixer ; un couple néo-zélandais ou australien installé à Lombok</div>
+    <div><b>Rubriques</b>Le Compteur, Le Tableau, Le Dossier, Le Confessionnal, La Routine, Ici on vit comme ça</div>
+  </div>
+  <div><span class="small">Équilibre : immobilier 19 min / lifestyle 14 min (58 / 42 %)</span>
+    <div class="bal"><span class="re" style="width:58%">Immobilier 19 min</span><span class="ls" style="width:42%">Lifestyle 14 min</span></div></div>
+  <div class="intro-box" style="margin-top:16px">
+    <div class="label">Cold open · 0:00-0:45</div>
+    <p><span class="pill v">à vivre</span> Le propriétaire, poli : « On en reparle après Lebaran. » Si ça n'arrive pas, <span class="pill p">prévu</span> un calendrier au mur, le 8 février entouré. B : « Dans dix jours, plus rien ne bouge ici pendant un mois. »</p>
+  </div>
+  <h3>Les beats (immobilier)</h3>
+  <ol class="beats"><li><span class="pill p">prévu</span> <b>Le point calendrier.</b> Ramadan ≈ 8 février au 9 mars. Aïd ≈ 9-10 mars : administrations fermées ≈ 1 semaine. Ce qu'il faut avoir avant : le résultat du titre, un accord de principe.</li><li><span class="pill p">prévu</span> <b>Le chef du village</b> (premier contact, avec le fixer) : emplois locaux, accès à la plage, la route, l'eau. Le respect avant le business. (Dans le sud de Lombok, culture sasak : on parle du village et de son chef, à confirmer avec le fixer.)</li><li><span class="pill p">prévu</span> <b>Négociation avec le propriétaire, tour n° 1.</b> Bail 30 ans + prolongation, paiement en 2 fois minimum, option sur la 2e moitié du terrain (phase 2). Le Tableau n° 7 : notre plafond, IDR 4 M/are/an.</li><li><span class="pill v">à vivre</span> <b>La condition du village</b> (route, emplois) ou une nouvelle info : un autre acheteur s'intéresse à la parcelle.</li><li><span class="pill p">prévu</span> <b>La rotation.</b> Un associé rentre à Dubaï faire tourner l'agence pendant le Ramadan, l'autre part à Bali. Confessionnaux : qui part, pourquoi, ce que ça coûte à chacun.</li></ol>
+  <h3>Lifestyle (où, quoi, pourquoi ça sert le projet)</h3>
+  <ul><li><b>La Routine</b> : course au lever du soleil jusqu'à un point de vue, puis bain de mer froid.</li><li><b>Food</b> : dîner chez le fixer, cuisine sasak. Le dernier grand repas avant le Ramadan.</li><li><b>Ici, on vit comme ça</b> : un couple néo-zélandais ou australien installé à Lombok. Pourquoi ils ont choisi Lombok comme base, comment ils vivent le Ramadan sur place.</li><li><b>Nature</b> : cascade ou rizières en terrasses de l'intérieur, en fin de journée. La pause qui précède le mois calme.</li></ul>
+  <div class="ud"><div class="up"><b>Le haut</b>L'accueil du village. Un accord est sur la table.</div><div class="dn"><b>Le bas</b>La pause forcée d'un mois. Rien n'est signé.</div></div>
+  <div class="rows">
+    <div class="r"><b>Cliffhanger</b><div><span class="pill v">à vivre</span> Le fixer appelle : « Le propriétaire a une autre offre. »</div></div>
+    <div class="r"><b>Si ça n'arrive pas</b><div><span class="pill p">prévu</span> On part sans signature. Plan large sur la parcelle : « Un mois de silence. Le terrain peut nous filer entre les doigts. »</div></div>
+    <div class="r"><b>CTA</b><div>≈ 30:30. Liste prioritaire → « Le Tableau » en téléchargement. QR code.</div></div>
+    <div class="r"><b>Miniature</b><div>Le duo devant le calendrier, « 8 FÉV » entouré en rouge. Texte : <b>« AVANT LE RAMADAN… »</b></div></div>
+    <div class="r"><b>Shorts</b><div><ul><li>Ramadan à Lombok : ce que ça change pour un projet</li><li>Ce que le village nous a demandé</li><li>Pourquoi ce couple a quitté l'Australie pour Lombok</li></ul></div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header">
+    <div class="num">Épisode 08 · 31 min · Bali + Dubaï</div>
+    <h2>Il pré-vend déjà. Et nous ?</h2>
+    <div class="wt">Titre de travail (EN) : The Rival</div>
+  </div>
+  <p class="promise"><strong>Promesse :</strong> Un concurrent qui pré-vend, un expert qui dit ce qu'exige un vrai lieu wellness, et les coulisses de l'agence à Dubaï.</p>
+  <div class="meta">
+    <div><b>Lieux</b>Bali (pendant le Ramadan à Lombok) : centre de récupération, retreat wellness, salle de padel. Dubaï : l'agence</div>
+    <div><b>Tournage → diffusion</b>Févr. 2027 (Bali + Dubaï). Nyepi ≈ 8 mars : rien du 7 au 10 mars → dim. 21 mars 2027</div>
+    <div><b>Invités</b>L'ami (ou rival) promoteur de Bali (retour) ; un expert biohacking / wellness (premier contact) ; notaire et architecte en visio ; des clients de l'agence à Dubaï (avec accord)</div>
+    <div><b>Rubriques</b>La Villa, Le Dossier, Le Confessionnal (à distance), La Routine (en grand), Ici on vit comme ça</div>
+  </div>
+  <div><span class="small">Équilibre : immobilier 17 min / lifestyle 14 min (55 / 45 %)</span>
+    <div class="bal"><span class="re" style="width:55%">Immobilier 17 min</span><span class="ls" style="width:45%">Lifestyle 14 min</span></div></div>
+  <div class="intro-box" style="margin-top:16px">
+    <div class="label">Cold open · 0:00-0:45</div>
+    <p><span class="pill p">prévu</span> Bain froid à quelques degrés, A grimace. Puis sauna, puis lumière rouge. A : « Voilà ce que nos futurs clients viendront chercher. » Split écran : B en costume à Dubaï, 38 °C… « Pendant ce temps, l'agence. »</p>
+  </div>
+  <h3>Les beats (immobilier)</h3>
+  <ol class="beats"><li><span class="pill p">prévu</span> <b>Montage alterné.</b> A à Bali, B à Dubaï. L'agence tourne : vrais rendez-vous clients, avec accord écrit.</li><li><span class="pill v">à vivre</span> <b>Le rival.</b> Son programme pré-vend. Ce qu'il fait bien, ce qu'il promet. On ne relaie aucun chiffre de rendement. Preuve de la demande, ou guerre des prix ?</li><li><span class="pill p">prévu</span> <b>L'expert wellness.</b> Ce qu'exige The Retreat : sauna, bain froid, shala de yoga, salle de sport, café santé. Le marché : les hôtels avec wellness intégré affichent +20 à +35 % de prix par nuit (RLA Global, 2024). Un prix, pas un rendement.</li><li><span class="pill p">prévu</span> <b>Visios : le notaire et l'architecte.</b> Le Dossier mis à jour à l'écran. Ce qui a bougé, ce qui est bloqué.</li><li><span class="pill v">à vivre</span> <b>Appel du fixer de Lombok</b> : des nouvelles du propriétaire.</li></ol>
+  <h3>Lifestyle (où, quoi, pourquoi ça sert le projet)</h3>
+  <ul><li><b>La Routine, en grand</b> (≈ 4 min) : centre de récupération de Bali, contraste chaud-froid, lumière rouge, respiration. Accueil offert ou day-pass. Lien direct : le Retreat vend exactement ça.</li><li><b>Padel</b> à Bali avec l'expert ou des résidents. Le sport social des expatriés.</li><li><b>La Villa n° 6</b> : un retreat wellness de Bali. Prix de la nuit, programme, ce qu'on copie pour la phase 2.</li><li><b>Ici, on vit comme ça</b> : un résident de Bali (coach, fondateur, télétravailleur). Pourquoi il a fait de Bali sa base pour le corps et le travail.</li><li><b>Dubaï</b> : le contraste. Bureau, chaleur, voitures. Le spectateur voit ce que le duo quitte.</li></ul>
+  <div class="ud"><div class="up"><b>Le haut</b>La vision wellness prend forme. L'agence de Dubaï tient.</div><div class="dn"><b>Le bas</b>Un concurrent avance plus vite. La distance. Le Ramadan bloque tout à Lombok.</div></div>
+  <div class="rows">
+    <div class="r"><b>Cliffhanger</b><div><span class="pill v">à vivre</span> Le résultat du registre foncier arrive par email. B l'ouvre… noir.</div></div>
+    <div class="r"><b>Si ça n'arrive pas</b><div><span class="pill p">prévu</span> A, au téléphone avec B : « Il pré-vend déjà. Nous, on n'a même pas le titre. On continue ? »</div></div>
+    <div class="r"><b>CTA</b><div>≈ 28:30. Liste prioritaire + appel de 15 min pour vos questions (pas de vente, pas de prix). QR code.</div></div>
+    <div class="r"><b>Miniature</b><div>Split : A dans un bain de glace à Bali, B en costume à Dubaï. Texte : <b>« IL VEND DÉJÀ. NOUS ? »</b></div></div>
+    <div class="r"><b>Shorts</b><div><ul><li>Bain froid + sauna : la routine des expats de Bali</li><li>Une journée à notre agence de Dubaï</li><li>Ce que doit avoir un vrai retreat wellness</li></ul></div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header">
+    <div class="num">Épisode 09 · 38 min · Lombok · le deal</div>
+    <h2>On signe ou pas ?</h2>
+    <div class="wt">Titre de travail (EN) : The Deal</div>
+  </div>
+  <p class="promise"><strong>Promesse :</strong> La négociation finale : terrain, opérateur, juridique. Un expert démonte notre plan. Et la question qu'on repousse depuis Bangkok.</p>
+  <div class="meta">
+    <div><b>Lieux</b>Lombok, juste après l'Aïd : la parcelle, chez le notaire, l'hôtel de l'opérateur, une table de négociation</div>
+    <div><b>Tournage → diffusion</b>≈ 11-20 mars 2027 (bloc 3). Jour cadreur → dim. 28 mars 2027 (Pâques : tester une sortie le samedi 27)</div>
+    <div><b>Invités</b>Le propriétaire ; l'opérateur ; le notaire ; un expert qui « démonte le plan » (promoteur expérimenté ou fiscaliste)</div>
+    <div><b>Rubriques</b>Le Dossier, Le Tableau (récap), Le Compteur, Red Flag / Green Flag, Le Confessionnal, La Routine</div>
+  </div>
+  <div><span class="small">Équilibre : immobilier 22 min / lifestyle 16 min (58 / 42 %)</span>
+    <div class="bal"><span class="re" style="width:58%">Immobilier 22 min</span><span class="ls" style="width:42%">Lifestyle 16 min</span></div></div>
+  <div class="intro-box" style="margin-top:16px">
+    <div class="label">Cold open · 0:00-0:50</div>
+    <p><span class="pill v">à vivre</span> La table de négociation. Le propriétaire avance un chiffre (flouté). Long silence. B pose son stylo. Si ça n'arrive pas, <span class="pill p">prévu</span> B devant Le Dossier : des cases cochées, d'autres non. « Il reste 10 jours de tournage. »</p>
+  </div>
+  <h3>Les beats (immobilier)</h3>
+  <ol class="beats"><li><span class="pill p">prévu</span> <b>Retour à Lombok après l'Aïd.</b> Le Dossier : ce qui a bougé pendant le Ramadan.</li><li><span class="pill v">à vivre</span> <b>La négociation finale avec le propriétaire.</b> Bail, option phase 2, paiement en 2 fois. Protocole d'accord seulement si le titre est vérifié. Montants floutés tant que rien n'est signé. Si le terrain tombe : la parcelle n° 2 (on en garde 2-3 vérifiées au registre).</li><li><span class="pill v">à vivre</span> <b>Négociation avec l'opérateur.</b> Gestion optionnelle pour les acheteurs, clause de performance et de résiliation, un opérateur de secours identifié. Il n'est jamais présenté comme garant.</li><li><span class="pill p">prévu</span> <b>L'expert démonte le plan.</b> Ventes lentes, construction +20 %, change, eau, séismes de 2018, MotoGP non garanti. Le duo répond : seuil « tout ou rien » (chantier seulement si 3 villas sur 4 réservées, sinon remboursement intégral), séquestre, prix en USD.</li><li><span class="pill p">prévu</span> <b>Le Tableau n° 9 : les coûts, tout compris.</b> Terrain ≈ 12 k$ par villa, construction visée ≈ 67 k$, coût complet modélisé ≈ 173 k$ par villa (base). Des coûts, aucun rendement.</li><li><span class="pill p">prévu</span> <b>La veille de la décision.</b> Chaque associé enregistre 2 confessionnaux : « Si on dit oui, c'est parce que… » et « Si on dit non, c'est parce que… ».</li></ol>
+  <h3>Lifestyle (où, quoi, pourquoi ça sert le projet)</h3>
+  <ul><li><b>La Routine</b> : surf avant la négociation. « On ne négocie pas fatigué. »</li><li><b>Food</b> : le repas de fin de Ramadan / Lebaran chez le fixer, si on est invité. Sinon un dîner de poisson sur la plage.</li><li><b>Ici, on vit comme ça</b> : un résident de longue date (5 ans et plus) raconte comment Lombok a changé. Ce qu'il voudrait voir construit, ce qu'il redoute.</li><li><b>Coucher de soleil</b> sur la parcelle, le face-à-face final.</li></ul>
+  <div class="ud"><div class="up"><b>Le haut</b>Le deal est possible. Les réponses à l'expert tiennent.</div><div class="dn"><b>Le bas</b>L'avis juridique n'est peut-être pas encore là. L'expert a touché un point faible.</div></div>
+  <div class="rows">
+    <div class="r"><b>Cliffhanger</b><div><span class="pill p">prévu</span> Le face-à-face au coucher du soleil sur la parcelle : « On y va ou pas ? » Noir.</div></div>
+    <div class="r"><b>Si ça n'arrive pas</b><div>Rien à remplacer : ce face-à-face a lieu quoi qu'il arrive. Seule la réponse change.</div></div>
+    <div class="r"><b>CTA</b><div>≈ 35:30. Liste prioritaire + appel de 15 min. Annonce du final interactif. Sondage communautaire 48 h avant.</div></div>
+    <div class="r"><b>Miniature</b><div>Le duo face à face sur la parcelle au crépuscule. Texte : <b>« ON SIGNE OU PAS ? »</b></div></div>
+    <div class="r"><b>Shorts</b><div><ul><li>L'expert qui a démonté notre plan</li><li>Négocier un bail à Lombok</li><li>« Si on dit non, c'est parce que… »</li></ul></div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header">
+    <div class="num">Épisode 10 · 40 min · Lombok · le choix</div>
+    <h2>Séjourner ou Posséder ?</h2>
+    <div class="wt">Titre de travail (EN) : Stay or Own</div>
+  </div>
+  <p class="promise"><strong>Promesse :</strong> Notre décision. Le vrai état du projet, case par case. Et votre choix.</p>
+  <div class="meta">
+    <div><b>Lieux</b>Lombok : la parcelle à l'aube, le notaire, l'hôtel de l'opérateur</div>
+    <div><b>Tournage → diffusion</b>≈ 11-20 mars 2027 + jour drone n° 2 → dim. 4 avr. 2027</div>
+    <div><b>Invités</b>L'opérateur ; le notaire ; l'architecte (rendu 3D) ; l'expert wellness (pour la porte Séjourner)</div>
+    <div><b>Rubriques</b>Tous : Le Dossier final, Le Compteur final, Red Flag / Green Flag, Le Confessionnal, La Routine, Ici on vit comme ça</div>
+  </div>
+  <div><span class="small">Équilibre : immobilier 24 min / lifestyle 16 min (60 / 40 %)</span>
+    <div class="bal"><span class="re" style="width:60%">Immobilier 24 min</span><span class="ls" style="width:40%">Lifestyle 16 min</span></div></div>
+  <div class="intro-box" style="margin-top:16px">
+    <div class="label">Cold open · 0:00-0:60</div>
+    <p><span class="pill p">prévu</span> Aube sur la parcelle. Le drone décolle du sol. A et B debout, de dos. A : « Trois mois. Bangkok, Bali, Gili, Lombok. » B : « Voilà notre réponse. » Noir. Générique.</p>
+  </div>
+  <h3>Les beats (immobilier)</h3>
+  <ol class="beats"><li><span class="pill p">prévu</span> <b>Le récap des drapeaux de la saison.</b> Montage rapide. Uniquement des moments vus à l'écran.</li><li><span class="pill p">prévu</span> <b>Le Dossier final, case par case.</b> Avis juridique, titre, structure, permis de construire (PBG), séquestre. L'état réel est dit à l'écran et écrit dans la description. Le permis est normalement encore en cours (demande prévue d'avril à juin).</li><li><span class="pill v">à vivre</span> <b>La décision.</b> 3 versions possibles, on filme la vraie : <b>Go</b> (bail ou protocole signé chez le notaire, montant non montré) ; <b>Go sous conditions</b> (« on attend X ») ; <b>No-go</b> (on dit pourquoi, avec les vrais coûts de la saison).</li><li><span class="pill p">prévu</span> <b>Le rendu 3D sur la parcelle</b> : les 4 villas de la phase 1 et la place du futur hub wellness.</li><li><span class="pill p">prévu</span> <b>Les confessionnaux de fin d'arc.</b> A : « Le Retreat attendra. Les villas d'abord. » B : « On a décidé sans tout savoir. Mais avec tout vérifié. »</li><li><span class="pill p">prévu</span> <b>La question au spectateur (≈ 2 min).</b> « Et vous : séjourner, ou posséder ? » La mécanique en 30 s : le site, un email, un choix par email et par appareil, définitif. Le vote ne décide pas du projet : il choisit votre liste. QR code 20 s et plus, URL dite à voix haute, écran de fin.</li></ol>
+  <h3>Lifestyle (où, quoi, pourquoi ça sert le projet)</h3>
+  <ul><li><b>La Routine finale</b> : la dernière session de surf de la saison, au lever du soleil, les deux associés ensemble.</li><li><b>Ici, on vit comme ça, le best-of</b> : 4-5 résidents de la saison en 10 secondes chacun. « Pourquoi ici ? » Ils incarnent les deux portes.</li><li><b>Le dernier dîner</b> sur la plage, avec l'opérateur, le fixer, l'architecte. L'équipe de la saison.</li><li><b>Teaser Saison 3</b> : images du futur (sport, récupération, nature).</li></ul>
+  <div class="ud"><div class="up"><b>Le haut</b>Une décision claire, prise devant vous, avec ses preuves.</div><div class="dn"><b>Le bas</b>Ce qui reste à faire : le permis, peut-être l'avis, et les risques assumés à voix haute.</div></div>
+  <div class="rows">
+    <div class="r"><b>Cliffhanger</b><div><span class="pill p">prévu</span> Le choix lui-même. L'épisode s'arrête sur les deux portes. La suite est sur le site.</div></div>
+    <div class="r"><b>Si ça n'arrive pas</b><div>Si le juridique glisse : l'épisode devient « on attend le permis ». La diffusion ne bouge pas, la pré-vente si.</div></div>
+    <div class="r"><b>CTA</b><div>Les 2 dernières minutes. QR code + URL courte (marina-immo.com/choix, à confirmer). Lien en description et en commentaire épinglé.</div></div>
+    <div class="r"><b>Miniature</b><div>Image coupée en deux : à gauche, sauna et yoga à l'aube (Séjourner) ; à droite, villa et piscine en 3D (Posséder). Texte : <b>« SÉJOURNER OU POSSÉDER ? »</b></div></div>
+    <div class="r"><b>Shorts</b><div><ul><li>Notre décision, en 60 secondes</li><li>Nos 4 villas en 3D</li><li>Choisis ta porte (renvoi vers le site)</li></ul></div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-header"><div class="num">04 — Le final interactif</div><h2>Les deux portes</h2></div>
+  <div class="intro-box">
+    <div class="label">La mécanique</div>
+    <ul>
+      <li>L'épisode 10 est public et gratuit sur YouTube. Il s'arrête sur la question.</li>
+      <li>Le choix se fait sur le site : prénom + email (WhatsApp en option). Confirmation par email : seuls les choix confirmés comptent.</li>
+      <li><strong>Un choix par email et par appareil, verrouillé.</strong> Message : « Votre choix est enregistré. Il est définitif. »</li>
+      <li>La porte choisie s'ouvre : une vidéo de 5 à 8 min + sa liste + 3 questions facultatives.</li>
+      <li>Le vote ne décide pas du projet. Il choisit la liste du spectateur. On le dit à l'écran.</li>
+    </ul>
+  </div>
+  <div class="scen">
+    <div class="card mid"><div class="hd"><div class="tag">Porte 1 · ≈ 6 min 45</div><div class="nm">Séjourner · The Retreat</div></div>
+      <div class="bd"><ol>
+        <li><span class="tc">0:00</span> Aube sur la parcelle, le drone décolle du sol (rushes de l'ép. 10).</li>
+        <li><span class="tc">0:30</span> Rendu 3D du hub wellness (250 m²) et des 8 villas d'1 chambre sur le terrain vide. Carton : « Phase 2, à l'étude. Rien n'est construit. »</li>
+        <li><span class="tc">1:30</span> Une journée type, montée avec les vraies Routines de la saison : surf, sport, bain froid, sauna, yoga, café santé.</li>
+        <li><span class="tc">3:30</span> L'opérateur face caméra : comment il ferait vivre le lieu.</li>
+        <li><span class="tc">4:30</span> L'expert wellness : deux signatures possibles, « Surf &amp; Sport » ou « Biohacking &amp; Récupération ». Le spectateur vote : un vote de design, pas d'argent.</li>
+        <li><span class="tc">5:30</span> Carton : « Saison 3 : on construit. » Teaser 30 s.</li>
+        <li><span class="tc">6:00</span> CTA : liste d'attente des séjours fondateurs. Questions : dates, durée, programme. « Liste d'intérêt. Aucun paiement. »</li>
+      </ol></div>
+      <div class="res">Mesure la demande wellness, la donnée qui manque au Retreat.</div></div>
+    <div class="card mid"><div class="hd"><div class="tag">Porte 2 · ≈ 7 min 30</div><div class="nm">Posséder · The Villas</div></div>
+      <div class="bd"><ol>
+        <li><span class="tc">0:00</span> Même aube, autre angle : les 4 villas de la phase 1.</li>
+        <li><span class="tc">0:30</span> Visite 3D d'une villa 2 chambres (≈ 110 m² + piscine) : plan, surfaces, matériaux.</li>
+        <li><span class="tc">2:00</span> Ce que l'acheteur reçoit : un bail notarié de X ans (pas de pleine propriété pour un étranger), un contrat de construction, une gestion optionnelle.</li>
+        <li><span class="tc">3:30</span> Le processus : 10 % à la réservation, 30 % à la signature, 20 % aux mois 8 et 12, 20 % à la remise des clés. Tout en séquestre. Pas d'appel des 30 % avant le permis. Chantier seulement si 3 villas sur 4 réservées, sinon remboursement intégral.</li>
+        <li><span class="tc">4:45</span> L'état réel : terrain, titre, permis. Fait / reste. <b>Version A</b> (feu vert juridique obtenu) : « Les réservations ouvrent d'abord pour la liste, par email. » <b>Version B</b> (pas encore) : « Pas de réservation tant que l'avis, le titre et le séquestre ne sont pas là. »</li>
+        <li><span class="tc">5:45</span> Confessionnaux : 3 raisons d'y aller, 3 risques assumés (perte en capital, retard, change, droit local, revenus non garantis).</li>
+        <li><span class="tc">6:45</span> CTA : liste prioritaire + « je veux le dossier » + appel de 15 min. Questions : budget, horizon.</li>
+      </ol></div>
+      <div class="res">Le pipeline des villas. Rien ne se paie avant le feu vert juridique.</div></div>
+  </div>
+  <p class="small">On tourne les deux portes pendant le bloc 3 (mars), avec les deux versions de la séquence « état réel » de la porte 2. La description de l'ép. 10 donne l'état réel du projet. Sondage communautaire 48 h avant pour la tension.</p>
+</div>
+
+<div class="section">
+  <div class="section-header"><div class="num">05 — Les garde-fous</div><h2>Conformité à l'écran</h2></div>
+  <div class="say">
+    <div class="card win"><div class="hd"><div class="tag">À dire</div><div class="nm">Toujours</div></div>
+      <div class="bd"><ul>
+        <li>« Publicité — nous sommes promoteurs et vendeurs de ce projet. Nous touchons de l'argent sur chaque vente. »</li>
+        <li>« Leasehold de X ans. Pas de pleine propriété pour les étrangers en Indonésie. »</li>
+        <li>« Risques : perte en capital, retard, change, droit local, revenus non garantis. »</li>
+        <li>Des coûts réels, des prix de nuit, des prix du sol. Les prix affichés sont dits « affichés ».</li>
+        <li>CTA unique : rejoindre la liste prioritaire (QR code).</li>
+      </ul></div></div>
+    <div class="card loss"><div class="hd"><div class="tag">À ne jamais dire</div><div class="nm">Nulle part</div></div>
+      <div class="bd"><ul>
+        <li>Un % de rendement, « garanti », « sans risque », « vous doublez votre mise ».</li>
+        <li>« Investissez maintenant », « devenez associé », lien de paiement.</li>
+        <li>Une date de signature ou un compte à rebours de vente.</li>
+        <li>La vente Gili ou « 30 investisseurs » avant l'avis de l'avocat.</li>
+        <li>« Plus que 2 villas » si ce n'est pas vérifiable.</li>
+      </ul></div></div>
+  </div>
+  <h3>Règles de tournage</h3>
+  <ul class="check">
+    <li>On ne rejoue jamais une scène avec un tiers. Un conflit ne se monte qu'avec son contexte.</li>
+    <li>Autorisation à l'image signée (FR / EN / bahasa) par chaque personne qui parle à la caméra, résidents compris.</li>
+    <li>Accord écrit de chaque hôtel, villa, salle, centre de récupération, coworking.</li>
+    <li>Pas de drone perso, pas de temples, pas de signature ni de pitch filmés sans le bon visa.</li>
+    <li>Notaires et vendeurs : relecture de leur séquence avant diffusion (pas de veto). Numéros de parcelle et prix floutés tant que rien n'est signé.</li>
+    <li>Pré-ventes : seulement après avis juridique, titre vérifié et séquestre ouvert. Si ça glisse, on décale la pré-vente, pas la diffusion.</li>
+  </ul>
+  <p class="small">Chiffres : Plan 2027 validé et recherches 01, 03, 05, 06 (novembre 2026). Prix du marché = prix affichés par des agences, pas des prix de vente constatés. Dates de Ramadan, Aïd et Nyepi 2027 à confirmer 8-10 semaines avant. Recherche, pas un avis juridique.</p>
+</div>
+
+<div class="footer">STORYBOARD SAISON 2 · MARINA IMMO DUBAI</div>
+</body>
+</html>
