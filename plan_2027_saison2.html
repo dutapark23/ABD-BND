@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan 2027 — Saison 2</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { max-width: 100%; overflow-x: hidden; }
+  body { font-family: 'Georgia', serif; background: #fafaf8; color: #1a1a1a; line-height: 1.7; overflow-wrap: break-word; }
+
+  .cover { background: #1a1a1a; color: #fff; padding: 80px 40px; text-align: center; page-break-after: always; }
+  .cover .kicker { color: #c8a96e; font-size: 0.85em; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; }
+  .cover h1 { font-size: 2.3em; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; line-height: 1.3; }
+  .cover .sub { color: #c8a96e; font-size: 1em; letter-spacing: 2px; margin-bottom: 30px; }
+  .cover .tagline { color: #aaa; font-style: italic; max-width: 560px; margin: 0 auto; border-top: 1px solid #333; padding-top: 20px; }
+  .cover .date { color: #777; font-size: 0.85em; margin-top: 30px; letter-spacing: 2px; }
+
+  .section { max-width: 800px; margin: 0 auto; padding: 60px 30px; page-break-before: always; }
+  .section-header { border-left: 4px solid #c8a96e; padding-left: 20px; margin-bottom: 30px; }
+  .section-header h2 { font-size: 1.6em; text-transform: uppercase; letter-spacing: 2px; line-height: 1.3; }
+  .section-header .num { font-size: 0.8em; color: #8a6a2e; letter-spacing: 3px; font-style: italic; }
+
+  h3 { font-size: 1.05em; text-transform: uppercase; letter-spacing: 2px; margin: 30px 0 12px; }
+  p { margin-bottom: 12px; font-size: 0.95em; color: #333; }
+  ul, ol { margin: 0 0 16px 22px; font-size: 0.93em; color: #333; }
+  li { margin-bottom: 6px; }
+  .small { font-size: 0.8em; color: #6b6b63; }
+
+  .intro-box { background: #1a1a1a; color: #fff; border-radius: 8px; padding: 22px 28px; margin-bottom: 28px; page-break-inside: avoid; }
+  .intro-box .label { font-size: 0.75em; color: #c8a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .intro-box p, .intro-box li { color: #ccc; font-size: 0.95em; }
+  .intro-box strong { color: #fff; }
+
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 24px 0 30px; }
+  .stats.four { grid-template-columns: repeat(4, 1fr); }
+  .stat { background: #fff; border: 1px solid #e0e0d8; border-radius: 8px; padding: 14px 12px; page-break-inside: avoid; min-width: 0; }
+  .stat .v { font-size: 1.45em; font-weight: bold; color: #1a1a1a; line-height: 1.2; }
+  .stat .l { font-size: 0.7em; color: #6b6b63; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+  .scen { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .scen.three { grid-template-columns: 1fr 1fr 1fr; }
+  .card { border: 1px solid #e0e0d8; border-radius: 8px; overflow: hidden; background: #fff; page-break-inside: avoid; min-width: 0; }
+  .card .hd { background: #1a1a1a; color: #fff; padding: 14px 18px; }
+  .card .hd .tag { font-size: 0.7em; letter-spacing: 3px; color: #c8a96e; text-transform: uppercase; }
+  .card .hd .nm { font-size: 1.05em; font-weight: bold; }
+  .card .bd { padding: 14px 18px; font-size: 0.88em; color: #333; }
+  .card .bd ol, .card .bd ul { margin: 0 0 0 18px; font-size: 1em; }
+  .card .bd .row { display: flex; justify-content: space-between; border-bottom: 1px solid #f0f0ea; padding: 5px 0; gap: 10px; }
+  .card .bd .row span:last-child { font-weight: bold; color: #1a1a1a; text-align: right; }
+  .card .res { padding: 12px 18px; font-weight: bold; font-size: 0.92em; }
+  .card.loss .res { background: #fff0f0; color: #8a2a2a; border-top: 3px solid #c0504d; }
+  .card.win .res { background: #f0f7f1; color: #1f5a33; border-top: 3px solid #3d8a55; }
+  .card.mid .res { background: #f6f1e6; color: #6a5220; border-top: 3px solid #c8a96e; }
+
+  .tablewrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82em; }
+  th { background: #1a1a1a; color: #c8a96e; text-align: right; padding: 9px 10px; letter-spacing: 1px; font-weight: normal; text-transform: uppercase; font-size: 0.8em; }
+  th:first-child, td:first-child { text-align: left; }
+  td { background: #fff; border-bottom: 1px solid #e6e6de; padding: 7px 10px; text-align: right; color: #333; font-variant-numeric: tabular-nums; vertical-align: top; }
+  table.txt td, table.txt th { text-align: left; }
+  tr { page-break-inside: avoid; }
+  td.hi { font-weight: bold; color: #1a1a1a; background: #f6f1e6; }
+
+  .warn { background: #fff8e8; border-left: 4px solid #d9a441; border-radius: 6px; padding: 16px 20px; margin: 20px 0; page-break-inside: avoid; }
+  .warn .label { font-size: 0.75em; font-weight: bold; color: #8a6415; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .warn p, .warn li { font-size: 0.88em; color: #5a4520; }
+
+  .check { list-style: none; margin-left: 0; }
+  .check li { padding-left: 28px; position: relative; }
+  .check li::before { content: "☐"; position: absolute; left: 4px; color: #8a6a2e; }
+
+  .say { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 24px; }
+  .say .card .bd li { margin-bottom: 5px; }
+
+  .sources li { font-size: 0.8em; word-break: break-word; }
+  .footer { text-align: center; color: #999; font-size: 0.8em; padding: 40px; letter-spacing: 2px; }
+
+  @media (max-width: 640px) {
+    .cover { padding: 60px 16px; }
+    .cover h1 { font-size: 1.6em; }
+    .section { padding: 40px 16px; }
+    .stats, .stats.four { grid-template-columns: 1fr 1fr; }
+    .scen, .scen.three, .say { grid-template-columns: 1fr; }
+    table { font-size: 0.74em; }
+    .intro-box { padding: 18px 18px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .tablewrap { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="kicker">Marina Immo Dubai · Plan stratégique</div>
+  <h1>Plan 2027<br>Saison 2</h1>
+  <div class="sub">Un hôtel wellness à Lombok, construit devant la caméra. Sans votre argent.</div>
+  <p class="tagline">Le projet, le financement conforme, la série, le final interactif, la machine à leads et le calendrier, de décembre 2026 à décembre 2027. Chaque chiffre vient de la recherche. Les estimations sont signalées comme telles.</p>
+  <p class="date">Version du 7 novembre 2026 · Document interne · Recherche, pas un avis juridique</p>
+</div>
+
+<!-- ===== 1. VERDICT ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">01 — Le verdict en 1 page</div>
+    <h2>Go, avec 3 conditions</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">Notre avis honnête</div>
+    <p><strong>Go pour tourner en décembre.</strong> L'histoire est forte : aucune chaîne en français sur Lombok, de toute taille.</p>
+    <p><strong>Pas de go pour vendre</strong> tant que 3 cases ne sont pas cochées : (1) vente Gili vérifiée par un avocat, (2) un terrain au titre vérifié, (3) une structure de vente validée par écrit.</p>
+    <p><strong>Le vrai frein n'est pas l'argent. C'est l'audience</strong> : à la taille actuelle, la série seule ne vend pas 8 villas. Il faut le réseau Dubaï + les acheteurs Gili + une croissance de la chaîne.</p>
+  </div>
+
+  <h3>Les 3 décisions qui comptent</h3>
+  <ol>
+    <li><strong>Ce qu'on vend : des villas (clés) en leasehold, pas des « parts ».</strong> Chaque acheteur a sa villa et son bail. La gestion par l'opérateur reste une option. C'est la voie la plus sûre légalement.</li>
+    <li><strong>Où : Lombok sud</strong> (Selong Belanak / arrière-pays de Kuta), avec l'opérateur de Gili. Pas Bali. Gili seulement si un terrain a un bail d'au moins 25 ans restant.</li>
+    <li><strong>Comment on tourne : léger.</strong> Le duo + 1 à 2 personnes. Les 10 k$ servent d'abord au juridique, ensuite au tournage.</li>
+  </ol>
+
+  <h3>Les 5 chiffres qui comptent</h3>
+  <div class="stats">
+    <div class="stat"><div class="v">8</div><div class="l">clés minimum pour que l'hôtel tienne</div></div>
+    <div class="stat"><div class="v">1,11 M$</div><div class="l">capex modélisé (base, terrain en JV)</div></div>
+    <div class="stat"><div class="v">0 $</div><div class="l">fonds propres du duo dans le projet</div></div>
+    <div class="stat"><div class="v">190 k</div><div class="l">vues nécessaires pour 8 acheteurs (base)</div></div>
+    <div class="stat"><div class="v">≈ 1,2 k</div><div class="l">vues par épisode en saison 1</div></div>
+  </div>
+  <p class="small">Sources : modèle financier 05 (estimations, scénario base) ; données publiques de la chaîne 02. L'écart de ×16 entre ce qu'il faut et ce que la saison 1 a fait est le sujet n°1 de ce plan.</p>
+</div>
+
+<!-- ===== 2. URGENT ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">02 — Urgent · avant de tourner (30 jours)</div>
+    <h2>Quatre vérifications, puis on tourne</h2>
+  </div>
+
+  <div class="warn">
+    <div class="label">À lire comme</div>
+    <p>Recherche documentaire, pas un avis juridique. Le but : arriver chez l'avocat avec les bonnes questions et le bon dossier.</p>
+  </div>
+
+  <h3>A. La vente Gili : un contrôle de qualification, pas une alarme</h3>
+  <p>D'après vous, la vente a été présentée comme un <strong>investissement dans une villa ou une unité</strong>, avec <strong>en option</strong> un opérateur qui la gère pour le propriétaire, comme n'importe quelle société de location courte durée ou de conciergerie. C'est proche de la voie conforme : <strong>vente d'unités + gestion locative optionnelle</strong>.</p>
+  <p>Une seule règle à garder en tête : <strong>c'est le pays de l'acheteur qui compte, pas celui de l'hôtel.</strong> Un acheteur qui vit en France est protégé par le droit français, même si la villa est en Indonésie.</p>
+  <p>Ce qui décide de la qualification tient en <strong>4 questions</strong>. Ce sont les questions à poser à l'avocat :</p>
+
+  <div class="tablewrap"><table class="txt">
+    <tr><th>#</th><th>Question</th><th>Réponse rassurante</th><th>Réponse qui demande du travail</th></tr>
+    <tr><td>1</td><td>Chaque acheteur a-t-il reçu <strong>une unité précise</strong>, avec son propre bail ou titre notarié ?</td><td>Oui, une villa identifiée, un acte à son nom</td><td>Une fraction des revenus d'un hôtel, sans unité ni acte</td></tr>
+    <tr><td>2</td><td>La gestion locative était-elle <strong>vraiment optionnelle</strong> ?</td><td>Oui, il pouvait gérer seul ou changer de gestionnaire</td><td>Gestion imposée ou pool obligatoire</td></tr>
+    <tr><td>3</td><td>Des <strong>rendements</strong> ont-ils été promis, garantis ou montrés en chiffres ?</td><td>Non, ou présentés comme des hypothèses</td><td>« X % garantis » ou chiffres donnés comme acquis</td></tr>
+    <tr><td>4</td><td>Comment avez-vous été <strong>payés</strong> (par le vendeur ou par les acheteurs) ? Avez-vous <strong>encaissé vous-mêmes</strong> l'argent des acheteurs ?</td><td>Commission du vendeur ; l'acheteur paie le vendeur ou le notaire</td><td>Argent des acheteurs passé par vos comptes</td></tr>
+  </table></div>
+  <p class="small">Pourquoi ces 4 points : une vente d'unité avec titre et gestion optionnelle reste en principe une vente immobilière. Une gestion imposée + un rendement promis peut être requalifiée en placement financier (France : « biens divers » ; Québec : contrat d'investissement). Source : recherche 04, sections 0 bis et 1.</p>
+
+  <h3>B. Le titre du terrain de Gili : à vérifier en priorité</h3>
+  <ul>
+    <li>À Gili Trawangan, environ <strong>65 ha</strong> de foncier sont sous droit de gestion de la province (HPL). Le contrat de l'ancien exploitant (PT GTI) a été <strong>résilié en sept. 2021</strong>.</li>
+    <li>Si l'hôtel est sur ce foncier, le titre des acheteurs peut être fragile. Une vérification au registre foncier (BPN) suffit à le savoir.</li>
+  </ul>
+
+  <h3>C. Pendant ce temps : 3 règles simples</h3>
+  <ul>
+    <li><strong>Ne rien supprimer</strong> (vidéos, messages, contrats) avant l'avis de l'avocat.</li>
+    <li><strong>Pas de nouvelle vente Gili</strong> et pas de « on a déjà 30 investisseurs » dans la série, le temps de l'avis.</li>
+    <li><strong>Envoyer un point d'étape</strong> aux acheteurs Gili. Un acheteur informé est un acheteur fidèle. Ce sont aussi vos premiers prospects.</li>
+  </ul>
+
+  <h3>D. Visa et tournage</h3>
+  <ul>
+    <li>Vous ne voulez pas de permis de tournage. Recommandation : <strong>visa d'affaires</strong> pour les rendez-vous et visites de terrain en Indonésie (type exact à confirmer par un agent visa), et <strong>un pilote de drone local licencié</strong> pour toutes les images aériennes.</li>
+    <li>Le risque, dit une fois : en Indonésie, un visa touriste ou à l'arrivée ne couvre pas un contenu commercial, et les autorités ont déjà averti les influenceurs. Le risque est une amende ou une expulsion. Même logique en Thaïlande pour un contenu commercial.</li>
+    <li>Pour le réduire : matériel léger, pas de drone perso, pas de tournage dans les temples, accord écrit de chaque hôtel, formulaire d'autorisation à l'image signé par chaque personne qui parle à la caméra.</li>
+  </ul>
+
+  <h3>E. La structure</h3>
+  <ul>
+    <li>Société indonésienne à capitaux étrangers (<strong>PT PMA</strong>) : capital libéré minimum <strong>IDR 2,5 Md (≈ 140 k$)</strong>, plan d'investissement au-delà de <strong>IDR 10 Md (≈ 560 k$)</strong> par activité et par site (règle BKPM 5/2025). Qui apporte ces 140 k$ ? À régler dans la JV.</li>
+    <li>Le code d'activité hôtelière (KBLI) ouvert aux étrangers pour un hôtel de 8 villas est <strong>contradictoire selon les sources</strong>. L'avocat tranche avant tout achat.</li>
+    <li><strong>Aucun prête-nom.</strong> Ces montages sont nuls en droit indonésien.</li>
+  </ul>
+
+  <h3>Checklist 30 jours</h3>
+  <ul class="check">
+    <li>Avocat en droit financier français mandaté, avec les 4 questions et le dossier Gili (acheteurs et pays de résidence, contrats, flux d'argent, vidéos, titre foncier).</li>
+    <li>Cabinet indonésien + notaire (PPAT) : titre du terrain Gili au BPN + titre d'un terrain candidat à Lombok.</li>
+    <li>Agent visa consulté : visa d'affaires pour décembre.</li>
+    <li>Pilote drone local réservé (via le fixer ou l'opérateur).</li>
+    <li>Formulaires d'autorisation à l'image FR/EN/bahasa prêts.</li>
+    <li>Accord écrit des hôtels de Bangkok et Bali pour filmer.</li>
+    <li>Page liste d'attente en ligne <strong>avant</strong> la diffusion de l'épisode 1.</li>
+    <li>Devis forfaitaire de l'avocat obtenu. Le coût de cette revue n'est pas chiffré dans la recherche : c'est le premier poste du budget.</li>
+  </ul>
+</div>
+
+<!-- ===== 3. LE PROJET ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">03 — Le projet</div>
+    <h2>The Retreat : 8 villas wellness à Lombok</h2>
+  </div>
+
+  <h3>Le concept</h3>
+  <ul>
+    <li><strong>8 villas privées</strong> d'1 chambre, 70 m², bassin privé.</li>
+    <li><strong>Un hub wellness de 250 m²</strong> : salle de sport, sauna, bain froid, shala de yoga, café santé.</li>
+    <li>Positionnement : sport, récupération, biohacking. Surf et nature à Lombok sud.</li>
+    <li>Pourquoi le wellness : les hôtels avec wellness intégré affichent <strong>+20 à +35 %</strong> de prix par nuit (2024, RLA Global). Les voyageurs wellness dépensent <strong>40 à 175 %</strong> de plus (Global Wellness Institute).</li>
+  </ul>
+
+  <h3>Lombok, Bali ou Gili ?</h3>
+  <div class="scen three">
+    <div class="card loss"><div class="hd"><div class="tag">Bali</div><div class="nm">Non</div></div>
+      <div class="bd"><ul><li>Terrain 3 à 10× plus cher</li><li>Marge ≈ 0 % en base sur des villas</li><li>Rizières interdites à la construction</li><li>Image « promoteur étranger illégal »</li></ul></div>
+      <div class="res">Une erreur de permis = un scandale filmé</div></div>
+    <div class="card win"><div class="hd"><div class="tag">Lombok sud</div><div class="nm">Oui</div></div>
+      <div class="bd"><ul><li>Terrain 3 à 5× moins cher qu'à Gili</li><li>Baux longs (jusqu'à 85 ans)</li><li>Surf + nature = sport</li><li>France ≈ 5 % des arrivées aériennes étrangères</li></ul></div>
+      <div class="res">Le bon ticket d'entrée et la bonne histoire</div></div>
+    <div class="card mid"><div class="hd"><div class="tag">Gili</div><div class="nm">Seulement si…</div></div>
+      <div class="bd"><ul><li>ADR affiché 261 $ (vs 200 $ Lombok)</li><li>L'opérateur y a 10 ans d'historique</li><li>Construction +20 à 30 % (bateau, charrette, estimation)</li><li>Baux courts, foncier HPL</li></ul></div>
+      <div class="res">…un terrain avec ≥ 25 ans de bail restant</div></div>
+  </div>
+  <p class="small">Lombok a aussi ses faiblesses : 0,43 M d'étrangers en 2024 contre 6,9 M à Bali en 2025 (≈ 16×), 20 à 30 % d'occupation en basse saison, annonces de villas +89 % en 2024 et prix par nuit −21 %, eau et électricité fragiles, séismes de 2018. Sources : C9/Horwath HTL 2025, BPS Bali.</p>
+
+  <h3>Le modèle opérateur</h3>
+  <ul>
+    <li>Vous construisez. <strong>L'opérateur local (10 ans à Gili/Lombok) exploite</strong>, sous contrat de gestion.</li>
+    <li>Négocier un <strong>contrat hôtelier : 3 % du CA + 8 % du résultat d'exploitation (GOP)</strong>. Pas une commission de villa à 15 % du CA.</li>
+    <li>Écart pour les propriétaires : <strong>≈ 45 k$ par an</strong> (EBITDA an 3 : 136,7 k$ contre 92,1 k$).</li>
+    <li>L'opérateur <strong>co-investit ≈ 5 %</strong> (≈ 55 k$ en base), contrat de 10 ans, clause de performance, droit de résiliation.</li>
+    <li>Avant de signer : <strong>voir les comptes de son hôtel à Gili.</strong></li>
+  </ul>
+
+  <h3>Les chiffres (estimations du modèle 05)</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Hôtel 8 villas, terrain en JV</th><th>Conservateur</th><th>Base</th><th>Optimiste</th></tr>
+    <tr><td>Prix par nuit / occupation</td><td>150 $ / 50 %</td><td class="hi">190 $ / 60 %</td><td>240 $ / 68 %</td></tr>
+    <tr><td>Capex</td><td>1 322 781</td><td class="hi">1 106 080</td><td>906 196</td></tr>
+    <tr><td>CA année 1</td><td>190 530</td><td class="hi">289 606</td><td>414 593</td></tr>
+    <tr><td>CA année 3 (stabilisé)</td><td>336 889</td><td class="hi">512 071</td><td>733 070</td></tr>
+    <tr><td>Frais opérateur an 3</td><td>18 225</td><td class="hi">32 149</td><td>49 657</td></tr>
+    <tr><td>Loyer terrain (8 % du CA)</td><td>26 951</td><td class="hi">40 966</td><td>58 646</td></tr>
+    <tr><td>EBITDA propriétaires an 3</td><td>56 298</td><td class="hi">136 722</td><td>237 505</td></tr>
+    <tr><td>Rendement cash modélisé / capex</td><td>3,5 %</td><td class="hi">9,4 %</td><td>19,4 %</td></tr>
+    <tr><td>Retour sur capex</td><td>&gt; 10 ans</td><td class="hi">≈ 10,6 ans</td><td>5,8 ans</td></tr>
+  </table></div>
+  <p class="small">USD, taux 18 000 IDR/USD. Hypothèses de modèle, pas des promesses : ces rendements ne se montrent jamais à l'antenne. Repère marché : villas de Lombok à 189 $ / 59 % en 2024 (C9). La base suppose donc une vraie prime wellness.</p>
+
+  <h3>Vendre les clés : la variante recommandée</h3>
+  <div class="tablewrap"><table>
+    <tr><th>8 clés vendues en bail</th><th>Conservateur</th><th>Base</th><th>Optimiste</th></tr>
+    <tr><td>Coût par clé (hub inclus)</td><td>165 348</td><td class="hi">138 260</td><td>113 274</td></tr>
+    <tr><td>Prix de vente par clé</td><td>180 000</td><td class="hi">200 000</td><td>220 000</td></tr>
+    <tr><td>Marge par clé</td><td>−17 748</td><td class="hi">+34 740</td><td>+86 926</td></tr>
+    <tr><td>Marge totale 8 clés</td><td>−141 981</td><td class="hi">+277 920</td><td>+695 404</td></tr>
+  </table></div>
+  <p>Ajustement juridique au modèle 05 : la gestion par l'opérateur est <strong>proposée, pas imposée</strong>. Revenus réels, frais transparents, contrat résiliable. C'est ce qui garde la vente dans l'immobilier.</p>
+
+  <h3>La version minimum viable</h3>
+  <ul>
+    <li><strong>Hôtel : 8 clés minimum.</strong> À 4 clés, rendement modélisé de 5,5 % : le hub et l'équipe sont des coûts fixes.</li>
+    <li><strong>Plan B si l'hôtel ne passe pas :</strong> 4 villas vendues, portées par un développeur local, le duo payé en commission (5-6 %). C'est ce que vous savez déjà faire.</li>
+    <li><strong>Étape 0 (10 k$) :</strong> 1 bloc de tournage, 1 terrain vérifié, 1 term sheet opérateur, 1 liste d'attente. Rien d'autre.</li>
+  </ul>
+
+  <h3>Critères go / no-go (avant chantier)</h3>
+  <div class="tablewrap"><table class="txt">
+    <tr><th>#</th><th>Critère</th><th>GO si…</th></tr>
+    <tr><td>1</td><td>Terrain</td><td>Propriétaire prêt à l'apporter en JV, titre vérifié au BPN, bail ≥ 30 ans, zonage tourisme</td></tr>
+    <tr><td>2</td><td>Opérateur</td><td>Term sheet signé : base ≤ 3-4 % du CA + incentive sur GOP, co-investissement ≥ 5 %, comptes Gili vérifiés</td></tr>
+    <tr><td>3</td><td>Juridique</td><td>Avis écrit : ce qu'on vend n'est pas une offre de titres non autorisée (Indonésie, France, EAU)</td></tr>
+    <tr><td>4</td><td>Demande</td><td>≥ 300 inscrits et ≥ 4 réservations remboursables (10 %) dans les 90 jours après la mise en vente</td></tr>
+    <tr><td>5</td><td>Chiffres</td><td>Devis à prix ferme ≤ 140 k$ par clé ; marge ≥ 15 % au prix de vente</td></tr>
+    <tr><td>6</td><td>Argent des acheteurs</td><td>Compte séquestre ; chantier seulement après permis de construire (PBG)</td></tr>
+  </table></div>
+</div>
+
+<!-- ===== 4. FINANCER ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">04 — Comment financer sans votre argent</div>
+    <h2>Quatre sources, zéro fonds propres</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">Le principe</div>
+    <p>Vous n'êtes pas le promoteur qui porte le risque. Vous êtes <strong>le canal de vente et le co-développeur</strong>, payés en honoraires.</p>
+    <p>Le projet se finance par : <strong>terrain apporté en JV</strong> + <strong>co-investissement de l'opérateur (≈ 5 %)</strong> + <strong>ventes de clés</strong> + <strong>acomptes en séquestre</strong>.</p>
+  </div>
+
+  <h3>Les routes conformes, classées</h3>
+  <div class="tablewrap"><table class="txt">
+    <tr><th>Rang</th><th>Route</th><th>Ce que c'est</th><th>Coût / délai (estimations)</th><th>La série peut en parler ?</th></tr>
+    <tr><td><strong>1</strong></td><td>Vente de clés / villas en leasehold sur plan</td><td>Unité identifiée, bail notarié + contrat de construction, séquestre, déblocage par étapes, gestion optionnelle</td><td>25-60 k€ de juridique et structure · 4-8 mois</td><td><strong>Oui</strong>, avec les mentions</td></tr>
+    <tr><td><strong>2</strong></td><td>Terrain en JV</td><td>Le propriétaire apporte le bail contre 8 % du CA (ou 15-25 % de parts)</td><td>Supprime ≈ 150-250 k$ de cash au départ</td><td>Oui (c'est de l'histoire)</td></tr>
+    <tr><td><strong>3</strong></td><td>Plateforme de financement participatif agréée (ECSP)</td><td>Petits tickets UE, plafond 5 M€ / 12 mois, la plateforme gère la conformité</td><td>3-8 % des fonds + 20-50 k€ · 3-6 mois. <strong>Aucune plateforme identifiée sur Bali/Lombok</strong></td><td>Seulement « le projet est présenté sur [plateforme] »</td></tr>
+    <tr><td><strong>4</strong></td><td>Placement privé</td><td>Investisseurs qualifiés ou &lt; 150 personnes par pays UE, par un intermédiaire agréé</td><td>30-100 k€ · 2-4 mois</td><td><strong>Non. Jamais.</strong></td></tr>
+  </table></div>
+
+  <h3>Ce que gagne le duo (estimation, base)</h3>
+  <ul>
+    <li>Honoraires de développement : 3 % du capex = <strong>≈ 33 k$</strong>.</li>
+    <li>Commission de placement : 5 % = <strong>≈ 56 k$</strong>. Total <strong>≈ 89 k$</strong>, plus une part de surperformance à négocier.</li>
+    <li><strong>Attention :</strong> une commission sur une levée de fonds est un service d'investissement réservé aux intermédiaires agréés. Sur une vente de villa, c'est une commission immobilière. Encore une raison de vendre des clés, pas des parts.</li>
+    <li>Honoraires + commissions = <strong>conflit d'intérêts à déclarer</strong>, à l'écran et dans les contrats.</li>
+  </ul>
+
+  <h3>À exclure</h3>
+  <ul>
+    <li>« Parts » de revenus de l'hôtel, pool locatif obligatoire, rendement garanti.</li>
+    <li>Tokens, NFT, « membership » à revenus.</li>
+    <li>Argent encaissé sur vos comptes, lien Stripe ou crypto en description.</li>
+    <li>Setters qui appellent pour vendre un placement.</li>
+    <li>Résidents canadiens (option investissement) et résidents marocains sans accord de l'Office des Changes.</li>
+  </ul>
+
+  <h3>À l'écran</h3>
+  <div class="say">
+    <div class="card win"><div class="hd"><div class="tag">À dire</div><div class="nm">Toujours</div></div>
+      <div class="bd"><ul>
+        <li>« Publicité — nous sommes promoteurs et vendeurs de ce projet. »</li>
+        <li>« Nous touchons de l'argent sur chaque vente. »</li>
+        <li>« Leasehold de X ans. Pas de pleine propriété pour les étrangers en Indonésie. »</li>
+        <li>« Risques : perte en capital, retard, change, droit local, revenus non garantis. »</li>
+        <li>Les chiffres = des « hypothèses », avec le scénario bas.</li>
+        <li>CTA : « Découvrez les villas » → page + brochure + rendez-vous.</li>
+      </ul></div></div>
+    <div class="card loss"><div class="hd"><div class="tag">À ne jamais dire</div><div class="nm">Nulle part</div></div>
+      <div class="bd"><ul>
+        <li>« Garanti », « sans risque », « rendement assuré », « vous doublez votre mise ».</li>
+        <li>« Investissez avec nous », « devenez associé du resort ».</li>
+        <li>Un % de rendement à l'image.</li>
+        <li>Une comparaison avec un livret ou un placement sûr.</li>
+        <li>« Plus que 2 places » si ce n'est pas vérifiable.</li>
+        <li>« On a déjà 30 investisseurs à Gili » (avant l'avis de l'avocat).</li>
+      </ul></div></div>
+  </div>
+  <p class="small">Obligations depuis Dubaï : loi influenceurs française (mention « Publicité » visible tout le contenu ; représentant légal dans l'UE + assurance RC UE pour un influenceur hors UE qui cible la France) ; régime finfluenceurs SCA aux EAU depuis le 20 mai 2025 ; votre licence RERA est exposée. Case « communication commerciale » cochée dans YouTube Studio.</p>
+</div>
+
+<!-- ===== 5. LA SERIE ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">05 — La série</div>
+    <h2>Vlog réalité, vrais enjeux</h2>
+  </div>
+
+  <h3>Le positionnement</h3>
+  <ul>
+    <li><strong>« Deux Français de Dubaï construisent un hôtel à Lombok. Vous choisissez la fin. »</strong></li>
+    <li>Terrain vierge : aucune chaîne en français sur Lombok trouvée. Les vendeurs de villas à Bali en français ont tous moins de 2,5 k abonnés.</li>
+    <li>Votre audience vient pour <strong>l'expatriation et le doute</strong>, pas pour les annonces : « fin du rêve » (14 k), « Hijra à Dubaï » (12 k). Chaque épisode parle de vie, pas de mètres carrés.</li>
+    <li>La preuve que ça peut grandir : Théo Ritzy (« 8 villas à Bali », 120 k abonnés) vend une histoire personnelle.</li>
+  </ul>
+
+  <h3>Le format : 25 minutes, 3 actes</h3>
+  <div class="tablewrap"><table class="txt">
+    <tr><th>Minute</th><th>Bloc</th><th>Pourquoi</th></tr>
+    <tr><td>0:00-0:45</td><td><strong>Accroche</strong> : le moment le plus fort de l'épisode</td><td>Stoppe la chute de la 1re minute</td></tr>
+    <tr><td>0:45-1:15</td><td>Générique + « précédemment » en 15 s</td><td>Repère pour la TV</td></tr>
+    <tr><td>1:15-2:00</td><td><strong>La question de l'épisode</strong>, face caméra</td><td>Le contrat de rétention</td></tr>
+    <tr><td>2:00-7:30</td><td>Acte 1 : arrivée, rencontre, découverte</td><td>Mise en place</td></tr>
+    <tr><td>≈ 7:30</td><td>Mini-cliffhanger → mid-roll manuel n°1</td><td>Coupure naturelle</td></tr>
+    <tr><td>7:30-13:00</td><td>Acte 2 : l'obstacle + <strong>« Le Tableau »</strong> (vrais coûts à l'écran)</td><td>La valeur business</td></tr>
+    <tr><td>≈ 13:00</td><td>Sponsor intégré à l'histoire (60-90 s), si sponsor</td><td>Revenu sans casser le rythme</td></tr>
+    <tr><td>13:00-19:00</td><td>Acte 3 : la décision sous pression</td><td>Pic émotionnel</td></tr>
+    <tr><td>≈ 19:00</td><td>Mini-cliffhanger → mid-roll n°2</td><td>Coupure naturelle</td></tr>
+    <tr><td>19:00-23:00</td><td>Résolution + <strong>confessionnaux</strong></td><td>Authenticité, confiance</td></tr>
+    <tr><td>23:00-24:20</td><td><strong>Un seul CTA</strong>, QR code à l'écran</td><td>Le lead</td></tr>
+    <tr><td>24:20-25:00</td><td>Teaser du prochain épisode + écran de fin</td><td>Session de visionnage</td></tr>
+  </table></div>
+  <p class="small">Objectif : ≥ 35 % de durée moyenne vue (≈ 9 min sur 25). Repère : 25-35 % pour les vidéos de plus de 20 min (données de vendeurs). Environ 35 % du temps YouTube se regarde sur TV (source secondaire) : gros sous-titres, QR codes, pas de petits textes. Chapitres nommés comme des moments d'histoire (« Le terrain est-il à vendre ? »).</p>
+
+  <h3>L'arc en 10 épisodes</h3>
+  <div class="tablewrap"><table class="txt">
+    <tr><th>#</th><th>Titre</th><th>Ce qui se passe (si ça arrive vraiment)</th><th>Cliffhanger possible</th></tr>
+    <tr><td>1</td><td><strong>Le Briefing</strong> · Bangkok</td><td>Les associés posent le plan dans de beaux hôtels. Deux visions : hôtel ou villas</td><td>Un message vocal d'un contact à Lombok</td></tr>
+    <tr><td>2</td><td><strong>Bali, trop tard ?</strong></td><td>Premiers rendez-vous bruts. Prix, rizières interdites, saturation</td><td>« Le vrai coup, aujourd'hui, c'est Lombok »</td></tr>
+    <tr><td>3</td><td><strong>Lombok, la vraie</strong></td><td>Rencontre avec l'opérateur. Routes, eau, plages vides</td><td>La parcelle parfaite… avec 7 héritiers</td></tr>
+    <tr><td>4</td><td><strong>Gili, la preuve</strong></td><td>L'hôtel de l'opérateur, ses vrais chiffres d'exploitation (s'il accepte)</td><td>Gili ou Lombok pour le Retreat ?</td></tr>
+    <tr><td>5</td><td><strong>Chez le notaire</strong></td><td>Titre, bail, PT PMA. Ce qu'un étranger peut vraiment détenir</td><td>Le notaire refuse de valider en l'état</td></tr>
+    <tr><td>6</td><td><strong>Les devis</strong></td><td>3 entrepreneurs, écart possible du simple au double</td><td>Désaccord réel en confessionnal</td></tr>
+    <tr><td>7</td><td><strong>Le Concurrent</strong></td><td>Un projet voisin : preuve de la demande ou guerre des prix ?</td><td>Délai pour signer le terrain</td></tr>
+    <tr><td>8</td><td><strong>Le Banjar</strong></td><td>Le village pose ses conditions (emplois, accès plage)</td><td>Un accord… avec une condition coûteuse</td></tr>
+    <tr><td>9</td><td><strong>Le Deal</strong></td><td>Négociation avec l'opérateur et le propriétaire du terrain. Un expert démonte le plan</td><td>« On signe ou pas ? »</td></tr>
+    <tr><td>10</td><td><strong>Le Choix</strong> (interactif)</td><td>Récap des drapeaux verts et rouges. Le spectateur choisit</td><td>Deux branches (section 06)</td></tr>
+  </table></div>
+  <p class="small">Coupé par rapport à la recherche : le dîner investisseurs (sollicitation filmée) et tout ce qui demande une grosse équipe. Le « pitch » devient une négociation avec l'opérateur et le terrain : enjeu réel, zéro risque juridique.</p>
+
+  <h3>Les rubriques récurrentes</h3>
+  <ul>
+    <li><strong>Le Compteur</strong> : « J-X avant le choix ». Revient dans chaque épisode.</li>
+    <li><strong>Le Tableau</strong> (60-90 s) : budget engagé, budget restant, prix au m². Des coûts, jamais des rendements.</li>
+    <li><strong>Red Flag / Green Flag</strong> : à la fin de chaque visite, chaque associé lève un drapeau.</li>
+    <li><strong>L'Expert</strong> : 1 invité par épisode (notaire, architecte, opérateur, banquier).</li>
+    <li><strong>Le Confessionnal</strong> : chaque associé seul, chaque soir, 10 min, 5 questions fixes : ça a marché ? qu'est-ce qui t'inquiète ? en désaccord sur quoi ? combien ça coûte ? on décide quoi demain ?</li>
+  </ul>
+
+  <h3>Brut, mais structuré</h3>
+  <ul>
+    <li><strong>Carte des enjeux</strong> avant de partir : tout ce qui peut arriver de vrai (terrain perdu, titre flou, devis qui explose).</li>
+    <li><strong>Chaque matin, 5 min</strong> : « aujourd'hui l'enjeu, c'est X ». La personne à la caméra note les timecodes des moments forts : 30 à 40 % de temps de montage gagné.</li>
+    <li><strong>Chaque épisode</strong> : un objectif, un obstacle, une décision. On écrit 2-3 issues possibles et on filme celle qui arrive.</li>
+    <li><strong>Épisodes auto-filmés</strong> : confessionnaux au téléphone sur trépied, micro-cravate sans fil. Suffisant.</li>
+    <li><strong>Règle anti-fausse drama</strong> : on ne rejoue jamais une scène avec un tiers. On ne monte jamais un conflit hors contexte.</li>
+    <li>Notaires et vendeurs : relecture de la séquence avant diffusion (pas de veto). Flouter numéros de parcelle et prix tant que rien n'est signé.</li>
+  </ul>
+</div>
+
+<!-- ===== 6. LE FINAL ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">06 — Le final interactif</div>
+    <h2>The Retreat ou The Villas</h2>
+  </div>
+
+  <div class="intro-box">
+    <div class="label">La mécanique en 5 étapes</div>
+    <ol>
+      <li><strong>L'épisode 10 est public et gratuit sur YouTube.</strong> Il finit sur la question : « Lequel on construit ? »</li>
+      <li><strong>Dernières 20 s</strong> : 2 éléments d'écran de fin + <strong>QR code et URL courte</strong> à l'écran (la TV ne clique pas). Lien en description et en commentaire épinglé.</li>
+      <li><strong>Le choix se fait sur votre site</strong> (marina-immo.com/choix) : prénom + email, WhatsApp en option.</li>
+      <li><strong>Un choix par email et par appareil. Verrouillé.</strong> Confirmation par email : seuls les choix confirmés comptent. Message : « Votre choix est enregistré. Il est définitif. »</li>
+      <li><strong>La branche choisie s'ouvre</strong> : aperçu vidéo du projet + inscription à sa liste d'attente + 3 questions facultatives (budget, horizon, « je veux le dossier »).</li>
+    </ol>
+  </div>
+
+  <div class="scen">
+    <div class="card win"><div class="hd"><div class="tag">Branche A</div><div class="nm">The Retreat · l'hôtel wellness</div></div>
+      <div class="bd"><ol>
+        <li>Aube sur la parcelle. Le drone (pilote local) décolle du sol.</li>
+        <li>Le rendu 3D des 8 villas et du hub apparaît sur le terrain vide.</li>
+        <li>Une journée type : surf, sport, bain froid, sauna, yoga.</li>
+        <li>L'opérateur face caméra : comment il va le faire tourner.</li>
+        <li>Confessionnaux : 3 raisons d'y aller, 3 risques assumés.</li>
+        <li>Carton : « Saison 3 : on construit le Retreat ».</li>
+      </ol></div>
+      <div class="res">CTA : liste d'attente The Retreat</div></div>
+    <div class="card mid"><div class="hd"><div class="tag">Branche B</div><div class="nm">The Villas · villas à vendre</div></div>
+      <div class="bd"><ol>
+        <li>Même aube, autre angle : un petit ensemble de villas privées.</li>
+        <li>Visite 3D d'une villa 2 chambres, plan et surfaces.</li>
+        <li>Ce que l'acheteur reçoit : bail de X ans, gestion optionnelle.</li>
+        <li>Le chantier en 18-24 mois, étape par étape.</li>
+        <li>Confessionnaux : 3 raisons, 3 risques.</li>
+        <li>Carton : « Saison 3 : on construit les Villas ».</li>
+      </ol></div>
+      <div class="res">CTA : liste d'attente The Villas</div></div>
+  </div>
+
+  <h3>Ce que le vote vous apprend</h3>
+  <ul>
+    <li>Le nombre de choix confirmés par branche = <strong>un test de demande gratuit</strong>. C'est le critère go/no-go n°4.</li>
+    <li>Dire la vérité à l'écran : « Votre choix pèse dans notre décision. On publie le résultat. Le projet final dépend aussi du terrain et des permis. »</li>
+    <li>La description de l'épisode 10 donne <strong>l'état réel du projet</strong> : terrain signé ou non, permis obtenu ou non.</li>
+    <li>Les listes d'attente = <strong>expressions d'intérêt</strong>. Pas d'argent, pas de rendement, pas de « parts ».</li>
+    <li>Semaine d'avant : sondage communautaire 48 h pour faire monter la tension.</li>
+  </ul>
+
+  <div class="warn">
+    <div class="label">Limites techniques</div>
+    <p>Les éléments « lien externe » des écrans de fin et des fiches exigent le Programme Partenaire YouTube (à vérifier dans Studio) et ne s'affichent pas partout sur mobile web. Le QR code et le lien en description sont donc obligatoires. Un vote « un par email + appareil » se contourne avec plusieurs emails : la confirmation par email limite la triche, sans l'empêcher.</p>
+  </div>
+
+  <h3>Alternatives (si vous voulez changer)</h3>
+  <ul>
+    <li><strong>Lombok ou Gili</strong> : même Retreat, deux lieux. Le spectateur choisit l'endroit.</li>
+    <li><strong>Surf &amp; Sport ou Biohacking &amp; Récupération</strong> : même hôtel, deux signatures pour le hub.</li>
+    <li><strong>Le design</strong> : deux architectures (bois et bambou, ou minimal béton). Impliquer l'audience dans les choix de design fait partie des schémas qui convertissent.</li>
+  </ul>
+</div>
+
+<!-- ===== 7. MACHINE A LEADS ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">07 — La machine à leads</div>
+    <h2>La série seule ne suffit pas</h2>
+  </div>
+
+  <h3>Le funnel (hypothèses du modèle 05, à mesurer)</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Étape</th><th>Conservateur</th><th>Base</th><th>Optimiste</th></tr>
+    <tr><td>Vues → lead</td><td>0,2 %</td><td class="hi">0,4 %</td><td>0,8 %</td></tr>
+    <tr><td>Lead → appel qualifié</td><td>10 %</td><td class="hi">15 %</td><td>25 %</td></tr>
+    <tr><td>Appel → acheteur</td><td>4 %</td><td class="hi">7 %</td><td>10 %</td></tr>
+    <tr><td><strong>Pour 8 clés à 200 k$ : vues</strong></td><td>1 000 000</td><td class="hi">190 476</td><td>40 000</td></tr>
+    <tr><td>Leads</td><td>2 000</td><td class="hi">762</td><td>320</td></tr>
+    <tr><td>Appels</td><td>200</td><td class="hi">114</td><td>80</td></tr>
+  </table></div>
+
+  <h3>La réalité de la chaîne</h3>
+  <div class="stats four">
+    <div class="stat"><div class="v">4,7 k</div><div class="l">abonnés</div></div>
+    <div class="stat"><div class="v">1,45 k</div><div class="l">vues médianes, vidéo longue</div></div>
+    <div class="stat"><div class="v">9,4 k</div><div class="l">vues totales saison 1 (8 ép.)</div></div>
+    <div class="stat"><div class="v">12-14 k</div><div class="l">pics : expatriation, quitter la France</div></div>
+  </div>
+  <ul>
+    <li><strong>Si la saison 2 fait comme la saison 1</strong> (≈ 1,2 k par épisode × 10) : ≈ 12 k vues → ≈ 48 leads → ≈ 7 appels → <strong>moins d'1 acheteur</strong> (calcul, base). Il manque ×16.</li>
+    <li>Les 300 inscrits du critère go/no-go demandent ≈ <strong>75 k vues</strong> à 0,4 %.</li>
+    <li>Le Asia actuel fait 0,4 à 1,5 k vues : moins que Dubaï et l'expatriation.</li>
+    <li><strong>Conclusion :</strong> les premiers acheteurs viennent du <strong>réseau</strong> (clients Dubaï, acheteurs Gili). La série construit la confiance et la liste. Le modèle 05 : 2 acheteurs « chauds » sur 4 villas = la moitié du risque de pré-vente enlevée.</li>
+  </ul>
+
+  <h3>Les leviers de croissance</h3>
+  <ul>
+    <li><strong>Titres « expatriation »</strong> : l'épisode est une histoire de départ, pas une visite. « On quitte Dubaï pour Lombok ? » plutôt que « Visite de terrain ».</li>
+    <li><strong>Shorts</strong> : vous en faites ≈ 1 par jour (médiane 1,1 k). 3 Shorts par épisode, chacun renvoie à l'épisode long.</li>
+    <li><strong>Lives</strong> : ≈ 1 par semaine, médiane 1,9 k, au-dessus des vidéos longues. Un live « questions sur le projet » après chaque épisode.</li>
+    <li><strong>Collabs</strong> avec des chaînes francophones d'expatriation en Asie (ex. Kathleen Phuket 31,4 k, Renaud Thaïlande 25,9 k, Objectif-Renta 49,9 k). Suggestions, aucun contact pris. Contrat écrit si rémunéré.</li>
+    <li><strong>QR codes</strong> à l'écran au Tableau, au CTA et au final, pour la TV.</li>
+    <li><strong>Pub payante vers le site</strong> : aucun coût par lead fiable dans la recherche. Petit test, seulement avec le reliquat du budget, seulement après feu vert juridique. On garde si le coût par inscrit est acceptable.</li>
+    <li><strong>Aimant à leads</strong> : guide PDF « Acheter à Lombok quand on est étranger » (ép. 1-3), puis « Le Tableau » en téléchargement (ép. 4-7), puis liste prioritaire + appel de 15 min (ép. 8-9).</li>
+    <li><strong>Ouvrir la liste avant l'épisode 1</strong> pour mesurer le vrai taux vues → lead.</li>
+  </ul>
+
+  <h3>Ce que paient les 10 k$ (estimations, pas des devis)</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Poste</th><th>Bas</th><th>Haut</th></tr>
+    <tr><td>Vols Dubaï-Bali/Lombok A/R × 2</td><td>1 200</td><td>1 800</td></tr>
+    <tr><td>Cadreur local 8-10 jours (150-250 $/jour)</td><td>1 200</td><td>2 500</td></tr>
+    <tr><td>Hébergement (en partie offert par l'opérateur)</td><td>500</td><td>1 000</td></tr>
+    <tr><td>Bateaux, transport, drone</td><td>300</td><td>600</td></tr>
+    <tr><td>Montage des 3-4 premiers épisodes (freelance)</td><td>1 200</td><td>2 000</td></tr>
+    <tr><td>Avocat/notaire : titre d'1 terrain + note sur la JV</td><td>1 500</td><td>2 500</td></tr>
+    <tr><td>Page liste d'attente + WhatsApp + CRM</td><td>100</td><td>300</td></tr>
+    <tr><td>Imprévus</td><td>500</td><td>800</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>6 500</strong></td><td><strong>11 500</strong></td></tr>
+  </table></div>
+  <ul>
+    <li><strong>Ce qui manque :</strong> la revue de la vente Gili par un avocat français (non chiffrée) et le vol/hôtel de Bangkok (non chiffré). À financer en coupant ailleurs.</li>
+    <li><strong>Où couper :</strong> plus d'épisodes auto-filmés (cadreur moins de jours), hôtels de Bangkok et Bali en échange de visibilité (à signaler comme « Publicité »).</li>
+    <li>Revenus pub et sponsors du premier bloc : <strong>quelques centaines à ≈ 2 000 $</strong>. C'est du marketing, pas un revenu.</li>
+  </ul>
+</div>
+
+<!-- ===== 8. CALENDRIER ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">08 — Calendrier</div>
+    <h2>Décembre 2026 → décembre 2027</h2>
+  </div>
+
+  <div class="tablewrap"><table class="txt">
+    <tr><th>Mois</th><th>Tournage</th><th>Diffusion</th><th>Business et juridique</th></tr>
+    <tr><td><strong>Nov. 2026</strong></td><td>Préparation, carte des enjeux</td><td>Shorts et lives habituels</td><td>Avocats mandatés, 4 questions Gili, visa, page liste d'attente</td></tr>
+    <tr><td><strong>Déc. 2026</strong></td><td><strong>Bloc 1</strong> : Bangkok (ép. 1), Bali (ép. 2), Lombok + Gili (ép. 3-4). Saison des pluies : drone limité</td><td>Teaser</td><td>Avis sur la vente Gili attendu (3-4 semaines après mandat). Titre d'1 terrain</td></tr>
+    <tr><td><strong>Janv. 2027</strong></td><td>—</td><td>Montage ép. 1-4. Bande-annonce</td><td>Avocat relit scripts et CTA. Term sheet opérateur. Dossier pour 5-10 plateformes ECSP</td></tr>
+    <tr><td><strong>Fév. 2027</strong></td><td>Pas de tournage à Lombok (Ramadan ≈ 8 fév.-9 mars)</td><td><strong>Ép. 1</strong> puis ép. 2 (toutes les 2 semaines). CTA : guide PDF</td><td>Structure choisie (clés + gestion optionnelle). PT PMA lancée</td></tr>
+    <tr><td><strong>Mars 2027</strong></td><td>Gel : Nyepi ≈ 8 mars (aéroport de Bali fermé 24 h), Aïd ≈ 9-10 mars</td><td>Ép. 3, ép. 4</td><td>Rendez-vous notaires et entrepreneurs fixés par visio. Représentant UE + assurance RC UE</td></tr>
+    <tr><td><strong>Avr. 2027</strong></td><td><strong>Bloc 2</strong> (saison sèche) : notaire, devis, concurrent (ép. 5-7)</td><td>Shorts + lives</td><td>Due diligence foncière, 3 devis</td></tr>
+    <tr><td><strong>Mai 2027</strong></td><td>Bloc 2 suite : banjar (ép. 8)</td><td>Ép. 5</td><td>Demande de permis (PBG). Séquestre ouvert</td></tr>
+    <tr><td><strong>Juin 2027</strong></td><td>—</td><td>Ép. 6, ép. 7</td><td>Contrats de vente validés. Point go/no-go critères 1, 2, 3, 5</td></tr>
+    <tr><td><strong>Juil. 2027</strong></td><td>— (haute saison Bali : +30 à 50 % sur l'hébergement)</td><td>Ép. 8. CTA : liste prioritaire</td><td>Appels découverte de 15 min</td></tr>
+    <tr><td><strong>Août 2027</strong></td><td><strong>Bloc 3</strong> court : le deal + les 2 branches (ép. 9-10). Éviter le 17 août</td><td>Shorts</td><td>Négociation finale opérateur + terrain</td></tr>
+    <tr><td><strong>Sept. 2027</strong></td><td>—</td><td>Ép. 9 + sondage 48 h</td><td>Page du choix testée. Feu vert juridique pour la pré-vente ?</td></tr>
+    <tr><td><strong>Oct. 2027</strong></td><td>—</td><td><strong>Ép. 10, le Choix</strong></td><td>Votes confirmés comptés. <strong>Pré-vente seulement si</strong> titre propre + structure validée + permis de principe</td></tr>
+    <tr><td><strong>Nov. 2027</strong></td><td>—</td><td>Live résultats du vote</td><td>Réservations remboursables (10 %) en séquestre. Fenêtre de 90 jours</td></tr>
+    <tr><td><strong>Déc. 2027</strong></td><td>Making-of</td><td>Annonce Saison 3</td><td>Décision go/no-go chantier</td></tr>
+  </table></div>
+  <ul>
+    <li><strong>Règle d'or :</strong> si le juridique glisse, <strong>on décale la pré-vente, pas la diffusion.</strong> L'épisode 10 devient « on attend le permis ». Ça reste un vrai cliffhanger.</li>
+    <li>Rythme toutes les 2 semaines (pas hebdo) : tenable avec un monteur freelance, et la saison dure 9 mois de présence au lieu de 10 semaines. Le build-in-public met <strong>9-12 mois</strong> à payer (opérateur Cabo Bali, source vendeur) : il faut commencer tôt.</li>
+    <li>Dates de Ramadan, Aïd et Nyepi 2027 à confirmer 8-10 semaines avant.</li>
+  </ul>
+</div>
+
+<!-- ===== 9. RISQUES ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">09 — Risques</div>
+    <h2>Ce qui peut tout casser</h2>
+  </div>
+
+  <div class="tablewrap"><table class="txt">
+    <tr><th>Risque</th><th>Niveau</th><th>Parade</th></tr>
+    <tr><td><strong>Qualification de ce qu'on vend</strong> (clés vs placement)</td><td>Élevé</td><td>Clés avec titre, gestion optionnelle, zéro rendement promis, avis écrit avant toute vente</td></tr>
+    <tr><td><strong>Vente Gili</strong> mal qualifiée ou titre HPL fragile</td><td>À mesurer</td><td>Les 4 questions à l'avocat, vérification du titre au BPN, point d'étape aux acheteurs</td></tr>
+    <tr><td><strong>Audience trop petite</strong> (12 k vues vs 190 k nécessaires)</td><td>Élevé</td><td>Réseau Dubaï + acheteurs Gili, Shorts, lives, collabs, titres expatriation</td></tr>
+    <tr><td><strong>Titre foncier</strong> à Lombok (titres flous, conflits autour de Mandalika)</td><td>Très élevé</td><td>Vérification BPN, notaire PPAT, zonage RDTR avant signature. Aucun prête-nom</td></tr>
+    <tr><td><strong>Structure PT PMA</strong> (140 k$ de capital, seuil de 560 k$, code d'activité incertain)</td><td>Élevé</td><td>Faire trancher par l'avocat. Le capital vient de la JV, pas du duo</td></tr>
+    <tr><td><strong>Visa et tournage</strong> sans permis</td><td>Moyen</td><td>Visa d'affaires, équipe légère, drone par pilote local, accord des lieux</td></tr>
+    <tr><td><strong>Budget 10 k$</strong> trop juste pour juridique + tournage</td><td>Élevé</td><td>Juridique d'abord. Plus d'auto-tournage. Hôtels en échange de visibilité</td></tr>
+    <tr><td><strong>Suroffre</strong> à Lombok (+89 % d'annonces, prix −21 %)</td><td>Moyen</td><td>Produit différent (wellness, 8 villas), prix par nuit de base au niveau du marché villas</td></tr>
+    <tr><td><strong>Saisonnalité</strong> (20-30 % en basse saison)</td><td>Moyen</td><td>Retraites et programmes wellness hors saison. Prévu dans les 45 % de revenus annexes (hypothèse)</td></tr>
+    <tr><td><strong>Opérateur = personne clé</strong></td><td>Moyen</td><td>Comptes vérifiés, clause de performance, droit de résiliation, co-investissement</td></tr>
+    <tr><td><strong>Eau, électricité, séismes</strong></td><td>Moyen</td><td>Forage/traitement d'eau au budget, structure parasismique, assurance</td></tr>
+    <tr><td><strong>Change</strong> (roupie au plus bas en 2026)</td><td>Moyen</td><td>Vendre et facturer en USD</td></tr>
+    <tr><td><strong>Licence RERA</strong> de l'agence de Dubaï exposée</td><td>Moyen</td><td>Avocat EAU. Séparer clairement le projet Lombok de l'agence</td></tr>
+    <tr><td><strong>Réputation</strong> (Cardone, Meet Kevin)</td><td>Élevé si faute</td><td>Transparence totale, conflits déclarés, vrais chiffres, vrais risques</td></tr>
+    <tr><td><strong>MotoGP de Mandalika</strong> non garanti après 2026</td><td>Faible</td><td>Ne pas bâtir l'argumentaire dessus</td></tr>
+  </table></div>
+  <p class="small">Ce tableau sera complété par les points du red team.</p>
+</div>
+
+<!-- ===== 10. KPI + 2 SEMAINES ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">10 — Pilotage</div>
+    <h2>10 KPI et les 2 prochaines semaines</h2>
+  </div>
+
+  <h3>Les 10 KPI à suivre</h3>
+  <div class="tablewrap"><table class="txt">
+    <tr><th>#</th><th>KPI</th><th>Repère / cible</th><th>Quand</th></tr>
+    <tr><td>1</td><td>Vues par épisode à J+30</td><td>Point de départ : ≈ 1,2 k (saison 1)</td><td>Chaque épisode</td></tr>
+    <tr><td>2</td><td>Durée moyenne vue</td><td>≥ 35 %</td><td>Chaque épisode</td></tr>
+    <tr><td>3</td><td>Taux vues → lead</td><td>≥ 0,3 % (seuil), 0,4 % (base)</td><td>Chaque épisode</td></tr>
+    <tr><td>4</td><td>Inscrits sur la liste d'attente</td><td>≥ 300</td><td>Chaque mois</td></tr>
+    <tr><td>5</td><td>Taux lead → appel</td><td>15 % (base)</td><td>Chaque mois</td></tr>
+    <tr><td>6</td><td>Appels réservés</td><td>114 pour 8 clés (base)</td><td>Chaque mois</td></tr>
+    <tr><td>7</td><td>Choix confirmés au final, par branche</td><td>À fixer après l'ép. 5</td><td>Octobre 2027</td></tr>
+    <tr><td>8</td><td>Réservations remboursables en séquestre</td><td>≥ 4 en 90 jours</td><td>Après mise en vente</td></tr>
+    <tr><td>9</td><td>Coût par inscrit (dépenses / inscrits)</td><td>À mesurer</td><td>Chaque mois</td></tr>
+    <tr><td>10</td><td>Jalons juridiques franchis (sur 6)</td><td>Gili, titre terrain, structure, scripts, représentant UE, séquestre</td><td>Chaque mois</td></tr>
+  </table></div>
+
+  <h3>Les 2 prochaines semaines</h3>
+  <ul class="check">
+    <li>Jour 1-2 : réunir le dossier Gili (contrats, acheteurs et pays, flux d'argent, vidéos, titre).</li>
+    <li>Jour 1-5 : 2 devis d'avocats en droit financier français. Mandater le meilleur.</li>
+    <li>Jour 1-5 : cabinet indonésien + notaire PPAT : titre Gili + 1 terrain candidat à Lombok.</li>
+    <li>Jour 3 : demander à l'opérateur les comptes de son hôtel de Gili.</li>
+    <li>Jour 3-7 : agent visa (visa d'affaires) + pilote drone local réservé.</li>
+    <li>Jour 5 : atelier « carte des enjeux » à 3 (duo + associé), 2 h.</li>
+    <li>Jour 7 : demandes d'accord de tournage aux hôtels de Bangkok et Bali (échange de visibilité).</li>
+    <li>Jour 7-10 : page liste d'attente + guide PDF en ligne, CRM branché.</li>
+    <li>Jour 10 : documenter la preuve Gili en 5 chiffres (prix de la part, leads, appels, vues, délai).</li>
+    <li>Jour 14 : point go/no-go tournage. Budget figé, cadreur confirmé.</li>
+  </ul>
+</div>
+
+<!-- ===== 11. SOURCES ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="num">11 — Sources</div>
+    <h2>Les sources clés</h2>
+  </div>
+  <p class="small">Consultées en novembre 2026. Beaucoup de chiffres de marché viennent d'agences ou de vendeurs (prix affichés, pas transactés). Recherche, pas un avis juridique.</p>
+  <h3>Chaîne et format</h3>
+  <ul class="sources">
+    <li>Chaîne : https://www.youtube.com/@marinaimmodubai/about · Saison 1 : https://www.youtube.com/playlist?list=PLhHLIZWIJaoQTYZVMCbzzkSnt2myu_pp3</li>
+    <li>Écrans de fin : https://support.google.com/youtube/answer/6388789 · Fiches : https://support.google.com/youtube/answer/6140493</li>
+    <li>TV : https://techcrunch.com/2025/10/29/youtubes-latest-updates-are-aimed-at-improving-the-tv-experience/ · https://adwave.com/resources/youtube-tv-viewing-share-q4-2025</li>
+    <li>Rétention : https://tubelab.net/blog/youtube-audience-retention · Mid-rolls : https://support.google.com/youtube/answer/6175006</li>
+    <li>Build-in-public : https://www.cabobali.com/blog/marketing-playbook-villa-hotel-retreat-developers</li>
+  </ul>
+  <h3>Marché Lombok / Bali</h3>
+  <ul class="sources">
+    <li>C9/Horwath HTL, Lombok 2025 : https://c9hotelworks.com/wp-content/uploads/2025/04/Lombok-Hotel-Branded-Residences-Report-April-2025.pdf</li>
+    <li>BPS Bali 2025 : https://bali.bps.go.id/en/news/2026/02/02/347/bali-s-foreign-arrivals-jan-dec-2025-rise--with-australia-remaining-the-largest-contributor-overall-.htm</li>
+    <li>PT PMA (BKPM 5/2025) : https://www.withersworldwide.com/en-gb/insight/read/indonesia-eases-foreign-capital-rules-key-takeaways-from-bkpm-regulation-no-5-of-2025</li>
+    <li>Prête-nom : https://emerhub.com/bali/nominee-arrangements/ · Rizières Bali : https://www.travelmole.com/news/bali-no-new-hotel-villa-construction</li>
+    <li>Contrats de gestion : https://www.jll.com/en-sea/insights/the-evolving-landscape-of-hotel-management-agreements-in-asia-pacific</li>
+    <li>Prime wellness : https://hotelsmag.com/news/beyond-the-spa-embedding-wellness-as-hospitalitys-strategic-core/ · https://beautymatter.com/articles/check-in-and-zone-out-wellness-real-estate-2025</li>
+    <li>Gili Trawangan HPL : https://ekonomi.bisnis.com/read/20210912/9/1441247/terlantarkan-lahan-di-gili-trawangan-kontrak-pt-gti-diputus</li>
+  </ul>
+  <h3>Juridique et financement</h3>
+  <ul class="sources">
+    <li>Loi influenceurs 2023-451 : https://www.legifrance.gouv.fr/loda/id/JORFTEXT000047663185</li>
+    <li>AMF biens divers : https://www.amf-france.org/fr/espace-professionnels/autres-profils/intermediaire-en-biens-divers</li>
+    <li>ESMA/AMF finfluenceurs : https://www.amf-france.org/fr/actualites-publications/actualites/lesma-et-lamf-publient-lattention-des-finfluenceurs-des-conseils-pour-une-promotion-responsable-sur</li>
+    <li>ECSP art. 21 : https://www.legislation.gov.uk/eur/2020/1503/article/21/data.html</li>
+    <li>Sollicitation inversée : https://riskandcompliance.freshfields.com/post/102jrp8/finally-some-clarity-on-reverse-solicitation-under-micar-and-beyond-esmas-fi</li>
+    <li>AMF Québec (immobilier) : https://lautorite.qc.ca/fileadmin/lautorite/reglementation/valeurs-mobilieres/r-immobilier-dispenses/2023-03-08/2023mars08-IG-dispense_immobilier-vconsolidee-fr.pdf</li>
+    <li>SCA finfluenceurs : https://hadefpartners.com/news-insights/insights/regulating-influence-the-uae-s-new-compliance-regime-for-finfluencers/</li>
+    <li>Office des Changes : https://www.ccme.org.ma/l-acquisition-par-les-personnes-physiques-marocaines-des-biens-immeubles-a-l-etranger-soumise-a-l-accord-prealable-de-l-office-des-changes</li>
+  </ul>
+  <h3>Production et calendrier</h3>
+  <ul class="sources">
+    <li>Visa créateurs Indonésie : https://www.ttgasia.com/2026/08/11/indonesia-plans-visa-for-foreign-content-creators/ · Avertissement influenceurs : https://www.travelnews.co.za/article/indonesia-warns-influencers-to-use-work-visas</li>
+    <li>Tournage Thaïlande : https://london.thaiembassy.org/en/page/84492-filming-in-thailand</li>
+    <li>Nyepi : https://en.antaranews.com/news/408234/bali-airport-announces-24-hour-operational-suspension-during-nyepi · Ramadan 2027 : https://blog.wego.com/ramadan-in-indonesia/</li>
+  </ul>
+</div>
+
+<div class="footer">PLAN 2027 — SAISON 2 · MARINA IMMO DUBAI</div>
+
+</body>
+</html>
